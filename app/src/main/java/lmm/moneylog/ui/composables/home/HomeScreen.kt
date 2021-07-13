@@ -25,7 +25,7 @@ private fun Background(content: @Composable () -> Unit = {}) {
                 if (isSystemInDarkTheme()) {
                     MaterialTheme.colors.background
                 } else {
-                    Color.Gray
+                    Color.LightGray
                 }
             )
     ) {
