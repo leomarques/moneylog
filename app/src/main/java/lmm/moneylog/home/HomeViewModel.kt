@@ -5,7 +5,7 @@ import lmm.moneylog.data.Repository
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
-class HomeViewModel(private val repository: Repository) : ViewModel() {
+class HomeViewModel(repository: Repository) : ViewModel() {
 
     private val transactions = repository.getTransactions().asLiveData()
 
@@ -26,11 +26,4 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     }
 
     private fun formatValue(value: Double) = "%.2f".format(value)
-
-    fun addRandomTransaction() {
-        viewModelScope.launch {
-            val randomValue = listOf(10.0, -20.10, 35.50)[Random.nextInt(3)]
-            repository.save(randomValue)
-        }
-    }
 }

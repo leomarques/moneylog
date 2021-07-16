@@ -6,34 +6,68 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import lmm.moneylog.home.HomeViewModel
-import lmm.moneylog.ui.composables.MainActivityScreen
-import lmm.moneylog.ui.composables.home.HomeFab
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import lmm.moneylog.addtransaction.AddTransactionScreen
+import lmm.moneylog.home.composables.HomeFab
+import lmm.moneylog.home.composables.MainActivityScreen
+import lmm.moneylog.ui.Screen
 import lmm.moneylog.ui.theme.MoneylogTheme
-import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
-
-    private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             MoneylogTheme {
+                val navController = rememberNavController()
+                val currentScreen = remember {
+                    mutableStateOf(Screen.Home.name)
+                }
+
                 Scaffold(
                     topBar = {
                         TopAppBar(title = { Text("Moneylog") })
                     },
                     floatingActionButton = {
-                        HomeFab {
-                            homeViewModel.addRandomTransaction()
-                        }
+                        if (currentScreen.value == Screen.Home.name)
+                            HomeFab {
+                                navController.navigate(Screen.AddTransaction.name)
+                            }
                     },
                     content = {
-                        MainActivityScreen(homeViewModel)
+                        MoneylogNavHost(navController, currentScreen)
                     }
                 )
+            }
+        }
+    }
+
+    @Composable
+    private fun MoneylogNavHost(
+        navController: NavHostController,
+        currentScreen: MutableState<String>
+    ) {
+        NavHost(
+            navController = navController,
+            startDestination = currentScreen.value
+        ) {
+            composable(Screen.Home.name) {
+                MainActivityScreen()
+                currentScreen.value = Screen.Home.name
+            }
+            composable(Screen.AddTransaction.name) {
+                AddTransactionScreen {
+                    navController.popBackStack()
+                }
+                currentScreen.value = Screen.AddTransaction.name
             }
         }
     }

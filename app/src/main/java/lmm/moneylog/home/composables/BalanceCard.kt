@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.composables.home
+package lmm.moneylog.home.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme

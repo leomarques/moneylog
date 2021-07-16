@@ -46,7 +46,10 @@ android {
 
 dependencies {
     def room_version = "2.3.0"
-    def koin_version = "2.2.3"
+    def koin_version = "3.1.2"
+
+    //Navigation
+    implementation "androidx.navigation:navigation-compose:2.4.0-alpha04"
 
     //room
     implementation("androidx.room:room-runtime:$room_version")
@@ -55,7 +58,7 @@ dependencies {
 
     //koin
     implementation "io.insert-koin:koin-android:$koin_version"
-    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
 
     //livedata
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"

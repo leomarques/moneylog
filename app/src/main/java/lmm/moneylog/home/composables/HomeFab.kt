@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.composables.home
+package lmm.moneylog.home.composables
 
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
