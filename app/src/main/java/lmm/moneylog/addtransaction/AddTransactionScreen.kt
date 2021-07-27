@@ -3,6 +3,7 @@ package lmm.moneylog.addtransaction
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -12,6 +13,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.data.Repository
@@ -59,10 +62,15 @@ private fun Field(
 
 @Composable
 fun StateTextField(keyboardType: KeyboardType, valueState: MutableState<String>) {
+    val focusManager = LocalFocusManager.current
+
     TextField(
         value = valueState.value,
-        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = keyboardType),
-        onValueChange = { valueState.value = it },
+        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = keyboardType, imeAction = ImeAction.Done),
+        keyboardActions = KeyboardActions(
+            onDone = { focusManager.clearFocus() }
+        ),
+        onValueChange = { valueo -> valueState.value =valueo },
         modifier = Modifier.fillMaxWidth()
     )
 }
