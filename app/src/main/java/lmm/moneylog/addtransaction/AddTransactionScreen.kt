@@ -70,7 +70,7 @@ fun StateTextField(keyboardType: KeyboardType, valueState: MutableState<String>)
         keyboardActions = KeyboardActions(
             onDone = { focusManager.clearFocus() }
         ),
-        onValueChange = { valueo -> valueState.value =valueo },
+        onValueChange = { value -> valueState.value = value },
         modifier = Modifier.fillMaxWidth()
     )
 }
