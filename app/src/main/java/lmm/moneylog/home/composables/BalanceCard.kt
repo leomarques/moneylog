@@ -4,8 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +24,7 @@ fun BalanceCard(total: String, credit: String, debt: String) {
                 if (isSystemInDarkTheme()) {
                     Color.DarkGray
                 } else {
-                    MaterialTheme.colors.background
+                    MaterialTheme.colorScheme.background
                 }
             )
             .padding(top = 16.dp, bottom = 16.dp),
@@ -51,12 +51,12 @@ fun Balance(title: String, value: String) {
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.body2
+            style = MaterialTheme.typography.titleLarge
         )
         Text(
             text = value,
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.h4
+            style = MaterialTheme.typography.bodyMedium
         )
     }
 }
@@ -68,11 +68,11 @@ fun Amount(title: String, value: String, color: Color) {
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.body2
+            style = MaterialTheme.typography.titleLarge
         )
         Text(
             text = value,
-            style = MaterialTheme.typography.h5,
+            style = MaterialTheme.typography.bodyMedium,
             color = color
         )
     }

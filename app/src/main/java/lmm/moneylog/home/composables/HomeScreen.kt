@@ -4,7 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,7 +23,7 @@ private fun Background(content: @Composable () -> Unit = {}) {
             .fillMaxSize()
             .background(
                 if (isSystemInDarkTheme()) {
-                    MaterialTheme.colors.background
+                    MaterialTheme.colorScheme.background
                 } else {
                     Color.LightGray
                 }

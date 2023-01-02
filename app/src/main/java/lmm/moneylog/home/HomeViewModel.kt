@@ -2,8 +2,6 @@ package lmm.moneylog.home
 
 import androidx.lifecycle.*
 import lmm.moneylog.data.Repository
-import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 class HomeViewModel(repository: Repository) : ViewModel() {
 

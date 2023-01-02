@@ -1,5 +1,6 @@
 package lmm.moneylog.addtransaction
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -8,11 +9,11 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -20,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import lmm.moneylog.data.Repository
 import org.koin.androidx.compose.get
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTransactionScreen(closeScreen: () -> Unit) {
     val repository: Repository = get()
@@ -60,6 +63,7 @@ private fun Field(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StateTextField(keyboardType: KeyboardType, valueState: MutableState<String>) {
     val focusManager = LocalFocusManager.current
@@ -79,7 +83,7 @@ fun StateTextField(keyboardType: KeyboardType, valueState: MutableState<String>)
 private fun Fab(onBtnClick: () -> Unit) {
     FloatingActionButton(
         onClick = onBtnClick,
-        backgroundColor = Color.Green,
+//        backgroundColor = Color.Green,
     ) {
         Icon(
             Icons.Default.Check,
