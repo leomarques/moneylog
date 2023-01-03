@@ -6,15 +6,15 @@ import lmm.moneylog.data.TransactionDatabase
 import org.koin.dsl.module
 
 val appModule = module {
-    //TransactionDatabase
+    // TransactionDatabase
     single { TransactionDatabase.getInstance(get()) }
 
-    //TransactionDao
+    // TransactionDao
     single {
         val db: TransactionDatabase = get()
         db.transactionDao()
     }
 
-    //Repository
+    // Repository
     single<Repository> { RepositoryImpl(get()) }
 }

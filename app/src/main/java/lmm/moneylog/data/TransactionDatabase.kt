@@ -22,8 +22,10 @@ abstract class TransactionDatabase : RoomDatabase() {
             }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext,
-                TransactionDatabase::class.java, "Transaction.db")
+            Room.databaseBuilder(
+                context.applicationContext,
+                TransactionDatabase::class.java, "Transaction.db"
+            )
                 .build()
     }
 }
