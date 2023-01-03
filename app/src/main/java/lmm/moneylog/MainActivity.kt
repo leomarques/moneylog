@@ -17,12 +17,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import lmm.moneylog.addtransaction.AddTransactionScreen
+import lmm.moneylog.addtransaction.AddTransactionViewModel
 import lmm.moneylog.home.composables.HomeFab
 import lmm.moneylog.home.composables.MainActivityScreen
 import lmm.moneylog.ui.Screen
 import lmm.moneylog.ui.theme.MoneylogTheme
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
+
+    private val addTransactionViewModel: AddTransactionViewModel by viewModel()
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3Api::class)
@@ -68,7 +72,8 @@ class MainActivity : ComponentActivity() {
                 currentScreen.value = Screen.Home.name
             }
             composable(Screen.AddTransaction.name) {
-                AddTransactionScreen {
+                AddTransactionScreen { transactionModel ->
+                    addTransactionViewModel.onBtnClick(transactionModel)
                     navController.popBackStack()
                 }
                 currentScreen.value = Screen.AddTransaction.name

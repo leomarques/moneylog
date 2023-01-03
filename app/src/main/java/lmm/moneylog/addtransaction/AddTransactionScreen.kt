@@ -23,23 +23,18 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import lmm.moneylog.data.Repository
-import org.koin.androidx.compose.get
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddTransactionScreen(closeScreen: () -> Unit) {
-    val repository: Repository = get()
-    val viewModel = remember { AddTransactionViewModel(repository) }
+fun AddTransactionScreen(onBtnClick: (TransactionModel) -> Unit) {
     val transactionModel = remember { TransactionModel() }
 
     Scaffold(
         floatingActionButtonPosition = FabPosition.Center,
         floatingActionButton = {
             Fab {
-                viewModel.onBtnClick(transactionModel)
-                closeScreen()
+                onBtnClick(transactionModel)
             }
         },
         content = {
