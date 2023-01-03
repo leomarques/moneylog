@@ -1,13 +1,11 @@
 package lmm.moneylog.home.composables
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 
 @Composable
 fun HomeScreen(total: String, credit: String, debt: String) {
@@ -22,11 +20,7 @@ private fun Background(content: @Composable () -> Unit = {}) {
         Modifier
             .fillMaxSize()
             .background(
-                if (isSystemInDarkTheme()) {
-                    MaterialTheme.colorScheme.background
-                } else {
-                    Color.LightGray
-                }
+                MaterialTheme.colorScheme.background
             )
     ) {
         content()

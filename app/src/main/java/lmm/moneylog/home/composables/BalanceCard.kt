@@ -1,7 +1,6 @@
 package lmm.moneylog.home.composables
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,11 +26,7 @@ fun BalanceCard(total: String, credit: String, debt: String) {
             .fillMaxWidth()
             .clip(RoundedCornerShape(bottomStart = 32.dp, bottomEnd = 32.dp))
             .background(
-                if (isSystemInDarkTheme()) {
-                    Color.DarkGray
-                } else {
-                    MaterialTheme.colorScheme.background
-                }
+                MaterialTheme.colorScheme.tertiaryContainer
             )
             .padding(top = 16.dp, bottom = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -57,12 +52,14 @@ fun Balance(title: String, value: String) {
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onTertiaryContainer
         )
         Text(
             text = value,
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onTertiaryContainer
         )
     }
 }
@@ -74,7 +71,8 @@ fun Amount(title: String, value: String, color: Color) {
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onTertiaryContainer
         )
         Text(
             text = value,
