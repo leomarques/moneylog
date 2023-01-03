@@ -1,6 +1,5 @@
 package lmm.moneylog.addtransaction
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -9,10 +8,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -24,30 +21,24 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTransactionScreen(onBtnClick: (TransactionModel) -> Unit) {
     val transactionModel = remember { TransactionModel() }
 
-    Scaffold(
-        floatingActionButtonPosition = FabPosition.Center,
-        floatingActionButton = {
-            Fab {
-                onBtnClick(transactionModel)
-            }
-        },
-        content = {
-            Column {
-                val modifier = Modifier.padding(16.dp)
-                Field("Valor", KeyboardType.Number, transactionModel.value, modifier)
-                Field("Data", KeyboardType.Text, transactionModel.date, modifier)
-                Field("Descrição", KeyboardType.Text, transactionModel.description, modifier)
-                Field("Categoria", KeyboardType.Text, transactionModel.category, modifier)
-                Field("Conta", KeyboardType.Text, transactionModel.account, modifier)
-            }
-        }
-    )
+    Column {
+        val modifier = Modifier.padding(16.dp)
+        Field("Valor", KeyboardType.Number, transactionModel.value, modifier)
+        Field("Data", KeyboardType.Text, transactionModel.date, modifier)
+        Field("Descrição", KeyboardType.Text, transactionModel.description, modifier)
+        Field("Categoria", KeyboardType.Text, transactionModel.category, modifier)
+        Field("Conta", KeyboardType.Text, transactionModel.account, modifier)
+    }
+
+//    floatingActionButton = {
+//        Fab {
+//            onBtnClick(transactionModel)
+//        }
+//    }
 }
 
 @Composable
