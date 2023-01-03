@@ -1,10 +1,10 @@
 package lmm.moneylog.addtransaction
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.Repository
-import java.lang.NumberFormatException
 
 class AddTransactionViewModel(private val repository: Repository) : ViewModel() {
 
