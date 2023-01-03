@@ -71,9 +71,14 @@ dependencies {
     implementation ("androidx.room:room-ktx:$room_version")
 
     //koin
-    def koin_version = "3.1.2"
-    implementation ("io.insert-koin:koin-android:$koin_version")
-    implementation ("io.insert-koin:koin-androidx-compose:$koin_version")
+    def koin_version= "3.3.2"
+    def koin_android_version= "3.3.2"
+    def koin_android_compose_version= "3.4.1"
+
+    // Koin main features for Android
+    implementation "io.insert-koin:koin-android:$koin_android_version"
+    // Koin for Jetpack Compose
+    implementation "io.insert-koin:koin-androidx-compose:$koin_android_compose_version"
 
     //Test
     testImplementation 'junit:junit:4.13.2'
@@ -83,4 +88,9 @@ dependencies {
     //Compose test
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+
+    // Koin Test features
+    testImplementation "io.insert-koin:koin-test:$koin_version"
+    // Koin for JUnit 4
+    testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
 }
