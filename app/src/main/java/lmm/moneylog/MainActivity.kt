@@ -43,7 +43,9 @@ class MainActivity : ComponentActivity() {
             }
             composable("add_transaction") {
                 AddTransactionActivityScreen {
-                    navController.navigate("home")
+                    navController.navigate("home") {
+                        popUpTo("home") { inclusive = true }
+                    }
                 }
             }
         }
