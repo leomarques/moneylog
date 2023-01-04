@@ -4,11 +4,14 @@ import androidx.compose.runtime.Composable
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun AddTransactionActivityScreen(onBtnClick: () -> Unit) {
+fun AddTransactionActivityScreen(onArrowBackClick: () -> Unit, onBtnClick: () -> Unit) {
     val viewModel: AddTransactionViewModel = getViewModel()
 
-    AddTransactionScreen { transactionModel ->
-        viewModel.onBtnClick(transactionModel)
-        onBtnClick()
-    }
+    AddTransactionScreen(
+        onArrowBackClick = onArrowBackClick,
+        onFabClick = { transactionModel ->
+            viewModel.onBtnClick(transactionModel)
+            onBtnClick()
+        }
+    )
 }

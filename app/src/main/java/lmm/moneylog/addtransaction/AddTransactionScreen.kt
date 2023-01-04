@@ -1,20 +1,23 @@
 package lmm.moneylog.addtransaction
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.remember
@@ -22,34 +25,55 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddTransactionScreen(onBtnClick: (TransactionModel) -> Unit) {
+fun AddTransactionScreen(
+    onFabClick: (TransactionModel) -> Unit,
+    onArrowBackClick: () -> Unit
+) {
     val transactionModel = remember { TransactionModel() }
 
     Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = "Nova transação")
+                },
+                navigationIcon = {
+                    IconButton(onClick = onArrowBackClick) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                }
+            )
+        },
         floatingActionButton = {
             AddFab {
-                onBtnClick(transactionModel)
+                onFabClick(transactionModel)
             }
         },
         floatingActionButtonPosition = FabPosition.Center,
-        content = { MyContent(transactionModel) }
+        content = { paddingValues ->
+            Surface(Modifier.padding(paddingValues)) {
+                MyContent(transactionModel)
+            }
+        }
     )
 }
 
 @Composable
 private fun MyContent(transactionModel: TransactionModel) {
-    Column {
-        val modifier = Modifier.padding(16.dp)
-        Field("Valor", KeyboardType.Number, transactionModel.value, modifier)
-        Field("Data", KeyboardType.Text, transactionModel.date, modifier)
-        Field("Descrição", KeyboardType.Text, transactionModel.description, modifier)
-        Field("Categoria", KeyboardType.Text, transactionModel.category, modifier)
-        Field("Conta", KeyboardType.Text, transactionModel.account, modifier)
+    Column(Modifier.padding(horizontal = 16.dp)) {
+        Field("Valor", KeyboardType.Number, transactionModel.value)
+        Field("Data", KeyboardType.Text, transactionModel.date)
+        Field("Descrição", KeyboardType.Text, transactionModel.description)
+        Field("Categoria", KeyboardType.Text, transactionModel.category)
+        Field("Conta", KeyboardType.Text, transactionModel.account)
     }
 }
 
@@ -57,21 +81,22 @@ private fun MyContent(transactionModel: TransactionModel) {
 private fun Field(
     title: String,
     keyboardType: KeyboardType,
-    valueState: MutableState<String>,
-    modifier: Modifier
+    valueState: MutableState<String>
 ) {
-    Column(modifier) {
-        Text(title)
-        StateTextField(keyboardType, valueState)
-    }
+    StateTextField(keyboardType, valueState, title)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StateTextField(keyboardType: KeyboardType, valueState: MutableState<String>) {
+fun StateTextField(
+    keyboardType: KeyboardType,
+    valueState: MutableState<String>,
+    title: String
+) {
     val focusManager = LocalFocusManager.current
 
-    TextField(
+    OutlinedTextField(
+        label = { Text(text = title) },
         value = valueState.value,
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = keyboardType,
@@ -81,7 +106,9 @@ fun StateTextField(keyboardType: KeyboardType, valueState: MutableState<String>)
             onDone = { focusManager.clearFocus() }
         ),
         onValueChange = { value -> valueState.value = value },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
     )
 }
 
@@ -95,4 +122,10 @@ private fun AddFab(onBtnClick: () -> Unit) {
             contentDescription = null
         )
     }
+}
+
+@Preview
+@Composable
+fun Preview() {
+    AddTransactionScreen(onFabClick = {}, onArrowBackClick = {})
 }

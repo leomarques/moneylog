@@ -42,11 +42,16 @@ class MainActivity : ComponentActivity() {
                 }
             }
             composable("add_transaction") {
-                AddTransactionActivityScreen {
-                    navController.navigate("home") {
-                        popUpTo("home") { inclusive = true }
+                AddTransactionActivityScreen(
+                    onArrowBackClick = {
+                        navController.popBackStack()
+                    },
+                    onBtnClick = {
+                        navController.navigate("home") {
+                            popUpTo("home") { inclusive = true }
+                        }
                     }
-                }
+                )
             }
         }
     }
