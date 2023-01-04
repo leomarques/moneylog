@@ -74,7 +74,6 @@ dependencies {
     def koin_version= "3.3.2"
     def koin_android_version= "3.3.2"
     def koin_android_compose_version= "3.4.1"
-
     // Koin main features for Android
     implementation "io.insert-koin:koin-android:$koin_android_version"
     // Koin for Jetpack Compose
