@@ -24,7 +24,7 @@ fun BalanceCard(total: String, credit: String, debt: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(bottomStart = 32.dp, bottomEnd = 32.dp))
+            .clip(RoundedCornerShape(16.dp))
             .background(
                 MaterialTheme.colorScheme.tertiaryContainer
             )
@@ -52,13 +52,13 @@ fun Balance(title: String, value: String) {
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onTertiaryContainer
         )
         Text(
             text = value,
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onTertiaryContainer
         )
     }
@@ -71,12 +71,12 @@ fun Amount(title: String, value: String, color: Color) {
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onTertiaryContainer
         )
         Text(
             text = value,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.headlineSmall,
             color = color
         )
     }
