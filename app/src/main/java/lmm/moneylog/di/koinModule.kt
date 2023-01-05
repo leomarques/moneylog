@@ -1,9 +1,9 @@
 package lmm.moneylog.di
 
 import lmm.moneylog.addtransaction.AddTransactionViewModel
-import lmm.moneylog.data.Repository
 import lmm.moneylog.data.RepositoryImpl
 import lmm.moneylog.data.TransactionDatabase
+import lmm.moneylog.data.TransactionRepository
 import lmm.moneylog.home.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
@@ -19,7 +19,7 @@ val appModule = module {
     }
 
     // Repository
-    single<Repository> { RepositoryImpl(get()) }
+    single<TransactionRepository> { RepositoryImpl(get()) }
 
     viewModelOf(::HomeViewModel)
     viewModelOf(::AddTransactionViewModel)

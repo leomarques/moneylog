@@ -4,22 +4,19 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import lmm.moneylog.data.Repository
+import lmm.moneylog.data.TransactionRepository
 
-class AddTransactionViewModel(private val repository: Repository) : ViewModel() {
+class AddTransactionViewModel(private val repository: TransactionRepository) : ViewModel() {
 
-    private fun addTransaction(value: Double) {
-        viewModelScope.launch {
-            repository.save(value)
-        }
-    }
-
-    fun onBtnClick(transactionModel: TransactionModel) {
+    fun saveTransaction(transactionModel: TransactionModel) {
         try {
             val value = transactionModel.value.value.toDouble()
-            addTransaction(value)
+
+            viewModelScope.launch {
+                repository.save(value)
+            }
         } catch (e: NumberFormatException) {
-            Log.d("moneylog", e.localizedMessage ?: "NumberFormatException")
+            Log.d("saveTransaction", e.localizedMessage ?: "NumberFormatException")
         }
     }
 }

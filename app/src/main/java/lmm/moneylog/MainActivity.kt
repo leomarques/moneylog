@@ -9,7 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import lmm.moneylog.addtransaction.AddTransactionActivityScreen
+import lmm.moneylog.addtransaction.AddTransactionScreen
 import lmm.moneylog.home.composables.HomeActivityScreen
 import lmm.moneylog.ui.theme.MoneylogTheme
 
@@ -42,14 +42,9 @@ class MainActivity : ComponentActivity() {
                 }
             }
             composable("add_transaction") {
-                AddTransactionActivityScreen(
+                AddTransactionScreen(
                     onArrowBackClick = {
                         navController.popBackStack()
-                    },
-                    onBtnClick = {
-                        navController.navigate("home") {
-                            popUpTo("home") { inclusive = true }
-                        }
                     }
                 )
             }

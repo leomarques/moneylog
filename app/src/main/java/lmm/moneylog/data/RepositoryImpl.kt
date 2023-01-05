@@ -4,7 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-class RepositoryImpl(private val transactionDao: TransactionDao) : Repository {
+class RepositoryImpl(private val transactionDao: TransactionDao) : TransactionRepository {
 
     override suspend fun save(value: Double) {
         withContext(Dispatchers.IO) {

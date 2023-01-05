@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import lmm.moneylog.data.Repository
+import lmm.moneylog.data.TransactionRepository
 
-class HomeViewModel(repository: Repository) : ViewModel() {
+class HomeViewModel(repository: TransactionRepository) : ViewModel() {
 
     private val transactions = repository.getTransactions().asLiveData()
 

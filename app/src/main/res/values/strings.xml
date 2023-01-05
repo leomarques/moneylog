@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Moneylog</string>
+
+    <string name="addtransaction_topbar">Nova transação</string>
+    <string name="addtransaction_arrowback_desc">arrow back icon</string>
+    <string name="addtransaction_value">Valor</string>
+    <string name="addtransaction_date">Data</string>
+    <string name="addtransaction_description">Descrição</string>
+    <string name="addtransaction_category">Categoria</string>
+    <string name="addtransaction_account">Conta</string>
+    <string name="addtransaction_fab_desc">add transaction fab</string>
 </resources>
