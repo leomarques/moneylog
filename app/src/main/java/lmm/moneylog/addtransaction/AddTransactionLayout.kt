@@ -33,9 +33,9 @@ import lmm.moneylog.ui.theme.SpaceSize
 @Composable
 fun AddTransactionLayout(
     onArrowBackClick: () -> Unit,
-    onFabClick: (TransactionModel) -> Unit
+    onFabClick: (AddTransactionModel) -> Unit
 ) {
-    val transactionModel = TransactionModel()
+    val addTransactionModel = AddTransactionModel()
 
     Scaffold(
         topBar = {
@@ -55,45 +55,45 @@ fun AddTransactionLayout(
         },
         floatingActionButton = {
             AddFab {
-                onFabClick(transactionModel)
+                onFabClick(addTransactionModel)
             }
         },
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
-                Content(transactionModel)
+                Content(addTransactionModel)
             }
         }
     )
 }
 
 @Composable
-private fun Content(transactionModel: TransactionModel) {
+private fun Content(addTransactionModel: AddTransactionModel) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
         Field(
             stringResource(R.string.addtransaction_value),
             KeyboardType.Number,
-            transactionModel.value
+            addTransactionModel.value
         )
         Field(
             stringResource(R.string.addtransaction_date),
             KeyboardType.Text,
-            transactionModel.date
+            addTransactionModel.date
         )
         Field(
             stringResource(R.string.addtransaction_description),
             KeyboardType.Text,
-            transactionModel.description
+            addTransactionModel.description
         )
         Field(
             stringResource(R.string.addtransaction_category),
             KeyboardType.Text,
-            transactionModel.category
+            addTransactionModel.category
         )
         Field(
             stringResource(R.string.addtransaction_account),
             KeyboardType.Text,
-            transactionModel.account
+            addTransactionModel.account
         )
     }
 }

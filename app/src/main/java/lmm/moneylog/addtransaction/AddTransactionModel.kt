@@ -2,7 +2,7 @@ package lmm.moneylog.addtransaction
 
 import androidx.compose.runtime.mutableStateOf
 
-class TransactionModel {
+class AddTransactionModel {
     val value = mutableStateOf("")
     val date = mutableStateOf("")
     val description = mutableStateOf("")

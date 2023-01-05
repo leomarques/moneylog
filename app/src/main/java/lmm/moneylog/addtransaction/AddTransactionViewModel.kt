@@ -8,9 +8,9 @@ import lmm.moneylog.data.TransactionRepository
 
 class AddTransactionViewModel(private val repository: TransactionRepository) : ViewModel() {
 
-    fun saveTransaction(transactionModel: TransactionModel) {
+    fun saveTransaction(addTransactionModel: AddTransactionModel) {
         try {
-            val value = transactionModel.value.value.toDouble()
+            val value = addTransactionModel.value.value.toDouble()
 
             viewModelScope.launch {
                 repository.save(value)
