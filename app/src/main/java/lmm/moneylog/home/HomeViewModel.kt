@@ -3,12 +3,11 @@ package lmm.moneylog.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import lmm.moneylog.data.TransactionRepository
 
 class HomeViewModel(repository: TransactionRepository) : ViewModel() {
 
-    private val transactions = repository.getTransactions().asLiveData()
+    private val transactions = repository.get()
 
     val balanceModel: LiveData<BalanceModel> = Transformations.map(transactions) { list ->
         var credit = 0.0

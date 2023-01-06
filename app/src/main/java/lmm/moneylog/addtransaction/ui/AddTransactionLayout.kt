@@ -1,4 +1,4 @@
-package lmm.moneylog.addtransaction
+package lmm.moneylog.addtransaction.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

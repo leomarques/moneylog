@@ -1,8 +1,8 @@
 package lmm.moneylog.data
 
-import kotlinx.coroutines.flow.Flow
+import androidx.lifecycle.LiveData
 
 interface TransactionRepository {
     suspend fun save(value: Double)
-    fun getTransactions(): Flow<List<Transaction>>
+    fun get(): LiveData<List<TransactionEntity>>
 }

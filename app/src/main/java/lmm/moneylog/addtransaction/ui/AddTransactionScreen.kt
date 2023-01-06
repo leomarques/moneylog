@@ -1,14 +1,14 @@
-package lmm.moneylog.addtransaction
+package lmm.moneylog.addtransaction.ui
 
 import androidx.compose.runtime.Composable
-import org.koin.androidx.compose.getViewModel
+import lmm.moneylog.addtransaction.AddTransactionViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AddTransactionScreen(
-    onArrowBackClick: () -> Unit
+    onArrowBackClick: () -> Unit,
+    viewModel: AddTransactionViewModel = koinViewModel()
 ) {
-    val viewModel: AddTransactionViewModel = getViewModel()
-
     AddTransactionLayout(
         onArrowBackClick = onArrowBackClick,
         onFabClick = { transactionModel ->

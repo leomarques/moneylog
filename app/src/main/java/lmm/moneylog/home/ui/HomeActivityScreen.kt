@@ -1,4 +1,4 @@
-package lmm.moneylog.home.composables
+package lmm.moneylog.home.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
