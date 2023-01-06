@@ -1,7 +1,7 @@
 package lmm.moneylog.data
 
-import androidx.lifecycle.LiveData
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class TransactionRepositoryImpl(private val transactionDao: TransactionDao) :
@@ -13,7 +13,7 @@ class TransactionRepositoryImpl(private val transactionDao: TransactionDao) :
         }
     }
 
-    override fun get(): LiveData<List<TransactionEntity>> {
+    override fun get(): Flow<List<TransactionEntity>> {
         return transactionDao.selectAll()
     }
 }
