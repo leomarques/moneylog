@@ -10,12 +10,12 @@ import org.koin.dsl.module
 
 val appModule = module {
     // TransactionDao
-    single {
+    factory {
         TransactionDatabase.getInstance(get()).transactionDao()
     }
 
     // TransactionRepository
-    single<TransactionRepository> { TransactionRepositoryImpl(get()) }
+    factory<TransactionRepository> { TransactionRepositoryImpl(get()) }
 
     viewModelOf(::HomeViewModel)
     viewModelOf(::AddTransactionViewModel)
