@@ -1,10 +1,9 @@
-package lmm.moneylog.addtransaction
+package lmm.moneylog.features.addtransaction
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import lmm.moneylog.addtransaction.ui.AddTransactionModel
 import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
 
 class AddTransactionViewModel(private val interactor: AddTransactionInteractor) : ViewModel() {

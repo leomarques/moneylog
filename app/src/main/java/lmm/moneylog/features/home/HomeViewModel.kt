@@ -1,11 +1,10 @@
-package lmm.moneylog.home
+package lmm.moneylog.features.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import lmm.moneylog.domain.getbalance.GetBalanceInteractor
-import lmm.moneylog.home.ui.BalanceCardModel
 
 class HomeViewModel(interactor: GetBalanceInteractor) : ViewModel() {
     private val balanceData = interactor.execute().asLiveData()
@@ -18,5 +17,5 @@ class HomeViewModel(interactor: GetBalanceInteractor) : ViewModel() {
         )
     }
 
-    private fun formatValue(value: Double) = "%.2f".format(value)
+    private fun formatValue(value: Double) = "R\$%.2f".format(value)
 }

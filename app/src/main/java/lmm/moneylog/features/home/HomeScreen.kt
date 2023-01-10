@@ -1,11 +1,10 @@
-package lmm.moneylog.home.ui
+package lmm.moneylog.features.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.res.stringResource
 import lmm.moneylog.R
-import lmm.moneylog.home.HomeViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

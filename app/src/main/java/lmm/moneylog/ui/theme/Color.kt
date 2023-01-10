@@ -2,6 +2,8 @@ package lmm.moneylog.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val balancecard_credit = Color(0xFF009f23)
+
 val md_theme_light_primary = Color(0xFF00696D)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFF6FF6FC)

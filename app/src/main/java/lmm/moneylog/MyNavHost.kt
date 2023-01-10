@@ -6,8 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import lmm.moneylog.addtransaction.ui.AddTransactionScreen
-import lmm.moneylog.home.ui.HomeScreen
+import lmm.moneylog.features.addtransaction.AddTransactionScreen
+import lmm.moneylog.features.home.HomeScreen
 
 const val homeScreen = "home"
 const val addTransactionScreen = "add_transaction"

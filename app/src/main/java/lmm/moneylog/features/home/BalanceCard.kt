@@ -1,4 +1,4 @@
-package lmm.moneylog.home.ui
+package lmm.moneylog.features.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -18,9 +18,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
+import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.balancecard_credit
 
 @Composable
 fun BalanceCard(
@@ -49,7 +52,7 @@ fun BalanceCard(
             Amount(
                 stringResource(R.string.balancecard_income),
                 credit,
-                Color.Green
+                balancecard_credit
             )
 
             Spacer(Modifier.width(SpaceSize.XLargeSpaceSize))
@@ -70,13 +73,13 @@ fun Balance(value: String) {
     ) {
         Text(
             text = stringResource(R.string.balancecard_total),
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onTertiaryContainer
         )
         Text(
             text = value,
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.headlineSmall,
+            style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onTertiaryContainer
         )
     }
@@ -93,13 +96,22 @@ fun Amount(
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onTertiaryContainer
         )
         Text(
             text = value,
-            style = MaterialTheme.typography.headlineSmall,
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleMedium,
             color = color
         )
+    }
+}
+
+@Preview
+@Composable
+fun BalanceCardPreview() {
+    MoneylogTheme {
+        BalanceCard(total = "RS150.00", credit = "R$200.00", debt = "R$50.00")
     }
 }

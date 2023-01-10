@@ -1,7 +1,6 @@
-package lmm.moneylog.addtransaction.ui
+package lmm.moneylog.features.addtransaction
 
 import androidx.compose.runtime.Composable
-import lmm.moneylog.addtransaction.AddTransactionViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
