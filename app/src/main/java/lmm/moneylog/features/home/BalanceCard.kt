@@ -1,13 +1,13 @@
 package lmm.moneylog.features.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
@@ -38,24 +39,22 @@ fun BalanceCard(
             .background(
                 MaterialTheme.colorScheme.tertiaryContainer
             )
-            .padding(
-                top = SpaceSize.DefaultSpaceSize,
-                bottom = SpaceSize.DefaultSpaceSize
-            ),
+            .padding(SpaceSize.DefaultSpaceSize),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Balance(total)
 
         Spacer(Modifier.height(SpaceSize.LargeSpaceSize))
 
-        Row {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
             Amount(
                 stringResource(R.string.balancecard_income),
                 credit,
                 balancecard_credit
             )
-
-            Spacer(Modifier.width(SpaceSize.XLargeSpaceSize))
 
             Amount(
                 stringResource(R.string.balancecard_outcome),
@@ -80,7 +79,9 @@ fun Balance(value: String) {
             text = value,
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.onTertiaryContainer
+            color = MaterialTheme.colorScheme.onTertiaryContainer,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
         )
     }
 }
@@ -103,7 +104,9 @@ fun Amount(
             text = value,
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.titleMedium,
-            color = color
+            color = color,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
         )
     }
 }
@@ -112,6 +115,6 @@ fun Amount(
 @Composable
 fun BalanceCardPreview() {
     MoneylogTheme {
-        BalanceCard(total = "RS150.00", credit = "R$200.00", debt = "R$50.00")
+        BalanceCard(total = "RS99995.00", credit = "R$100000.00", debt = "R$50.00")
     }
 }
