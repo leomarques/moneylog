@@ -16,7 +16,10 @@ class AddTransactionViewModel(private val interactor: AddTransactionInteractor) 
                 interactor.execute(value)
             }
         } catch (e: NumberFormatException) {
-            Log.e("saveTransaction", "NumberFormatException: " + e.localizedMessage)
+            Log.e(
+                "saveTransaction",
+                "NumberFormatException: " + e.localizedMessage
+            )
         }
     }
 }
