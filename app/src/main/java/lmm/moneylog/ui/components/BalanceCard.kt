@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.components.balancecard
+package lmm.moneylog.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

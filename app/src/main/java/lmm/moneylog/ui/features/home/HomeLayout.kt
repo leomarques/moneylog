@@ -1,4 +1,4 @@
-package lmm.moneylog.features.home
+package lmm.moneylog.ui.features.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.padding
@@ -11,8 +11,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.components.balancecard.BalanceCard
-import lmm.moneylog.ui.components.balancecard.MyFab
+import lmm.moneylog.ui.components.BalanceCard
+import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
 

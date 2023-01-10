@@ -1,4 +1,4 @@
-package lmm.moneylog.features.home
+package lmm.moneylog.ui.features.home
 
 data class BalanceCardModel(
     val total: String,

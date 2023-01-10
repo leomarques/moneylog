@@ -1,4 +1,4 @@
-package lmm.moneylog.features.addtransaction
+package lmm.moneylog.ui.features.addtransaction
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

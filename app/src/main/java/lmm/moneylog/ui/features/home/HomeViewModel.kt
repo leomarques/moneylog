@@ -1,4 +1,4 @@
-package lmm.moneylog.features.home
+package lmm.moneylog.ui.features.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations

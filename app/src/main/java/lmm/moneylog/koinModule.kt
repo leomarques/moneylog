@@ -1,4 +1,4 @@
-package lmm.moneylog.di
+package lmm.moneylog
 
 import lmm.moneylog.data.TransactionDatabase
 import lmm.moneylog.data.repositories.AddTransactionRepositoryImpl
@@ -7,8 +7,8 @@ import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
 import lmm.moneylog.domain.addtransaction.AddTransactionRepository
 import lmm.moneylog.domain.getbalance.GetBalanceInteractor
 import lmm.moneylog.domain.getbalance.GetBalanceRepository
-import lmm.moneylog.features.addtransaction.AddTransactionViewModel
-import lmm.moneylog.features.home.HomeViewModel
+import lmm.moneylog.ui.features.addtransaction.AddTransactionViewModel
+import lmm.moneylog.ui.features.home.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf

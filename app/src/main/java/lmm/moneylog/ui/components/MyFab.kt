@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.components.balancecard
+package lmm.moneylog.ui.components
 
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon

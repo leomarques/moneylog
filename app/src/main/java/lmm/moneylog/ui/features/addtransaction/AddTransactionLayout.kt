@@ -1,4 +1,4 @@
-package lmm.moneylog.features.addtransaction
+package lmm.moneylog.ui.features.addtransaction
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,7 +26,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.balancecard.MyFab
+import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)

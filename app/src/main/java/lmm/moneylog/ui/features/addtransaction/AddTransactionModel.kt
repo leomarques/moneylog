@@ -1,4 +1,4 @@
-package lmm.moneylog.features.addtransaction
+package lmm.moneylog.ui.features.addtransaction
 
 import androidx.compose.runtime.mutableStateOf
 
