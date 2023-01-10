@@ -6,16 +6,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.R
 import lmm.moneylog.ui.components.balancecard.BalanceCard
+import lmm.moneylog.ui.components.balancecard.MyFab
 import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
 
@@ -32,7 +29,12 @@ fun HomeLayout(
         modifier = Modifier
             .padding(horizontal = SpaceSize.DefaultSpaceSize)
             .padding(top = SpaceSize.DefaultSpaceSize),
-        floatingActionButton = { HomeFab(onFabClick) },
+        floatingActionButton = {
+            MyFab(
+                onFabClick,
+                Icons.Default.Add
+            )
+        },
         floatingActionButtonPosition = FabPosition.Center,
         content = {
             Surface {
@@ -44,16 +46,6 @@ fun HomeLayout(
             }
         }
     )
-}
-
-@Composable
-fun HomeFab(onClick: () -> Unit) {
-    FloatingActionButton(onClick = onClick) {
-        Icon(
-            Icons.Default.Add,
-            contentDescription = stringResource(R.string.home_fab_desc)
-        )
-    }
 }
 
 @Preview

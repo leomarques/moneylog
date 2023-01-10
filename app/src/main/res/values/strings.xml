@@ -9,12 +9,12 @@
     <string name="addtransaction_account">Conta</string>
 
     <string name="addtransaction_arrowback_desc">arrow back icon</string>
-    <string name="addtransaction_fab_desc">add transaction fab</string>
 
     <string name="balancecard_total">Saldo em contas</string>
     <string name="balancecard_income">Receitas</string>
     <string name="balancecard_outcome">Despesas</string>
 
-    <string name="home_fab_desc">home fab</string>
     <string name="home_placeholdervalue">0.0</string>
+
+    <string name="fab_desc">floating action button</string>
 </resources>

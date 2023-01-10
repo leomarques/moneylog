@@ -10,7 +10,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -27,6 +26,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.balancecard.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,9 +54,10 @@ fun AddTransactionLayout(
             )
         },
         floatingActionButton = {
-            AddFab {
-                onFabClick(addTransactionModel)
-            }
+            MyFab(
+                { onFabClick(addTransactionModel) },
+                Icons.Default.Check
+            )
         },
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
@@ -135,16 +136,6 @@ fun StateTextField(
             .fillMaxWidth()
             .padding(bottom = SpaceSize.SmallSpaceSize)
     )
-}
-
-@Composable
-private fun AddFab(onClick: () -> Unit) {
-    FloatingActionButton(onClick = onClick) {
-        Icon(
-            Icons.Default.Check,
-            contentDescription = stringResource(R.string.addtransaction_fab_desc)
-        )
-    }
 }
 
 @Preview
