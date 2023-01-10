@@ -5,6 +5,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import lmm.moneylog.data.TransactionRepository
+import lmm.moneylog.home.ui.BalanceModel
 
 class HomeViewModel(repository: TransactionRepository) : ViewModel() {
 
@@ -23,7 +24,11 @@ class HomeViewModel(repository: TransactionRepository) : ViewModel() {
 
         val total = credit + debt
 
-        BalanceModel(formatValue(total), formatValue(credit), formatValue(debt))
+        BalanceModel(
+            formatValue(total),
+            formatValue(credit),
+            formatValue(debt)
+        )
     }
 
     private fun formatValue(value: Double) = "%.2f".format(value)

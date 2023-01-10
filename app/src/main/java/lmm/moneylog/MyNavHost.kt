@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import lmm.moneylog.addtransaction.ui.AddTransactionScreen
-import lmm.moneylog.home.ui.HomeActivityScreen
+import lmm.moneylog.home.ui.HomeScreen
 
 const val homeScreen = "home"
 const val addTransactionScreen = "add_transaction"
@@ -24,9 +24,10 @@ fun MyNavHost(
         startDestination = startDestination
     ) {
         composable(homeScreen) {
-            HomeActivityScreen {
+            HomeScreen({
                 navController.navigate(addTransactionScreen)
             }
+            )
         }
 
         composable(addTransactionScreen) {

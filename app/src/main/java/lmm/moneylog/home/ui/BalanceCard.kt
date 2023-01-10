@@ -16,11 +16,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import lmm.moneylog.R
+import lmm.moneylog.ui.theme.SpaceSize
 
 @Composable
-fun BalanceCard(total: String, credit: String, debt: String) {
+fun BalanceCard(
+    total: String,
+    credit: String,
+    debt: String
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -28,30 +35,41 @@ fun BalanceCard(total: String, credit: String, debt: String) {
             .background(
                 MaterialTheme.colorScheme.tertiaryContainer
             )
-            .padding(top = 16.dp, bottom = 16.dp),
+            .padding(
+                top = SpaceSize.DefaultSpaceSize,
+                bottom = SpaceSize.DefaultSpaceSize
+            ),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Balance("Saldo em contas", total)
+        Balance(total)
 
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(SpaceSize.LargeSpaceSize))
 
         Row {
-            Amount("Receitas", credit, Color.Green)
+            Amount(
+                stringResource(R.string.balancecard_income),
+                credit,
+                Color.Green
+            )
 
-            Spacer(Modifier.width(64.dp))
+            Spacer(Modifier.width(SpaceSize.XLargeSpaceSize))
 
-            Amount("Despesas", debt, Color.Red)
+            Amount(
+                stringResource(R.string.balancecard_outcome),
+                debt,
+                Color.Red
+            )
         }
     }
 }
 
 @Composable
-fun Balance(title: String, value: String) {
+fun Balance(value: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = title,
+            text = stringResource(R.string.balancecard_total),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onTertiaryContainer
         )
@@ -65,7 +83,11 @@ fun Balance(title: String, value: String) {
 }
 
 @Composable
-fun Amount(title: String, value: String, color: Color) {
+fun Amount(
+    title: String,
+    value: String,
+    color: Color
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
