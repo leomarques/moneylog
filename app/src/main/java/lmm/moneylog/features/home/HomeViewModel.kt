@@ -13,7 +13,13 @@ class HomeViewModel(interactor: GetBalanceInteractor) : ViewModel() {
         BalanceCardModel(
             formatValue(balance.total),
             formatValue(balance.credit),
-            formatValue(-balance.debt)
+            formatValue(
+                if (balance.debt < 0) {
+                    -balance.debt
+                } else {
+                    0.0
+                }
+            )
         )
     }
 
