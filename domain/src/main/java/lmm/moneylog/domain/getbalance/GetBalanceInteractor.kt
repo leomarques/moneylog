@@ -1,4 +1,4 @@
-package lmm.moneylog.domain
+package lmm.moneylog.domain.getbalance
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

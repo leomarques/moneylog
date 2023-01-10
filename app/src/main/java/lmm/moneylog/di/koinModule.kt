@@ -1,12 +1,13 @@
 package lmm.moneylog.di
 
 import lmm.moneylog.addtransaction.AddTransactionViewModel
+import lmm.moneylog.data.AddTransactionRepositoryImpl
 import lmm.moneylog.data.GetBalanceRepositoryImpl
 import lmm.moneylog.data.TransactionDatabase
-import lmm.moneylog.data.TransactionRepository
-import lmm.moneylog.data.TransactionRepositoryImpl
-import lmm.moneylog.domain.GetBalanceInteractor
-import lmm.moneylog.domain.GetBalanceRepository
+import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
+import lmm.moneylog.domain.addtransaction.AddTransactionRepository
+import lmm.moneylog.domain.getbalance.GetBalanceInteractor
+import lmm.moneylog.domain.getbalance.GetBalanceRepository
 import lmm.moneylog.home.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
@@ -19,10 +20,11 @@ val appModule = module {
         TransactionDatabase.getInstance(get()).transactionDao()
     }
 
-    factoryOf(::TransactionRepositoryImpl) { bind<TransactionRepository>() }
-
+    factoryOf(::AddTransactionRepositoryImpl) { bind<AddTransactionRepository>() }
     factoryOf(::GetBalanceRepositoryImpl) { bind<GetBalanceRepository>() }
+
     factoryOf(::GetBalanceInteractor)
+    factoryOf(::AddTransactionInteractor)
 
     viewModelOf(::HomeViewModel)
     viewModelOf(::AddTransactionViewModel)
