@@ -4,30 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import lmm.moneylog.data.TransactionRepository
-import lmm.moneylog.home.ui.BalanceModel
+import lmm.moneylog.domain.GetBalanceInteractor
+import lmm.moneylog.home.ui.BalanceCardModel
 
-class HomeViewModel(repository: TransactionRepository) : ViewModel() {
+class HomeViewModel(interactor: GetBalanceInteractor) : ViewModel() {
+    private val balanceData = interactor.execute().asLiveData()
 
-    private val transactions = repository.get().asLiveData()
-
-    val balanceModel: LiveData<BalanceModel> = Transformations.map(transactions) { list ->
-        var credit = 0.0
-        var debt = 0.0
-
-        for (transaction in list) {
-            if (transaction.value > 0)
-                credit += transaction.value
-            else
-                debt += transaction.value
-        }
-
-        val total = credit + debt
-
-        BalanceModel(
-            formatValue(total),
-            formatValue(credit),
-            formatValue(debt)
+    val balanceCardModel: LiveData<BalanceCardModel> = Transformations.map(balanceData) { balance ->
+        BalanceCardModel(
+            formatValue(balance.total),
+            formatValue(balance.credit),
+            formatValue(-balance.debt)
         )
     }
 

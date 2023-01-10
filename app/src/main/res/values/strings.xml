@@ -16,4 +16,5 @@
     <string name="balancecard_outcome">Despesas</string>
 
     <string name="home_fab_desc">home fab</string>
+    <string name="home_placeholdervalue">0.0</string>
 </resources>

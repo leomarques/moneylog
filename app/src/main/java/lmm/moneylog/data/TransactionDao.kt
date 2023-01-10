@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TransactionDao {
-    @Query("SELECT * FROM `transaction`")
-    fun selectAll(): Flow<List<TransactionEntity>>
+    @Query("SELECT value FROM `transaction`")
+    fun selectAllValues(): Flow<List<Double>>
 
     @Insert(onConflict = REPLACE)
     fun insert(transactionEntity: TransactionEntity)
