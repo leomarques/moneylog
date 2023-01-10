@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun AddTransactionScreen(
+fun AddTransactionView(
     onArrowBackClick: () -> Unit,
     viewModel: AddTransactionViewModel = koinViewModel()
 ) {

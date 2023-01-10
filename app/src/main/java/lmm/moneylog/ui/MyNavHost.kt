@@ -1,4 +1,4 @@
-package lmm.moneylog
+package lmm.moneylog.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
@@ -8,7 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import lmm.moneylog.features.addtransaction.AddTransactionScreen
+import lmm.moneylog.features.addtransaction.AddTransactionView
 import lmm.moneylog.features.home.HomeScreen
 
 const val homeScreen = "home"
@@ -32,7 +32,7 @@ fun MyNavHost(
         }
 
         composable(addTransactionScreen) {
-            AddTransactionScreen(
+            AddTransactionView(
                 onArrowBackClick = {
                     navController.popBackStack()
                 }

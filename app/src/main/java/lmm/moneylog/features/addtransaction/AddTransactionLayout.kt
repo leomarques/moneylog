@@ -138,10 +138,8 @@ fun StateTextField(
 }
 
 @Composable
-private fun AddFab(onBtnClick: () -> Unit) {
-    FloatingActionButton(
-        onClick = onBtnClick
-    ) {
+private fun AddFab(onClick: () -> Unit) {
+    FloatingActionButton(onClick = onClick) {
         Icon(
             Icons.Default.Check,
             contentDescription = stringResource(R.string.addtransaction_fab_desc)

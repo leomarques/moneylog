@@ -1,4 +1,4 @@
-package lmm.moneylog
+package lmm.moneylog.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

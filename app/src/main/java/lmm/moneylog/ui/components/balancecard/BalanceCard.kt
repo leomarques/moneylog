@@ -1,4 +1,4 @@
-package lmm.moneylog.features.home
+package lmm.moneylog.ui.components.balancecard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,7 +20,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
@@ -35,7 +34,7 @@ fun BalanceCard(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(SpaceSize.DefaultSpaceSize))
             .background(
                 MaterialTheme.colorScheme.tertiaryContainer
             )
