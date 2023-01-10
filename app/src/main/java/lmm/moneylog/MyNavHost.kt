@@ -1,5 +1,7 @@
 package lmm.moneylog
 
+import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -19,15 +21,14 @@ fun MyNavHost(
     startDestination: String = homeScreen
 ) {
     NavHost(
-        modifier = modifier,
+        modifier = modifier.background(MaterialTheme.colorScheme.background),
         navController = navController,
         startDestination = startDestination
     ) {
         composable(homeScreen) {
             HomeScreen({
                 navController.navigate(addTransactionScreen)
-            }
-            )
+            })
         }
 
         composable(addTransactionScreen) {

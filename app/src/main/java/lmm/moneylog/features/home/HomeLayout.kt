@@ -1,5 +1,6 @@
 package lmm.moneylog.features.home
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -12,9 +13,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeLayout(
@@ -29,8 +33,8 @@ fun HomeLayout(
             .padding(top = SpaceSize.DefaultSpaceSize),
         floatingActionButton = { HomeFab(onFabClick) },
         floatingActionButtonPosition = FabPosition.Center,
-        content = { paddingValues ->
-            Surface(modifier = Modifier.padding(paddingValues)) {
+        content = {
+            Surface {
                 BalanceCard(
                     total,
                     credit,
@@ -48,5 +52,17 @@ fun HomeFab(onClick: () -> Unit) {
             Icons.Default.Add,
             contentDescription = stringResource(R.string.home_fab_desc)
         )
+    }
+}
+
+@Preview
+@Composable
+fun HomeLayoutPreview() {
+    MoneylogTheme {
+        HomeLayout(
+            total = "R$250",
+            credit = "R$300",
+            debt = "R$50"
+        ) {}
     }
 }
