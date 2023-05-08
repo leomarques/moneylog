@@ -2,7 +2,7 @@ package lmm.moneylog.data
 
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
@@ -11,6 +11,6 @@ interface TransactionDao {
     @Query("SELECT value FROM `transaction`")
     fun selectAllValues(): Flow<List<Double>>
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(transactionEntity: TransactionEntity)
 }
