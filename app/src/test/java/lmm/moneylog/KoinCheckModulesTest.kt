@@ -5,7 +5,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.test.KoinTest
 import org.koin.test.verify.verify
 
-class CheckModulesTest : KoinTest {
+class KoinCheckModulesTest : KoinTest {
 
     @OptIn(KoinExperimentalAPI::class)
     @Test
