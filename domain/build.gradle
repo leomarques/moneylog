@@ -3,12 +3,14 @@ plugins {
     id "org.jlleitschuh.gradle.ktlint"
 }
 
+apply from: '../dependencies.gradle'
+
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = versions.javaVersion
+    targetCompatibility = versions.javaVersion
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation 'junit:junit:4.13.2'
+    implementation libraries.kotlinx_coroutines_core
+    implementation libraries.junit
 }
