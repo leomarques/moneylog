@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
 import lmm.moneylog.domain.addtransaction.model.Transaction
-import lmm.moneylog.ui.features.addtransaction.domaintime.DomainTimeConverter
-import lmm.moneylog.ui.features.addtransaction.domaintime.DomainTimeException
+import lmm.moneylog.domain.addtransaction.time.DomainTimeConverter
+import lmm.moneylog.domain.addtransaction.time.DomainTimeException
 
 class AddTransactionViewModel(
     private val interactor: AddTransactionInteractor,

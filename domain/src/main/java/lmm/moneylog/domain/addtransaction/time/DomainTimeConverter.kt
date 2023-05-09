@@ -1,6 +1,4 @@
-package lmm.moneylog.ui.features.addtransaction.domaintime
-
-import lmm.moneylog.domain.addtransaction.model.DomainTime
+package lmm.moneylog.domain.addtransaction.time
 
 interface DomainTimeConverter {
     fun toDomainTime(time: String): DomainTime
