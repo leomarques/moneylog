@@ -85,16 +85,6 @@ private fun Content(addTransactionModel: AddTransactionModel) {
             keyboardType = KeyboardType.Text,
             valueState = addTransactionModel.description
         )
-        Field(
-            title = stringResource(R.string.addtransaction_category),
-            keyboardType = KeyboardType.Text,
-            valueState = addTransactionModel.category
-        )
-        Field(
-            title = stringResource(R.string.addtransaction_account),
-            keyboardType = KeyboardType.Text,
-            valueState = addTransactionModel.account
-        )
     }
 }
 
