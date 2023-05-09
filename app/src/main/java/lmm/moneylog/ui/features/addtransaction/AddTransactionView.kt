@@ -13,6 +13,7 @@ fun AddTransactionView(
         onFabClick = { transactionModel ->
             viewModel.saveTransaction(transactionModel)
             onArrowBackClick()
-        }
+        },
+        addTransactionModel = viewModel.addTransactionModel
     )
 }

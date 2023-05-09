@@ -1,6 +1,6 @@
 package lmm.moneylog.domain.addtransaction.model
 
-data class MoneylogTime(
+data class DomainTime(
     val day: Int,
     val month: Int,
     val year: Int,

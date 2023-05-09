@@ -8,6 +8,8 @@ import lmm.moneylog.domain.addtransaction.AddTransactionRepository
 import lmm.moneylog.domain.getbalance.GetBalanceInteractor
 import lmm.moneylog.domain.getbalance.GetBalanceRepository
 import lmm.moneylog.ui.features.addtransaction.AddTransactionViewModel
+import lmm.moneylog.ui.features.addtransaction.domaintime.DomainTimeConverter
+import lmm.moneylog.ui.features.addtransaction.domaintime.LocalDateTimeToDomainTimeConverterImpl
 import lmm.moneylog.ui.features.home.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
@@ -22,6 +24,7 @@ val appModule = module {
 
     factoryOf(::AddTransactionRepositoryImpl) { bind<AddTransactionRepository>() }
     factoryOf(::GetBalanceRepositoryImpl) { bind<GetBalanceRepository>() }
+    factoryOf(::LocalDateTimeToDomainTimeConverterImpl) { bind<DomainTimeConverter>() }
 
     factoryOf(::GetBalanceInteractor)
     factoryOf(::AddTransactionInteractor)

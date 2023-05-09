@@ -33,10 +33,9 @@ import lmm.moneylog.ui.theme.SpaceSize
 @Composable
 fun AddTransactionLayout(
     onArrowBackClick: () -> Unit,
-    onFabClick: (AddTransactionModel) -> Unit
+    onFabClick: (AddTransactionModel) -> Unit,
+    addTransactionModel: AddTransactionModel
 ) {
-    val addTransactionModel = AddTransactionModel()
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -72,29 +71,29 @@ fun AddTransactionLayout(
 private fun Content(addTransactionModel: AddTransactionModel) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
         Field(
-            stringResource(R.string.addtransaction_value),
-            KeyboardType.Number,
-            addTransactionModel.value
+            title = stringResource(R.string.addtransaction_value),
+            keyboardType = KeyboardType.Number,
+            valueState = addTransactionModel.value
         )
         Field(
-            stringResource(R.string.addtransaction_date),
-            KeyboardType.Text,
-            addTransactionModel.date
+            title = stringResource(R.string.addtransaction_date),
+            keyboardType = KeyboardType.Text,
+            valueState = addTransactionModel.date
         )
         Field(
-            stringResource(R.string.addtransaction_description),
-            KeyboardType.Text,
-            addTransactionModel.description
+            title = stringResource(R.string.addtransaction_description),
+            keyboardType = KeyboardType.Text,
+            valueState = addTransactionModel.description
         )
         Field(
-            stringResource(R.string.addtransaction_category),
-            KeyboardType.Text,
-            addTransactionModel.category
+            title = stringResource(R.string.addtransaction_category),
+            keyboardType = KeyboardType.Text,
+            valueState = addTransactionModel.category
         )
         Field(
-            stringResource(R.string.addtransaction_account),
-            KeyboardType.Text,
-            addTransactionModel.account
+            title = stringResource(R.string.addtransaction_account),
+            keyboardType = KeyboardType.Text,
+            valueState = addTransactionModel.account
         )
     }
 }
@@ -106,9 +105,9 @@ private fun Field(
     valueState: MutableState<String>
 ) {
     StateTextField(
-        title,
-        keyboardType,
-        valueState
+        title = title,
+        keyboardType = keyboardType,
+        valueState = valueState
     )
 }
 
@@ -141,5 +140,9 @@ fun StateTextField(
 @Preview
 @Composable
 fun Preview() {
-    AddTransactionLayout(onFabClick = {}, onArrowBackClick = {})
+    AddTransactionLayout(
+        onFabClick = {},
+        onArrowBackClick = {},
+        addTransactionModel = AddTransactionModel()
+    )
 }
