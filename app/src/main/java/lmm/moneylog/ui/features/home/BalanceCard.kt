@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.components
+package lmm.moneylog.ui.features.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

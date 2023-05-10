@@ -11,7 +11,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.components.BalanceCard
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
