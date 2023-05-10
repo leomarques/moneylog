@@ -2,40 +2,31 @@ package lmm.moneylog.data.domaintime
 
 import lmm.moneylog.domain.addtransaction.time.DomainTime
 import lmm.moneylog.domain.addtransaction.time.DomainTimeConverter
-import lmm.moneylog.domain.addtransaction.time.DomainTimeException
+import java.time.Instant
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeParseException
+import java.time.Month
+import java.time.ZoneId
 
 class LocalDateTimeToDomainTimeConverterImpl : DomainTimeConverter {
 
-    private val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern(getDatePattern())
+    override fun getCurrentTimeStamp() =
+        Instant.now().toEpochMilli()
 
-    override fun toDomainTime(time: String): DomainTime {
-        try {
-            val localDateTime = LocalDateTime.parse(time, dateTimeFormatter)
+    override fun timeStampToDomainTime(timeStamp: Long): DomainTime {
+        val localDate = LocalDateTime.ofInstant(
+            Instant.ofEpochMilli(timeStamp),
+            ZoneId.systemDefault()
+        )
 
-            with(localDateTime) {
-                return DomainTime(
-                    day = dayOfMonth,
-                    month = month.value,
-                    year = year,
-                    hour = hour,
-                    minute = minute
-                )
-            }
-        } catch (exception: DateTimeParseException) {
-            throw exception.toDomainTimeException()
+        with(localDate) {
+            return DomainTime(
+                day = dayOfMonth,
+                month = month.value,
+                year = year,
+                hour = hour,
+                minute = minute
+            )
         }
     }
-
-    override fun getNowTime(): String {
-        return LocalDateTime.now().format(dateTimeFormatter)
-    }
-
-    override fun getDatePattern() = "yyyy-MM-dd HH:mm"
-}
-
-private fun DateTimeParseException.toDomainTimeException(): Throwable {
-    throw DomainTimeException("message = $message")
+    override fun getMonthName(number: Int) = Month.of(number).name.lowercase()
 }

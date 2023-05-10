@@ -35,9 +35,9 @@ class AddTransactionViewModelTest {
     fun setup() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
 
-        every { domainTimeConverter.toDomainTime(any()) } returns domainTime
-        every { domainTimeConverter.getNowTime() } returns ""
-        every { domainTimeConverter.getDatePattern() } returns ""
+        every { domainTimeConverter.timeStampToDomainTime(any()) } returns domainTime
+        every { domainTimeConverter.getCurrentTimeStamp() } returns 0L
+        every { domainTimeConverter.getMonthName(any()) } returns ""
 
         coEvery { interactor.execute(any()) } returns Unit
 

@@ -3,25 +3,20 @@ package lmm.moneylog.ui.features.addtransaction.domaintime
 import lmm.moneylog.data.domaintime.LocalDateTimeToDomainTimeConverterImpl
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class LocalDateTimeToDomainTimeConverterImplTest {
 
     @Test
     fun `should convert date string in converter pattern to DomainTime`() {
         val converter = LocalDateTimeToDomainTimeConverterImpl()
+        val domainTime = converter.timeStampToDomainTime(1683733471712)
 
-        val text = "2022-01-06 21:30"
-        val dateTimeFormatter = DateTimeFormatter.ofPattern(converter.getDatePattern())
-
-        val localDateString = LocalDateTime.parse(text, dateTimeFormatter).format(dateTimeFormatter)
-        val domainTime = converter.toDomainTime(localDateString)
-
-        assertEquals(2022, domainTime.year)
-        assertEquals(1, domainTime.month)
-        assertEquals(6, domainTime.day)
-        assertEquals(21, domainTime.hour)
-        assertEquals(30, domainTime.minute)
+        with(domainTime) {
+            assertEquals(2023, year)
+            assertEquals(5, month)
+            assertEquals(10, day)
+            assertEquals(12, hour)
+            assertEquals(44, minute)
+        }
     }
 }

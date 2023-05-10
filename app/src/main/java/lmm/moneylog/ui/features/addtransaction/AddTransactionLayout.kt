@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package lmm.moneylog.ui.features.addtransaction
 
 import androidx.compose.foundation.clickable
@@ -34,6 +32,7 @@ import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTransactionLayout(
     onArrowBackClick: () -> Unit,
@@ -101,7 +100,7 @@ private fun Content(
         Field(
             title = stringResource(R.string.addtransaction_date),
             keyboardType = KeyboardType.Text,
-            valueState = addTransactionModel.date,
+            valueState = addTransactionModel.displayDate,
         ) {
             showDatePicker.value = true
         }

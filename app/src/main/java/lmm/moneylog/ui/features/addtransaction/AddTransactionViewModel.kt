@@ -6,54 +6,49 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
 import lmm.moneylog.domain.addtransaction.model.Transaction
+import lmm.moneylog.domain.addtransaction.time.DomainTime
 import lmm.moneylog.domain.addtransaction.time.DomainTimeConverter
-import lmm.moneylog.domain.addtransaction.time.DomainTimeException
-import java.time.Instant
-import java.time.LocalDateTime
 
 class AddTransactionViewModel(
     private val interactor: AddTransactionInteractor,
     private val domainTimeConverter: DomainTimeConverter,
 ) : ViewModel() {
 
-    val addTransactionModel = AddTransactionModel().also {
-        it.date.value = domainTimeConverter.getNowTime()
+    val addTransactionModel = AddTransactionModel()
+
+    init {
+        onDatePicked(domainTimeConverter.getCurrentTimeStamp())
+    }
+
+    fun onDatePicked(timeStamp: Long) {
+        with(addTransactionModel) {
+            date = domainTimeConverter.timeStampToDomainTime(timeStamp)
+            displayDate.value = convertToDisplayDate(date)
+        }
+    }
+
+    private fun convertToDisplayDate(domainTime: DomainTime): String {
+        return "${domainTime.day} ${domainTimeConverter.getMonthName(domainTime.month)}, ${domainTime.year}"
     }
 
     fun saveTransaction(addTransactionModel: AddTransactionModel) {
         try {
-            val value = addTransactionModel.value.value.toDouble()
-            val date = addTransactionModel.date.value
-            val description = addTransactionModel.description.value
+            with(addTransactionModel) {
+                val transaction = Transaction(
+                    value = value.value.toDouble(),
+                    date = date,
+                    description = description.value
+                )
 
-            val transaction = Transaction(
-                value = value,
-                date = domainTimeConverter.toDomainTime(date),
-                description = description
-            )
-
-            viewModelScope.launch {
-                interactor.execute(transaction)
+                viewModelScope.launch {
+                    interactor.execute(transaction)
+                }
             }
         } catch (e: NumberFormatException) {
             Log.e(
                 /* tag = */ "saveTransaction",
                 /* msg = */ "NumberFormatException: " + e.localizedMessage
             )
-        } catch (e: DomainTimeException) {
-            Log.e(
-                /* tag = */ "saveTransaction",
-                /* msg = */ "ToDomainTimeException: " + e.localizedMessage
-            )
         }
-    }
-
-    fun onDatePicked(datePicked: Long) {
-        val localDatePicked = LocalDateTime.ofInstant(
-            Instant.ofEpochMilli(datePicked),
-            java.time.ZoneId.systemDefault()
-        )
-
-        addTransactionModel.date.value = localDatePicked.toString()
     }
 }
