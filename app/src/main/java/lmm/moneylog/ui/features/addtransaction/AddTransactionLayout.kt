@@ -33,14 +33,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
-import java.time.Instant
-import java.time.LocalDateTime
 
 @Composable
 fun AddTransactionLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: (AddTransactionModel) -> Unit,
-    addTransactionModel: AddTransactionModel
+    addTransactionModel: AddTransactionModel,
+    onDatePicked: (Long) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -67,25 +66,30 @@ fun AddTransactionLayout(
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
-                Content(addTransactionModel)
+                Content(
+                    addTransactionModel,
+                    onDatePicked
+                )
             }
         }
     )
 }
 
 @Composable
-private fun Content(addTransactionModel: AddTransactionModel) {
+private fun Content(
+    addTransactionModel: AddTransactionModel,
+    onDatePicked: (Long) -> Unit
+) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
         val showDatePicker = remember { mutableStateOf(false) }
         if (showDatePicker.value) {
             AddTransactionDatePicker(
                 onConfirm = {
-                    val selectedDate = LocalDateTime.ofInstant(
-                        Instant.ofEpochMilli(it),
-                        java.time.ZoneId.systemDefault()
-                    )
+                    onDatePicked(it)
                 },
-                onDismiss = { showDatePicker.value = false }
+                onDismiss = {
+                    showDatePicker.value = false
+                }
             )
         }
 
@@ -158,8 +162,9 @@ fun StateTextField(
 @Composable
 fun Preview() {
     AddTransactionLayout(
-        onFabClick = {},
         onArrowBackClick = {},
-        addTransactionModel = AddTransactionModel()
+        onFabClick = {},
+        addTransactionModel = AddTransactionModel(),
+        onDatePicked = {}
     )
 }

@@ -8,6 +8,8 @@ import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
 import lmm.moneylog.domain.addtransaction.model.Transaction
 import lmm.moneylog.domain.addtransaction.time.DomainTimeConverter
 import lmm.moneylog.domain.addtransaction.time.DomainTimeException
+import java.time.Instant
+import java.time.LocalDateTime
 
 class AddTransactionViewModel(
     private val interactor: AddTransactionInteractor,
@@ -44,5 +46,14 @@ class AddTransactionViewModel(
                 /* msg = */ "ToDomainTimeException: " + e.localizedMessage
             )
         }
+    }
+
+    fun onDatePicked(datePicked: Long) {
+        val localDatePicked = LocalDateTime.ofInstant(
+            Instant.ofEpochMilli(datePicked),
+            java.time.ZoneId.systemDefault()
+        )
+
+        addTransactionModel.date.value = localDatePicked.toString()
     }
 }

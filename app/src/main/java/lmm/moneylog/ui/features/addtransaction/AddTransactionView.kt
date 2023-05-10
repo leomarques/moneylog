@@ -14,6 +14,9 @@ fun AddTransactionView(
             viewModel.saveTransaction(transactionModel)
             onArrowBackClick()
         },
-        addTransactionModel = viewModel.addTransactionModel
+        addTransactionModel = viewModel.addTransactionModel,
+        onDatePicked = { datePicked ->
+            viewModel.onDatePicked(datePicked)
+        }
     )
 }
