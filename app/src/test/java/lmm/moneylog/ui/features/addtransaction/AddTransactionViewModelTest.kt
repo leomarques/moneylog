@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.addtransaction
 
+import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
@@ -37,6 +38,8 @@ class AddTransactionViewModelTest {
         every { domainTimeConverter.toDomainTime(any()) } returns domainTime
         every { domainTimeConverter.getNowTime() } returns ""
         every { domainTimeConverter.getDatePattern() } returns ""
+
+        coEvery { interactor.execute(any()) } returns Unit
 
         viewModel = AddTransactionViewModel(
             interactor,
