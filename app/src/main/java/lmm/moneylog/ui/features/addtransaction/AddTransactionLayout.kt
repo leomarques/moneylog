@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.features.addtransaction
 
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,6 +20,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -124,7 +126,7 @@ private fun Field(
         keyboardType = keyboardType,
         valueState = valueState,
         onClick = onClick ?: {},
-        enabled = onClick == null
+        readOnly = onClick != null
     )
 }
 
@@ -134,7 +136,7 @@ fun StateTextField(
     keyboardType: KeyboardType,
     valueState: MutableState<String>,
     onClick: () -> Unit,
-    enabled: Boolean = true
+    readOnly: Boolean = false
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -145,15 +147,24 @@ fun StateTextField(
             keyboardType = keyboardType,
             imeAction = ImeAction.Done
         ),
+        readOnly = readOnly,
         keyboardActions = KeyboardActions(
             onDone = { focusManager.clearFocus() }
         ),
+        interactionSource = remember { MutableInteractionSource() }
+            .also { interactionSource ->
+                LaunchedEffect(interactionSource) {
+                    interactionSource.interactions.collect {
+                        if (it is PressInteraction.Release) {
+                            onClick()
+                        }
+                    }
+                }
+            },
         onValueChange = { value -> valueState.value = value },
-        enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = SpaceSize.SmallSpaceSize)
-            .clickable { onClick() }
     )
 }
 
