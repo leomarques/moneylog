@@ -1,5 +1,8 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package lmm.moneylog.ui.features.addtransaction
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -19,6 +22,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -28,8 +33,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
+import java.time.Instant
+import java.time.LocalDateTime
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTransactionLayout(
     onArrowBackClick: () -> Unit,
@@ -70,6 +76,19 @@ fun AddTransactionLayout(
 @Composable
 private fun Content(addTransactionModel: AddTransactionModel) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
+        val showDatePicker = remember { mutableStateOf(false) }
+        if (showDatePicker.value) {
+            AddTransactionDatePicker(
+                onConfirm = {
+                    val selectedDate = LocalDateTime.ofInstant(
+                        Instant.ofEpochMilli(it),
+                        java.time.ZoneId.systemDefault()
+                    )
+                },
+                onDismiss = { showDatePicker.value = false }
+            )
+        }
+
         Field(
             title = stringResource(R.string.addtransaction_value),
             keyboardType = KeyboardType.Number,
@@ -78,8 +97,10 @@ private fun Content(addTransactionModel: AddTransactionModel) {
         Field(
             title = stringResource(R.string.addtransaction_date),
             keyboardType = KeyboardType.Text,
-            valueState = addTransactionModel.date
-        )
+            valueState = addTransactionModel.date,
+        ) {
+            showDatePicker.value = true
+        }
         Field(
             title = stringResource(R.string.addtransaction_description),
             keyboardType = KeyboardType.Text,
@@ -92,21 +113,25 @@ private fun Content(addTransactionModel: AddTransactionModel) {
 private fun Field(
     title: String,
     keyboardType: KeyboardType,
-    valueState: MutableState<String>
+    valueState: MutableState<String>,
+    onClick: (() -> Unit)? = null
 ) {
     StateTextField(
         title = title,
         keyboardType = keyboardType,
-        valueState = valueState
+        valueState = valueState,
+        onClick = onClick ?: {},
+        enabled = onClick == null
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StateTextField(
     title: String,
     keyboardType: KeyboardType,
-    valueState: MutableState<String>
+    valueState: MutableState<String>,
+    onClick: () -> Unit,
+    enabled: Boolean = true
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -121,9 +146,11 @@ fun StateTextField(
             onDone = { focusManager.clearFocus() }
         ),
         onValueChange = { value -> valueState.value = value },
+        enabled = enabled,
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = SpaceSize.SmallSpaceSize)
+            .clickable { onClick() }
     )
 }
 
