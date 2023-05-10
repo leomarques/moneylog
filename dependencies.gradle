@@ -17,6 +17,8 @@ ext {
             koin_test                     : '3.3.2',
             kotlinx_coroutines_core       : '1.6.4',
             junit                         : '4.13.2',
+            mockk                         : '1.13.5',
+            kotlinx_coroutines_test       : '1.6.4',
     ]
 
     libraries = [
@@ -34,6 +36,8 @@ ext {
             koin_androidx_compose  : "io.insert-koin:koin-androidx-compose:$versions.koin_androidx_compose",
             koin_test              : "io.insert-koin:koin-test:$versions.koin_test",
             kotlinx_coroutines_core: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinx_coroutines_core",
-            junit                  : "junit:junit:$versions.junit"
+            junit                  : "junit:junit:$versions.junit",
+            mockk                  : "io.mockk:mockk:$versions.mockk",
+            kotlinx_coroutines_test: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinx_coroutines_test",
     ]
 }

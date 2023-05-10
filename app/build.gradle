@@ -69,4 +69,7 @@ dependencies {
     implementation libraries.koin_android
     implementation libraries.koin_androidx_compose
     testImplementation libraries.koin_test
+
+    testImplementation libraries.mockk
+    testImplementation libraries.kotlinx_coroutines_test
 }
