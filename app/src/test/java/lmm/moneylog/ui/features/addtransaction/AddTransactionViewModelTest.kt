@@ -7,14 +7,12 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import lmm.moneylog.MainDispatcherRule
 import lmm.moneylog.data.domaintime.LocalDateTimeToDomainTimeConverterImpl
 import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
 import lmm.moneylog.domain.addtransaction.model.Transaction
 import lmm.moneylog.domain.addtransaction.time.DomainTime
 import org.junit.After
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -23,13 +21,9 @@ class AddTransactionViewModelTest {
     private lateinit var viewModel: AddTransactionViewModel
     private val interactor: AddTransactionInteractor = mockk()
 
-    @get:Rule
-    val mainDispatcherRule = MainDispatcherRule()
-    private val dispatcher = UnconfinedTestDispatcher()
-
     @Before
     fun setup() {
-        Dispatchers.setMain(dispatcher)
+        Dispatchers.setMain(UnconfinedTestDispatcher())
 
         viewModel = AddTransactionViewModel(
             interactor,
