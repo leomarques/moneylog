@@ -9,9 +9,7 @@ data class TransactionEntity(
     val description: String,
     val year: Int,
     val month: Int,
-    val day: Int,
-    val hour: Int,
-    val minute: Int
+    val day: Int
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

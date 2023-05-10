@@ -19,9 +19,7 @@ class AddTransactionRepositoryImpl(private val transactionDao: TransactionDao) :
                         description = description,
                         year = date.year,
                         month = date.month,
-                        day = date.day,
-                        hour = date.hour,
-                        minute = date.minute
+                        day = date.day
                     )
                 }
             )

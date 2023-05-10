@@ -1,7 +1,7 @@
 package lmm.moneylog
 
 import lmm.moneylog.data.TransactionDatabase
-import lmm.moneylog.data.domaintime.LocalDateTimeToDomainTimeConverterImpl
+import lmm.moneylog.data.domaintime.LocalDateToDomainTimeConverterImpl
 import lmm.moneylog.data.repositories.AddTransactionRepositoryImpl
 import lmm.moneylog.data.repositories.GetBalanceRepositoryImpl
 import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
@@ -24,7 +24,7 @@ val appModule = module {
 
     factoryOf(::AddTransactionRepositoryImpl) { bind<AddTransactionRepository>() }
     factoryOf(::GetBalanceRepositoryImpl) { bind<GetBalanceRepository>() }
-    factoryOf(::LocalDateTimeToDomainTimeConverterImpl) { bind<DomainTimeConverter>() }
+    factoryOf(::LocalDateToDomainTimeConverterImpl) { bind<DomainTimeConverter>() }
 
     factoryOf(::GetBalanceInteractor)
     factoryOf(::AddTransactionInteractor)

@@ -26,9 +26,7 @@ class AddTransactionViewModelTest {
     private val domainTime = DomainTime(
         6,
         1,
-        2022,
-        21,
-        30
+        2022
     )
 
     @Before
