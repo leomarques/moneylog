@@ -5,6 +5,8 @@ import lmm.moneylog.domain.addtransaction.time.DomainTimeConverter
 import java.time.Instant
 import java.time.Month
 import java.time.ZoneId
+import java.time.format.TextStyle
+import java.util.Locale
 
 class LocalDateToDomainTimeConverterImpl : DomainTimeConverter {
 
@@ -26,5 +28,6 @@ class LocalDateToDomainTimeConverterImpl : DomainTimeConverter {
         }
     }
 
-    override fun getMonthName(number: Int) = Month.of(number).name.lowercase()
+    override fun getMonthName(number: Int): String =
+        Month.of(number).getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())
 }
