@@ -45,7 +45,7 @@ class AddTransactionViewModelTest {
     @Test
     fun `should save transaction from model`() {
         with(viewModel.addTransactionModel) {
-            value.value = "51.0"
+            value.value = "50.0"
             date.value = "2022-01-06 21:30"
             description.value = "description"
 
