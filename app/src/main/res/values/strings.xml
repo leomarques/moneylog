@@ -3,6 +3,8 @@
 
     <string name="addtransaction_topbar">Nova transação</string>
     <string name="addtransaction_value">Valor</string>
+    <string name="addtransaction_income">Receita</string>
+    <string name="addtransaction_outcome">Despesa</string>
     <string name="addtransaction_date">Data</string>
     <string name="addtransaction_description">Descrição</string>
     <string name="addtransaction_category">Categoria</string>

@@ -3,8 +3,10 @@ package lmm.moneylog.ui.features.addtransaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -15,6 +17,7 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -24,6 +27,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -40,7 +44,8 @@ fun AddTransactionLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: (AddTransactionModel) -> Unit,
     addTransactionModel: AddTransactionModel,
-    onDatePicked: (Long) -> Unit
+    onDatePicked: (Long) -> Unit,
+    onTypeOfIncomeSelected: (Boolean) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -69,7 +74,8 @@ fun AddTransactionLayout(
             Surface(Modifier.padding(paddingValues)) {
                 Content(
                     addTransactionModel,
-                    onDatePicked
+                    onDatePicked,
+                    onTypeOfIncomeSelected
                 )
             }
         }
@@ -79,7 +85,8 @@ fun AddTransactionLayout(
 @Composable
 private fun Content(
     addTransactionModel: AddTransactionModel,
-    onDatePicked: (Long) -> Unit
+    onDatePicked: (Long) -> Unit,
+    onTypeOfIncomeSelected: (Boolean) -> Unit
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
         val showDatePicker = remember { mutableStateOf(false) }
@@ -99,6 +106,46 @@ private fun Content(
             keyboardType = KeyboardType.Number,
             valueState = addTransactionModel.value
         )
+
+        Row {
+            val isCreditSelected = remember { mutableStateOf(true) }
+            val onSelectedChange = { creditSelected: Boolean ->
+                isCreditSelected.value = creditSelected
+                onTypeOfIncomeSelected(creditSelected)
+            }
+
+            Row(
+                Modifier
+                    .selectable(
+                        selected = isCreditSelected.value,
+                        onClick = { onSelectedChange(true) }),
+                verticalAlignment = CenterVertically
+            ) {
+                RadioButton(
+                    selected = isCreditSelected.value,
+                    onClick = { onSelectedChange(true) }
+                )
+                Text(
+                    text = stringResource(R.string.addtransaction_income)
+                )
+            }
+
+            Row(
+                Modifier.selectable(
+                    selected = !isCreditSelected.value,
+                    onClick = { onSelectedChange(false) }),
+                verticalAlignment = CenterVertically
+            ) {
+                RadioButton(
+                    selected = !isCreditSelected.value,
+                    onClick = { onSelectedChange(false) }
+                )
+                Text(
+                    text = stringResource(R.string.addtransaction_outcome)
+                )
+            }
+        }
+
         Field(
             title = stringResource(R.string.addtransaction_date),
             keyboardType = KeyboardType.Text,
@@ -175,6 +222,7 @@ fun Preview() {
         onArrowBackClick = {},
         onFabClick = {},
         addTransactionModel = AddTransactionModel(),
-        onDatePicked = {}
+        onDatePicked = {},
+        onTypeOfIncomeSelected = {}
     )
 }

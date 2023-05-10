@@ -35,7 +35,11 @@ class AddTransactionViewModel(
         try {
             with(addTransactionModel) {
                 val transaction = Transaction(
-                    value = value.value.toDouble(),
+                    value =
+                    if (addTransactionModel.isIncome)
+                        value.value.toDouble()
+                    else
+                        -value.value.toDouble(),
                     date = date,
                     description = description.value
                 )
@@ -50,5 +54,9 @@ class AddTransactionViewModel(
                 /* msg = */ "NumberFormatException: " + e.localizedMessage
             )
         }
+    }
+
+    fun onTypeOfIncomeSelected(isIncomeParam: Boolean) {
+        addTransactionModel.isIncome = isIncomeParam
     }
 }

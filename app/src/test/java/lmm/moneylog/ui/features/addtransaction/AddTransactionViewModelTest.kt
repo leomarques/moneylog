@@ -51,7 +51,7 @@ class AddTransactionViewModelTest {
     }
 
     @Test
-    fun `should save transaction from model`() {
+    fun `should save income transaction from model`() {
         with(viewModel.addTransactionModel) {
             value.value = "50.0"
             description.value = "description"
@@ -62,6 +62,27 @@ class AddTransactionViewModelTest {
                 interactor.execute(
                     Transaction(
                         50.0,
+                        "description",
+                        domainTime
+                    )
+                )
+            }
+        }
+    }
+
+    @Test
+    fun `should save outcome transaction from model`() {
+        with(viewModel.addTransactionModel) {
+            value.value = "50.0"
+            isIncome = false
+            description.value = "description"
+
+            viewModel.saveTransaction(this)
+
+            coVerify {
+                interactor.execute(
+                    Transaction(
+                        -50.0,
                         "description",
                         domainTime
                     )
