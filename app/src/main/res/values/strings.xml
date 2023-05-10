@@ -17,4 +17,7 @@
     <string name="home_placeholdervalue">0.0</string>
 
     <string name="fab_desc">floating action button</string>
+
+    <string name="datepicker_ok">OK</string>
+    <string name="datepicker_cancel">Cancelar</string>
 </resources>

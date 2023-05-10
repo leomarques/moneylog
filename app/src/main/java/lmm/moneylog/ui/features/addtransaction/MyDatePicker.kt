@@ -9,6 +9,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.ui.res.stringResource
+import lmm.moneylog.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnrememberedMutableState")
@@ -29,14 +31,14 @@ fun AddTransactionDatePicker(
                 },
                 enabled = confirmEnabled.value
             ) {
-                Text("OK")
+                Text(stringResource(R.string.datepicker_ok))
             }
         },
         dismissButton = {
             TextButton(
                 onClick = onDismiss
             ) {
-                Text("Cancel")
+                Text(stringResource(R.string.datepicker_cancel))
             }
         }
     ) {
