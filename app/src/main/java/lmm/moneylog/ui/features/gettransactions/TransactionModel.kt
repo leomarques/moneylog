@@ -1,10 +1,8 @@
 package lmm.moneylog.ui.features.gettransactions
 
-import lmm.moneylog.domain.addtransaction.time.DomainTime
-
 data class TransactionModel(
-    val value: Double,
+    val value: String,
     val isIncome: Boolean,
     val description: String,
-    val date: DomainTime
+    val date: String
 )

@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import lmm.moneylog.domain.gettransactions.GetTransactionsInteractor
+import lmm.moneylog.ui.textformatters.formatDate
+import lmm.moneylog.ui.textformatters.formatForRs
 
 class GetTransactionsViewModel(interactor: GetTransactionsInteractor) : ViewModel() {
     private val transactions = interactor.execute().asLiveData()
@@ -14,13 +16,18 @@ class GetTransactionsViewModel(interactor: GetTransactionsInteractor) : ViewMode
             transactions.map { transaction ->
                 with(transaction) {
                     TransactionModel(
-                        value,
+                        if (value < 0.0) {
+                            (-value).formatForRs()
+                        } else {
+                            value.formatForRs()
+                        },
                         value > 0,
                         description,
-                        date
+                        date.formatDate()
                     )
                 }
             }
         )
     }
 }
+

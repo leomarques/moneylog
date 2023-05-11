@@ -30,7 +30,7 @@ class GetBalanceInteractorTest {
 
             val balance = interactor.execute().first()
             assertEquals(11.0, balance.credit)
-            assertEquals(-20.0, balance.debt)
+            assertEquals(20.0, balance.debt)
             assertEquals(-9.0, balance.total)
         }
     }
@@ -42,7 +42,7 @@ class GetBalanceInteractorTest {
 
             val balance = interactor.execute().first()
             assertEquals(0.0, balance.credit)
-            assertEquals(-30.0, balance.debt)
+            assertEquals(30.0, balance.debt)
             assertEquals(-30.0, balance.total)
         }
     }

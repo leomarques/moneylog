@@ -13,10 +13,10 @@ class GetBalanceInteractor(private val repository: GetBalanceRepository) {
             var debt = 0.0
 
             for (value in values) {
-                if (value > 0)
-                    credit += value
-                else
+                if (value < 0)
                     debt += value
+                else
+                    credit += value
             }
 
             val total = credit + debt
@@ -24,7 +24,11 @@ class GetBalanceInteractor(private val repository: GetBalanceRepository) {
             BalanceModel(
                 total,
                 credit,
-                debt
+                if (debt < 0) {
+                    -debt
+                } else {
+                    debt
+                }
             )
         }
 

@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
-import lmm.moneylog.ui.theme.balancecard_credit
+import lmm.moneylog.ui.theme.income
 
 @Composable
 fun BalanceCard(
@@ -54,7 +54,7 @@ fun BalanceCard(
             Amount(
                 stringResource(R.string.balancecard_income),
                 credit,
-                balancecard_credit,
+                income,
                 onAmountClick
             )
 
