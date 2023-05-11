@@ -1,4 +1,4 @@
-package lmm.moneylog.domain.addtransaction.time
+package lmm.moneylog.domain.time
 
 interface DomainTimeConverter {
     fun getCurrentTimeStamp(): Long

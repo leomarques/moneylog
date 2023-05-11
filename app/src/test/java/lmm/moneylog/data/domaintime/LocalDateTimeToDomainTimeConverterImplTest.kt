@@ -1,6 +1,5 @@
-package lmm.moneylog.ui.features.addtransaction.domaintime
+package lmm.moneylog.data.domaintime
 
-import lmm.moneylog.data.domaintime.LocalDateToDomainTimeConverterImpl
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

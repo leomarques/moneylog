@@ -1,6 +1,6 @@
 package lmm.moneylog.domain.addtransaction
 
-import lmm.moneylog.domain.addtransaction.model.Transaction
+import lmm.moneylog.domain.models.Transaction
 
 class AddTransactionInteractor(private val addTransactionRepository: AddTransactionRepository) {
     suspend fun execute(transaction: Transaction) {

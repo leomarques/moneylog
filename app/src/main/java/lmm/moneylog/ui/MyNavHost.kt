@@ -29,8 +29,12 @@ fun MyNavHost(
     ) {
         composable(homeScreen) {
             HomeScreen(
-                onFabClick = { navController.navigate(addTransactionScreen) },
-                onAmountClick = { navController.navigate(getTransactionsScreen) }
+                onFabClick = {
+                    navController.navigate(addTransactionScreen)
+                },
+                onAmountClick = {
+                    navController.navigate(getTransactionsScreen)
+                }
             )
         }
 

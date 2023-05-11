@@ -2,10 +2,10 @@ package lmm.moneylog.data.repositories
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import lmm.moneylog.data.TransactionDao
-import lmm.moneylog.domain.addtransaction.model.Transaction
-import lmm.moneylog.domain.addtransaction.time.DomainTime
+import lmm.moneylog.data.database.TransactionDao
 import lmm.moneylog.domain.gettransactions.GetTransactionsRepository
+import lmm.moneylog.domain.models.Transaction
+import lmm.moneylog.domain.time.DomainTime
 
 class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) :
     GetTransactionsRepository {

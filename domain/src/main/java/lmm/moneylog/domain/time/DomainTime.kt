@@ -1,4 +1,4 @@
-package lmm.moneylog.domain.addtransaction.time
+package lmm.moneylog.domain.time
 
 data class DomainTime(
     val day: Int,

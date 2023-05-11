@@ -10,9 +10,9 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
-import lmm.moneylog.domain.addtransaction.model.Transaction
-import lmm.moneylog.domain.addtransaction.time.DomainTime
-import lmm.moneylog.domain.addtransaction.time.DomainTimeConverter
+import lmm.moneylog.domain.models.Transaction
+import lmm.moneylog.domain.time.DomainTime
+import lmm.moneylog.domain.time.DomainTimeConverter
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

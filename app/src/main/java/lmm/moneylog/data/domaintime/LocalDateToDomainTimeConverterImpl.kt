@@ -1,7 +1,7 @@
 package lmm.moneylog.data.domaintime
 
-import lmm.moneylog.domain.addtransaction.time.DomainTime
-import lmm.moneylog.domain.addtransaction.time.DomainTimeConverter
+import lmm.moneylog.domain.time.DomainTime
+import lmm.moneylog.domain.time.DomainTimeConverter
 import java.time.Instant
 import java.time.Month
 import java.time.ZoneId

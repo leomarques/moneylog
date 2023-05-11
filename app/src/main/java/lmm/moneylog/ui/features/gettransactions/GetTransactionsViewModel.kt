@@ -30,4 +30,3 @@ class GetTransactionsViewModel(interactor: GetTransactionsInteractor) : ViewMode
         )
     }
 }
-

@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
-import lmm.moneylog.domain.addtransaction.model.Transaction
-import lmm.moneylog.domain.addtransaction.time.DomainTime
-import lmm.moneylog.domain.addtransaction.time.DomainTimeConverter
+import lmm.moneylog.domain.models.Transaction
+import lmm.moneylog.domain.time.DomainTime
+import lmm.moneylog.domain.time.DomainTimeConverter
 
 class AddTransactionViewModel(
     private val interactor: AddTransactionInteractor,
@@ -56,7 +56,7 @@ class AddTransactionViewModel(
         }
     }
 
-    fun onTypeOfIncomeSelected(isIncomeParam: Boolean) {
-        addTransactionModel.isIncome = isIncomeParam
+    fun onTypeOfIncomeSelected(isIncome: Boolean) {
+        addTransactionModel.isIncome = isIncome
     }
 }

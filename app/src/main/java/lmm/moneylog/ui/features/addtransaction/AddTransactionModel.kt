@@ -1,7 +1,7 @@
 package lmm.moneylog.ui.features.addtransaction
 
 import androidx.compose.runtime.mutableStateOf
-import lmm.moneylog.domain.addtransaction.time.DomainTime
+import lmm.moneylog.domain.time.DomainTime
 
 class AddTransactionModel {
     val value = mutableStateOf("")

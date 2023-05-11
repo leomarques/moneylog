@@ -101,7 +101,7 @@ private fun Content(
             )
         }
 
-        Field(
+        StateTextField(
             title = stringResource(R.string.addtransaction_value),
             keyboardType = KeyboardType.Number,
             valueState = addTransactionModel.value
@@ -146,14 +146,14 @@ private fun Content(
             }
         }
 
-        Field(
+        StateTextField(
             title = stringResource(R.string.addtransaction_date),
             keyboardType = KeyboardType.Text,
             valueState = addTransactionModel.displayDate,
         ) {
             showDatePicker.value = true
         }
-        Field(
+        StateTextField(
             title = stringResource(R.string.addtransaction_description),
             keyboardType = KeyboardType.Text,
             valueState = addTransactionModel.description
@@ -162,28 +162,11 @@ private fun Content(
 }
 
 @Composable
-private fun Field(
-    title: String,
-    keyboardType: KeyboardType,
-    valueState: MutableState<String>,
-    onClick: (() -> Unit)? = null
-) {
-    StateTextField(
-        title = title,
-        keyboardType = keyboardType,
-        valueState = valueState,
-        onClick = onClick ?: {},
-        readOnly = onClick != null
-    )
-}
-
-@Composable
 fun StateTextField(
     title: String,
     keyboardType: KeyboardType,
     valueState: MutableState<String>,
-    onClick: () -> Unit,
-    readOnly: Boolean = false
+    onClick: (() -> Unit)? = null
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -194,7 +177,7 @@ fun StateTextField(
             keyboardType = keyboardType,
             imeAction = ImeAction.Done
         ),
-        readOnly = readOnly,
+        readOnly = onClick != null,
         keyboardActions = KeyboardActions(
             onDone = { focusManager.clearFocus() }
         ),
@@ -203,7 +186,7 @@ fun StateTextField(
                 LaunchedEffect(interactionSource) {
                     interactionSource.interactions.collect {
                         if (it is PressInteraction.Release) {
-                            onClick()
+                            onClick?.invoke()
                         }
                     }
                 }
