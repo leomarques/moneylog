@@ -22,4 +22,6 @@
 
     <string name="datepicker_ok">OK</string>
     <string name="datepicker_cancel">Cancelar</string>
+
+    <string name="gettransactions_topbar">Transações</string>
 </resources>

@@ -9,10 +9,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import lmm.moneylog.ui.features.addtransaction.AddTransactionView
+import lmm.moneylog.ui.features.gettransactions.GetTransactionsView
 import lmm.moneylog.ui.features.home.HomeScreen
 
 const val homeScreen = "home"
 const val addTransactionScreen = "add_transaction"
+const val getTransactionsScreen = "get_transactions"
 
 @Composable
 fun MyNavHost(
@@ -26,15 +28,27 @@ fun MyNavHost(
         startDestination = startDestination
     ) {
         composable(homeScreen) {
-            HomeScreen({
-                navController.navigate(addTransactionScreen)
-            })
+            HomeScreen(
+                onFabClick = { navController.navigate(addTransactionScreen) },
+                onAmountClick = { navController.navigate(getTransactionsScreen) }
+            )
         }
 
         composable(addTransactionScreen) {
             AddTransactionView(
                 onArrowBackClick = {
                     navController.popBackStack()
+                }
+            )
+        }
+
+        composable(getTransactionsScreen) {
+            GetTransactionsView(
+                onArrowBackClick = {
+                    navController.popBackStack()
+                },
+                onFabClick = {
+                    navController.navigate(addTransactionScreen)
                 }
             )
         }

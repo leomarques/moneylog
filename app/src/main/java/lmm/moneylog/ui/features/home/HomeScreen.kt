@@ -10,6 +10,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun HomeScreen(
     onFabClick: () -> Unit,
+    onAmountClick: () -> Unit,
     viewModel: HomeViewModel = koinViewModel()
 ) {
     val balance by viewModel.balanceCardModel.observeAsState(
@@ -24,6 +25,7 @@ fun HomeScreen(
         balance.total,
         balance.credit,
         balance.debt,
-        onFabClick
+        onFabClick,
+        onAmountClick
     )
 }

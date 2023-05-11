@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.features.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,7 +30,8 @@ import lmm.moneylog.ui.theme.balancecard_credit
 fun BalanceCard(
     total: String,
     credit: String,
-    debt: String
+    debt: String,
+    onAmountClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -52,13 +54,15 @@ fun BalanceCard(
             Amount(
                 stringResource(R.string.balancecard_income),
                 credit,
-                balancecard_credit
+                balancecard_credit,
+                onAmountClick
             )
 
             Amount(
                 stringResource(R.string.balancecard_outcome),
                 debt,
-                Color.Red
+                Color.Red,
+                onAmountClick
             )
         }
     }
@@ -89,9 +93,11 @@ fun Balance(value: String) {
 fun Amount(
     title: String,
     value: String,
-    color: Color
+    color: Color,
+    onClick: () -> Unit
 ) {
     Column(
+        modifier = Modifier.clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
@@ -114,6 +120,11 @@ fun Amount(
 @Composable
 fun BalanceCardPreview() {
     MoneylogTheme {
-        BalanceCard(total = "RS99995.00", credit = "R$100000.00", debt = "R$50.00")
+        BalanceCard(
+            total = "RS99995.00",
+            credit = "R$100000.00",
+            debt = "R$50.00",
+            onAmountClick = {}
+        )
     }
 }

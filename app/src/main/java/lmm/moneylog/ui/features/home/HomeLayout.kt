@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -16,13 +15,13 @@ import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeLayout(
     total: String,
     credit: String,
     debt: String,
-    onFabClick: () -> Unit
+    onFabClick: () -> Unit,
+    onAmountClick: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier
@@ -40,7 +39,8 @@ fun HomeLayout(
                 BalanceCard(
                     total,
                     credit,
-                    debt
+                    debt,
+                    onAmountClick
                 )
             }
         }
@@ -54,7 +54,9 @@ fun HomeLayoutPreview() {
         HomeLayout(
             total = "R$250",
             credit = "R$300",
-            debt = "R$50"
-        ) {}
+            debt = "R$50",
+            {},
+            {}
+        )
     }
 }

@@ -11,6 +11,9 @@ interface TransactionDao {
     @Query("SELECT value FROM `transaction`")
     fun selectAllValues(): Flow<List<Double>>
 
+    @Query("SELECT * FROM `transaction`")
+    fun selectAllTransactions(): Flow<List<TransactionEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(transactionEntity: TransactionEntity)
 }
