@@ -2,7 +2,6 @@ package lmm.moneylog.ui.features.home.balancecard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -55,10 +54,10 @@ fun BalanceCard(
         Spacer(Modifier.height(SpaceSize.LargeSpaceSize))
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround
+            modifier = Modifier.fillMaxWidth()
         ) {
             Amount(
+                modifier = Modifier.weight(0.5f),
                 title = stringResource(R.string.balancecard_income),
                 value = credit,
                 color = income,
@@ -66,6 +65,7 @@ fun BalanceCard(
             )
 
             Amount(
+                modifier = Modifier.weight(0.5f),
                 title = stringResource(R.string.balancecard_outcome),
                 value = debt,
                 color = Color.Red,
@@ -102,13 +102,14 @@ fun Balance(
 
 @Composable
 fun Amount(
+    modifier: Modifier,
     title: String,
     value: String,
     color: Color,
     onClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier.clickable { onClick() },
+        modifier = modifier.clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
@@ -132,9 +133,9 @@ fun Amount(
 fun BalanceCardPreview() {
     MoneylogTheme {
         BalanceCard(
-            total = "RS99995.00",
-            credit = "R$100000.00",
-            debt = "R$50.00",
+            total = "R$99999999999999999999999999999999999999999999999999999999999999999999,00,00",
+            credit = "R$99999999999999999999999999999999999999999999999999999999999999999999,00,00,00",
+            debt = "R$99999999999999999999999999999999999999999999999999999999999999999999,00,00",
             onClick = {}
         )
     }
