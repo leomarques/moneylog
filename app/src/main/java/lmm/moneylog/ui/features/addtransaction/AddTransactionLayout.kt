@@ -23,17 +23,25 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
@@ -104,7 +112,8 @@ private fun Content(
         StateTextField(
             title = stringResource(R.string.addtransaction_value),
             keyboardType = KeyboardType.Number,
-            valueState = addTransactionModel.value
+            valueState = addTransactionModel.value,
+            getFocus = true
         )
 
         Row {
@@ -152,13 +161,14 @@ private fun Content(
             title = stringResource(R.string.addtransaction_date),
             keyboardType = KeyboardType.Text,
             valueState = addTransactionModel.displayDate,
-        ) {
-            showDatePicker.value = true
-        }
+            onClick = {
+                showDatePicker.value = true
+            }
+        )
         StateTextField(
             title = stringResource(R.string.addtransaction_description),
             keyboardType = KeyboardType.Text,
-            valueState = addTransactionModel.description
+            valueState = addTransactionModel.description,
         )
     }
 }
@@ -168,13 +178,15 @@ fun StateTextField(
     title: String,
     keyboardType: KeyboardType,
     valueState: MutableState<String>,
-    onClick: (() -> Unit)? = null
+    onClick: (() -> Unit)? = null,
+    getFocus: Boolean = false
 ) {
     val focusManager = LocalFocusManager.current
+    val focusRequester = remember { FocusRequester() }
 
     OutlinedTextField(
-        label = { Text(text = title) },
         value = valueState.value,
+        label = { Text(text = title) },
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = keyboardType,
             imeAction = ImeAction.Done
@@ -197,7 +209,38 @@ fun StateTextField(
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = SpaceSize.SmallSpaceSize)
+            .focusRequester(focusRequester)
     )
+
+    OnLifecycleEvent { _, event ->
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> {
+                if (getFocus) {
+                    focusRequester.requestFocus()
+                }
+            }
+
+            else -> {}
+        }
+    }
+}
+
+@Composable
+fun OnLifecycleEvent(onEvent: (owner: LifecycleOwner, event: Lifecycle.Event) -> Unit) {
+    val eventHandler = rememberUpdatedState(onEvent)
+    val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)
+
+    DisposableEffect(lifecycleOwner.value) {
+        val lifecycle = lifecycleOwner.value.lifecycle
+        val observer = LifecycleEventObserver { owner, event ->
+            eventHandler.value(owner, event)
+        }
+
+        lifecycle.addObserver(observer)
+        onDispose {
+            lifecycle.removeObserver(observer)
+        }
+    }
 }
 
 @Preview
