@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.home
+package lmm.moneylog.ui.features.home.balancecard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,7 @@ import androidx.lifecycle.map
 import lmm.moneylog.domain.getbalance.GetBalanceInteractor
 import lmm.moneylog.ui.textformatters.formatForRs
 
-class HomeViewModel(interactor: GetBalanceInteractor) : ViewModel() {
+class BalanceCardViewModel(interactor: GetBalanceInteractor) : ViewModel() {
     private val balanceData = interactor.execute().asLiveData()
 
     val balanceCardModel: LiveData<BalanceCardModel> = balanceData.map { balance ->

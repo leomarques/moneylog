@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.home
+package lmm.moneylog.ui.features.home.balancecard
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -8,13 +8,12 @@ import lmm.moneylog.R
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeScreen(
-    onFabClick: () -> Unit,
+fun BalanceCardView(
     onAmountClick: (String) -> Unit,
     onBalanceClick: (String) -> Unit,
-    viewModel: HomeViewModel = koinViewModel()
+    viewModel: BalanceCardViewModel = koinViewModel(),
 ) {
-    val balance by viewModel.balanceCardModel.observeAsState(
+    val model by viewModel.balanceCardModel.observeAsState(
         BalanceCardModel(
             stringResource(R.string.home_placeholdervalue),
             stringResource(R.string.home_placeholdervalue),
@@ -22,12 +21,11 @@ fun HomeScreen(
         )
     )
 
-    HomeLayout(
-        balance.total,
-        balance.credit,
-        balance.debt,
-        onFabClick,
-        onAmountClick,
-        onBalanceClick
+    BalanceCard(
+        total = model.total,
+        credit = model.credit,
+        debt = model.debt,
+        onAmountClick = onAmountClick,
+        onBalanceClick = onBalanceClick
     )
 }

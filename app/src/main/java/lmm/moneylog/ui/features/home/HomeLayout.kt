@@ -11,15 +11,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.MyFab
+import lmm.moneylog.ui.features.home.balancecard.BalanceCardView
 import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeLayout(
-    total: String,
-    credit: String,
-    debt: String,
     onFabClick: () -> Unit,
     onAmountClick: (String) -> Unit,
     onBalanceClick: (String) -> Unit
@@ -37,10 +35,7 @@ fun HomeLayout(
         floatingActionButtonPosition = FabPosition.Center,
         content = {
             Surface {
-                BalanceCard(
-                    total,
-                    credit,
-                    debt,
+                BalanceCardView(
                     onAmountClick,
                     onBalanceClick
                 )
@@ -54,9 +49,6 @@ fun HomeLayout(
 fun HomeLayoutPreview() {
     MoneylogTheme {
         HomeLayout(
-            total = "R$250",
-            credit = "R$300",
-            debt = "R$50",
             {},
             {},
             {}

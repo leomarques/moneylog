@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import lmm.moneylog.ui.features.addtransaction.AddTransactionView
 import lmm.moneylog.ui.features.gettransactions.GetTransactionsView
-import lmm.moneylog.ui.features.home.HomeScreen
+import lmm.moneylog.ui.features.home.HomeLayout
 
 const val homeScreen = "home"
 const val addTransactionScreen = "add_transaction"
@@ -29,7 +29,7 @@ fun MyNavHost(
         startDestination = startDestination
     ) {
         composable(homeScreen) {
-            HomeScreen(
+            HomeLayout(
                 onFabClick = {
                     navController.navigate(addTransactionScreen)
                 },

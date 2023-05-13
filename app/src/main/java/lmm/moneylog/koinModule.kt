@@ -14,7 +14,7 @@ import lmm.moneylog.domain.gettransactions.GetTransactionsRepository
 import lmm.moneylog.domain.time.DomainTimeConverter
 import lmm.moneylog.ui.features.addtransaction.AddTransactionViewModel
 import lmm.moneylog.ui.features.gettransactions.GetTransactionsViewModel
-import lmm.moneylog.ui.features.home.HomeViewModel
+import lmm.moneylog.ui.features.home.balancecard.BalanceCardViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -34,7 +34,7 @@ val appModule = module {
     factoryOf(::AddTransactionInteractor)
     factoryOf(::GetTransactionsInteractor)
 
-    viewModelOf(::HomeViewModel)
+    viewModelOf(::BalanceCardViewModel)
     viewModelOf(::AddTransactionViewModel)
     viewModelOf(::GetTransactionsViewModel)
 }
