@@ -1,9 +1,11 @@
 package lmm.moneylog.ui.features.addtransaction
 
+import io.mockk.called
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -56,7 +58,7 @@ class AddTransactionViewModelTest {
             value.value = "50.0"
             description.value = "description"
 
-            viewModel.saveTransaction(this)
+            viewModel.saveTransaction(this) {}
 
             coVerify {
                 interactor.execute(
@@ -77,7 +79,7 @@ class AddTransactionViewModelTest {
             isIncome = false
             description.value = "description"
 
-            viewModel.saveTransaction(this)
+            viewModel.saveTransaction(this) {}
 
             coVerify {
                 interactor.execute(
@@ -88,6 +90,45 @@ class AddTransactionViewModelTest {
                     )
                 )
             }
+        }
+    }
+
+    @Test
+    fun `should not save negative number`() {
+        with(viewModel.addTransactionModel) {
+            value.value = "-50.0"
+            isIncome = true
+            description.value = "description"
+
+            val onValueError = {}
+            viewModel.saveTransaction(this, onValueError)
+            verify { interactor wasNot called}
+        }
+    }
+
+    @Test
+    fun `should not save invalid number`() {
+        with(viewModel.addTransactionModel) {
+            value.value = "1,5"
+            isIncome = false
+            description.value = "description"
+
+            val onValueError = {}
+            viewModel.saveTransaction(this, onValueError)
+            verify { interactor wasNot called}
+        }
+    }
+
+    @Test
+    fun `should not save invalid number 2`() {
+        with(viewModel.addTransactionModel) {
+            value.value = "5 5"
+            isIncome = false
+            description.value = "description"
+
+            val onValueError = {}
+            viewModel.saveTransaction(this, onValueError)
+            verify { interactor wasNot called}
         }
     }
 }
