@@ -5,5 +5,7 @@ import lmm.moneylog.domain.models.Transaction
 
 interface GetTransactionsRepository {
 
-    fun getTransactions(): Flow<List<Transaction>>
+    fun getAllTransactions(): Flow<List<Transaction>>
+    fun getIncomeTransactions(): Flow<List<Transaction>>
+    fun getOutcomeTransactions(): Flow<List<Transaction>>
 }

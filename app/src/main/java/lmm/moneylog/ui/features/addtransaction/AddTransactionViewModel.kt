@@ -56,7 +56,7 @@ class AddTransactionViewModel(
         }
     }
 
-    fun onTypeOfIncomeSelected(isIncome: Boolean) {
+    fun onTypeOfValueSelected(isIncome: Boolean) {
         addTransactionModel.isIncome = isIncome
     }
 }

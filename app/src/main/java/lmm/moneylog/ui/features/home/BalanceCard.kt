@@ -31,7 +31,8 @@ fun BalanceCard(
     total: String,
     credit: String,
     debt: String,
-    onAmountClick: () -> Unit
+    onAmountClick: (String) -> Unit,
+    onBalanceClick: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -43,7 +44,10 @@ fun BalanceCard(
             .padding(SpaceSize.DefaultSpaceSize),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Balance(total)
+        Balance(
+            value = total,
+            onClick = { onBalanceClick("all") }
+        )
 
         Spacer(Modifier.height(SpaceSize.LargeSpaceSize))
 
@@ -52,25 +56,29 @@ fun BalanceCard(
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             Amount(
-                stringResource(R.string.balancecard_income),
-                credit,
-                income,
-                onAmountClick
+                title = stringResource(R.string.balancecard_income),
+                value = credit,
+                color = income,
+                onClick = { onAmountClick("income") }
             )
 
             Amount(
-                stringResource(R.string.balancecard_outcome),
-                debt,
-                Color.Red,
-                onAmountClick
+                title = stringResource(R.string.balancecard_outcome),
+                value = debt,
+                color = Color.Red,
+                onClick = { onAmountClick("outcome") }
             )
         }
     }
 }
 
 @Composable
-fun Balance(value: String) {
+fun Balance(
+    value: String,
+    onClick: () -> Unit
+) {
     Column(
+        modifier = Modifier.clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
@@ -124,7 +132,8 @@ fun BalanceCardPreview() {
             total = "RS99995.00",
             credit = "R$100000.00",
             debt = "R$50.00",
-            onAmountClick = {}
+            onAmountClick = {},
+            onBalanceClick = {}
         )
     }
 }

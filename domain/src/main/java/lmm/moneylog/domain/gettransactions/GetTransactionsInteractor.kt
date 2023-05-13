@@ -5,7 +5,15 @@ import lmm.moneylog.domain.models.Transaction
 
 class GetTransactionsInteractor(private val repository: GetTransactionsRepository) {
 
-    fun execute(): Flow<List<Transaction>> {
-        return repository.getTransactions()
+    fun getAllTransactions(): Flow<List<Transaction>> {
+        return repository.getAllTransactions()
+    }
+
+    fun getIncomeTransactions(): Flow<List<Transaction>> {
+        return repository.getIncomeTransactions()
+    }
+
+    fun getOutcomeTransactions(): Flow<List<Transaction>> {
+        return repository.getOutcomeTransactions()
     }
 }

@@ -21,7 +21,8 @@ fun HomeLayout(
     credit: String,
     debt: String,
     onFabClick: () -> Unit,
-    onAmountClick: () -> Unit
+    onAmountClick: (String) -> Unit,
+    onBalanceClick: (String) -> Unit
 ) {
     Scaffold(
         modifier = Modifier
@@ -40,7 +41,8 @@ fun HomeLayout(
                     total,
                     credit,
                     debt,
-                    onAmountClick
+                    onAmountClick,
+                    onBalanceClick
                 )
             }
         }
@@ -55,6 +57,7 @@ fun HomeLayoutPreview() {
             total = "R$250",
             credit = "R$300",
             debt = "R$50",
+            {},
             {},
             {}
         )

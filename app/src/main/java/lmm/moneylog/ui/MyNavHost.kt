@@ -14,6 +14,7 @@ import lmm.moneylog.ui.features.home.HomeScreen
 
 const val homeScreen = "home"
 const val addTransactionScreen = "add_transaction"
+const val paramTypeOfValue = "typeOfValue"
 const val getTransactionsScreen = "get_transactions"
 
 @Composable
@@ -32,8 +33,11 @@ fun MyNavHost(
                 onFabClick = {
                     navController.navigate(addTransactionScreen)
                 },
-                onAmountClick = {
-                    navController.navigate(getTransactionsScreen)
+                onAmountClick = { typeOfValue ->
+                    navController.navigate("$getTransactionsScreen/$typeOfValue")
+                },
+                onBalanceClick = { typeOfValue ->
+                    navController.navigate("$getTransactionsScreen/$typeOfValue")
                 }
             )
         }
@@ -46,14 +50,17 @@ fun MyNavHost(
             )
         }
 
-        composable(getTransactionsScreen) {
+        composable("$getTransactionsScreen/{$paramTypeOfValue}") { backStackEntry ->
+            val typeOfValue = backStackEntry.arguments?.getString(paramTypeOfValue)
+
             GetTransactionsView(
                 onArrowBackClick = {
                     navController.popBackStack()
                 },
                 onFabClick = {
                     navController.navigate(addTransactionScreen)
-                }
+                },
+                typeOfValue = typeOfValue
             )
         }
     }

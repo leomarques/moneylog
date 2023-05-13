@@ -5,28 +5,47 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import lmm.moneylog.domain.gettransactions.GetTransactionsInteractor
+import lmm.moneylog.domain.models.Transaction
 import lmm.moneylog.ui.textformatters.formatDate
 import lmm.moneylog.ui.textformatters.formatForRs
 
-class GetTransactionsViewModel(interactor: GetTransactionsInteractor) : ViewModel() {
-    private val transactions = interactor.execute().asLiveData()
+class GetTransactionsViewModel(private val interactor: GetTransactionsInteractor) : ViewModel() {
 
-    val transactionsModel: LiveData<GetTransactionsModel> = transactions.map { transactions ->
-        GetTransactionsModel(
-            transactions.map { transaction ->
-                with(transaction) {
-                    TransactionModel(
-                        if (value < 0.0) {
-                            (-value).formatForRs()
-                        } else {
-                            value.formatForRs()
-                        },
-                        value > 0,
-                        description,
-                        date.formatDate()
-                    )
-                }
+    fun convertToModel(typeOfValue: String?): LiveData<GetTransactionsModel> =
+        when (typeOfValue) {
+            "income" -> {
+                val transactions = interactor.getIncomeTransactions().asLiveData()
+                convertToModel(transactions)
             }
-        )
-    }
+
+            "outcome" -> {
+                val transactions = interactor.getOutcomeTransactions().asLiveData()
+                convertToModel(transactions)
+            }
+
+            else -> {
+                val transactions = interactor.getAllTransactions().asLiveData()
+                convertToModel(transactions)
+            }
+        }
+
+    private fun convertToModel(listLiveData: LiveData<List<Transaction>>) =
+        listLiveData.map { transactions ->
+            GetTransactionsModel(
+                transactions.map { transaction ->
+                    with(transaction) {
+                        TransactionModel(
+                            if (value < 0.0) {
+                                (-value).formatForRs()
+                            } else {
+                                value.formatForRs()
+                            },
+                            value > 0,
+                            description,
+                            date.formatDate()
+                        )
+                    }
+                }
+            )
+        }
 }

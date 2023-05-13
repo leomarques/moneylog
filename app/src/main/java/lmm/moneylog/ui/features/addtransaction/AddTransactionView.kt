@@ -18,8 +18,8 @@ fun AddTransactionView(
         onDatePicked = { datePicked ->
             viewModel.onDatePicked(datePicked)
         },
-        onTypeOfIncomeSelected = { isIncome ->
-            viewModel.onTypeOfIncomeSelected(isIncome)
+        onTypeOfValueSelected = { isIncome ->
+            viewModel.onTypeOfValueSelected(isIncome)
         }
     )
 }

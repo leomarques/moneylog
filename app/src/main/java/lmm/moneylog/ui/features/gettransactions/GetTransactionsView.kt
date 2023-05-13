@@ -9,9 +9,10 @@ import org.koin.androidx.compose.koinViewModel
 fun GetTransactionsView(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
-    viewModel: GetTransactionsViewModel = koinViewModel()
+    viewModel: GetTransactionsViewModel = koinViewModel(),
+    typeOfValue: String?
 ) {
-    val transactionsModel by viewModel.transactionsModel.observeAsState(
+    val transactionsModel by viewModel.convertToModel(typeOfValue).observeAsState(
         GetTransactionsModel(emptyList())
     )
 

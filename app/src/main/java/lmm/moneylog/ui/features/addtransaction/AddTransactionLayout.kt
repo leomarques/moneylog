@@ -45,7 +45,7 @@ fun AddTransactionLayout(
     onFabClick: (AddTransactionModel) -> Unit,
     addTransactionModel: AddTransactionModel,
     onDatePicked: (Long) -> Unit,
-    onTypeOfIncomeSelected: (Boolean) -> Unit
+    onTypeOfValueSelected: (Boolean) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -75,7 +75,7 @@ fun AddTransactionLayout(
                 Content(
                     addTransactionModel,
                     onDatePicked,
-                    onTypeOfIncomeSelected
+                    onTypeOfValueSelected
                 )
             }
         }
@@ -86,7 +86,7 @@ fun AddTransactionLayout(
 private fun Content(
     addTransactionModel: AddTransactionModel,
     onDatePicked: (Long) -> Unit,
-    onTypeOfIncomeSelected: (Boolean) -> Unit
+    onTypeOfValueSelected: (Boolean) -> Unit
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
         val showDatePicker = remember { mutableStateOf(false) }
@@ -111,7 +111,7 @@ private fun Content(
             val isCreditSelected = remember { mutableStateOf(true) }
             val onSelectedChange = { creditSelected: Boolean ->
                 isCreditSelected.value = creditSelected
-                onTypeOfIncomeSelected(creditSelected)
+                onTypeOfValueSelected(creditSelected)
             }
 
             Row(
@@ -206,6 +206,6 @@ fun Preview() {
         onFabClick = {},
         addTransactionModel = AddTransactionModel(),
         onDatePicked = {},
-        onTypeOfIncomeSelected = {}
+        onTypeOfValueSelected = {}
     )
 }
