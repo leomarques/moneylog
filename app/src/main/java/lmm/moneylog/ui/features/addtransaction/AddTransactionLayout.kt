@@ -118,7 +118,8 @@ private fun Content(
                 Modifier
                     .selectable(
                         selected = isCreditSelected.value,
-                        onClick = { onSelectedChange(true) }),
+                        onClick = { onSelectedChange(true) }
+                    ),
                 verticalAlignment = CenterVertically
             ) {
                 RadioButton(
@@ -133,7 +134,8 @@ private fun Content(
             Row(
                 Modifier.selectable(
                     selected = !isCreditSelected.value,
-                    onClick = { onSelectedChange(false) }),
+                    onClick = { onSelectedChange(false) }
+                ),
                 verticalAlignment = CenterVertically
             ) {
                 RadioButton(
