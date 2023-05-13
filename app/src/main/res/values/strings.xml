@@ -7,6 +7,7 @@
     <string name="addtransaction_outcome">Despesa</string>
     <string name="addtransaction_date">Data</string>
     <string name="addtransaction_description">Descrição</string>
+    <string name="addtransaction_invalidvalue">Número inválido</string>
 
     <string name="addtransaction_arrowback_desc">arrow back icon</string>
 

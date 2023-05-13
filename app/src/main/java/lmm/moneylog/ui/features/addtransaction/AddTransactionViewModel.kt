@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.features.addtransaction
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -31,15 +30,14 @@ class AddTransactionViewModel(
         return "${domainTime.day} ${domainTimeConverter.getMonthName(domainTime.month)}, ${domainTime.year}"
     }
 
-    fun saveTransaction(addTransactionModel: AddTransactionModel) {
+    fun saveTransaction(
+        addTransactionModel: AddTransactionModel,
+        onValueError: () -> Unit
+    ) {
         try {
             with(addTransactionModel) {
                 val transaction = Transaction(
-                    value =
-                    if (addTransactionModel.isIncome)
-                        value.value.toDouble()
-                    else
-                        -value.value.toDouble(),
+                    value = validateValue(value.value, isIncome),
                     date = date,
                     description = description.value
                 )
@@ -49,10 +47,20 @@ class AddTransactionViewModel(
                 }
             }
         } catch (e: NumberFormatException) {
-            Log.e(
-                /* tag = */ "saveTransaction",
-                /* msg = */ "NumberFormatException: " + e.localizedMessage
-            )
+            onValueError()
+        }
+    }
+
+    private fun validateValue(valueParam: String, isIncome: Boolean): Double {
+        val value = valueParam.toDouble()
+        if (value <= 0.0) {
+            throw java.lang.NumberFormatException("Negative number")
+        }
+
+        return if (isIncome) {
+            value
+        } else {
+            -value
         }
     }
 
