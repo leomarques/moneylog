@@ -58,8 +58,8 @@ fun GetTransactionsLayout(
         },
         floatingActionButton = {
             MyFab(
-                { onFabClick() },
-                Icons.Default.Add
+                onClick = onFabClick,
+                icon = Icons.Default.Add
             )
         },
         floatingActionButtonPosition = FabPosition.Center,
