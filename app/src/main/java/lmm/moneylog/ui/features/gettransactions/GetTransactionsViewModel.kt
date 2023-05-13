@@ -9,16 +9,20 @@ import lmm.moneylog.domain.models.Transaction
 import lmm.moneylog.ui.textformatters.formatDate
 import lmm.moneylog.ui.textformatters.formatForRs
 
+const val getTransactionsIncome = "income"
+const val getTransactionsOutcome = "outcome"
+const val getTransactionsAll = "all"
+
 class GetTransactionsViewModel(private val interactor: GetTransactionsInteractor) : ViewModel() {
 
     fun convertToModel(typeOfValue: String?): LiveData<GetTransactionsModel> =
         when (typeOfValue) {
-            "income" -> {
+            getTransactionsIncome -> {
                 val transactions = interactor.getIncomeTransactions().asLiveData()
                 convertToModel(transactions)
             }
 
-            "outcome" -> {
+            getTransactionsOutcome -> {
                 val transactions = interactor.getOutcomeTransactions().asLiveData()
                 convertToModel(transactions)
             }

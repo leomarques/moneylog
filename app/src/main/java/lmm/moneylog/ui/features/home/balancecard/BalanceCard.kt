@@ -26,13 +26,16 @@ import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
 import lmm.moneylog.ui.theme.income
 
+const val balanceCardAll = "all"
+const val balanceCardIncome = "income"
+const val balanceCardOutcome = "outcome"
+
 @Composable
 fun BalanceCard(
     total: String,
     credit: String,
     debt: String,
-    onAmountClick: (String) -> Unit,
-    onBalanceClick: (String) -> Unit
+    onClick: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -46,7 +49,7 @@ fun BalanceCard(
     ) {
         Balance(
             value = total,
-            onClick = { onBalanceClick("all") }
+            onClick = { onClick(balanceCardAll) }
         )
 
         Spacer(Modifier.height(SpaceSize.LargeSpaceSize))
@@ -59,14 +62,14 @@ fun BalanceCard(
                 title = stringResource(R.string.balancecard_income),
                 value = credit,
                 color = income,
-                onClick = { onAmountClick("income") }
+                onClick = { onClick(balanceCardIncome) }
             )
 
             Amount(
                 title = stringResource(R.string.balancecard_outcome),
                 value = debt,
                 color = Color.Red,
-                onClick = { onAmountClick("outcome") }
+                onClick = { onClick(balanceCardOutcome) }
             )
         }
     }
@@ -132,8 +135,7 @@ fun BalanceCardPreview() {
             total = "RS99995.00",
             credit = "R$100000.00",
             debt = "R$50.00",
-            onAmountClick = {},
-            onBalanceClick = {}
+            onClick = {}
         )
     }
 }

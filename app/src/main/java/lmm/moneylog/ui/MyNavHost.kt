@@ -33,10 +33,7 @@ fun MyNavHost(
                 onFabClick = {
                     navController.navigate(addTransactionScreen)
                 },
-                onAmountClick = { typeOfValue ->
-                    navController.navigate("$getTransactionsScreen/$typeOfValue")
-                },
-                onBalanceClick = { typeOfValue ->
+                onClick = { typeOfValue ->
                     navController.navigate("$getTransactionsScreen/$typeOfValue")
                 }
             )
@@ -51,7 +48,8 @@ fun MyNavHost(
         }
 
         composable("$getTransactionsScreen/{$paramTypeOfValue}") { backStackEntry ->
-            val typeOfValue = backStackEntry.arguments?.getString(paramTypeOfValue)
+            val param = backStackEntry.arguments?.getString(paramTypeOfValue)
+            val typeOfValue = convertTransactionTypeParam(param)
 
             GetTransactionsView(
                 onArrowBackClick = {

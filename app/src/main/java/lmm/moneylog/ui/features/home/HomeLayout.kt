@@ -19,8 +19,7 @@ import lmm.moneylog.ui.theme.SpaceSize
 @Composable
 fun HomeLayout(
     onFabClick: () -> Unit,
-    onAmountClick: (String) -> Unit,
-    onBalanceClick: (String) -> Unit
+    onClick: (String) -> Unit
 ) {
     Scaffold(
         modifier = Modifier
@@ -36,8 +35,7 @@ fun HomeLayout(
         content = {
             Surface {
                 BalanceCardView(
-                    onAmountClick,
-                    onBalanceClick
+                    onClick
                 )
             }
         }
@@ -49,7 +47,6 @@ fun HomeLayout(
 fun HomeLayoutPreview() {
     MoneylogTheme {
         HomeLayout(
-            {},
             {},
             {}
         )
