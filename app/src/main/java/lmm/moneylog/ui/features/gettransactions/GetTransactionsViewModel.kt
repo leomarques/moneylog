@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
+import lmm.moneylog.R
 import lmm.moneylog.domain.gettransactions.GetTransactionsInteractor
 import lmm.moneylog.domain.models.Transaction
 import lmm.moneylog.ui.textformatters.formatDate
@@ -19,24 +20,24 @@ class GetTransactionsViewModel(private val interactor: GetTransactionsInteractor
         when (typeOfValue) {
             getTransactionsIncome -> {
                 val transactions = interactor.getIncomeTransactions().asLiveData()
-                convertToModel(transactions)
+                convertToModel(transactions, R.string.gettransactions_topbar_income)
             }
 
             getTransactionsOutcome -> {
                 val transactions = interactor.getOutcomeTransactions().asLiveData()
-                convertToModel(transactions)
+                convertToModel(transactions, R.string.gettransactions_topbar_outcome)
             }
 
             else -> {
                 val transactions = interactor.getAllTransactions().asLiveData()
-                convertToModel(transactions)
+                convertToModel(transactions, R.string.gettransactions_topbar_all)
             }
         }
 
-    private fun convertToModel(listLiveData: LiveData<List<Transaction>>) =
+    private fun convertToModel(listLiveData: LiveData<List<Transaction>>, titleResourceId: Int) =
         listLiveData.map { transactions ->
             GetTransactionsModel(
-                transactions.map { transaction ->
+                transactions = transactions.map { transaction ->
                     with(transaction) {
                         TransactionModel(
                             if (value < 0.0) {
@@ -49,7 +50,8 @@ class GetTransactionsViewModel(private val interactor: GetTransactionsInteractor
                             date.formatDate()
                         )
                     }
-                }
+                },
+                titleResourceId = titleResourceId
             )
         }
 }

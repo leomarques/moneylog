@@ -44,7 +44,7 @@ fun GetTransactionsLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(R.string.gettransactions_topbar))
+                    Text(text = stringResource(model.titleResourceId))
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
@@ -177,7 +177,8 @@ fun Preview() {
                     description = stringResource(R.string.loremipsum),
                     date = "20/2/2023"
                 )
-            )
+            ),
+            R.string.gettransactions_topbar_all
         )
     )
 }

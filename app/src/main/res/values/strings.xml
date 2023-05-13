@@ -22,7 +22,9 @@
     <string name="datepicker_ok">OK</string>
     <string name="datepicker_cancel">Cancelar</string>
 
-    <string name="gettransactions_topbar">Transações</string>
+    <string name="gettransactions_topbar_all">Transações</string>
+    <string name="gettransactions_topbar_income">Receitas</string>
+    <string name="gettransactions_topbar_outcome">Despesas</string>
     <string name="gettransactions_nodescription">(sem descrição)</string>
 
     <string name="loremipsum">Lorem Ipsum is simply dummy text of the printing and typesetting

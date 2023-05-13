@@ -3,6 +3,7 @@ package lmm.moneylog.ui.features.gettransactions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import lmm.moneylog.R
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -13,7 +14,10 @@ fun GetTransactionsView(
     typeOfValue: String?
 ) {
     val transactionsModel by viewModel.convertToModel(typeOfValue).observeAsState(
-        GetTransactionsModel(emptyList())
+        GetTransactionsModel(
+            emptyList(),
+            R.string.gettransactions_topbar_all
+        )
     )
 
     GetTransactionsLayout(
