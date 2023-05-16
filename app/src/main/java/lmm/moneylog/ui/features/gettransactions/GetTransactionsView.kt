@@ -13,7 +13,7 @@ fun GetTransactionsView(
     viewModel: GetTransactionsViewModel = koinViewModel(),
     typeOfValue: String?
 ) {
-    val transactionsModel by viewModel.convertToModel(typeOfValue).observeAsState(
+    val transactionsModel by viewModel.getTransactionsModel(typeOfValue).observeAsState(
         GetTransactionsModel(
             emptyList(),
             R.string.gettransactions_topbar_all

@@ -20,6 +20,7 @@ ext {
             junit                         : '4.13.2',
             mockk                         : '1.13.5',
             kotlinx_coroutines_test       : '1.6.4',
+            core_testing                  : '2.2.0',
     ]
 
     libraries = [
@@ -40,5 +41,6 @@ ext {
             junit                  : "junit:junit:$versions.junit",
             mockk                  : "io.mockk:mockk:$versions.mockk",
             kotlinx_coroutines_test: "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.kotlinx_coroutines_test",
+            core_testing           : "androidx.arch.core:core-testing:$versions.core_testing",
     ]
 }

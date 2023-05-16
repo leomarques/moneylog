@@ -72,4 +72,5 @@ dependencies {
 
     testImplementation libraries.mockk
     testImplementation libraries.kotlinx_coroutines_test
+    testImplementation libraries.core_testing
 }

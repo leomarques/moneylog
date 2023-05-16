@@ -16,7 +16,7 @@ const val getTransactionsAll = "all"
 
 class GetTransactionsViewModel(private val interactor: GetTransactionsInteractor) : ViewModel() {
 
-    fun convertToModel(typeOfValue: String?): LiveData<GetTransactionsModel> =
+    fun getTransactionsModel(typeOfValue: String?): LiveData<GetTransactionsModel> =
         when (typeOfValue) {
             getTransactionsIncome -> {
                 val transactions = interactor.getIncomeTransactions().asLiveData()
