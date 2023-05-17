@@ -102,7 +102,7 @@ class AddTransactionViewModelTest {
 
             val onValueError = {}
             viewModel.saveTransaction(this, onValueError)
-            verify { interactor wasNot called}
+            verify { interactor wasNot called }
         }
     }
 
@@ -115,7 +115,7 @@ class AddTransactionViewModelTest {
 
             val onValueError = {}
             viewModel.saveTransaction(this, onValueError)
-            verify { interactor wasNot called}
+            verify { interactor wasNot called }
         }
     }
 
@@ -128,7 +128,7 @@ class AddTransactionViewModelTest {
 
             val onValueError = {}
             viewModel.saveTransaction(this, onValueError)
-            verify { interactor wasNot called}
+            verify { interactor wasNot called }
         }
     }
 }

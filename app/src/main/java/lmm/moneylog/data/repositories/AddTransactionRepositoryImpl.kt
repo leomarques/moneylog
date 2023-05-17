@@ -1,17 +1,20 @@
 package lmm.moneylog.data.repositories
 
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import lmm.moneylog.data.CoroutineDispatcherProvider
 import lmm.moneylog.data.database.TransactionDao
 import lmm.moneylog.data.database.TransactionEntity
 import lmm.moneylog.domain.addtransaction.AddTransactionRepository
 import lmm.moneylog.domain.models.Transaction
 
-class AddTransactionRepositoryImpl(private val transactionDao: TransactionDao) :
+class AddTransactionRepositoryImpl(
+    private val transactionDao: TransactionDao,
+    private val coroutineDispatcherProvider: CoroutineDispatcherProvider
+) :
     AddTransactionRepository {
 
     override suspend fun save(transaction: Transaction) {
-        withContext(Dispatchers.IO) {
+        withContext(coroutineDispatcherProvider.provide()) {
             transactionDao.insert(
                 with(transaction) {
                     TransactionEntity(
