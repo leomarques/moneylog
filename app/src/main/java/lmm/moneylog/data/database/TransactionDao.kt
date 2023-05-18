@@ -22,4 +22,7 @@ interface TransactionDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(transactionEntity: TransactionEntity)
+
+    @Query("SELECT * FROM `transaction` where id=:id")
+    fun selectTransaction(id: Int): Flow<TransactionEntity>
 }
