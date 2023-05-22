@@ -33,6 +33,7 @@ class GetTransactionsViewModelTest {
         Dispatchers.setMain(UnconfinedTestDispatcher())
 
         val transaction = Transaction(
+            id = 10,
             value = 0.1,
             description = "desc",
             date = DomainTime(

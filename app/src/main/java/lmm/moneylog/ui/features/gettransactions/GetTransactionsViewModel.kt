@@ -40,14 +40,15 @@ class GetTransactionsViewModel(private val interactor: GetTransactionsInteractor
                 transactions = transactions.map { transaction ->
                     with(transaction) {
                         TransactionModel(
-                            if (value < 0.0) {
+                            value = if (value < 0.0) {
                                 (-value).formatForRs()
                             } else {
                                 value.formatForRs()
                             },
-                            value > 0,
-                            description,
-                            date.formatDate()
+                            isIncome = value > 0,
+                            description = description,
+                            date = date.formatDate(),
+                            id = id
                         )
                     }
                 },

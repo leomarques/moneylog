@@ -25,12 +25,13 @@ class GetTransactionsRepositoryImplTest {
                     year = 1,
                     month = 2,
                     day = 3
-                )
+                ).also { it.id = 10 }
             )
         ).asFlow()
 
         runBlocking {
             val trans = repository.getAllTransactions().first()[0]
+            assertEquals(10, trans.id)
             assertEquals(0.5, trans.value)
             assertEquals("", trans.description)
             assertEquals(1, trans.date.year)
@@ -38,5 +39,4 @@ class GetTransactionsRepositoryImplTest {
             assertEquals(3, trans.date.day)
         }
     }
-
 }

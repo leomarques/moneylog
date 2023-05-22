@@ -11,7 +11,8 @@ fun GetTransactionsView(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     viewModel: GetTransactionsViewModel = koinViewModel(),
-    typeOfValue: String?
+    typeOfValue: String?,
+    onItemClick: (Int) -> Unit
 ) {
     val transactionsModel by viewModel.getTransactionsModel(typeOfValue).observeAsState(
         GetTransactionsModel(
@@ -23,6 +24,7 @@ fun GetTransactionsView(
     GetTransactionsLayout(
         onArrowBackClick = onArrowBackClick,
         onFabClick = onFabClick,
-        model = transactionsModel
+        model = transactionsModel,
+        onItemClick = onItemClick
     )
 }

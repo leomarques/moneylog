@@ -5,17 +5,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import lmm.moneylog.ui.features.addtransaction.AddTransactionView
+import androidx.navigation.navArgument
 import lmm.moneylog.ui.features.gettransactions.GetTransactionsView
 import lmm.moneylog.ui.features.home.HomeLayout
+import lmm.moneylog.ui.features.transactiondetail.TransactionDetailView
 
 const val homeScreen = "home"
-const val addTransactionScreen = "add_transaction"
-const val paramTypeOfValue = "typeOfValue"
+const val transactionDetailScreen = "transaction_detail"
 const val getTransactionsScreen = "get_transactions"
+
+const val paramTypeOfValue = "typeOfValue"
+const val paramId = "id"
 
 @Composable
 fun MyNavHost(
@@ -31,7 +35,7 @@ fun MyNavHost(
         composable(homeScreen) {
             HomeLayout(
                 onFabClick = {
-                    navController.navigate(addTransactionScreen)
+                    navController.navigate(transactionDetailScreen)
                 },
                 onClick = { typeOfValue ->
                     navController.navigate("$getTransactionsScreen/$typeOfValue")
@@ -39,8 +43,16 @@ fun MyNavHost(
             )
         }
 
-        composable(addTransactionScreen) {
-            AddTransactionView(
+        composable(
+            route = "$transactionDetailScreen?$paramId={$paramId}",
+            arguments = listOf(
+                navArgument(paramId) {
+                    defaultValue = -1
+                    type = NavType.IntType
+                }
+            )
+        ) {
+            TransactionDetailView(
                 onArrowBackClick = {
                     navController.popBackStack()
                 }
@@ -56,9 +68,12 @@ fun MyNavHost(
                     navController.popBackStack()
                 },
                 onFabClick = {
-                    navController.navigate(addTransactionScreen)
+                    navController.navigate(transactionDetailScreen)
                 },
-                typeOfValue = typeOfValue
+                typeOfValue = typeOfValue,
+                onItemClick = { id ->
+                    navController.navigate("$transactionDetailScreen?$paramId=$id")
+                }
             )
         }
     }

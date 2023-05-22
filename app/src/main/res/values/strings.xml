@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Moneylog</string>
 
-    <string name="addtransaction_topbar">Nova transação</string>
-    <string name="addtransaction_value">Valor</string>
-    <string name="addtransaction_income">Receita</string>
-    <string name="addtransaction_outcome">Despesa</string>
-    <string name="addtransaction_date">Data</string>
-    <string name="addtransaction_description">Descrição</string>
-    <string name="addtransaction_invalidvalue">Número inválido</string>
+    <string name="detailtransaction_topbar_title_add">Nova transação</string>
+    <string name="detailtransaction_topbar_title_edit">Editar transação</string>
+    <string name="detailtransaction_value">Valor</string>
+    <string name="detailtransaction_income">Receita</string>
+    <string name="detailtransaction_outcome">Despesa</string>
+    <string name="detailtransaction_date">Data</string>
+    <string name="detailtransaction_description">Descrição</string>
+    <string name="detailtransaction_invalidvalue">Valor inválido</string>
 
-    <string name="addtransaction_arrowback_desc">arrow back icon</string>
+    <string name="detailtransaction_arrowback_desc">arrow back icon</string>
 
     <string name="balancecard_total">Saldo em contas</string>
     <string name="balancecard_income">Receitas</string>

@@ -27,15 +27,18 @@ class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) 
 
     private fun convertEntityToTransaction(list: List<TransactionEntity>): List<Transaction> {
         return list.map {
-            Transaction(
-                it.value,
-                it.description,
-                DomainTime(
-                    it.day,
-                    it.month,
-                    it.year
+            with(it) {
+                Transaction(
+                    id = id,
+                    value = value,
+                    description = description,
+                    date = DomainTime(
+                        day = day,
+                        month = month,
+                        year = year
+                    )
                 )
-            )
+            }
         }
     }
 }

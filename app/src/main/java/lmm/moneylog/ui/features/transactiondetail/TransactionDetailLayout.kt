@@ -1,5 +1,6 @@
-package lmm.moneylog.ui.features.addtransaction
+package lmm.moneylog.ui.features.transactiondetail
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Column
@@ -43,15 +44,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import lmm.moneylog.R
+import lmm.moneylog.domain.time.DomainTime
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddTransactionLayout(
+fun TransactionDetailLayout(
     onArrowBackClick: () -> Unit,
-    onFabClick: (AddTransactionModel) -> Unit,
-    addTransactionModel: AddTransactionModel,
+    onFabClick: (TransactionDetailModel) -> Unit,
+    transactionDetailModel: TransactionDetailModel,
     onDatePicked: (Long) -> Unit,
     onTypeOfValueSelected: (Boolean) -> Unit
 ) {
@@ -59,13 +61,13 @@ fun AddTransactionLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(R.string.addtransaction_topbar))
+                    Text(text = stringResource(transactionDetailModel.titleResourceId))
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.addtransaction_arrowback_desc)
+                            contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
                         )
                     }
                 }
@@ -73,7 +75,7 @@ fun AddTransactionLayout(
         },
         floatingActionButton = {
             MyFab(
-                { onFabClick(addTransactionModel) },
+                { onFabClick(transactionDetailModel) },
                 Icons.Default.Check
             )
         },
@@ -81,7 +83,7 @@ fun AddTransactionLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 Content(
-                    addTransactionModel,
+                    transactionDetailModel,
                     onDatePicked,
                     onTypeOfValueSelected
                 )
@@ -92,7 +94,7 @@ fun AddTransactionLayout(
 
 @Composable
 private fun Content(
-    addTransactionModel: AddTransactionModel,
+    transactionDetailModel: TransactionDetailModel,
     onDatePicked: (Long) -> Unit,
     onTypeOfValueSelected: (Boolean) -> Unit
 ) {
@@ -110,65 +112,59 @@ private fun Content(
         }
 
         StateTextField(
-            title = stringResource(R.string.addtransaction_value),
+            title = stringResource(R.string.detailtransaction_value),
             keyboardType = KeyboardType.Number,
-            valueState = addTransactionModel.value,
-            getFocus = true
+            valueState = transactionDetailModel.value,
+            getFocus = !transactionDetailModel.isEdit
         )
 
         Row {
-            val isCreditSelected = remember { mutableStateOf(true) }
-            val onSelectedChange = { creditSelected: Boolean ->
-                isCreditSelected.value = creditSelected
-                onTypeOfValueSelected(creditSelected)
-            }
-
             Row(
                 Modifier
                     .selectable(
-                        selected = isCreditSelected.value,
-                        onClick = { onSelectedChange(true) }
+                        selected = transactionDetailModel.isIncome.value,
+                        onClick = { onTypeOfValueSelected(true) }
                     ),
                 verticalAlignment = CenterVertically
             ) {
                 RadioButton(
-                    selected = isCreditSelected.value,
-                    onClick = { onSelectedChange(true) }
+                    selected = transactionDetailModel.isIncome.value,
+                    onClick = { onTypeOfValueSelected(true) }
                 )
                 Text(
-                    text = stringResource(R.string.addtransaction_income)
+                    text = stringResource(R.string.detailtransaction_income)
                 )
             }
 
             Row(
                 Modifier.selectable(
-                    selected = !isCreditSelected.value,
-                    onClick = { onSelectedChange(false) }
+                    selected = !transactionDetailModel.isIncome.value,
+                    onClick = { onTypeOfValueSelected(false) }
                 ),
                 verticalAlignment = CenterVertically
             ) {
                 RadioButton(
-                    selected = !isCreditSelected.value,
-                    onClick = { onSelectedChange(false) }
+                    selected = !transactionDetailModel.isIncome.value,
+                    onClick = { onTypeOfValueSelected(false) }
                 )
                 Text(
-                    text = stringResource(R.string.addtransaction_outcome)
+                    text = stringResource(R.string.detailtransaction_outcome)
                 )
             }
         }
 
         StateTextField(
-            title = stringResource(R.string.addtransaction_date),
+            title = stringResource(R.string.detailtransaction_date),
             keyboardType = KeyboardType.Text,
-            valueState = addTransactionModel.displayDate,
+            valueState = transactionDetailModel.displayDate,
             onClick = {
                 showDatePicker.value = true
             }
         )
         StateTextField(
-            title = stringResource(R.string.addtransaction_description),
+            title = stringResource(R.string.detailtransaction_description),
             keyboardType = KeyboardType.Text,
-            valueState = addTransactionModel.description,
+            valueState = transactionDetailModel.description,
         )
     }
 }
@@ -212,15 +208,15 @@ fun StateTextField(
             .focusRequester(focusRequester)
     )
 
-    OnLifecycleEvent { _, event ->
-        when (event) {
-            Lifecycle.Event.ON_RESUME -> {
-                if (getFocus) {
+    if (getFocus) {
+        OnLifecycleEvent { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_RESUME -> {
                     focusRequester.requestFocus()
                 }
-            }
 
-            else -> {}
+                else -> {}
+            }
         }
     }
 }
@@ -243,13 +239,23 @@ fun OnLifecycleEvent(onEvent: (owner: LifecycleOwner, event: Lifecycle.Event) ->
     }
 }
 
+@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
 fun Preview() {
-    AddTransactionLayout(
+    TransactionDetailLayout(
         onArrowBackClick = {},
         onFabClick = {},
-        addTransactionModel = AddTransactionModel(),
+        transactionDetailModel = TransactionDetailModel(
+            value = mutableStateOf(""),
+            isIncome = mutableStateOf(true),
+            displayDate = mutableStateOf(""),
+            description = mutableStateOf(""),
+            date = DomainTime(0, 0, 0),
+            isEdit = false,
+            id = 0,
+            titleResourceId = R.string.detailtransaction_topbar_title_add
+        ),
         onDatePicked = {},
         onTypeOfValueSelected = {}
     )

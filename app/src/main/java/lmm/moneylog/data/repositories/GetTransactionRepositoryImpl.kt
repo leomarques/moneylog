@@ -13,6 +13,7 @@ class GetTransactionRepositoryImpl(private val transactionDao: TransactionDao) :
     override fun getTransactionById(id: Int): Flow<Transaction> {
         return transactionDao.selectTransaction(id).map {
             Transaction(
+                id = id,
                 value = it.value,
                 description = it.description,
                 date = DomainTime(

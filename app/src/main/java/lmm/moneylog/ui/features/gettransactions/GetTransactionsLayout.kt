@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.gettransactions
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,7 +39,8 @@ import lmm.moneylog.ui.theme.income
 fun GetTransactionsLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
-    model: GetTransactionsModel
+    model: GetTransactionsModel,
+    onItemClick: (Int) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -50,7 +52,7 @@ fun GetTransactionsLayout(
                     IconButton(onClick = onArrowBackClick) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.addtransaction_arrowback_desc)
+                            contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
                         )
                     }
                 }
@@ -65,14 +67,20 @@ fun GetTransactionsLayout(
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
-                Content(model)
+                Content(
+                    model = model,
+                    onItemClick = onItemClick
+                )
             }
         }
     )
 }
 
 @Composable
-fun Content(model: GetTransactionsModel) {
+fun Content(
+    model: GetTransactionsModel,
+    onItemClick: (Int) -> Unit
+) {
     Column(
         Modifier
             .padding(horizontal = SpaceSize.DefaultSpaceSize)
@@ -80,18 +88,25 @@ fun Content(model: GetTransactionsModel) {
     ) {
         LazyColumn {
             items(model.transactions.reversed()) { transaction ->
-                TransactionItem(transaction)
+                TransactionItem(
+                    transaction = transaction,
+                    onItemClick = onItemClick
+                )
             }
         }
     }
 }
 
 @Composable
-fun TransactionItem(transaction: TransactionModel) {
+fun TransactionItem(
+    transaction: TransactionModel,
+    onItemClick: (Int) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = SpaceSize.SmallSpaceSize),
+            .padding(vertical = SpaceSize.SmallSpaceSize)
+            .clickable { onItemClick(transaction.id) },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -151,34 +166,40 @@ fun Preview() {
                     value = "R$50,00",
                     isIncome = true,
                     description = "Calça",
-                    date = "1/2/2023"
+                    date = "1/2/2023",
+                    id = 0
                 ),
                 TransactionModel(
                     value = "R$1,00",
                     isIncome = false,
                     description = "",
-                    date = "22/12/2023"
+                    date = "22/12/2023",
+                    id = 0
                 ),
                 TransactionModel(
                     value = "R$123456789123123123,00",
                     isIncome = true,
                     description = stringResource(R.string.loremipsum),
-                    date = "20/2/2023"
+                    date = "20/2/2023",
+                    id = 0
                 ),
                 TransactionModel(
                     value = "R$123456789123123123,00",
                     isIncome = true,
                     description = "",
-                    date = "20/2/2023"
+                    date = "20/2/2023",
+                    id = 0
                 ),
                 TransactionModel(
                     value = "R$1,00",
                     isIncome = true,
                     description = stringResource(R.string.loremipsum),
-                    date = "20/2/2023"
+                    date = "20/2/2023",
+                    id = 0
                 )
             ),
             R.string.gettransactions_topbar_all
-        )
+        ),
+        onItemClick = {}
     )
 }
