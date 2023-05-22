@@ -101,19 +101,22 @@ class TransactionDetailViewModel(
         }
     }
 
-    fun onFabClick(transactionModel: TransactionDetailModel, onError: () -> Unit) {
+    fun onFabClick(transactionModel: TransactionDetailModel, onSuccess: () -> Unit, onError: () -> Unit) {
         try {
             if (transactionModel.isEdit) {
-                updateTransaction(transactionModel)
+                updateTransaction(transactionModel, onSuccess)
             } else {
-                saveTransaction(transactionModel)
+                saveTransaction(transactionModel, onSuccess)
             }
         } catch (e: NumberFormatException) {
             onError()
         }
     }
 
-    private fun updateTransaction(transactionDetailModel: TransactionDetailModel) {
+    private fun updateTransaction(
+        transactionDetailModel: TransactionDetailModel,
+        onSuccess: () -> Unit
+    ) {
         with(transactionDetailModel) {
             val transaction = Transaction(
                 value = validateValue(value.value, isIncome.value),
@@ -124,11 +127,15 @@ class TransactionDetailViewModel(
 
             viewModelScope.launch {
                 updateTransactionInteractor.execute(transaction)
+                onSuccess()
             }
         }
     }
 
-    private fun saveTransaction(transactionDetailModel: TransactionDetailModel) {
+    private fun saveTransaction(
+        transactionDetailModel: TransactionDetailModel,
+        onSuccess: () -> Unit
+    ) {
         with(transactionDetailModel) {
             val transaction = Transaction(
                 value = validateValue(value.value, isIncome.value),
@@ -138,6 +145,7 @@ class TransactionDetailViewModel(
 
             viewModelScope.launch {
                 addTransactionInteractor.execute(transaction)
+                onSuccess()
             }
         }
     }

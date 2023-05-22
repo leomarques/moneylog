@@ -20,6 +20,7 @@ fun TransactionDetailView(
 ) {
     val current = LocalContext.current
     val errorText = stringResource(R.string.detailtransaction_invalidvalue)
+    val successText = stringResource(R.string.detailtransaction_success)
 
     val model by viewModel.transactionDetailModel.observeAsState(
         TransactionDetailModel(
@@ -37,10 +38,14 @@ fun TransactionDetailView(
     TransactionDetailLayout(
         onArrowBackClick = onArrowBackClick,
         onFabClick = { transactionModel ->
-            viewModel.onFabClick(transactionModel) {
-                Toast.makeText(current, errorText, Toast.LENGTH_LONG).show()
-            }
-            onArrowBackClick()
+            viewModel.onFabClick(
+                transactionModel = transactionModel,
+                onSuccess = {
+                    Toast.makeText(current, successText, Toast.LENGTH_SHORT).show()
+                    onArrowBackClick()
+                },
+                onError = { Toast.makeText(current, errorText, Toast.LENGTH_LONG).show() }
+            )
         },
         transactionDetailModel = model,
         onDatePicked = { datePicked ->

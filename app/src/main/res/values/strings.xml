@@ -9,6 +9,7 @@
     <string name="detailtransaction_date">Data</string>
     <string name="detailtransaction_description">Descrição</string>
     <string name="detailtransaction_invalidvalue">Valor inválido</string>
+    <string name="detailtransaction_success">Registrado!</string>
 
     <string name="detailtransaction_arrowback_desc">arrow back icon</string>
 
