@@ -30,13 +30,15 @@ class GetTransactionsRepositoryImplTest {
         ).asFlow()
 
         runBlocking {
-            val trans = repository.getAllTransactions().first()[0]
-            assertEquals(10, trans.id)
-            assertEquals(0.5, trans.value)
-            assertEquals("", trans.description)
-            assertEquals(1, trans.date.year)
-            assertEquals(2, trans.date.month)
-            assertEquals(3, trans.date.day)
+            val transaction = repository.getAllTransactions().first()[0]
+            with(transaction) {
+                assertEquals(10, id)
+                assertEquals(0.5, value)
+                assertEquals("", description)
+                assertEquals(1, date.year)
+                assertEquals(2, date.month)
+                assertEquals(3, date.day)
+            }
         }
     }
 }
