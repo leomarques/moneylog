@@ -10,7 +10,9 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
+import lmm.moneylog.data.CoroutineDispatcherProvider
 import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
+import lmm.moneylog.domain.deletetransaction.DeleteTransactionInteractor
 import lmm.moneylog.domain.edittransaction.UpdateTransactionInteractor
 import lmm.moneylog.domain.gettransaction.GetTransactionInteractor
 import lmm.moneylog.domain.models.Transaction
@@ -21,8 +23,10 @@ class TransactionDetailViewModel(
     getTransactionInteractor: GetTransactionInteractor,
     private val addTransactionInteractor: AddTransactionInteractor,
     private val updateTransactionInteractor: UpdateTransactionInteractor,
+    private val deleteTransactionInteractor: DeleteTransactionInteractor,
     private val domainTimeConverter: DomainTimeConverter,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
+    private val dispatcherProvider: CoroutineDispatcherProvider
 ) : ViewModel() {
 
     val transactionDetailModel: LiveData<TransactionDetailModel>
@@ -32,55 +36,62 @@ class TransactionDetailViewModel(
 
         transactionDetailModel = if (id != -1) {
             getTransactionInteractor.getTransaction(id).asLiveData().map { transaction ->
-                TransactionDetailModel(
-                    value = mutableStateOf(
-                        if (transaction.value > 0) {
-                            "${transaction.value}"
-                        } else {
-                            "${-transaction.value}"
-                        }
-                    ),
-                    isIncome = mutableStateOf(transaction.value > 0),
-                    displayDate = mutableStateOf(convertToDisplayDate(transaction.date)),
-                    description = mutableStateOf(transaction.description),
-                    date = transaction.date,
-                    isEdit = true,
-                    id = id,
-                    titleResourceId = R.string.detailtransaction_topbar_title_edit
-                )
+                if (transaction != null) {
+                    TransactionDetailModel(
+                        value = mutableStateOf(
+                            if (transaction.value > 0) {
+                                "${transaction.value}"
+                            } else {
+                                "${-transaction.value}"
+                            }
+                        ),
+                        isIncome = mutableStateOf(transaction.value > 0),
+                        displayDate = mutableStateOf(convertToDisplayDate(transaction.date)),
+                        description = mutableStateOf(transaction.description),
+                        date = transaction.date,
+                        isEdit = true,
+                        id = id,
+                        titleResourceId = R.string.detailtransaction_topbar_title_edit
+                    )
+                } else {
+                    provideDefaultModel()
+                }
             }
         } else {
             MutableLiveData(
-                TransactionDetailModel(
-                    value = mutableStateOf(""),
-                    isIncome = mutableStateOf(true),
-                    displayDate = mutableStateOf(
-                        convertToDisplayDate(
-                            domainTimeConverter.timeStampToDomainTime(
-                                domainTimeConverter.getCurrentTimeStamp()
-                            )
-                        )
-                    ),
-                    description = mutableStateOf(""),
-                    date = domainTimeConverter.timeStampToDomainTime(
-                        domainTimeConverter.getCurrentTimeStamp()
-                    ),
-                    isEdit = false,
-                    id = id,
-                    titleResourceId = R.string.detailtransaction_topbar_title_add
-                )
+                provideDefaultModel()
             )
         }
     }
+
+    private fun provideDefaultModel() =
+        TransactionDetailModel(
+            value = mutableStateOf(""),
+            isIncome = mutableStateOf(true),
+            displayDate = mutableStateOf(
+                convertToDisplayDate(
+                    domainTimeConverter.timeStampToDomainTime(
+                        domainTimeConverter.getCurrentTimeStamp()
+                    )
+                )
+            ),
+            description = mutableStateOf(""),
+            date = domainTimeConverter.timeStampToDomainTime(
+                domainTimeConverter.getCurrentTimeStamp()
+            ),
+            isEdit = false,
+            id = -1,
+            titleResourceId = R.string.detailtransaction_topbar_title_add
+        )
 
     fun onTypeOfValueSelected(isIncome: Boolean) {
         transactionDetailModel.value?.isIncome?.value = isIncome
     }
 
     fun onDatePicked(timeStamp: Long) {
-        with(transactionDetailModel.value!!) {
-            date = domainTimeConverter.timeStampToDomainTime(timeStamp)
-            displayDate.value = convertToDisplayDate(date)
+        transactionDetailModel.value?.let {
+            it.date = domainTimeConverter.timeStampToDomainTime(timeStamp)
+            it.displayDate.value = convertToDisplayDate(it.date)
         }
     }
 
@@ -101,7 +112,11 @@ class TransactionDetailViewModel(
         }
     }
 
-    fun onFabClick(transactionModel: TransactionDetailModel, onSuccess: () -> Unit, onError: () -> Unit) {
+    fun onFabClick(
+        transactionModel: TransactionDetailModel,
+        onSuccess: () -> Unit,
+        onError: () -> Unit
+    ) {
         try {
             if (transactionModel.isEdit) {
                 updateTransaction(transactionModel, onSuccess)
@@ -147,6 +162,12 @@ class TransactionDetailViewModel(
                 addTransactionInteractor.execute(transaction)
                 onSuccess()
             }
+        }
+    }
+
+    fun deleteTransaction(id: Int) {
+        viewModelScope.launch(dispatcherProvider.provide()) {
+            deleteTransactionInteractor.execute(id)
         }
     }
 }

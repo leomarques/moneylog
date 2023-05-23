@@ -25,8 +25,11 @@ interface TransactionDao {
     fun insert(transactionEntity: TransactionEntity)
 
     @Query("SELECT * FROM `transaction` where id=:id")
-    fun selectTransaction(id: Int): Flow<TransactionEntity>
+    fun selectTransaction(id: Int): Flow<TransactionEntity?>
 
     @Update
     fun update(transactionEntity: TransactionEntity)
+
+    @Query("DELETE FROM `transaction` WHERE id = :id")
+    fun delete(id: Int)
 }

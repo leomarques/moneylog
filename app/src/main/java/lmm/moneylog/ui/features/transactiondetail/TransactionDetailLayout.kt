@@ -13,6 +13,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
@@ -55,7 +56,8 @@ fun TransactionDetailLayout(
     onFabClick: (TransactionDetailModel) -> Unit,
     transactionDetailModel: TransactionDetailModel,
     onDatePicked: (Long) -> Unit,
-    onTypeOfValueSelected: (Boolean) -> Unit
+    onTypeOfValueSelected: (Boolean) -> Unit,
+    onDeleteClick: (Int) -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -68,6 +70,19 @@ fun TransactionDetailLayout(
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+                        )
+                    }
+                },
+                actions = {
+                    if (transactionDetailModel.isEdit) {
+                        IconButton(
+                            onClick = { onDeleteClick(transactionDetailModel.id) },
+                            content = {
+                                Icon(
+                                    imageVector = Icons.Default.Delete,
+                                    contentDescription = stringResource(R.string.detailtransaction_delete_desc)
+                                )
+                            }
                         )
                     }
                 }
@@ -257,6 +272,7 @@ fun Preview() {
             titleResourceId = R.string.detailtransaction_topbar_title_add
         ),
         onDatePicked = {},
-        onTypeOfValueSelected = {}
+        onTypeOfValueSelected = {},
+        onDeleteClick = {}
     )
 }

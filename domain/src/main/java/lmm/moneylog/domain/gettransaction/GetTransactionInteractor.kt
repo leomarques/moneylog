@@ -5,7 +5,7 @@ import lmm.moneylog.domain.models.Transaction
 
 class GetTransactionInteractor(private val getTransactionRepository: GetTransactionRepository) {
 
-    fun getTransaction(id: Int): Flow<Transaction> {
+    fun getTransaction(id: Int): Flow<Transaction?> {
         return getTransactionRepository.getTransactionById(id)
     }
 }

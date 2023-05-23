@@ -5,5 +5,5 @@ import lmm.moneylog.domain.models.Transaction
 
 interface GetTransactionRepository {
 
-    fun getTransactionById(id: Int): Flow<Transaction>
+    fun getTransactionById(id: Int): Flow<Transaction?>
 }

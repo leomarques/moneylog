@@ -11,6 +11,7 @@
     <string name="detailtransaction_invalidvalue">Valor inválido</string>
 
     <string name="detailtransaction_arrowback_desc">arrow back icon</string>
+    <string name="detailtransaction_delete_desc">Delete</string>
 
     <string name="balancecard_total">Saldo em contas</string>
     <string name="balancecard_income">Receitas</string>

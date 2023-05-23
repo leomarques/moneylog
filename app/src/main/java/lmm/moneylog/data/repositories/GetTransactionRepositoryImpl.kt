@@ -10,18 +10,22 @@ import lmm.moneylog.domain.time.DomainTime
 class GetTransactionRepositoryImpl(private val transactionDao: TransactionDao) :
     GetTransactionRepository {
 
-    override fun getTransactionById(id: Int): Flow<Transaction> {
+    override fun getTransactionById(id: Int): Flow<Transaction?> {
         return transactionDao.selectTransaction(id).map {
-            Transaction(
-                id = id,
-                value = it.value,
-                description = it.description,
-                date = DomainTime(
-                    day = it.day,
-                    month = it.month,
-                    year = it.year
+            if (it != null) {
+                Transaction(
+                    id = id,
+                    value = it.value,
+                    description = it.description,
+                    date = DomainTime(
+                        day = it.day,
+                        month = it.month,
+                        year = it.year
+                    )
                 )
-            )
+            } else {
+                null
+            }
         }
     }
 }
