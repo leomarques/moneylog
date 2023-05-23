@@ -37,7 +37,7 @@ class GetTransactionsViewModel(private val interactor: GetTransactionsInteractor
     private fun convertToModel(listLiveData: LiveData<List<Transaction>>, titleResourceId: Int) =
         listLiveData.map { transactions ->
             GetTransactionsModel(
-                transactions = transactions.map { transaction ->
+                transactions = transactions.sortedBy { it.date }.map { transaction ->
                     with(transaction) {
                         TransactionModel(
                             value = if (value < 0.0) {
