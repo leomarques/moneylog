@@ -15,7 +15,7 @@ import lmm.moneylog.R
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun AddTransactionDatePicker(
+fun TransactionDetailDatePicker(
     onConfirm: (Long) -> Unit,
     onDismiss: () -> Unit
 ) {

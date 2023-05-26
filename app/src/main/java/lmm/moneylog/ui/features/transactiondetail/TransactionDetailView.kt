@@ -50,7 +50,7 @@ fun TransactionDetailView(
         onTypeOfValueSelected = { isIncome ->
             viewModel.onTypeOfValueSelected(isIncome)
         },
-        onDeleteClick = { id ->
+        onDeleteConfirmClick = { id ->
             viewModel.deleteTransaction(id)
             onArrowBackClick()
         }

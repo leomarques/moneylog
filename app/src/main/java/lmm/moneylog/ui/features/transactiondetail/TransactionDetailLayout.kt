@@ -57,8 +57,10 @@ fun TransactionDetailLayout(
     transactionDetailModel: TransactionDetailModel,
     onDatePicked: (Long) -> Unit,
     onTypeOfValueSelected: (Boolean) -> Unit,
-    onDeleteClick: (Int) -> Unit = {}
+    onDeleteConfirmClick: (Int) -> Unit = {}
 ) {
+    val showDeleteConfirmDialog = remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -76,7 +78,7 @@ fun TransactionDetailLayout(
                 actions = {
                     if (transactionDetailModel.isEdit) {
                         IconButton(
-                            onClick = { onDeleteClick(transactionDetailModel.id) },
+                            onClick = { showDeleteConfirmDialog.value = true },
                             content = {
                                 Icon(
                                     imageVector = Icons.Default.Delete,
@@ -98,9 +100,16 @@ fun TransactionDetailLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 Content(
-                    transactionDetailModel,
-                    onDatePicked,
-                    onTypeOfValueSelected
+                    transactionDetailModel = transactionDetailModel,
+                    onDatePicked = onDatePicked,
+                    onTypeOfValueSelected = onTypeOfValueSelected,
+                    onDeleteConfirm = {
+                        onDeleteConfirmClick(transactionDetailModel.id)
+                    },
+                    showDeleteConfirmDialog = showDeleteConfirmDialog.value,
+                    onDeleteDismiss = {
+                        showDeleteConfirmDialog.value = false
+                    }
                 )
             }
         }
@@ -111,18 +120,28 @@ fun TransactionDetailLayout(
 private fun Content(
     transactionDetailModel: TransactionDetailModel,
     onDatePicked: (Long) -> Unit,
-    onTypeOfValueSelected: (Boolean) -> Unit
+    onTypeOfValueSelected: (Boolean) -> Unit,
+    showDeleteConfirmDialog: Boolean,
+    onDeleteConfirm: () -> Unit,
+    onDeleteDismiss: () -> Unit
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
         val showDatePicker = remember { mutableStateOf(false) }
+
         if (showDatePicker.value) {
-            AddTransactionDatePicker(
+            TransactionDetailDatePicker(
                 onConfirm = {
                     onDatePicked(it)
                 },
                 onDismiss = {
                     showDatePicker.value = false
                 }
+            )
+        }
+        if (showDeleteConfirmDialog) {
+            DeleteTransactionConfirmDialog(
+                onConfirm = onDeleteConfirm,
+                onDismiss = onDeleteDismiss
             )
         }
 
@@ -273,6 +292,6 @@ fun Preview() {
         ),
         onDatePicked = {},
         onTypeOfValueSelected = {},
-        onDeleteClick = {}
+        onDeleteConfirmClick = {}
     )
 }
