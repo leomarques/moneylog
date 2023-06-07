@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import lmm.moneylog.TestCoroutineDispatcher
 import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
 import lmm.moneylog.domain.deletetransaction.DeleteTransactionInteractor
 import lmm.moneylog.domain.edittransaction.UpdateTransactionInteractor
@@ -79,8 +78,7 @@ class TransactionDetailViewModelTest {
             deleteTransactionInteractor = deleteTransactionInteractor,
             updateTransactionInteractor = updateTransactionInteractor,
             domainTimeConverter = domainTimeConverter,
-            savedStateHandle = SavedStateHandle().also { it["id"] = id },
-            dispatcherProvider = TestCoroutineDispatcher()
+            savedStateHandle = SavedStateHandle().also { it["id"] = id }
         )
     }
 
