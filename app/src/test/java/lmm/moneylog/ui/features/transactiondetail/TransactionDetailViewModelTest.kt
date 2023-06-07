@@ -90,7 +90,7 @@ class TransactionDetailViewModelTest {
             value.value = "50.0"
             description.value = "description"
 
-            viewModel.onFabClick(this, {}) {}
+            viewModel.onFabClick({}) {}
 
             coVerify {
                 addTransactionInteractor.execute(
@@ -116,7 +116,6 @@ class TransactionDetailViewModelTest {
             date = domainTime
 
             viewModel.onFabClick(
-                transactionModel = this,
                 onSuccess = {},
                 onError = {}
             )
@@ -143,7 +142,7 @@ class TransactionDetailViewModelTest {
             isIncome.value = true
             description.value = "description"
 
-            viewModel.onFabClick(this, {}) {}
+            viewModel.onFabClick({}) {}
             verify { addTransactionInteractor wasNot called }
         }
     }
@@ -158,7 +157,7 @@ class TransactionDetailViewModelTest {
             isIncome.value = true
             description.value = "description"
 
-            viewModel.onFabClick(this, {}) {}
+            viewModel.onFabClick({}) {}
             verify { updateTransactionInteractor wasNot called }
         }
     }
@@ -172,7 +171,7 @@ class TransactionDetailViewModelTest {
             isIncome.value = false
             description.value = "description"
 
-            viewModel.onFabClick(this, {}) {}
+            viewModel.onFabClick({}) {}
             verify { addTransactionInteractor wasNot called }
         }
     }
@@ -186,7 +185,7 @@ class TransactionDetailViewModelTest {
             isIncome.value = false
             description.value = "description"
 
-            viewModel.onFabClick(this, {}) {}
+            viewModel.onFabClick({}) {}
             verify { addTransactionInteractor wasNot called }
         }
     }
