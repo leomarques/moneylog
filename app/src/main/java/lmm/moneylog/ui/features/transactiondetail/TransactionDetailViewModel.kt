@@ -10,7 +10,6 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
-import lmm.moneylog.data.CoroutineDispatcherProvider
 import lmm.moneylog.domain.addtransaction.AddTransactionInteractor
 import lmm.moneylog.domain.deletetransaction.DeleteTransactionInteractor
 import lmm.moneylog.domain.edittransaction.UpdateTransactionInteractor
@@ -25,8 +24,7 @@ class TransactionDetailViewModel(
     private val updateTransactionInteractor: UpdateTransactionInteractor,
     private val deleteTransactionInteractor: DeleteTransactionInteractor,
     private val domainTimeConverter: DomainTimeConverter,
-    savedStateHandle: SavedStateHandle,
-    private val dispatcherProvider: CoroutineDispatcherProvider
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     val transactionDetailModel: LiveData<TransactionDetailModel>
@@ -166,7 +164,7 @@ class TransactionDetailViewModel(
     }
 
     fun deleteTransaction(id: Int) {
-        viewModelScope.launch(dispatcherProvider.provide()) {
+        viewModelScope.launch {
             deleteTransactionInteractor.execute(id)
         }
     }

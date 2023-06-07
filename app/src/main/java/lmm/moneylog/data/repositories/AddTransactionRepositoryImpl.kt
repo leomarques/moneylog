@@ -10,8 +10,7 @@ import lmm.moneylog.domain.models.Transaction
 class AddTransactionRepositoryImpl(
     private val transactionDao: TransactionDao,
     private val coroutineDispatcherProvider: CoroutineDispatcherProvider
-) :
-    AddTransactionRepository {
+) : AddTransactionRepository {
 
     override suspend fun save(transaction: Transaction) {
         withContext(coroutineDispatcherProvider.provide()) {
