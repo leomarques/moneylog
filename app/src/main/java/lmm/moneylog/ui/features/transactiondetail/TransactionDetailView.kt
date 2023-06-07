@@ -36,9 +36,8 @@ fun TransactionDetailView(
 
     TransactionDetailLayout(
         onArrowBackClick = onArrowBackClick,
-        onFabClick = { transactionModel ->
+        onFabClick = {
             viewModel.onFabClick(
-                transactionModel = transactionModel,
                 onSuccess = onArrowBackClick,
                 onError = { Toast.makeText(current, errorText, Toast.LENGTH_LONG).show() }
             )

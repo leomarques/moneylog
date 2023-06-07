@@ -111,54 +111,46 @@ class TransactionDetailViewModel(
     }
 
     fun onFabClick(
-        transactionModel: TransactionDetailModel,
         onSuccess: () -> Unit,
         onError: () -> Unit
     ) {
         try {
-            if (transactionModel.isEdit) {
-                updateTransaction(transactionModel, onSuccess)
+            if (transactionDetailModel.value?.isEdit == true) {
+                updateTransaction()
             } else {
-                saveTransaction(transactionModel, onSuccess)
+                saveTransaction()
             }
+            onSuccess()
         } catch (e: NumberFormatException) {
             onError()
         }
     }
 
-    private fun updateTransaction(
-        transactionDetailModel: TransactionDetailModel,
-        onSuccess: () -> Unit
-    ) {
-        with(transactionDetailModel) {
+    private fun updateTransaction() {
+        transactionDetailModel.value?.let {
             val transaction = Transaction(
-                value = validateValue(value.value, isIncome.value),
-                date = date,
-                description = description.value,
-                id = id
+                value = validateValue(it.value.value, it.isIncome.value),
+                date = it.date,
+                description = it.description.value,
+                id = it.id
             )
 
             viewModelScope.launch {
                 updateTransactionInteractor.execute(transaction)
-                onSuccess()
             }
         }
     }
 
-    private fun saveTransaction(
-        transactionDetailModel: TransactionDetailModel,
-        onSuccess: () -> Unit
-    ) {
-        with(transactionDetailModel) {
+    private fun saveTransaction() {
+        transactionDetailModel.value?.let {
             val transaction = Transaction(
-                value = validateValue(value.value, isIncome.value),
-                date = date,
-                description = description.value
+                value = validateValue(it.value.value, it.isIncome.value),
+                date = it.date,
+                description = it.description.value
             )
 
             viewModelScope.launch {
                 addTransactionInteractor.execute(transaction)
-                onSuccess()
             }
         }
     }
