@@ -19,12 +19,12 @@ import lmm.moneylog.domain.time.DomainTime
 import lmm.moneylog.domain.time.DomainTimeConverter
 
 class TransactionDetailViewModel(
+    savedStateHandle: SavedStateHandle,
     getTransactionInteractor: GetTransactionInteractor,
     private val addTransactionInteractor: AddTransactionInteractor,
     private val updateTransactionInteractor: UpdateTransactionInteractor,
     private val deleteTransactionInteractor: DeleteTransactionInteractor,
-    private val domainTimeConverter: DomainTimeConverter,
-    savedStateHandle: SavedStateHandle
+    private val domainTimeConverter: DomainTimeConverter
 ) : ViewModel() {
 
     val transactionDetailModel: LiveData<TransactionDetailModel>

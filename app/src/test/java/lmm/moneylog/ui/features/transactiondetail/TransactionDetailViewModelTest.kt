@@ -73,12 +73,12 @@ class TransactionDetailViewModelTest {
         }
 
         viewModel = TransactionDetailViewModel(
+            savedStateHandle = SavedStateHandle().also { it["id"] = id },
             getTransactionInteractor = getTransactionInteractor,
             addTransactionInteractor = addTransactionInteractor,
             deleteTransactionInteractor = deleteTransactionInteractor,
             updateTransactionInteractor = updateTransactionInteractor,
-            domainTimeConverter = domainTimeConverter,
-            savedStateHandle = SavedStateHandle().also { it["id"] = id }
+            domainTimeConverter = domainTimeConverter
         )
     }
 

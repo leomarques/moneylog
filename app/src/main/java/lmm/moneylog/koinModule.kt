@@ -36,12 +36,13 @@ val appModule = module {
         TransactionDatabase.getInstance(get()).transactionDao()
     }
 
+    factoryOf(::CoroutineDispatcherProviderImpl) { bind<CoroutineDispatcherProvider>() }
+    factoryOf(::LocalDateToDomainTimeConverterImpl) { bind<DomainTimeConverter>() }
+
     factoryOf(::AddTransactionRepositoryImpl) { bind<AddTransactionRepository>() }
     factoryOf(::GetBalanceRepositoryImpl) { bind<GetBalanceRepository>() }
-    factoryOf(::LocalDateToDomainTimeConverterImpl) { bind<DomainTimeConverter>() }
     factoryOf(::GetTransactionsRepositoryImpl) { bind<GetTransactionsRepository>() }
     factoryOf(::GetTransactionRepositoryImpl) { bind<GetTransactionRepository>() }
-    factoryOf(::CoroutineDispatcherProviderImpl) { bind<CoroutineDispatcherProvider>() }
     factoryOf(::UpdateTransactionRepositoryImpl) { bind<UpdateTransactionRepository>() }
     factoryOf(::DeleteTransactionRepositoryImpl) { bind<DeleteTransactionRepository>() }
 
