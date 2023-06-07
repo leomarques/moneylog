@@ -3,7 +3,7 @@ ext {
             compileSdk                    : 33,
             minSdk                        : 26,
             targetSdk                     : 33,
-            versionCode                   : 2,
+            versionCode                   : 3,
             versionName                   : "0.1.2",
             jvmTarget                     : '17',
             javaVersion                   : JavaVersion.VERSION_17,
