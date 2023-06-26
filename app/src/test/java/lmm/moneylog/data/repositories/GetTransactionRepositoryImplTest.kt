@@ -5,8 +5,8 @@ import io.mockk.mockk
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import lmm.moneylog.data.database.TransactionDao
-import lmm.moneylog.data.database.TransactionEntity
+import lmm.moneylog.data.database.transaction.TransactionDao
+import lmm.moneylog.data.database.transaction.TransactionEntity
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull

@@ -1,4 +1,4 @@
-package lmm.moneylog.data.database
+package lmm.moneylog.data.database.transaction
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

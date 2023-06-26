@@ -1,7 +1,7 @@
 package lmm.moneylog.data.repositories
 
 import kotlinx.coroutines.flow.Flow
-import lmm.moneylog.data.database.TransactionDao
+import lmm.moneylog.data.database.transaction.TransactionDao
 import lmm.moneylog.domain.getbalance.GetBalanceRepository
 
 class GetBalanceRepositoryImpl(private val transactionDao: TransactionDao) :

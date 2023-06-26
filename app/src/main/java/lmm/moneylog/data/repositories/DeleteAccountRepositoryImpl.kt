@@ -2,17 +2,17 @@ package lmm.moneylog.data.repositories
 
 import kotlinx.coroutines.withContext
 import lmm.moneylog.data.CoroutineDispatcherProvider
-import lmm.moneylog.data.database.transaction.TransactionDao
-import lmm.moneylog.domain.deletetransaction.DeleteTransactionRepository
+import lmm.moneylog.data.database.account.AccountDao
+import lmm.moneylog.domain.deleteaccount.DeleteAccountRepository
 
-class DeleteTransactionRepositoryImpl(
-    private val transactionDao: TransactionDao,
+class DeleteAccountRepositoryImpl(
+    private val accountDao: AccountDao,
     private val coroutineDispatcherProvider: CoroutineDispatcherProvider
-) : DeleteTransactionRepository {
+) : DeleteAccountRepository {
 
     override suspend fun delete(id: Int) {
         withContext(coroutineDispatcherProvider.provide()) {
-            transactionDao.delete(id)
+            accountDao.delete(id)
         }
     }
 }

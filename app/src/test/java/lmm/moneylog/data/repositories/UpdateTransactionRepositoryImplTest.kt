@@ -4,8 +4,8 @@ import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import lmm.moneylog.TestCoroutineDispatcher
-import lmm.moneylog.data.database.TransactionDao
-import lmm.moneylog.data.database.TransactionEntity
+import lmm.moneylog.data.database.transaction.TransactionDao
+import lmm.moneylog.data.database.transaction.TransactionEntity
 import lmm.moneylog.domain.models.Transaction
 import lmm.moneylog.domain.time.DomainTime
 import org.junit.Test

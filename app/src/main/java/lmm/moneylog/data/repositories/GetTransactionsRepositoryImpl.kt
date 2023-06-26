@@ -1,8 +1,8 @@
 package lmm.moneylog.data.repositories
 
 import kotlinx.coroutines.flow.map
-import lmm.moneylog.data.database.TransactionDao
-import lmm.moneylog.data.database.TransactionEntity
+import lmm.moneylog.data.database.transaction.TransactionDao
+import lmm.moneylog.data.database.transaction.TransactionEntity
 import lmm.moneylog.domain.gettransactions.GetTransactionsRepository
 import lmm.moneylog.domain.models.Transaction
 import lmm.moneylog.domain.time.DomainTime
@@ -26,8 +26,8 @@ class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) 
         }
 
     private fun convertEntityToTransaction(list: List<TransactionEntity>): List<Transaction> {
-        return list.map {
-            with(it) {
+        return list.map { entity ->
+            with(entity) {
                 Transaction(
                     id = id,
                     value = value,

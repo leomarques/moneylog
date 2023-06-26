@@ -2,8 +2,8 @@ package lmm.moneylog.data.repositories
 
 import kotlinx.coroutines.withContext
 import lmm.moneylog.data.CoroutineDispatcherProvider
-import lmm.moneylog.data.database.TransactionDao
-import lmm.moneylog.data.database.TransactionEntity
+import lmm.moneylog.data.database.transaction.TransactionDao
+import lmm.moneylog.data.database.transaction.TransactionEntity
 import lmm.moneylog.domain.edittransaction.UpdateTransactionRepository
 import lmm.moneylog.domain.models.Transaction
 
