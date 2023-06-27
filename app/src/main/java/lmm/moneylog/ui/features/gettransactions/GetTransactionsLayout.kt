@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.data.gettransactions.TransactionModel
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
 import lmm.moneylog.ui.theme.income

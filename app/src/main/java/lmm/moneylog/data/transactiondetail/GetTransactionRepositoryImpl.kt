@@ -1,4 +1,4 @@
-package lmm.moneylog.data.repositories
+package lmm.moneylog.data.transactiondetail
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

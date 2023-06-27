@@ -40,6 +40,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import lmm.moneylog.R
+import lmm.moneylog.data.transactiondetail.TransactionDetailModel
 import lmm.moneylog.domain.time.DomainTime
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
@@ -47,12 +48,12 @@ import lmm.moneylog.ui.theme.SpaceSize
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionDetailLayout(
+    model: TransactionDetailModel,
     onArrowBackClick: () -> Unit,
-    onFabClick: () -> Unit,
-    transactionDetailModel: TransactionDetailModel,
     onDatePicked: (Long) -> Unit,
     onTypeOfValueSelected: (Boolean) -> Unit,
-    onDeleteConfirmClick: (Int) -> Unit = {}
+    onDeleteConfirmClick: (Int) -> Unit = {},
+    onFabClick: () -> Unit
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
@@ -60,7 +61,7 @@ fun TransactionDetailLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(transactionDetailModel.titleResourceId))
+                    Text(text = stringResource(model.titleResourceId))
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
@@ -71,7 +72,7 @@ fun TransactionDetailLayout(
                     }
                 },
                 actions = {
-                    if (transactionDetailModel.isEdit) {
+                    if (model.isEdit) {
                         IconButton(
                             onClick = { showDeleteConfirmDialog.value = true },
                             content = {
@@ -95,11 +96,11 @@ fun TransactionDetailLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 Content(
-                    transactionDetailModel = transactionDetailModel,
+                    transactionDetailModel = model,
                     onDatePicked = onDatePicked,
                     onTypeOfValueSelected = onTypeOfValueSelected,
                     onDeleteConfirm = {
-                        onDeleteConfirmClick(transactionDetailModel.id)
+                        onDeleteConfirmClick(model.id)
                     },
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
                     onDeleteDismiss = {
@@ -255,9 +256,7 @@ fun StateTextField(
 @Composable
 fun Preview() {
     TransactionDetailLayout(
-        onArrowBackClick = {},
-        onFabClick = {},
-        transactionDetailModel = TransactionDetailModel(
+        model = TransactionDetailModel(
             value = mutableStateOf(""),
             isIncome = mutableStateOf(true),
             displayDate = mutableStateOf(""),
@@ -267,6 +266,8 @@ fun Preview() {
             id = 0,
             titleResourceId = R.string.detailtransaction_topbar_title_add
         ),
+        onArrowBackClick = {},
+        onFabClick = {},
         onDatePicked = {},
         onTypeOfValueSelected = {},
         onDeleteConfirmClick = {}

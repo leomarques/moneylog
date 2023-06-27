@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transactiondetail
+package lmm.moneylog.data.transactiondetail
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
@@ -36,6 +36,7 @@ class TransactionDetailViewModel(
             getTransactionInteractor.getTransaction(id).asLiveData().map { transaction ->
                 if (transaction != null) {
                     TransactionDetailModel(
+                        id = id,
                         value = mutableStateOf(
                             if (transaction.value > 0) {
                                 "${transaction.value}"
@@ -44,11 +45,10 @@ class TransactionDetailViewModel(
                             }
                         ),
                         isIncome = mutableStateOf(transaction.value > 0),
+                        date = transaction.date,
                         displayDate = mutableStateOf(convertToDisplayDate(transaction.date)),
                         description = mutableStateOf(transaction.description),
-                        date = transaction.date,
                         isEdit = true,
-                        id = id,
                         titleResourceId = R.string.detailtransaction_topbar_title_edit
                     )
                 } else {
@@ -62,10 +62,14 @@ class TransactionDetailViewModel(
         }
     }
 
-    private fun provideDefaultModel() =
+    fun provideDefaultModel() =
         TransactionDetailModel(
+            id = -1,
             value = mutableStateOf(""),
             isIncome = mutableStateOf(true),
+            date = domainTimeConverter.timeStampToDomainTime(
+                domainTimeConverter.getCurrentTimeStamp()
+            ),
             displayDate = mutableStateOf(
                 convertToDisplayDate(
                     domainTimeConverter.timeStampToDomainTime(
@@ -74,11 +78,7 @@ class TransactionDetailViewModel(
                 )
             ),
             description = mutableStateOf(""),
-            date = domainTimeConverter.timeStampToDomainTime(
-                domainTimeConverter.getCurrentTimeStamp()
-            ),
             isEdit = false,
-            id = -1,
             titleResourceId = R.string.detailtransaction_topbar_title_add
         )
 
@@ -86,29 +86,14 @@ class TransactionDetailViewModel(
         transactionDetailModel.value?.isIncome?.value = isIncome
     }
 
-    fun onDatePicked(timeStamp: Long) {
+    fun onDatePicked(timeStamp: Long) =
         transactionDetailModel.value?.let {
             it.date = domainTimeConverter.timeStampToDomainTime(timeStamp)
             it.displayDate.value = convertToDisplayDate(it.date)
         }
-    }
 
-    private fun convertToDisplayDate(domainTime: DomainTime): String {
-        return "${domainTime.day} ${domainTimeConverter.getMonthName(domainTime.month)}, ${domainTime.year}"
-    }
-
-    private fun validateValue(valueParam: String, isIncome: Boolean): Double {
-        val value = valueParam.toDouble()
-        if (value <= 0.0) {
-            throw java.lang.NumberFormatException("Negative number")
-        }
-
-        return if (isIncome) {
-            value
-        } else {
-            -value
-        }
-    }
+    private fun convertToDisplayDate(domainTime: DomainTime) =
+        "${domainTime.day} ${domainTimeConverter.getMonthName(domainTime.month)}, ${domainTime.year}"
 
     fun onFabClick(
         onSuccess: () -> Unit,
@@ -152,6 +137,19 @@ class TransactionDetailViewModel(
             viewModelScope.launch {
                 addTransactionInteractor.execute(transaction)
             }
+        }
+    }
+
+    private fun validateValue(valueParam: String, isIncome: Boolean): Double {
+        val value = valueParam.toDouble()
+        if (value <= 0.0) {
+            throw java.lang.NumberFormatException("Negative number")
+        }
+
+        return if (isIncome) {
+            value
+        } else {
+            -value
         }
     }
 

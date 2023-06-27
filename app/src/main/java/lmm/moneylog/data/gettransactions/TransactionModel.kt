@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.gettransactions
+package lmm.moneylog.data.gettransactions
 
 data class TransactionModel(
     val value: String,

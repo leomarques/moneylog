@@ -5,6 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.res.stringResource
 import lmm.moneylog.R
+import lmm.moneylog.data.balancecard.BalanceCardModel
+import lmm.moneylog.data.balancecard.BalanceCardViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

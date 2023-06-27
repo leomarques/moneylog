@@ -9,6 +9,10 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
+import lmm.moneylog.data.gettransactions.GetTransactionsViewModel
+import lmm.moneylog.data.gettransactions.getTransactionsAll
+import lmm.moneylog.data.gettransactions.getTransactionsIncome
+import lmm.moneylog.data.gettransactions.getTransactionsOutcome
 import lmm.moneylog.domain.gettransactions.GetTransactionsInteractor
 import lmm.moneylog.domain.models.Transaction
 import lmm.moneylog.domain.time.DomainTime
