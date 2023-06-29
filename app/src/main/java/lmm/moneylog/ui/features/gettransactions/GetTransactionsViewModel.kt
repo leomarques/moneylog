@@ -1,4 +1,4 @@
-package lmm.moneylog.data.gettransactions
+package lmm.moneylog.ui.features.gettransactions
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,6 @@ import androidx.lifecycle.map
 import lmm.moneylog.R
 import lmm.moneylog.domain.gettransactions.GetTransactionsInteractor
 import lmm.moneylog.domain.models.Transaction
-import lmm.moneylog.ui.features.gettransactions.GetTransactionsModel
 import lmm.moneylog.ui.textformatters.formatDate
 import lmm.moneylog.ui.textformatters.formatForRs
 

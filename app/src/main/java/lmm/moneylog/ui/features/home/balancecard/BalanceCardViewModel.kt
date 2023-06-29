@@ -1,4 +1,4 @@
-package lmm.moneylog.data.balancecard
+package lmm.moneylog.ui.features.home.balancecard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

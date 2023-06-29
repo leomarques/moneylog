@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import lmm.moneylog.data.database.transaction.TransactionDao
 import lmm.moneylog.data.database.transaction.TransactionEntity
-import lmm.moneylog.data.transactiondetail.GetTransactionRepositoryImpl
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull

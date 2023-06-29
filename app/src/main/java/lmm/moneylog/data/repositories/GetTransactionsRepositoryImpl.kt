@@ -1,4 +1,4 @@
-package lmm.moneylog.data.gettransactions
+package lmm.moneylog.data.repositories
 
 import kotlinx.coroutines.flow.map
 import lmm.moneylog.data.database.transaction.TransactionDao

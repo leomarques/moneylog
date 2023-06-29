@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import lmm.moneylog.R
-import lmm.moneylog.data.gettransactions.GetTransactionsViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

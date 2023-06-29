@@ -1,21 +1,20 @@
-package lmm.moneylog.data.transactiondetail
+package lmm.moneylog.data.repositories
 
 import kotlinx.coroutines.withContext
 import lmm.moneylog.data.CoroutineDispatcherProvider
 import lmm.moneylog.data.database.transaction.TransactionDao
 import lmm.moneylog.data.database.transaction.TransactionEntity
-import lmm.moneylog.domain.edittransaction.UpdateTransactionRepository
+import lmm.moneylog.domain.addtransaction.AddTransactionRepository
 import lmm.moneylog.domain.models.Transaction
 
-class UpdateTransactionRepositoryImpl(
+class AddTransactionRepositoryImpl(
     private val transactionDao: TransactionDao,
     private val coroutineDispatcherProvider: CoroutineDispatcherProvider
-) :
-    UpdateTransactionRepository {
+) : AddTransactionRepository {
 
-    override suspend fun update(transaction: Transaction) {
+    override suspend fun save(transaction: Transaction) {
         withContext(coroutineDispatcherProvider.provide()) {
-            transactionDao.update(
+            transactionDao.insert(
                 with(transaction) {
                     TransactionEntity(
                         value = value,
@@ -23,9 +22,7 @@ class UpdateTransactionRepositoryImpl(
                         year = date.year,
                         month = date.month,
                         day = date.day
-                    ).also {
-                        it.id = id
-                    }
+                    )
                 }
             )
         }

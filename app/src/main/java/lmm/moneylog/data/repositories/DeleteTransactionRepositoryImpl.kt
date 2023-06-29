@@ -1,4 +1,4 @@
-package lmm.moneylog.data.transactiondetail
+package lmm.moneylog.data.repositories
 
 import kotlinx.coroutines.withContext
 import lmm.moneylog.data.CoroutineDispatcherProvider
