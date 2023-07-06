@@ -92,13 +92,13 @@ class TransactionDetailViewModelTest {
         with(viewModel.transactionDetailModel.getOrAwaitValue()) {
             value.value = "50.0"
             description.value = "description"
+            date = domainTime
 
             viewModel.onFabClick({}) {}
 
             coVerify {
                 addTransactionInteractor.execute(
                     Transaction(
-                        id = -1,
                         value = 50.0,
                         description = "description",
                         date = domainTime

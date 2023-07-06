@@ -12,6 +12,6 @@ data class TransactionDetailModel(
     val description: MutableState<String> = mutableStateOf(""),
     var date: DomainTime = DomainTime(0, 0, 0),
     val isEdit: Boolean = false,
-    val id: Int = 0,
+    val id: Int = -1,
     val titleResourceId: Int = R.string.detailtransaction_topbar_title_add
 )

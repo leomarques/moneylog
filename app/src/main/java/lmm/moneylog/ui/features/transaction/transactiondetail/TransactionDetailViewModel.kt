@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.features.transaction.transactiondetail
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,6 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import lmm.moneylog.domain.time.DomainTimeConverter
-import lmm.moneylog.domain.transaction.Transaction
 import lmm.moneylog.domain.transaction.addtransaction.AddTransactionInteractor
 import lmm.moneylog.domain.transaction.deletetransaction.DeleteTransactionInteractor
 import lmm.moneylog.domain.transaction.edittransaction.UpdateTransactionInteractor
@@ -24,18 +22,15 @@ class TransactionDetailViewModel(
     private val domainTimeConverter: DomainTimeConverter
 ) : ViewModel() {
 
-    val transactionDetailModel: LiveData<TransactionDetailModel> =
-        savedStateHandle.get<Int>("id")?.let { id ->
-            getTransactionInteractor.getTransaction(id).asLiveData().map { transaction ->
-                transaction?.toDetailModel(domainTimeConverter) ?: provideDefaultModel(
-                    domainTimeConverter
-                )
-            }
-        } ?: MutableLiveData(
-            provideDefaultModel(domainTimeConverter)
-        )
+    val transactionDetailModel = savedStateHandle.getIdParam()?.let { id ->
+        getTransactionInteractor.getTransaction(id).asLiveData().map { transaction ->
+            transaction?.toDetailModel(domainTimeConverter) ?: provideDefaultModel()
+        }
+    } ?: MutableLiveData(
+        provideDefaultModel()
+    )
 
-    private fun provideDefaultModel(domainTimeConverter: DomainTimeConverter) =
+    private fun provideDefaultModel() =
         TransactionDetailModel().apply {
             updateTime(domainTimeConverter.getCurrentTimeStamp(), domainTimeConverter)
         }
@@ -59,43 +54,18 @@ class TransactionDetailViewModel(
         onError: () -> Unit
     ) {
         try {
-            if (transactionDetailModel.value?.isEdit == true) {
-                updateTransaction()
-            } else {
-                saveTransaction()
+            transactionDetailModel.value?.let {
+                viewModelScope.launch {
+                    if (it.isEdit) {
+                        updateTransactionInteractor.execute(it.toTransaction())
+                    } else {
+                        addTransactionInteractor.execute(it.toTransaction())
+                    }
+                    onSuccess()
+                }
             }
-            onSuccess()
         } catch (e: NumberFormatException) {
             onError()
-        }
-    }
-
-    private fun updateTransaction() {
-        transactionDetailModel.value?.let {
-            val transaction = Transaction(
-                value = it.value.value.validateValue(it.isIncome.value),
-                date = it.date,
-                description = it.description.value,
-                id = it.id
-            )
-
-            viewModelScope.launch {
-                updateTransactionInteractor.execute(transaction)
-            }
-        }
-    }
-
-    private fun saveTransaction() {
-        transactionDetailModel.value?.let {
-            val transaction = Transaction(
-                value = it.value.value.validateValue(it.isIncome.value),
-                date = it.date,
-                description = it.description.value
-            )
-
-            viewModelScope.launch {
-                addTransactionInteractor.execute(transaction)
-            }
         }
     }
 }

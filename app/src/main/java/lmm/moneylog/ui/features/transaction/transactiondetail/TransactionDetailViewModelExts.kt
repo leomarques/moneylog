@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.features.transaction.transactiondetail
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import lmm.moneylog.R
 import lmm.moneylog.domain.time.DomainTime
 import lmm.moneylog.domain.time.DomainTimeConverter
@@ -47,4 +48,17 @@ fun Transaction.toDetailModel(domainTimeConverter: DomainTimeConverter) =
 fun TransactionDetailModel.updateTime(timeStamp: Long, domainTimeConverter: DomainTimeConverter) {
     date = domainTimeConverter.timeStampToDomainTime(timeStamp)
     displayDate.value = date.convertToDisplayDate(domainTimeConverter)
+}
+
+fun TransactionDetailModel.toTransaction(): Transaction = Transaction(
+    value = value.value.validateValue(isIncome.value),
+    date = date,
+    description = description.value,
+    id = id
+)
+
+fun SavedStateHandle.getIdParam(): Int? {
+    get<Int>("id")?.let { id ->
+        return if (id != -1) id else null
+    } ?: return null
 }
