@@ -27,16 +27,16 @@ class TransactionDetailViewModel(
     val transactionDetailModel: LiveData<TransactionDetailModel> =
         savedStateHandle.get<Int>("id")?.let { id ->
             getTransactionInteractor.getTransaction(id).asLiveData().map { transaction ->
-                transaction?.toDetailModel(domainTimeConverter) ?:
-                    provideDefaultModel(domainTimeConverter)
+                transaction?.toDetailModel(domainTimeConverter) ?: provideDefaultModel(
+                    domainTimeConverter
+                )
             }
         } ?: MutableLiveData(
             provideDefaultModel(domainTimeConverter)
         )
 
     private fun provideDefaultModel(domainTimeConverter: DomainTimeConverter) =
-        TransactionDetailModel(
-        ).apply {
+        TransactionDetailModel().apply {
             updateTime(domainTimeConverter.getCurrentTimeStamp(), domainTimeConverter)
         }
 
