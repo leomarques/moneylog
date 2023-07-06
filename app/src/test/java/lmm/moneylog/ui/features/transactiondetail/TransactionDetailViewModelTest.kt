@@ -14,13 +14,13 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
+import lmm.moneylog.domain.time.DomainTime
+import lmm.moneylog.domain.time.DomainTimeConverter
+import lmm.moneylog.domain.transaction.Transaction
 import lmm.moneylog.domain.transaction.addtransaction.AddTransactionInteractor
 import lmm.moneylog.domain.transaction.deletetransaction.DeleteTransactionInteractor
 import lmm.moneylog.domain.transaction.edittransaction.UpdateTransactionInteractor
 import lmm.moneylog.domain.transaction.gettransaction.GetTransactionInteractor
-import lmm.moneylog.domain.transaction.Transaction
-import lmm.moneylog.domain.time.DomainTime
-import lmm.moneylog.domain.time.DomainTimeConverter
 import lmm.moneylog.getOrAwaitValue
 import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailViewModel
 import org.junit.After
@@ -55,24 +55,26 @@ class TransactionDetailViewModelTest {
         every { domainTimeConverter.getMonthName(any()) } returns ""
 
         coEvery { addTransactionInteractor.execute(any()) } returns Unit
+
+        every { getTransactionInteractor.getTransaction(-1) } returns listOf(
+            null
+        ).asFlow()
+
+        every { getTransactionInteractor.getTransaction(1) } returns listOf(
+            Transaction(
+                id = 1,
+                value = 50.0,
+                description = "description",
+                date = DomainTime(
+                    day = 0,
+                    month = 0,
+                    year = 0
+                )
+            )
+        ).asFlow()
     }
 
     private fun initViewModel(id: Int) {
-        if (id == 1) {
-            every { getTransactionInteractor.getTransaction(any()) } returns listOf(
-                Transaction(
-                    id = 1,
-                    value = 50.0,
-                    description = "description",
-                    date = DomainTime(
-                        day = 0,
-                        month = 0,
-                        year = 0
-                    )
-                )
-            ).asFlow()
-        }
-
         viewModel = TransactionDetailViewModel(
             savedStateHandle = SavedStateHandle().also { it["id"] = id },
             getTransactionInteractor = getTransactionInteractor,
@@ -87,7 +89,7 @@ class TransactionDetailViewModelTest {
     fun `should save income transaction from model`() {
         initViewModel(-1)
 
-        with(viewModel.transactionDetailModel.value!!) {
+        with(viewModel.transactionDetailModel.getOrAwaitValue()) {
             value.value = "50.0"
             description.value = "description"
 
@@ -138,7 +140,7 @@ class TransactionDetailViewModelTest {
     fun `should not save negative number`() {
         initViewModel(-1)
 
-        with(viewModel.transactionDetailModel.value!!) {
+        with(viewModel.transactionDetailModel.getOrAwaitValue()) {
             value.value = "-50.0"
             isIncome.value = true
             description.value = "description"
@@ -167,7 +169,7 @@ class TransactionDetailViewModelTest {
     fun `should not save invalid number`() {
         initViewModel(-1)
 
-        with(viewModel.transactionDetailModel.value!!) {
+        with(viewModel.transactionDetailModel.getOrAwaitValue()) {
             value.value = "1,5"
             isIncome.value = false
             description.value = "description"
@@ -181,7 +183,7 @@ class TransactionDetailViewModelTest {
     fun `should not save invalid number 2`() {
         initViewModel(-1)
 
-        with(viewModel.transactionDetailModel.value!!) {
+        with(viewModel.transactionDetailModel.getOrAwaitValue()) {
             value.value = "5 5"
             isIncome.value = false
             description.value = "description"
