@@ -10,9 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import lmm.moneylog.ui.features.gettransactions.GetTransactionsView
 import lmm.moneylog.ui.features.home.HomeLayout
-import lmm.moneylog.ui.features.transactiondetail.TransactionDetailView
+import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsView
+import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailView
 
 const val homeScreen = "home"
 const val transactionDetailScreen = "transaction_detail"

@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import lmm.moneylog.data.database.account.AccountDao
-import lmm.moneylog.data.database.account.AccountEntity
-import lmm.moneylog.data.database.category.CategoryDao
-import lmm.moneylog.data.database.category.CategoryEntity
-import lmm.moneylog.data.database.transaction.TransactionDao
-import lmm.moneylog.data.database.transaction.TransactionEntity
+import lmm.moneylog.data.account.database.AccountDao
+import lmm.moneylog.data.account.database.AccountEntity
+import lmm.moneylog.data.category.database.CategoryDao
+import lmm.moneylog.data.category.database.CategoryEntity
+import lmm.moneylog.data.transaction.database.TransactionDao
+import lmm.moneylog.data.transaction.database.TransactionEntity
 
 @Database(
     entities = [

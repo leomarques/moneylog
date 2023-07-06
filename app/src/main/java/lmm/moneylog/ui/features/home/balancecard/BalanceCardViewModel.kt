@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
-import lmm.moneylog.domain.getbalance.GetBalanceInteractor
+import lmm.moneylog.domain.balance.getbalance.GetBalanceInteractor
 import lmm.moneylog.ui.textformatters.formatForRs
 
 class BalanceCardViewModel(interactor: GetBalanceInteractor) : ViewModel() {

@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import lmm.moneylog.domain.getbalance.BalanceModel
-import lmm.moneylog.domain.getbalance.GetBalanceInteractor
+import lmm.moneylog.domain.balance.getbalance.BalanceModel
+import lmm.moneylog.domain.balance.getbalance.GetBalanceInteractor
 import lmm.moneylog.getOrAwaitValue
 import org.junit.After
 import org.junit.Rule
