@@ -6,8 +6,8 @@ import kotlinx.coroutines.runBlocking
 import lmm.moneylog.data.coroutine.TestCoroutineDispatcher
 import lmm.moneylog.data.transaction.database.TransactionDao
 import lmm.moneylog.data.transaction.database.TransactionEntity
-import lmm.moneylog.domain.transaction.Transaction
 import lmm.moneylog.domain.time.DomainTime
+import lmm.moneylog.domain.transaction.Transaction
 import org.junit.Test
 
 class AddTransactionRepositoryImplTest {
