@@ -1,6 +1,6 @@
 package lmm.moneylog.ui.features.home.balancecard
 
-data class BalanceCardModel(
+data class BalanceCardUIState(
     val total: String,
     val credit: String,
     val debt: String
