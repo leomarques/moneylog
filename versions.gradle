@@ -1,9 +1,9 @@
 ext {
     versions = [
-            compileSdk                    : 33,
+            compileSdk                    : 34,
             minSdk                        : 26,
-            targetSdk                     : 33,
-            versionCode                   : 3,
+            targetSdk                     : 34,
+            versionCode                   : 1,
             versionName                   : "0.2.0a",
             jvmTarget                     : '17',
             javaVersion                   : JavaVersion.VERSION_17,
