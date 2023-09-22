@@ -1,8 +1,8 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-    id "org.jlleitschuh.gradle.ktlint"
+    alias libs.plugins.android.application
+    alias libs.plugins.jetbrains.kotlin.android
+    alias libs.plugins.google.devtools.ksp
+    alias libs.plugins.jlleitschuh.gradle.ktlint
 }
 
 apply from: '../dependencies.gradle'
@@ -49,28 +49,28 @@ android {
 dependencies {
     implementation project(':domain')
 
-    implementation platform(libraries.compose_bom)
-    androidTestImplementation platform(libraries.compose_bom)
+    implementation platform(libs.compose.bom)
+    androidTestImplementation platform(libs.compose.bom)
 
-    implementation libraries.ui_tooling_preview
-    debugImplementation libraries.ui_tooling
+    implementation libs.ui.tooling.preview
+    debugImplementation libs.ui.tooling
 
-    implementation libraries.material3
+    implementation libs.material3
 
-    implementation libraries.runtime_livedata
-    implementation libraries.lifecycle_livedata_ktx
+    implementation libs.runtime.livedata
+    implementation libs.lifecycle.livedata.ktx
 
-    implementation libraries.navigation_compose
+    implementation libs.navigation.compose
 
-    implementation libraries.room_runtime
-    implementation libraries.room_ktx
-    kapt libraries.room_compiler
+    implementation libs.room.runtime
+    implementation libs.room.ktx
+    ksp libs.room.compiler
 
-    implementation libraries.koin_android
-    implementation libraries.koin_androidx_compose
-    testImplementation libraries.koin_test
+    implementation libs.koin.android
+    implementation libs.koin.androidx.compose
+    testImplementation libs.koin.test
 
-    testImplementation libraries.mockk
-    testImplementation libraries.kotlinx_coroutines_test
-    testImplementation libraries.core_testing
+    testImplementation libs.mockk
+    testImplementation libs.kotlinx.coroutines.test
+    testImplementation libs.core.testing
 }

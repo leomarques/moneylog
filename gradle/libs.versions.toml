@@ -1,0 +1,47 @@
+[versions]
+composeBom                     = "2023.05.00"
+material3                      = "1.1.0-rc01"
+lifecycleLivedataKtx           = "2.6.1"
+navigationCompose              = "2.5.3"
+room                           = "2.5.1"
+koinAndroid                    = "3.4.0"
+koinAndroidxCompose            = "3.4.4"
+koinTest                       = "3.4.0"
+kotlinxCoroutinesCore          = "1.6.4"
+junit                          = "4.13.2"
+mockk                          = "1.13.5"
+kotlinxCoroutinesTest          = "1.6.4"
+coreTesting                    = "2.2.0"
+
+androidApplication      = "8.1.1"
+jetbrainsKotlinAndroid  = "1.8.21"
+androidLibrary          = "8.1.1"
+googleDevtoolsKsp       = "1.8.21-1.0.11"
+jlleitschuhGradleKtlint = "11.0.0"
+
+[libraries]
+compose-bom 			= { group = "androidx.compose", 			name = "compose-bom", 				version.ref = "composeBom" }
+ui-tooling-preview 		= { group = "androidx.compose.ui", 			name = "ui-tooling-preview" }
+ui-tooling  			= { group = "androidx.compose.ui", 			name = "ui-tooling" }
+material3   			= { group = "androidx.compose.material3", 	name = "material3", 				version.ref = "material3" }
+runtime-livedata   		= { group = "androidx.compose.runtime", 	name = "runtime-livedata" }
+lifecycle-livedata-ktx  = { group = "androidx.lifecycle", 			name = "lifecycle-livedata-ktx", 	version.ref = "lifecycleLivedataKtx" }
+navigation-compose 		= { group = "androidx.navigation", 			name = "navigation-compose", 		version.ref = "navigationCompose" }
+room-runtime       		= { group = "androidx.room", 				name = "room-runtime", 				version.ref = "room" }
+room-ktx    			= { group = "androidx.room", 				name = "room-ktx", 					version.ref = "room" }
+room-compiler      		= { group = "androidx.room", 				name = "room-compiler", 			version.ref = "room" }
+koin-android       		= { group = "io.insert-koin", 				name = "koin-android", 				version.ref = "koinAndroid" }
+koin-androidx-compose   = { group = "io.insert-koin", 				name = "koin-androidx-compose", 	version.ref = "koinAndroidxCompose" }
+koin-test   			= { group = "io.insert-koin", 				name = "koin-test", 				version.ref = "koinTest" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", 		name = "kotlinx-coroutines-core", 	version.ref = "kotlinxCoroutinesCore" }
+junit       			= { group = "junit", 						name = "junit", 					version.ref = "junit" }
+mockk       			= { group = "io.mockk", 					name = "mockk", 					version.ref = "mockk" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", 		name = "kotlinx-coroutines-test", 	version.ref = "kotlinxCoroutinesTest" }
+core-testing       		= { group = "androidx.arch.core", 			name = "core-testing", 				version.ref = "coreTesting" }
+			
+[plugins]
+android-application 		= { id = "com.android.application", 		version.ref = "androidApplication" }
+jetbrains-kotlin-android 	= { id = "org.jetbrains.kotlin.android", 	version.ref = "jetbrainsKotlinAndroid" }
+android-library 			= { id = "com.android.library", 			version.ref = "androidLibrary" }
+google-devtools-ksp 		= { id = "com.google.devtools.ksp", 		version.ref = "googleDevtoolsKsp" }
+jlleitschuh-gradle-ktlint 	= { id = "org.jlleitschuh.gradle.ktlint", 	version.ref = "jlleitschuhGradleKtlint" }
