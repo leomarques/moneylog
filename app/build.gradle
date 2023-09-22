@@ -5,7 +5,7 @@ plugins {
     alias libs.plugins.jlleitschuh.gradle.ktlint
 }
 
-apply from: '../dependencies.gradle'
+apply from: '../versions.gradle'
 
 android {
     namespace 'lmm.moneylog'
