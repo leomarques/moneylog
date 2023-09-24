@@ -77,10 +77,10 @@ class TransactionDetailViewModelTest {
     private fun initViewModel(id: Int) {
         viewModel = TransactionDetailViewModel(
             savedStateHandle = SavedStateHandle().also { it["id"] = id },
-            getTransactionInteractor = getTransactionInteractor,
-            addTransactionInteractor = addTransactionInteractor,
-            deleteTransactionInteractor = deleteTransactionInteractor,
-            updateTransactionInteractor = updateTransactionInteractor,
+            getTransactionRepository = getTransactionInteractor,
+            addTransactionRepository = addTransactionInteractor,
+            deleteTransactionRepository = deleteTransactionInteractor,
+            updateTransactionRepository = updateTransactionInteractor,
             domainTimeConverter = domainTimeConverter
         )
     }

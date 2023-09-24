@@ -14,22 +14,23 @@ const val getTransactionsIncome = "income"
 const val getTransactionsOutcome = "outcome"
 const val getTransactionsAll = "all"
 
-class GetTransactionsViewModel(private val interactor: GetTransactionsRepository) : ViewModel() {
+class GetTransactionsViewModel(private val getTransactionsRepository: GetTransactionsRepository) :
+    ViewModel() {
 
     fun getTransactionsModel(typeOfValue: String?): LiveData<GetTransactionsModel> =
         when (typeOfValue) {
             getTransactionsIncome -> {
-                val transactions = interactor.getIncomeTransactions().asLiveData()
+                val transactions = getTransactionsRepository.getIncomeTransactions().asLiveData()
                 convertToModel(transactions, R.string.gettransactions_topbar_income)
             }
 
             getTransactionsOutcome -> {
-                val transactions = interactor.getOutcomeTransactions().asLiveData()
+                val transactions = getTransactionsRepository.getOutcomeTransactions().asLiveData()
                 convertToModel(transactions, R.string.gettransactions_topbar_outcome)
             }
 
             else -> {
-                val transactions = interactor.getAllTransactions().asLiveData()
+                val transactions = getTransactionsRepository.getAllTransactions().asLiveData()
                 convertToModel(transactions, R.string.gettransactions_topbar_all)
             }
         }

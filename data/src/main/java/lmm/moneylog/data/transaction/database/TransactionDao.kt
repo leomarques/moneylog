@@ -22,14 +22,14 @@ interface TransactionDao {
     fun selectOutcomeTransactions(): Flow<List<TransactionEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(transactionEntity: TransactionEntity)
+    suspend fun insert(transactionEntity: TransactionEntity)
 
     @Query("SELECT * FROM `transaction` where id=:id")
     fun selectTransaction(id: Int): Flow<TransactionEntity?>
 
     @Update
-    fun update(transactionEntity: TransactionEntity)
+    suspend fun update(transactionEntity: TransactionEntity)
 
     @Query("DELETE FROM `transaction` WHERE id = :id")
-    fun delete(id: Int)
+    suspend fun delete(id: Int)
 }

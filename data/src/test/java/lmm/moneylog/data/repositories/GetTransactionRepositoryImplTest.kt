@@ -14,8 +14,8 @@ import org.junit.Test
 
 class GetTransactionRepositoryImplTest {
 
-    val dao: TransactionDao = mockk()
-    val repository = GetTransactionRepositoryImpl(dao)
+    private val dao: TransactionDao = mockk()
+    private val repository = GetTransactionRepositoryImpl(dao)
 
     @Test
     fun `should get transactions`() {

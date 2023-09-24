@@ -3,7 +3,6 @@ package lmm.moneylog.data.repositories
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.runBlocking
-import lmm.moneylog.data.coroutine.TestCoroutineDispatcher
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.database.TransactionDao
 import lmm.moneylog.data.transaction.database.TransactionEntity
@@ -18,8 +17,7 @@ class AddTransactionRepositoryImplTest {
         val transactionDaoMock: TransactionDao = mockk(relaxed = true)
         val addTransactionRepositoryImpl =
             AddTransactionRepositoryImpl(
-                transactionDao = transactionDaoMock,
-                coroutineDispatcherProvider = TestCoroutineDispatcher()
+                transactionDao = transactionDaoMock
             )
 
         val transaction = Transaction(
@@ -34,17 +32,18 @@ class AddTransactionRepositoryImplTest {
 
         runBlocking {
             addTransactionRepositoryImpl.save(transaction)
-
             verify {
-                transactionDaoMock.insert(
-                    TransactionEntity(
-                        value = 0.5,
-                        description = "desc",
-                        year = 2003,
-                        month = 2,
-                        day = 1
+                runBlocking {
+                    transactionDaoMock.insert(
+                        TransactionEntity(
+                            value = 0.5,
+                            description = "desc",
+                            year = 2003,
+                            month = 2,
+                            day = 1
+                        )
                     )
-                )
+                }
             }
         }
     }

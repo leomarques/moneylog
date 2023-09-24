@@ -13,14 +13,14 @@ interface AccountDao {
     fun selectAccounts(): Flow<List<AccountEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(accountEntity: AccountEntity)
+    suspend fun insert(accountEntity: AccountEntity)
 
     @Query("SELECT * FROM `account` where id=:id")
-    fun selectAccount(id: Int): Flow<AccountEntity?>
+    suspend fun selectAccount(id: Int): AccountEntity?
 
     @Update
-    fun update(accountEntity: AccountEntity)
+    suspend fun update(accountEntity: AccountEntity)
 
     @Query("DELETE FROM `account` WHERE id = :id")
-    fun delete(id: Int)
+    suspend fun delete(id: Int)
 }

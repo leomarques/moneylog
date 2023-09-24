@@ -15,15 +15,15 @@ import lmm.moneylog.data.transaction.time.DomainTimeConverter
 
 class TransactionDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    getTransactionInteractor: GetTransactionRepository,
-    private val addTransactionInteractor: AddTransactionRepository,
-    private val updateTransactionInteractor: UpdateTransactionRepository,
-    private val deleteTransactionInteractor: DeleteTransactionRepository,
+    getTransactionRepository: GetTransactionRepository,
+    private val addTransactionRepository: AddTransactionRepository,
+    private val updateTransactionRepository: UpdateTransactionRepository,
+    private val deleteTransactionRepository: DeleteTransactionRepository,
     private val domainTimeConverter: DomainTimeConverter
 ) : ViewModel() {
 
     val transactionDetailModel = savedStateHandle.getIdParam()?.let { id ->
-        getTransactionInteractor.getTransactionById(id).asLiveData().map { transaction ->
+        getTransactionRepository.getTransactionById(id).asLiveData().map { transaction ->
             transaction?.toDetailModel(domainTimeConverter) ?: provideDefaultModel()
         }
     } ?: MutableLiveData(
@@ -37,7 +37,7 @@ class TransactionDetailViewModel(
 
     fun deleteTransaction(id: Int) {
         viewModelScope.launch {
-            deleteTransactionInteractor.delete(id)
+            deleteTransactionRepository.delete(id)
         }
     }
 
@@ -57,9 +57,9 @@ class TransactionDetailViewModel(
             transactionDetailModel.value?.let {
                 viewModelScope.launch {
                     if (it.isEdit) {
-                        updateTransactionInteractor.update(it.toTransaction())
+                        updateTransactionRepository.update(it.toTransaction())
                     } else {
-                        addTransactionInteractor.save(it.toTransaction())
+                        addTransactionRepository.save(it.toTransaction())
                     }
                     onSuccess()
                 }
