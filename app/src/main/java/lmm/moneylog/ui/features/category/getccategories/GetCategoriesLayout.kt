@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.domain.category.Category
 import lmm.moneylog.ui.components.MyFab
@@ -122,4 +123,33 @@ fun CategoryItem(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun Preview() {
+    GetCategoriesLayout(
+        onArrowBackClick = { },
+        onFabClick = { },
+        model = GetCategoriesModel(
+            listOf(
+                Category(
+                    id = 0,
+                    name = "Alimentação",
+                    color = 0
+                ),
+                Category(
+                    id = 0,
+                    name = "Moradia",
+                    color = 0
+                ),
+                Category(
+                    id = 0,
+                    name = "Transporte",
+                    color = 0
+                )
+            )
+        ),
+        onItemClick = {}
+    )
 }

@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.data.account.Account
 import lmm.moneylog.ui.components.MyFab
@@ -122,4 +123,33 @@ fun AccountItem(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun Preview() {
+    GetAccountsLayout(
+        onArrowBackClick = { },
+        onFabClick = { },
+        model = GetAccountsModel(
+            listOf(
+                Account(
+                    id = 0,
+                    name = "Itaú",
+                    color = 0
+                ),
+                Account(
+                    id = 0,
+                    name = "Nubank",
+                    color = 0
+                ),
+                Account(
+                    id = 0,
+                    name = "VR",
+                    color = 0
+                )
+            )
+        ),
+        onItemClick = {}
+    )
 }
