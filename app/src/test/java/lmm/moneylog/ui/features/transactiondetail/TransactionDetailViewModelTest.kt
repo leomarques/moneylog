@@ -10,7 +10,6 @@ import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -21,7 +20,6 @@ import lmm.moneylog.data.transaction.repositories.GetTransactionRepository
 import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
 import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.data.transaction.time.DomainTimeConverter
-import lmm.moneylog.getOrAwaitValue
 import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailViewModel
 import org.junit.After
 import org.junit.Before
@@ -56,11 +54,9 @@ class TransactionDetailViewModelTest {
 
         coEvery { addTransactionInteractor.save(any()) } returns Unit
 
-        every { getTransactionInteractor.getTransactionById(-1) } returns listOf(
-            null
-        ).asFlow()
+        coEvery { getTransactionInteractor.getTransactionById(-1) } returns null
 
-        every { getTransactionInteractor.getTransactionById(1) } returns listOf(
+        coEvery { getTransactionInteractor.getTransactionById(1) } returns
             Transaction(
                 id = 1,
                 value = 50.0,
@@ -71,7 +67,6 @@ class TransactionDetailViewModelTest {
                     year = 0
                 )
             )
-        ).asFlow()
     }
 
     private fun initViewModel(id: Int) {
@@ -89,7 +84,7 @@ class TransactionDetailViewModelTest {
     fun `should save income transaction from model`() {
         initViewModel(-1)
 
-        with(viewModel.transactionDetailModel.getOrAwaitValue()) {
+        with(viewModel.model) {
             value.value = "50.0"
             description.value = "description"
             date = domainTime
@@ -112,7 +107,7 @@ class TransactionDetailViewModelTest {
     fun `should update income transaction from model`() {
         initViewModel(1)
 
-        val model = viewModel.transactionDetailModel.getOrAwaitValue()
+        val model = viewModel.model
         with(model) {
             value.value = "50.0"
             description.value = "description"
@@ -140,7 +135,7 @@ class TransactionDetailViewModelTest {
     fun `should not save negative number`() {
         initViewModel(-1)
 
-        with(viewModel.transactionDetailModel.getOrAwaitValue()) {
+        with(viewModel.model) {
             value.value = "-50.0"
             isIncome.value = true
             description.value = "description"
@@ -154,7 +149,7 @@ class TransactionDetailViewModelTest {
     fun `should not edit negative number`() {
         initViewModel(1)
 
-        val model = viewModel.transactionDetailModel.getOrAwaitValue()
+        val model = viewModel.model
         with(model) {
             value.value = "-50.0"
             isIncome.value = true
@@ -169,7 +164,7 @@ class TransactionDetailViewModelTest {
     fun `should not save invalid number`() {
         initViewModel(-1)
 
-        with(viewModel.transactionDetailModel.getOrAwaitValue()) {
+        with(viewModel.model) {
             value.value = "1,5"
             isIncome.value = false
             description.value = "description"
@@ -183,7 +178,7 @@ class TransactionDetailViewModelTest {
     fun `should not save invalid number 2`() {
         initViewModel(-1)
 
-        with(viewModel.transactionDetailModel.getOrAwaitValue()) {
+        with(viewModel.model) {
             value.value = "5 5"
             isIncome.value = false
             description.value = "description"

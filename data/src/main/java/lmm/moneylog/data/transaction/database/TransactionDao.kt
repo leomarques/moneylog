@@ -25,7 +25,7 @@ interface TransactionDao {
     suspend fun insert(transactionEntity: TransactionEntity)
 
     @Query("SELECT * FROM `transaction` where id=:id")
-    fun selectTransaction(id: Int): Flow<TransactionEntity?>
+    suspend fun selectTransaction(id: Int): TransactionEntity?
 
     @Update
     suspend fun update(transactionEntity: TransactionEntity)

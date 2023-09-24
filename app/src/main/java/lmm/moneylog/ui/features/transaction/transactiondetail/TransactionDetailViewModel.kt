@@ -1,10 +1,7 @@
 package lmm.moneylog.ui.features.transaction.transactiondetail
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
@@ -22,13 +19,17 @@ class TransactionDetailViewModel(
     private val domainTimeConverter: DomainTimeConverter
 ) : ViewModel() {
 
-    val transactionDetailModel = savedStateHandle.getIdParam()?.let { id ->
-        getTransactionRepository.getTransactionById(id).asLiveData().map { transaction ->
-            transaction?.toDetailModel(domainTimeConverter) ?: provideDefaultModel()
+    var model = provideDefaultModel()
+
+    init {
+        viewModelScope.launch {
+            savedStateHandle.getIdParam()?.let { id ->
+                getTransactionRepository.getTransactionById(id)?.let { transaction ->
+                    model = transaction.toDetailModel(domainTimeConverter)
+                }
+            }
         }
-    } ?: MutableLiveData(
-        provideDefaultModel()
-    )
+    }
 
     private fun provideDefaultModel() =
         TransactionDetailModel().apply {
@@ -42,11 +43,11 @@ class TransactionDetailViewModel(
     }
 
     fun onTypeOfValueSelected(isIncome: Boolean) {
-        transactionDetailModel.value?.isIncome?.value = isIncome
+        model.isIncome.value = isIncome
     }
 
     fun onDatePicked(timeStamp: Long) {
-        transactionDetailModel.value?.updateTime(timeStamp, domainTimeConverter)
+        model.updateTime(timeStamp, domainTimeConverter)
     }
 
     fun onFabClick(
@@ -54,15 +55,13 @@ class TransactionDetailViewModel(
         onError: () -> Unit
     ) {
         try {
-            transactionDetailModel.value?.let {
-                viewModelScope.launch {
-                    if (it.isEdit) {
-                        updateTransactionRepository.update(it.toTransaction())
-                    } else {
-                        addTransactionRepository.save(it.toTransaction())
-                    }
-                    onSuccess()
+            viewModelScope.launch {
+                if (model.isEdit) {
+                    updateTransactionRepository.update(model.toTransaction())
+                } else {
+                    addTransactionRepository.save(model.toTransaction())
                 }
+                onSuccess()
             }
         } catch (e: NumberFormatException) {
             onError()

@@ -3,8 +3,6 @@ package lmm.moneylog.ui.features.transaction.transactiondetail
 import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import lmm.moneylog.R
@@ -19,8 +17,6 @@ fun TransactionDetailView(
     val current = LocalContext.current
     val errorText = stringResource(R.string.detailtransaction_invalidvalue)
 
-    val model by viewModel.transactionDetailModel.observeAsState(TransactionDetailModel())
-
     TransactionDetailLayout(
         onArrowBackClick = onArrowBackClick,
         onFabClick = {
@@ -29,7 +25,7 @@ fun TransactionDetailView(
                 onError = { Toast.makeText(current, errorText, Toast.LENGTH_LONG).show() }
             )
         },
-        transactionDetailModel = model,
+        transactionDetailModel = viewModel.model,
         onDatePicked = { datePicked ->
             viewModel.onDatePicked(datePicked)
         },
