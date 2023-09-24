@@ -7,23 +7,23 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import lmm.moneylog.domain.time.DomainTimeConverter
-import lmm.moneylog.domain.transaction.addtransaction.AddTransactionInteractor
-import lmm.moneylog.domain.transaction.deletetransaction.DeleteTransactionInteractor
-import lmm.moneylog.domain.transaction.edittransaction.UpdateTransactionInteractor
-import lmm.moneylog.domain.transaction.gettransaction.GetTransactionInteractor
+import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
+import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
+import lmm.moneylog.data.transaction.repositories.GetTransactionRepository
+import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
+import lmm.moneylog.data.transaction.time.DomainTimeConverter
 
 class TransactionDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    getTransactionInteractor: GetTransactionInteractor,
-    private val addTransactionInteractor: AddTransactionInteractor,
-    private val updateTransactionInteractor: UpdateTransactionInteractor,
-    private val deleteTransactionInteractor: DeleteTransactionInteractor,
+    getTransactionInteractor: GetTransactionRepository,
+    private val addTransactionInteractor: AddTransactionRepository,
+    private val updateTransactionInteractor: UpdateTransactionRepository,
+    private val deleteTransactionInteractor: DeleteTransactionRepository,
     private val domainTimeConverter: DomainTimeConverter
 ) : ViewModel() {
 
     val transactionDetailModel = savedStateHandle.getIdParam()?.let { id ->
-        getTransactionInteractor.getTransaction(id).asLiveData().map { transaction ->
+        getTransactionInteractor.getTransactionById(id).asLiveData().map { transaction ->
             transaction?.toDetailModel(domainTimeConverter) ?: provideDefaultModel()
         }
     } ?: MutableLiveData(
@@ -37,7 +37,7 @@ class TransactionDetailViewModel(
 
     fun deleteTransaction(id: Int) {
         viewModelScope.launch {
-            deleteTransactionInteractor.execute(id)
+            deleteTransactionInteractor.delete(id)
         }
     }
 
@@ -57,9 +57,9 @@ class TransactionDetailViewModel(
             transactionDetailModel.value?.let {
                 viewModelScope.launch {
                     if (it.isEdit) {
-                        updateTransactionInteractor.execute(it.toTransaction())
+                        updateTransactionInteractor.update(it.toTransaction())
                     } else {
-                        addTransactionInteractor.execute(it.toTransaction())
+                        addTransactionInteractor.save(it.toTransaction())
                     }
                     onSuccess()
                 }

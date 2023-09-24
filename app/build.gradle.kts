@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "lmm.moneylog"
-        minSdk = 26
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "0.2.0a"
@@ -52,7 +52,7 @@ android {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":domain")))
+    implementation(project(mapOf("path" to ":data")))
 
     implementation(platform(libs.compose.bom))
 
@@ -72,7 +72,6 @@ dependencies {
 
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
-    testImplementation(libs.koin.test)
 
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)

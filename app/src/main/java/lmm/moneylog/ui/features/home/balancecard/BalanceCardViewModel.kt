@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import lmm.moneylog.domain.balance.getbalance.GetBalanceInteractor
+import lmm.moneylog.data.balance.GetBalanceInteractor
 import lmm.moneylog.ui.textformatters.formatForRs
 
 class BalanceCardViewModel(interactor: GetBalanceInteractor) : ViewModel() {

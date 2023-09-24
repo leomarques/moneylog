@@ -3,15 +3,16 @@ package lmm.moneylog.ui.features.gettransactions
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.every
 import io.mockk.mockk
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import lmm.moneylog.domain.time.DomainTime
-import lmm.moneylog.domain.transaction.Transaction
-import lmm.moneylog.domain.transaction.gettransactions.GetTransactionsInteractor
+import lmm.moneylog.data.transaction.Transaction
+import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
+import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.getOrAwaitValue
 import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsViewModel
 import lmm.moneylog.ui.features.transaction.gettransactions.getTransactionsAll
@@ -21,7 +22,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import kotlin.test.assertEquals
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class GetTransactionsViewModelTest {
@@ -30,7 +30,7 @@ class GetTransactionsViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     private lateinit var viewModel: GetTransactionsViewModel
-    private val interactor: GetTransactionsInteractor = mockk()
+    private val interactor: GetTransactionsRepository = mockk()
 
     @Before
     fun setUp() {

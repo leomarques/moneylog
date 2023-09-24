@@ -3,7 +3,7 @@ package lmm.moneylog.ui.features.transaction.transactiondetail
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import lmm.moneylog.R
-import lmm.moneylog.domain.time.DomainTime
+import lmm.moneylog.data.transaction.time.DomainTime
 
 data class TransactionDetailModel(
     val value: MutableState<String> = mutableStateOf(""),

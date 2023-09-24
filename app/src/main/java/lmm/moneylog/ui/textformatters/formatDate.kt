@@ -1,5 +1,5 @@
 package lmm.moneylog.ui.textformatters
 
-import lmm.moneylog.domain.time.DomainTime
+import lmm.moneylog.data.transaction.time.DomainTime
 
 fun DomainTime.formatDate() = "$day/$month/$year"

@@ -14,13 +14,13 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import lmm.moneylog.domain.time.DomainTime
-import lmm.moneylog.domain.time.DomainTimeConverter
-import lmm.moneylog.domain.transaction.Transaction
-import lmm.moneylog.domain.transaction.addtransaction.AddTransactionInteractor
-import lmm.moneylog.domain.transaction.deletetransaction.DeleteTransactionInteractor
-import lmm.moneylog.domain.transaction.edittransaction.UpdateTransactionInteractor
-import lmm.moneylog.domain.transaction.gettransaction.GetTransactionInteractor
+import lmm.moneylog.data.transaction.Transaction
+import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
+import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
+import lmm.moneylog.data.transaction.repositories.GetTransactionRepository
+import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
+import lmm.moneylog.data.transaction.time.DomainTime
+import lmm.moneylog.data.transaction.time.DomainTimeConverter
 import lmm.moneylog.getOrAwaitValue
 import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailViewModel
 import org.junit.After
@@ -35,10 +35,10 @@ class TransactionDetailViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     private lateinit var viewModel: TransactionDetailViewModel
-    private val getTransactionInteractor: GetTransactionInteractor = mockk(relaxed = true)
-    private val addTransactionInteractor: AddTransactionInteractor = mockk()
-    private val deleteTransactionInteractor: DeleteTransactionInteractor = mockk()
-    private val updateTransactionInteractor: UpdateTransactionInteractor = mockk(relaxed = true)
+    private val getTransactionInteractor: GetTransactionRepository = mockk(relaxed = true)
+    private val addTransactionInteractor: AddTransactionRepository = mockk()
+    private val deleteTransactionInteractor: DeleteTransactionRepository = mockk()
+    private val updateTransactionInteractor: UpdateTransactionRepository = mockk(relaxed = true)
     private val domainTimeConverter: DomainTimeConverter = mockk()
     private val domainTime = DomainTime(
         6,
@@ -54,13 +54,13 @@ class TransactionDetailViewModelTest {
         every { domainTimeConverter.getCurrentTimeStamp() } returns 0L
         every { domainTimeConverter.getMonthName(any()) } returns ""
 
-        coEvery { addTransactionInteractor.execute(any()) } returns Unit
+        coEvery { addTransactionInteractor.save(any()) } returns Unit
 
-        every { getTransactionInteractor.getTransaction(-1) } returns listOf(
+        every { getTransactionInteractor.getTransactionById(-1) } returns listOf(
             null
         ).asFlow()
 
-        every { getTransactionInteractor.getTransaction(1) } returns listOf(
+        every { getTransactionInteractor.getTransactionById(1) } returns listOf(
             Transaction(
                 id = 1,
                 value = 50.0,
@@ -97,7 +97,7 @@ class TransactionDetailViewModelTest {
             viewModel.onFabClick({}) {}
 
             coVerify {
-                addTransactionInteractor.execute(
+                addTransactionInteractor.save(
                     Transaction(
                         value = 50.0,
                         description = "description",
@@ -124,7 +124,7 @@ class TransactionDetailViewModelTest {
             )
 
             coVerify {
-                updateTransactionInteractor.execute(
+                updateTransactionInteractor.update(
                     Transaction(
                         id = 1,
                         value = 50.0,

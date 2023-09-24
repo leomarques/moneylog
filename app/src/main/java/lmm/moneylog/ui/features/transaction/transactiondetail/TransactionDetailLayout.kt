@@ -40,7 +40,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import lmm.moneylog.R
-import lmm.moneylog.domain.time.DomainTime
+import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
 

@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import lmm.moneylog.R
-import lmm.moneylog.domain.transaction.Transaction
-import lmm.moneylog.domain.transaction.gettransactions.GetTransactionsInteractor
+import lmm.moneylog.data.transaction.Transaction
+import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.ui.textformatters.formatDate
 import lmm.moneylog.ui.textformatters.formatForRs
 
@@ -14,7 +14,7 @@ const val getTransactionsIncome = "income"
 const val getTransactionsOutcome = "outcome"
 const val getTransactionsAll = "all"
 
-class GetTransactionsViewModel(private val interactor: GetTransactionsInteractor) : ViewModel() {
+class GetTransactionsViewModel(private val interactor: GetTransactionsRepository) : ViewModel() {
 
     fun getTransactionsModel(typeOfValue: String?): LiveData<GetTransactionsModel> =
         when (typeOfValue) {

@@ -3,9 +3,9 @@ package lmm.moneylog.ui.features.transaction.transactiondetail
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import lmm.moneylog.R
-import lmm.moneylog.domain.time.DomainTime
-import lmm.moneylog.domain.time.DomainTimeConverter
-import lmm.moneylog.domain.transaction.Transaction
+import lmm.moneylog.data.transaction.Transaction
+import lmm.moneylog.data.transaction.time.DomainTime
+import lmm.moneylog.data.transaction.time.DomainTimeConverter
 
 fun DomainTime.convertToDisplayDate(domainTimeConverter: DomainTimeConverter) =
     "$day ${domainTimeConverter.getMonthName(month)}, $year"
