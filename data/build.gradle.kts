@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.devtools.ksp)
+    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jlleitschuh.gradle.ktlint)
 }
 
@@ -35,13 +35,13 @@ android {
 }
 
 dependencies {
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    ksp(libs.room.compiler)
-
     implementation(libs.koin.android)
 
-    testImplementation(libs.mockk)
-    testImplementation(libs.kotlinx.coroutines.test)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
+    implementation(libs.room.runtime)
+
     testImplementation(libs.core.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
 }
