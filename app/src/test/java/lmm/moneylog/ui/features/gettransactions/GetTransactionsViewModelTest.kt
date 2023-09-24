@@ -13,11 +13,7 @@ import kotlinx.coroutines.test.setMain
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.time.DomainTime
-import lmm.moneylog.getOrAwaitValue
 import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsViewModel
-import lmm.moneylog.ui.features.transaction.gettransactions.getTransactionsAll
-import lmm.moneylog.ui.features.transaction.gettransactions.getTransactionsIncome
-import lmm.moneylog.ui.features.transaction.gettransactions.getTransactionsOutcome
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -30,7 +26,7 @@ class GetTransactionsViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     private lateinit var viewModel: GetTransactionsViewModel
-    private val interactor: GetTransactionsRepository = mockk()
+    private val repository: GetTransactionsRepository = mockk()
 
     @Before
     fun setUp() {
@@ -48,18 +44,15 @@ class GetTransactionsViewModelTest {
         )
         val listAsFlow = listOf(listOf(transaction)).asFlow()
 
-        every { interactor.getIncomeTransactions() } returns listAsFlow
-        every { interactor.getOutcomeTransactions() } returns listAsFlow
-        every { interactor.getAllTransactions() } returns listAsFlow
-
-        viewModel = GetTransactionsViewModel(interactor)
+        every { repository.getIncomeTransactions() } returns listAsFlow
+        every { repository.getOutcomeTransactions() } returns listAsFlow
+        every { repository.getAllTransactions() } returns listAsFlow
     }
 
     @Test
     fun `should get income transactions`() {
-        val result = viewModel.getTransactionsModel(getTransactionsIncome)
-
-        val transactions = result.getOrAwaitValue().transactions
+        viewModel = GetTransactionsViewModel("income", repository)
+        val transactions = viewModel.uiState.value.transactions
         assert(transactions.size == 1)
 
         val model = transactions[0]
@@ -71,9 +64,8 @@ class GetTransactionsViewModelTest {
 
     @Test
     fun `should get outcome transactions`() {
-        val result = viewModel.getTransactionsModel(getTransactionsOutcome)
-
-        val transactions = result.getOrAwaitValue().transactions
+        viewModel = GetTransactionsViewModel("outcome", repository)
+        val transactions = viewModel.uiState.value.transactions
         assert(transactions.size == 1)
 
         val model = transactions[0]
@@ -85,9 +77,8 @@ class GetTransactionsViewModelTest {
 
     @Test
     fun `should get all transactions`() {
-        val result = viewModel.getTransactionsModel(getTransactionsAll)
-
-        val transactions = result.getOrAwaitValue().transactions
+        viewModel = GetTransactionsViewModel("all", repository)
+        val transactions = viewModel.uiState.value.transactions
         assert(transactions.size == 1)
 
         val model = transactions[0]

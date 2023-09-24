@@ -1,11 +1,9 @@
 package lmm.moneylog.data.repositories
 
-import io.mockk.every
+import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNull
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import lmm.moneylog.data.transaction.database.TransactionDao
 import lmm.moneylog.data.transaction.database.TransactionEntity
@@ -19,7 +17,7 @@ class GetTransactionRepositoryImplTest {
 
     @Test
     fun `should get transactions`() {
-        every { dao.selectTransaction(any()) } returns listOf(
+        coEvery { dao.selectTransaction(any()) } returns
             TransactionEntity(
                 value = 0.5,
                 "",
@@ -27,10 +25,9 @@ class GetTransactionRepositoryImplTest {
                 2,
                 3
             ).also { it.id = 10 }
-        ).asFlow()
 
         runBlocking {
-            val transaction = repository.getTransactionById(10).first()!!
+            val transaction = repository.getTransactionById(10)!!
             with(transaction) {
                 assertEquals(10, id)
                 assertEquals(0.5, value)
@@ -44,12 +41,10 @@ class GetTransactionRepositoryImplTest {
 
     @Test
     fun `should not get transactions`() {
-        every { dao.selectTransaction(any()) } returns listOf(
-            null
-        ).asFlow()
+        coEvery { dao.selectTransaction(any()) } returns null
 
         runBlocking {
-            val transaction = repository.getTransactionById(0).first()
+            val transaction = repository.getTransactionById(0)
             assertNull(transaction)
         }
     }

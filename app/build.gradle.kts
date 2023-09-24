@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.google.devtools.ksp)
     alias(libs.plugins.jlleitschuh.gradle.ktlint)
 }
 
@@ -61,14 +60,7 @@ dependencies {
 
     implementation(libs.material3)
 
-    implementation(libs.runtime.livedata)
-    implementation(libs.lifecycle.livedata.ktx)
-
     implementation(libs.navigation.compose)
-
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    ksp(libs.room.compiler)
 
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)

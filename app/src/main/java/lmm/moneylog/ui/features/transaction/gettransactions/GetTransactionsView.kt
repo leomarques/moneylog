@@ -1,25 +1,22 @@
 package lmm.moneylog.ui.features.transaction.gettransactions
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import lmm.moneylog.R
-import org.koin.androidx.compose.koinViewModel
+import org.koin.androidx.compose.getViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun GetTransactionsView(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
-    viewModel: GetTransactionsViewModel = koinViewModel(),
     typeOfValue: String?,
     onItemClick: (Int) -> Unit
 ) {
-    val transactionsModel by viewModel.getTransactionsModel(typeOfValue).observeAsState(
-        GetTransactionsModel(
-            emptyList(),
-            R.string.gettransactions_topbar_all
-        )
+    val viewModel = getViewModel<GetTransactionsViewModel>(
+        parameters = { parametersOf(typeOfValue) }
     )
+    val transactionsModel by viewModel.uiState.collectAsState()
 
     GetTransactionsLayout(
         onArrowBackClick = onArrowBackClick,
