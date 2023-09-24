@@ -193,7 +193,7 @@ private fun Content(
         StateTextField(
             title = stringResource(R.string.detailtransaction_description),
             keyboardType = KeyboardType.Text,
-            valueState = transactionDetailModel.description,
+            valueState = transactionDetailModel.description
         )
     }
 }

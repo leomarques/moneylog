@@ -18,14 +18,13 @@ class GetTransactionRepositoryImplTest {
     @Test
     fun `should get transactions`() {
         coEvery { dao.selectTransaction(any()) } returns
-                TransactionEntity(
-                    value = 0.5,
-                    "",
-                    1,
-                    2,
-                    3
-                ).also { it.id = 10 }
-
+            TransactionEntity(
+                value = 0.5,
+                "",
+                1,
+                2,
+                3
+            ).also { it.id = 10 }
 
         runBlocking {
             val transaction = repository.getTransactionById(10)!!

@@ -25,7 +25,7 @@ class BalanceCardViewModel(interactor: GetBalanceInteractor) : ViewModel() {
                 _uiState.value = BalanceCardUIState(
                     total = balanceModel.total.formatForRs(),
                     credit = balanceModel.credit.formatForRs(),
-                    debt = balanceModel.debt.formatForRs(),
+                    debt = balanceModel.debt.formatForRs()
                 )
             }
         }

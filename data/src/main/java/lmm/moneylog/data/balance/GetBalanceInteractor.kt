@@ -13,10 +13,11 @@ class GetBalanceInteractor(private val repository: GetBalanceRepository) {
             var debt = 0.0
 
             for (value in values) {
-                if (value < 0)
+                if (value < 0) {
                     debt += value
-                else
+                } else {
                     credit += value
+                }
             }
 
             val total = credit + debt

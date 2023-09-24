@@ -8,7 +8,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun BalanceCardView(
     onClick: (String) -> Unit,
-    viewModel: BalanceCardViewModel = koinViewModel(),
+    viewModel: BalanceCardViewModel = koinViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 

@@ -44,7 +44,7 @@ fun BalanceCard(
                 MaterialTheme.colorScheme.tertiaryContainer
             )
             .padding(SpaceSize.DefaultSpaceSize),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Balance(
             value = total,
@@ -95,7 +95,7 @@ fun Balance(
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onTertiaryContainer,
             overflow = TextOverflow.Ellipsis,
-            maxLines = 1,
+            maxLines = 1
         )
     }
 }
@@ -123,7 +123,7 @@ fun Amount(
             style = MaterialTheme.typography.titleMedium,
             color = color,
             overflow = TextOverflow.Ellipsis,
-            maxLines = 1,
+            maxLines = 1
         )
     }
 }
