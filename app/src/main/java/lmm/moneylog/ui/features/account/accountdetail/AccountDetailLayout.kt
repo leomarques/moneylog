@@ -1,13 +1,11 @@
-package lmm.moneylog.ui.features.transaction.transactiondetail
+package lmm.moneylog.ui.features.account.accountdetail
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -19,7 +17,6 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,7 +26,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -40,19 +36,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import lmm.moneylog.R
-import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.OnLifecycleEvent
+import lmm.moneylog.ui.features.transaction.transactiondetail.DeleteTransactionConfirmDialog
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransactionDetailLayout(
+fun AccountDetailLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
-    transactionDetailModel: TransactionDetailModel,
-    onDatePicked: (Long) -> Unit,
-    onTypeOfValueSelected: (Boolean) -> Unit,
+    model: AccountDetailModel,
     onDeleteConfirmClick: (Int) -> Unit = {}
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
@@ -61,7 +55,7 @@ fun TransactionDetailLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(transactionDetailModel.titleResourceId))
+                    Text(text = stringResource(R.string.topbar_title_account))
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
@@ -72,7 +66,7 @@ fun TransactionDetailLayout(
                     }
                 },
                 actions = {
-                    if (transactionDetailModel.isEdit) {
+                    if (model.isEdit) {
                         IconButton(
                             onClick = { showDeleteConfirmDialog.value = true },
                             content = {
@@ -96,11 +90,9 @@ fun TransactionDetailLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 Content(
-                    transactionDetailModel = transactionDetailModel,
-                    onDatePicked = onDatePicked,
-                    onTypeOfValueSelected = onTypeOfValueSelected,
+                    model = model,
                     onDeleteConfirm = {
-                        onDeleteConfirmClick(transactionDetailModel.id)
+                        onDeleteConfirmClick(model.id)
                     },
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
                     onDeleteDismiss = {
@@ -114,26 +106,12 @@ fun TransactionDetailLayout(
 
 @Composable
 private fun Content(
-    transactionDetailModel: TransactionDetailModel,
-    onDatePicked: (Long) -> Unit,
-    onTypeOfValueSelected: (Boolean) -> Unit,
+    model: AccountDetailModel,
     showDeleteConfirmDialog: Boolean,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
-        val showDatePicker = remember { mutableStateOf(false) }
-
-        if (showDatePicker.value) {
-            TransactionDetailDatePicker(
-                onConfirm = {
-                    onDatePicked(it)
-                },
-                onDismiss = {
-                    showDatePicker.value = false
-                }
-            )
-        }
         if (showDeleteConfirmDialog) {
             DeleteTransactionConfirmDialog(
                 onConfirm = onDeleteConfirm,
@@ -142,59 +120,10 @@ private fun Content(
         }
 
         StateTextField(
-            title = stringResource(R.string.detailtransaction_value),
-            keyboardType = KeyboardType.Number,
-            valueState = transactionDetailModel.value,
-            getFocus = !transactionDetailModel.isEdit
-        )
-
-        Row {
-            Row(
-                Modifier
-                    .selectable(
-                        selected = transactionDetailModel.isIncome.value,
-                        onClick = { onTypeOfValueSelected(true) }
-                    ),
-                verticalAlignment = CenterVertically
-            ) {
-                RadioButton(
-                    selected = transactionDetailModel.isIncome.value,
-                    onClick = { onTypeOfValueSelected(true) }
-                )
-                Text(
-                    text = stringResource(R.string.detailtransaction_income)
-                )
-            }
-
-            Row(
-                Modifier.selectable(
-                    selected = !transactionDetailModel.isIncome.value,
-                    onClick = { onTypeOfValueSelected(false) }
-                ),
-                verticalAlignment = CenterVertically
-            ) {
-                RadioButton(
-                    selected = !transactionDetailModel.isIncome.value,
-                    onClick = { onTypeOfValueSelected(false) }
-                )
-                Text(
-                    text = stringResource(R.string.detailtransaction_outcome)
-                )
-            }
-        }
-
-        StateTextField(
-            title = stringResource(R.string.detailtransaction_date),
+            title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,
-            valueState = transactionDetailModel.displayDate,
-            onClick = {
-                showDatePicker.value = true
-            }
-        )
-        StateTextField(
-            title = stringResource(R.string.detailtransaction_description),
-            keyboardType = KeyboardType.Text,
-            valueState = transactionDetailModel.description
+            valueState = model.name,
+            getFocus = !model.isEdit
         )
     }
 }
@@ -254,22 +183,15 @@ fun StateTextField(
 @SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
-fun Preview() {
-    TransactionDetailLayout(
+fun AccountDetailLayoutPreview() {
+    AccountDetailLayout(
         onArrowBackClick = {},
         onFabClick = {},
-        transactionDetailModel = TransactionDetailModel(
-            value = mutableStateOf(""),
-            isIncome = mutableStateOf(true),
-            displayDate = mutableStateOf(""),
-            description = mutableStateOf(""),
-            date = DomainTime(0, 0, 0),
+        model = AccountDetailModel(
+            name = mutableStateOf(""),
             isEdit = false,
-            id = 0,
-            titleResourceId = R.string.detailtransaction_topbar_title_add
+            id = 0
         ),
-        onDatePicked = {},
-        onTypeOfValueSelected = {},
         onDeleteConfirmClick = {}
     )
 }

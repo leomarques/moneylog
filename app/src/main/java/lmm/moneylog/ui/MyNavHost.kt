@@ -10,7 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import lmm.moneylog.ui.features.account.accountdetail.AccountDetailView
 import lmm.moneylog.ui.features.account.getaccounts.GetAccountsView
+import lmm.moneylog.ui.features.category.categorydetail.CategoryDetailView
 import lmm.moneylog.ui.features.category.getccategories.GetCategoriesView
 import lmm.moneylog.ui.features.home.HomeLayout
 import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsView
@@ -21,6 +23,8 @@ const val transactionDetailScreen = "transaction_detail"
 const val getTransactionsScreen = "get_transactions"
 const val getAccountsScreen = "get_accounts"
 const val getCategoriesScreen = "get_categories"
+const val accountDetailScreen = "account_detail"
+const val categoryDetailScreen = "category_detail"
 
 const val paramTypeOfValue = "typeOfValue"
 const val paramId = "id"
@@ -51,22 +55,6 @@ fun MyNavHost(
             )
         }
 
-        composable(
-            route = "$transactionDetailScreen?$paramId={$paramId}",
-            arguments = listOf(
-                navArgument(paramId) {
-                    defaultValue = -1
-                    type = NavType.IntType
-                }
-            )
-        ) {
-            TransactionDetailView(
-                onArrowBackClick = {
-                    navController.popBackStack()
-                }
-            )
-        }
-
         composable("$getTransactionsScreen/{$paramTypeOfValue}") { backStackEntry ->
             val param = backStackEntry.arguments?.getString(paramTypeOfValue)
             val typeOfValue = convertTransactionTypeParam(param)
@@ -85,16 +73,48 @@ fun MyNavHost(
             )
         }
 
+        composable(
+            route = "$transactionDetailScreen?$paramId={$paramId}",
+            arguments = listOf(
+                navArgument(paramId) {
+                    defaultValue = -1
+                    type = NavType.IntType
+                }
+            )
+        ) {
+            TransactionDetailView(
+                onArrowBackClick = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
         composable(getAccountsScreen) {
             GetAccountsView(
                 onArrowBackClick = {
                     navController.popBackStack()
                 },
                 onFabClick = {
-//                    navController.navigate(transactionDetailScreen)
+                    navController.navigate(accountDetailScreen)
                 },
                 onItemClick = { id ->
-//                    navController.navigate("$transactionDetailScreen?$paramId=$id")
+                    navController.navigate("$accountDetailScreen?$paramId=$id")
+                }
+            )
+        }
+
+        composable(
+            route = "$accountDetailScreen?$paramId={$paramId}",
+            arguments = listOf(
+                navArgument(paramId) {
+                    defaultValue = -1
+                    type = NavType.IntType
+                }
+            )
+        ) {
+            AccountDetailView(
+                onArrowBackClick = {
+                    navController.popBackStack()
                 }
             )
         }
@@ -105,10 +125,26 @@ fun MyNavHost(
                     navController.popBackStack()
                 },
                 onFabClick = {
-//                    navController.navigate(transactionDetailScreen)
+                    navController.navigate(categoryDetailScreen)
                 },
                 onItemClick = { id ->
-//                    navController.navigate("$transactionDetailScreen?$paramId=$id")
+                    navController.navigate("$categoryDetailScreen?$paramId=$id")
+                }
+            )
+        }
+
+        composable(
+            route = "$categoryDetailScreen?$paramId={$paramId}",
+            arguments = listOf(
+                navArgument(paramId) {
+                    defaultValue = -1
+                    type = NavType.IntType
+                }
+            )
+        ) {
+            CategoryDetailView(
+                onArrowBackClick = {
+                    navController.popBackStack()
                 }
             )
         }

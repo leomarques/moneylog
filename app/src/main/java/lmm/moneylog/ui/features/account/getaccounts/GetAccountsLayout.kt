@@ -1,16 +1,19 @@
 package lmm.moneylog.ui.features.account.getaccounts
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
@@ -64,7 +67,7 @@ fun GetAccountsLayout(
         },
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
-            Surface(Modifier.padding(paddingValues)) {
+            Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
                 Content(
                     model = model,
                     onItemClick = onItemClick
@@ -79,11 +82,7 @@ fun Content(
     model: GetAccountsModel,
     onItemClick: (Int) -> Unit
 ) {
-    Column(
-        Modifier
-            .padding(horizontal = SpaceSize.DefaultSpaceSize)
-            .fillMaxWidth()
-    ) {
+    Column(Modifier.fillMaxWidth()) {
         LazyColumn {
             items(model.accounts.reversed()) { account ->
                 AccountItem(
@@ -102,8 +101,13 @@ fun AccountItem(
 ) {
     Row(
         modifier = Modifier
+            .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
-            .padding(vertical = SpaceSize.SmallSpaceSize)
+            .height(SpaceSize.ListItemHeight)
+            .padding(
+                vertical = SpaceSize.SmallSpaceSize,
+                horizontal = SpaceSize.DefaultSpaceSize
+            )
             .clickable { onItemClick(account.id) },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -115,6 +119,7 @@ fun AccountItem(
                 },
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
+                style = MaterialTheme.typography.bodyLarge,
                 color = if (name.isEmpty()) {
                     Color.Gray
                 } else {
@@ -123,6 +128,8 @@ fun AccountItem(
             )
         }
     }
+
+    Divider()
 }
 
 @Preview

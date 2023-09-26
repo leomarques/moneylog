@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.features.transaction.transactiondetail
 
-import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -8,7 +7,6 @@ import androidx.compose.ui.res.stringResource
 import lmm.moneylog.R
 import org.koin.androidx.compose.koinViewModel
 
-@SuppressLint("UnrememberedMutableState")
 @Composable
 fun TransactionDetailView(
     onArrowBackClick: () -> Unit,

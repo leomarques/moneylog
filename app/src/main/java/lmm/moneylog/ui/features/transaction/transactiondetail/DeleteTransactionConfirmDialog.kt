@@ -7,7 +7,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import lmm.moneylog.R
 
 @Composable
 fun DeleteTransactionConfirmDialog(
@@ -18,28 +20,28 @@ fun DeleteTransactionConfirmDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(onClick = onConfirm) {
-                Text(text = "Apagar")
+                Text(text = stringResource(R.string.delete_dialog_delete))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(text = "Cancelar")
+                Text(text = stringResource(R.string.cancel))
             }
         },
         icon = {
             Icon(
                 imageVector = Icons.Default.Delete,
-                contentDescription = "delete_dialog"
+                contentDescription = stringResource(R.string.delete_dialog_icon_desc)
             )
         },
         title = {
             Text(
-                text = "Excluir transação?"
+                text = stringResource(R.string.delete_dialog_title)
             )
         },
         text = {
             Text(
-                text = "Isso vai apagar essa transação do seu histórico."
+                text = stringResource(R.string.delete_dialog_description)
             )
         }
     )
@@ -47,7 +49,7 @@ fun DeleteTransactionConfirmDialog(
 
 @Preview
 @Composable
-fun MyDeleteConfirmDialogPreview() {
+fun DeleteConfirmDialogPreview() {
     DeleteTransactionConfirmDialog(
         onConfirm = {},
         onDismiss = {}

@@ -1,16 +1,19 @@
 package lmm.moneylog.ui.features.category.getccategories
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
@@ -28,7 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.domain.category.Category
+import lmm.moneylog.data.category.Category
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
 
@@ -64,7 +67,7 @@ fun GetCategoriesLayout(
         },
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
-            Surface(Modifier.padding(paddingValues)) {
+            Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
                 Content(
                     model = model,
                     onItemClick = onItemClick
@@ -79,11 +82,7 @@ fun Content(
     model: GetCategoriesModel,
     onItemClick: (Int) -> Unit
 ) {
-    Column(
-        Modifier
-            .padding(horizontal = SpaceSize.DefaultSpaceSize)
-            .fillMaxWidth()
-    ) {
+    Column(Modifier.fillMaxWidth()) {
         LazyColumn {
             items(model.categories.reversed()) { category ->
                 CategoryItem(
@@ -102,8 +101,13 @@ fun CategoryItem(
 ) {
     Row(
         modifier = Modifier
+            .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
-            .padding(vertical = SpaceSize.SmallSpaceSize)
+            .height(SpaceSize.ListItemHeight)
+            .padding(
+                vertical = SpaceSize.SmallSpaceSize,
+                horizontal = SpaceSize.DefaultSpaceSize
+            )
             .clickable { onItemClick(category.id) },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
@@ -115,6 +119,7 @@ fun CategoryItem(
                 },
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
+                style = MaterialTheme.typography.bodyLarge,
                 color = if (name.isEmpty()) {
                     Color.Gray
                 } else {
@@ -123,6 +128,8 @@ fun CategoryItem(
             )
         }
     }
+
+    Divider()
 }
 
 @Preview

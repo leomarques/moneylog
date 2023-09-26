@@ -1,4 +1,4 @@
-package lmm.moneylog.domain.category
+package lmm.moneylog.data.category
 
 data class Category(
     val id: Int = -1,

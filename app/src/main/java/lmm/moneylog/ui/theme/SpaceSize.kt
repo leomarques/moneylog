@@ -6,4 +6,6 @@ object SpaceSize {
     val SmallSpaceSize = 8.dp
     val DefaultSpaceSize = 16.dp
     val LargeSpaceSize = 32.dp
+
+    val ListItemHeight = 56.dp
 }

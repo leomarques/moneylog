@@ -1,6 +1,8 @@
 package lmm.moneylog
 
+import lmm.moneylog.ui.features.account.accountdetail.AccountDetailViewModel
 import lmm.moneylog.ui.features.account.getaccounts.GetAccountsViewModel
+import lmm.moneylog.ui.features.category.categorydetail.CategoryDetailViewModel
 import lmm.moneylog.ui.features.category.getccategories.GetCategoriesViewModel
 import lmm.moneylog.ui.features.home.balancecard.BalanceCardViewModel
 import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsViewModel
@@ -11,10 +13,13 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    viewModelOf(::BalanceCardViewModel)
-    viewModelOf(::TransactionDetailViewModel)
     viewModelOf(::GetAccountsViewModel)
+    viewModelOf(::AccountDetailViewModel)
+
     viewModelOf(::GetCategoriesViewModel)
+    viewModelOf(::CategoryDetailViewModel)
+
+    viewModelOf(::BalanceCardViewModel)
 
     viewModel { parameters ->
         GetTransactionsViewModel(
@@ -22,4 +27,5 @@ val appModule = module {
             getTransactionsRepository = get()
         )
     }
+    viewModelOf(::TransactionDetailViewModel)
 }

@@ -32,6 +32,18 @@
     <string name="getaccounts_topbar">Contas</string>
     <string name="getcategories_topbar">Categorias</string>
 
+
+    <string name="topbar_title_category">Categoria</string>
+    <string name="topbar_title_account">Conta</string>
+
+    <string name="delete_dialog_icon_desc">delete_dialog</string>
+    <string name="delete_dialog_title">Excluir transação?</string>
+    <string name="delete_dialog_description">Isso vai apagar essa transação do seu histórico.</string>
+    <string name="delete_dialog_delete">Apagar</string>
+
+    <string name="name">Nome</string>
+    <string name="cancel">Cancelar</string>
+
     <string name="loremipsum">Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
         when an unknown printer took a galley of type and scrambled it to make a type specimen

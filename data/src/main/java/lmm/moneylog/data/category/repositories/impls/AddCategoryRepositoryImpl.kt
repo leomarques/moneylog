@@ -1,11 +1,11 @@
 package lmm.moneylog.data.category.repositories.impls
 
 import kotlinx.coroutines.withContext
+import lmm.moneylog.data.category.Category
 import lmm.moneylog.data.category.database.CategoryDao
 import lmm.moneylog.data.category.database.CategoryEntity
 import lmm.moneylog.data.category.repositories.AddCategoryRepository
 import lmm.moneylog.data.coroutine.CoroutineDispatcherProvider
-import lmm.moneylog.domain.category.Category
 
 class AddCategoryRepositoryImpl(
     private val categoryDao: CategoryDao,

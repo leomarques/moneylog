@@ -2,10 +2,10 @@ package lmm.moneylog.data.category.repositories.impls
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import lmm.moneylog.data.category.Category
 import lmm.moneylog.data.category.database.CategoryDao
 import lmm.moneylog.data.category.database.CategoryEntity
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
-import lmm.moneylog.domain.category.Category
 
 class GetCategoriesRepositoryImpl(private val categoryDao: CategoryDao) :
     GetCategoriesRepository {
