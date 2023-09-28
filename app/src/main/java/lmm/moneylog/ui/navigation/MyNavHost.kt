@@ -1,4 +1,4 @@
-package lmm.moneylog.ui
+package lmm.moneylog.ui.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
@@ -8,8 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import lmm.moneylog.ui.convertTransactionTypeParam
 import lmm.moneylog.ui.features.account.accountdetail.AccountDetailView
 import lmm.moneylog.ui.features.account.getaccounts.GetAccountsView
 import lmm.moneylog.ui.features.category.categorydetail.CategoryDetailView
@@ -18,22 +18,11 @@ import lmm.moneylog.ui.features.home.HomeLayout
 import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsView
 import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailView
 
-const val homeScreen = "home"
-const val transactionDetailScreen = "transaction_detail"
-const val getTransactionsScreen = "get_transactions"
-const val getAccountsScreen = "get_accounts"
-const val getCategoriesScreen = "get_categories"
-const val accountDetailScreen = "account_detail"
-const val categoryDetailScreen = "category_detail"
-
-const val paramTypeOfValue = "typeOfValue"
-const val paramId = "id"
-
 @Composable
 fun MyNavHost(
-    modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
-    startDestination: String = homeScreen
+    navController: NavHostController,
+    startDestination: String,
+    modifier: Modifier = Modifier
 ) {
     NavHost(
         modifier = modifier.background(MaterialTheme.colorScheme.background),

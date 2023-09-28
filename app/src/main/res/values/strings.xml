@@ -13,6 +13,11 @@
     <string name="detailtransaction_arrowback_desc">arrow back icon</string>
     <string name="detailtransaction_delete_desc">Delete</string>
 
+    <string name="navbar_home">Início</string>
+    <string name="navbar_transactions">Transações</string>
+    <string name="navbar_accounts">Contas</string>
+    <string name="navbar_categories">Categorias</string>
+
     <string name="balancecard_total">Saldo em contas</string>
     <string name="balancecard_income">Receitas</string>
     <string name="balancecard_outcome">Despesas</string>
