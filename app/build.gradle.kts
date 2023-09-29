@@ -64,7 +64,7 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     debugImplementation(libs.ui.tooling)
 
-    testImplementation(libs.mockk)
-    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.core.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
 }

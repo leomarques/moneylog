@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.gettransactions
+package lmm.moneylog.ui.features.transactions.gettransactions
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.every

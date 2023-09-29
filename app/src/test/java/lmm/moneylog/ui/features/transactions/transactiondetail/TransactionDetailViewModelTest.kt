@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transactiondetail
+package lmm.moneylog.ui.features.transactions.transactiondetail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.SavedStateHandle

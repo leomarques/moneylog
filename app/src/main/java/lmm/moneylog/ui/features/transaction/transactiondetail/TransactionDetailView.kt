@@ -23,7 +23,7 @@ fun TransactionDetailView(
                 onError = { Toast.makeText(current, errorText, Toast.LENGTH_LONG).show() }
             )
         },
-        transactionDetailModel = viewModel.model,
+        model = viewModel.model,
         onDatePicked = { datePicked ->
             viewModel.onDatePicked(datePicked)
         },

@@ -1,15 +1,8 @@
 package lmm.moneylog.ui.features.transaction.transactiondetail
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
@@ -18,31 +11,24 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.Lifecycle
 import lmm.moneylog.R
 import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.ui.components.MyFab
-import lmm.moneylog.ui.components.OnLifecycleEvent
+import lmm.moneylog.ui.components.StateTextField
+import lmm.moneylog.ui.features.transaction.transactiondetail.components.DeleteTransactionConfirmDialog
+import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionDetailDatePicker
+import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionRadioGroup
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,7 +36,7 @@ import lmm.moneylog.ui.theme.SpaceSize
 fun TransactionDetailLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
-    transactionDetailModel: TransactionDetailModel,
+    model: TransactionDetailModel,
     onDatePicked: (Long) -> Unit,
     onTypeOfValueSelected: (Boolean) -> Unit,
     onDeleteConfirmClick: (Int) -> Unit = {}
@@ -61,7 +47,7 @@ fun TransactionDetailLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(transactionDetailModel.titleResourceId))
+                    Text(text = stringResource(model.titleResourceId))
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
@@ -72,7 +58,7 @@ fun TransactionDetailLayout(
                     }
                 },
                 actions = {
-                    if (transactionDetailModel.isEdit) {
+                    if (model.isEdit) {
                         IconButton(
                             onClick = { showDeleteConfirmDialog.value = true },
                             content = {
@@ -96,11 +82,11 @@ fun TransactionDetailLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 Content(
-                    transactionDetailModel = transactionDetailModel,
+                    model = model,
                     onDatePicked = onDatePicked,
                     onTypeOfValueSelected = onTypeOfValueSelected,
                     onDeleteConfirm = {
-                        onDeleteConfirmClick(transactionDetailModel.id)
+                        onDeleteConfirmClick(model.id)
                     },
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
                     onDeleteDismiss = {
@@ -114,7 +100,7 @@ fun TransactionDetailLayout(
 
 @Composable
 private fun Content(
-    transactionDetailModel: TransactionDetailModel,
+    model: TransactionDetailModel,
     onDatePicked: (Long) -> Unit,
     onTypeOfValueSelected: (Boolean) -> Unit,
     showDeleteConfirmDialog: Boolean,
@@ -144,49 +130,19 @@ private fun Content(
         StateTextField(
             title = stringResource(R.string.detailtransaction_value),
             keyboardType = KeyboardType.Number,
-            valueState = transactionDetailModel.value,
-            getFocus = !transactionDetailModel.isEdit
+            valueState = model.value,
+            getFocus = !model.isEdit
         )
 
-        Row {
-            Row(
-                Modifier
-                    .selectable(
-                        selected = transactionDetailModel.isIncome.value,
-                        onClick = { onTypeOfValueSelected(true) }
-                    ),
-                verticalAlignment = CenterVertically
-            ) {
-                RadioButton(
-                    selected = transactionDetailModel.isIncome.value,
-                    onClick = { onTypeOfValueSelected(true) }
-                )
-                Text(
-                    text = stringResource(R.string.detailtransaction_income)
-                )
-            }
-
-            Row(
-                Modifier.selectable(
-                    selected = !transactionDetailModel.isIncome.value,
-                    onClick = { onTypeOfValueSelected(false) }
-                ),
-                verticalAlignment = CenterVertically
-            ) {
-                RadioButton(
-                    selected = !transactionDetailModel.isIncome.value,
-                    onClick = { onTypeOfValueSelected(false) }
-                )
-                Text(
-                    text = stringResource(R.string.detailtransaction_outcome)
-                )
-            }
-        }
+        TransactionRadioGroup(
+            model = model,
+            onTypeOfValueSelected = onTypeOfValueSelected
+        )
 
         StateTextField(
             title = stringResource(R.string.detailtransaction_date),
             keyboardType = KeyboardType.Text,
-            valueState = transactionDetailModel.displayDate,
+            valueState = model.displayDate,
             onClick = {
                 showDatePicker.value = true
             }
@@ -194,60 +150,8 @@ private fun Content(
         StateTextField(
             title = stringResource(R.string.detailtransaction_description),
             keyboardType = KeyboardType.Text,
-            valueState = transactionDetailModel.description
+            valueState = model.description
         )
-    }
-}
-
-@Composable
-fun StateTextField(
-    title: String,
-    keyboardType: KeyboardType,
-    valueState: MutableState<String>,
-    onClick: (() -> Unit)? = null,
-    getFocus: Boolean = false
-) {
-    val focusManager = LocalFocusManager.current
-    val focusRequester = remember { FocusRequester() }
-
-    OutlinedTextField(
-        value = valueState.value,
-        label = { Text(text = title) },
-        keyboardOptions = KeyboardOptions.Default.copy(
-            keyboardType = keyboardType,
-            imeAction = ImeAction.Done
-        ),
-        readOnly = onClick != null,
-        keyboardActions = KeyboardActions(
-            onDone = { focusManager.clearFocus() }
-        ),
-        interactionSource = remember { MutableInteractionSource() }
-            .also { interactionSource ->
-                LaunchedEffect(interactionSource) {
-                    interactionSource.interactions.collect {
-                        if (it is PressInteraction.Release) {
-                            onClick?.invoke()
-                        }
-                    }
-                }
-            },
-        onValueChange = { value -> valueState.value = value },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = SpaceSize.SmallSpaceSize)
-            .focusRequester(focusRequester)
-    )
-
-    if (getFocus) {
-        OnLifecycleEvent { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_RESUME -> {
-                    focusRequester.requestFocus()
-                }
-
-                else -> {}
-            }
-        }
     }
 }
 
@@ -258,7 +162,7 @@ fun Preview() {
     TransactionDetailLayout(
         onArrowBackClick = {},
         onFabClick = {},
-        transactionDetailModel = TransactionDetailModel(
+        model = TransactionDetailModel(
             value = mutableStateOf(""),
             isIncome = mutableStateOf(true),
             displayDate = mutableStateOf(""),

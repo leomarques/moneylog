@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.transactiondetail
+package lmm.moneylog.ui.features.transaction.transactiondetail.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete

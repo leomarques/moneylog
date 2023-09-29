@@ -1,7 +1,7 @@
-package lmm.moneylog.data.repositories
+package lmm.moneylog.data.repositories.transactions
 
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.database.TransactionDao
@@ -32,18 +32,16 @@ class UpdateTransactionRepositoryImplTest {
         runBlocking {
             repository.update(transaction)
 
-            verify {
-                runBlocking {
-                    transactionDaoMock.update(
-                        TransactionEntity(
-                            value = 0.5,
-                            description = "desc",
-                            year = 2003,
-                            month = 2,
-                            day = 1
-                        )
+            coVerify {
+                transactionDaoMock.update(
+                    TransactionEntity(
+                        value = 0.5,
+                        description = "desc",
+                        year = 2003,
+                        month = 2,
+                        day = 1
                     )
-                }
+                )
             }
         }
     }

@@ -2,7 +2,7 @@
 coreTesting                    = "2.2.0"
 composeBom                     = "2023.09.01"
 material3                      = "1.1.2"
-navigationCompose              = "2.7.2"
+navigationCompose              = "2.7.3"
 room                           = "2.5.2"
 koinAndroid                    = "3.5.0"
 koinAndroidxCompose            = "3.5.0"

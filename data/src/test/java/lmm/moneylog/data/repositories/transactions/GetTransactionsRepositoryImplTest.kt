@@ -1,4 +1,4 @@
-package lmm.moneylog.data.repositories
+package lmm.moneylog.data.repositories.transactions
 
 import io.mockk.every
 import io.mockk.mockk
