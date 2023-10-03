@@ -16,6 +16,18 @@ class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
         }
     }
 
+    override suspend fun getAccountsSuspend(): List<Account> {
+        return accountDao.selectAccountsSuspend().map { account ->
+            with(account) {
+                Account(
+                    id = id,
+                    name = name,
+                    color = color
+                )
+            }
+        }
+    }
+
     private fun convertEntity(list: List<AccountEntity>): List<Account> {
         return list.map { account ->
             with(account) {

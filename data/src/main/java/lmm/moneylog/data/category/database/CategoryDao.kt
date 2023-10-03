@@ -12,6 +12,9 @@ interface CategoryDao {
     @Query("SELECT * FROM `category`")
     fun selectCategories(): Flow<List<CategoryEntity>>
 
+    @Query("SELECT * FROM `category`")
+    suspend fun selectCategoriesSuspend(): List<CategoryEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(accountEntity: CategoryEntity)
 

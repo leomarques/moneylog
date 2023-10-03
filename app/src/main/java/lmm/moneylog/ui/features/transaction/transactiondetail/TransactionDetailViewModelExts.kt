@@ -54,8 +54,10 @@ fun TransactionDetailModel.toTransaction(): Transaction = Transaction(
     value = value.value.validateValue(isIncome.value),
     date = date,
     description = description.value,
-    id = id
-)
+    id = id,
+    accountId = null,
+    categoryId = null
+) // TODO: FIX THIS
 
 fun SavedStateHandle.getIdParam(): Int? {
     get<Int>("id")?.let { id ->

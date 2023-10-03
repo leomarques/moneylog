@@ -18,7 +18,9 @@ class UpdateTransactionRepositoryImpl(
                     description = description,
                     year = date.year,
                     month = date.month,
-                    day = date.day
+                    day = date.day,
+                    accountId = accountId,
+                    categoryId = categoryId
                 ).also {
                     it.id = id
                 }

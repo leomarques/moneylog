@@ -20,7 +20,9 @@ class GetTransactionRepositoryImpl(private val transactionDao: TransactionDao) :
                         day = day,
                         month = month,
                         year = year
-                    )
+                    ),
+                    accountId = accountId,
+                    categoryId = categoryId
                 )
             }
         } else {

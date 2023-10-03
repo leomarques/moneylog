@@ -16,6 +16,18 @@ class GetCategoriesRepositoryImpl(private val categoryDao: CategoryDao) :
         }
     }
 
+    override suspend fun getCategoriesSuspend(): List<Category> {
+        return categoryDao.selectCategoriesSuspend().map { categories ->
+            with(categories) {
+                Category(
+                    id = id,
+                    name = name,
+                    color = color
+                )
+            }
+        }
+    }
+
     private fun convertEntity(list: List<CategoryEntity>): List<Category> {
         return list.map { category ->
             with(category) {

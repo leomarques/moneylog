@@ -5,4 +5,5 @@ import lmm.moneylog.data.account.Account
 
 interface GetAccountsRepository {
     fun getAccounts(): Flow<List<Account>>
+    suspend fun getAccountsSuspend(): List<Account>
 }

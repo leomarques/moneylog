@@ -17,7 +17,9 @@ class AddTransactionRepositoryImpl(
                     description = description,
                     year = date.year,
                     month = date.month,
-                    day = date.day
+                    day = date.day,
+                    accountId = accountId,
+                    categoryId = categoryId
                 )
             }
         )
