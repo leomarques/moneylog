@@ -29,10 +29,10 @@ import lmm.moneylog.R
 import lmm.moneylog.ui.components.ClickTextField
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
-import lmm.moneylog.ui.features.transaction.transactiondetail.components.DeleteTransactionConfirmDialog
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TextPicker
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionDetailDatePicker
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionRadioGroup
+import lmm.moneylog.ui.features.transaction.transactiondetail.components.deleteconfirmdialog.DeleteTransactionConfirmDialog
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)

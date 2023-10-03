@@ -44,9 +44,16 @@
     <string name="topbar_title_account">Conta</string>
 
     <string name="delete_dialog_icon_desc">delete_dialog</string>
-    <string name="delete_dialog_title">Excluir transação?</string>
-    <string name="delete_dialog_description">Isso vai apagar essa transação do seu histórico.</string>
     <string name="delete_dialog_delete">Apagar</string>
+
+    <string name="delete_dialog_transaction_title">Excluir transação?</string>
+    <string name="delete_dialog_transaction_description">Isso vai apagar essa transação do seu histórico.</string>
+
+    <string name="delete_dialog_account_title">Excluir conta?</string>
+    <string name="delete_dialog_account_description">Isso vai apagar essa conta.  Nenhuma transação será apagada.</string>
+
+    <string name="delete_dialog_category_title">Excluir categoria?</string>
+    <string name="delete_dialog_category_description">Isso vai apagar essa categoria. Nenhuma transação será apagada.</string>
 
     <string name="name">Nome</string>
     <string name="cancel">Cancelar</string>

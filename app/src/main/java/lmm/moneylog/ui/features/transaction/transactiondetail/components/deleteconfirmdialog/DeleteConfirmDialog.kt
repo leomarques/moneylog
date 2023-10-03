@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.transactiondetail.components
+package lmm.moneylog.ui.features.transaction.transactiondetail.components.deleteconfirmdialog
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -12,9 +12,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 
 @Composable
-fun DeleteTransactionConfirmDialog(
+fun DeleteConfirmDialog(
     onConfirm: () -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    deleteDialogTitle: String,
+    deleteDialogDescription: String
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -36,12 +38,12 @@ fun DeleteTransactionConfirmDialog(
         },
         title = {
             Text(
-                text = stringResource(R.string.delete_dialog_title)
+                text = deleteDialogTitle
             )
         },
         text = {
             Text(
-                text = stringResource(R.string.delete_dialog_description)
+                text = deleteDialogDescription
             )
         }
     )
@@ -50,8 +52,10 @@ fun DeleteTransactionConfirmDialog(
 @Preview
 @Composable
 fun DeleteConfirmDialogPreview() {
-    DeleteTransactionConfirmDialog(
+    DeleteConfirmDialog(
         onConfirm = {},
-        onDismiss = {}
+        onDismiss = {},
+        deleteDialogTitle = stringResource(R.string.delete_dialog_transaction_title),
+        deleteDialogDescription = stringResource(R.string.delete_dialog_transaction_description)
     )
 }
