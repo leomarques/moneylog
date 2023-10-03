@@ -37,7 +37,14 @@ fun Transaction.toDetailModel(domainTimeConverter: DomainTimeConverter) =
         categoryId = categoryId
     )
 
-private fun Double.toPositiveString() = if (this < 0) (-this).toString() else this.toString()
+private fun Double.toPositiveString(): String {
+    val positive = if (this < 0) -this else this
+    return if (positive.isWhole()) positive.toString().removeDecimal() else "$positive"
+}
+
+private fun Double.isWhole() = this % 1.0 == 0.0
+
+private fun String.removeDecimal() = substring(0, length - 2)
 
 fun TransactionDetailModel.toTransaction(): Transaction = Transaction(
     value = value.value.validateValue(isIncome.value),
