@@ -225,22 +225,22 @@ private fun Content(
 @Preview
 @Composable
 fun TransactionDetailLayout2Preview() {
-//    TransactionDetailLayout(
-//        valueField = mutableStateOf(""),
-//        isIncomeField = mutableStateOf(true),
-//        descriptionField = mutableStateOf(""),
-//        displayDate = "",
-//        displayAccount = "",
-//        displayCategory = "",
-//        accounts = emptyList(),
-//        categories = emptyList(),
-//        isEdit = true,
-//        topBarTitle = stringResource(R.string.detailtransaction_topbar_title_add),
-//        onArrowBackClick = {},
-//        onDeleteConfirmClick = {},
-//        onFabClick = {},
-//        onDatePicked = {},
-//        onAccountPicked = {},
-//        onCategoryPicked = {}
-//    )
+    TransactionDetailLayout(
+        valueField = mutableStateOf(""),
+        isIncomeField = mutableStateOf(true),
+        descriptionField = mutableStateOf(""),
+        displayDate = "",
+        displayAccount = "",
+        displayCategory = "",
+        accounts = emptyList(),
+        categories = emptyList(),
+        isEdit = true,
+        topBarTitle = stringResource(R.string.detailtransaction_topbar_title_add),
+        onArrowBackClick = {},
+        onDeleteConfirmClick = {},
+        onFabClick = {},
+        onDatePicked = {},
+        onAccountPicked = {},
+        onCategoryPicked = {}
+    )
 }
