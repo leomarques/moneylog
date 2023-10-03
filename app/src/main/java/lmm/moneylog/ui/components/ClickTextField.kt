@@ -16,6 +16,7 @@ import lmm.moneylog.ui.theme.SpaceSize
 fun ClickTextField(
     value: String,
     title: String,
+    enabled: Boolean = true,
     onClick: (() -> Unit)
 ) {
     OutlinedTextField(
@@ -25,6 +26,7 @@ fun ClickTextField(
         value = value,
         label = { Text(text = title) },
         readOnly = true,
+        enabled = enabled,
         interactionSource = remember { MutableInteractionSource() }
             .also { interactionSource ->
                 LaunchedEffect(interactionSource) {

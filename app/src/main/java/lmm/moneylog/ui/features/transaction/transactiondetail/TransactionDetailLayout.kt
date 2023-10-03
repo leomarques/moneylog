@@ -206,6 +206,7 @@ private fun Content(
         ClickTextField(
             title = stringResource(R.string.detailtransaction_account),
             value = displayAccount,
+            enabled = accounts.isNotEmpty(),
             onClick = {
                 showAccountPicker = true
             }
@@ -214,6 +215,7 @@ private fun Content(
         ClickTextField(
             title = stringResource(R.string.detailtransaction_category),
             value = displayCategory,
+            enabled = categories.isNotEmpty(),
             onClick = {
                 showCategoryPicker = true
             }
