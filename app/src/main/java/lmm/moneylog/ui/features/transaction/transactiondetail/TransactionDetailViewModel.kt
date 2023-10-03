@@ -3,6 +3,10 @@ package lmm.moneylog.ui.features.transaction.transactiondetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
@@ -19,35 +23,47 @@ class TransactionDetailViewModel(
     private val domainTimeConverter: DomainTimeConverter
 ) : ViewModel() {
 
-    var model = provideDefaultModel()
+    private val _uiState = MutableStateFlow(TransactionDetailModel())
+    val uiState: StateFlow<TransactionDetailModel> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
-            savedStateHandle.getIdParam()?.let { id ->
-                getTransactionRepository.getTransactionById(id)?.let { transaction ->
-                    model = transaction.toDetailModel(domainTimeConverter)
+            val idParam = savedStateHandle.getIdParam()
+
+            if (idParam != null) {
+                getTransactionRepository.getTransactionById(idParam)?.let { transaction ->
+                    _uiState.update {
+                        transaction.toDetailModel(domainTimeConverter)
+                    }
+                }
+            } else {
+                _uiState.update {
+                    val currentDate = with(domainTimeConverter) {
+                        timeStampToDomainTime(getCurrentTimeStamp())
+                    }
+                    TransactionDetailModel(
+                        date = currentDate,
+                        displayDate = currentDate.convertToDisplayDate(domainTimeConverter)
+                    )
                 }
             }
         }
     }
 
-    private fun provideDefaultModel() =
-        TransactionDetailModel().apply {
-            updateTime(domainTimeConverter.getCurrentTimeStamp(), domainTimeConverter)
-        }
-
-    fun deleteTransaction(id: Int) {
+    fun deleteTransaction() {
         viewModelScope.launch {
-            deleteTransactionRepository.delete(id)
+            deleteTransactionRepository.delete(_uiState.value.id)
         }
-    }
-
-    fun onTypeOfValueSelected(isIncome: Boolean) {
-        model.isIncome.value = isIncome
     }
 
     fun onDatePicked(timeStamp: Long) {
-        model.updateTime(timeStamp, domainTimeConverter)
+        _uiState.update {
+            val domainTime = domainTimeConverter.timeStampToDomainTime(timeStamp)
+            it.copy(
+                date = domainTime,
+                displayDate = domainTime.convertToDisplayDate(domainTimeConverter)
+            )
+        }
     }
 
     fun onFabClick(
@@ -55,11 +71,12 @@ class TransactionDetailViewModel(
         onError: () -> Unit
     ) {
         try {
+            val transaction = _uiState.value.toTransaction()
             viewModelScope.launch {
-                if (model.isEdit) {
-                    updateTransactionRepository.update(model.toTransaction())
+                if (_uiState.value.isEdit) {
+                    updateTransactionRepository.update(transaction)
                 } else {
-                    addTransactionRepository.save(model.toTransaction())
+                    addTransactionRepository.save(transaction)
                 }
                 onSuccess()
             }

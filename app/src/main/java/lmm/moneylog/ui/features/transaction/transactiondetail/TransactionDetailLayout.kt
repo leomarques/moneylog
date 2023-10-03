@@ -16,14 +16,17 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.data.transaction.time.DomainTime
+import lmm.moneylog.ui.components.DateTextField
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.DeleteTransactionConfirmDialog
@@ -34,12 +37,16 @@ import lmm.moneylog.ui.theme.SpaceSize
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionDetailLayout(
+    valueField: MutableState<String>,
+    isIncomeField: MutableState<Boolean>,
+    descriptionField: MutableState<String>,
+    displayDate: String,
+    isEdit: Boolean,
+    topBarTitle: String,
     onArrowBackClick: () -> Unit,
+    onDeleteConfirmClick: () -> Unit,
     onFabClick: () -> Unit,
-    model: TransactionDetailModel,
-    onDatePicked: (Long) -> Unit,
-    onTypeOfValueSelected: (Boolean) -> Unit,
-    onDeleteConfirmClick: (Int) -> Unit = {}
+    onDatePicked: (Long) -> Unit
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
@@ -47,7 +54,7 @@ fun TransactionDetailLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(model.titleResourceId))
+                    Text(text = topBarTitle)
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
@@ -58,7 +65,7 @@ fun TransactionDetailLayout(
                     }
                 },
                 actions = {
-                    if (model.isEdit) {
+                    if (isEdit) {
                         IconButton(
                             onClick = { showDeleteConfirmDialog.value = true },
                             content = {
@@ -82,16 +89,15 @@ fun TransactionDetailLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 Content(
-                    model = model,
-                    onDatePicked = onDatePicked,
-                    onTypeOfValueSelected = onTypeOfValueSelected,
-                    onDeleteConfirm = {
-                        onDeleteConfirmClick(model.id)
-                    },
+                    valueField = valueField,
+                    descriptionField = descriptionField,
+                    isIncomeField = isIncomeField,
+                    displayDate = displayDate,
+                    isEdit = isEdit,
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
-                    onDeleteDismiss = {
-                        showDeleteConfirmDialog.value = false
-                    }
+                    onDatePicked = onDatePicked,
+                    onDeleteConfirm = { onDeleteConfirmClick() },
+                    onDeleteDismiss = { showDeleteConfirmDialog.value = false }
                 )
             }
         }
@@ -100,23 +106,26 @@ fun TransactionDetailLayout(
 
 @Composable
 private fun Content(
-    model: TransactionDetailModel,
-    onDatePicked: (Long) -> Unit,
-    onTypeOfValueSelected: (Boolean) -> Unit,
+    valueField: MutableState<String>,
+    descriptionField: MutableState<String>,
+    isIncomeField: MutableState<Boolean>,
+    displayDate: String,
+    isEdit: Boolean,
     showDeleteConfirmDialog: Boolean,
+    onDatePicked: (Long) -> Unit,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
-        val showDatePicker = remember { mutableStateOf(false) }
+        var showDatePicker by remember { mutableStateOf(false) }
 
-        if (showDatePicker.value) {
+        if (showDatePicker) {
             TransactionDetailDatePicker(
                 onConfirm = {
                     onDatePicked(it)
                 },
                 onDismiss = {
-                    showDatePicker.value = false
+                    showDatePicker = false
                 }
             )
         }
@@ -126,31 +135,27 @@ private fun Content(
                 onDismiss = onDeleteDismiss
             )
         }
-
         StateTextField(
             title = stringResource(R.string.detailtransaction_value),
             keyboardType = KeyboardType.Number,
-            valueState = model.value,
-            getFocus = !model.isEdit
+            valueState = valueField,
+            getFocus = !isEdit
         )
 
-        TransactionRadioGroup(
-            model = model,
-            onTypeOfValueSelected = onTypeOfValueSelected
-        )
+        TransactionRadioGroup(isIncomeField)
 
-        StateTextField(
+        DateTextField(
             title = stringResource(R.string.detailtransaction_date),
-            keyboardType = KeyboardType.Text,
-            valueState = model.displayDate,
+            value = displayDate,
             onClick = {
-                showDatePicker.value = true
+                showDatePicker = true
             }
         )
+
         StateTextField(
             title = stringResource(R.string.detailtransaction_description),
             keyboardType = KeyboardType.Text,
-            valueState = model.description
+            valueState = descriptionField
         )
     }
 }
@@ -158,22 +163,17 @@ private fun Content(
 @SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
-fun Preview() {
+fun TransactionDetailLayout2Preview() {
     TransactionDetailLayout(
+        valueField = mutableStateOf(""),
+        isIncomeField = mutableStateOf(true),
+        descriptionField = mutableStateOf(""),
+        displayDate = "",
+        isEdit = true,
+        topBarTitle = stringResource(R.string.detailtransaction_topbar_title_add),
         onArrowBackClick = {},
+        onDeleteConfirmClick = {},
         onFabClick = {},
-        model = TransactionDetailModel(
-            value = mutableStateOf(""),
-            isIncome = mutableStateOf(true),
-            displayDate = mutableStateOf(""),
-            description = mutableStateOf(""),
-            date = DomainTime(0, 0, 0),
-            isEdit = false,
-            id = 0,
-            titleResourceId = R.string.detailtransaction_topbar_title_add
-        ),
-        onDatePicked = {},
-        onTypeOfValueSelected = {},
-        onDeleteConfirmClick = {}
+        onDatePicked = {}
     )
 }

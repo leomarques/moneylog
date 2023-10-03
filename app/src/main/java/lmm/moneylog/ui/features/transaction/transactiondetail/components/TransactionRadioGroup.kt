@@ -5,29 +5,28 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import lmm.moneylog.R
-import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailModel
 
 @Composable
 fun TransactionRadioGroup(
-    model: TransactionDetailModel,
-    onTypeOfValueSelected: (Boolean) -> Unit
+    isIncome: MutableState<Boolean>
 ) {
     Row {
         Row(
             Modifier
                 .selectable(
-                    selected = model.isIncome.value,
-                    onClick = { onTypeOfValueSelected(true) }
+                    selected = isIncome.value,
+                    onClick = { isIncome.value = true }
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
             RadioButton(
-                selected = model.isIncome.value,
-                onClick = { onTypeOfValueSelected(true) }
+                selected = isIncome.value,
+                onClick = { isIncome.value = true }
             )
             Text(
                 text = stringResource(R.string.detailtransaction_income)
@@ -36,14 +35,14 @@ fun TransactionRadioGroup(
 
         Row(
             Modifier.selectable(
-                selected = !model.isIncome.value,
-                onClick = { onTypeOfValueSelected(false) }
+                selected = !isIncome.value,
+                onClick = { isIncome.value = false }
             ),
             verticalAlignment = Alignment.CenterVertically
         ) {
             RadioButton(
-                selected = !model.isIncome.value,
-                onClick = { onTypeOfValueSelected(false) }
+                selected = !isIncome.value,
+                onClick = { isIncome.value = false }
             )
             Text(
                 text = stringResource(R.string.detailtransaction_outcome)

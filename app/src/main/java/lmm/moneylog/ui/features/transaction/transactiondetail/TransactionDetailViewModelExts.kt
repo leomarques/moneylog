@@ -25,30 +25,17 @@ fun String.validateValue(isIncome: Boolean): Double {
 
 fun Transaction.toDetailModel(domainTimeConverter: DomainTimeConverter) =
     TransactionDetailModel(
-        value = mutableStateOf(
-            if (value > 0) {
-                "$value"
-            } else {
-                "${-value}"
-            }
-        ),
+        id = id,
+        value = mutableStateOf(value.toPositiveString()),
         isIncome = mutableStateOf(value > 0),
-        displayDate = mutableStateOf(
-            date.convertToDisplayDate(
-                domainTimeConverter
-            )
-        ),
         description = mutableStateOf(description),
         date = date,
+        displayDate = date.convertToDisplayDate(domainTimeConverter),
         isEdit = true,
-        id = id,
         titleResourceId = R.string.detailtransaction_topbar_title_edit
     )
 
-fun TransactionDetailModel.updateTime(timeStamp: Long, domainTimeConverter: DomainTimeConverter) {
-    date = domainTimeConverter.timeStampToDomainTime(timeStamp)
-    displayDate.value = date.convertToDisplayDate(domainTimeConverter)
-}
+private fun Double.toPositiveString() = if (this < 0) (-this).toString() else this.toString()
 
 fun TransactionDetailModel.toTransaction(): Transaction = Transaction(
     value = value.value.validateValue(isIncome.value),

@@ -8,10 +8,10 @@ import lmm.moneylog.data.transaction.time.DomainTime
 data class TransactionDetailModel(
     val value: MutableState<String> = mutableStateOf(""),
     val isIncome: MutableState<Boolean> = mutableStateOf(true),
-    val displayDate: MutableState<String> = mutableStateOf(""),
     val description: MutableState<String> = mutableStateOf(""),
-    var date: DomainTime = DomainTime(0, 0, 0),
+    val displayDate: String = "",
     val isEdit: Boolean = false,
+    val titleResourceId: Int = R.string.detailtransaction_topbar_title_add,
     val id: Int = -1,
-    val titleResourceId: Int = R.string.detailtransaction_topbar_title_add
+    val date: DomainTime = DomainTime(0, 0, 0)
 )
