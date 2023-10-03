@@ -24,6 +24,10 @@ fun TransactionDetailView(
         isIncomeField = uiState.isIncome,
         descriptionField = uiState.description,
         displayDate = uiState.displayDate,
+        displayAccount = uiState.displayAccount,
+        displayCategory = uiState.displayCategory,
+        accounts = uiState.accounts.map { it.name },
+        categories = uiState.categories.map { it.name },
         isEdit = uiState.isEdit,
         topBarTitle = stringResource(uiState.titleResourceId),
         onArrowBackClick = onArrowBackClick,
@@ -39,6 +43,12 @@ fun TransactionDetailView(
         },
         onDatePicked = { datePicked ->
             viewModel.onDatePicked(datePicked)
+        },
+        onAccountPicked = { index ->
+            viewModel.onAccountPicked(index)
+        },
+        onCategoryPicked = { index ->
+            viewModel.onCategoryPicked(index)
         }
     )
 }

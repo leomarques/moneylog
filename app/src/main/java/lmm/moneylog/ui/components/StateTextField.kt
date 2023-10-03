@@ -17,6 +17,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.Lifecycle
 import lmm.moneylog.ui.theme.SpaceSize
@@ -37,7 +38,8 @@ fun StateTextField(
         label = { Text(text = title) },
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = keyboardType,
-            imeAction = ImeAction.Done
+            imeAction = ImeAction.Done,
+            capitalization = KeyboardCapitalization.Sentences
         ),
         readOnly = onClick != null,
         keyboardActions = KeyboardActions(

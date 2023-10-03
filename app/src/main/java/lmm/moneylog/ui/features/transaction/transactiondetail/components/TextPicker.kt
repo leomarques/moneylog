@@ -24,9 +24,9 @@ import lmm.moneylog.ui.theme.SpaceSize
 
 @Composable
 fun TextPicker(
+    list: List<String>,
     onConfirm: (Int) -> Unit,
-    onDismiss: () -> Unit,
-    list: List<String>
+    onDismiss: () -> Unit
 ) {
     Dialog(
         onDismissRequest = onDismiss,
@@ -35,7 +35,10 @@ fun TextPicker(
                 itemsIndexed(list) { index, item ->
                     Item(
                         text = item,
-                        onItemClick = { onConfirm(index) }
+                        onItemClick = {
+                            onConfirm(index)
+                            onDismiss()
+                        }
                     )
                 }
             }

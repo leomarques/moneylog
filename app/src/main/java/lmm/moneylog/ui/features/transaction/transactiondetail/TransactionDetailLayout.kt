@@ -26,10 +26,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.DateTextField
+import lmm.moneylog.ui.components.ClickTextField
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.DeleteTransactionConfirmDialog
+import lmm.moneylog.ui.features.transaction.transactiondetail.components.TextPicker
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionDetailDatePicker
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionRadioGroup
 import lmm.moneylog.ui.theme.SpaceSize
@@ -41,12 +42,18 @@ fun TransactionDetailLayout(
     isIncomeField: MutableState<Boolean>,
     descriptionField: MutableState<String>,
     displayDate: String,
+    displayAccount: String,
+    displayCategory: String,
+    accounts: List<String>,
+    categories: List<String>,
     isEdit: Boolean,
     topBarTitle: String,
     onArrowBackClick: () -> Unit,
     onDeleteConfirmClick: () -> Unit,
     onFabClick: () -> Unit,
-    onDatePicked: (Long) -> Unit
+    onDatePicked: (Long) -> Unit,
+    onAccountPicked: (Int) -> Unit,
+    onCategoryPicked: (Int) -> Unit
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
@@ -93,9 +100,15 @@ fun TransactionDetailLayout(
                     descriptionField = descriptionField,
                     isIncomeField = isIncomeField,
                     displayDate = displayDate,
+                    displayAccount = displayAccount,
+                    displayCategory = displayCategory,
+                    accounts = accounts,
+                    categories = categories,
                     isEdit = isEdit,
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
                     onDatePicked = onDatePicked,
+                    onAccountPicked = onAccountPicked,
+                    onCategoryPicked = onCategoryPicked,
                     onDeleteConfirm = { onDeleteConfirmClick() },
                     onDeleteDismiss = { showDeleteConfirmDialog.value = false }
                 )
@@ -110,14 +123,22 @@ private fun Content(
     descriptionField: MutableState<String>,
     isIncomeField: MutableState<Boolean>,
     displayDate: String,
+    displayAccount: String,
+    displayCategory: String,
+    accounts: List<String>,
+    categories: List<String>,
     isEdit: Boolean,
     showDeleteConfirmDialog: Boolean,
     onDatePicked: (Long) -> Unit,
+    onAccountPicked: (Int) -> Unit,
+    onCategoryPicked: (Int) -> Unit,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
         var showDatePicker by remember { mutableStateOf(false) }
+        var showAccountPicker by remember { mutableStateOf(false) }
+        var showCategoryPicker by remember { mutableStateOf(false) }
 
         if (showDatePicker) {
             TransactionDetailDatePicker(
@@ -129,12 +150,36 @@ private fun Content(
                 }
             )
         }
+        if (showAccountPicker) {
+            TextPicker(
+                list = accounts,
+                onConfirm = { index ->
+                    onAccountPicked(index)
+                },
+                onDismiss = {
+                    showAccountPicker = false
+                }
+            )
+        }
+        if (showCategoryPicker) {
+            TextPicker(
+                list = categories,
+                onConfirm = { index ->
+                    onCategoryPicked(index)
+                },
+                onDismiss = {
+                    showCategoryPicker = false
+                }
+            )
+        }
+
         if (showDeleteConfirmDialog) {
             DeleteTransactionConfirmDialog(
                 onConfirm = onDeleteConfirm,
                 onDismiss = onDeleteDismiss
             )
         }
+
         StateTextField(
             title = stringResource(R.string.detailtransaction_value),
             keyboardType = KeyboardType.Number,
@@ -144,7 +189,7 @@ private fun Content(
 
         TransactionRadioGroup(isIncomeField)
 
-        DateTextField(
+        ClickTextField(
             title = stringResource(R.string.detailtransaction_date),
             value = displayDate,
             onClick = {
@@ -157,6 +202,22 @@ private fun Content(
             keyboardType = KeyboardType.Text,
             valueState = descriptionField
         )
+
+        ClickTextField(
+            title = stringResource(R.string.detailtransaction_account),
+            value = displayAccount,
+            onClick = {
+                showAccountPicker = true
+            }
+        )
+
+        ClickTextField(
+            title = stringResource(R.string.detailtransaction_category),
+            value = displayCategory,
+            onClick = {
+                showCategoryPicker = true
+            }
+        )
     }
 }
 
@@ -164,16 +225,22 @@ private fun Content(
 @Preview
 @Composable
 fun TransactionDetailLayout2Preview() {
-    TransactionDetailLayout(
-        valueField = mutableStateOf(""),
-        isIncomeField = mutableStateOf(true),
-        descriptionField = mutableStateOf(""),
-        displayDate = "",
-        isEdit = true,
-        topBarTitle = stringResource(R.string.detailtransaction_topbar_title_add),
-        onArrowBackClick = {},
-        onDeleteConfirmClick = {},
-        onFabClick = {},
-        onDatePicked = {}
-    )
+//    TransactionDetailLayout(
+//        valueField = mutableStateOf(""),
+//        isIncomeField = mutableStateOf(true),
+//        descriptionField = mutableStateOf(""),
+//        displayDate = "",
+//        displayAccount = "",
+//        displayCategory = "",
+//        accounts = emptyList(),
+//        categories = emptyList(),
+//        isEdit = true,
+//        topBarTitle = stringResource(R.string.detailtransaction_topbar_title_add),
+//        onArrowBackClick = {},
+//        onDeleteConfirmClick = {},
+//        onFabClick = {},
+//        onDatePicked = {},
+//        onAccountPicked = {},
+//        onCategoryPicked = {}
+//    )
 }

@@ -32,7 +32,9 @@ fun Transaction.toDetailModel(domainTimeConverter: DomainTimeConverter) =
         date = date,
         displayDate = date.convertToDisplayDate(domainTimeConverter),
         isEdit = true,
-        titleResourceId = R.string.detailtransaction_topbar_title_edit
+        titleResourceId = R.string.detailtransaction_topbar_title_edit,
+        accountId = accountId,
+        categoryId = categoryId
     )
 
 private fun Double.toPositiveString() = if (this < 0) (-this).toString() else this.toString()
@@ -42,9 +44,9 @@ fun TransactionDetailModel.toTransaction(): Transaction = Transaction(
     date = date,
     description = description.value,
     id = id,
-    accountId = null,
-    categoryId = null
-) // TODO: FIX THIS
+    accountId = accountId,
+    categoryId = categoryId
+)
 
 fun SavedStateHandle.getIdParam(): Int? {
     get<Int>("id")?.let { id ->

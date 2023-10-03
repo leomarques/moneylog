@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import lmm.moneylog.data.account.repositories.GetAccountsRepository
+import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
 import lmm.moneylog.data.transaction.repositories.GetTransactionRepository
@@ -20,6 +22,8 @@ class TransactionDetailViewModel(
     private val addTransactionRepository: AddTransactionRepository,
     private val updateTransactionRepository: UpdateTransactionRepository,
     private val deleteTransactionRepository: DeleteTransactionRepository,
+    private val getAccountsRepository: GetAccountsRepository,
+    private val getCategoriesRepository: GetCategoriesRepository,
     private val domainTimeConverter: DomainTimeConverter
 ) : ViewModel() {
 
@@ -47,6 +51,26 @@ class TransactionDetailViewModel(
                     )
                 }
             }
+
+            val accounts = getAccountsRepository.getAccountsSuspend()
+            val categories = getCategoriesRepository.getCategoriesSuspend()
+
+            val displayAccount = accounts.firstOrNull {
+                it.id == _uiState.value.accountId
+            }?.name
+
+            val displayCategory = categories.firstOrNull {
+                it.id == _uiState.value.categoryId
+            }?.name
+
+            _uiState.update {
+                it.copy(
+                    accounts = accounts,
+                    categories = categories,
+                    displayAccount = displayAccount.orEmpty(),
+                    displayCategory = displayCategory.orEmpty()
+                )
+            }
         }
     }
 
@@ -62,6 +86,24 @@ class TransactionDetailViewModel(
             it.copy(
                 date = domainTime,
                 displayDate = domainTime.convertToDisplayDate(domainTimeConverter)
+            )
+        }
+    }
+
+    fun onAccountPicked(index: Int) {
+        _uiState.update {
+            it.copy(
+                displayAccount = _uiState.value.accounts[index].name,
+                accountId = _uiState.value.accounts[index].id
+            )
+        }
+    }
+
+    fun onCategoryPicked(index: Int) {
+        _uiState.update {
+            it.copy(
+                displayCategory = _uiState.value.categories[index].name,
+                categoryId = _uiState.value.categories[index].id
             )
         }
     }

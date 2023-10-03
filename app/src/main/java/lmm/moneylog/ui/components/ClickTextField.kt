@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import lmm.moneylog.ui.theme.SpaceSize
 
 @Composable
-fun DateTextField(
+fun ClickTextField(
     value: String,
     title: String,
     onClick: (() -> Unit)
