@@ -5,6 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.account.Account
 import lmm.moneylog.data.account.repositories.AddAccountRepository
@@ -21,35 +25,38 @@ class AccountDetailViewModel(
     private val deleteAccountRepository: DeleteAccountRepository
 ) : ViewModel() {
 
-    var model = AccountDetailModel()
+    private val _uiState = MutableStateFlow(AccountDetailModel())
+    val uiState: StateFlow<AccountDetailModel> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
             savedStateHandle.getIdParam()?.let { id ->
                 getAccountRepository.getAccountById(id)?.let { account ->
-                    model = AccountDetailModel(
-                        name = mutableStateOf(account.name),
-                        isEdit = true,
-                        id = account.id,
-                        color = mutableLongStateOf(account.color)
-                    )
+                    _uiState.update {
+                        AccountDetailModel(
+                            name = mutableStateOf(account.name),
+                            color = mutableLongStateOf(account.color),
+                            isEdit = true,
+                            id = account.id
+                        )
+                    }
                 }
             }
         }
     }
 
-    fun deleteAccount(id: Int) {
+    fun deleteAccount() {
         viewModelScope.launch {
-            deleteAccountRepository.delete(id)
+            deleteAccountRepository.delete(_uiState.value.id)
         }
     }
 
     fun onFabClick() {
         viewModelScope.launch {
-            if (model.isEdit) {
-                updateAccountRepository.update(model.toAccount())
+            if (_uiState.value.isEdit) {
+                updateAccountRepository.update(_uiState.value.toAccount())
             } else {
-                addAccountRepository.save(model.toAccount())
+                addAccountRepository.save(_uiState.value.toAccount())
             }
         }
     }

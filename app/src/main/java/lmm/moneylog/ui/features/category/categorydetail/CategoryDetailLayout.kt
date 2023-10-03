@@ -16,6 +16,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -33,8 +34,9 @@ import lmm.moneylog.ui.theme.SpaceSize
 fun CategoryDetailLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
-    model: CategoryDetailModel,
-    onDeleteConfirmClick: (Int) -> Unit = {}
+    onDeleteConfirmClick: () -> Unit = {},
+    isEdit: Boolean,
+    valueState: MutableState<String>
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
@@ -53,7 +55,7 @@ fun CategoryDetailLayout(
                     }
                 },
                 actions = {
-                    if (model.isEdit) {
+                    if (isEdit) {
                         IconButton(
                             onClick = { showDeleteConfirmDialog.value = true },
                             content = {
@@ -77,14 +79,13 @@ fun CategoryDetailLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 Content(
-                    model = model,
-                    onDeleteConfirm = {
-                        onDeleteConfirmClick(model.id)
-                    },
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
+                    onDeleteConfirm = onDeleteConfirmClick,
                     onDeleteDismiss = {
                         showDeleteConfirmDialog.value = false
-                    }
+                    },
+                    isEdit = isEdit,
+                    valueState = valueState
                 )
             }
         }
@@ -93,10 +94,11 @@ fun CategoryDetailLayout(
 
 @Composable
 private fun Content(
-    model: CategoryDetailModel,
     showDeleteConfirmDialog: Boolean,
     onDeleteConfirm: () -> Unit,
-    onDeleteDismiss: () -> Unit
+    onDeleteDismiss: () -> Unit,
+    isEdit: Boolean,
+    valueState: MutableState<String>
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
         if (showDeleteConfirmDialog) {
@@ -109,8 +111,8 @@ private fun Content(
         StateTextField(
             title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,
-            valueState = model.name,
-            getFocus = !model.isEdit
+            valueState = valueState,
+            getFocus = !isEdit
         )
     }
 }
@@ -122,11 +124,8 @@ fun CategoryDetailLayoutPreview() {
     CategoryDetailLayout(
         onArrowBackClick = {},
         onFabClick = {},
-        model = CategoryDetailModel(
-            name = mutableStateOf(""),
-            isEdit = false,
-            id = 0
-        ),
-        onDeleteConfirmClick = {}
+        onDeleteConfirmClick = {},
+        isEdit = false,
+        valueState = mutableStateOf("")
     )
 }
