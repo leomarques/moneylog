@@ -4,9 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NamedNavArgument
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -123,20 +120,5 @@ fun MyNavHost(
         ) {
             CategoryDetailView(onArrowBackClick)
         }
-    }
-}
-
-private fun NavGraphBuilder.composableExt(
-    route: String,
-    arguments: List<NamedNavArgument>? = null,
-    onArrowBackClick: () -> Unit,
-    content: @Composable (NavBackStackEntry?) -> Unit
-) {
-    composable(
-        route = route,
-        arguments = arguments ?: emptyList()
-    ) {
-        BackPressHandler(onBackPressed = onArrowBackClick)
-        content(it)
     }
 }

@@ -17,6 +17,23 @@ import lmm.moneylog.R
 
 @Composable
 fun MyNavigationBar(
+    selectedIndex: Int,
+    onClick: (Int) -> Unit
+) {
+    BaseNavigationBar(
+        items = listOf(
+            Pair(stringResource(R.string.navbar_home), Icons.Default.Home),
+            Pair(stringResource(R.string.navbar_transactions), Icons.Default.PlayArrow),
+            Pair(stringResource(R.string.navbar_accounts), Icons.Default.Person),
+            Pair(stringResource(R.string.navbar_categories), Icons.Default.Star)
+        ),
+        selectedIndex = selectedIndex,
+        onClick = onClick
+    )
+}
+
+@Composable
+fun BaseNavigationBar(
     items: List<Pair<String, ImageVector>>,
     selectedIndex: Int,
     onClick: (Int) -> Unit
@@ -43,13 +60,5 @@ fun MyNavigationBar(
 @Preview
 @Composable
 fun MyNavigationBarPreview() {
-    MyNavigationBar(
-        selectedIndex = 0,
-        items = listOf(
-            Pair(stringResource(R.string.navbar_home), Icons.Default.Home),
-            Pair(stringResource(R.string.navbar_transactions), Icons.Default.PlayArrow),
-            Pair(stringResource(R.string.navbar_accounts), Icons.Default.Person),
-            Pair(stringResource(R.string.navbar_categories), Icons.Default.Star)
-        )
-    ) {}
+    MyNavigationBar(selectedIndex = 0) {}
 }
