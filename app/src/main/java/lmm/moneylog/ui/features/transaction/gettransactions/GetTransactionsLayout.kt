@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -41,11 +40,15 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyFab
-import lmm.moneylog.ui.components.SearchBarUI
+import lmm.moneylog.ui.components.SearchTopBar
 import lmm.moneylog.ui.theme.SpaceSize
 import lmm.moneylog.ui.theme.income
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalAnimationApi::class,
+    ExperimentalComposeUiApi::class
+)
 @Composable
 fun GetTransactionsLayout(
     onArrowBackClick: () -> Unit,
@@ -54,6 +57,7 @@ fun GetTransactionsLayout(
     onItemClick: (Int) -> Unit
 ) {
     val showTopBar = remember { mutableStateOf(true) }
+    val filter = remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -82,62 +86,36 @@ fun GetTransactionsLayout(
                         )
                     }
                 )
+            } else {
+                SearchTopBar(
+                    searchText = filter.value,
+                    placeholderText = stringResource(R.string.search_placeholder),
+                    onSearchTextChanged = { filter.value = it },
+                    onClearClick = {
+                        filter.value = ""
+                        showTopBar.value = true
+                    },
+                    onArrowBackClick = onArrowBackClick
+                )
             }
         },
+        floatingActionButtonPosition = FabPosition.Center,
         floatingActionButton = {
             MyFab(
                 onClick = onFabClick,
                 icon = Icons.Default.Add
             )
         },
-        floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
-            Content(
-                model = model,
-                onItemClick = onItemClick,
-                showSearchBar = !showTopBar.value,
-                onClearClick = {
-                    showTopBar.value = true
-                },
-                paddingValues = paddingValues,
-                onArrowBackClick = onArrowBackClick
-            )
+            Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
+                List(
+                    model = model,
+                    filter = filter,
+                    onItemClick = onItemClick
+                )
+            }
         }
     )
-}
-
-@OptIn(ExperimentalAnimationApi::class, ExperimentalComposeUiApi::class)
-@Composable
-fun Content(
-    model: GetTransactionsModel,
-    onItemClick: (Int) -> Unit,
-    showSearchBar: Boolean,
-    onClearClick: () -> Unit,
-    paddingValues: PaddingValues,
-    onArrowBackClick: () -> Unit
-) {
-    val filter = remember { mutableStateOf("") }
-
-    Column(Modifier.fillMaxWidth()) {
-        if (showSearchBar) {
-            SearchBarUI(
-                searchText = filter.value,
-                placeholderText = stringResource(R.string.search_placeholder),
-                onSearchTextChanged = { filter.value = it },
-                onClearClick = {
-                    filter.value = ""
-                    onClearClick()
-                },
-                onArrowBackClick = onArrowBackClick
-            ) {
-                List(model, filter, onItemClick)
-            }
-        } else {
-            Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
-                List(model, filter, onItemClick)
-            }
-        }
-    }
 }
 
 @Composable

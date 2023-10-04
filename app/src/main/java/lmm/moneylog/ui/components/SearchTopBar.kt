@@ -4,8 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
@@ -36,39 +34,16 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 
-@ExperimentalAnimationApi
-@ExperimentalComposeUiApi
-@Composable
-fun SearchBarUI(
-    searchText: String,
-    placeholderText: String = "",
-    onSearchTextChanged: (String) -> Unit = {},
-    onClearClick: () -> Unit = {},
-    onArrowBackClick: () -> Unit = {},
-    content: @Composable () -> Unit = {}
-) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        SearchBar(
-            searchText,
-            placeholderText,
-            onSearchTextChanged,
-            onClearClick,
-            onArrowBackClick
-        )
-        content()
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Composable
-fun SearchBar(
+fun SearchTopBar(
     searchText: String,
     placeholderText: String = "",
     onSearchTextChanged: (String) -> Unit = {},
     onClearClick: () -> Unit = {},
-    onNavigateBack: () -> Unit = {}
+    onArrowBackClick: () -> Unit = {}
 ) {
     var showClearButton by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -77,7 +52,7 @@ fun SearchBar(
     TopAppBar(
         title = { Text("") },
         navigationIcon = {
-            IconButton(onClick = { onNavigateBack() }) {
+            IconButton(onClick = { onArrowBackClick() }) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     modifier = Modifier,
@@ -105,7 +80,6 @@ fun SearchBar(
                     unfocusedIndicatorColor = Color.Transparent,
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent
-//                cursorColor = LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
                 ),
                 trailingIcon = {
                     AnimatedVisibility(
