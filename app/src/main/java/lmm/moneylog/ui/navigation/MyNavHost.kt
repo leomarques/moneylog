@@ -22,7 +22,16 @@ import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailV
 fun MyNavHost(
     navController: NavHostController,
     startDestination: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onHomeFabClick: () -> Unit,
+    onBalanceCardClick: (String) -> Unit,
+    onArrowBackClick: () -> Unit,
+    onTransactionsFabClick: () -> Unit,
+    onTransactionsItemClick: (Int) -> Unit,
+    onAccountsFabClick: () -> Unit,
+    onAccountsItemClick: (Int) -> Unit,
+    onCategoriesFabClick: () -> Unit,
+    onCategoriesItemClick: (Int) -> Unit
 ) {
     NavHost(
         modifier = modifier.background(MaterialTheme.colorScheme.background),
@@ -31,16 +40,8 @@ fun MyNavHost(
     ) {
         composable(homeScreen) {
             HomeLayout(
-                onFabClick = {
-                    navController.navigate(transactionDetailScreen)
-                },
-                onClick = { typeOfValue ->
-                    if (typeOfValue == "all") {
-                        navController.navigate(getAccountsScreen)
-                    } else {
-                        navController.navigate("$getTransactionsScreen/$typeOfValue")
-                    }
-                }
+                onFabClick = onHomeFabClick,
+                onClick = onBalanceCardClick
             )
         }
 
@@ -49,16 +50,10 @@ fun MyNavHost(
             val typeOfValue = convertTransactionTypeParam(param)
 
             GetTransactionsView(
-                onArrowBackClick = {
-                    navController.popBackStack()
-                },
-                onFabClick = {
-                    navController.navigate(transactionDetailScreen)
-                },
+                onArrowBackClick = onArrowBackClick,
+                onFabClick = onTransactionsFabClick,
                 typeOfValue = typeOfValue,
-                onItemClick = { id ->
-                    navController.navigate("$transactionDetailScreen?$paramId=$id")
-                }
+                onItemClick = onTransactionsItemClick
             )
         }
 
@@ -71,24 +66,14 @@ fun MyNavHost(
                 }
             )
         ) {
-            TransactionDetailView(
-                onArrowBackClick = {
-                    navController.popBackStack()
-                }
-            )
+            TransactionDetailView(onArrowBackClick)
         }
 
         composable(getAccountsScreen) {
             GetAccountsView(
-                onArrowBackClick = {
-                    navController.popBackStack()
-                },
-                onFabClick = {
-                    navController.navigate(accountDetailScreen)
-                },
-                onItemClick = { id ->
-                    navController.navigate("$accountDetailScreen?$paramId=$id")
-                }
+                onArrowBackClick = onArrowBackClick,
+                onFabClick = onAccountsFabClick,
+                onItemClick = onAccountsItemClick
             )
         }
 
@@ -101,24 +86,14 @@ fun MyNavHost(
                 }
             )
         ) {
-            AccountDetailView(
-                onArrowBackClick = {
-                    navController.popBackStack()
-                }
-            )
+            AccountDetailView(onArrowBackClick)
         }
 
         composable(getCategoriesScreen) {
             GetCategoriesView(
-                onArrowBackClick = {
-                    navController.popBackStack()
-                },
-                onFabClick = {
-                    navController.navigate(categoryDetailScreen)
-                },
-                onItemClick = { id ->
-                    navController.navigate("$categoryDetailScreen?$paramId=$id")
-                }
+                onArrowBackClick = onArrowBackClick,
+                onFabClick = onCategoriesFabClick,
+                onItemClick = onCategoriesItemClick
             )
         }
 
@@ -131,11 +106,7 @@ fun MyNavHost(
                 }
             )
         ) {
-            CategoryDetailView(
-                onArrowBackClick = {
-                    navController.popBackStack()
-                }
-            )
+            CategoryDetailView(onArrowBackClick)
         }
     }
 }

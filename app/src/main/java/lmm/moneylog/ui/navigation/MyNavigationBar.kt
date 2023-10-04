@@ -10,24 +10,17 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavHostController
+import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 
 @Composable
-fun MyNavigationBar(navHostController: NavHostController) {
-    var selectedItem by remember { mutableIntStateOf(0) }
-    val items = listOf(
-        Pair(stringResource(R.string.navbar_home), Icons.Default.Home),
-        Pair(stringResource(R.string.navbar_transactions), Icons.Default.PlayArrow),
-        Pair(stringResource(R.string.navbar_accounts), Icons.Default.Person),
-        Pair(stringResource(R.string.navbar_categories), Icons.Default.Star)
-    )
-
+fun MyNavigationBar(
+    items: List<Pair<String, ImageVector>>,
+    selectedIndex: Int,
+    onClick: (Int) -> Unit
+) {
     NavigationBar {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
@@ -38,21 +31,25 @@ fun MyNavigationBar(navHostController: NavHostController) {
                     )
                 },
                 label = { Text(item.first) },
-                selected = selectedItem == index,
+                selected = selectedIndex == index,
                 onClick = {
-                    selectedItem = index
-
-                    navHostController.navigate(
-                        when (index) {
-                            0 -> homeScreen
-                            1 -> "$getTransactionsScreen/all"
-                            2 -> getAccountsScreen
-                            3 -> getCategoriesScreen
-                            else -> homeScreen
-                        }
-                    )
+                    onClick(index)
                 }
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun MyNavigationBarPreview() {
+    MyNavigationBar(
+        selectedIndex = 0,
+        items = listOf(
+            Pair(stringResource(R.string.navbar_home), Icons.Default.Home),
+            Pair(stringResource(R.string.navbar_transactions), Icons.Default.PlayArrow),
+            Pair(stringResource(R.string.navbar_accounts), Icons.Default.Person),
+            Pair(stringResource(R.string.navbar_categories), Icons.Default.Star)
+        )
+    ) {}
 }
