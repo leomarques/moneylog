@@ -35,6 +35,9 @@
     <string name="gettransactions_topbar_income">Receitas</string>
     <string name="gettransactions_topbar_outcome">Despesas</string>
     <string name="gettransactions_nodescription">(sem descrição)</string>
+    <string name="search_label">Procure pelo nome</string>
+    <string name="search_icon_desc">search icon</string>
+    <string name="clear_search_icon_desc">clear search icon</string>
 
     <string name="getaccounts_topbar">Contas</string>
     <string name="getcategories_topbar">Categorias</string>

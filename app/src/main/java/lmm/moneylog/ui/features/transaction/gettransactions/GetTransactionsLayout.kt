@@ -24,6 +24,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,6 +36,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyFab
+import lmm.moneylog.ui.components.MySearchBar
 import lmm.moneylog.ui.theme.SpaceSize
 import lmm.moneylog.ui.theme.income
 
@@ -84,9 +87,27 @@ fun Content(
     model: GetTransactionsModel,
     onItemClick: (Int) -> Unit
 ) {
+    val filter = remember { mutableStateOf("") }
+
     Column(Modifier.fillMaxWidth()) {
+        MySearchBar(
+            onSearch = { text ->
+                filter.value = text
+            }
+        )
+
         LazyColumn {
-            items(model.transactions.reversed()) { transaction ->
+            items(
+                model.transactions
+                    .filter { transaction ->
+                        transaction.description
+                            .startsWith(
+                                prefix = filter.value,
+                                ignoreCase = true
+                            )
+                    }
+                    .reversed()
+            ) { transaction ->
                 TransactionItem(
                     transaction = transaction,
                     onItemClick = onItemClick
