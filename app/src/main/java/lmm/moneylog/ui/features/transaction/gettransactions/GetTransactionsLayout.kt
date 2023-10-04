@@ -1,9 +1,11 @@
 package lmm.moneylog.ui.features.transaction.gettransactions
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -13,6 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
@@ -24,9 +27,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -36,7 +41,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyFab
-import lmm.moneylog.ui.components.MySearchBar
+import lmm.moneylog.ui.components.SearchBarUI
 import lmm.moneylog.ui.theme.SpaceSize
 import lmm.moneylog.ui.theme.income
 
@@ -48,21 +53,36 @@ fun GetTransactionsLayout(
     model: GetTransactionsModel,
     onItemClick: (Int) -> Unit
 ) {
+    val showTopBar = remember { mutableStateOf(true) }
+
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(text = stringResource(model.titleResourceId))
-                },
-                navigationIcon = {
-                    IconButton(onClick = onArrowBackClick) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+            if (showTopBar.value) {
+                TopAppBar(
+                    title = {
+                        Text(text = stringResource(model.titleResourceId))
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = onArrowBackClick) {
+                            Icon(
+                                imageVector = Icons.Filled.ArrowBack,
+                                contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+                            )
+                        }
+                    },
+                    actions = {
+                        IconButton(
+                            onClick = { showTopBar.value = false },
+                            content = {
+                                Icon(
+                                    imageVector = Icons.Default.Search,
+                                    contentDescription = stringResource(R.string.detailtransaction_delete_desc)
+                                )
+                            }
                         )
                     }
-                }
-            )
+                )
+            }
         },
         floatingActionButton = {
             MyFab(
@@ -72,47 +92,76 @@ fun GetTransactionsLayout(
         },
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
-            Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
-                Content(
-                    model = model,
-                    onItemClick = onItemClick
-                )
-            }
+            Content(
+                model = model,
+                onItemClick = onItemClick,
+                showSearchBar = !showTopBar.value,
+                onClearClick = {
+                    showTopBar.value = true
+                },
+                paddingValues = paddingValues,
+                onArrowBackClick = onArrowBackClick
+            )
         }
     )
 }
 
+@OptIn(ExperimentalAnimationApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun Content(
     model: GetTransactionsModel,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
+    showSearchBar: Boolean,
+    onClearClick: () -> Unit,
+    paddingValues: PaddingValues,
+    onArrowBackClick: () -> Unit
 ) {
     val filter = remember { mutableStateOf("") }
 
     Column(Modifier.fillMaxWidth()) {
-        MySearchBar(
-            onSearch = { text ->
-                filter.value = text
+        if (showSearchBar) {
+            SearchBarUI(
+                searchText = filter.value,
+                placeholderText = stringResource(R.string.search_placeholder),
+                onSearchTextChanged = { filter.value = it },
+                onClearClick = {
+                    filter.value = ""
+                    onClearClick()
+                },
+                onArrowBackClick = onArrowBackClick
+            ) {
+                List(model, filter, onItemClick)
             }
-        )
+        } else {
+            Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
+                List(model, filter, onItemClick)
+            }
+        }
+    }
+}
 
-        LazyColumn {
-            items(
-                model.transactions
-                    .filter { transaction ->
-                        transaction.description
-                            .startsWith(
-                                prefix = filter.value,
-                                ignoreCase = true
-                            )
-                    }
-                    .reversed()
-            ) { transaction ->
-                TransactionItem(
-                    transaction = transaction,
-                    onItemClick = onItemClick
-                )
-            }
+@Composable
+private fun List(
+    model: GetTransactionsModel,
+    filter: MutableState<String>,
+    onItemClick: (Int) -> Unit
+) {
+    LazyColumn {
+        items(
+            model.transactions
+                .filter { transaction ->
+                    transaction.description
+                        .startsWith(
+                            prefix = filter.value,
+                            ignoreCase = true
+                        )
+                }
+                .reversed()
+        ) { transaction ->
+            TransactionItem(
+                transaction = transaction,
+                onItemClick = onItemClick
+            )
         }
     }
 }
