@@ -4,6 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -45,8 +48,11 @@ fun MyNavHost(
             )
         }
 
-        composable("$getTransactionsScreen/{$paramTypeOfValue}") { backStackEntry ->
-            val param = backStackEntry.arguments?.getString(paramTypeOfValue)
+        composableExt(
+            route = "$getTransactionsScreen/{$paramTypeOfValue}",
+            onArrowBackClick = onArrowBackClick
+        ) { backStackEntry ->
+            val param = backStackEntry?.arguments?.getString(paramTypeOfValue)
             val typeOfValue = convertTransactionTypeParam(param)
 
             GetTransactionsView(
@@ -57,8 +63,9 @@ fun MyNavHost(
             )
         }
 
-        composable(
+        composableExt(
             route = "$transactionDetailScreen?$paramId={$paramId}",
+            onArrowBackClick = onArrowBackClick,
             arguments = listOf(
                 navArgument(paramId) {
                     defaultValue = -1
@@ -69,7 +76,10 @@ fun MyNavHost(
             TransactionDetailView(onArrowBackClick)
         }
 
-        composable(getAccountsScreen) {
+        composableExt(
+            route = getAccountsScreen,
+            onArrowBackClick = onArrowBackClick
+        ) {
             GetAccountsView(
                 onArrowBackClick = onArrowBackClick,
                 onFabClick = onAccountsFabClick,
@@ -77,8 +87,9 @@ fun MyNavHost(
             )
         }
 
-        composable(
+        composableExt(
             route = "$accountDetailScreen?$paramId={$paramId}",
+            onArrowBackClick = onArrowBackClick,
             arguments = listOf(
                 navArgument(paramId) {
                     defaultValue = -1
@@ -89,7 +100,10 @@ fun MyNavHost(
             AccountDetailView(onArrowBackClick)
         }
 
-        composable(getCategoriesScreen) {
+        composableExt(
+            route = getCategoriesScreen,
+            onArrowBackClick = onArrowBackClick
+        ) {
             GetCategoriesView(
                 onArrowBackClick = onArrowBackClick,
                 onFabClick = onCategoriesFabClick,
@@ -97,8 +111,9 @@ fun MyNavHost(
             )
         }
 
-        composable(
+        composableExt(
             route = "$categoryDetailScreen?$paramId={$paramId}",
+            onArrowBackClick = onArrowBackClick,
             arguments = listOf(
                 navArgument(paramId) {
                     defaultValue = -1
@@ -108,5 +123,20 @@ fun MyNavHost(
         ) {
             CategoryDetailView(onArrowBackClick)
         }
+    }
+}
+
+private fun NavGraphBuilder.composableExt(
+    route: String,
+    arguments: List<NamedNavArgument>? = null,
+    onArrowBackClick: () -> Unit,
+    content: @Composable (NavBackStackEntry?) -> Unit
+) {
+    composable(
+        route = route,
+        arguments = arguments ?: emptyList()
+    ) {
+        BackPressHandler(onBackPressed = onArrowBackClick)
+        content(it)
     }
 }
