@@ -12,6 +12,7 @@ import androidx.navigation.navArgument
 import lmm.moneylog.ui.convertTransactionTypeParam
 import lmm.moneylog.ui.features.account.accountdetail.AccountDetailView
 import lmm.moneylog.ui.features.account.getaccounts.GetAccountsView
+import lmm.moneylog.ui.features.account.getaccounts.archive.GetArchivedAccountsView
 import lmm.moneylog.ui.features.category.categorydetail.CategoryDetailView
 import lmm.moneylog.ui.features.category.getccategories.GetCategoriesView
 import lmm.moneylog.ui.features.home.HomeLayout
@@ -31,7 +32,8 @@ fun MyNavHost(
     onAccountsFabClick: () -> Unit,
     onAccountsItemClick: (Int) -> Unit,
     onCategoriesFabClick: () -> Unit,
-    onCategoriesItemClick: (Int) -> Unit
+    onCategoriesItemClick: (Int) -> Unit,
+    onArchivedIconClick: () -> Unit
 ) {
     NavHost(
         modifier = modifier.background(MaterialTheme.colorScheme.background),
@@ -80,7 +82,8 @@ fun MyNavHost(
             GetAccountsView(
                 onArrowBackClick = onArrowBackClick,
                 onFabClick = onAccountsFabClick,
-                onItemClick = onAccountsItemClick
+                onItemClick = onAccountsItemClick,
+                onArchivedIconClick = onArchivedIconClick
             )
         }
 
@@ -119,6 +122,13 @@ fun MyNavHost(
             )
         ) {
             CategoryDetailView(onArrowBackClick)
+        }
+
+        composableExt(
+            route = getArchivedAccountsScreen,
+            onArrowBackClick = onArrowBackClick
+        ) {
+            GetArchivedAccountsView(onArrowBackClick = onArrowBackClick)
         }
     }
 }

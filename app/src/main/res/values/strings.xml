@@ -14,7 +14,7 @@
 
     <string name="detailtransaction_arrowback_desc">arrow back icon</string>
     <string name="detailtransaction_delete_desc">Delete</string>
-    <string name="detailtransaction_archive_desc">Archive</string>
+    <string name="archive_desc">Archive</string>
 
     <string name="navbar_home">Início</string>
     <string name="navbar_transactions">Transações</string>

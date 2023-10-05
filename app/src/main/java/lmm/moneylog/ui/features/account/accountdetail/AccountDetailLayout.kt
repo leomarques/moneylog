@@ -69,7 +69,7 @@ fun AccountDetailLayout(
                             content = {
                                 Icon(
                                     imageVector = Icons.Default.Build,
-                                    contentDescription = stringResource(R.string.detailtransaction_archive_desc)
+                                    contentDescription = stringResource(R.string.archive_desc)
                                 )
                             }
                         )

@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
@@ -42,7 +43,8 @@ fun GetAccountsLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     model: GetAccountsModel,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
+    onArchivedIconClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -57,6 +59,17 @@ fun GetAccountsLayout(
                             contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
                         )
                     }
+                },
+                actions = {
+                    IconButton(
+                        onClick = onArchivedIconClick,
+                        content = {
+                            Icon(
+                                imageVector = Icons.Default.ThumbUp,
+                                contentDescription = stringResource(R.string.archive_desc)
+                            )
+                        }
+                    )
                 }
             )
         },
@@ -69,7 +82,7 @@ fun GetAccountsLayout(
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
             Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
-                Content(
+                GetAccountsContent(
                     model = model,
                     onItemClick = onItemClick
                 )
@@ -79,14 +92,14 @@ fun GetAccountsLayout(
 }
 
 @Composable
-fun Content(
+fun GetAccountsContent(
     model: GetAccountsModel,
     onItemClick: (Int) -> Unit
 ) {
     Column(Modifier.fillMaxWidth()) {
         LazyColumn {
             items(model.list.reversed()) { accountModel ->
-                AccountItem(
+                GetAccountsItem(
                     account = accountModel.account,
                     onItemClick = onItemClick,
                     balance = accountModel.balance
@@ -97,7 +110,7 @@ fun Content(
 }
 
 @Composable
-fun AccountItem(
+fun GetAccountsItem(
     account: Account,
     onItemClick: (Int) -> Unit,
     balance: String
@@ -142,7 +155,7 @@ fun AccountItem(
 
 @Preview
 @Composable
-fun Preview() {
+fun GetAccountsLayoutPreview() {
     GetAccountsLayout(
         onArrowBackClick = { },
         onFabClick = { },
@@ -177,6 +190,7 @@ fun Preview() {
                 )
             )
         ),
-        onItemClick = {}
+        onItemClick = {},
+        onArchivedIconClick = {}
     )
 }

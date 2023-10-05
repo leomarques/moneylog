@@ -43,6 +43,7 @@ fun MutableIntState.updateIndex(destination: String) {
         getTransactionsScreen -> 1
         transactionDetailScreen -> 1
         getAccountsScreen -> 2
+        getArchivedAccountsScreen -> 2
         accountDetailScreen -> 2
         getCategoriesScreen -> 3
         categoryDetailScreen -> 3

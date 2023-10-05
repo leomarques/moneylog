@@ -77,6 +77,12 @@ fun Navigation(
                     )
                 }
             },
+            onArrowBackClick = {
+                navController.popBackStack()
+                navController.currentBackStackEntry?.destination?.route?.let {
+                    navBarSelectedIndex.updateIndex(it)
+                }
+            },
             onTransactionsFabClick = {
                 navController.navigatePopUpTo(
                     destination = transactionDetailScreen,
@@ -113,11 +119,11 @@ fun Navigation(
                     navBarSelectedIndex = navBarSelectedIndex
                 )
             },
-            onArrowBackClick = {
-                navController.popBackStack()
-                navController.currentBackStackEntry?.destination?.route?.let {
-                    navBarSelectedIndex.updateIndex(it)
-                }
+            onArchivedIconClick = {
+                navController.navigatePopUpTo(
+                    destination = getArchivedAccountsScreen,
+                    navBarSelectedIndex = navBarSelectedIndex
+                )
             }
         )
     }

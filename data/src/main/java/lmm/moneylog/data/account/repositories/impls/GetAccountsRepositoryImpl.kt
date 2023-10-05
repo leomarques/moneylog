@@ -10,20 +10,20 @@ import lmm.moneylog.data.account.repositories.GetAccountsRepository
 class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
     GetAccountsRepository {
 
-    override fun getAccounts(): Flow<List<Account>> {
+    override fun getAccounts(archived: Boolean): Flow<List<Account>> {
         return accountDao.selectAccounts()
             .map { accountsList ->
                 convertEntity(
                     accountsList.filter {
-                        !it.archived
+                        it.archived == archived
                     }
                 )
             }
     }
 
-    override suspend fun getAccountsSuspend(): List<Account> {
+    override suspend fun getAccountsSuspend(archived: Boolean): List<Account> {
         return accountDao.selectAccountsSuspend()
-            .filter { !it.archived }
+            .filter { it.archived == archived }
             .map { account ->
                 with(account) {
                     Account(

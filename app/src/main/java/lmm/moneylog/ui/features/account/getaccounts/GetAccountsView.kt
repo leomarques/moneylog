@@ -10,7 +10,8 @@ fun GetAccountsView(
     viewModel: GetAccountsViewModel = koinViewModel(),
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
+    onArchivedIconClick: () -> Unit
 ) {
     val model by viewModel.uiState.collectAsState()
 
@@ -18,6 +19,7 @@ fun GetAccountsView(
         onArrowBackClick = onArrowBackClick,
         onFabClick = onFabClick,
         model = model,
-        onItemClick = onItemClick
+        onItemClick = onItemClick,
+        onArchivedIconClick = onArchivedIconClick
     )
 }
