@@ -16,7 +16,7 @@ data class TransactionDetailModel(
     val displayCategory: String = "",
     val accountId: Int? = null,
     val categoryId: Int? = null,
-    val date: DomainTime = DomainTime(0, 0, 0),
+    var date: DomainTime = DomainTime(0, 0, 0),
     val accounts: List<Account> = emptyList(),
     val categories: List<Category> = emptyList(),
     val value: MutableState<String> = mutableStateOf(""),

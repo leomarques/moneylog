@@ -13,6 +13,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
+import lmm.moneylog.data.account.repositories.GetAccountsRepository
+import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
@@ -37,6 +39,8 @@ class TransactionDetailViewModelTest {
     private val addTransactionInteractor: AddTransactionRepository = mockk()
     private val deleteTransactionInteractor: DeleteTransactionRepository = mockk()
     private val updateTransactionInteractor: UpdateTransactionRepository = mockk(relaxed = true)
+    private val getAccountsRepository: GetAccountsRepository = mockk(relaxed = true)
+    private val getCategoriesRepository: GetCategoriesRepository = mockk(relaxed = true)
     private val domainTimeConverter: DomainTimeConverter = mockk()
     private val domainTime = DomainTime(
         6,
@@ -76,7 +80,9 @@ class TransactionDetailViewModelTest {
             addTransactionRepository = addTransactionInteractor,
             deleteTransactionRepository = deleteTransactionInteractor,
             updateTransactionRepository = updateTransactionInteractor,
-            domainTimeConverter = domainTimeConverter
+            domainTimeConverter = domainTimeConverter,
+            getAccountsRepository = getAccountsRepository,
+            getCategoriesRepository = getCategoriesRepository
         )
     }
 
@@ -84,7 +90,7 @@ class TransactionDetailViewModelTest {
     fun `should save income transaction from model`() {
         initViewModel(-1)
 
-        with(viewModel.model) {
+        with(viewModel.uiState.value) {
             value.value = "50.0"
             description.value = "description"
             date = domainTime
@@ -107,7 +113,7 @@ class TransactionDetailViewModelTest {
     fun `should update income transaction from model`() {
         initViewModel(1)
 
-        val model = viewModel.model
+        val model = viewModel.uiState.value
         with(model) {
             value.value = "50.0"
             description.value = "description"
@@ -135,7 +141,7 @@ class TransactionDetailViewModelTest {
     fun `should not save negative number`() {
         initViewModel(-1)
 
-        with(viewModel.model) {
+        with(viewModel.uiState.value) {
             value.value = "-50.0"
             isIncome.value = true
             description.value = "description"
@@ -149,7 +155,7 @@ class TransactionDetailViewModelTest {
     fun `should not edit negative number`() {
         initViewModel(1)
 
-        val model = viewModel.model
+        val model = viewModel.uiState.value
         with(model) {
             value.value = "-50.0"
             isIncome.value = true
@@ -164,7 +170,7 @@ class TransactionDetailViewModelTest {
     fun `should not save invalid number`() {
         initViewModel(-1)
 
-        with(viewModel.model) {
+        with(viewModel.uiState.value) {
             value.value = "1,5"
             isIncome.value = false
             description.value = "description"
@@ -178,7 +184,7 @@ class TransactionDetailViewModelTest {
     fun `should not save invalid number 2`() {
         initViewModel(-1)
 
-        with(viewModel.model) {
+        with(viewModel.uiState.value) {
             value.value = "5 5"
             isIncome.value = false
             description.value = "description"

@@ -3,6 +3,7 @@ package lmm.moneylog.ui.features.home.balancecard
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.every
 import io.mockk.mockk
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
@@ -39,10 +40,9 @@ class BalanceCardViewModelTest {
         }
 
         viewModel = BalanceCardViewModel(interactor)
-//        val model = viewModel.uiState.getOrAwaitValue()
-//        assertEquals("R$10,00", model.total)
-//        assertEquals("R$15,00", model.credit)
-//        assertEquals("R$5,00", model.debt)
+        assertEquals("R$10,00", viewModel.uiState.value.total)
+        assertEquals("R$15,00", viewModel.uiState.value.credit)
+        assertEquals("R$5,00", viewModel.uiState.value.debt)
     }
 
     @After

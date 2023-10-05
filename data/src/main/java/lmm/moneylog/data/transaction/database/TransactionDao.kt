@@ -12,6 +12,9 @@ interface TransactionDao {
     @Query("SELECT value FROM `transaction`")
     fun selectAllValues(): Flow<List<Double>>
 
+    @Query("SELECT value FROM `transaction` WHERE accountId = :accountId")
+    suspend fun selectAllValuesWhereAccount(accountId: Int): List<Double>
+
     @Query("SELECT * FROM `transaction`")
     fun selectAllTransactions(): Flow<List<TransactionEntity>>
 

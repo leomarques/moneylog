@@ -10,6 +10,7 @@ import lmm.moneylog.data.account.repositories.impls.DeleteAccountRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.GetAccountRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.GetAccountsRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.UpdateAccountRepositoryImpl
+import lmm.moneylog.data.balance.GetBalanceByAccountInteractor
 import lmm.moneylog.data.balance.GetBalanceInteractor
 import lmm.moneylog.data.balance.GetBalanceRepository
 import lmm.moneylog.data.balance.GetBalanceRepositoryImpl
@@ -57,6 +58,7 @@ val dataModule = module {
     factoryOf(::LocalDateToDomainTimeConverterImpl) { bind<DomainTimeConverter>() }
 
     factoryOf(::GetBalanceInteractor)
+    factoryOf(::GetBalanceByAccountInteractor)
     factoryOf(::GetBalanceRepositoryImpl) { bind<GetBalanceRepository>() }
 
     factoryOf(::AddAccountRepositoryImpl) { bind<AddAccountRepository>() }

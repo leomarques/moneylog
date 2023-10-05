@@ -34,6 +34,7 @@ import lmm.moneylog.R
 import lmm.moneylog.data.account.Account
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.income
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,10 +85,11 @@ fun Content(
 ) {
     Column(Modifier.fillMaxWidth()) {
         LazyColumn {
-            items(model.accounts.reversed()) { account ->
+            items(model.list.reversed()) { accountModel ->
                 AccountItem(
-                    account = account,
-                    onItemClick = onItemClick
+                    account = accountModel.account,
+                    onItemClick = onItemClick,
+                    balance = accountModel.balance
                 )
             }
         }
@@ -97,7 +99,8 @@ fun Content(
 @Composable
 fun AccountItem(
     account: Account,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
+    balance: String
 ) {
     Row(
         modifier = Modifier
@@ -127,6 +130,11 @@ fun AccountItem(
                 }
             )
         }
+
+        Text(
+            text = balance,
+            color = if (balance.contains("-")) Color.Red else income
+        )
     }
 
     Divider()
@@ -140,20 +148,29 @@ fun Preview() {
         onFabClick = { },
         model = GetAccountsModel(
             listOf(
-                Account(
-                    id = 0,
-                    name = "Itaú",
-                    color = 0
+                AccountModel(
+                    account = Account(
+                        id = 0,
+                        name = "Itaú",
+                        color = 0
+                    ),
+                    balance = "R$200,00"
                 ),
-                Account(
-                    id = 0,
-                    name = "Nubank",
-                    color = 0
+                AccountModel(
+                    account = Account(
+                        id = 0,
+                        name = "Itaú",
+                        color = 0
+                    ),
+                    balance = "R$-200,00"
                 ),
-                Account(
-                    id = 0,
-                    name = "VR",
-                    color = 0
+                AccountModel(
+                    account = Account(
+                        id = 0,
+                        name = "Itaú",
+                        color = 0
+                    ),
+                    balance = "R$99999,00"
                 )
             )
         ),

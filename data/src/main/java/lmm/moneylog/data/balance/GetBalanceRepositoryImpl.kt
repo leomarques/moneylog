@@ -9,4 +9,8 @@ class GetBalanceRepositoryImpl(private val transactionDao: TransactionDao) :
     override fun getAllTransactionsValues(): Flow<List<Double>> {
         return transactionDao.selectAllValues()
     }
+
+    override suspend fun getAllValuesByAccount(accountId: Int): List<Double> {
+        return transactionDao.selectAllValuesWhereAccount(accountId)
+    }
 }
