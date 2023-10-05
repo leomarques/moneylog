@@ -20,8 +20,8 @@ fun AccountDetailView(
         },
         isEdit = uiState.isEdit,
         valueState = uiState.name,
-        onDeleteConfirmClick = {
-            viewModel.deleteAccount()
+        onArchiveIconClick = {
+            viewModel.archiveAccount()
             onArrowBackClick()
         }
     )

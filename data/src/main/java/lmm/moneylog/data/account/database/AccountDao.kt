@@ -26,4 +26,7 @@ interface AccountDao {
 
     @Query("DELETE FROM `account` WHERE id = :id")
     suspend fun delete(id: Int)
+
+    @Query("UPDATE account SET archived=:archive WHERE id = :id")
+    suspend fun archive(id: Int, archive: Boolean)
 }

@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
-import lmm.moneylog.ui.features.transaction.transactiondetail.components.deleteconfirmdialog.DeleteAccountConfirmDialog
+import lmm.moneylog.ui.features.transaction.transactiondetail.components.archiveconfirmdialog.ArchiveAccountConfirmDialog
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,15 +36,23 @@ fun AccountDetailLayout(
     onFabClick: () -> Unit,
     isEdit: Boolean,
     valueState: MutableState<String>,
-    onDeleteConfirmClick: () -> Unit = {}
+    onArchiveIconClick: () -> Unit = {}
 ) {
-    val showDeleteConfirmDialog = remember { mutableStateOf(false) }
+    val showArchiveConfirmDialog = remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(R.string.topbar_title_account))
+                    Text(
+                        text = stringResource(
+                            if (isEdit) {
+                                R.string.topbar_title_account_edit
+                            } else {
+                                R.string.topbar_title_account_add
+                            }
+                        )
+                    )
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
@@ -57,11 +65,11 @@ fun AccountDetailLayout(
                 actions = {
                     if (isEdit) {
                         IconButton(
-                            onClick = { showDeleteConfirmDialog.value = true },
+                            onClick = { showArchiveConfirmDialog.value = true },
                             content = {
                                 Icon(
-                                    imageVector = Icons.Default.Delete,
-                                    contentDescription = stringResource(R.string.detailtransaction_delete_desc)
+                                    imageVector = Icons.Default.Build,
+                                    contentDescription = stringResource(R.string.detailtransaction_archive_desc)
                                 )
                             }
                         )
@@ -79,10 +87,10 @@ fun AccountDetailLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 Content(
-                    onDeleteConfirm = onDeleteConfirmClick,
-                    showDeleteConfirmDialog = showDeleteConfirmDialog.value,
-                    onDeleteDismiss = {
-                        showDeleteConfirmDialog.value = false
+                    onArchiveConfirm = onArchiveIconClick,
+                    showArchiveConfirmDialog = showArchiveConfirmDialog.value,
+                    onArchiveDismiss = {
+                        showArchiveConfirmDialog.value = false
                     },
                     isEdit = isEdit,
                     valueState = valueState
@@ -94,17 +102,17 @@ fun AccountDetailLayout(
 
 @Composable
 private fun Content(
-    showDeleteConfirmDialog: Boolean,
-    onDeleteConfirm: () -> Unit,
-    onDeleteDismiss: () -> Unit,
+    showArchiveConfirmDialog: Boolean,
+    onArchiveConfirm: () -> Unit,
+    onArchiveDismiss: () -> Unit,
     isEdit: Boolean,
     valueState: MutableState<String>
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
-        if (showDeleteConfirmDialog) {
-            DeleteAccountConfirmDialog(
-                onConfirm = onDeleteConfirm,
-                onDismiss = onDeleteDismiss
+        if (showArchiveConfirmDialog) {
+            ArchiveAccountConfirmDialog(
+                onConfirm = onArchiveConfirm,
+                onDismiss = onArchiveDismiss
             )
         }
 
@@ -126,6 +134,6 @@ fun AccountDetailLayoutPreview() {
         onFabClick = {},
         isEdit = false,
         valueState = mutableStateOf(""),
-        onDeleteConfirmClick = {}
+        onArchiveIconClick = {}
     )
 }

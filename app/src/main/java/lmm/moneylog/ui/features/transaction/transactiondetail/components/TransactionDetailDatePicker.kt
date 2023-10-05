@@ -32,7 +32,7 @@ fun TransactionDetailDatePicker(
                 },
                 enabled = confirmEnabled.value
             ) {
-                Text(stringResource(R.string.datepicker_ok))
+                Text(stringResource(R.string.ok))
             }
         },
         dismissButton = {

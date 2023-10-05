@@ -44,7 +44,15 @@ fun CategoryDetailLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(R.string.topbar_title_category))
+                    Text(
+                        text = stringResource(
+                            if (isEdit) {
+                                R.string.topbar_title_category_edit
+                            } else {
+                                R.string.topbar_title_category_edit
+                            }
+                        )
+                    )
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {

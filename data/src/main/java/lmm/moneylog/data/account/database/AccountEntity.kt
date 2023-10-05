@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "account")
 data class AccountEntity(
     val name: String,
-    val color: Long
+    val color: Long,
+    val archived: Boolean
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.transactiondetail.components.deleteconfirmdialog
+package lmm.moneylog.ui.features.transaction.transactiondetail.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -7,22 +7,24 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 
 @Composable
-fun DeleteConfirmDialog(
+fun ConfirmDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
-    deleteDialogTitle: String,
-    deleteDialogDescription: String
+    title: String,
+    description: String,
+    icon: ImageVector
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(onClick = onConfirm) {
-                Text(text = stringResource(R.string.delete_dialog_delete))
+                Text(text = stringResource(R.string.ok))
             }
         },
         dismissButton = {
@@ -32,18 +34,18 @@ fun DeleteConfirmDialog(
         },
         icon = {
             Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = stringResource(R.string.delete_dialog_icon_desc)
+                imageVector = icon,
+                contentDescription = stringResource(R.string.dialog_icon_desc)
             )
         },
         title = {
             Text(
-                text = deleteDialogTitle
+                text = title
             )
         },
         text = {
             Text(
-                text = deleteDialogDescription
+                text = description
             )
         }
     )
@@ -51,11 +53,12 @@ fun DeleteConfirmDialog(
 
 @Preview
 @Composable
-fun DeleteConfirmDialogPreview() {
-    DeleteConfirmDialog(
+fun ConfirmDialogPreview() {
+    ConfirmDialog(
         onConfirm = {},
         onDismiss = {},
-        deleteDialogTitle = stringResource(R.string.delete_dialog_transaction_title),
-        deleteDialogDescription = stringResource(R.string.delete_dialog_transaction_description)
+        title = stringResource(R.string.delete_dialog_transaction_title),
+        description = stringResource(R.string.delete_dialog_transaction_description),
+        icon = Icons.Default.Delete
     )
 }

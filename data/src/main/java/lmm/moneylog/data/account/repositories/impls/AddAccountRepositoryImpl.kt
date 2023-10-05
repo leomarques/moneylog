@@ -14,7 +14,8 @@ class AddAccountRepositoryImpl(
             with(account) {
                 AccountEntity(
                     name = name,
-                    color = color
+                    color = color,
+                    archived = archived
                 )
             }
         )

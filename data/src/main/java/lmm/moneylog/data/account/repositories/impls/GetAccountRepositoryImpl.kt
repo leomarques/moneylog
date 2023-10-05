@@ -14,7 +14,8 @@ class GetAccountRepositoryImpl(private val accountDao: AccountDao) :
                 Account(
                     id = id,
                     name = name,
-                    color = color
+                    color = color,
+                    archived = archived
                 )
             }
         } else {

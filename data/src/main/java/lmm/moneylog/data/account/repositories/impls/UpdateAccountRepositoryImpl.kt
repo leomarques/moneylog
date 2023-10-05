@@ -15,7 +15,8 @@ class UpdateAccountRepositoryImpl(
             with(account) {
                 AccountEntity(
                     name = name,
-                    color = color
+                    color = color,
+                    archived = archived
                 ).also {
                     it.id = id
                 }

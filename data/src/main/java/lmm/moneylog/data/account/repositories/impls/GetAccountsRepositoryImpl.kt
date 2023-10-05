@@ -11,21 +11,29 @@ class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
     GetAccountsRepository {
 
     override fun getAccounts(): Flow<List<Account>> {
-        return accountDao.selectAccounts().map { accountsList ->
-            convertEntity(accountsList)
-        }
+        return accountDao.selectAccounts()
+            .map { accountsList ->
+                convertEntity(
+                    accountsList.filter {
+                        !it.archived
+                    }
+                )
+            }
     }
 
     override suspend fun getAccountsSuspend(): List<Account> {
-        return accountDao.selectAccountsSuspend().map { account ->
-            with(account) {
-                Account(
-                    id = id,
-                    name = name,
-                    color = color
-                )
+        return accountDao.selectAccountsSuspend()
+            .filter { !it.archived }
+            .map { account ->
+                with(account) {
+                    Account(
+                        id = id,
+                        name = name,
+                        color = color,
+                        archived = archived
+                    )
+                }
             }
-        }
     }
 
     private fun convertEntity(list: List<AccountEntity>): List<Account> {
@@ -34,7 +42,8 @@ class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
                 Account(
                     id = id,
                     name = name,
-                    color = color
+                    color = color,
+                    archived = archived
                 )
             }
         }

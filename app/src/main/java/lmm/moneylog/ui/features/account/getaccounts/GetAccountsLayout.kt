@@ -152,7 +152,8 @@ fun Preview() {
                     account = Account(
                         id = 0,
                         name = "Itaú",
-                        color = 0
+                        color = 0,
+                        archived = false
                     ),
                     balance = "R$200,00"
                 ),
@@ -160,7 +161,8 @@ fun Preview() {
                     account = Account(
                         id = 0,
                         name = "Itaú",
-                        color = 0
+                        color = 0,
+                        archived = false
                     ),
                     balance = "R$-200,00"
                 ),
@@ -168,7 +170,8 @@ fun Preview() {
                     account = Account(
                         id = 0,
                         name = "Itaú",
-                        color = 0
+                        color = 0,
+                        archived = false
                     ),
                     balance = "R$99999,00"
                 )
