@@ -11,6 +11,7 @@
     <string name="detailtransaction_category">Categoria</string>
     <string name="detailtransaction_description">Descrição</string>
     <string name="detailtransaction_invalidvalue">Valor inválido</string>
+    <string name="detailtransaction_no_account">Campo Conta é obrigatório</string>
 
     <string name="detailtransaction_arrowback_desc">arrow back icon</string>
     <string name="detailtransaction_delete_desc">Delete</string>
@@ -77,5 +78,6 @@
     <string name="search_placeholder">Procure pela descrição</string>
     <string name="unarchive">Desarquivar</string>
     <string name="delete">Apagar</string>
+    <string name="error">Erro</string>
     <string name="more_options_desc">more options</string>
 </resources>

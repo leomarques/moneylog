@@ -15,7 +15,9 @@ fun TransactionDetailView(
     viewModel: TransactionDetailViewModel = koinViewModel()
 ) {
     val current = LocalContext.current
-    val errorText = stringResource(R.string.detailtransaction_invalidvalue)
+    val invalidValueErrorText = stringResource(R.string.detailtransaction_invalidvalue)
+    val noAccountErrorText = stringResource(R.string.detailtransaction_no_account)
+    val error = stringResource(R.string.error)
 
     val uiState by viewModel.uiState.collectAsState()
 
@@ -38,7 +40,21 @@ fun TransactionDetailView(
         onFabClick = {
             viewModel.onFabClick(
                 onSuccess = onArrowBackClick,
-                onError = { Toast.makeText(current, errorText, Toast.LENGTH_LONG).show() }
+                onError = { stringId ->
+                    Toast.makeText(
+                        current,
+                        when (stringId) {
+                            R.string.detailtransaction_no_account ->
+                                noAccountErrorText
+
+                            R.string.detailtransaction_invalidvalue ->
+                                invalidValueErrorText
+
+                            else -> error
+                        },
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             )
         },
         onDatePicked = { datePicked ->

@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import lmm.moneylog.R
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
@@ -110,20 +111,24 @@ class TransactionDetailViewModel(
 
     fun onFabClick(
         onSuccess: () -> Unit,
-        onError: () -> Unit
+        onError: (Int) -> Unit
     ) {
         try {
             val transaction = _uiState.value.toTransaction()
-            viewModelScope.launch {
-                if (_uiState.value.isEdit) {
-                    updateTransactionRepository.update(transaction)
-                } else {
-                    addTransactionRepository.save(transaction)
+            if (transaction.accountId == null) {
+                onError(R.string.detailtransaction_no_account)
+            } else {
+                viewModelScope.launch {
+                    if (_uiState.value.isEdit) {
+                        updateTransactionRepository.update(transaction)
+                    } else {
+                        addTransactionRepository.save(transaction)
+                    }
+                    onSuccess()
                 }
-                onSuccess()
             }
         } catch (e: NumberFormatException) {
-            onError()
+            onError(R.string.detailtransaction_invalidvalue)
         }
     }
 }
