@@ -12,8 +12,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.account.Account
 import lmm.moneylog.data.account.repositories.AddAccountRepository
-import lmm.moneylog.data.account.repositories.ArchiveAccountRepository
-import lmm.moneylog.data.account.repositories.DeleteAccountRepository
+import lmm.moneylog.data.account.repositories.ArchivedAccountsRepository
 import lmm.moneylog.data.account.repositories.GetAccountRepository
 import lmm.moneylog.data.account.repositories.UpdateAccountRepository
 import lmm.moneylog.ui.features.transaction.transactiondetail.getIdParam
@@ -23,8 +22,7 @@ class AccountDetailViewModel(
     getAccountRepository: GetAccountRepository,
     private val addAccountRepository: AddAccountRepository,
     private val updateAccountRepository: UpdateAccountRepository,
-    private val deleteAccountRepository: DeleteAccountRepository,
-    private val archiveAccountRepository: ArchiveAccountRepository
+    private val archivedAccountsRepository: ArchivedAccountsRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AccountDetailModel())
@@ -47,15 +45,9 @@ class AccountDetailViewModel(
         }
     }
 
-    fun deleteAccount() {
-        viewModelScope.launch {
-            deleteAccountRepository.delete(_uiState.value.id)
-        }
-    }
-
     fun archiveAccount() {
         viewModelScope.launch {
-            archiveAccountRepository.archive(_uiState.value.id)
+            archivedAccountsRepository.archive(_uiState.value.id)
         }
     }
 

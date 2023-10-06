@@ -1,5 +1,6 @@
 package lmm.moneylog.data.account.repositories
 
-interface ArchiveAccountRepository {
+interface ArchivedAccountsRepository {
     suspend fun archive(id: Int)
+    suspend fun unarchive(id: Int)
 }

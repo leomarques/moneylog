@@ -14,6 +14,12 @@ fun GetArchivedAccountsView(
 
     GetArchivedAccountsLayout(
         onArrowBackClick = onArrowBackClick,
-        list = uiState.list
+        list = uiState.list,
+        onUnArchive = { id ->
+            viewModel.unarchive(id)
+        },
+        onDeleteConfirm = { id ->
+            viewModel.delete(id)
+        }
     )
 }

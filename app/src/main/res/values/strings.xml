@@ -40,6 +40,7 @@
     <string name="clear_search_icon_desc">clear search icon</string>
 
     <string name="getaccounts_topbar">Contas</string>
+    <string name="getarchivedaccounts_topbar">Contas Arquivadas</string>
     <string name="getcategories_topbar">Categorias</string>
 
 
@@ -74,4 +75,7 @@
         release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
         publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     <string name="search_placeholder">Procure pela descrição</string>
+    <string name="unarchive">Desarquivar</string>
+    <string name="delete">Apagar</string>
+    <string name="more_options_desc">more options</string>
 </resources>
