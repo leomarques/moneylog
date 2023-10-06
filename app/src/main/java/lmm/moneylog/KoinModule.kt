@@ -25,7 +25,9 @@ val appModule = module {
     viewModel { parameters ->
         GetTransactionsViewModel(
             typeOfValue = parameters.get(),
-            getTransactionsRepository = get()
+            get(),
+            get(),
+            get()
         )
     }
     viewModelOf(::TransactionDetailViewModel)

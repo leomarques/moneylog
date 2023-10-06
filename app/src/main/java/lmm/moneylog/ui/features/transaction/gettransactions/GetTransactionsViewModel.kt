@@ -2,12 +2,15 @@ package lmm.moneylog.ui.features.transaction.gettransactions
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
+import lmm.moneylog.data.account.repositories.GetAccountsRepository
+import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.ui.textformatters.formatDate
@@ -19,7 +22,9 @@ const val getTransactionsAll = "all"
 
 class GetTransactionsViewModel(
     private val typeOfValue: String?,
-    private val getTransactionsRepository: GetTransactionsRepository
+    private val getTransactionsRepository: GetTransactionsRepository,
+    private val getAccountsRepository: GetAccountsRepository,
+    private val getCategoriesRepository: GetCategoriesRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
@@ -32,12 +37,24 @@ class GetTransactionsViewModel(
 
     init {
         viewModelScope.launch {
+            val accounts = async { getAccountsRepository.getAccountsSuspend() }
+            val categories = async { getCategoriesRepository.getCategoriesSuspend() }
+
+            val accountsMap: Map<Int, String> = accounts.await().associate {
+                it.id to it.name
+            }
+            val categoriesMap = categories.await().associate {
+                it.id to it.name
+            }
+
             when (typeOfValue) {
                 getTransactionsIncome -> {
                     getTransactionsRepository.getIncomeTransactions().collect { transactions ->
                         _uiState.update {
                             transactions.toModel(
-                                R.string.gettransactions_topbar_income
+                                R.string.gettransactions_topbar_income,
+                                accountMap = accountsMap,
+                                categoryMap = categoriesMap
                             )
                         }
                     }
@@ -47,7 +64,9 @@ class GetTransactionsViewModel(
                     getTransactionsRepository.getOutcomeTransactions().collect { transactions ->
                         _uiState.update {
                             transactions.toModel(
-                                R.string.gettransactions_topbar_outcome
+                                R.string.gettransactions_topbar_outcome,
+                                accountMap = accountsMap,
+                                categoryMap = categoriesMap
                             )
                         }
                     }
@@ -57,7 +76,9 @@ class GetTransactionsViewModel(
                     getTransactionsRepository.getAllTransactions().collect { transactions ->
                         _uiState.update {
                             transactions.toModel(
-                                R.string.gettransactions_topbar_all
+                                R.string.gettransactions_topbar_all,
+                                accountMap = accountsMap,
+                                categoryMap = categoriesMap
                             )
                         }
                     }
@@ -67,7 +88,11 @@ class GetTransactionsViewModel(
     }
 }
 
-private fun List<Transaction>.toModel(titleResourceId: Int): GetTransactionsModel {
+private fun List<Transaction>.toModel(
+    titleResourceId: Int,
+    accountMap: Map<Int, String>,
+    categoryMap: Map<Int, String>
+): GetTransactionsModel {
     return GetTransactionsModel(
         transactions = sortedBy { it.date }.map { transaction ->
             with(transaction) {
@@ -80,7 +105,9 @@ private fun List<Transaction>.toModel(titleResourceId: Int): GetTransactionsMode
                     isIncome = value > 0,
                     description = description,
                     date = date.formatDate(),
-                    id = id
+                    id = id,
+                    account = accountMap[accountId].orEmpty(),
+                    category = categoryMap[categoryId].orEmpty()
                 )
             }
         },

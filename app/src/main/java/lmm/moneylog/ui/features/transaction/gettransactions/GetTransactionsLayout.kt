@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.features.transaction.gettransactions
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
@@ -34,7 +34,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -109,7 +109,7 @@ fun GetTransactionsLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
                 List(
-                    model = model,
+                    list = model.transactions,
                     filter = filter,
                     onItemClick = onItemClick
                 )
@@ -118,28 +118,50 @@ fun GetTransactionsLayout(
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun List(
-    model: GetTransactionsModel,
+    list: List<TransactionModel>,
     filter: MutableState<String>,
     onItemClick: (Int) -> Unit
 ) {
+    val grouped = list
+        .filter { transaction ->
+            transaction.description
+                .startsWith(
+                    prefix = filter.value,
+                    ignoreCase = true
+                )
+        }
+        .reversed()
+        .groupBy { it.date }
+
     LazyColumn {
-        items(
-            model.transactions
-                .filter { transaction ->
-                    transaction.description
-                        .startsWith(
-                            prefix = filter.value,
-                            ignoreCase = true
-                        )
+        grouped.forEach { (date, transactions) ->
+            stickyHeader {
+                Surface(
+                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = date,
+                        modifier = Modifier
+                            .padding(
+                                top = SpaceSize.SmallSpaceSize,
+                                start = SpaceSize.DefaultSpaceSize
+                            ),
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = Bold
+                    )
                 }
-                .reversed()
-        ) { transaction ->
-            TransactionItem(
-                transaction = transaction,
-                onItemClick = onItemClick
-            )
+            }
+
+            items(transactions) { transaction ->
+                TransactionItem(
+                    transaction = transaction,
+                    onItemClick = onItemClick
+                )
+            }
         }
     }
 }
@@ -183,11 +205,11 @@ fun TransactionItem(
                 )
 
                 Text(
-                    text = date,
-                    fontStyle = FontStyle.Italic,
+                    text = "$category | $account",
                     style = MaterialTheme.typography.bodyMedium,
                     overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
+                    maxLines = 1,
+                    color = Color.Gray
                 )
             }
 
@@ -207,8 +229,6 @@ fun TransactionItem(
             )
         }
     }
-
-    Divider()
 }
 
 @Preview
@@ -224,35 +244,45 @@ fun Preview() {
                     isIncome = true,
                     description = "Calça",
                     date = "1/2/2023",
-                    id = 0
+                    id = 0,
+                    account = "Nubank",
+                    category = "Roupa"
                 ),
                 TransactionModel(
                     value = "R$1,00",
                     isIncome = false,
                     description = "",
                     date = "22/12/2023",
-                    id = 0
+                    id = 0,
+                    account = "Nubank",
+                    category = "Roupa"
                 ),
                 TransactionModel(
                     value = "R$123456789123123123,00",
                     isIncome = true,
                     description = stringResource(R.string.loremipsum),
                     date = "20/2/2023",
-                    id = 0
+                    id = 0,
+                    account = "Nubank",
+                    category = "Roupa"
                 ),
                 TransactionModel(
                     value = "R$123456789123123123,00",
                     isIncome = true,
                     description = "",
                     date = "20/2/2023",
-                    id = 0
+                    id = 0,
+                    account = "Nubank",
+                    category = "Roupa"
                 ),
                 TransactionModel(
                     value = "R$1,00",
                     isIncome = true,
                     description = stringResource(R.string.loremipsum),
                     date = "20/2/2023",
-                    id = 0
+                    id = 0,
+                    account = "Nubank",
+                    category = "Roupa"
                 )
             ),
             R.string.gettransactions_topbar_all
