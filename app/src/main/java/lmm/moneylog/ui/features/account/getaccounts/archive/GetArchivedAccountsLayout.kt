@@ -129,15 +129,15 @@ fun GetArchivedAccountsLayoutPreview() {
         list = listOf(
             ArchivedAccountModel(
                 id = 0,
-                name = "Itaú",
+                name = "Itaú"
             ),
             ArchivedAccountModel(
                 id = 0,
-                name = "Itaú",
+                name = "Itaú"
             ),
             ArchivedAccountModel(
                 id = 0,
-                name = "Itaú",
+                name = "Itaú"
             )
         )
     )

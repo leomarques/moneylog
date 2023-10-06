@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.category.getccategories
+package lmm.moneylog.ui.features.category.getcategories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,7 +31,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.data.category.Category
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
 
@@ -40,7 +39,7 @@ import lmm.moneylog.ui.theme.SpaceSize
 fun GetCategoriesLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
-    model: GetCategoriesModel,
+    list: List<CategoryModel>,
     onItemClick: (Int) -> Unit
 ) {
     Scaffold(
@@ -68,8 +67,8 @@ fun GetCategoriesLayout(
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
             Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
-                Content(
-                    model = model,
+                GetCategoriesContent(
+                    list = list,
                     onItemClick = onItemClick
                 )
             }
@@ -78,16 +77,17 @@ fun GetCategoriesLayout(
 }
 
 @Composable
-fun Content(
-    model: GetCategoriesModel,
-    onItemClick: (Int) -> Unit
+fun GetCategoriesContent(
+    onItemClick: (Int) -> Unit,
+    list: List<CategoryModel>
 ) {
     Column(Modifier.fillMaxWidth()) {
         LazyColumn {
-            items(model.categories.reversed()) { category ->
+            items(list.reversed()) { category ->
                 CategoryItem(
-                    category = category,
-                    onItemClick = onItemClick
+                    onItemClick = onItemClick,
+                    id = category.id,
+                    name = category.name
                 )
             }
         }
@@ -96,8 +96,9 @@ fun Content(
 
 @Composable
 fun CategoryItem(
-    category: Category,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
+    id: Int,
+    name: String
 ) {
     Row(
         modifier = Modifier
@@ -108,25 +109,23 @@ fun CategoryItem(
                 vertical = SpaceSize.SmallSpaceSize,
                 horizontal = SpaceSize.DefaultSpaceSize
             )
-            .clickable { onItemClick(category.id) },
+            .clickable { onItemClick(id) },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        with(category) {
-            Text(
-                text = name.ifEmpty {
-                    stringResource(R.string.gettransactions_nodescription)
-                },
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
-                style = MaterialTheme.typography.bodyLarge,
-                color = if (name.isEmpty()) {
-                    Color.Gray
-                } else {
-                    MaterialTheme.colorScheme.onSurface
-                }
-            )
-        }
+        Text(
+            text = name.ifEmpty {
+                stringResource(R.string.gettransactions_nodescription)
+            },
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+            style = MaterialTheme.typography.bodyLarge,
+            color = if (name.isEmpty()) {
+                Color.Gray
+            } else {
+                MaterialTheme.colorScheme.onSurface
+            }
+        )
     }
 
     Divider()
@@ -138,23 +137,22 @@ fun Preview() {
     GetCategoriesLayout(
         onArrowBackClick = { },
         onFabClick = { },
-        model = GetCategoriesModel(
-            listOf(
-                Category(
-                    id = 0,
-                    name = "Alimentação",
-                    color = 0
-                ),
-                Category(
-                    id = 0,
-                    name = "Moradia",
-                    color = 0
-                ),
-                Category(
-                    id = 0,
-                    name = "Transporte",
-                    color = 0
-                )
+        list =
+        listOf(
+            CategoryModel(
+                id = 0,
+                name = "Alimentação",
+                color = 0
+            ),
+            CategoryModel(
+                id = 0,
+                name = "Moradia",
+                color = 0
+            ),
+            CategoryModel(
+                id = 0,
+                name = "Transporte",
+                color = 0
             )
         ),
         onItemClick = {}

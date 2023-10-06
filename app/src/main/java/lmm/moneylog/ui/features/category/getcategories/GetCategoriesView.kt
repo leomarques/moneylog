@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.category.getccategories
+package lmm.moneylog.ui.features.category.getcategories
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -12,12 +12,12 @@ fun GetCategoriesView(
     onFabClick: () -> Unit,
     onItemClick: (Int) -> Unit
 ) {
-    val model by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
     GetCategoriesLayout(
         onArrowBackClick = onArrowBackClick,
         onFabClick = onFabClick,
-        model = model,
+        list = uiState.list,
         onItemClick = onItemClick
     )
 }
