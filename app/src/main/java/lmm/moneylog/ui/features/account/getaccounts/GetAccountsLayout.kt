@@ -32,7 +32,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.data.account.Account
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.SpaceSize
 import lmm.moneylog.ui.theme.income
@@ -42,7 +41,7 @@ import lmm.moneylog.ui.theme.income
 fun GetAccountsLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
-    model: GetAccountsModel,
+    list: List<AccountModel>,
     onItemClick: (Int) -> Unit,
     onArchivedIconClick: () -> Unit
 ) {
@@ -83,7 +82,7 @@ fun GetAccountsLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
                 GetAccountsContent(
-                    model = model,
+                    list = list,
                     onItemClick = onItemClick
                 )
             }
@@ -93,15 +92,16 @@ fun GetAccountsLayout(
 
 @Composable
 fun GetAccountsContent(
-    model: GetAccountsModel,
+    list: List<AccountModel>,
     onItemClick: (Int) -> Unit
 ) {
     Column(Modifier.fillMaxWidth()) {
         LazyColumn {
-            items(model.list.reversed()) { accountModel ->
+            items(list.reversed()) { accountModel ->
                 GetAccountsItem(
-                    account = accountModel.account,
                     onItemClick = onItemClick,
+                    id = accountModel.id,
+                    name = accountModel.name,
                     balance = accountModel.balance
                 )
             }
@@ -111,8 +111,9 @@ fun GetAccountsContent(
 
 @Composable
 fun GetAccountsItem(
-    account: Account,
     onItemClick: (Int) -> Unit,
+    id: Int,
+    name: String,
     balance: String
 ) {
     Row(
@@ -124,25 +125,23 @@ fun GetAccountsItem(
                 vertical = SpaceSize.SmallSpaceSize,
                 horizontal = SpaceSize.DefaultSpaceSize
             )
-            .clickable { onItemClick(account.id) },
+            .clickable { onItemClick(id) },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        with(account) {
-            Text(
-                text = name.ifEmpty {
-                    stringResource(R.string.gettransactions_nodescription)
-                },
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
-                style = MaterialTheme.typography.bodyLarge,
-                color = if (name.isEmpty()) {
-                    Color.Gray
-                } else {
-                    MaterialTheme.colorScheme.onSurface
-                }
-            )
-        }
+        Text(
+            text = name.ifEmpty {
+                stringResource(R.string.gettransactions_nodescription)
+            },
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+            style = MaterialTheme.typography.bodyLarge,
+            color = if (name.isEmpty()) {
+                Color.Gray
+            } else {
+                MaterialTheme.colorScheme.onSurface
+            }
+        )
 
         Text(
             text = balance,
@@ -159,35 +158,21 @@ fun GetAccountsLayoutPreview() {
     GetAccountsLayout(
         onArrowBackClick = { },
         onFabClick = { },
-        model = GetAccountsModel(
-            listOf(
-                AccountModel(
-                    account = Account(
-                        id = 0,
-                        name = "Itaú",
-                        color = 0,
-                        archived = false
-                    ),
-                    balance = "R$200,00"
-                ),
-                AccountModel(
-                    account = Account(
-                        id = 0,
-                        name = "Itaú",
-                        color = 0,
-                        archived = false
-                    ),
-                    balance = "R$-200,00"
-                ),
-                AccountModel(
-                    account = Account(
-                        id = 0,
-                        name = "Itaú",
-                        color = 0,
-                        archived = false
-                    ),
-                    balance = "R$99999,00"
-                )
+        listOf(
+            AccountModel(
+                id = 0,
+                name = "Itaú",
+                balance = "R$200,00"
+            ),
+            AccountModel(
+                id = 0,
+                name = "Itaú",
+                balance = "R$-200,00"
+            ),
+            AccountModel(
+                id = 0,
+                name = "Itaú",
+                balance = "R$99999,00"
             )
         ),
         onItemClick = {},

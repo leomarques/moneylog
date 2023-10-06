@@ -28,7 +28,8 @@ class GetAccountsViewModel(
 
                     list.add(
                         AccountModel(
-                            account = account,
+                            id = account.id,
+                            name = account.name,
                             balance = balance.formatForRs()
                         )
                     )

@@ -13,12 +13,12 @@ fun GetAccountsView(
     onItemClick: (Int) -> Unit,
     onArchivedIconClick: () -> Unit
 ) {
-    val model by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
     GetAccountsLayout(
         onArrowBackClick = onArrowBackClick,
         onFabClick = onFabClick,
-        model = model,
+        list = uiState.list,
         onItemClick = onItemClick,
         onArchivedIconClick = onArchivedIconClick
     )
