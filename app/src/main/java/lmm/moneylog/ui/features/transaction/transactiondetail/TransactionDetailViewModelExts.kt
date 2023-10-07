@@ -10,7 +10,7 @@ import lmm.moneylog.data.transaction.time.DomainTimeConverter
 fun DomainTime.convertToDisplayDate(domainTimeConverter: DomainTimeConverter) =
     "$day ${domainTimeConverter.getMonthName(month)}, $year"
 
-fun String.validateValue(isIncome: Boolean): Double {
+fun String.validateValue(isIncome: Boolean = true): Double {
     val value = toDouble()
     if (value <= 0.0) {
         throw java.lang.NumberFormatException("Negative number")

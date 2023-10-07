@@ -1,11 +1,13 @@
 package lmm.moneylog.data
 
+import lmm.moneylog.data.account.repositories.AccountTransferRepository
 import lmm.moneylog.data.account.repositories.AddAccountRepository
 import lmm.moneylog.data.account.repositories.ArchivedAccountsRepository
 import lmm.moneylog.data.account.repositories.DeleteAccountRepository
 import lmm.moneylog.data.account.repositories.GetAccountRepository
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.account.repositories.UpdateAccountRepository
+import lmm.moneylog.data.account.repositories.impls.AccountTransferRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.AddAccountRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.ArchivedAccountsRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.DeleteAccountRepositoryImpl
@@ -69,6 +71,7 @@ val dataModule = module {
     factoryOf(::UpdateAccountRepositoryImpl) { bind<UpdateAccountRepository>() }
     factoryOf(::DeleteAccountRepositoryImpl) { bind<DeleteAccountRepository>() }
     factoryOf(::ArchivedAccountsRepositoryImpl) { bind<ArchivedAccountsRepository>() }
+    factoryOf(::AccountTransferRepositoryImpl) { bind<AccountTransferRepository>() }
 
     factoryOf(::AddCategoryRepositoryImpl) { bind<AddCategoryRepository>() }
     factoryOf(::GetCategoriesRepositoryImpl) { bind<GetCategoriesRepository>() }

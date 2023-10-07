@@ -31,8 +31,9 @@ data class TransactionEntity(
     val year: Int,
     val month: Int,
     val day: Int,
-    val accountId: Int? = null,
-    val categoryId: Int? = null
+    val accountId: Int?,
+    val categoryId: Int?,
+    val transfer: Boolean = false
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

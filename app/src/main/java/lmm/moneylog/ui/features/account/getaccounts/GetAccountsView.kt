@@ -11,7 +11,8 @@ fun GetAccountsView(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     onItemClick: (Int) -> Unit,
-    onArchivedIconClick: () -> Unit
+    onArchivedIconClick: () -> Unit,
+    onTransferIconClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -20,6 +21,7 @@ fun GetAccountsView(
         onFabClick = onFabClick,
         list = uiState.list,
         onItemClick = onItemClick,
-        onArchivedIconClick = onArchivedIconClick
+        onArchivedIconClick = onArchivedIconClick,
+        onTransferIconClick = onTransferIconClick
     )
 }

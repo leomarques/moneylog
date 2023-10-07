@@ -1,6 +1,6 @@
 [versions]
 coreTesting                    = "2.2.0"
-composeBom                     = "2023.09.01"
+composeBom                     = "2023.10.00"
 material3                      = "1.1.2"
 navigationCompose              = "2.7.3"
 room                           = "2.5.2"
@@ -11,8 +11,8 @@ junit                          = "4.13.2"
 kotlinxCoroutinesCore          = "1.7.3"
 kotlinxCoroutinesTest          = "1.7.3"
 
-androidApplication      = "8.1.1"
-androidLibrary          = "8.1.1"
+androidApplication      = "8.1.2"
+androidLibrary          = "8.1.2"
 googleDevtoolsKsp       = "1.9.10-1.0.13"
 jetbrainsKotlinAndroid  = "1.9.10"
 jlleitschuhGradleKtlint = "11.6.0"

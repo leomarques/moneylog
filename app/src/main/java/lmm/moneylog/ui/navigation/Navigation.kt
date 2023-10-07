@@ -124,6 +124,12 @@ fun Navigation(
                     destination = getArchivedAccountsScreen,
                     navBarSelectedIndex = navBarSelectedIndex
                 )
+            },
+            onTransferIconClick = {
+                navController.navigatePopUpTo(
+                    destination = transferScreen,
+                    navBarSelectedIndex = navBarSelectedIndex
+                )
             }
         )
     }

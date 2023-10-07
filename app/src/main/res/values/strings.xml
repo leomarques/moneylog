@@ -16,6 +16,7 @@
     <string name="detailtransaction_arrowback_desc">arrow back icon</string>
     <string name="detailtransaction_delete_desc">Delete</string>
     <string name="archive_desc">Archive</string>
+    <string name="transfer_desc">Transfer</string>
 
     <string name="navbar_home">Início</string>
     <string name="navbar_transactions">Transações</string>
@@ -80,4 +81,7 @@
     <string name="delete">Apagar</string>
     <string name="error">Erro</string>
     <string name="more_options_desc">more options</string>
+    <string name="account_transfer_topbar_title">Transferência</string>
+    <string name="account_transfer_origin_account">Conta origem</string>
+    <string name="account_transfer_destination_account">Conta destino</string>
 </resources>

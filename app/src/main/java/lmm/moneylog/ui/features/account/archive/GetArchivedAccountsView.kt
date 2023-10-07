@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.account.getaccounts.archive
+package lmm.moneylog.ui.features.account.archive
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState

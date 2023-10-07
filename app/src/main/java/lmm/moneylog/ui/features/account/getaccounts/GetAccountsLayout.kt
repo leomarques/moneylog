@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -43,7 +44,8 @@ fun GetAccountsLayout(
     onFabClick: () -> Unit,
     list: List<AccountModel>,
     onItemClick: (Int) -> Unit,
-    onArchivedIconClick: () -> Unit
+    onArchivedIconClick: () -> Unit,
+    onTransferIconClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -66,6 +68,15 @@ fun GetAccountsLayout(
                             Icon(
                                 imageVector = Icons.Default.ThumbUp,
                                 contentDescription = stringResource(R.string.archive_desc)
+                            )
+                        }
+                    )
+                    IconButton(
+                        onClick = onTransferIconClick,
+                        content = {
+                            Icon(
+                                imageVector = Icons.Default.ArrowForward,
+                                contentDescription = stringResource(R.string.transfer_desc)
                             )
                         }
                     )
@@ -176,6 +187,7 @@ fun GetAccountsLayoutPreview() {
             )
         ),
         onItemClick = {},
-        onArchivedIconClick = {}
+        onArchivedIconClick = {},
+        onTransferIconClick = {}
     )
 }

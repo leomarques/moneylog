@@ -11,6 +11,8 @@ class LocalDateToDomainTimeConverterImpl : DomainTimeConverter {
     override fun getCurrentTimeStamp() =
         Instant.now().toEpochMilli()
 
+    override fun getCurrentDomainTime() = timeStampToDomainTime(getCurrentTimeStamp())
+
     override fun timeStampToDomainTime(timeStamp: Long): DomainTime {
         val localDate = Instant
             .ofEpochMilli(timeStamp)

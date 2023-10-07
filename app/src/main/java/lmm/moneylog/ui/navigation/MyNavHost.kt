@@ -11,8 +11,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import lmm.moneylog.ui.convertTransactionTypeParam
 import lmm.moneylog.ui.features.account.accountdetail.AccountDetailView
+import lmm.moneylog.ui.features.account.archive.GetArchivedAccountsView
 import lmm.moneylog.ui.features.account.getaccounts.GetAccountsView
-import lmm.moneylog.ui.features.account.getaccounts.archive.GetArchivedAccountsView
+import lmm.moneylog.ui.features.account.transfer.AccountTransferView
 import lmm.moneylog.ui.features.category.categorydetail.CategoryDetailView
 import lmm.moneylog.ui.features.category.getcategories.GetCategoriesView
 import lmm.moneylog.ui.features.home.HomeLayout
@@ -33,7 +34,8 @@ fun MyNavHost(
     onAccountsItemClick: (Int) -> Unit,
     onCategoriesFabClick: () -> Unit,
     onCategoriesItemClick: (Int) -> Unit,
-    onArchivedIconClick: () -> Unit
+    onArchivedIconClick: () -> Unit,
+    onTransferIconClick: () -> Unit
 ) {
     NavHost(
         modifier = modifier.background(MaterialTheme.colorScheme.background),
@@ -83,7 +85,8 @@ fun MyNavHost(
                 onArrowBackClick = onArrowBackClick,
                 onFabClick = onAccountsFabClick,
                 onItemClick = onAccountsItemClick,
-                onArchivedIconClick = onArchivedIconClick
+                onArchivedIconClick = onArchivedIconClick,
+                onTransferIconClick = onTransferIconClick
             )
         }
 
@@ -129,6 +132,13 @@ fun MyNavHost(
             onArrowBackClick = onArrowBackClick
         ) {
             GetArchivedAccountsView(onArrowBackClick = onArrowBackClick)
+        }
+
+        composableExt(
+            route = transferScreen,
+            onArrowBackClick = onArrowBackClick
+        ) {
+            AccountTransferView(onArrowBackClick = onArrowBackClick)
         }
     }
 }

@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.account.getaccounts.archive
+package lmm.moneylog.ui.features.account.archive
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

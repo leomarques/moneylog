@@ -9,30 +9,56 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TransactionDao {
-    @Query("SELECT value FROM `transaction` WHERE accountId IN (SELECT id FROM `account` WHERE archived = 0)")
+    @Query(
+        "SELECT value FROM `transaction` " +
+            "WHERE accountId IN " +
+            "(SELECT id FROM `account` " +
+            "WHERE archived = 0) " +
+            "AND transfer = 0"
+    )
     fun selectAllValues(): Flow<List<Double>>
 
-    @Query("SELECT value FROM `transaction` WHERE accountId = :accountId")
+    @Query(
+        "SELECT value FROM `transaction` " +
+            "WHERE accountId = :accountId "
+    )
     suspend fun selectAllValuesWhereAccount(accountId: Int): List<Double>
 
-    @Query("SELECT * FROM `transaction`")
+    @Query(
+        "SELECT * FROM `transaction`" +
+            "WHERE transfer = 0 "
+    )
     fun selectAllTransactions(): Flow<List<TransactionEntity>>
 
-    @Query("SELECT * FROM `transaction` WHERE value > 0")
+    @Query(
+        "SELECT * FROM `transaction` " +
+            "WHERE value > 0 " +
+            "AND transfer = 0 "
+    )
     fun selectIncomeTransactions(): Flow<List<TransactionEntity>>
 
-    @Query("SELECT * FROM `transaction` WHERE value < 0")
+    @Query(
+        "SELECT * FROM `transaction` " +
+            "WHERE value < 0 " +
+            "AND transfer = 0 "
+    )
     fun selectOutcomeTransactions(): Flow<List<TransactionEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(transactionEntity: TransactionEntity)
 
-    @Query("SELECT * FROM `transaction` WHERE id=:id")
+    @Query(
+        "SELECT * FROM `transaction` " +
+            "WHERE id=:id"
+    )
     suspend fun selectTransaction(id: Int): TransactionEntity?
 
     @Update
     suspend fun update(transactionEntity: TransactionEntity)
 
-    @Query("DELETE FROM `transaction` WHERE id = :id")
+    @Query(
+        "DELETE FROM `transaction` " +
+            "WHERE id = :id"
+    )
     suspend fun delete(id: Int)
 }

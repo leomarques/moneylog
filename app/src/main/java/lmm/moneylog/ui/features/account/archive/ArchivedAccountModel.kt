@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.account.getaccounts.archive
+package lmm.moneylog.ui.features.account.archive
 
 data class ArchivedAccountModel(
     val id: Int,

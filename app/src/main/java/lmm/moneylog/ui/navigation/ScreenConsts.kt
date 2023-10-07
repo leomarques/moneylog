@@ -8,6 +8,7 @@ const val getCategoriesScreen = "get_categories"
 const val accountDetailScreen = "account_detail"
 const val categoryDetailScreen = "category_detail"
 const val getArchivedAccountsScreen = "get_archived_accounts"
+const val transferScreen = "transfer"
 
 const val paramTypeOfValue = "typeOfValue"
 const val paramTypeAll = "all"
