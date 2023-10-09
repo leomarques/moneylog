@@ -18,11 +18,14 @@ fun CategoryDetailView(
             viewModel.onFabClick()
             onArrowBackClick()
         },
-        isEdit = uiState.isEdit,
-        valueState = uiState.name,
         onDeleteConfirmClick = {
             viewModel.deleteCategory()
             onArrowBackClick()
+        },
+        isEdit = uiState.isEdit,
+        valueState = uiState.name,
+        onIsIncomeSelected = {
+            viewModel.onIsIncomeSelected(it)
         }
     )
 }

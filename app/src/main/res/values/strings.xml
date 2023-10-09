@@ -68,6 +68,7 @@
     <string name="name">Nome</string>
     <string name="cancel">Cancelar</string>
     <string name="ok">OK</string>
+    <string name="type">Tipo</string>
 
     <string name="loremipsum">Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,

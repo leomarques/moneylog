@@ -13,13 +13,13 @@ import kotlinx.coroutines.launch
 import lmm.moneylog.data.category.Category
 import lmm.moneylog.data.category.repositories.AddCategoryRepository
 import lmm.moneylog.data.category.repositories.DeleteCategoryRepository
-import lmm.moneylog.data.category.repositories.GetCategoryRepository
+import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.category.repositories.UpdateCategoryRepository
 import lmm.moneylog.ui.features.transaction.transactiondetail.getIdParam
 
 class CategoryDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    getCategoryRepository: GetCategoryRepository,
+    getCategoriesRepository: GetCategoriesRepository,
     private val addCategoryRepository: AddCategoryRepository,
     private val updateCategoryRepository: UpdateCategoryRepository,
     private val deleteCategoryRepository: DeleteCategoryRepository
@@ -31,13 +31,14 @@ class CategoryDetailViewModel(
     init {
         viewModelScope.launch {
             savedStateHandle.getIdParam()?.let { id ->
-                getCategoryRepository.getCategoryById(id)?.let { category ->
+                getCategoriesRepository.getCategoryById(id)?.let { category ->
                     _uiState.update {
                         CategoryDetailModel(
                             name = mutableStateOf(category.name),
                             color = mutableLongStateOf(category.color),
                             isEdit = true,
-                            id = category.id
+                            id = category.id,
+                            isIncome = category.isIncome
                         )
                     }
                 }
@@ -60,11 +61,20 @@ class CategoryDetailViewModel(
             }
         }
     }
+
+    fun onIsIncomeSelected(isIncome: Boolean) {
+        _uiState.update {
+            it.copy(
+                isIncome = isIncome
+            )
+        }
+    }
 }
 
 fun CategoryDetailModel.toCategory() =
     Category(
         id = id,
         name = name.value,
-        color = color.value
+        color = color.value,
+        isIncome = isIncome
     )

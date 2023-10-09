@@ -17,15 +17,19 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.ClickTextField
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
+import lmm.moneylog.ui.components.TextPicker
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,7 +39,8 @@ fun CategoryDetailLayout(
     onFabClick: () -> Unit,
     onDeleteConfirmClick: () -> Unit = {},
     isEdit: Boolean,
-    valueState: MutableState<String>
+    valueState: MutableState<String>,
+    onIsIncomeSelected: (Boolean) -> Unit
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
@@ -92,7 +97,8 @@ fun CategoryDetailLayout(
                         showDeleteConfirmDialog.value = false
                     },
                     isEdit = isEdit,
-                    valueState = valueState
+                    valueState = valueState,
+                    onIsIncomeSelected = onIsIncomeSelected
                 )
             }
         }
@@ -105,13 +111,34 @@ private fun Content(
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit,
     isEdit: Boolean,
-    valueState: MutableState<String>
+    valueState: MutableState<String>,
+    onIsIncomeSelected: (Boolean) -> Unit
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
+        var showIsIncomePicker by remember { mutableStateOf(false) }
+        var displayIsIncome by remember { mutableStateOf("") }
+
         if (showDeleteConfirmDialog) {
             DeleteCategoryConfirmDialog(
                 onConfirm = onDeleteConfirm,
                 onDismiss = onDeleteDismiss
+            )
+        }
+
+        if (showIsIncomePicker) {
+            val list = listOf(
+                stringResource(id = R.string.balancecard_income),
+                stringResource(id = R.string.balancecard_outcome)
+            )
+            TextPicker(
+                list = list,
+                onConfirm = { index ->
+                    onIsIncomeSelected(index == 0)
+                    displayIsIncome = list[index]
+                },
+                onDismiss = {
+                    showIsIncomePicker = false
+                }
             )
         }
 
@@ -120,6 +147,14 @@ private fun Content(
             keyboardType = KeyboardType.Text,
             valueState = valueState,
             getFocus = !isEdit
+        )
+
+        ClickTextField(
+            title = stringResource(R.string.type),
+            value = displayIsIncome,
+            onClick = {
+                showIsIncomePicker = true
+            }
         )
     }
 }
@@ -133,6 +168,7 @@ fun CategoryDetailLayoutPreview() {
         onFabClick = {},
         onDeleteConfirmClick = {},
         isEdit = false,
-        valueState = mutableStateOf("")
+        valueState = mutableStateOf(""),
+        onIsIncomeSelected = {}
     )
 }

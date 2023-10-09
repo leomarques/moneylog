@@ -21,9 +21,14 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -81,9 +86,42 @@ fun GetCategoriesContent(
     onItemClick: (Int) -> Unit,
     list: List<CategoryModel>
 ) {
-    Column(Modifier.fillMaxWidth()) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        var checked by remember {
+            mutableStateOf(false)
+        }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = stringResource(id = R.string.balancecard_income),
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Switch(
+                modifier = Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize),
+                checked = checked,
+                onCheckedChange = {
+                    checked = !checked
+                }
+            )
+
+            Text(
+                text = stringResource(id = R.string.balancecard_outcome),
+                style = MaterialTheme.typography.titleMedium
+            )
+        }
+
         LazyColumn {
-            items(list.reversed()) { category ->
+            items(
+                list
+                    .filter {
+                        it.isIncome == !checked
+                    }
+                    .reversed()
+            ) { category ->
                 CategoryItem(
                     onItemClick = onItemClick,
                     id = category.id,
@@ -142,17 +180,20 @@ fun Preview() {
             CategoryModel(
                 id = 0,
                 name = "Alimentação",
-                color = 0
+                color = 0,
+                isIncome = true
             ),
             CategoryModel(
                 id = 0,
                 name = "Moradia",
-                color = 0
+                color = 0,
+                isIncome = true
             ),
             CategoryModel(
                 id = 0,
                 name = "Transporte",
-                color = 0
+                color = 0,
+                isIncome = false
             )
         ),
         onItemClick = {}

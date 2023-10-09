@@ -15,7 +15,8 @@ class UpdateCategoryRepositoryImpl(
             with(category) {
                 CategoryEntity(
                     name = name,
-                    color = color
+                    color = color,
+                    isIncome = isIncome
                 ).also {
                     it.id = id
                 }

@@ -14,7 +14,8 @@ class AddCategoryRepositoryImpl(
             with(category) {
                 CategoryEntity(
                     name = name,
-                    color = color
+                    color = color,
+                    isIncome = isIncome
                 )
             }
         )

@@ -19,12 +19,10 @@ import lmm.moneylog.data.balance.GetBalanceRepositoryImpl
 import lmm.moneylog.data.category.repositories.AddCategoryRepository
 import lmm.moneylog.data.category.repositories.DeleteCategoryRepository
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
-import lmm.moneylog.data.category.repositories.GetCategoryRepository
 import lmm.moneylog.data.category.repositories.UpdateCategoryRepository
 import lmm.moneylog.data.category.repositories.impls.AddCategoryRepositoryImpl
 import lmm.moneylog.data.category.repositories.impls.DeleteCategoryRepositoryImpl
 import lmm.moneylog.data.category.repositories.impls.GetCategoriesRepositoryImpl
-import lmm.moneylog.data.category.repositories.impls.GetCategoryRepositoryImpl
 import lmm.moneylog.data.category.repositories.impls.UpdateCategoryRepositoryImpl
 import lmm.moneylog.data.coroutine.CoroutineDispatcherProvider
 import lmm.moneylog.data.coroutine.CoroutineDispatcherProviderImpl
@@ -73,7 +71,6 @@ val dataModule = module {
 
     factoryOf(::AddCategoryRepositoryImpl) { bind<AddCategoryRepository>() }
     factoryOf(::GetCategoriesRepositoryImpl) { bind<GetCategoriesRepository>() }
-    factoryOf(::GetCategoryRepositoryImpl) { bind<GetCategoryRepository>() }
     factoryOf(::UpdateCategoryRepositoryImpl) { bind<UpdateCategoryRepository>() }
     factoryOf(::DeleteCategoryRepositoryImpl) { bind<DeleteCategoryRepository>() }
 

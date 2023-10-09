@@ -31,7 +31,8 @@ private fun List<Category>.toCategoryModelList(): List<CategoryModel> {
         CategoryModel(
             id = it.id,
             name = it.name,
-            color = it.color
+            color = it.color,
+            isIncome = it.isIncome
         )
     }
 }
