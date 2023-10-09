@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.transactiondetail.components.deleteconfirmdialog
+package lmm.moneylog.ui.features.account.accountdetail
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -6,26 +6,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.features.transaction.transactiondetail.components.ConfirmDialog
+import lmm.moneylog.ui.components.ConfirmDialog
 
 @Composable
-fun DeleteTransactionConfirmDialog(
+fun DeleteAccountConfirmDialog(
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
     ConfirmDialog(
         onConfirm = onConfirm,
         onDismiss = onDismiss,
-        title = stringResource(R.string.delete_dialog_transaction_title),
-        description = stringResource(R.string.delete_dialog_transaction_description),
+        title = stringResource(R.string.delete_dialog_account_title),
+        description = stringResource(R.string.delete_dialog_account_description),
         icon = Icons.Default.Delete
     )
 }
 
 @Preview
 @Composable
-fun DeleteTransactionConfirmDialogPreview() {
-    DeleteTransactionConfirmDialog(
+fun DeleteAccountConfirmDialogPreview() {
+    DeleteAccountConfirmDialog(
         onConfirm = {},
         onDismiss = {}
     )

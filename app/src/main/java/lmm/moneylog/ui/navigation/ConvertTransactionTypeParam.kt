@@ -1,4 +1,4 @@
-package lmm.moneylog.ui
+package lmm.moneylog.ui.navigation
 
 import lmm.moneylog.ui.features.home.balancecard.balanceCardIncome
 import lmm.moneylog.ui.features.home.balancecard.balanceCardOutcome

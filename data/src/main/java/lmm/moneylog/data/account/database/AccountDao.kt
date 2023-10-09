@@ -19,7 +19,7 @@ interface AccountDao {
     suspend fun insert(accountEntity: AccountEntity)
 
     @Query("SELECT * FROM `account` WHERE id = :id")
-    suspend fun selectAccount(id: Int): AccountEntity?
+    suspend fun selectAccountById(id: Int): AccountEntity?
 
     @Update
     suspend fun update(accountEntity: AccountEntity)
@@ -27,6 +27,6 @@ interface AccountDao {
     @Query("DELETE FROM `account` WHERE id = :id")
     suspend fun delete(id: Int)
 
-    @Query("UPDATE account SET archived=:archive WHERE id = :id")
-    suspend fun archive(id: Int, archive: Boolean)
+    @Query("UPDATE account SET archived = :archived WHERE id = :id")
+    suspend fun updateArchived(id: Int, archived: Boolean)
 }

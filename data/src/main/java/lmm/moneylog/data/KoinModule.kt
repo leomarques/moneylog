@@ -1,19 +1,17 @@
 package lmm.moneylog.data
 
-import lmm.moneylog.data.account.repositories.AccountTransferRepository
 import lmm.moneylog.data.account.repositories.AddAccountRepository
-import lmm.moneylog.data.account.repositories.ArchivedAccountsRepository
+import lmm.moneylog.data.account.repositories.ArchiveAccountRepository
 import lmm.moneylog.data.account.repositories.DeleteAccountRepository
-import lmm.moneylog.data.account.repositories.GetAccountRepository
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.account.repositories.UpdateAccountRepository
-import lmm.moneylog.data.account.repositories.impls.AccountTransferRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.AddAccountRepositoryImpl
-import lmm.moneylog.data.account.repositories.impls.ArchivedAccountsRepositoryImpl
+import lmm.moneylog.data.account.repositories.impls.ArchiveAccountRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.DeleteAccountRepositoryImpl
-import lmm.moneylog.data.account.repositories.impls.GetAccountRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.GetAccountsRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.UpdateAccountRepositoryImpl
+import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
+import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepositoryImpl
 import lmm.moneylog.data.balance.GetBalanceByAccountInteractor
 import lmm.moneylog.data.balance.GetBalanceInteractor
 import lmm.moneylog.data.balance.GetBalanceRepository
@@ -32,12 +30,10 @@ import lmm.moneylog.data.coroutine.CoroutineDispatcherProvider
 import lmm.moneylog.data.coroutine.CoroutineDispatcherProviderImpl
 import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
-import lmm.moneylog.data.transaction.repositories.GetTransactionRepository
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
 import lmm.moneylog.data.transaction.repositories.impls.AddTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.DeleteTransactionRepositoryImpl
-import lmm.moneylog.data.transaction.repositories.impls.GetTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.GetTransactionsRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.UpdateTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.time.DomainTimeConverter
@@ -57,6 +53,9 @@ val dataModule = module {
     single {
         MoneylogDatabase.getInstance(get()).categoryDao()
     }
+    single {
+        MoneylogDatabase.getInstance(get()).accountTransferDao()
+    }
 
     factoryOf(::CoroutineDispatcherProviderImpl) { bind<CoroutineDispatcherProvider>() }
     factoryOf(::LocalDateToDomainTimeConverterImpl) { bind<DomainTimeConverter>() }
@@ -67,10 +66,9 @@ val dataModule = module {
 
     factoryOf(::AddAccountRepositoryImpl) { bind<AddAccountRepository>() }
     factoryOf(::GetAccountsRepositoryImpl) { bind<GetAccountsRepository>() }
-    factoryOf(::GetAccountRepositoryImpl) { bind<GetAccountRepository>() }
     factoryOf(::UpdateAccountRepositoryImpl) { bind<UpdateAccountRepository>() }
     factoryOf(::DeleteAccountRepositoryImpl) { bind<DeleteAccountRepository>() }
-    factoryOf(::ArchivedAccountsRepositoryImpl) { bind<ArchivedAccountsRepository>() }
+    factoryOf(::ArchiveAccountRepositoryImpl) { bind<ArchiveAccountRepository>() }
     factoryOf(::AccountTransferRepositoryImpl) { bind<AccountTransferRepository>() }
 
     factoryOf(::AddCategoryRepositoryImpl) { bind<AddCategoryRepository>() }
@@ -81,7 +79,6 @@ val dataModule = module {
 
     factoryOf(::AddTransactionRepositoryImpl) { bind<AddTransactionRepository>() }
     factoryOf(::GetTransactionsRepositoryImpl) { bind<GetTransactionsRepository>() }
-    factoryOf(::GetTransactionRepositoryImpl) { bind<GetTransactionRepository>() }
     factoryOf(::UpdateTransactionRepositoryImpl) { bind<UpdateTransactionRepository>() }
     factoryOf(::DeleteTransactionRepositoryImpl) { bind<DeleteTransactionRepository>() }
 }

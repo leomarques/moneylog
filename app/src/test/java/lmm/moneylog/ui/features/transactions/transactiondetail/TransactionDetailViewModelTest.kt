@@ -18,7 +18,7 @@ import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
-import lmm.moneylog.data.transaction.repositories.GetTransactionRepository
+import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
 import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.data.transaction.time.DomainTimeConverter
@@ -35,7 +35,7 @@ class TransactionDetailViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     private lateinit var viewModel: TransactionDetailViewModel
-    private val getTransactionInteractor: GetTransactionRepository = mockk(relaxed = true)
+    private val getTransactionsInteractor: GetTransactionsRepository = mockk(relaxed = true)
     private val addTransactionInteractor: AddTransactionRepository = mockk()
     private val deleteTransactionInteractor: DeleteTransactionRepository = mockk()
     private val updateTransactionInteractor: UpdateTransactionRepository = mockk(relaxed = true)
@@ -58,9 +58,9 @@ class TransactionDetailViewModelTest {
 
         coEvery { addTransactionInteractor.save(any()) } returns Unit
 
-        coEvery { getTransactionInteractor.getTransactionById(-1) } returns null
+        coEvery { getTransactionsInteractor.getTransactionById(-1) } returns null
 
-        coEvery { getTransactionInteractor.getTransactionById(1) } returns
+        coEvery { getTransactionsInteractor.getTransactionById(1) } returns
             Transaction(
                 id = 1,
                 value = 50.0,
@@ -76,7 +76,7 @@ class TransactionDetailViewModelTest {
     private fun initViewModel(id: Int) {
         viewModel = TransactionDetailViewModel(
             savedStateHandle = SavedStateHandle().also { it["id"] = id },
-            getTransactionRepository = getTransactionInteractor,
+            getTransactionsRepository = getTransactionsInteractor,
             addTransactionRepository = addTransactionInteractor,
             deleteTransactionRepository = deleteTransactionInteractor,
             updateTransactionRepository = updateTransactionInteractor,

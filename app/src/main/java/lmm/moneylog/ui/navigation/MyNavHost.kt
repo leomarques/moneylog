@@ -9,7 +9,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import lmm.moneylog.ui.convertTransactionTypeParam
 import lmm.moneylog.ui.features.account.accountdetail.AccountDetailView
 import lmm.moneylog.ui.features.account.archive.GetArchivedAccountsView
 import lmm.moneylog.ui.features.account.getaccounts.GetAccountsView

@@ -36,8 +36,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.features.transaction.transactiondetail.components.TextPicker
-import lmm.moneylog.ui.features.transaction.transactiondetail.components.deleteconfirmdialog.DeleteAccountConfirmDialog
+import lmm.moneylog.ui.components.TextPicker
+import lmm.moneylog.ui.features.account.accountdetail.DeleteAccountConfirmDialog
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)

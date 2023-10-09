@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import lmm.moneylog.data.account.repositories.ArchivedAccountsRepository
+import lmm.moneylog.data.account.repositories.ArchiveAccountRepository
 import lmm.moneylog.data.account.repositories.DeleteAccountRepository
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 
 class GetArchivedAccountsViewModel(
     private val getAccountsRepository: GetAccountsRepository,
-    private val archivedAccountsRepository: ArchivedAccountsRepository,
+    private val archiveAccountRepository: ArchiveAccountRepository,
     private val deleteAccountRepository: DeleteAccountRepository
 ) : ViewModel() {
 
@@ -39,7 +39,10 @@ class GetArchivedAccountsViewModel(
 
     fun unarchive(id: Int) {
         viewModelScope.launch {
-            archivedAccountsRepository.unarchive(id)
+            archiveAccountRepository.updateArchived(
+                id = id,
+                archived = false
+            )
         }
     }
 

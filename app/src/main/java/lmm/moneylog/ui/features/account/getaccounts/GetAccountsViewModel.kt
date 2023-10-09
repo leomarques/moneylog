@@ -8,11 +8,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
+import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.balance.GetBalanceByAccountInteractor
-import lmm.moneylog.ui.textformatters.formatForRs
 
 class GetAccountsViewModel(
     private val getAccountsRepository: GetAccountsRepository,
+    private val accountTransferRepository: AccountTransferRepository,
     private val getBalanceByAccountInteractor: GetBalanceByAccountInteractor
 ) : ViewModel() {
 
@@ -22,15 +23,29 @@ class GetAccountsViewModel(
     init {
         viewModelScope.launch {
             getAccountsRepository.getAccounts().collect { accounts ->
+                val transfers = accountTransferRepository.getTransfers()
                 val list = mutableListOf<AccountModel>()
+
                 accounts.forEach { account ->
-                    val balance = getBalanceByAccountInteractor.execute(account.id)
+                    var balance = getBalanceByAccountInteractor.execute(account.id)
+
+                    transfers.filter {
+                        it.originAccountId == account.id
+                    }.forEach {
+                        balance -= it.value
+                    }
+
+                    transfers.filter {
+                        it.destinationAccountId == account.id
+                    }.forEach {
+                        balance += it.value
+                    }
 
                     list.add(
                         AccountModel(
                             id = account.id,
                             name = account.name,
-                            balance = balance.formatForRs()
+                            balance = balance
                         )
                     )
                 }

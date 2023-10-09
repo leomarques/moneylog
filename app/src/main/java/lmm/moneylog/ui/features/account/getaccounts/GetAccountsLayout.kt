@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyFab
+import lmm.moneylog.ui.textformatters.formatForRs
 import lmm.moneylog.ui.theme.SpaceSize
 import lmm.moneylog.ui.theme.income
 
@@ -113,7 +114,7 @@ fun GetAccountsContent(
                     onItemClick = onItemClick,
                     id = accountModel.id,
                     name = accountModel.name,
-                    balance = accountModel.balance
+                    balance = accountModel.balance.formatForRs()
                 )
             }
         }
@@ -173,17 +174,17 @@ fun GetAccountsLayoutPreview() {
             AccountModel(
                 id = 0,
                 name = "Itaú",
-                balance = "R$200,00"
+                balance = 200.0
             ),
             AccountModel(
                 id = 0,
                 name = "Itaú",
-                balance = "R$-200,00"
+                balance = -200.0
             ),
             AccountModel(
                 id = 0,
                 name = "Itaú",
-                balance = "R$99999,00"
+                balance = 9999999.0
             )
         ),
         onItemClick = {},

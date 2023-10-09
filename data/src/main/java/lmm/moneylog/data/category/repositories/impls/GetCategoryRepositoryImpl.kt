@@ -7,7 +7,7 @@ import lmm.moneylog.data.category.repositories.GetCategoryRepository
 class GetCategoryRepositoryImpl(private val categoryDao: CategoryDao) :
     GetCategoryRepository {
 
-    override suspend fun getCategory(id: Int): Category? {
+    override suspend fun getCategoryById(id: Int): Category? {
         val category = categoryDao.selectCategory(id)
         return if (category != null) {
             with(category) {

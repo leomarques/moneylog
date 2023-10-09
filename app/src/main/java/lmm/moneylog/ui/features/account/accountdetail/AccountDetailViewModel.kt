@@ -12,17 +12,17 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.account.Account
 import lmm.moneylog.data.account.repositories.AddAccountRepository
-import lmm.moneylog.data.account.repositories.ArchivedAccountsRepository
-import lmm.moneylog.data.account.repositories.GetAccountRepository
+import lmm.moneylog.data.account.repositories.ArchiveAccountRepository
+import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.account.repositories.UpdateAccountRepository
 import lmm.moneylog.ui.features.transaction.transactiondetail.getIdParam
 
 class AccountDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    getAccountRepository: GetAccountRepository,
+    private val getAccountsRepository: GetAccountsRepository,
     private val addAccountRepository: AddAccountRepository,
     private val updateAccountRepository: UpdateAccountRepository,
-    private val archivedAccountsRepository: ArchivedAccountsRepository
+    private val archiveAccountRepository: ArchiveAccountRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AccountDetailModel())
@@ -31,7 +31,7 @@ class AccountDetailViewModel(
     init {
         viewModelScope.launch {
             savedStateHandle.getIdParam()?.let { id ->
-                getAccountRepository.getAccountById(id)?.let { account ->
+                getAccountsRepository.getAccountById(id)?.let { account ->
                     _uiState.update {
                         AccountDetailModel(
                             name = mutableStateOf(account.name),
@@ -47,7 +47,10 @@ class AccountDetailViewModel(
 
     fun archiveAccount() {
         viewModelScope.launch {
-            archivedAccountsRepository.archive(_uiState.value.id)
+            archiveAccountRepository.updateArchived(
+                id = _uiState.value.id,
+                archived = true
+            )
         }
     }
 

@@ -13,34 +13,28 @@ interface TransactionDao {
         "SELECT value FROM `transaction` " +
             "WHERE accountId IN " +
             "(SELECT id FROM `account` " +
-            "WHERE archived = 0) " +
-            "AND transfer = 0"
+            "WHERE archived = :archived) "
     )
-    fun selectAllValues(): Flow<List<Double>>
+    fun selectValuesFromAccounts(archived: Boolean = false): Flow<List<Double>>
 
     @Query(
         "SELECT value FROM `transaction` " +
             "WHERE accountId = :accountId "
     )
-    suspend fun selectAllValuesWhereAccount(accountId: Int): List<Double>
+    suspend fun selectValuesByAccountId(accountId: Int): List<Double>
 
-    @Query(
-        "SELECT * FROM `transaction`" +
-            "WHERE transfer = 0 "
-    )
+    @Query("SELECT * FROM `transaction`")
     fun selectAllTransactions(): Flow<List<TransactionEntity>>
 
     @Query(
         "SELECT * FROM `transaction` " +
-            "WHERE value > 0 " +
-            "AND transfer = 0 "
+            "WHERE value > 0 "
     )
     fun selectIncomeTransactions(): Flow<List<TransactionEntity>>
 
     @Query(
         "SELECT * FROM `transaction` " +
-            "WHERE value < 0 " +
-            "AND transfer = 0 "
+            "WHERE value < 0 "
     )
     fun selectOutcomeTransactions(): Flow<List<TransactionEntity>>
 
@@ -49,9 +43,9 @@ interface TransactionDao {
 
     @Query(
         "SELECT * FROM `transaction` " +
-            "WHERE id=:id"
+            "WHERE id = :id"
     )
-    suspend fun selectTransaction(id: Int): TransactionEntity?
+    suspend fun selectTransactionById(id: Int): TransactionEntity?
 
     @Update
     suspend fun update(transactionEntity: TransactionEntity)

@@ -10,6 +10,22 @@ import lmm.moneylog.data.account.repositories.GetAccountsRepository
 class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
     GetAccountsRepository {
 
+    override suspend fun getAccountById(id: Int): Account? {
+        val account = accountDao.selectAccountById(id)
+        return if (account != null) {
+            with(account) {
+                Account(
+                    id = id,
+                    name = name,
+                    color = color,
+                    archived = archived
+                )
+            }
+        } else {
+            null
+        }
+    }
+
     override fun getAccounts(archived: Boolean): Flow<List<Account>> {
         return accountDao.selectAccounts()
             .map { accountsList ->

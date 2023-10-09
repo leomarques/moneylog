@@ -26,7 +26,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
-import lmm.moneylog.ui.features.transaction.transactiondetail.components.deleteconfirmdialog.DeleteCategoryConfirmDialog
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)

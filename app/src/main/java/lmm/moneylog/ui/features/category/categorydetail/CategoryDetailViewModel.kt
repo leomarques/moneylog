@@ -31,7 +31,7 @@ class CategoryDetailViewModel(
     init {
         viewModelScope.launch {
             savedStateHandle.getIdParam()?.let { id ->
-                getCategoryRepository.getCategory(id)?.let { category ->
+                getCategoryRepository.getCategoryById(id)?.let { category ->
                     _uiState.update {
                         CategoryDetailModel(
                             name = mutableStateOf(category.name),

@@ -28,7 +28,7 @@ import lmm.moneylog.R
 import lmm.moneylog.ui.components.ClickTextField
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
-import lmm.moneylog.ui.features.transaction.transactiondetail.components.TextPicker
+import lmm.moneylog.ui.components.TextPicker
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)

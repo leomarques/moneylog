@@ -13,13 +13,13 @@ import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
-import lmm.moneylog.data.transaction.repositories.GetTransactionRepository
+import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
 import lmm.moneylog.data.transaction.time.DomainTimeConverter
 
 class TransactionDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    getTransactionRepository: GetTransactionRepository,
+    private val getTransactionsRepository: GetTransactionsRepository,
     private val addTransactionRepository: AddTransactionRepository,
     private val updateTransactionRepository: UpdateTransactionRepository,
     private val deleteTransactionRepository: DeleteTransactionRepository,
@@ -36,7 +36,7 @@ class TransactionDetailViewModel(
             val idParam = savedStateHandle.getIdParam()
 
             if (idParam != null) {
-                getTransactionRepository.getTransactionById(idParam)?.let { transaction ->
+                getTransactionsRepository.getTransactionById(idParam)?.let { transaction ->
                     _uiState.update {
                         transaction.toDetailModel(domainTimeConverter)
                     }

@@ -6,6 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import lmm.moneylog.data.account.database.AccountDao
 import lmm.moneylog.data.account.database.AccountEntity
+import lmm.moneylog.data.accounttransfer.database.AccountTransferDao
+import lmm.moneylog.data.accounttransfer.database.AccountTransferEntity
 import lmm.moneylog.data.category.database.CategoryDao
 import lmm.moneylog.data.category.database.CategoryEntity
 import lmm.moneylog.data.transaction.database.TransactionDao
@@ -15,7 +17,8 @@ import lmm.moneylog.data.transaction.database.TransactionEntity
     entities = [
         TransactionEntity::class,
         AccountEntity::class,
-        CategoryEntity::class
+        CategoryEntity::class,
+        AccountTransferEntity::class
     ],
     version = 1,
     exportSchema = false
@@ -25,6 +28,7 @@ abstract class MoneylogDatabase : RoomDatabase() {
     abstract fun transactionDao(): TransactionDao
     abstract fun accountDao(): AccountDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun accountTransferDao(): AccountTransferDao
 
     companion object {
 

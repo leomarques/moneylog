@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
-import lmm.moneylog.data.account.repositories.AccountTransferRepository
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
+import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.transaction.time.DomainTimeConverter
 import lmm.moneylog.ui.features.transaction.transactiondetail.validateValue
 
