@@ -23,35 +23,36 @@ class GetAccountsViewModel(
     init {
         viewModelScope.launch {
             getAccountsRepository.getAccounts().collect { accounts ->
-                val transfers = accountTransferRepository.getTransfers()
-                val list = mutableListOf<AccountModel>()
+                accountTransferRepository.getTransfers().collect { transfers ->
+                    mutableListOf<AccountModel>().let { list ->
+                        accounts.forEach { account ->
+                            var balance = getBalanceByAccountInteractor.execute(account.id)
 
-                accounts.forEach { account ->
-                    var balance = getBalanceByAccountInteractor.execute(account.id)
+                            transfers.filter {
+                                it.originAccountId == account.id
+                            }.forEach {
+                                balance -= it.value
+                            }
 
-                    transfers.filter {
-                        it.originAccountId == account.id
-                    }.forEach {
-                        balance -= it.value
+                            transfers.filter {
+                                it.destinationAccountId == account.id
+                            }.forEach {
+                                balance += it.value
+                            }
+
+                            list.add(
+                                AccountModel(
+                                    id = account.id,
+                                    name = account.name,
+                                    balance = balance
+                                )
+                            )
+                        }.also {
+                            _uiState.update {
+                                GetAccountsModel(list)
+                            }
+                        }
                     }
-
-                    transfers.filter {
-                        it.destinationAccountId == account.id
-                    }.forEach {
-                        balance += it.value
-                    }
-
-                    list.add(
-                        AccountModel(
-                            id = account.id,
-                            name = account.name,
-                            balance = balance
-                        )
-                    )
-                }
-
-                _uiState.update {
-                    GetAccountsModel(list)
                 }
             }
         }

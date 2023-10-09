@@ -1,5 +1,6 @@
 package lmm.moneylog.data.accounttransfer.repositories
 
+import kotlinx.coroutines.flow.Flow
 import lmm.moneylog.data.transaction.time.DomainTime
 
 interface AccountTransferRepository {
@@ -10,5 +11,5 @@ interface AccountTransferRepository {
         destinationAccountId: Int
     )
 
-    suspend fun getTransfers(): List<AccountTransfer>
+    fun getTransfers(): Flow<List<AccountTransfer>>
 }
