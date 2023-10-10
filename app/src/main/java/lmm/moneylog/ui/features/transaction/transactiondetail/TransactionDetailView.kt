@@ -29,7 +29,10 @@ fun TransactionDetailView(
         displayAccount = uiState.displayAccount,
         displayCategory = uiState.displayCategory,
         accounts = uiState.accounts.map { it.name },
-        categories = uiState.categories.map { it.name },
+        categories = uiState.categories
+            .filter { it.isIncome == uiState.isIncome.value }
+            .map { it.name }
+            .reversed(),
         isEdit = uiState.isEdit,
         topBarTitle = stringResource(uiState.titleResourceId),
         onArrowBackClick = onArrowBackClick,
