@@ -15,7 +15,7 @@ import lmm.moneylog.ui.features.account.getaccounts.GetAccountsView
 import lmm.moneylog.ui.features.account.transfer.AccountTransferView
 import lmm.moneylog.ui.features.category.categorydetail.CategoryDetailView
 import lmm.moneylog.ui.features.category.getcategories.GetCategoriesView
-import lmm.moneylog.ui.features.home.HomeLayout
+import lmm.moneylog.ui.features.home.HomeView
 import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsView
 import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailView
 
@@ -42,7 +42,7 @@ fun MyNavHost(
         startDestination = startDestination
     ) {
         composable(homeScreen) {
-            HomeLayout(
+            HomeView(
                 onFabClick = onHomeFabClick,
                 onClick = onBalanceCardClick
             )

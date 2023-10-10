@@ -8,19 +8,25 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.features.home.balancecard.BalanceCardView
 import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
+import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeLayout(
+fun HomeView(
+    viewModel: HomeViewModel = koinViewModel(),
     onFabClick: () -> Unit,
     onClick: (String) -> Unit
 ) {
+    val uiState by viewModel.uiState.collectAsState()
+
     Scaffold(
         modifier = Modifier
             .padding(horizontal = SpaceSize.DefaultSpaceSize)
@@ -35,7 +41,11 @@ fun HomeLayout(
         content = {
             Surface {
                 BalanceCardView(
-                    onClick
+                    onClick = onClick,
+                    hideValues = uiState,
+                    onHideClick = {
+                        viewModel.onHideClick()
+                    }
                 )
             }
         }
@@ -46,9 +56,9 @@ fun HomeLayout(
 @Composable
 fun HomeLayoutPreview() {
     MoneylogTheme {
-        HomeLayout(
-            {},
-            {}
+        HomeView(
+            onFabClick = {},
+            onClick = {}
         )
     }
 }
