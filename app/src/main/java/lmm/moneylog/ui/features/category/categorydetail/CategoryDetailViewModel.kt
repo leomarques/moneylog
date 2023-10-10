@@ -38,7 +38,7 @@ class CategoryDetailViewModel(
                             color = mutableLongStateOf(category.color),
                             isEdit = true,
                             id = category.id,
-                            isIncome = category.isIncome
+                            isIncome = mutableStateOf(category.isIncome)
                         )
                     }
                 }
@@ -61,14 +61,6 @@ class CategoryDetailViewModel(
             }
         }
     }
-
-    fun onIsIncomeSelected(isIncome: Boolean) {
-        _uiState.update {
-            it.copy(
-                isIncome = isIncome
-            )
-        }
-    }
 }
 
 fun CategoryDetailModel.toCategory() =
@@ -76,5 +68,5 @@ fun CategoryDetailModel.toCategory() =
         id = id,
         name = name.value,
         color = color.value,
-        isIncome = isIncome
+        isIncome = isIncome.value
     )

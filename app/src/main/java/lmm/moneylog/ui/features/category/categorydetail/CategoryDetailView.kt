@@ -24,8 +24,6 @@ fun CategoryDetailView(
         },
         isEdit = uiState.isEdit,
         valueState = uiState.name,
-        onIsIncomeSelected = {
-            viewModel.onIsIncomeSelected(it)
-        }
+        isIncome = uiState.isIncome
     )
 }

@@ -9,6 +9,5 @@ data class CategoryDetailModel(
     val color: MutableState<Long> = mutableLongStateOf(0),
     val isEdit: Boolean = false,
     val id: Int = -1,
-    val isIncome: Boolean = true,
-    val displayIsIncome: String = ""
+    val isIncome: MutableState<Boolean> = mutableStateOf(true)
 )
