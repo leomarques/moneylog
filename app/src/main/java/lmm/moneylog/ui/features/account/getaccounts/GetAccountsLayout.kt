@@ -33,8 +33,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.MyCircle
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.textformatters.formatForRs
+import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.SpaceSize
 import lmm.moneylog.ui.theme.income
 
@@ -114,7 +116,8 @@ fun GetAccountsContent(
                     onItemClick = onItemClick,
                     id = accountModel.id,
                     name = accountModel.name,
-                    balance = accountModel.balance.formatForRs()
+                    balance = accountModel.balance.formatForRs(),
+                    color = accountModel.color
                 )
             }
         }
@@ -126,7 +129,8 @@ fun GetAccountsItem(
     onItemClick: (Int) -> Unit,
     id: Int,
     name: String,
-    balance: String
+    balance: String,
+    color: Color
 ) {
     Row(
         modifier = Modifier
@@ -141,19 +145,24 @@ fun GetAccountsItem(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = name.ifEmpty {
-                stringResource(R.string.gettransactions_nodescription)
-            },
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 1,
-            style = MaterialTheme.typography.bodyLarge,
-            color = if (name.isEmpty()) {
-                Color.Gray
-            } else {
-                MaterialTheme.colorScheme.onSurface
-            }
-        )
+        Row {
+            MyCircle(color = color)
+
+            Text(
+                modifier = Modifier.padding(start = SpaceSize.DefaultSpaceSize),
+                text = name.ifEmpty {
+                    stringResource(R.string.gettransactions_nodescription)
+                },
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
+                style = MaterialTheme.typography.bodyLarge,
+                color = if (name.isEmpty()) {
+                    Color.Gray
+                } else {
+                    MaterialTheme.colorScheme.onSurface
+                }
+            )
+        }
 
         Text(
             text = balance,
@@ -174,17 +183,20 @@ fun GetAccountsLayoutPreview() {
             AccountModel(
                 id = 0,
                 name = "Itaú",
-                balance = 200.0
+                balance = 200.0,
+                color = DarkRed
             ),
             AccountModel(
                 id = 0,
                 name = "Itaú",
-                balance = -200.0
+                balance = 200.0,
+                color = DarkRed
             ),
             AccountModel(
                 id = 0,
                 name = "Itaú",
-                balance = 9999999.0
+                balance = 9999999.0,
+                color = DarkRed
             )
         ),
         onItemClick = {},

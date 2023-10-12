@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.category.getcategories
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,7 +32,7 @@ private fun List<Category>.toCategoryModelList(): List<CategoryModel> {
         CategoryModel(
             id = it.id,
             name = it.name,
-            color = it.color,
+            color = Color(it.color.toULong()),
             isIncome = it.isIncome
         )
     }

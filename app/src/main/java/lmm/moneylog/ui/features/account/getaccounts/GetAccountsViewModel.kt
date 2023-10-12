@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.account.getaccounts
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
@@ -40,7 +41,8 @@ class GetAccountsViewModel(
                 AccountModel(
                     id = account.id,
                     name = account.name,
-                    balance = balance
+                    balance = balance,
+                    color = Color(account.color.toULong())
                 )
             )
         }

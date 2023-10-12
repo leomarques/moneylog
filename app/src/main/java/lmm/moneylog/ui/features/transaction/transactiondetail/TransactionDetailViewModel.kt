@@ -118,13 +118,17 @@ class TransactionDetailViewModel(
             if (transaction.accountId == null) {
                 onError(R.string.detailtransaction_no_account)
             } else {
-                viewModelScope.launch {
-                    if (_uiState.value.isEdit) {
-                        updateTransactionRepository.update(transaction)
-                    } else {
-                        addTransactionRepository.save(transaction)
+                if (transaction.categoryId == null) {
+                    onError(R.string.detailtransaction_no_category)
+                } else {
+                    viewModelScope.launch {
+                        if (_uiState.value.isEdit) {
+                            updateTransactionRepository.update(transaction)
+                        } else {
+                            addTransactionRepository.save(transaction)
+                        }
+                        onSuccess()
                     }
-                    onSuccess()
                 }
             }
         } catch (e: NumberFormatException) {

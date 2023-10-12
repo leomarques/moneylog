@@ -36,7 +36,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.MyCircle
 import lmm.moneylog.ui.components.MyFab
+import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -125,7 +127,8 @@ fun GetCategoriesContent(
                 CategoryItem(
                     onItemClick = onItemClick,
                     id = category.id,
-                    name = category.name
+                    name = category.name,
+                    color = category.color
                 )
             }
         }
@@ -136,7 +139,8 @@ fun GetCategoriesContent(
 fun CategoryItem(
     onItemClick: (Int) -> Unit,
     id: Int,
-    name: String
+    name: String,
+    color: Color
 ) {
     Row(
         modifier = Modifier
@@ -151,19 +155,24 @@ fun CategoryItem(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = name.ifEmpty {
-                stringResource(R.string.gettransactions_nodescription)
-            },
-            overflow = TextOverflow.Ellipsis,
-            maxLines = 1,
-            style = MaterialTheme.typography.bodyLarge,
-            color = if (name.isEmpty()) {
-                Color.Gray
-            } else {
-                MaterialTheme.colorScheme.onSurface
-            }
-        )
+        Row {
+            MyCircle(color = color)
+
+            Text(
+                modifier = Modifier.padding(start = SpaceSize.DefaultSpaceSize),
+                text = name.ifEmpty {
+                    stringResource(R.string.gettransactions_nodescription)
+                },
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
+                style = MaterialTheme.typography.bodyLarge,
+                color = if (name.isEmpty()) {
+                    Color.Gray
+                } else {
+                    MaterialTheme.colorScheme.onSurface
+                }
+            )
+        }
     }
 
     Divider()
@@ -180,19 +189,19 @@ fun Preview() {
             CategoryModel(
                 id = 0,
                 name = "Alimentação",
-                color = 0,
+                color = DarkRed,
                 isIncome = true
             ),
             CategoryModel(
                 id = 0,
                 name = "Moradia",
-                color = 0,
+                color = DarkRed,
                 isIncome = true
             ),
             CategoryModel(
                 id = 0,
                 name = "Transporte",
-                color = 0,
+                color = DarkRed,
                 isIncome = false
             )
         ),
