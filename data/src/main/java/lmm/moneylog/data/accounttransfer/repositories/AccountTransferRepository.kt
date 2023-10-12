@@ -1,6 +1,7 @@
 package lmm.moneylog.data.accounttransfer.repositories
 
 import kotlinx.coroutines.flow.Flow
+import lmm.moneylog.data.accounttransfer.AccountTransfer
 import lmm.moneylog.data.transaction.time.DomainTime
 
 interface AccountTransferRepository {

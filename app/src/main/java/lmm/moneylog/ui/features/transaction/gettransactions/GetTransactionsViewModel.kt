@@ -40,7 +40,7 @@ class GetTransactionsViewModel(
             val accounts = async { getAccountsRepository.getAccountsSuspend() }
             val categories = async { getCategoriesRepository.getCategoriesSuspend() }
 
-            val accountsMap: Map<Int, String> = accounts.await().associate {
+            val accountsMap = accounts.await().associate {
                 it.id to it.name
             }
             val categoriesMap = categories.await().associate {

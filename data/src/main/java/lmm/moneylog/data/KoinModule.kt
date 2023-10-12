@@ -42,18 +42,10 @@ import org.koin.dsl.module
 
 val dataModule = module {
 
-    single {
-        MoneylogDatabase.getInstance(get()).transactionDao()
-    }
-    single {
-        MoneylogDatabase.getInstance(get()).accountDao()
-    }
-    single {
-        MoneylogDatabase.getInstance(get()).categoryDao()
-    }
-    single {
-        MoneylogDatabase.getInstance(get()).accountTransferDao()
-    }
+    single { MoneylogDatabase.getInstance(get()).transactionDao() }
+    single { MoneylogDatabase.getInstance(get()).accountDao() }
+    single { MoneylogDatabase.getInstance(get()).categoryDao() }
+    single { MoneylogDatabase.getInstance(get()).accountTransferDao() }
 
     factoryOf(::CoroutineDispatcherProviderImpl) { bind<CoroutineDispatcherProvider>() }
     factoryOf(::LocalDateToDomainTimeConverterImpl) { bind<DomainTimeConverter>() }
