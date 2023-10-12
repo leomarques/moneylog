@@ -22,8 +22,12 @@ fun CategoryDetailView(
             viewModel.deleteCategory()
             onArrowBackClick()
         },
+        color = uiState.color,
         isEdit = uiState.isEdit,
         valueState = uiState.name,
-        isIncome = uiState.isIncome
+        isIncome = uiState.isIncome,
+        onColorPicked = {
+            viewModel.onColorPicked(it)
+        }
     )
 }

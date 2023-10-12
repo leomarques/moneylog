@@ -1,7 +1,7 @@
 package lmm.moneylog.ui.features.account.accountdetail
 
-import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -35,7 +35,7 @@ class AccountDetailViewModel(
                     _uiState.update {
                         AccountDetailModel(
                             name = mutableStateOf(account.name),
-                            color = mutableLongStateOf(account.color),
+                            color = Color(account.color.toULong()),
                             isEdit = true,
                             id = account.id
                         )
@@ -63,12 +63,20 @@ class AccountDetailViewModel(
             }
         }
     }
+
+    fun onColorPicked(color: Color) {
+        _uiState.update {
+            it.copy(
+                color = color
+            )
+        }
+    }
 }
 
 fun AccountDetailModel.toAccount() =
     Account(
         id = id,
         name = name.value,
-        color = color.value,
+        color = color.value.toLong(),
         archived = false
     )

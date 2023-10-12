@@ -17,13 +17,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.ColorClickField
+import lmm.moneylog.ui.components.ColorPicker
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionRadioGroup
@@ -37,7 +42,9 @@ fun CategoryDetailLayout(
     onDeleteConfirmClick: () -> Unit = {},
     isEdit: Boolean,
     valueState: MutableState<String>,
-    isIncome: MutableState<Boolean>
+    isIncome: MutableState<Boolean>,
+    onColorPicked: (Color) -> Unit,
+    color: Color
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
@@ -88,6 +95,7 @@ fun CategoryDetailLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 Content(
+                    color = color,
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
                     onDeleteConfirm = onDeleteConfirmClick,
                     onDeleteDismiss = {
@@ -95,7 +103,8 @@ fun CategoryDetailLayout(
                     },
                     isEdit = isEdit,
                     valueState = valueState,
-                    isIncome = isIncome
+                    isIncome = isIncome,
+                    onColorPicked = onColorPicked
                 )
             }
         }
@@ -104,6 +113,8 @@ fun CategoryDetailLayout(
 
 @Composable
 private fun Content(
+    color: Color,
+    onColorPicked: (Color) -> Unit,
     showDeleteConfirmDialog: Boolean,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit,
@@ -112,10 +123,24 @@ private fun Content(
     isIncome: MutableState<Boolean>
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
+        var showColorsDialog by remember { mutableStateOf(false) }
+
         if (showDeleteConfirmDialog) {
             DeleteCategoryConfirmDialog(
                 onConfirm = onDeleteConfirm,
                 onDismiss = onDeleteDismiss
+            )
+        }
+
+        if (showColorsDialog) {
+            ColorPicker(
+                onConfirm = {
+                    onColorPicked(it)
+                    showColorsDialog = false
+                },
+                onDismiss = {
+                    showColorsDialog = false
+                }
             )
         }
 
@@ -127,6 +152,10 @@ private fun Content(
         )
 
         TransactionRadioGroup(isIncome)
+
+        ColorClickField(color = color) {
+            showColorsDialog = true
+        }
     }
 }
 
@@ -140,6 +169,8 @@ fun CategoryDetailLayoutPreview() {
         onDeleteConfirmClick = {},
         isEdit = false,
         valueState = mutableStateOf(""),
-        isIncome = mutableStateOf(true)
+        isIncome = mutableStateOf(true),
+        onColorPicked = {},
+        color = Color.Gray
     )
 }

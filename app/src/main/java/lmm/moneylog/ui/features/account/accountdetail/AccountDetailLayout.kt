@@ -17,13 +17,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.ColorClickField
+import lmm.moneylog.ui.components.ColorPicker
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
 import lmm.moneylog.ui.features.account.archive.ArchiveAccountConfirmDialog
@@ -36,7 +41,9 @@ fun AccountDetailLayout(
     onFabClick: () -> Unit,
     isEdit: Boolean,
     valueState: MutableState<String>,
-    onArchiveIconClick: () -> Unit = {}
+    onArchiveIconClick: () -> Unit = {},
+    onColorPicked: (Color) -> Unit,
+    color: Color
 ) {
     val showArchiveConfirmDialog = remember { mutableStateOf(false) }
 
@@ -87,13 +94,15 @@ fun AccountDetailLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 Content(
-                    onArchiveConfirm = onArchiveIconClick,
+                    color = color,
                     showArchiveConfirmDialog = showArchiveConfirmDialog.value,
+                    onArchiveConfirm = onArchiveIconClick,
                     onArchiveDismiss = {
                         showArchiveConfirmDialog.value = false
                     },
                     isEdit = isEdit,
-                    valueState = valueState
+                    valueState = valueState,
+                    onColorPicked = onColorPicked
                 )
             }
         }
@@ -105,14 +114,30 @@ private fun Content(
     showArchiveConfirmDialog: Boolean,
     onArchiveConfirm: () -> Unit,
     onArchiveDismiss: () -> Unit,
+    onColorPicked: (Color) -> Unit,
     isEdit: Boolean,
-    valueState: MutableState<String>
+    valueState: MutableState<String>,
+    color: Color
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
+        var showColorsDialog by remember { mutableStateOf(false) }
+
         if (showArchiveConfirmDialog) {
             ArchiveAccountConfirmDialog(
                 onConfirm = onArchiveConfirm,
                 onDismiss = onArchiveDismiss
+            )
+        }
+
+        if (showColorsDialog) {
+            ColorPicker(
+                onConfirm = {
+                    onColorPicked(it)
+                    showColorsDialog = false
+                },
+                onDismiss = {
+                    showColorsDialog = false
+                }
             )
         }
 
@@ -122,6 +147,10 @@ private fun Content(
             valueState = valueState,
             getFocus = !isEdit
         )
+
+        ColorClickField(color = color) {
+            showColorsDialog = true
+        }
     }
 }
 
@@ -134,6 +163,8 @@ fun AccountDetailLayoutPreview() {
         onFabClick = {},
         isEdit = false,
         valueState = mutableStateOf(""),
-        onArchiveIconClick = {}
+        onArchiveIconClick = {},
+        onColorPicked = {},
+        color = Color.Gray
     )
 }

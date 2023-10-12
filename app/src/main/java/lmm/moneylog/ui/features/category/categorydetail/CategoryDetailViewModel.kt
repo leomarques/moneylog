@@ -1,7 +1,7 @@
 package lmm.moneylog.ui.features.category.categorydetail
 
-import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -35,7 +35,7 @@ class CategoryDetailViewModel(
                     _uiState.update {
                         CategoryDetailModel(
                             name = mutableStateOf(category.name),
-                            color = mutableLongStateOf(category.color),
+                            color = Color(category.color.toULong()),
                             isEdit = true,
                             id = category.id,
                             isIncome = mutableStateOf(category.isIncome)
@@ -61,12 +61,20 @@ class CategoryDetailViewModel(
             }
         }
     }
+
+    fun onColorPicked(color: Color) {
+        _uiState.update {
+            it.copy(
+                color = color
+            )
+        }
+    }
 }
 
 fun CategoryDetailModel.toCategory() =
     Category(
         id = id,
         name = name.value,
-        color = color.value,
+        color = color.value.toLong(),
         isIncome = isIncome.value
     )

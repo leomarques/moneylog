@@ -18,11 +18,15 @@ fun AccountDetailView(
             viewModel.onFabClick()
             onArrowBackClick()
         },
+        color = uiState.color,
         isEdit = uiState.isEdit,
         valueState = uiState.name,
         onArchiveIconClick = {
             viewModel.archiveAccount()
             onArrowBackClick()
+        },
+        onColorPicked = {
+            viewModel.onColorPicked(it)
         }
     )
 }

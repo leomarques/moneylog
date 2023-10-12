@@ -85,4 +85,6 @@
     <string name="account_transfer_topbar_title">Transferência</string>
     <string name="account_transfer_origin_account">Conta origem</string>
     <string name="account_transfer_destination_account">Conta destino</string>
+
+    <string name="color_field">Cor</string>
 </resources>
