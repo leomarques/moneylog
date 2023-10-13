@@ -1,5 +1,7 @@
 package lmm.moneylog.ui.features.transaction.gettransactions
 
+import androidx.compose.ui.graphics.Color
+
 data class TransactionModel(
     val value: String,
     val isIncome: Boolean,
@@ -7,5 +9,6 @@ data class TransactionModel(
     val account: String,
     val category: String,
     val date: String,
-    val id: Int
+    val id: Int,
+    val categoryColor: Color
 )

@@ -1,8 +1,8 @@
 package lmm.moneylog.ui.features.transaction.gettransactions
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -37,14 +37,17 @@ class GetTransactionsViewModel(
 
     init {
         viewModelScope.launch {
-            val accounts = async { getAccountsRepository.getAccountsSuspend() }
-            val categories = async { getCategoriesRepository.getCategoriesSuspend() }
+            val accounts = getAccountsRepository.getAccountsSuspend()
+            val categories = getCategoriesRepository.getCategoriesSuspend()
 
-            val accountsMap = accounts.await().associate {
+            val accountsMap = accounts.associate {
                 it.id to it.name
             }
-            val categoriesMap = categories.await().associate {
+            val categoriesMap = categories.associate {
                 it.id to it.name
+            }
+            val categoriesColorMap = categories.associate {
+                it.id to Color(it.color.toULong())
             }
 
             when (typeOfValue) {
@@ -54,7 +57,8 @@ class GetTransactionsViewModel(
                             transactions.toModel(
                                 R.string.gettransactions_topbar_income,
                                 accountMap = accountsMap,
-                                categoryMap = categoriesMap
+                                categoriesMap = categoriesMap,
+                                categoriesColorMap = categoriesColorMap
                             )
                         }
                     }
@@ -66,7 +70,8 @@ class GetTransactionsViewModel(
                             transactions.toModel(
                                 R.string.gettransactions_topbar_outcome,
                                 accountMap = accountsMap,
-                                categoryMap = categoriesMap
+                                categoriesMap = categoriesMap,
+                                categoriesColorMap = categoriesColorMap
                             )
                         }
                     }
@@ -78,7 +83,8 @@ class GetTransactionsViewModel(
                             transactions.toModel(
                                 R.string.gettransactions_topbar_all,
                                 accountMap = accountsMap,
-                                categoryMap = categoriesMap
+                                categoriesMap = categoriesMap,
+                                categoriesColorMap = categoriesColorMap
                             )
                         }
                     }
@@ -91,7 +97,8 @@ class GetTransactionsViewModel(
 private fun List<Transaction>.toModel(
     titleResourceId: Int,
     accountMap: Map<Int, String>,
-    categoryMap: Map<Int, String>
+    categoriesMap: Map<Int, String>,
+    categoriesColorMap: Map<Int, Color>
 ): GetTransactionsModel {
     return GetTransactionsModel(
         transactions = sortedBy { it.date }.map { transaction ->
@@ -107,7 +114,8 @@ private fun List<Transaction>.toModel(
                     date = date.formatDate(),
                     id = id,
                     account = accountMap[accountId].orEmpty(),
-                    category = categoryMap[categoryId].orEmpty()
+                    category = categoriesMap[categoryId].orEmpty(),
+                    categoryColor = categoriesColorMap[categoryId] ?: Color.Gray
                 )
             }
         },
