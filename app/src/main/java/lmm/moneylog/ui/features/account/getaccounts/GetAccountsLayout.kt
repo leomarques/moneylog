@@ -13,8 +13,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
@@ -29,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -69,7 +68,7 @@ fun GetAccountsLayout(
                         onClick = onArchivedIconClick,
                         content = {
                             Icon(
-                                imageVector = Icons.Default.ThumbUp,
+                                painter = painterResource(id = R.drawable.outline_unarchive_24),
                                 contentDescription = stringResource(R.string.archive_desc)
                             )
                         }
@@ -78,7 +77,7 @@ fun GetAccountsLayout(
                         onClick = onTransferIconClick,
                         content = {
                             Icon(
-                                imageVector = Icons.Default.ArrowForward,
+                                painter = painterResource(id = R.drawable.outline_currency_exchange_24),
                                 contentDescription = stringResource(R.string.transfer_desc)
                             )
                         }

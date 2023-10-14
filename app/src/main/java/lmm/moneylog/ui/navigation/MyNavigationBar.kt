@@ -2,9 +2,6 @@ package lmm.moneylog.ui.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -12,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 
@@ -23,9 +21,9 @@ fun MyNavigationBar(
     BaseNavigationBar(
         items = listOf(
             Pair(stringResource(R.string.navbar_home), Icons.Default.Home),
-            Pair(stringResource(R.string.navbar_transactions), Icons.Default.PlayArrow),
-            Pair(stringResource(R.string.navbar_accounts), Icons.Default.Person),
-            Pair(stringResource(R.string.navbar_categories), Icons.Default.Star)
+            Pair(stringResource(R.string.navbar_transactions), ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24)),
+            Pair(stringResource(R.string.navbar_accounts), ImageVector.vectorResource(id = R.drawable.outline_account_balance_24)),
+            Pair(stringResource(R.string.navbar_categories), ImageVector.vectorResource(id = R.drawable.outline_category_24))
         ),
         selectedIndex = selectedIndex,
         onClick = onClick
