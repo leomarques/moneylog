@@ -3,7 +3,6 @@ package lmm.moneylog.ui.features.transaction.transactiondetail
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -12,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.AccCatClickField
 import lmm.moneylog.ui.components.ClickTextField
 import lmm.moneylog.ui.components.StateTextField
 import lmm.moneylog.ui.components.TextPicker
@@ -22,15 +22,7 @@ import lmm.moneylog.ui.theme.SpaceSize
 
 @Composable
 fun TransactionDetailContent(
-    valueField: MutableState<String>,
-    descriptionField: MutableState<String>,
-    isIncomeField: MutableState<Boolean>,
-    displayDate: String,
-    displayAccount: String,
-    displayCategory: String,
-    accounts: List<String>,
-    categories: List<String>,
-    isEdit: Boolean,
+    model: TransactionDetailModel,
     showDeleteConfirmDialog: Boolean,
     onDatePicked: (Long) -> Unit,
     onAccountPicked: (Int) -> Unit,
@@ -55,7 +47,7 @@ fun TransactionDetailContent(
         }
         if (showAccountPicker) {
             TextPicker(
-                list = accounts,
+                list = model.accounts.map { it.name },
                 onConfirm = { index ->
                     onAccountPicked(index)
                 },
@@ -66,7 +58,9 @@ fun TransactionDetailContent(
         }
         if (showCategoryPicker) {
             TextPicker(
-                list = categories,
+                list = model.categories
+                    .filter { it.isIncome == model.isIncome.value }
+                    .map { it.name },
                 onConfirm = { index ->
                     onCategoryPicked(index)
                 },
@@ -86,15 +80,15 @@ fun TransactionDetailContent(
         StateTextField(
             title = stringResource(R.string.detailtransaction_value),
             keyboardType = KeyboardType.Number,
-            valueState = valueField,
-            getFocus = !isEdit
+            valueState = model.value,
+            getFocus = !model.isEdit
         )
 
-        TransactionRadioGroup(isIncomeField)
+        TransactionRadioGroup(model.isIncome)
 
         ClickTextField(
             title = stringResource(R.string.detailtransaction_date),
-            value = displayDate,
+            value = model.displayDate,
             onClick = {
                 showDatePicker = true
             }
@@ -103,25 +97,25 @@ fun TransactionDetailContent(
         StateTextField(
             title = stringResource(R.string.detailtransaction_description),
             keyboardType = KeyboardType.Text,
-            valueState = descriptionField
+            valueState = model.description
         )
 
-        ClickTextField(
+        AccCatClickField(
             title = stringResource(R.string.detailtransaction_account),
-            value = displayAccount,
-            enabled = accounts.isNotEmpty(),
-            onClick = {
-                showAccountPicker = true
-            }
-        )
+            value = model.displayAccount,
+            enabled = model.accounts.isNotEmpty(),
+            color = model.displayAccountColor
+        ) {
+            showAccountPicker = true
+        }
 
-        ClickTextField(
+        AccCatClickField(
             title = stringResource(R.string.detailtransaction_category),
-            value = displayCategory,
-            enabled = categories.isNotEmpty(),
-            onClick = {
-                showCategoryPicker = true
-            }
-        )
+            value = model.displayCategory,
+            enabled = model.categories.isNotEmpty(),
+            color = model.displayCategoryColor
+        ) {
+            showCategoryPicker = true
+        }
     }
 }

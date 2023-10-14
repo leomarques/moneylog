@@ -22,19 +22,7 @@ fun TransactionDetailView(
     val uiState by viewModel.uiState.collectAsState()
 
     TransactionDetailLayout(
-        valueField = uiState.value,
-        isIncomeField = uiState.isIncome,
-        descriptionField = uiState.description,
-        displayDate = uiState.displayDate,
-        displayAccount = uiState.displayAccount,
-        displayCategory = uiState.displayCategory,
-        accounts = uiState.accounts.map { it.name },
-        categories = uiState.categories
-            .filter { it.isIncome == uiState.isIncome.value }
-            .map { it.name }
-            .reversed(),
-        isEdit = uiState.isEdit,
-        topBarTitle = stringResource(uiState.titleResourceId),
+        model = uiState,
         onArrowBackClick = onArrowBackClick,
         onDeleteConfirmClick = {
             viewModel.deleteTransaction()

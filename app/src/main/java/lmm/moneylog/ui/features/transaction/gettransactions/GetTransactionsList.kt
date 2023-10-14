@@ -102,7 +102,7 @@ fun GetTransactionsListPreview() {
                 date = "01/01/2001",
                 id = 0,
                 categoryColor = DarkRed
-            ),
+            )
         ),
         filter = mutableStateOf(""),
         onItemClick = {}

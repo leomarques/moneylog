@@ -15,7 +15,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -27,16 +26,7 @@ import lmm.moneylog.ui.components.MyFab
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionDetailLayout(
-    valueField: MutableState<String>,
-    isIncomeField: MutableState<Boolean>,
-    descriptionField: MutableState<String>,
-    displayDate: String,
-    displayAccount: String,
-    displayCategory: String,
-    accounts: List<String>,
-    categories: List<String>,
-    isEdit: Boolean,
-    topBarTitle: String,
+    model: TransactionDetailModel,
     onArrowBackClick: () -> Unit,
     onDeleteConfirmClick: () -> Unit,
     onFabClick: () -> Unit,
@@ -50,7 +40,7 @@ fun TransactionDetailLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = topBarTitle)
+                    Text(text = stringResource(model.titleResourceId))
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
@@ -61,7 +51,7 @@ fun TransactionDetailLayout(
                     }
                 },
                 actions = {
-                    if (isEdit) {
+                    if (model.isEdit) {
                         IconButton(
                             onClick = { showDeleteConfirmDialog.value = true },
                             content = {
@@ -85,15 +75,7 @@ fun TransactionDetailLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 TransactionDetailContent(
-                    valueField = valueField,
-                    descriptionField = descriptionField,
-                    isIncomeField = isIncomeField,
-                    displayDate = displayDate,
-                    displayAccount = displayAccount,
-                    displayCategory = displayCategory,
-                    accounts = accounts,
-                    categories = categories,
-                    isEdit = isEdit,
+                    model = model,
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
                     onDatePicked = onDatePicked,
                     onAccountPicked = onAccountPicked,
@@ -111,16 +93,7 @@ fun TransactionDetailLayout(
 @Composable
 fun TransactionDetailLayoutPreview() {
     TransactionDetailLayout(
-        valueField = mutableStateOf(""),
-        isIncomeField = mutableStateOf(true),
-        descriptionField = mutableStateOf(""),
-        displayDate = "",
-        displayAccount = "",
-        displayCategory = "",
-        accounts = emptyList(),
-        categories = emptyList(),
-        isEdit = true,
-        topBarTitle = stringResource(R.string.detailtransaction_topbar_title_add),
+        model = TransactionDetailModel(),
         onArrowBackClick = {},
         onDeleteConfirmClick = {},
         onFabClick = {},

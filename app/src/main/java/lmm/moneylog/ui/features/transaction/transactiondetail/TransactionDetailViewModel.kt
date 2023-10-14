@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.transaction.transactiondetail
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -56,20 +57,25 @@ class TransactionDetailViewModel(
             val accounts = getAccountsRepository.getAccountsSuspend()
             val categories = getCategoriesRepository.getCategoriesSuspend()
 
-            val displayAccount = accounts.firstOrNull {
+            val account = accounts.firstOrNull {
                 it.id == _uiState.value.accountId
-            }?.name
-
-            val displayCategory = categories.firstOrNull {
+            }?.let {
+                it.name to Color(it.color.toULong())
+            }
+            val category = categories.firstOrNull {
                 it.id == _uiState.value.categoryId
-            }?.name
+            }?.let {
+                it.name to Color(it.color.toULong())
+            }
 
             _uiState.update {
                 it.copy(
                     accounts = accounts,
                     categories = categories,
-                    displayAccount = displayAccount.orEmpty(),
-                    displayCategory = displayCategory.orEmpty()
+                    displayAccount = account?.first.orEmpty(),
+                    displayCategory = category?.first.orEmpty(),
+                    displayAccountColor = account?.second ?: Color.Gray,
+                    displayCategoryColor = category?.second ?: Color.Gray
                 )
             }
         }
@@ -93,18 +99,22 @@ class TransactionDetailViewModel(
 
     fun onAccountPicked(index: Int) {
         _uiState.update {
+            val account = _uiState.value.accounts[index]
             it.copy(
-                displayAccount = _uiState.value.accounts[index].name,
-                accountId = _uiState.value.accounts[index].id
+                displayAccount = account.name,
+                displayAccountColor = Color(account.color.toULong()),
+                accountId = account.id
             )
         }
     }
 
     fun onCategoryPicked(index: Int) {
         _uiState.update {
+            val category = _uiState.value.categories[index]
             it.copy(
-                displayCategory = _uiState.value.categories[index].name,
-                categoryId = _uiState.value.categories[index].id
+                displayCategory = category.name,
+                displayCategoryColor = Color(category.color.toULong()),
+                categoryId = category.id
             )
         }
     }
