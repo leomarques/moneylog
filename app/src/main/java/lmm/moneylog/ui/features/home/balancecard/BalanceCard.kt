@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -108,29 +107,15 @@ fun Balance(
             color = MaterialTheme.colorScheme.onTertiaryContainer
         )
 
-        if (hideValues) {
-            HiddenValue(MaterialTheme.typography.headlineMedium)
-        } else {
-            Text(
-                text = value,
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.headlineMedium,
-                color = MaterialTheme.colorScheme.onTertiaryContainer,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
-            )
-        }
+        Text(
+            text = if (hideValues) "****" else value,
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onTertiaryContainer,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1
+        )
     }
-}
-
-@Composable
-private fun HiddenValue(style: TextStyle) {
-    Text(
-        modifier = Modifier.background(Color.LightGray),
-        text = "HIDDEN",
-        color = Color.LightGray,
-        style = style
-    )
 }
 
 @Composable
@@ -151,18 +136,14 @@ fun Amount(
             style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onTertiaryContainer
         )
-        if (hideValue) {
-            HiddenValue(MaterialTheme.typography.titleMedium)
-        } else {
-            Text(
-                text = value,
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleMedium,
-                color = color,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
-            )
-        }
+        Text(
+            text = if (hideValue) "****" else value,
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleMedium,
+            color = color,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1
+        )
     }
 }
 
