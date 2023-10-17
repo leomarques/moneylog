@@ -2,6 +2,7 @@ package lmm.moneylog.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.MutableState
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
@@ -25,7 +26,8 @@ fun NavGraphBuilder.composableExt(
 
 fun NavHostController.navigatePopUpTo(
     destination: String,
-    navBarSelectedIndex: MutableIntState
+    navBarSelectedIndex: MutableIntState,
+    showNavigationBar: MutableState<Boolean>
 ) {
     navigate(destination) {
         launchSingleTop = true
@@ -34,10 +36,11 @@ fun NavHostController.navigatePopUpTo(
         }
     }
 
-    navBarSelectedIndex.updateIndex(destination)
+    navBarSelectedIndex.updateShow(destination)
+    showNavigationBar.updateShow(destination)
 }
 
-fun MutableIntState.updateIndex(destination: String) {
+fun MutableIntState.updateShow(destination: String) {
     when (destination.split("/", "?")[0]) {
         homeScreen -> 0
         getTransactionsScreen -> 1
@@ -49,4 +52,18 @@ fun MutableIntState.updateIndex(destination: String) {
         categoryDetailScreen -> 3
         else -> 0
     }.also { intValue = it }
+}
+
+fun MutableState<Boolean>.updateShow(destination: String) {
+    value = when (destination.split("/", "?")[0]) {
+        homeScreen -> true
+        getTransactionsScreen -> true
+        transactionDetailScreen -> false
+        getAccountsScreen -> true
+        getArchivedAccountsScreen -> true
+        accountDetailScreen -> false
+        getCategoriesScreen -> true
+        categoryDetailScreen -> false
+        else -> true
+    }
 }
