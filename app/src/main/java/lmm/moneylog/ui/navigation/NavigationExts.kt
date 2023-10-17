@@ -36,11 +36,11 @@ fun NavHostController.navigatePopUpTo(
         }
     }
 
-    navBarSelectedIndex.updateShow(destination)
+    navBarSelectedIndex.updateIndex(destination)
     showNavigationBar.updateShow(destination)
 }
 
-fun MutableIntState.updateShow(destination: String) {
+fun MutableIntState.updateIndex(destination: String) {
     when (destination.split("/", "?")[0]) {
         homeScreen -> 0
         getTransactionsScreen -> 1

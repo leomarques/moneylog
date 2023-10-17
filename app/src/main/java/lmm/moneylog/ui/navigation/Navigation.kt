@@ -91,7 +91,7 @@ fun Navigation(
             onArrowBackClick = {
                 navController.popBackStack()
                 navController.currentBackStackEntry?.destination?.route?.let {
-                    navBarSelectedIndex.updateShow(it)
+                    navBarSelectedIndex.updateIndex(it)
                     showNavigationBar.updateShow(it)
                 }
             },

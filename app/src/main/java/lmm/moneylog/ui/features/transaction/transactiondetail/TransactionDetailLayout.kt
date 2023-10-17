@@ -71,7 +71,7 @@ fun TransactionDetailLayout(
                 icon = Icons.Default.Check
             )
         },
-        floatingActionButtonPosition = FabPosition.Center,
+        floatingActionButtonPosition = FabPosition.End,
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 TransactionDetailContent(
