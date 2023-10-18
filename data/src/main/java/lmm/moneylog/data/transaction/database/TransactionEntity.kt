@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
 import androidx.room.ForeignKey.Companion.SET_NULL
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import lmm.moneylog.data.account.database.AccountEntity
 import lmm.moneylog.data.category.database.CategoryEntity
@@ -23,6 +24,10 @@ import lmm.moneylog.data.category.database.CategoryEntity
             parentColumns = ["id"],
             onDelete = SET_NULL
         )
+    ],
+    indices = [
+        Index("accountId"),
+        Index("categoryId")
     ]
 )
 data class TransactionEntity(
