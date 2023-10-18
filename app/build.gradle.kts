@@ -52,19 +52,8 @@ android {
 
 dependencies {
     implementation(project(mapOf("path" to ":data")))
-
     implementation(platform(libs.compose.bom))
-
-    implementation(libs.koin.android)
-    implementation(libs.koin.androidx.compose)
-
-    implementation(libs.material3)
-    implementation(libs.navigation.compose)
-
-    implementation(libs.ui.tooling.preview)
-    debugImplementation(libs.ui.tooling)
-
-    testImplementation(libs.core.testing)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.mockk)
+    implementation(libs.bundles.compose)
+    implementation(libs.bundles.koin)
+    testImplementation(libs.bundles.test)
 }

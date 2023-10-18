@@ -35,13 +35,8 @@ android {
 }
 
 dependencies {
-    implementation(libs.koin.android)
-
     ksp(libs.room.compiler)
-    implementation(libs.room.ktx)
-    implementation(libs.room.runtime)
-
-    testImplementation(libs.core.testing)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.mockk)
+    implementation(libs.bundles.room)
+    implementation(libs.koin.android)
+    testImplementation(libs.bundles.test)
 }
