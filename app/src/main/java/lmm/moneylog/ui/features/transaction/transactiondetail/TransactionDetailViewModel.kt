@@ -151,7 +151,7 @@ class TransactionDetailViewModel(
             it.copy(
                 displayCategory = "",
                 displayCategoryColor = Color.Gray,
-                categoryId = -1
+                categoryId = null
             )
         }
     }

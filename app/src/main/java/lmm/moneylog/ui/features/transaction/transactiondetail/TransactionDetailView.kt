@@ -17,6 +17,7 @@ fun TransactionDetailView(
     val current = LocalContext.current
     val invalidValueErrorText = stringResource(R.string.detailtransaction_invalidvalue)
     val noAccountErrorText = stringResource(R.string.detailtransaction_no_account)
+    val noCategoryErrorText = stringResource(R.string.detailtransaction_no_category)
     val error = stringResource(R.string.error)
 
     val uiState by viewModel.uiState.collectAsState()
@@ -37,6 +38,9 @@ fun TransactionDetailView(
                         when (stringId) {
                             R.string.detailtransaction_no_account ->
                                 noAccountErrorText
+
+                            R.string.detailtransaction_no_category ->
+                                noCategoryErrorText
 
                             R.string.detailtransaction_invalidvalue ->
                                 invalidValueErrorText
