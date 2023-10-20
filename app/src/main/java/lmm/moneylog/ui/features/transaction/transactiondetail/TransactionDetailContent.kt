@@ -35,6 +35,8 @@ fun TransactionDetailContent(
         var showAccountPicker by remember { mutableStateOf(false) }
         var showCategoryPicker by remember { mutableStateOf(false) }
 
+        val filteredCategories = model.categories.filter { it.isIncome == model.isIncome.value }
+
         if (showDatePicker) {
             TransactionDetailDatePicker(
                 onConfirm = {
@@ -58,9 +60,7 @@ fun TransactionDetailContent(
         }
         if (showCategoryPicker) {
             TextPicker(
-                list = model.categories
-                    .filter { it.isIncome == model.isIncome.value }
-                    .map { it.name },
+                list = filteredCategories.map { it.name },
                 onConfirm = { index ->
                     onCategoryPicked(index)
                 },
@@ -112,7 +112,7 @@ fun TransactionDetailContent(
         AccCatClickField(
             title = stringResource(R.string.detailtransaction_category),
             value = model.displayCategory,
-            enabled = model.categories.isNotEmpty(),
+            enabled = filteredCategories.isNotEmpty(),
             color = model.displayCategoryColor
         ) {
             showCategoryPicker = true
