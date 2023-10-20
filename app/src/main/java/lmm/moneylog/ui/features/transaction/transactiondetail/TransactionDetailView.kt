@@ -56,6 +56,9 @@ fun TransactionDetailView(
         },
         onCategoryPicked = { index ->
             viewModel.onCategoryPicked(index)
+        },
+        onIsIncomeSelected = {
+            viewModel.onIsIncomeSelected()
         }
     )
 }

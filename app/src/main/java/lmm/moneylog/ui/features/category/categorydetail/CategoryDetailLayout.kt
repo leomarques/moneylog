@@ -151,7 +151,7 @@ private fun Content(
             getFocus = !isEdit
         )
 
-        TransactionRadioGroup(isIncome)
+        TransactionRadioGroup(isIncome) {}
 
         ColorClickField(color = color) {
             showColorsDialog = true

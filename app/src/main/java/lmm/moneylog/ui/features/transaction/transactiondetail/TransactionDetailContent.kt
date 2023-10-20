@@ -28,7 +28,8 @@ fun TransactionDetailContent(
     onAccountPicked: (Int) -> Unit,
     onCategoryPicked: (Int) -> Unit,
     onDeleteConfirm: () -> Unit,
-    onDeleteDismiss: () -> Unit
+    onDeleteDismiss: () -> Unit,
+    onIsIncomeSelected: () -> Unit
 ) {
     Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
         var showDatePicker by remember { mutableStateOf(false) }
@@ -84,7 +85,9 @@ fun TransactionDetailContent(
             getFocus = !model.isEdit
         )
 
-        TransactionRadioGroup(model.isIncome)
+        TransactionRadioGroup(model.isIncome) {
+            onIsIncomeSelected()
+        }
 
         ClickTextField(
             title = stringResource(R.string.detailtransaction_date),

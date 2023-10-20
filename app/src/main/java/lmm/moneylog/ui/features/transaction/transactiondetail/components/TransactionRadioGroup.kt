@@ -13,20 +13,27 @@ import lmm.moneylog.R
 
 @Composable
 fun TransactionRadioGroup(
-    isIncome: MutableState<Boolean>
+    isIncome: MutableState<Boolean>,
+    onValueChange: (Boolean) -> Unit
 ) {
     Row {
         Row(
             Modifier
                 .selectable(
                     selected = isIncome.value,
-                    onClick = { isIncome.value = true }
+                    onClick = {
+                        isIncome.value = true
+                        onValueChange(true)
+                    }
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
             RadioButton(
                 selected = isIncome.value,
-                onClick = { isIncome.value = true }
+                onClick = {
+                    isIncome.value = true
+                    onValueChange(true)
+                }
             )
             Text(
                 text = stringResource(R.string.detailtransaction_income)
@@ -36,13 +43,19 @@ fun TransactionRadioGroup(
         Row(
             Modifier.selectable(
                 selected = !isIncome.value,
-                onClick = { isIncome.value = false }
+                onClick = {
+                    isIncome.value = false
+                    onValueChange(false)
+                }
             ),
             verticalAlignment = Alignment.CenterVertically
         ) {
             RadioButton(
                 selected = !isIncome.value,
-                onClick = { isIncome.value = false }
+                onClick = {
+                    isIncome.value = false
+                    onValueChange(false)
+                }
             )
             Text(
                 text = stringResource(R.string.detailtransaction_outcome)

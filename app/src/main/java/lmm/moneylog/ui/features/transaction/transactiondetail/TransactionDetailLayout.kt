@@ -32,7 +32,8 @@ fun TransactionDetailLayout(
     onFabClick: () -> Unit,
     onDatePicked: (Long) -> Unit,
     onAccountPicked: (Int) -> Unit,
-    onCategoryPicked: (Int) -> Unit
+    onCategoryPicked: (Int) -> Unit,
+    onIsIncomeSelected: () -> Unit
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
@@ -81,7 +82,8 @@ fun TransactionDetailLayout(
                     onAccountPicked = onAccountPicked,
                     onCategoryPicked = onCategoryPicked,
                     onDeleteConfirm = { onDeleteConfirmClick() },
-                    onDeleteDismiss = { showDeleteConfirmDialog.value = false }
+                    onDeleteDismiss = { showDeleteConfirmDialog.value = false },
+                    onIsIncomeSelected = onIsIncomeSelected
                 )
             }
         }
@@ -99,6 +101,7 @@ fun TransactionDetailLayoutPreview() {
         onFabClick = {},
         onDatePicked = {},
         onAccountPicked = {},
-        onCategoryPicked = {}
+        onCategoryPicked = {},
+        onIsIncomeSelected = {}
     )
 }

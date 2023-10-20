@@ -145,4 +145,14 @@ class TransactionDetailViewModel(
             onError(R.string.detailtransaction_invalidvalue)
         }
     }
+
+    fun onIsIncomeSelected() {
+        _uiState.update {
+            it.copy(
+                displayCategory = "",
+                displayCategoryColor = Color.Gray,
+                categoryId = -1
+            )
+        }
+    }
 }
