@@ -9,13 +9,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.TextPicker
 import lmm.moneylog.ui.features.account.accountdetail.DeleteAccountConfirmDialog
@@ -64,7 +65,6 @@ fun GetArchivedAccountsLayout(
                 }
             )
         },
-        floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
             Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
                 var showDeleteConfirmDialog by remember {
@@ -115,8 +115,13 @@ fun GetArchivedAccountsContent(
     }
 
     Column(Modifier.fillMaxWidth()) {
-        LazyColumn {
-            items(list.reversed()) { accountModel ->
+        LazyColumn(
+            Modifier.background(
+                color = MaterialTheme.colorScheme.inverseOnSurface,
+                shape = RoundedCornerShape(20.dp)
+            )
+        ) {
+            itemsIndexed(list.reversed()) { index, accountModel ->
                 ArchivedAccountItem(
                     id = accountModel.id,
                     name = accountModel.name,
@@ -124,7 +129,8 @@ fun GetArchivedAccountsContent(
                     onUnArchiveClick = onUnArchive,
                     onDeleteClick = { id ->
                         onDeleteClick(id)
-                    }
+                    },
+                    showDivider = index != list.size - 1
                 )
             }
         }
@@ -137,7 +143,8 @@ fun ArchivedAccountItem(
     name: String,
     onItemClick: (Int) -> Unit,
     onUnArchiveClick: (Int) -> Unit,
-    onDeleteClick: (Int) -> Unit
+    onDeleteClick: (Int) -> Unit,
+    showDivider: Boolean
 ) {
     var showMore by remember { mutableStateOf(false) }
 
@@ -149,9 +156,13 @@ fun ArchivedAccountItem(
             ),
             onConfirm = { index ->
                 when (index) {
-                    0 -> { onUnArchiveClick(id) }
+                    0 -> {
+                        onUnArchiveClick(id)
+                    }
 
-                    1 -> { onDeleteClick(id) }
+                    1 -> {
+                        onDeleteClick(id)
+                    }
                 }
                 showMore = false
             },
@@ -163,7 +174,6 @@ fun ArchivedAccountItem(
 
     Row(
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
             .height(SpaceSize.OneLineListItemHeight)
             .padding(
@@ -196,7 +206,9 @@ fun ArchivedAccountItem(
         }
     }
 
-    Divider()
+    if (showDivider) {
+        Divider(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize))
+    }
 }
 
 @Preview

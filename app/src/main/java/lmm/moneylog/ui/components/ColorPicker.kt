@@ -41,7 +41,7 @@ fun ColorPicker(
         DarkOrange,
         DarkPurple,
         DarkPink,
-        DarkBrow,
+        DarkBrow
     )
 
     Dialog(
