@@ -21,7 +21,7 @@ import lmm.moneylog.data.transaction.database.TransactionEntity
         AccountTransferEntity::class
     ],
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 abstract class MoneylogDatabase : RoomDatabase() {
 
@@ -45,8 +45,10 @@ abstract class MoneylogDatabase : RoomDatabase() {
             Room.databaseBuilder(
                 context.applicationContext,
                 MoneylogDatabase::class.java,
-                "Transaction.db"
+                "moneylog.db"
             )
+                .fallbackToDestructiveMigration()
+                .addCallback(onCreateCallback(context))
                 .build()
     }
 }
