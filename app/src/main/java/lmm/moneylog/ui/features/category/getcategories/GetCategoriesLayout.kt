@@ -2,14 +2,14 @@ package lmm.moneylog.ui.features.category.getcategories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyCircle
 import lmm.moneylog.ui.components.MyFab
@@ -99,7 +100,10 @@ fun GetCategoriesContent(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TabRow(selectedTabIndex = tabIndex) {
+        TabRow(
+            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
+            selectedTabIndex = tabIndex
+        ) {
             tabs.forEachIndexed { index, title ->
                 Tab(
                     text = { Text(title) },
@@ -109,19 +113,25 @@ fun GetCategoriesContent(
             }
         }
 
-        LazyColumn {
-            items(
+        LazyColumn(
+            Modifier.background(
+                color = MaterialTheme.colorScheme.inverseOnSurface,
+                shape = RoundedCornerShape(20.dp)
+            )
+        ) {
+            itemsIndexed(
                 list
                     .filter {
                         it.isIncome == (tabIndex == 0)
                     }
                     .reversed()
-            ) { category ->
+            ) { index, category ->
                 CategoryItem(
                     onItemClick = onItemClick,
                     id = category.id,
                     name = category.name,
-                    color = category.color
+                    color = category.color,
+                    showDivider = index != list.size - 1
                 )
             }
         }
@@ -133,42 +143,44 @@ fun CategoryItem(
     onItemClick: (Int) -> Unit,
     id: Int,
     name: String,
-    color: Color
+    color: Color,
+    showDivider: Boolean
 ) {
     Row(
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
-            .height(SpaceSize.OneLineListItemHeight)
+            .height(SpaceSize.TwoLinesListItemHeight)
             .padding(
-                vertical = SpaceSize.SmallSpaceSize,
+                vertical = SpaceSize.DefaultSpaceSize,
                 horizontal = SpaceSize.DefaultSpaceSize
             )
             .clickable { onItemClick(id) },
-        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Row {
-            MyCircle(color = color)
+        MyCircle(
+            color = color,
+            letters = name
+        )
 
-            Text(
-                modifier = Modifier.padding(start = SpaceSize.DefaultSpaceSize),
-                text = name.ifEmpty {
-                    stringResource(R.string.gettransactions_nodescription)
-                },
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
-                style = MaterialTheme.typography.bodyLarge,
-                color = if (name.isEmpty()) {
-                    Color.Gray
-                } else {
-                    MaterialTheme.colorScheme.onSurface
-                }
-            )
-        }
+        Text(
+            modifier = Modifier.padding(start = SpaceSize.DefaultSpaceSize),
+            text = name.ifEmpty {
+                stringResource(R.string.gettransactions_nodescription)
+            },
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+            style = MaterialTheme.typography.bodyLarge,
+            color = if (name.isEmpty()) {
+                Color.Gray
+            } else {
+                MaterialTheme.colorScheme.onSurface
+            }
+        )
     }
 
-    Divider()
+    if (showDivider) {
+        Divider(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize))
+    }
 }
 
 @Preview
