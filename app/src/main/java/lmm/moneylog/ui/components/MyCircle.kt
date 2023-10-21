@@ -1,25 +1,53 @@
 package lmm.moneylog.ui.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
-fun MyCircle(color: Color) {
-    Canvas(
-        modifier = Modifier.size(25.dp),
-        onDraw = {
-            drawCircle(color = color)
+fun MyCircle(
+    color: Color,
+    letters: String? = null
+) {
+    Box(contentAlignment = Alignment.Center) {
+        Canvas(
+            modifier = Modifier.size(30.dp),
+            onDraw = {
+                drawCircle(color = color)
+            }
+        )
+        letters?.let {
+            Text(
+                text = it
+                    .substring(
+                        startIndex = 0,
+                        endIndex = Integer.min(
+                            it.length,
+                            2
+                        )
+                    ).uppercase(),
+                fontSize = 12.sp,
+                color = Color.White,
+                modifier = Modifier.offset(y = (-1).dp)
+            )
         }
-    )
+    }
 }
 
 @Preview
 @Composable
 fun MyCirclePreview() {
-    MyCircle(Color.Red)
+    MyCircle(
+        color = Color.Red,
+        letters = "AL"
+    )
 }

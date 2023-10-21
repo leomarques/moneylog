@@ -50,7 +50,10 @@ fun GetTransactionsItem(
                     .padding(end = SpaceSize.SmallSpaceSize),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                MyCircle(color = color)
+                MyCircle(
+                    color = color,
+                    letters = category
+                )
 
                 Column(Modifier.padding(start = SpaceSize.DefaultSpaceSize)) {
                     Text(
