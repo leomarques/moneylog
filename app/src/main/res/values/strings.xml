@@ -88,4 +88,5 @@
     <string name="account_transfer_destination_account">Conta destino</string>
 
     <string name="color_field">Cor</string>
+    <string name="current_balance">"Saldo atual: "</string>
 </resources>

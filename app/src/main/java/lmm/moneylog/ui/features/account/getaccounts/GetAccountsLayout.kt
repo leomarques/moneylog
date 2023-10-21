@@ -9,7 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
@@ -31,6 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyCircle
 import lmm.moneylog.ui.components.MyFab
@@ -52,14 +54,14 @@ fun GetAccountsLayout(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = {
-                    Text(text = stringResource(id = R.string.getaccounts_topbar))
-                },
+                title = { Text(text = stringResource(id = R.string.getaccounts_topbar)) },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+                            contentDescription = stringResource(
+                                R.string.detailtransaction_arrowback_desc
+                            )
                         )
                     }
                 },
@@ -109,14 +111,20 @@ fun GetAccountsContent(
     onItemClick: (Int) -> Unit
 ) {
     Column(Modifier.fillMaxWidth()) {
-        LazyColumn {
-            items(list.reversed()) { accountModel ->
+        LazyColumn(
+            Modifier.background(
+                color = MaterialTheme.colorScheme.inverseOnSurface,
+                shape = RoundedCornerShape(20.dp)
+            )
+        ) {
+            itemsIndexed(list.reversed()) { index, accountModel ->
                 GetAccountsItem(
                     onItemClick = onItemClick,
                     id = accountModel.id,
                     name = accountModel.name,
                     balance = accountModel.balance.formatForRs(),
-                    color = accountModel.color
+                    color = accountModel.color,
+                    showDivider = index != list.size - 1
                 )
             }
         }
@@ -129,15 +137,15 @@ fun GetAccountsItem(
     id: Int,
     name: String,
     balance: String,
-    color: Color
+    color: Color,
+    showDivider: Boolean
 ) {
     Row(
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
-            .height(SpaceSize.OneLineListItemHeight)
+            .height(SpaceSize.TwoLinesListItemHeight)
             .padding(
-                vertical = SpaceSize.SmallSpaceSize,
+                vertical = SpaceSize.DefaultSpaceSize,
                 horizontal = SpaceSize.DefaultSpaceSize
             )
             .clickable { onItemClick(id) },
@@ -147,29 +155,43 @@ fun GetAccountsItem(
         Row {
             MyCircle(color = color)
 
-            Text(
-                modifier = Modifier.padding(start = SpaceSize.DefaultSpaceSize),
-                text = name.ifEmpty {
-                    stringResource(R.string.gettransactions_nodescription)
-                },
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
-                style = MaterialTheme.typography.bodyLarge,
-                color = if (name.isEmpty()) {
-                    Color.Gray
-                } else {
-                    MaterialTheme.colorScheme.onSurface
-                }
-            )
-        }
+            Column(Modifier.padding(start = SpaceSize.DefaultSpaceSize)) {
+                Text(
+                    text = name.ifEmpty {
+                        stringResource(R.string.gettransactions_nodescription)
+                    },
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = if (name.isEmpty()) {
+                        Color.Gray
+                    } else {
+                        MaterialTheme.colorScheme.onSurface
+                    }
+                )
 
-        Text(
-            text = balance,
-            color = if (balance.contains("-")) Color.Red else income
-        )
+                Row {
+                    Text(
+                        text = stringResource(R.string.current_balance),
+                        style = MaterialTheme.typography.bodyMedium,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    Text(
+                        text = balance,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = if (balance.contains("-")) Color.Red else income
+                    )
+                }
+            }
+        }
     }
 
-    Divider()
+    if (showDivider) {
+        Divider(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize))
+    }
 }
 
 @Preview
