@@ -129,7 +129,7 @@ fun GetCategoriesContent(
                         id = category.id,
                         name = category.name,
                         color = category.color,
-                        showDivider = index != list.size - 1
+                        showDivider = index != filteredList.size - 1
                     )
                 }
             }
