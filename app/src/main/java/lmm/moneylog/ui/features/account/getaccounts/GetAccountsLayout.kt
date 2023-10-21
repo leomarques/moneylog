@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.EmptyState
 import lmm.moneylog.ui.components.MyCircle
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.textformatters.formatForRs
@@ -96,37 +97,42 @@ fun GetAccountsLayout(
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
             Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
-                GetAccountsContent(
-                    list = list,
-                    onItemClick = onItemClick
-                )
+                if (list.isNotEmpty()) {
+                    GetAccountsList(
+                        list = list,
+                        onItemClick = onItemClick
+                    )
+                } else {
+                    EmptyState(
+                        stringResource(R.string.empty_accounts_title),
+                        stringResource(R.string.empty_accounts_desc)
+                    )
+                }
             }
         }
     )
 }
 
 @Composable
-fun GetAccountsContent(
+fun GetAccountsList(
     list: List<AccountModel>,
     onItemClick: (Int) -> Unit
 ) {
-    Column(Modifier.fillMaxWidth()) {
-        LazyColumn(
-            Modifier.background(
-                color = MaterialTheme.colorScheme.inverseOnSurface,
-                shape = RoundedCornerShape(20.dp)
+    LazyColumn(
+        Modifier.background(
+            color = MaterialTheme.colorScheme.inverseOnSurface,
+            shape = RoundedCornerShape(20.dp)
+        )
+    ) {
+        itemsIndexed(list.reversed()) { index, accountModel ->
+            GetAccountsItem(
+                onItemClick = onItemClick,
+                id = accountModel.id,
+                name = accountModel.name,
+                balance = accountModel.balance.formatForRs(),
+                color = accountModel.color,
+                showDivider = index != list.size - 1
             )
-        ) {
-            itemsIndexed(list.reversed()) { index, accountModel ->
-                GetAccountsItem(
-                    onItemClick = onItemClick,
-                    id = accountModel.id,
-                    name = accountModel.name,
-                    balance = accountModel.balance.formatForRs(),
-                    color = accountModel.color,
-                    showDivider = index != list.size - 1
-                )
-            }
         }
     }
 }

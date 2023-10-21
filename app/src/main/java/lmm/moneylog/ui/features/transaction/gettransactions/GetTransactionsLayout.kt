@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.EmptyState
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.SearchTopBar
 
@@ -92,11 +93,18 @@ fun GetTransactionsLayout(
             Surface(
                 Modifier.padding(top = paddingValues.calculateTopPadding())
             ) {
-                GetTransactionsList(
-                    list = model.transactions,
-                    filter = filter,
-                    onItemClick = onItemClick
-                )
+                if (model.transactions.isNotEmpty()) {
+                    GetTransactionsList(
+                        list = model.transactions,
+                        filter = filter,
+                        onItemClick = onItemClick
+                    )
+                } else {
+                    EmptyState(
+                        stringResource(R.string.empty_transactions_title),
+                        stringResource(R.string.empty_transactions_desc)
+                    )
+                }
             }
         }
     )

@@ -38,6 +38,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.EmptyState
 import lmm.moneylog.ui.components.MyCircle
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.DarkRed
@@ -113,27 +114,30 @@ fun GetCategoriesContent(
             }
         }
 
-        LazyColumn(
-            Modifier.background(
-                color = MaterialTheme.colorScheme.inverseOnSurface,
-                shape = RoundedCornerShape(20.dp)
-            )
-        ) {
-            itemsIndexed(
-                list
-                    .filter {
-                        it.isIncome == (tabIndex == 0)
-                    }
-                    .reversed()
-            ) { index, category ->
-                CategoryItem(
-                    onItemClick = onItemClick,
-                    id = category.id,
-                    name = category.name,
-                    color = category.color,
-                    showDivider = index != list.size - 1
+        val filteredList = list.filter { it.isIncome == (tabIndex == 0) }
+
+        if (filteredList.isNotEmpty()) {
+            LazyColumn(
+                Modifier.background(
+                    color = MaterialTheme.colorScheme.inverseOnSurface,
+                    shape = RoundedCornerShape(20.dp)
                 )
+            ) {
+                itemsIndexed(filteredList.reversed()) { index, category ->
+                    CategoryItem(
+                        onItemClick = onItemClick,
+                        id = category.id,
+                        name = category.name,
+                        color = category.color,
+                        showDivider = index != list.size - 1
+                    )
+                }
             }
+        } else {
+            EmptyState(
+                title = stringResource(id = R.string.empty_categories_title),
+                description = stringResource(id = R.string.empty_categories_desc)
+            )
         }
     }
 }
