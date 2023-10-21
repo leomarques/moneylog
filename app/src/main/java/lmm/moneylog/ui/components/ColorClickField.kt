@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -20,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 import lmm.moneylog.ui.theme.SpaceSize
 
@@ -31,8 +31,7 @@ fun ColorClickField(
 ) {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(SpaceSize.OneLineListItemHeight),
+            .fillMaxWidth(),
         contentAlignment = Alignment.CenterStart
     ) {
         OutlinedTextField(
@@ -59,10 +58,15 @@ fun ColorClickField(
             modifier = Modifier
                 .padding(horizontal = SpaceSize.DefaultSpaceSize)
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(text = stringResource(R.string.color_field))
-            MyCircle(color = color)
+
+            MyCircle(
+                color = color,
+                size = 30.dp
+            )
         }
     }
 }
