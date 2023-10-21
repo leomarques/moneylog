@@ -14,13 +14,14 @@ import lmm.moneylog.ui.theme.SpaceSize
 
 @Composable
 fun ClickTextField(
+    modifier: Modifier = Modifier,
     value: String,
     title: String,
     enabled: Boolean = true,
-    onClick: (() -> Unit)
+    onClick: () -> Unit
 ) {
     OutlinedTextField(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(bottom = SpaceSize.SmallSpaceSize),
         value = value,

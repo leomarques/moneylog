@@ -19,6 +19,7 @@ import lmm.moneylog.ui.theme.SpaceSize
 
 @Composable
 fun AccCatClickField(
+    modifier: Modifier = Modifier,
     title: String,
     value: String,
     color: Color,
@@ -26,7 +27,7 @@ fun AccCatClickField(
     onClick: () -> Unit
 ) {
     OutlinedTextField(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(bottom = SpaceSize.SmallSpaceSize)
             .background(MaterialTheme.colorScheme.surface),

@@ -79,17 +79,22 @@ fun TransactionDetailContent(
         }
 
         StateTextField(
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             title = stringResource(R.string.detailtransaction_value),
             keyboardType = KeyboardType.Number,
             valueState = model.value,
             getFocus = !model.isEdit
         )
 
-        TransactionRadioGroup(model.isIncome) {
+        TransactionRadioGroup(
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            model.isIncome
+        ) {
             onIsIncomeSelected()
         }
 
         ClickTextField(
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             title = stringResource(R.string.detailtransaction_date),
             value = model.displayDate,
             onClick = {
@@ -98,12 +103,14 @@ fun TransactionDetailContent(
         )
 
         StateTextField(
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             title = stringResource(R.string.detailtransaction_description),
             keyboardType = KeyboardType.Text,
             valueState = model.description
         )
 
         AccCatClickField(
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             title = stringResource(R.string.detailtransaction_account),
             value = model.displayAccount,
             enabled = model.accounts.isNotEmpty(),
@@ -113,12 +120,14 @@ fun TransactionDetailContent(
         }
 
         AccCatClickField(
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             title = stringResource(R.string.detailtransaction_category),
             value = model.displayCategory,
+            color = model.displayCategoryColor,
             enabled = filteredCategories.isNotEmpty(),
-            color = model.displayCategoryColor
-        ) {
-            showCategoryPicker = true
-        }
+            onClick = {
+                showCategoryPicker = true
+            }
+        )
     }
 }

@@ -97,7 +97,10 @@ fun CategoryDetailLayout(
                 Content(
                     color = color,
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
-                    onDeleteConfirm = onDeleteConfirmClick,
+                    onDeleteConfirm = {
+                        showDeleteConfirmDialog.value = false
+                        onDeleteConfirmClick()
+                    },
                     onDeleteDismiss = {
                         showDeleteConfirmDialog.value = false
                     },
@@ -151,7 +154,7 @@ private fun Content(
             getFocus = !isEdit
         )
 
-        TransactionRadioGroup(isIncome) {}
+        TransactionRadioGroup(isIncome = isIncome) {}
 
         ColorClickField(color = color) {
             showColorsDialog = true

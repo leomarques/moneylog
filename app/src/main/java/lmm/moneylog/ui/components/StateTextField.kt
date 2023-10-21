@@ -24,6 +24,7 @@ import lmm.moneylog.ui.theme.SpaceSize
 
 @Composable
 fun StateTextField(
+    modifier: Modifier = Modifier,
     title: String,
     keyboardType: KeyboardType,
     valueState: MutableState<String>,
@@ -56,7 +57,7 @@ fun StateTextField(
                 }
             },
         onValueChange = { value -> valueState.value = value },
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(bottom = SpaceSize.SmallSpaceSize)
             .focusRequester(focusRequester)

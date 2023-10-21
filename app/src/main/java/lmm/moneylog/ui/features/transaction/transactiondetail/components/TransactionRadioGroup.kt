@@ -13,10 +13,11 @@ import lmm.moneylog.R
 
 @Composable
 fun TransactionRadioGroup(
+    modifier: Modifier = Modifier,
     isIncome: MutableState<Boolean>,
     onValueChange: (Boolean) -> Unit
 ) {
-    Row {
+    Row(modifier = modifier) {
         Row(
             Modifier
                 .selectable(
