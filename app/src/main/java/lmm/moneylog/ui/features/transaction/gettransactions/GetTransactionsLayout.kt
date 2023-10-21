@@ -89,7 +89,9 @@ fun GetTransactionsLayout(
             )
         },
         content = { paddingValues ->
-            Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
+            Surface(
+                Modifier.padding(top = paddingValues.calculateTopPadding())
+            ) {
                 GetTransactionsList(
                     list = model.transactions,
                     filter = filter,

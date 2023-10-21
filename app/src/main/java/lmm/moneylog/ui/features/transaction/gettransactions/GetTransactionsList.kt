@@ -2,10 +2,12 @@ package lmm.moneylog.ui.features.transaction.gettransactions
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -15,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.SpaceSize
 
@@ -36,7 +39,12 @@ fun GetTransactionsList(
         .reversed()
         .groupBy { it.date }
 
-    LazyColumn {
+    LazyColumn(
+        Modifier.background(
+            color = MaterialTheme.colorScheme.inverseOnSurface,
+            shape = RoundedCornerShape(20.dp)
+        )
+    ) {
         grouped.forEach { (date, transactions) ->
             stickyHeader {
                 Surface(
@@ -46,10 +54,8 @@ fun GetTransactionsList(
                     Text(
                         text = date,
                         modifier = Modifier
-                            .padding(
-                                top = SpaceSize.SmallSpaceSize,
-                                start = SpaceSize.DefaultSpaceSize
-                            ),
+                            .padding(vertical = SpaceSize.SmallSpaceSize)
+                            .padding(start = SpaceSize.DefaultSpaceSize),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold
                     )

@@ -4,6 +4,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 @Composable
 fun MyCircle(
@@ -20,7 +20,7 @@ fun MyCircle(
 ) {
     Box(contentAlignment = Alignment.Center) {
         Canvas(
-            modifier = Modifier.size(30.dp),
+            modifier = Modifier.size(40.dp),
             onDraw = {
                 drawCircle(color = color)
             }
@@ -35,7 +35,7 @@ fun MyCircle(
                             2
                         )
                     ).uppercase(),
-                fontSize = 12.sp,
+                style = MaterialTheme.typography.titleMedium,
                 color = Color.White,
                 modifier = Modifier.offset(y = (-1).dp)
             )

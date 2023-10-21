@@ -135,7 +135,7 @@ fun GetAccountsItem(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
-            .height(SpaceSize.ListItemHeight)
+            .height(SpaceSize.OneLineListItemHeight)
             .padding(
                 vertical = SpaceSize.SmallSpaceSize,
                 horizontal = SpaceSize.DefaultSpaceSize

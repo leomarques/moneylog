@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.features.transaction.gettransactions
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,9 +31,8 @@ fun GetTransactionsItem(
 ) {
     Row(
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
-            .height(SpaceSize.ListItemHeight)
+            .height(SpaceSize.TwoLinesListItemHeight)
             .padding(
                 vertical = SpaceSize.SmallSpaceSize,
                 horizontal = SpaceSize.DefaultSpaceSize
@@ -75,7 +73,7 @@ fun GetTransactionsItem(
                         style = MaterialTheme.typography.bodyMedium,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
-                        color = Color.Gray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }

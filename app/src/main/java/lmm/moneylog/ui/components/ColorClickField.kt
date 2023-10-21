@@ -32,7 +32,7 @@ fun ColorClickField(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(SpaceSize.ListItemHeight),
+            .height(SpaceSize.OneLineListItemHeight),
         contentAlignment = Alignment.CenterStart
     ) {
         OutlinedTextField(
