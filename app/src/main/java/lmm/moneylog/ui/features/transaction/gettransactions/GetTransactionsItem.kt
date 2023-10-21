@@ -87,7 +87,7 @@ fun GetTransactionsItem(
                 if (isIncome) {
                     income
                 } else {
-                    color
+                    Color.Red
                 },
                 textAlign = TextAlign.End,
                 style = MaterialTheme.typography.bodyMedium,
