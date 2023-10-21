@@ -19,8 +19,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import lmm.moneylog.ui.theme.DarkBlue
+import lmm.moneylog.ui.theme.DarkBrow
 import lmm.moneylog.ui.theme.DarkGreen
 import lmm.moneylog.ui.theme.DarkOrange
+import lmm.moneylog.ui.theme.DarkPink
 import lmm.moneylog.ui.theme.DarkPurple
 import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.DarkYellow
@@ -37,7 +39,9 @@ fun ColorPicker(
         DarkGreen,
         DarkYellow,
         DarkOrange,
-        DarkPurple
+        DarkPurple,
+        DarkPink,
+        DarkBrow,
     )
 
     Dialog(

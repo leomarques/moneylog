@@ -4,12 +4,14 @@ import androidx.compose.ui.graphics.Color
 
 val income = Color(0xFF009f23)
 
-val DarkRed = Color(0xFFc46156)
-val DarkBlue = Color(0xFF487dc4)
-val DarkGreen = Color(0xFF52a475)
-val DarkYellow = Color(0xFFda9f47)
-val DarkOrange = Color(0xFFd57b31)
-val DarkPurple = Color(0xFF8f5ec2)
+val DarkRed = Color(0xFF693738)
+val DarkBlue = Color(0xFF28456c)
+val DarkGreen = Color(0xFF2c5b3c)
+val DarkYellow = Color(0xFF89632a)
+val DarkOrange = Color(0xFF854c1d)
+val DarkPurple = Color(0xFF492f64)
+val DarkPink = Color(0xFF69314c)
+val DarkBrow = Color(0xFF603b2c)
 
 val md_theme_light_primary = Color(0xFF00696D)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
