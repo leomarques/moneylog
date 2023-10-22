@@ -84,8 +84,8 @@ fun GetArchivedAccountsLayout(
                         showDeleteConfirmDialog = true
                     },
                     onDeleteConfirm = {
-                        onDeleteConfirm(idToDelete)
                         showDeleteConfirmDialog = false
+                        onDeleteConfirm(idToDelete)
                     },
                     onDismissConfirmDialog = {
                         showDeleteConfirmDialog = false

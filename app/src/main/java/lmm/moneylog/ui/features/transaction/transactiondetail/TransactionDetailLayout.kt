@@ -81,7 +81,10 @@ fun TransactionDetailLayout(
                     onDatePicked = onDatePicked,
                     onAccountPicked = onAccountPicked,
                     onCategoryPicked = onCategoryPicked,
-                    onDeleteConfirm = { onDeleteConfirmClick() },
+                    onDeleteConfirm = {
+                        showDeleteConfirmDialog.value = false
+                        onDeleteConfirmClick()
+                    },
                     onDeleteDismiss = { showDeleteConfirmDialog.value = false },
                     onIsIncomeSelected = onIsIncomeSelected
                 )

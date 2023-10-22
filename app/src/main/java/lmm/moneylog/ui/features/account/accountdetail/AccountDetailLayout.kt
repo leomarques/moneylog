@@ -96,7 +96,10 @@ fun AccountDetailLayout(
                 Content(
                     color = color,
                     showArchiveConfirmDialog = showArchiveConfirmDialog.value,
-                    onArchiveConfirm = onArchiveIconClick,
+                    onArchiveConfirm = {
+                        showArchiveConfirmDialog.value = false
+                        onArchiveIconClick()
+                    },
                     onArchiveDismiss = {
                         showArchiveConfirmDialog.value = false
                     },
