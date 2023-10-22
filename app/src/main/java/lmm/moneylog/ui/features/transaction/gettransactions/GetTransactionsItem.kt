@@ -68,8 +68,15 @@ fun GetTransactionsItem(
                         }
                     )
 
+
+                    val categoryString = category.ifEmpty {
+                        stringResource(R.string.no_category)
+                    }
+                    val accountString = account.ifEmpty {
+                        stringResource(R.string.no_account)
+                    }
                     Text(
-                        text = "$category | $account",
+                        text = "$categoryString | $accountString",
                         style = MaterialTheme.typography.bodyMedium,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,

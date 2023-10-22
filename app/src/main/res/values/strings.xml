@@ -95,4 +95,6 @@
     <string name="empty_transactions_desc">Adicione uma transação e ela irá aparecer aqui.</string>
     <string name="empty_accounts_desc">Adicione uma conta e ela irá aparecer aqui.</string>
     <string name="empty_categories_desc">Adicione uma categoria e ela irá aparecer aqui.</string>
+    <string name="no_category">(sem categoria)</string>
+    <string name="no_account">(sem conta)</string>
 </resources>
