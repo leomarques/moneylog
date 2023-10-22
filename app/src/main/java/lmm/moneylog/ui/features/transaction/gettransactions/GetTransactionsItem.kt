@@ -68,7 +68,6 @@ fun GetTransactionsItem(
                         }
                     )
 
-
                     val categoryString = category.ifEmpty {
                         stringResource(R.string.no_category)
                     }

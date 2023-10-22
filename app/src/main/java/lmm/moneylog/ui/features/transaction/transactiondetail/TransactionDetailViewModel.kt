@@ -109,8 +109,12 @@ class TransactionDetailViewModel(
     }
 
     fun onCategoryPicked(index: Int) {
+        val uiStateValue = _uiState.value
+        val filteredCategories = uiStateValue.categories
+            .filter { cat -> cat.isIncome == uiStateValue.isIncome.value }
+
         _uiState.update {
-            val category = _uiState.value.categories[index]
+            val category = filteredCategories[index]
             it.copy(
                 displayCategory = category.name,
                 displayCategoryColor = Color(category.color.toULong()),
