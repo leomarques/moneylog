@@ -15,8 +15,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,6 +43,7 @@ fun GetTransactionsLayout(
 ) {
     val showTopBar = remember { mutableStateOf(true) }
     val filter = remember { mutableStateOf("") }
+    var showFab by remember { mutableStateOf(true) }
 
     Scaffold(
         topBar = {
@@ -84,10 +87,15 @@ fun GetTransactionsLayout(
         },
         floatingActionButtonPosition = FabPosition.Center,
         floatingActionButton = {
-            MyFab(
-                onClick = onFabClick,
-                icon = Icons.Default.Add
-            )
+            if (showFab) {
+                MyFab(
+                    onClick = {
+                        showFab = false
+                        onFabClick()
+                    },
+                    icon = Icons.Default.Add
+                )
+            }
         },
         content = { paddingValues ->
             Surface(

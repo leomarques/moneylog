@@ -10,11 +10,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.features.home.balancecard.BalanceCardView
-import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.SpaceSize
 import org.koin.androidx.compose.koinViewModel
 
@@ -27,15 +29,22 @@ fun HomeView(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
+    var showFab by remember { mutableStateOf(true) }
+
     Scaffold(
         modifier = Modifier
             .padding(horizontal = SpaceSize.DefaultSpaceSize)
             .padding(top = SpaceSize.DefaultSpaceSize),
         floatingActionButton = {
-            MyFab(
-                onFabClick,
-                Icons.Default.Add
-            )
+            if (showFab) {
+                MyFab(
+                    onClick = {
+                        showFab = false
+                        onFabClick()
+                    },
+                    icon = Icons.Default.Add
+                )
+            }
         },
         floatingActionButtonPosition = FabPosition.Center,
         content = {
@@ -54,11 +63,9 @@ fun HomeView(
 
 @Preview
 @Composable
-fun HomeLayoutPreview() {
-    MoneylogTheme {
-        HomeView(
-            onFabClick = {},
-            onClick = {}
-        )
-    }
+fun HomeViewPreview() {
+    HomeView(
+        onFabClick = {},
+        onClick = {}
+    )
 }

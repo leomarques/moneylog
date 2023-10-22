@@ -28,6 +28,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -52,6 +53,8 @@ fun GetCategoriesLayout(
     list: List<CategoryModel>,
     onItemClick: (Int) -> Unit
 ) {
+    var showFab by remember { mutableStateOf(true) }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -69,10 +72,15 @@ fun GetCategoriesLayout(
             )
         },
         floatingActionButton = {
-            MyFab(
-                onClick = onFabClick,
-                icon = Icons.Default.Add
-            )
+            if (showFab) {
+                MyFab(
+                    onClick = {
+                        showFab = false
+                        onFabClick()
+                    },
+                    icon = Icons.Default.Add
+                )
+            }
         },
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
