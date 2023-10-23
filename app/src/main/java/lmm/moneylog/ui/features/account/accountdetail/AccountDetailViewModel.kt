@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import lmm.moneylog.R
 import lmm.moneylog.data.account.Account
 import lmm.moneylog.data.account.repositories.AddAccountRepository
 import lmm.moneylog.data.account.repositories.ArchiveAccountRepository
@@ -54,12 +55,21 @@ class AccountDetailViewModel(
         }
     }
 
-    fun onFabClick() {
-        viewModelScope.launch {
-            if (_uiState.value.isEdit) {
-                updateAccountRepository.update(_uiState.value.toAccount())
-            } else {
-                addAccountRepository.save(_uiState.value.toAccount())
+    fun onFabClick(
+        onSuccess: () -> Unit,
+        onError: (Int) -> Unit
+    ) {
+        val name = _uiState.value.name.value.trim()
+        if (name.isEmpty()) {
+            onError(R.string.detail_no_name)
+        } else {
+            viewModelScope.launch {
+                if (_uiState.value.isEdit) {
+                    updateAccountRepository.update(_uiState.value.toAccount())
+                } else {
+                    addAccountRepository.save(_uiState.value.toAccount())
+                }
+                onSuccess()
             }
         }
     }
@@ -76,7 +86,7 @@ class AccountDetailViewModel(
 fun AccountDetailModel.toAccount() =
     Account(
         id = id,
-        name = name.value,
+        name = name.value.trim(),
         color = color.value.toLong(),
         archived = false
     )

@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import lmm.moneylog.R
 import lmm.moneylog.data.category.Category
 import lmm.moneylog.data.category.repositories.AddCategoryRepository
 import lmm.moneylog.data.category.repositories.DeleteCategoryRepository
@@ -52,12 +53,21 @@ class CategoryDetailViewModel(
         }
     }
 
-    fun onFabClick() {
-        viewModelScope.launch {
-            if (_uiState.value.isEdit) {
-                updateCategoryRepository.update(_uiState.value.toCategory())
-            } else {
-                addCategoryRepository.save(_uiState.value.toCategory())
+    fun onFabClick(
+        onSuccess: () -> Unit,
+        onError: (Int) -> Unit
+    ) {
+        val name = _uiState.value.name.value.trim()
+        if (name.isEmpty()) {
+            onError(R.string.detail_no_name)
+        } else {
+            viewModelScope.launch {
+                if (_uiState.value.isEdit) {
+                    updateCategoryRepository.update(_uiState.value.toCategory())
+                } else {
+                    addCategoryRepository.save(_uiState.value.toCategory())
+                }
+                onSuccess()
             }
         }
     }
@@ -74,7 +84,7 @@ class CategoryDetailViewModel(
 fun CategoryDetailModel.toCategory() =
     Category(
         id = id,
-        name = name.value,
+        name = name.value.trim(),
         color = color.value.toLong(),
         isIncome = isIncome.value
     )

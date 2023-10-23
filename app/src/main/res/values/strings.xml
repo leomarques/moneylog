@@ -11,6 +11,7 @@
     <string name="detailtransaction_category">Categoria</string>
     <string name="detailtransaction_description">Descrição</string>
     <string name="detailtransaction_invalidvalue">Valor inválido</string>
+    <string name="detail_no_name">Campo Nome é obrigatório</string>
     <string name="detailtransaction_no_account">Campo Conta é obrigatório</string>
     <string name="detailtransaction_no_category">Campo Categoria é obrigatório</string>
 
