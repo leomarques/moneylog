@@ -98,4 +98,5 @@
     <string name="empty_categories_desc">Adicione uma categoria e ela irá aparecer aqui.</string>
     <string name="no_category">(sem categoria)</string>
     <string name="no_account">(sem conta)</string>
+    <string name="detailtransaction_value_icon_desc">ícone de valor</string>
 </resources>

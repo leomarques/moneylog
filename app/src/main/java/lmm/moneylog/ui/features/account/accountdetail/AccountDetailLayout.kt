@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -62,7 +63,13 @@ fun AccountDetailLayout(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = onArrowBackClick) {
+                    val focusManager = LocalFocusManager.current
+                    IconButton(
+                        onClick = {
+                            focusManager.clearFocus()
+                            onArrowBackClick()
+                        }
+                    ) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
