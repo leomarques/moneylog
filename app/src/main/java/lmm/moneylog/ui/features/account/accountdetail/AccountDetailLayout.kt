@@ -152,6 +152,7 @@ private fun Content(
         }
 
         StateTextField(
+            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,
             valueState = valueState,

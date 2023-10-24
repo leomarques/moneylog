@@ -119,6 +119,7 @@ fun AccountTransferContent(
         }
 
         StateTextField(
+            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             title = stringResource(R.string.detailtransaction_value),
             keyboardType = KeyboardType.Number,
             valueState = valueField,
@@ -126,12 +127,12 @@ fun AccountTransferContent(
         )
 
         Text(
-            modifier = Modifier.padding(vertical = SpaceSize.DefaultSpaceSize),
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             text = "Transferir de:"
         )
 
         ClickTextField(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             value = originAccountDisplay,
             title = stringResource(R.string.account_transfer_origin_account),
             enabled = accounts.isNotEmpty(),
@@ -141,12 +142,12 @@ fun AccountTransferContent(
         )
 
         Text(
-            modifier = Modifier.padding(vertical = SpaceSize.DefaultSpaceSize),
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             text = "Para:"
         )
 
         ClickTextField(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             value = destinationAccountDisplay,
             title = stringResource(R.string.account_transfer_destination_account),
             enabled = accounts.isNotEmpty(),

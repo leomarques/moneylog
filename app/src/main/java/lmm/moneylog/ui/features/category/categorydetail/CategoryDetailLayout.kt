@@ -155,13 +155,17 @@ private fun Content(
         }
 
         StateTextField(
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,
             valueState = valueState,
             getFocus = !isEdit
         )
 
-        TransactionRadioGroup(isIncome = isIncome) {}
+        TransactionRadioGroup(
+            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
+            isIncome = isIncome
+        ) {}
 
         ColorClickField(color = color) {
             showColorsDialog = true
