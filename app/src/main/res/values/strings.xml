@@ -9,7 +9,7 @@
     <string name="detailtransaction_date">Data</string>
     <string name="detailtransaction_account">Conta</string>
     <string name="detailtransaction_category">Categoria</string>
-    <string name="detailtransaction_description">Descrição</string>
+    <string name="detailtransaction_description">Descrição (opcional)</string>
     <string name="detailtransaction_invalidvalue">Valor inválido</string>
     <string name="detail_no_name">Campo Nome é obrigatório</string>
     <string name="detailtransaction_no_account">Campo Conta é obrigatório</string>
