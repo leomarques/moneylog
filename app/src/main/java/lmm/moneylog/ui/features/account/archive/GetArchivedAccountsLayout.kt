@@ -37,6 +37,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.EmptyState
 import lmm.moneylog.ui.components.TextPicker
 import lmm.moneylog.ui.features.account.accountdetail.DeleteAccountConfirmDialog
 import lmm.moneylog.ui.theme.SpaceSize
@@ -67,31 +68,38 @@ fun GetArchivedAccountsLayout(
         },
         content = { paddingValues ->
             Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
-                var showDeleteConfirmDialog by remember {
-                    mutableStateOf(false)
-                }
+                if (list.isEmpty()) {
+                    EmptyState(
+                        stringResource(R.string.empty_archived_accounts_title),
+                        stringResource(R.string.empty_archived_accounts_desc)
+                    )
+                } else {
+                    var showDeleteConfirmDialog by remember {
+                        mutableStateOf(false)
+                    }
 
-                var idToDelete by remember {
-                    mutableIntStateOf(-1)
-                }
+                    var idToDelete by remember {
+                        mutableIntStateOf(-1)
+                    }
 
-                GetArchivedAccountsContent(
-                    onItemClick = {},
-                    list = list,
-                    onUnArchive = onUnArchive,
-                    onDeleteClick = { id ->
-                        idToDelete = id
-                        showDeleteConfirmDialog = true
-                    },
-                    onDeleteConfirm = {
-                        showDeleteConfirmDialog = false
-                        onDeleteConfirm(idToDelete)
-                    },
-                    onDismissConfirmDialog = {
-                        showDeleteConfirmDialog = false
-                    },
-                    showDeleteConfirmDialog = showDeleteConfirmDialog
-                )
+                    GetArchivedAccountsContent(
+                        onItemClick = {},
+                        list = list,
+                        onUnArchive = onUnArchive,
+                        onDeleteClick = { id ->
+                            idToDelete = id
+                            showDeleteConfirmDialog = true
+                        },
+                        onDeleteConfirm = {
+                            showDeleteConfirmDialog = false
+                            onDeleteConfirm(idToDelete)
+                        },
+                        onDismissConfirmDialog = {
+                            showDeleteConfirmDialog = false
+                        },
+                        showDeleteConfirmDialog = showDeleteConfirmDialog
+                    )
+                }
             }
         }
     )

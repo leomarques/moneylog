@@ -92,10 +92,12 @@
     <string name="current_balance">"Saldo atual: "</string>
     <string name="empty_transactions_title">Não há transações</string>
     <string name="empty_accounts_title">Não há contas</string>
+    <string name="empty_archived_accounts_title">Não há contas arquivadas</string>
     <string name="empty_categories_title">Não há categorias</string>
     <string name="empty_transactions_desc">Adicione uma transação e ela irá aparecer aqui.</string>
     <string name="empty_accounts_desc">Adicione uma conta e ela irá aparecer aqui.</string>
     <string name="empty_categories_desc">Adicione uma categoria e ela irá aparecer aqui.</string>
+    <string name="empty_archived_accounts_desc">Ao arquivar uma conta ela irá aparecer aqui.</string>
     <string name="no_category">(sem categoria)</string>
     <string name="no_account">(sem conta)</string>
     <string name="detailtransaction_value_icon_desc">ícone de valor</string>
