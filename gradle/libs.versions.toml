@@ -1,14 +1,14 @@
 [versions]
-coreTesting                    = "2.2.0"
-composeBom                     = "2023.10.01"
-junit                          = "4.13.2"
-koinAndroid                    = "3.5.0"
-koinAndroidxCompose            = "3.5.0"
-kotlinxCoroutinesTest          = "1.7.3"
-material3                      = "1.1.2"
-mockk                          = "1.13.7"
-navigationCompose              = "2.7.4"
-room                           = "2.6.0"
+composeBom            = "2023.10.01"
+coreTesting           = "2.2.0"
+junit                 = "4.13.2"
+koinAndroid           = "3.5.0"
+koinAndroidxCompose   = "3.5.0"
+kotlinxCoroutinesTest = "1.7.3"
+material3             = "1.1.2"
+mockk                 = "1.13.7"
+navigationCompose     = "2.7.4"
+room                  = "2.6.0"
 
 androidApplication      = "8.1.2"
 androidLibrary          = "8.1.2"
@@ -17,20 +17,20 @@ jetbrainsKotlinAndroid  = "1.9.10"
 jlleitschuhGradleKtlint = "11.6.0"
 
 [libraries]
-core-testing       		= { group = "androidx.arch.core", 			name = "core-testing", 				version.ref = "coreTesting" }
-compose-bom 			= { group = "androidx.compose", 			name = "compose-bom", 				version.ref = "composeBom" }
-material3   			= { group = "androidx.compose.material3", 	name = "material3", 				version.ref = "material3" }
-ui-tooling-preview 		= { group = "androidx.compose.ui", 			name = "ui-tooling-preview" }
-ui-tooling  			= { group = "androidx.compose.ui", 			name = "ui-tooling" }
-navigation-compose 		= { group = "androidx.navigation", 			name = "navigation-compose", 		version.ref = "navigationCompose" }
-room-compiler      		= { group = "androidx.room", 				name = "room-compiler", 			version.ref = "room" }
-room-ktx    			= { group = "androidx.room", 				name = "room-ktx", 					version.ref = "room" }
-room-runtime       		= { group = "androidx.room", 				name = "room-runtime", 				version.ref = "room" }
-koin-android       		= { group = "io.insert-koin", 				name = "koin-android", 				version.ref = "koinAndroid" }
-koin-androidx-compose   = { group = "io.insert-koin", 				name = "koin-androidx-compose", 	version.ref = "koinAndroidxCompose" }
-mockk       			= { group = "io.mockk", 					name = "mockk", 					version.ref = "mockk" }
-junit       			= { group = "junit", 						name = "junit", 					version.ref = "junit" }
-kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", 		name = "kotlinx-coroutines-test", 	version.ref = "kotlinxCoroutinesTest" }
+core-testing            = { group = "androidx.arch.core",         name = "core-testing", 				    version.ref = "coreTesting" }
+compose-bom 			      = { group = "androidx.compose",           name = "compose-bom", 				    version.ref = "composeBom" }
+material3   			      = { group = "androidx.compose.material3", name = "material3", 				      version.ref = "material3" }
+ui-tooling-preview 	    = { group = "androidx.compose.ui",        name = "ui-tooling-preview" }
+ui-tooling  			      = { group = "androidx.compose.ui",        name = "ui-tooling" }
+navigation-compose 	    = { group = "androidx.navigation", 			  name = "navigation-compose", 		  version.ref = "navigationCompose" }
+room-compiler      	    = { group = "androidx.room", 				      name = "room-compiler", 			    version.ref = "room" }
+room-ktx    			      = { group = "androidx.room", 				      name = "room-ktx", 					      version.ref = "room" }
+room-runtime       	    = { group = "androidx.room", 				      name = "room-runtime", 				    version.ref = "room" }
+koin-android       	    = { group = "io.insert-koin", 				    name = "koin-android", 				    version.ref = "koinAndroid" }
+koin-androidx-compose   = { group = "io.insert-koin", 				    name = "koin-androidx-compose", 	version.ref = "koinAndroidxCompose" }
+mockk       			      = { group = "io.mockk", 					        name = "mockk", 					        version.ref = "mockk" }
+junit       			      = { group = "junit", 						          name = "junit", 					        version.ref = "junit" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", 		  name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 
 [bundles]
 compose = ["material3", "ui-tooling-preview", "ui-tooling", "navigation-compose"]
@@ -39,8 +39,8 @@ room    = ["room-ktx", "room-runtime"]
 test    = ["core-testing", "kotlinx-coroutines-test", "mockk", "junit"]
 
 [plugins]
-android-application 		= { id = "com.android.application", 		version.ref = "androidApplication" }
-android-library 			= { id = "com.android.library", 			version.ref = "androidLibrary" }
-google-devtools-ksp 		= { id = "com.google.devtools.ksp", 		version.ref = "googleDevtoolsKsp" }
+android-application 		  = { id = "com.android.application", 		  version.ref = "androidApplication" }
+android-library 			    = { id = "com.android.library", 			    version.ref = "androidLibrary" }
+google-devtools-ksp 		  = { id = "com.google.devtools.ksp", 		  version.ref = "googleDevtoolsKsp" }
 jetbrains-kotlin-android 	= { id = "org.jetbrains.kotlin.android", 	version.ref = "jetbrainsKotlinAndroid" }
-jlleitschuh-gradle-ktlint 	= { id = "org.jlleitschuh.gradle.ktlint", 	version.ref = "jlleitschuhGradleKtlint" }
+jlleitschuh-gradle-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "jlleitschuhGradleKtlint" }
