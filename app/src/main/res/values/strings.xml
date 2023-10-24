@@ -99,4 +99,8 @@
     <string name="no_category">(sem categoria)</string>
     <string name="no_account">(sem conta)</string>
     <string name="detailtransaction_value_icon_desc">ícone de valor</string>
+    <string name="detailtransaction_date_icon_desc">ícone de data</string>
+    <string name="detailtransaction_description_icon_desc">ícone de descrição</string>
+    <string name="detailtransaction_account_icon_desc">ícone de conta</string>
+    <string name="detailtransaction_category_icon_desc">ícone de categoria</string>
 </resources>

@@ -18,9 +18,11 @@ fun ClickTextField(
     value: String,
     title: String,
     enabled: Boolean = true,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    leadingIcon: @Composable (() -> Unit)? = null
 ) {
     OutlinedTextField(
+        leadingIcon = leadingIcon,
         modifier = modifier
             .fillMaxWidth()
             .padding(bottom = SpaceSize.SmallSpaceSize),

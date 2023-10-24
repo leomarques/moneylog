@@ -29,12 +29,14 @@ fun StateTextField(
     keyboardType: KeyboardType,
     valueState: MutableState<String>,
     onClick: (() -> Unit)? = null,
-    getFocus: Boolean = false
+    getFocus: Boolean = false,
+    leadingIcon: (@Composable () -> Unit)? = null
 ) {
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
 
     OutlinedTextField(
+        leadingIcon = leadingIcon,
         value = valueState.value,
         label = { Text(text = title) },
         keyboardOptions = KeyboardOptions.Default.copy(

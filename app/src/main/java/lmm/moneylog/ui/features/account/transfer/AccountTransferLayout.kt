@@ -131,13 +131,13 @@ fun AccountTransferContent(
         )
 
         ClickTextField(
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             value = originAccountDisplay,
             title = stringResource(R.string.account_transfer_origin_account),
             enabled = accounts.isNotEmpty(),
             onClick = {
                 showOriginAccountPicker = true
-            },
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize)
+            }
         )
 
         Text(
@@ -146,13 +146,13 @@ fun AccountTransferContent(
         )
 
         ClickTextField(
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             value = destinationAccountDisplay,
             title = stringResource(R.string.account_transfer_destination_account),
             enabled = accounts.isNotEmpty(),
             onClick = {
                 showDestinationAccountPicker = true
-            },
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize)
+            }
         )
     }
 }

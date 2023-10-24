@@ -2,13 +2,19 @@ package lmm.moneylog.ui.features.transaction.transactiondetail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.AccCatClickField
@@ -83,7 +89,13 @@ fun TransactionDetailContent(
             title = stringResource(R.string.detailtransaction_value),
             keyboardType = KeyboardType.Number,
             valueState = model.value,
-            getFocus = !model.isEdit
+            getFocus = !model.isEdit,
+            leadingIcon = {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.outline_attach_money_24),
+                    contentDescription = stringResource(R.string.detailtransaction_value_icon_desc)
+                )
+            }
         )
 
         TransactionRadioGroup(
@@ -95,10 +107,16 @@ fun TransactionDetailContent(
 
         ClickTextField(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
-            title = stringResource(R.string.detailtransaction_date),
             value = model.displayDate,
+            title = stringResource(R.string.detailtransaction_date),
             onClick = {
                 showDatePicker = true
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.DateRange,
+                    contentDescription = stringResource(R.string.detailtransaction_date_icon_desc)
+                )
             }
         )
 
@@ -106,18 +124,31 @@ fun TransactionDetailContent(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             title = stringResource(R.string.detailtransaction_description),
             keyboardType = KeyboardType.Text,
-            valueState = model.description
+            valueState = model.description,
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Create,
+                    contentDescription = stringResource(R.string.detailtransaction_description_icon_desc)
+                )
+            }
         )
 
         AccCatClickField(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             title = stringResource(R.string.detailtransaction_account),
             value = model.displayAccount,
+            color = model.displayAccountColor,
             enabled = model.accounts.isNotEmpty(),
-            color = model.displayAccountColor
-        ) {
-            showAccountPicker = true
-        }
+            onClick = {
+                showAccountPicker = true
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
+                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc)
+                )
+            }
+        )
 
         AccCatClickField(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
@@ -127,6 +158,12 @@ fun TransactionDetailContent(
             enabled = filteredCategories.isNotEmpty(),
             onClick = {
                 showCategoryPicker = true
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.outline_category_24),
+                    contentDescription = stringResource(R.string.detailtransaction_category_icon_desc)
+                )
             }
         )
     }
