@@ -1,7 +1,7 @@
 # Moneylog
 
 Moneylog is an app to log your money.<br>
-<i>This project uses the [architecture recommended by Google](https://developer.android.com/topic/architecture#recommended-app-arch), MVVM design pattern and the UI is written in Jetpack Compose.</i>
+This project uses the [architecture recommended by Google](https://developer.android.com/topic/architecture#recommended-app-arch), MVVM design pattern and the UI is written in Jetpack Compose.
 
 ## License
 
