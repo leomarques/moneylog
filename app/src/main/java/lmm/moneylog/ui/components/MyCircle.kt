@@ -16,11 +16,15 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun MyCircle(
+    modifier: Modifier = Modifier,
     color: Color,
     letters: String? = null,
     size: Dp = 40.dp
 ) {
-    Box(contentAlignment = Alignment.Center) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
         Canvas(
             modifier = Modifier.size(size),
             onDraw = {

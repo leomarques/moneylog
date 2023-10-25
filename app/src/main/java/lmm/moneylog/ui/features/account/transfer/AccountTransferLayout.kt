@@ -21,7 +21,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
@@ -119,6 +121,12 @@ fun AccountTransferContent(
         }
 
         StateTextField(
+            leadingIcon = {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.outline_attach_money_24),
+                    contentDescription = stringResource(R.string.detailtransaction_value_icon_desc)
+                )
+            },
             modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             title = stringResource(R.string.detailtransaction_value),
             keyboardType = KeyboardType.Number,
@@ -132,6 +140,12 @@ fun AccountTransferContent(
         )
 
         ClickTextField(
+            leadingIcon = {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
+                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc)
+                )
+            },
             modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             value = originAccountDisplay,
             title = stringResource(R.string.account_transfer_origin_account),
@@ -147,6 +161,12 @@ fun AccountTransferContent(
         )
 
         ClickTextField(
+            leadingIcon = {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
+                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc)
+                )
+            },
             modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             value = destinationAccountDisplay,
             title = stringResource(R.string.account_transfer_destination_account),

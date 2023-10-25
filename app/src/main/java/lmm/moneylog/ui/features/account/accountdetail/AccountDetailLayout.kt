@@ -22,9 +22,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
@@ -152,6 +154,12 @@ private fun Content(
         }
 
         StateTextField(
+            leadingIcon = {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
+                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc)
+                )
+            },
             modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,
@@ -159,9 +167,18 @@ private fun Content(
             getFocus = !isEdit
         )
 
-        ColorClickField(color = color) {
-            showColorsDialog = true
-        }
+        ColorClickField(
+            color = color,
+            leadingIcon = {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.outline_brush_24),
+                    contentDescription = stringResource(R.string.detailtransaction_color_icon_desc)
+                )
+            },
+            onClick = {
+                showColorsDialog = true
+            }
+        )
     }
 }
 
