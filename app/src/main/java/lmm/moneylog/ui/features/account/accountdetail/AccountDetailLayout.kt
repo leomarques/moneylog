@@ -49,6 +49,7 @@ fun AccountDetailLayout(
     color: Color
 ) {
     val showArchiveConfirmDialog = remember { mutableStateOf(false) }
+    var showFab by remember { mutableStateOf(true) }
 
     Scaffold(
         topBar = {
@@ -94,10 +95,15 @@ fun AccountDetailLayout(
             )
         },
         floatingActionButton = {
-            MyFab(
-                onClick = onFabClick,
-                icon = Icons.Default.Check
-            )
+            if (showFab) {
+                MyFab(
+                    onClick = {
+                        showFab = false
+                        onFabClick()
+                    },
+                    icon = Icons.Default.Check
+                )
+            }
         },
         floatingActionButtonPosition = FabPosition.End,
         content = { paddingValues ->

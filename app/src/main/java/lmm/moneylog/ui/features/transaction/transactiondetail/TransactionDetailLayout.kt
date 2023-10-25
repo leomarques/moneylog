@@ -15,8 +15,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -37,6 +39,7 @@ fun TransactionDetailLayout(
     onIsIncomeSelected: () -> Unit
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
+    var showFab by remember { mutableStateOf(true) }
 
     Scaffold(
         topBar = {
@@ -74,10 +77,15 @@ fun TransactionDetailLayout(
             )
         },
         floatingActionButton = {
-            MyFab(
-                onClick = onFabClick,
-                icon = Icons.Default.Check
-            )
+            if (showFab) {
+                MyFab(
+                    onClick = {
+                        showFab = false
+                        onFabClick()
+                    },
+                    icon = Icons.Default.Check
+                )
+            }
         },
         floatingActionButtonPosition = FabPosition.End,
         content = { paddingValues ->

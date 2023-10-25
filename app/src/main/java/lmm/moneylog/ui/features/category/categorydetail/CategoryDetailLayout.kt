@@ -50,6 +50,7 @@ fun CategoryDetailLayout(
     color: Color
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
+    var showFab by remember { mutableStateOf(true) }
 
     Scaffold(
         topBar = {
@@ -95,10 +96,15 @@ fun CategoryDetailLayout(
             )
         },
         floatingActionButton = {
-            MyFab(
-                onClick = onFabClick,
-                icon = Icons.Default.Check
-            )
+            if (showFab) {
+                MyFab(
+                    onClick = {
+                        showFab = false
+                        onFabClick()
+                    },
+                    icon = Icons.Default.Check
+                )
+            }
         },
         floatingActionButtonPosition = FabPosition.End,
         content = { paddingValues ->
