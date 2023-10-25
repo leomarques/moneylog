@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -25,6 +26,7 @@ import lmm.moneylog.ui.features.transaction.transactiondetail.components.DeleteT
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionDetailDatePicker
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionRadioGroup
 import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.income
 
 @Composable
 fun TransactionDetailContent(
@@ -93,7 +95,8 @@ fun TransactionDetailContent(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_attach_money_24),
-                    contentDescription = stringResource(R.string.detailtransaction_value_icon_desc)
+                    contentDescription = stringResource(R.string.detailtransaction_value_icon_desc),
+                    tint = if (model.isIncome.value) income else Color.Red
                 )
             }
         )
@@ -137,7 +140,6 @@ fun TransactionDetailContent(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             title = stringResource(R.string.detailtransaction_account),
             value = model.displayAccount,
-            color = model.displayAccountColor,
             enabled = model.accounts.isNotEmpty(),
             onClick = {
                 showAccountPicker = true
@@ -145,7 +147,8 @@ fun TransactionDetailContent(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
-                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc)
+                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc),
+                    tint = model.displayAccountColor
                 )
             }
         )
@@ -154,7 +157,6 @@ fun TransactionDetailContent(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             title = stringResource(R.string.detailtransaction_category),
             value = model.displayCategory,
-            color = model.displayCategoryColor,
             enabled = filteredCategories.isNotEmpty(),
             onClick = {
                 showCategoryPicker = true
@@ -162,7 +164,8 @@ fun TransactionDetailContent(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_category_24),
-                    contentDescription = stringResource(R.string.detailtransaction_category_icon_desc)
+                    contentDescription = stringResource(R.string.detailtransaction_category_icon_desc),
+                    tint = model.displayCategoryColor
                 )
             }
         )
