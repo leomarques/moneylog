@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.account.transfer
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,17 +20,21 @@ class AccountTransferViewModel(
     private val domainTimeConverter: DomainTimeConverter
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(AccountTransferModel())
-    val uiState: StateFlow<AccountTransferModel> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(AccountTransferUIState())
+    val uiState: StateFlow<AccountTransferUIState> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
             val accounts = getAccountsRepository.getAccountsSuspend()
 
             _uiState.update {
-                AccountTransferModel(
+                AccountTransferUIState(
                     accounts = accounts.map {
-                        it.id to it.name
+                        AccountTransferModel(
+                            id = it.id,
+                            name = it.name,
+                            color = Color(it.color.toULong())
+                        )
                     },
                     date = domainTimeConverter.getCurrentDomainTime()
                 )
@@ -40,8 +45,9 @@ class AccountTransferViewModel(
     fun onOriginAccountPicked(index: Int) {
         _uiState.update {
             it.copy(
-                originAccountId = _uiState.value.accounts[index].first,
-                originAccountDisplay = _uiState.value.accounts[index].second
+                originAccountId = _uiState.value.accounts[index].id,
+                originAccountDisplay = _uiState.value.accounts[index].name,
+                originAccountColor = _uiState.value.accounts[index].color
             )
         }
     }
@@ -49,8 +55,9 @@ class AccountTransferViewModel(
     fun onDestinationAccountPicked(index: Int) {
         _uiState.update {
             it.copy(
-                destinationAccountId = _uiState.value.accounts[index].first,
-                destinationAccountDisplay = _uiState.value.accounts[index].second
+                destinationAccountId = _uiState.value.accounts[index].id,
+                destinationAccountDisplay = _uiState.value.accounts[index].name,
+                destinationAccountColor = _uiState.value.accounts[index].color
             )
         }
     }

@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,15 +21,16 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.AccCatClickField
+import lmm.moneylog.ui.components.BottomSheetContent
 import lmm.moneylog.ui.components.ClickTextField
 import lmm.moneylog.ui.components.StateTextField
-import lmm.moneylog.ui.components.TextPicker
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.DeleteTransactionConfirmDialog
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionDetailDatePicker
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionRadioGroup
 import lmm.moneylog.ui.theme.SpaceSize
 import lmm.moneylog.ui.theme.income
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionDetailContent(
     model: TransactionDetailModel,
@@ -56,27 +59,38 @@ fun TransactionDetailContent(
                 }
             )
         }
+
         if (showAccountPicker) {
-            TextPicker(
-                list = model.accounts.map { it.name },
-                onConfirm = { index ->
-                    onAccountPicked(index)
-                },
-                onDismiss = {
+            ModalBottomSheet(
+                onDismissRequest = {
                     showAccountPicker = false
                 }
-            )
+            ) {
+                BottomSheetContent(
+                    list = model.accounts.map { it.name to Color(it.color.toULong()) },
+                    onConfirm = { index ->
+                        onAccountPicked(index)
+                    }
+                ) {
+                    showAccountPicker = false
+                }
+            }
         }
         if (showCategoryPicker) {
-            TextPicker(
-                list = filteredCategories.map { it.name },
-                onConfirm = { index ->
-                    onCategoryPicked(index)
-                },
-                onDismiss = {
+            ModalBottomSheet(
+                onDismissRequest = {
+                    showAccountPicker = false
+                }
+            ) {
+                BottomSheetContent(
+                    list = filteredCategories.map { it.name to Color(it.color.toULong()) },
+                    onConfirm = { index ->
+                        onCategoryPicked(index)
+                    }
+                ) {
                     showCategoryPicker = false
                 }
-            )
+            }
         }
 
         if (showDeleteConfirmDialog) {

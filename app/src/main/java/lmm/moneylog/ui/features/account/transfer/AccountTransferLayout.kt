@@ -10,6 +10,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -21,16 +22,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.BottomSheetContent
 import lmm.moneylog.ui.components.ClickTextField
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
-import lmm.moneylog.ui.components.TextPicker
 import lmm.moneylog.ui.theme.SpaceSize
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,7 +41,9 @@ fun AccountTransferLayout(
     valueField: MutableState<String>,
     originAccountDisplay: String,
     destinationAccountDisplay: String,
-    accounts: List<String>,
+    originAccountColor: Color,
+    destinationAccountColor: Color,
+    accounts: List<AccountTransferModel>,
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     onOriginAccountPicked: (Int) -> Unit,
@@ -74,7 +78,9 @@ fun AccountTransferLayout(
                     valueField = valueField,
                     originAccountDisplay = originAccountDisplay,
                     destinationAccountDisplay = destinationAccountDisplay,
-                    accounts = accounts,
+                    originAccountColor = originAccountColor,
+                    destinationAccountColor = destinationAccountColor,
+                    list = accounts,
                     onOriginAccountPicked = onOriginAccountPicked,
                     onDestinationAccountPicked = onDestinationAccountPicked
                 )
@@ -83,12 +89,15 @@ fun AccountTransferLayout(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AccountTransferContent(
     valueField: MutableState<String>,
     originAccountDisplay: String,
     destinationAccountDisplay: String,
-    accounts: List<String>,
+    originAccountColor: Color,
+    destinationAccountColor: Color,
+    list: List<AccountTransferModel>,
     onOriginAccountPicked: (Int) -> Unit,
     onDestinationAccountPicked: (Int) -> Unit
 ) {
@@ -97,27 +106,37 @@ fun AccountTransferContent(
         var showDestinationAccountPicker by remember { mutableStateOf(false) }
 
         if (showOriginAccountPicker) {
-            TextPicker(
-                list = accounts,
-                onConfirm = { index ->
-                    onOriginAccountPicked(index)
-                },
-                onDismiss = {
+            ModalBottomSheet(
+                onDismissRequest = {
                     showOriginAccountPicker = false
                 }
-            )
+            ) {
+                BottomSheetContent(
+                    list = list.map { it.name to it.color },
+                    onConfirm = { index ->
+                        onOriginAccountPicked(index)
+                    }
+                ) {
+                    showOriginAccountPicker = false
+                }
+            }
         }
 
         if (showDestinationAccountPicker) {
-            TextPicker(
-                list = accounts,
-                onConfirm = { index ->
-                    onDestinationAccountPicked(index)
-                },
-                onDismiss = {
+            ModalBottomSheet(
+                onDismissRequest = {
+                    showOriginAccountPicker = false
+                }
+            ) {
+                BottomSheetContent(
+                    list = list.map { it.name to it.color },
+                    onConfirm = { index ->
+                        onDestinationAccountPicked(index)
+                    }
+                ) {
                     showDestinationAccountPicker = false
                 }
-            )
+            }
         }
 
         StateTextField(
@@ -136,20 +155,21 @@ fun AccountTransferContent(
 
         Text(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
-            text = "Transferir de:"
+            text = stringResource(R.string.transfer_from)
         )
 
         ClickTextField(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
-                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc)
+                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc),
+                    tint = originAccountColor
                 )
             },
             modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             value = originAccountDisplay,
             title = stringResource(R.string.account_transfer_origin_account),
-            enabled = accounts.isNotEmpty(),
+            enabled = list.isNotEmpty(),
             onClick = {
                 showOriginAccountPicker = true
             }
@@ -157,20 +177,21 @@ fun AccountTransferContent(
 
         Text(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
-            text = "Para:"
+            text = stringResource(R.string.transfer_to)
         )
 
         ClickTextField(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
-                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc)
+                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc),
+                    tint = destinationAccountColor
                 )
             },
             modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             value = destinationAccountDisplay,
             title = stringResource(R.string.account_transfer_destination_account),
-            enabled = accounts.isNotEmpty(),
+            enabled = list.isNotEmpty(),
             onClick = {
                 showDestinationAccountPicker = true
             }
@@ -190,7 +211,8 @@ fun AccountTransferLayoutPreview() {
         onArrowBackClick = {},
         onFabClick = {},
         onOriginAccountPicked = {},
-        onDestinationAccountPicked = {}
-
+        onDestinationAccountPicked = {},
+        originAccountColor = Color.Red,
+        destinationAccountColor = Color.Blue
     )
 }

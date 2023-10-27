@@ -24,8 +24,10 @@ fun AccountTransferView(
     AccountTransferLayout(
         valueField = uiState.value,
         originAccountDisplay = uiState.originAccountDisplay,
+        originAccountColor = uiState.originAccountColor,
         destinationAccountDisplay = uiState.destinationAccountDisplay,
-        accounts = uiState.accounts.map { it.second },
+        destinationAccountColor = uiState.destinationAccountColor,
+        accounts = uiState.accounts,
         onArrowBackClick = onArrowBackClick,
         onFabClick = {
             viewModel.onFabClick(
@@ -49,9 +51,8 @@ fun AccountTransferView(
         },
         onOriginAccountPicked = { index ->
             viewModel.onOriginAccountPicked(index)
-        },
-        onDestinationAccountPicked = { index ->
-            viewModel.onDestinationAccountPicked(index)
         }
-    )
+    ) { index ->
+        viewModel.onDestinationAccountPicked(index)
+    }
 }

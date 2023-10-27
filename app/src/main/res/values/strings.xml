@@ -106,4 +106,6 @@
     <string name="detailtransaction_account_icon_desc">ícone de conta</string>
     <string name="detailtransaction_category_icon_desc">ícone de categoria</string>
     <string name="detailtransaction_color_icon_desc">ícone de cor</string>
+    <string name="transfer_from">Transferir de:</string>
+    <string name="transfer_to">Para:</string>
 </resources>
