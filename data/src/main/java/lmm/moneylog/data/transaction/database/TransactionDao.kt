@@ -10,12 +10,12 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TransactionDao {
     @Query(
-        "SELECT value FROM `transaction` " +
+        "SELECT value, month, year FROM `transaction` " +
             "WHERE accountId IN " +
             "(SELECT id FROM `account` " +
             "WHERE archived = :archived) "
     )
-    fun selectValuesFromAccounts(archived: Boolean = false): Flow<List<Double>>
+    fun selectValuesFromAccounts(archived: Boolean = false): Flow<List<TransactionBalance>>
 
     @Query(
         "SELECT value FROM `transaction` " +

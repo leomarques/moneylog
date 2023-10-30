@@ -25,8 +25,12 @@ class BalanceCardViewModel(
     val uiState: StateFlow<BalanceCardUIState> = _uiState.asStateFlow()
 
     init {
+        val currentDomainTime = domainTimeInteractor.getCurrentDomainTime()
         viewModelScope.launch {
-            interactor.execute().collect { balanceModel ->
+            interactor.execute(
+                monthNumber = currentDomainTime.month,
+                yearNumber = currentDomainTime.year
+            ).collect { balanceModel ->
                 _uiState.value = BalanceCardUIState(
                     total = balanceModel.total.formatForRs(),
                     credit = balanceModel.credit.formatForRs(),
