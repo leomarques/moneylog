@@ -39,7 +39,8 @@ fun BalanceCard(
     debt: String,
     onClick: (String) -> Unit,
     hideValues: Boolean,
-    onHideClick: () -> Unit
+    onHideClick: () -> Unit,
+    month: String
 ) {
     Column(
         modifier = Modifier
@@ -54,7 +55,8 @@ fun BalanceCard(
         Balance(
             value = total,
             onClick = { onClick(balanceCardAll) },
-            hideValues = hideValues
+            hideValues = hideValues,
+            month = month
         )
 
         IconButton(
@@ -95,12 +97,21 @@ fun BalanceCard(
 fun Balance(
     value: String,
     onClick: () -> Unit,
-    hideValues: Boolean
+    hideValues: Boolean,
+    month: String
 ) {
     Column(
         modifier = Modifier.clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text(
+            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            text = month,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onTertiaryContainer
+        )
+
         Text(
             text = stringResource(R.string.balancecard_total),
             style = MaterialTheme.typography.titleSmall,
@@ -157,7 +168,8 @@ fun BalanceCardPreview() {
             debt = "R$99999999999999999999999999999999999999999999999999999999999999999999,00,00",
             onClick = {},
             hideValues = false,
-            onHideClick = {}
+            onHideClick = {},
+            month = "Outubro"
         )
     }
 }

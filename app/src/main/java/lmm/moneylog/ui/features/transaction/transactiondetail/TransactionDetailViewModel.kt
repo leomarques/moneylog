@@ -16,7 +16,7 @@ import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
-import lmm.moneylog.data.transaction.time.DomainTimeConverter
+import lmm.moneylog.data.transaction.time.DomainTimeInteractor
 
 class TransactionDetailViewModel(
     savedStateHandle: SavedStateHandle,
@@ -26,7 +26,7 @@ class TransactionDetailViewModel(
     private val deleteTransactionRepository: DeleteTransactionRepository,
     private val getAccountsRepository: GetAccountsRepository,
     private val getCategoriesRepository: GetCategoriesRepository,
-    private val domainTimeConverter: DomainTimeConverter
+    private val domainTimeInteractor: DomainTimeInteractor
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(TransactionDetailModel())
@@ -39,17 +39,17 @@ class TransactionDetailViewModel(
             if (idParam != null) {
                 getTransactionsRepository.getTransactionById(idParam)?.let { transaction ->
                     _uiState.update {
-                        transaction.toDetailModel(domainTimeConverter)
+                        transaction.toDetailModel(domainTimeInteractor)
                     }
                 }
             } else {
                 _uiState.update {
-                    val currentDate = with(domainTimeConverter) {
+                    val currentDate = with(domainTimeInteractor) {
                         timeStampToDomainTime(getCurrentTimeStamp())
                     }
                     TransactionDetailModel(
                         date = currentDate,
-                        displayDate = currentDate.convertToDisplayDate(domainTimeConverter)
+                        displayDate = currentDate.convertToDisplayDate(domainTimeInteractor)
                     )
                 }
             }
@@ -89,10 +89,10 @@ class TransactionDetailViewModel(
 
     fun onDatePicked(timeStamp: Long) {
         _uiState.update {
-            val domainTime = domainTimeConverter.timeStampToDomainTime(timeStamp)
+            val domainTime = domainTimeInteractor.timeStampToDomainTime(timeStamp)
             it.copy(
                 date = domainTime,
-                displayDate = domainTime.convertToDisplayDate(domainTimeConverter)
+                displayDate = domainTime.convertToDisplayDate(domainTimeInteractor)
             )
         }
     }

@@ -11,13 +11,13 @@ import kotlinx.coroutines.launch
 import lmm.moneylog.R
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
-import lmm.moneylog.data.transaction.time.DomainTimeConverter
+import lmm.moneylog.data.transaction.time.DomainTimeInteractor
 import lmm.moneylog.ui.features.transaction.transactiondetail.validateValue
 
 class AccountTransferViewModel(
     private val accountTransferRepository: AccountTransferRepository,
     private val getAccountsRepository: GetAccountsRepository,
-    private val domainTimeConverter: DomainTimeConverter
+    private val domainTimeInteractor: DomainTimeInteractor
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AccountTransferUIState())
@@ -36,7 +36,7 @@ class AccountTransferViewModel(
                             color = Color(it.color.toULong())
                         )
                     },
-                    date = domainTimeConverter.getCurrentDomainTime()
+                    date = domainTimeInteractor.getCurrentDomainTime()
                 )
             }
         }

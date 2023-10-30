@@ -5,10 +5,10 @@ import androidx.lifecycle.SavedStateHandle
 import lmm.moneylog.R
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.time.DomainTime
-import lmm.moneylog.data.transaction.time.DomainTimeConverter
+import lmm.moneylog.data.transaction.time.DomainTimeInteractor
 
-fun DomainTime.convertToDisplayDate(domainTimeConverter: DomainTimeConverter) =
-    "$day ${domainTimeConverter.getMonthName(month)}, $year"
+fun DomainTime.convertToDisplayDate(domainTimeInteractor: DomainTimeInteractor) =
+    "$day ${domainTimeInteractor.getMonthName(month)}, $year"
 
 fun String.validateValue(isIncome: Boolean = true): Double {
     val value = toDouble()
@@ -23,14 +23,14 @@ fun String.validateValue(isIncome: Boolean = true): Double {
     }
 }
 
-fun Transaction.toDetailModel(domainTimeConverter: DomainTimeConverter) =
+fun Transaction.toDetailModel(domainTimeInteractor: DomainTimeInteractor) =
     TransactionDetailModel(
         id = id,
         value = mutableStateOf(value.toPositiveString()),
         isIncome = mutableStateOf(value > 0),
         description = mutableStateOf(description),
         date = date,
-        displayDate = date.convertToDisplayDate(domainTimeConverter),
+        displayDate = date.convertToDisplayDate(domainTimeInteractor),
         isEdit = true,
         titleResourceId = R.string.detailtransaction_topbar_title_edit,
         accountId = accountId,

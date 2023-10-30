@@ -20,6 +20,7 @@ fun BalanceCardView(
         debt = uiState.debt,
         onClick = onClick,
         hideValues = hideValues,
-        onHideClick = onHideClick
+        onHideClick = onHideClick,
+        month = uiState.month
     )
 }

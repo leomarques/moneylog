@@ -21,7 +21,7 @@ import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
 import lmm.moneylog.data.transaction.time.DomainTime
-import lmm.moneylog.data.transaction.time.DomainTimeConverter
+import lmm.moneylog.data.transaction.time.DomainTimeInteractor
 import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailViewModel
 import org.junit.After
 import org.junit.Before
@@ -41,7 +41,7 @@ class TransactionDetailViewModelTest {
     private val updateTransactionInteractor: UpdateTransactionRepository = mockk(relaxed = true)
     private val getAccountsRepository: GetAccountsRepository = mockk(relaxed = true)
     private val getCategoriesRepository: GetCategoriesRepository = mockk(relaxed = true)
-    private val domainTimeConverter: DomainTimeConverter = mockk()
+    private val domainTimeInteractor: DomainTimeInteractor = mockk()
     private val domainTime = DomainTime(
         6,
         1,
@@ -52,9 +52,9 @@ class TransactionDetailViewModelTest {
     fun setup() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
 
-        every { domainTimeConverter.timeStampToDomainTime(any()) } returns domainTime
-        every { domainTimeConverter.getCurrentTimeStamp() } returns 0L
-        every { domainTimeConverter.getMonthName(any()) } returns ""
+        every { domainTimeInteractor.timeStampToDomainTime(any()) } returns domainTime
+        every { domainTimeInteractor.getCurrentTimeStamp() } returns 0L
+        every { domainTimeInteractor.getMonthName(any()) } returns ""
 
         coEvery { addTransactionInteractor.save(any()) } returns Unit
 
@@ -80,7 +80,7 @@ class TransactionDetailViewModelTest {
             addTransactionRepository = addTransactionInteractor,
             deleteTransactionRepository = deleteTransactionInteractor,
             updateTransactionRepository = updateTransactionInteractor,
-            domainTimeConverter = domainTimeConverter,
+            domainTimeInteractor = domainTimeInteractor,
             getAccountsRepository = getAccountsRepository,
             getCategoriesRepository = getCategoriesRepository
         )

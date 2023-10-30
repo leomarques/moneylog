@@ -6,7 +6,7 @@ import java.time.ZoneId
 import java.time.format.TextStyle
 import java.util.Locale
 
-class LocalDateToDomainTimeConverterImpl : DomainTimeConverter {
+class LocalDateToDomainTimeInteractorImpl : DomainTimeInteractor {
 
     override fun getCurrentTimeStamp() =
         Instant.now().toEpochMilli()
@@ -30,4 +30,7 @@ class LocalDateToDomainTimeConverterImpl : DomainTimeConverter {
 
     override fun getMonthName(number: Int): String =
         Month.of(number).getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())
+
+    override fun getCurrentMonthName() =
+        getCurrentDomainTime().month.let(::getMonthName).replaceFirstChar(Char::titlecase)
 }
