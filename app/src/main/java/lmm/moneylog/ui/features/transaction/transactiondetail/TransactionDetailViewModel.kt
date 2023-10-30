@@ -135,6 +135,8 @@ class TransactionDetailViewModel(
                 if (transaction.categoryId == null) {
                     onError(R.string.detailtransaction_no_category)
                 } else {
+                    _uiState.update { it.copy(showFab = false) }
+
                     viewModelScope.launch {
                         if (_uiState.value.isEdit) {
                             updateTransactionRepository.update(transaction)

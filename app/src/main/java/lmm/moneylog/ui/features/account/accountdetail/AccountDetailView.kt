@@ -24,9 +24,7 @@ fun AccountDetailView(
         onArrowBackClick = onArrowBackClick,
         onFabClick = {
             viewModel.onFabClick(
-                onSuccess = {
-                    onArrowBackClick()
-                },
+                onSuccess = onArrowBackClick,
                 onError = { stringId ->
                     Toast.makeText(
                         current,
@@ -50,6 +48,7 @@ fun AccountDetailView(
         },
         onColorPicked = {
             viewModel.onColorPicked(it)
-        }
+        },
+        showFab = uiState.showFab
     )
 }

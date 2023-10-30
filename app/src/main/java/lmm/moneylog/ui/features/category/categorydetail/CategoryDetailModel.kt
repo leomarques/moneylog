@@ -9,5 +9,6 @@ data class CategoryDetailModel(
     val color: Color = Color.Gray,
     val isEdit: Boolean = false,
     val id: Int = -1,
-    val isIncome: MutableState<Boolean> = mutableStateOf(true)
+    val isIncome: MutableState<Boolean> = mutableStateOf(true),
+    val showFab: Boolean = true
 )

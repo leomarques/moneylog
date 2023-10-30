@@ -24,5 +24,6 @@ data class TransactionDetailModel(
     val categories: List<Category> = emptyList(),
     val value: MutableState<String> = mutableStateOf(""),
     val isIncome: MutableState<Boolean> = mutableStateOf(true),
-    val description: MutableState<String> = mutableStateOf("")
+    val description: MutableState<String> = mutableStateOf(""),
+    val showFab: Boolean = true
 )

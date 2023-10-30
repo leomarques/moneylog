@@ -46,10 +46,10 @@ fun AccountDetailLayout(
     valueState: MutableState<String>,
     onArchiveIconClick: () -> Unit = {},
     onColorPicked: (Color) -> Unit,
-    color: Color
+    color: Color,
+    showFab: Boolean
 ) {
     val showArchiveConfirmDialog = remember { mutableStateOf(false) }
-    var showFab by remember { mutableStateOf(true) }
 
     Scaffold(
         topBar = {
@@ -97,10 +97,7 @@ fun AccountDetailLayout(
         floatingActionButton = {
             if (showFab) {
                 MyFab(
-                    onClick = {
-                        showFab = false
-                        onFabClick()
-                    },
+                    onClick = onFabClick,
                     icon = Icons.Default.Check
                 )
             }
@@ -199,6 +196,7 @@ fun AccountDetailLayoutPreview() {
         valueState = mutableStateOf(""),
         onArchiveIconClick = {},
         onColorPicked = {},
-        color = Color.Gray
+        color = Color.Gray,
+        showFab = true
     )
 }

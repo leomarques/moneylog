@@ -47,10 +47,10 @@ fun CategoryDetailLayout(
     valueState: MutableState<String>,
     isIncome: MutableState<Boolean>,
     onColorPicked: (Color) -> Unit,
-    color: Color
+    color: Color,
+    showFab: Boolean
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
-    var showFab by remember { mutableStateOf(true) }
 
     Scaffold(
         topBar = {
@@ -98,10 +98,7 @@ fun CategoryDetailLayout(
         floatingActionButton = {
             if (showFab) {
                 MyFab(
-                    onClick = {
-                        showFab = false
-                        onFabClick()
-                    },
+                    onClick = onFabClick,
                     icon = Icons.Default.Check
                 )
             }
@@ -202,6 +199,7 @@ fun CategoryDetailLayoutPreview() {
         valueState = mutableStateOf(""),
         isIncome = mutableStateOf(true),
         onColorPicked = {},
-        color = Color.Gray
+        color = Color.Gray,
+        showFab = true
     )
 }

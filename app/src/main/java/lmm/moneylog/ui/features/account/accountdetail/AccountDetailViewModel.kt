@@ -63,6 +63,8 @@ class AccountDetailViewModel(
         if (name.isEmpty()) {
             onError(R.string.detail_no_name)
         } else {
+            _uiState.update { it.copy(showFab = false) }
+
             viewModelScope.launch {
                 if (_uiState.value.isEdit) {
                     updateAccountRepository.update(_uiState.value.toAccount())

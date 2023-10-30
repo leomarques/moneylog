@@ -8,5 +8,6 @@ data class AccountDetailModel(
     val name: MutableState<String> = mutableStateOf(""),
     val color: Color = Color.Gray,
     val isEdit: Boolean = false,
-    val id: Int = -1
+    val id: Int = -1,
+    val showFab: Boolean = true
 )

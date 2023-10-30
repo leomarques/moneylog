@@ -61,6 +61,8 @@ class CategoryDetailViewModel(
         if (name.isEmpty()) {
             onError(R.string.detail_no_name)
         } else {
+            _uiState.update { it.copy(showFab = false) }
+
             viewModelScope.launch {
                 if (_uiState.value.isEdit) {
                     updateCategoryRepository.update(_uiState.value.toCategory())

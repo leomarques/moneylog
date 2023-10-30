@@ -24,9 +24,7 @@ fun CategoryDetailView(
         onArrowBackClick = onArrowBackClick,
         onFabClick = {
             viewModel.onFabClick(
-                onSuccess = {
-                    onArrowBackClick()
-                },
+                onSuccess = onArrowBackClick,
                 onError = { stringId ->
                     Toast.makeText(
                         current,
@@ -51,6 +49,7 @@ fun CategoryDetailView(
         isIncome = uiState.isIncome,
         onColorPicked = {
             viewModel.onColorPicked(it)
-        }
+        },
+        showFab = uiState.showFab
     )
 }
