@@ -20,7 +20,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.Lifecycle
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun StateTextField(
@@ -61,7 +61,7 @@ fun StateTextField(
         onValueChange = { value -> valueState.value = value },
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = SpaceSize.SmallSpaceSize)
+            .padding(bottom = Size.SmallSpaceSize)
             .focusRequester(focusRequester)
     )
 

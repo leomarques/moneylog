@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.theme.MoneylogTheme
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income
 
 const val balanceCardAll = "all"
@@ -45,11 +45,11 @@ fun BalanceCard(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(SpaceSize.DefaultSpaceSize))
+            .clip(RoundedCornerShape(Size.DefaultSpaceSize))
             .background(
                 MaterialTheme.colorScheme.tertiaryContainer
             )
-            .padding(SpaceSize.DefaultSpaceSize),
+            .padding(Size.DefaultSpaceSize),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Balance(
@@ -61,7 +61,7 @@ fun BalanceCard(
 
         IconButton(
             onClick = onHideClick,
-            modifier = Modifier.padding(vertical = SpaceSize.XSmallSpaceSize)
+            modifier = Modifier.padding(vertical = Size.XSmallSpaceSize)
         ) {
             Icon(
                 imageVector = if (hideValues) Icons.Filled.Lock else Icons.Outlined.Lock,
@@ -105,7 +105,7 @@ fun Balance(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
             text = month,
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,

@@ -43,7 +43,7 @@ import lmm.moneylog.ui.components.MyCircle
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.textformatters.formatForRs
 import lmm.moneylog.ui.theme.DarkRed
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -160,10 +160,10 @@ fun GetAccountsItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(SpaceSize.TwoLinesListItemHeight)
+            .height(Size.TwoLinesListItemHeight)
             .padding(
-                vertical = SpaceSize.DefaultSpaceSize,
-                horizontal = SpaceSize.DefaultSpaceSize
+                vertical = Size.DefaultSpaceSize,
+                horizontal = Size.DefaultSpaceSize
             )
             .clickable { onItemClick(id) },
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -172,7 +172,7 @@ fun GetAccountsItem(
         Row {
             MyCircle(color = color)
 
-            Column(Modifier.padding(start = SpaceSize.DefaultSpaceSize)) {
+            Column(Modifier.padding(start = Size.DefaultSpaceSize)) {
                 Text(
                     text = name.ifEmpty {
                         stringResource(R.string.no_description)
@@ -207,7 +207,7 @@ fun GetAccountsItem(
     }
 
     if (showDivider) {
-        Divider(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize))
+        Divider(Modifier.padding(horizontal = Size.DefaultSpaceSize))
     }
 }
 

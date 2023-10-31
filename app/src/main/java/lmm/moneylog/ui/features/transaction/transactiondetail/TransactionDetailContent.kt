@@ -20,14 +20,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.AccCatClickField
-import lmm.moneylog.ui.components.BottomSheetContent
-import lmm.moneylog.ui.components.ClickTextField
 import lmm.moneylog.ui.components.StateTextField
+import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
+import lmm.moneylog.ui.components.textfields.ClickTextField
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.DeleteTransactionConfirmDialog
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionDetailDatePicker
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionRadioGroup
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,7 +41,7 @@ fun TransactionDetailContent(
     onDeleteDismiss: () -> Unit,
     onIsIncomeSelected: () -> Unit
 ) {
-    Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
+    Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         var showDatePicker by remember { mutableStateOf(false) }
         var showAccountPicker by remember { mutableStateOf(false) }
         var showCategoryPicker by remember { mutableStateOf(false) }
@@ -101,7 +100,7 @@ fun TransactionDetailContent(
         }
 
         StateTextField(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
             title = stringResource(R.string.value),
             keyboardType = KeyboardType.Number,
             valueState = model.value,
@@ -116,16 +115,16 @@ fun TransactionDetailContent(
         )
 
         TransactionRadioGroup(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
             model.isIncome
         ) {
             onIsIncomeSelected()
         }
 
         ClickTextField(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             value = model.displayDate,
-            title = stringResource(R.string.detail_date),
+            label = stringResource(R.string.detail_date),
             onClick = {
                 showDatePicker = true
             },
@@ -138,7 +137,7 @@ fun TransactionDetailContent(
         )
 
         StateTextField(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
             title = stringResource(R.string.detail_description),
             keyboardType = KeyboardType.Text,
             valueState = model.description,
@@ -150,9 +149,9 @@ fun TransactionDetailContent(
             }
         )
 
-        AccCatClickField(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
-            title = stringResource(R.string.account),
+        ClickTextField(
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
+            label = stringResource(R.string.account),
             value = model.displayAccount,
             enabled = model.accounts.isNotEmpty(),
             onClick = {
@@ -167,9 +166,9 @@ fun TransactionDetailContent(
             }
         )
 
-        AccCatClickField(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
-            title = stringResource(R.string.category),
+        ClickTextField(
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
+            label = stringResource(R.string.category),
             value = model.displayCategory,
             enabled = filteredCategories.isNotEmpty(),
             onClick = {

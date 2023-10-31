@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.ui.theme.DarkRed
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -54,8 +54,8 @@ fun GetTransactionsList(
                     Text(
                         text = date,
                         modifier = Modifier
-                            .padding(vertical = SpaceSize.SmallSpaceSize)
-                            .padding(start = SpaceSize.DefaultSpaceSize),
+                            .padding(vertical = Size.SmallSpaceSize)
+                            .padding(start = Size.DefaultSpaceSize),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold
                     )

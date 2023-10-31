@@ -29,11 +29,11 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.BottomSheetContent
-import lmm.moneylog.ui.components.ClickTextField
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
+import lmm.moneylog.ui.components.textfields.ClickTextField
+import lmm.moneylog.ui.theme.Size
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -101,7 +101,7 @@ fun AccountTransferContent(
     onOriginAccountPicked: (Int) -> Unit,
     onDestinationAccountPicked: (Int) -> Unit
 ) {
-    Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
+    Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         var showOriginAccountPicker by remember { mutableStateOf(false) }
         var showDestinationAccountPicker by remember { mutableStateOf(false) }
 
@@ -146,7 +146,7 @@ fun AccountTransferContent(
                     contentDescription = stringResource(R.string.value)
                 )
             },
-            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.value),
             keyboardType = KeyboardType.Number,
             valueState = valueField,
@@ -154,7 +154,7 @@ fun AccountTransferContent(
         )
 
         Text(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
             text = stringResource(R.string.transfer_from)
         )
 
@@ -166,9 +166,9 @@ fun AccountTransferContent(
                     tint = originAccountColor
                 )
             },
-            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             value = originAccountDisplay,
-            title = stringResource(R.string.transfer_origin),
+            label = stringResource(R.string.transfer_origin),
             enabled = list.isNotEmpty(),
             onClick = {
                 showOriginAccountPicker = true
@@ -176,7 +176,7 @@ fun AccountTransferContent(
         )
 
         Text(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
             text = stringResource(R.string.transfer_to)
         )
 
@@ -188,9 +188,9 @@ fun AccountTransferContent(
                     tint = destinationAccountColor
                 )
             },
-            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             value = destinationAccountDisplay,
-            title = stringResource(R.string.transfer_destination),
+            label = stringResource(R.string.transfer_destination),
             enabled = list.isNotEmpty(),
             onClick = {
                 showDestinationAccountPicker = true

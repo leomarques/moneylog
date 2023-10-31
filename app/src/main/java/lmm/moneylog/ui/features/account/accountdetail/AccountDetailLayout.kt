@@ -30,12 +30,12 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.ColorClickField
-import lmm.moneylog.ui.components.ColorPicker
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
+import lmm.moneylog.ui.components.textfields.ColorPicker
+import lmm.moneylog.ui.components.textfields.ColorTextField
 import lmm.moneylog.ui.features.account.archive.ArchiveAccountConfirmDialog
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -134,7 +134,7 @@ private fun Content(
     valueState: MutableState<String>,
     color: Color
 ) {
-    Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
+    Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         var showColorsDialog by remember { mutableStateOf(false) }
 
         if (showArchiveConfirmDialog) {
@@ -163,14 +163,14 @@ private fun Content(
                     contentDescription = stringResource(R.string.account)
                 )
             },
-            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,
             valueState = valueState,
             getFocus = !isEdit
         )
 
-        ColorClickField(
+        ColorTextField(
             color = color,
             leadingIcon = {
                 Icon(

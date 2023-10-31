@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.components
+package lmm.moneylog.ui.components.bottomsheet
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
@@ -9,7 +9,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import lmm.moneylog.ui.theme.SpaceSize
+import androidx.compose.ui.tooling.preview.Preview
+import lmm.moneylog.ui.theme.DarkPurple
+import lmm.moneylog.ui.theme.DarkRed
+import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun BottomSheetContent(
@@ -20,10 +23,10 @@ fun BottomSheetContent(
     LazyColumn(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.surface)
-            .padding(horizontal = SpaceSize.DefaultSpaceSize)
+            .padding(horizontal = Size.DefaultSpaceSize)
             .padding(
-                top = SpaceSize.SmallSpaceSize,
-                bottom = SpaceSize.XLargeSpaceSize
+                top = Size.SmallSpaceSize,
+                bottom = Size.XLargeSpaceSize
             )
     ) {
         itemsIndexed(list) { index, item ->
@@ -31,8 +34,8 @@ fun BottomSheetContent(
                 text = item.first,
                 color = item.second,
                 onItemClick = {
-                    onConfirm(index)
                     onDismiss()
+                    onConfirm(index)
                 }
             )
 
@@ -41,4 +44,17 @@ fun BottomSheetContent(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun BottomSheetContentPreview() {
+    BottomSheetContent(
+        list = listOf(
+            Pair("Nubank", DarkPurple),
+            Pair("Santander", DarkRed)
+        ),
+        onConfirm = {},
+        onDismiss = {}
+    )
 }

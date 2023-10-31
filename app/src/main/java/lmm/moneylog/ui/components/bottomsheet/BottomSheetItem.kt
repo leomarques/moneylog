@@ -1,13 +1,11 @@
-package lmm.moneylog.ui.components
+package lmm.moneylog.ui.components.bottomsheet
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,9 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.components.MyCircle
+import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun BottomSheetItem(
@@ -31,32 +29,26 @@ fun BottomSheetItem(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
-            .height(SpaceSize.OneLineListItemHeight)
-            .padding(
-                vertical = SpaceSize.SmallSpaceSize,
-                horizontal = SpaceSize.DefaultSpaceSize
-            )
+            .height(Size.OneLineListItemHeight)
+            .padding(horizontal = Size.DefaultSpaceSize)
             .clickable { onItemClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         MyCircle(
+            modifier = Modifier.padding(end = Size.DefaultSpaceSize),
             color = color ?: Color.Gray,
-            size = 30.dp
+            size = Size.SmallCircleSize
         )
 
-        Spacer(modifier = Modifier.width(SpaceSize.DefaultSpaceSize))
-
         Text(
-            text = text.ifEmpty {
-                stringResource(R.string.no_description)
-            },
+            text = text.ifEmpty { stringResource(R.string.no_name) },
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
             style = MaterialTheme.typography.bodyLarge,
-            color = if (text.isEmpty()) {
-                Color.Gray
-            } else {
+            color = if (text.isNotEmpty()) {
                 MaterialTheme.colorScheme.onSurface
+            } else {
+                Color.Gray
             }
         )
     }
@@ -64,7 +56,7 @@ fun BottomSheetItem(
 
 @Preview
 @Composable
-fun ItemPreview() {
+fun BottomSheetItemPreview() {
     BottomSheetItem(
         text = "Alimentação",
         onItemClick = {}

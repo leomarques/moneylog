@@ -1,4 +1,4 @@
-package lmm.moneylog
+package lmm.moneylog.misc
 
 import android.app.Application
 import lmm.moneylog.data.dataModule

@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyCircle
 import lmm.moneylog.ui.theme.DarkRed
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income
 
 @Composable
@@ -32,10 +32,10 @@ fun GetTransactionsItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(SpaceSize.TwoLinesListItemHeight)
+            .height(Size.TwoLinesListItemHeight)
             .padding(
-                vertical = SpaceSize.SmallSpaceSize,
-                horizontal = SpaceSize.DefaultSpaceSize
+                vertical = Size.SmallSpaceSize,
+                horizontal = Size.DefaultSpaceSize
             )
             .clickable { onItemClick(transaction.id) },
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -45,7 +45,7 @@ fun GetTransactionsItem(
             Row(
                 Modifier
                     .weight(0.75f)
-                    .padding(end = SpaceSize.SmallSpaceSize),
+                    .padding(end = Size.SmallSpaceSize),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 MyCircle(
@@ -53,7 +53,7 @@ fun GetTransactionsItem(
                     letters = category
                 )
 
-                Column(Modifier.padding(start = SpaceSize.DefaultSpaceSize)) {
+                Column(Modifier.padding(start = Size.DefaultSpaceSize)) {
                     Text(
                         text = description.ifEmpty {
                             stringResource(R.string.no_description)
@@ -87,7 +87,7 @@ fun GetTransactionsItem(
             Text(
                 modifier = Modifier
                     .weight(0.25f)
-                    .padding(start = SpaceSize.DefaultSpaceSize),
+                    .padding(start = Size.DefaultSpaceSize),
                 text = value,
                 color =
                 if (isIncome) {

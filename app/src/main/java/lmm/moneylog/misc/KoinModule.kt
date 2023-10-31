@@ -1,4 +1,4 @@
-package lmm.moneylog
+package lmm.moneylog.misc
 
 import android.content.Context
 import lmm.moneylog.ui.features.account.accountdetail.AccountDetailViewModel
@@ -30,9 +30,9 @@ val appModule = module {
     viewModel { parameters ->
         GetTransactionsViewModel(
             typeOfValue = parameters.get(),
-            get(),
-            get(),
-            get()
+            getTransactionsRepository = get(),
+            getAccountsRepository = get(),
+            getCategoriesRepository = get()
         )
     }
     viewModelOf(::TransactionDetailViewModel)

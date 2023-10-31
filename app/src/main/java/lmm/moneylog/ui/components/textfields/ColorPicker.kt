@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.components
+package lmm.moneylog.ui.components.textfields
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import lmm.moneylog.ui.components.MyCircle
 import lmm.moneylog.ui.theme.DarkBlue
 import lmm.moneylog.ui.theme.DarkBrow
 import lmm.moneylog.ui.theme.DarkGreen
@@ -26,7 +27,7 @@ import lmm.moneylog.ui.theme.DarkPink
 import lmm.moneylog.ui.theme.DarkPurple
 import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.DarkYellow
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun ColorPicker(
@@ -52,8 +53,8 @@ fun ColorPicker(
                     .background(MaterialTheme.colorScheme.surface)
                     .width(150.dp)
                     .padding(
-                        horizontal = SpaceSize.DefaultSpaceSize,
-                        vertical = SpaceSize.SmallSpaceSize
+                        horizontal = Size.DefaultSpaceSize,
+                        vertical = Size.SmallSpaceSize
                     )
             ) {
                 itemsIndexed(list) { index, item ->
@@ -82,10 +83,10 @@ fun ColorItem(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth()
-            .height(SpaceSize.OneLineListItemHeight)
+            .height(Size.OneLineListItemHeight)
             .padding(
-                vertical = SpaceSize.SmallSpaceSize,
-                horizontal = SpaceSize.DefaultSpaceSize
+                vertical = Size.SmallSpaceSize,
+                horizontal = Size.DefaultSpaceSize
             )
             .clickable { onItemClick() },
         contentAlignment = Alignment.Center

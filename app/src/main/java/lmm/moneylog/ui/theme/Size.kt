@@ -2,7 +2,7 @@ package lmm.moneylog.ui.theme
 
 import androidx.compose.ui.unit.dp
 
-object SpaceSize {
+object Size {
     val XSmallSpaceSize = 4.dp
     val SmallSpaceSize = 8.dp
     val DefaultSpaceSize = 16.dp
@@ -10,4 +10,7 @@ object SpaceSize {
 
     val OneLineListItemHeight = 56.dp
     val TwoLinesListItemHeight = 72.dp
+
+    val SmallCircleSize = 30.dp
+    val DefaultCircleSize = 40.dp
 }

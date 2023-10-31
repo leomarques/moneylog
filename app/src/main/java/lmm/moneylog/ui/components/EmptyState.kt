@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun EmptyState(
@@ -34,8 +34,8 @@ fun EmptyState(
             )
             Text(
                 modifier = Modifier.padding(
-                    horizontal = SpaceSize.XLargeSpaceSize,
-                    vertical = SpaceSize.SmallSpaceSize
+                    horizontal = Size.XLargeSpaceSize,
+                    vertical = Size.SmallSpaceSize
                 ),
                 text = description,
                 textAlign = TextAlign.Center,

@@ -32,7 +32,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -57,10 +57,10 @@ fun ArchivedAccountItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(SpaceSize.OneLineListItemHeight)
+                .height(Size.OneLineListItemHeight)
                 .padding(
-                    vertical = SpaceSize.SmallSpaceSize,
-                    horizontal = SpaceSize.DefaultSpaceSize
+                    vertical = Size.SmallSpaceSize,
+                    horizontal = Size.DefaultSpaceSize
                 )
                 .clickable { onItemClick(id) },
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -127,6 +127,6 @@ fun ArchivedAccountItem(
     }
 
     if (showDivider) {
-        Divider(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize))
+        Divider(Modifier.padding(horizontal = Size.DefaultSpaceSize))
     }
 }

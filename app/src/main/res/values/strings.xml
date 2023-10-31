@@ -26,6 +26,7 @@
     <string name="list_account_balance">"Saldo atual: "</string>
 
     <string name="no_description">(sem descrição)</string>
+    <string name="no_name">(sem nome)</string>
     <string name="no_category">(sem categoria)</string>
     <string name="no_account">(sem conta)</string>
 

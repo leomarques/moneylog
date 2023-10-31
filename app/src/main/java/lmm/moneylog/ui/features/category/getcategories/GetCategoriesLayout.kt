@@ -43,7 +43,7 @@ import lmm.moneylog.ui.components.EmptyState
 import lmm.moneylog.ui.components.MyCircle
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.theme.DarkRed
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -110,7 +110,7 @@ fun GetCategoriesContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TabRow(
-            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             selectedTabIndex = tabIndex
         ) {
             tabs.forEachIndexed { index, title ->
@@ -161,10 +161,10 @@ fun CategoryItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(SpaceSize.TwoLinesListItemHeight)
+            .height(Size.TwoLinesListItemHeight)
             .padding(
-                vertical = SpaceSize.DefaultSpaceSize,
-                horizontal = SpaceSize.DefaultSpaceSize
+                vertical = Size.DefaultSpaceSize,
+                horizontal = Size.DefaultSpaceSize
             )
             .clickable { onItemClick(id) },
         verticalAlignment = Alignment.CenterVertically
@@ -175,7 +175,7 @@ fun CategoryItem(
         )
 
         Text(
-            modifier = Modifier.padding(start = SpaceSize.DefaultSpaceSize),
+            modifier = Modifier.padding(start = Size.DefaultSpaceSize),
             text = name.ifEmpty {
                 stringResource(R.string.no_description)
             },
@@ -191,7 +191,7 @@ fun CategoryItem(
     }
 
     if (showDivider) {
-        Divider(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize))
+        Divider(Modifier.padding(horizontal = Size.DefaultSpaceSize))
     }
 }
 

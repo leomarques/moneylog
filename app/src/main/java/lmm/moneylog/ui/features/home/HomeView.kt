@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.features.home.balancecard.BalanceCardView
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -33,8 +33,8 @@ fun HomeView(
 
     Scaffold(
         modifier = Modifier
-            .padding(horizontal = SpaceSize.DefaultSpaceSize)
-            .padding(top = SpaceSize.DefaultSpaceSize),
+            .padding(horizontal = Size.DefaultSpaceSize)
+            .padding(top = Size.DefaultSpaceSize),
         floatingActionButton = {
             if (showFab) {
                 MyFab(

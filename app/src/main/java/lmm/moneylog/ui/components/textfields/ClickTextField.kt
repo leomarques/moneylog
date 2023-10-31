@@ -1,33 +1,40 @@
-package lmm.moneylog.ui.components
+package lmm.moneylog.ui.components.textfields
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import lmm.moneylog.ui.theme.SpaceSize
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ClickTextField(
     modifier: Modifier = Modifier,
     value: String,
-    title: String,
+    label: String? = null,
     enabled: Boolean = true,
     onClick: () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null
 ) {
     OutlinedTextField(
-        leadingIcon = leadingIcon,
         modifier = modifier
-            .fillMaxWidth()
-            .padding(bottom = SpaceSize.SmallSpaceSize),
+            .background(MaterialTheme.colorScheme.surface)
+            .fillMaxWidth(),
         value = value,
-        label = { Text(text = title) },
+        label = {
+            label?.let {
+                Text(text = label)
+            }
+        },
         readOnly = true,
         enabled = enabled,
         interactionSource = remember { MutableInteractionSource() }
@@ -40,6 +47,23 @@ fun ClickTextField(
                     }
                 }
             },
-        onValueChange = { }
+        onValueChange = { },
+        leadingIcon = leadingIcon
+    )
+}
+
+@Preview
+@Composable
+fun ClickTextFieldPreview() {
+    ClickTextField(
+        value = "Nubank",
+        label = "Label",
+        onClick = {},
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = null
+            )
+        }
     )
 }

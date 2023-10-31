@@ -30,12 +30,12 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.ColorClickField
-import lmm.moneylog.ui.components.ColorPicker
 import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.StateTextField
+import lmm.moneylog.ui.components.textfields.ColorPicker
+import lmm.moneylog.ui.components.textfields.ColorTextField
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionRadioGroup
-import lmm.moneylog.ui.theme.SpaceSize
+import lmm.moneylog.ui.theme.Size
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -137,7 +137,7 @@ private fun Content(
     valueState: MutableState<String>,
     isIncome: MutableState<Boolean>
 ) {
-    Column(Modifier.padding(horizontal = SpaceSize.DefaultSpaceSize)) {
+    Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         var showColorsDialog by remember { mutableStateOf(false) }
 
         if (showDeleteConfirmDialog) {
@@ -160,7 +160,7 @@ private fun Content(
         }
 
         StateTextField(
-            modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
             title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,
             valueState = valueState,
@@ -168,11 +168,11 @@ private fun Content(
         )
 
         TransactionRadioGroup(
-            modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             isIncome = isIncome
         ) {}
 
-        ColorClickField(
+        ColorTextField(
             color = color,
             leadingIcon = {
                 Icon(
