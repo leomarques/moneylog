@@ -56,7 +56,7 @@ fun GetTransactionsLayout(
                         IconButton(onClick = onArrowBackClick) {
                             Icon(
                                 imageVector = Icons.Filled.ArrowBack,
-                                contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+                                contentDescription = stringResource(R.string.arrowback_desc)
                             )
                         }
                     },
@@ -66,7 +66,7 @@ fun GetTransactionsLayout(
                             content = {
                                 Icon(
                                     imageVector = Icons.Default.Search,
-                                    contentDescription = stringResource(R.string.detailtransaction_delete_desc)
+                                    contentDescription = stringResource(R.string.delete)
                                 )
                             }
                         )
@@ -147,7 +147,7 @@ fun Preview() {
                     categoryColor = Color.Red
                 )
             ),
-            R.string.gettransactions_topbar_all
+            R.string.transactions
         ),
         onItemClick = {}
     )

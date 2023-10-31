@@ -43,13 +43,13 @@ fun GetArchivedAccountsLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(id = R.string.getarchivedaccounts_topbar))
+                    Text(text = stringResource(id = R.string.topbar_archived_accounts))
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+                            contentDescription = stringResource(R.string.arrowback_desc)
                         )
                     }
                 }

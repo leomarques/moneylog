@@ -61,13 +61,13 @@ fun GetAccountsLayout(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = stringResource(id = R.string.getaccounts_topbar)) },
+                title = { Text(text = stringResource(id = R.string.accounts)) },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = stringResource(
-                                R.string.detailtransaction_arrowback_desc
+                                R.string.arrowback_desc
                             )
                         )
                     }
@@ -175,7 +175,7 @@ fun GetAccountsItem(
             Column(Modifier.padding(start = SpaceSize.DefaultSpaceSize)) {
                 Text(
                     text = name.ifEmpty {
-                        stringResource(R.string.gettransactions_nodescription)
+                        stringResource(R.string.no_description)
                     },
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
@@ -189,7 +189,7 @@ fun GetAccountsItem(
 
                 Row {
                     Text(
-                        text = stringResource(R.string.current_balance),
+                        text = stringResource(R.string.list_account_balance),
                         style = MaterialTheme.typography.bodyMedium,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,

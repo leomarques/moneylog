@@ -32,7 +32,7 @@ fun Transaction.toDetailModel(domainTimeInteractor: DomainTimeInteractor) =
         date = date,
         displayDate = date.convertToDisplayDate(domainTimeInteractor),
         isEdit = true,
-        titleResourceId = R.string.detailtransaction_topbar_title_edit,
+        titleResourceId = R.string.detail_topbar_transaction_edit,
         accountId = accountId,
         categoryId = categoryId
     )

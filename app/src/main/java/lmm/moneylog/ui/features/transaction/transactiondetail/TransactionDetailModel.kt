@@ -10,7 +10,7 @@ import lmm.moneylog.data.transaction.time.DomainTime
 
 data class TransactionDetailModel(
     val id: Int = -1,
-    val titleResourceId: Int = R.string.detailtransaction_topbar_title_add,
+    val titleResourceId: Int = R.string.detail_topbar_transaction_add,
     val isEdit: Boolean = false,
     val displayDate: String = "",
     val displayAccount: String = "",

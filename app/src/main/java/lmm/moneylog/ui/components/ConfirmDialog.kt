@@ -35,7 +35,7 @@ fun ConfirmDialog(
         icon = {
             Icon(
                 imageVector = icon,
-                contentDescription = stringResource(R.string.dialog_icon_desc)
+                contentDescription = stringResource(R.string.dialog_desc)
             )
         },
         title = {
@@ -57,8 +57,8 @@ fun ConfirmDialogPreview() {
     ConfirmDialog(
         onConfirm = {},
         onDismiss = {},
-        title = stringResource(R.string.delete_dialog_transaction_title),
-        description = stringResource(R.string.delete_dialog_transaction_description),
+        title = stringResource(R.string.dialog_title_transaction_delete),
+        description = stringResource(R.string.dialog_description_transaction_delete),
         icon = Icons.Default.Delete
     )
 }

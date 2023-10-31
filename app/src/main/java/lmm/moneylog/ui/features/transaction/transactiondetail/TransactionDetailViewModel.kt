@@ -130,10 +130,10 @@ class TransactionDetailViewModel(
         try {
             val transaction = _uiState.value.toTransaction()
             if (transaction.accountId == null) {
-                onError(R.string.detailtransaction_no_account)
+                onError(R.string.detail_no_account)
             } else {
                 if (transaction.categoryId == null) {
-                    onError(R.string.detailtransaction_no_category)
+                    onError(R.string.detail_no_category)
                 } else {
                     _uiState.update { it.copy(showFab = false) }
 
@@ -148,7 +148,7 @@ class TransactionDetailViewModel(
                 }
             }
         } catch (e: NumberFormatException) {
-            onError(R.string.detailtransaction_invalidvalue)
+            onError(R.string.detail_invalidvalue)
         }
     }
 

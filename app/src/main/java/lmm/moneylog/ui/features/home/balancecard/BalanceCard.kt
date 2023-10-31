@@ -65,7 +65,7 @@ fun BalanceCard(
         ) {
             Icon(
                 imageVector = if (hideValues) Icons.Filled.Lock else Icons.Outlined.Lock,
-                contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+                contentDescription = stringResource(R.string.arrowback_desc)
             )
         }
 
@@ -74,7 +74,7 @@ fun BalanceCard(
         ) {
             Amount(
                 modifier = Modifier.weight(0.5f),
-                title = stringResource(R.string.balancecard_income),
+                title = stringResource(R.string.incomes),
                 value = credit,
                 color = income,
                 onClick = { onClick(balanceCardIncome) },
@@ -83,7 +83,7 @@ fun BalanceCard(
 
             Amount(
                 modifier = Modifier.weight(0.5f),
-                title = stringResource(R.string.balancecard_outcome),
+                title = stringResource(R.string.outcome),
                 value = debt,
                 color = Color.Red,
                 onClick = { onClick(balanceCardOutcome) },

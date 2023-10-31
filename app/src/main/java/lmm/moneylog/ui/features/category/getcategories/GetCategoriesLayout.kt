@@ -59,13 +59,13 @@ fun GetCategoriesLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(id = R.string.getcategories_topbar))
+                    Text(text = stringResource(id = R.string.categories))
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+                            contentDescription = stringResource(R.string.arrowback_desc)
                         )
                     }
                 }
@@ -101,8 +101,8 @@ fun GetCategoriesContent(
 ) {
     var tabIndex by remember { mutableIntStateOf(0) }
     val tabs = listOf(
-        stringResource(id = R.string.balancecard_income),
-        stringResource(id = R.string.balancecard_outcome)
+        stringResource(id = R.string.incomes),
+        stringResource(id = R.string.outcomes)
     )
 
     Column(
@@ -177,7 +177,7 @@ fun CategoryItem(
         Text(
             modifier = Modifier.padding(start = SpaceSize.DefaultSpaceSize),
             text = name.ifEmpty {
-                stringResource(R.string.gettransactions_nodescription)
+                stringResource(R.string.no_description)
             },
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,

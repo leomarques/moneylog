@@ -25,15 +25,15 @@ fun MyNavigationBar(
                 Icons.Default.Home
             ),
             Pair(
-                stringResource(R.string.navbar_transactions),
+                stringResource(R.string.transactions),
                 ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24)
             ),
             Pair(
-                stringResource(R.string.navbar_accounts),
+                stringResource(R.string.accounts),
                 ImageVector.vectorResource(id = R.drawable.outline_account_balance_24)
             ),
             Pair(
-                stringResource(R.string.navbar_categories),
+                stringResource(R.string.categories),
                 ImageVector.vectorResource(id = R.drawable.outline_category_24)
             )
         ),

@@ -37,7 +37,7 @@ fun ColorClickField(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.surface),
-            value = stringResource(R.string.color_field),
+            value = stringResource(R.string.color),
             readOnly = true,
             enabled = enabled,
             interactionSource = remember { MutableInteractionSource() }
