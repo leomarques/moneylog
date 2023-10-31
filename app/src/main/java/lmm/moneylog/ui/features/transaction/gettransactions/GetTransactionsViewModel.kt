@@ -30,7 +30,7 @@ class GetTransactionsViewModel(
     private val _uiState = MutableStateFlow(
         GetTransactionsModel(
             titleResourceId =
-            R.string.gettransactions_topbar_all
+            R.string.transactions
         )
     )
     val uiState: StateFlow<GetTransactionsModel> = _uiState.asStateFlow()
@@ -55,7 +55,7 @@ class GetTransactionsViewModel(
                     getTransactionsRepository.getIncomeTransactions().collect { transactions ->
                         _uiState.update {
                             transactions.toModel(
-                                R.string.gettransactions_topbar_income,
+                                R.string.incomes,
                                 accountMap = accountsMap,
                                 categoriesMap = categoriesMap,
                                 categoriesColorMap = categoriesColorMap
@@ -68,7 +68,7 @@ class GetTransactionsViewModel(
                     getTransactionsRepository.getOutcomeTransactions().collect { transactions ->
                         _uiState.update {
                             transactions.toModel(
-                                R.string.gettransactions_topbar_outcome,
+                                R.string.outcomes,
                                 accountMap = accountsMap,
                                 categoriesMap = categoriesMap,
                                 categoriesColorMap = categoriesColorMap
@@ -81,7 +81,7 @@ class GetTransactionsViewModel(
                     getTransactionsRepository.getAllTransactions().collect { transactions ->
                         _uiState.update {
                             transactions.toModel(
-                                R.string.gettransactions_topbar_all,
+                                R.string.transactions,
                                 accountMap = accountsMap,
                                 categoriesMap = categoriesMap,
                                 categoriesColorMap = categoriesColorMap

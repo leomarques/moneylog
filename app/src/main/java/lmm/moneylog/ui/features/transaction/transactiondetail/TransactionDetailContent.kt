@@ -102,14 +102,14 @@ fun TransactionDetailContent(
 
         StateTextField(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
-            title = stringResource(R.string.detailtransaction_value),
+            title = stringResource(R.string.value),
             keyboardType = KeyboardType.Number,
             valueState = model.value,
             getFocus = !model.isEdit,
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_attach_money_24),
-                    contentDescription = stringResource(R.string.detailtransaction_value_icon_desc),
+                    contentDescription = stringResource(R.string.value),
                     tint = if (model.isIncome.value) income else Color.Red
                 )
             }
@@ -125,34 +125,34 @@ fun TransactionDetailContent(
         ClickTextField(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
             value = model.displayDate,
-            title = stringResource(R.string.detailtransaction_date),
+            title = stringResource(R.string.detail_date),
             onClick = {
                 showDatePicker = true
             },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.DateRange,
-                    contentDescription = stringResource(R.string.detailtransaction_date_icon_desc)
+                    contentDescription = stringResource(R.string.date_desc)
                 )
             }
         )
 
         StateTextField(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
-            title = stringResource(R.string.detailtransaction_description),
+            title = stringResource(R.string.detail_description),
             keyboardType = KeyboardType.Text,
             valueState = model.description,
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Create,
-                    contentDescription = stringResource(R.string.detailtransaction_description_icon_desc)
+                    contentDescription = stringResource(R.string.detail_description)
                 )
             }
         )
 
         AccCatClickField(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
-            title = stringResource(R.string.detailtransaction_account),
+            title = stringResource(R.string.account),
             value = model.displayAccount,
             enabled = model.accounts.isNotEmpty(),
             onClick = {
@@ -161,7 +161,7 @@ fun TransactionDetailContent(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
-                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc),
+                    contentDescription = stringResource(R.string.account),
                     tint = model.displayAccountColor
                 )
             }
@@ -169,7 +169,7 @@ fun TransactionDetailContent(
 
         AccCatClickField(
             modifier = Modifier.padding(bottom = SpaceSize.SmallSpaceSize),
-            title = stringResource(R.string.detailtransaction_category),
+            title = stringResource(R.string.category),
             value = model.displayCategory,
             enabled = filteredCategories.isNotEmpty(),
             onClick = {
@@ -178,7 +178,7 @@ fun TransactionDetailContent(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_category_24),
-                    contentDescription = stringResource(R.string.detailtransaction_category_icon_desc),
+                    contentDescription = stringResource(R.string.category),
                     tint = model.displayCategoryColor
                 )
             }

@@ -15,9 +15,9 @@ fun TransactionDetailView(
     viewModel: TransactionDetailViewModel = koinViewModel()
 ) {
     val current = LocalContext.current
-    val invalidValueErrorText = stringResource(R.string.detailtransaction_invalidvalue)
-    val noAccountErrorText = stringResource(R.string.detailtransaction_no_account)
-    val noCategoryErrorText = stringResource(R.string.detailtransaction_no_category)
+    val invalidValueErrorText = stringResource(R.string.detail_invalidvalue)
+    val noAccountErrorText = stringResource(R.string.detail_no_account)
+    val noCategoryErrorText = stringResource(R.string.detail_no_category)
     val error = stringResource(R.string.error)
 
     val uiState by viewModel.uiState.collectAsState()
@@ -36,13 +36,13 @@ fun TransactionDetailView(
                     Toast.makeText(
                         current,
                         when (stringId) {
-                            R.string.detailtransaction_no_account ->
+                            R.string.detail_no_account ->
                                 noAccountErrorText
 
-                            R.string.detailtransaction_no_category ->
+                            R.string.detail_no_category ->
                                 noCategoryErrorText
 
-                            R.string.detailtransaction_invalidvalue ->
+                            R.string.detail_invalidvalue ->
                                 invalidValueErrorText
 
                             else -> error

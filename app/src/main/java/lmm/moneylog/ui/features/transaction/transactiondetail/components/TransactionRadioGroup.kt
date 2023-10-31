@@ -37,7 +37,7 @@ fun TransactionRadioGroup(
                 }
             )
             Text(
-                text = stringResource(R.string.detailtransaction_income)
+                text = stringResource(R.string.income)
             )
         }
 
@@ -59,7 +59,7 @@ fun TransactionRadioGroup(
                 }
             )
             Text(
-                text = stringResource(R.string.detailtransaction_outcome)
+                text = stringResource(R.string.outcome)
             )
         }
     }

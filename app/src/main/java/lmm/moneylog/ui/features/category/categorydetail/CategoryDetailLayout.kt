@@ -59,9 +59,9 @@ fun CategoryDetailLayout(
                     Text(
                         text = stringResource(
                             if (isEdit) {
-                                R.string.topbar_title_category_edit
+                                R.string.detail_topbar_category_edit
                             } else {
-                                R.string.topbar_title_category_edit
+                                R.string.detail_topbar_category_edit
                             }
                         )
                     )
@@ -76,7 +76,7 @@ fun CategoryDetailLayout(
                     ) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+                            contentDescription = stringResource(R.string.arrowback_desc)
                         )
                     }
                 },
@@ -87,7 +87,7 @@ fun CategoryDetailLayout(
                             content = {
                                 Icon(
                                     imageVector = Icons.Default.Delete,
-                                    contentDescription = stringResource(R.string.detailtransaction_delete_desc)
+                                    contentDescription = stringResource(R.string.delete)
                                 )
                             }
                         )
@@ -177,7 +177,7 @@ private fun Content(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_brush_24),
-                    contentDescription = stringResource(R.string.detailtransaction_color_icon_desc)
+                    contentDescription = stringResource(R.string.color)
                 )
             },
             onClick = {

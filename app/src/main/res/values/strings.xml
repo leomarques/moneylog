@@ -1,95 +1,60 @@
 <resources>
     <string name="app_name">Moneylog</string>
 
-    <string name="detailtransaction_topbar_title_add">Nova transação</string>
-    <string name="detailtransaction_topbar_title_edit">Editar transação</string>
-    <string name="detailtransaction_value">Valor</string>
-    <string name="detailtransaction_income">Receita</string>
-    <string name="detailtransaction_outcome">Despesa</string>
-    <string name="detailtransaction_date">Data</string>
-    <string name="detailtransaction_account">Conta</string>
-    <string name="detailtransaction_category">Categoria</string>
-    <string name="detailtransaction_description">Descrição (opcional)</string>
-    <string name="detailtransaction_invalidvalue">Valor inválido</string>
-    <string name="detail_no_name">Campo Nome é obrigatório</string>
-    <string name="detailtransaction_no_account">Campo Conta é obrigatório</string>
-    <string name="detailtransaction_no_category">Campo Categoria é obrigatório</string>
-
-    <string name="detailtransaction_arrowback_desc">arrow back icon</string>
-    <string name="detailtransaction_delete_desc">Delete</string>
-    <string name="archive_desc">Archive</string>
-    <string name="transfer_desc">Transfer</string>
-
-    <string name="navbar_home">Início</string>
-    <string name="navbar_transactions">Transações</string>
-    <string name="navbar_accounts">Contas</string>
-    <string name="navbar_categories">Categorias</string>
-
-    <string name="balancecard_total">Saldo em contas</string>
-    <string name="balancecard_income">Receitas</string>
-    <string name="balancecard_outcome">Despesas</string>
-
-    <string name="home_placeholdervalue">0.0</string>
-
-    <string name="fab_desc">floating action button</string>
-
-    <string name="datepicker_cancel">Cancelar</string>
-
-    <string name="gettransactions_topbar_all">Transações</string>
-    <string name="gettransactions_topbar_income">Receitas</string>
-    <string name="gettransactions_topbar_outcome">Despesas</string>
-    <string name="gettransactions_nodescription">(sem descrição)</string>
-    <string name="search_label">Procure pelo nome</string>
-    <string name="search_icon_desc">search icon</string>
-    <string name="clear_search_icon_desc">clear search icon</string>
-
-    <string name="getaccounts_topbar">Contas</string>
-    <string name="getarchivedaccounts_topbar">Contas Arquivadas</string>
-    <string name="getcategories_topbar">Categorias</string>
-
-
-    <string name="topbar_title_category_add">Nova Categoria</string>
-    <string name="topbar_title_category_edit">Editar Categoria</string>
-    <string name="topbar_title_account_add">Nova Conta</string>
-    <string name="topbar_title_account_edit">Editar Conta</string>
-
-    <string name="dialog_icon_desc">dialog</string>
-    <string name="delete_dialog_delete">Apagar</string>
-
-    <string name="delete_dialog_transaction_title">Excluir transação?</string>
-    <string name="delete_dialog_transaction_description">Isso vai apagar essa transação do seu histórico.</string>
-
-    <string name="archive_dialog_account_title">Arquivar conta?</string>
-    <string name="delete_dialog_account_title">Excluir conta?</string>
-    <string name="delete_dialog_account_description">Isso vai apagar essa conta e todas as transações associadas.</string>
-    <string name="archive_dialog_account_description">Isso vai arquivar essa conta. Nenhuma transação será apagada.</string>
-
-    <string name="delete_dialog_category_title">Excluir categoria?</string>
-    <string name="delete_dialog_category_description">Isso vai apagar essa categoria. Nenhuma transação será apagada.</string>
-
+    <string name="transactions">Transações</string>
+    <string name="accounts">Contas</string>
+    <string name="account">Conta</string>
+    <string name="categories">Categorias</string>
+    <string name="category">Categoria</string>
+    <string name="incomes">Receitas</string>
+    <string name="income">Receita</string>
+    <string name="outcomes">Despesas</string>
+    <string name="outcome">Despesa</string>
+    <string name="color">Cor</string>
+    <string name="value">Valor</string>
     <string name="name">Nome</string>
     <string name="cancel">Cancelar</string>
     <string name="ok">OK</string>
     <string name="type">Tipo</string>
-
-    <string name="loremipsum">Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen
-        book. It has survived not only five centuries, but also the leap into electronic
-        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
-        release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-        publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
-    <string name="search_placeholder">Procure pela descrição</string>
     <string name="unarchive">Desarquivar</string>
     <string name="delete">Apagar</string>
     <string name="error">Erro</string>
-    <string name="more_options_desc">more options</string>
-    <string name="account_transfer_topbar_title">Transferência</string>
-    <string name="account_transfer_origin_account">Conta origem</string>
-    <string name="account_transfer_destination_account">Conta destino</string>
 
-    <string name="color_field">Cor</string>
-    <string name="current_balance">"Saldo atual: "</string>
+    <string name="navbar_home">Início</string>
+    <string name="balancecard_total">Saldo em contas</string>
+    <string name="search_placeholder">Procure pela descrição</string>
+    <string name="list_account_balance">"Saldo atual: "</string>
+
+    <string name="no_description">(sem descrição)</string>
+    <string name="no_category">(sem categoria)</string>
+    <string name="no_account">(sem conta)</string>
+
+    <string name="topbar_transfer_add">Fazer Transferência</string>
+    <string name="topbar_archived_accounts">Contas Arquivadas</string>
+
+    <string name="detail_topbar_transaction_add">Nova Transação</string>
+    <string name="detail_topbar_transaction_edit">Editar Transação</string>
+    <string name="detail_topbar_category_add">Nova Categoria</string>
+    <string name="detail_topbar_category_edit">Editar Categoria</string>
+    <string name="detail_topbar_account_add">Nova Conta</string>
+    <string name="detail_topbar_account_edit">Editar Conta</string>
+
+    <string name="detail_date">Data</string>
+    <string name="detail_description">Descrição (opcional)</string>
+    <string name="detail_invalidvalue">Valor inválido</string>
+    <string name="detail_no_name">Campo Nome é obrigatório</string>
+    <string name="detail_no_account">Campo Conta é obrigatório</string>
+    <string name="detail_no_category">Campo Categoria é obrigatório</string>
+
+    <string name="dialog_title_transaction_delete">Excluir transação?</string>
+    <string name="dialog_title_account_archive">Arquivar conta?</string>
+    <string name="dialog_title_account_delete">Excluir conta?</string>
+    <string name="dialog_title_category_delete">Excluir categoria?</string>
+    <string name="dialog_description_transaction_delete">Isso vai apagar essa transação do seu histórico.</string>
+    <string name="dialog_description_account_delete">Isso vai apagar essa conta e todas as transações associadas.</string>
+    <string name="dialog_description_account_archive">Isso vai arquivar essa conta. Nenhuma transação será apagada.</string>
+    <string name="dialog_description_category_delete">Isso vai apagar essa categoria. Nenhuma transação será apagada.</string>
+
     <string name="empty_transactions_title">Não há transações</string>
     <string name="empty_accounts_title">Não há contas</string>
     <string name="empty_archived_accounts_title">Não há contas arquivadas</string>
@@ -98,14 +63,19 @@
     <string name="empty_accounts_desc">Adicione uma conta e ela irá aparecer aqui.</string>
     <string name="empty_categories_desc">Adicione uma categoria e ela irá aparecer aqui.</string>
     <string name="empty_archived_accounts_desc">Ao arquivar uma conta ela irá aparecer aqui.</string>
-    <string name="no_category">(sem categoria)</string>
-    <string name="no_account">(sem conta)</string>
-    <string name="detailtransaction_value_icon_desc">ícone de valor</string>
-    <string name="detailtransaction_date_icon_desc">ícone de data</string>
-    <string name="detailtransaction_description_icon_desc">ícone de descrição</string>
-    <string name="detailtransaction_account_icon_desc">ícone de conta</string>
-    <string name="detailtransaction_category_icon_desc">ícone de categoria</string>
-    <string name="detailtransaction_color_icon_desc">ícone de cor</string>
+
     <string name="transfer_from">Transferir de:</string>
     <string name="transfer_to">Para:</string>
+    <string name="transfer_origin">Conta origem</string>
+    <string name="transfer_destination">Conta destino</string>
+
+    <string name="arrowback_desc">voltar</string>
+    <string name="archive_desc">arquivar</string>
+    <string name="transfer_desc">transferir</string>
+    <string name="fab_desc">fab</string>
+    <string name="search_desc">buscar</string>
+    <string name="clear_search_desc">limpar busca</string>
+    <string name="dialog_desc">dialog</string>
+    <string name="more_options_desc">mais opções</string>
+    <string name="date_desc">data</string>
 </resources>

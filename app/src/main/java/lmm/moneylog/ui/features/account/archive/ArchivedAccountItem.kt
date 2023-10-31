@@ -68,7 +68,7 @@ fun ArchivedAccountItem(
         ) {
             Text(
                 text = name.ifEmpty {
-                    stringResource(R.string.gettransactions_nodescription)
+                    stringResource(R.string.no_description)
                 },
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,

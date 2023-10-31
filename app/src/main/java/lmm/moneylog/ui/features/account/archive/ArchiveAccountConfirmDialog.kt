@@ -15,8 +15,8 @@ fun ArchiveAccountConfirmDialog(
     ConfirmDialog(
         onConfirm = onConfirm,
         onDismiss = onDismiss,
-        title = stringResource(R.string.archive_dialog_account_title),
-        description = stringResource(R.string.archive_dialog_account_description),
+        title = stringResource(R.string.dialog_title_account_archive),
+        description = stringResource(R.string.dialog_description_account_archive),
         icon = ImageVector.vectorResource(id = R.drawable.outline_archive_24)
     )
 }

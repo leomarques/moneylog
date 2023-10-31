@@ -16,8 +16,8 @@ fun DeleteAccountConfirmDialog(
     ConfirmDialog(
         onConfirm = onConfirm,
         onDismiss = onDismiss,
-        title = stringResource(R.string.delete_dialog_account_title),
-        description = stringResource(R.string.delete_dialog_account_description),
+        title = stringResource(R.string.dialog_title_account_delete),
+        description = stringResource(R.string.dialog_description_account_delete),
         icon = Icons.Default.Delete
     )
 }

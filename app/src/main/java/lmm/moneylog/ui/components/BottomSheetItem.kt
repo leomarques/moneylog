@@ -48,7 +48,7 @@ fun BottomSheetItem(
 
         Text(
             text = text.ifEmpty {
-                stringResource(R.string.gettransactions_nodescription)
+                stringResource(R.string.no_description)
             },
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,

@@ -58,9 +58,9 @@ fun AccountDetailLayout(
                     Text(
                         text = stringResource(
                             if (isEdit) {
-                                R.string.topbar_title_account_edit
+                                R.string.detail_topbar_account_edit
                             } else {
-                                R.string.topbar_title_account_add
+                                R.string.detail_topbar_account_add
                             }
                         )
                     )
@@ -75,7 +75,7 @@ fun AccountDetailLayout(
                     ) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+                            contentDescription = stringResource(R.string.arrowback_desc)
                         )
                     }
                 },
@@ -160,7 +160,7 @@ private fun Content(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
-                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc)
+                    contentDescription = stringResource(R.string.account)
                 )
             },
             modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
@@ -175,7 +175,7 @@ private fun Content(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_brush_24),
-                    contentDescription = stringResource(R.string.detailtransaction_color_icon_desc)
+                    contentDescription = stringResource(R.string.color)
                 )
             },
             onClick = {

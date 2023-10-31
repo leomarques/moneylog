@@ -39,7 +39,7 @@ fun TransactionDetailDatePicker(
             TextButton(
                 onClick = onDismiss
             ) {
-                Text(stringResource(R.string.datepicker_cancel))
+                Text(stringResource(R.string.cancel))
             }
         }
     ) {

@@ -54,7 +54,7 @@ fun TransactionDetailLayout(
                     ) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+                            contentDescription = stringResource(R.string.arrowback_desc)
                         )
                     }
                 },
@@ -65,7 +65,7 @@ fun TransactionDetailLayout(
                             content = {
                                 Icon(
                                     imageVector = Icons.Default.Delete,
-                                    contentDescription = stringResource(R.string.detailtransaction_delete_desc)
+                                    contentDescription = stringResource(R.string.delete)
                                 )
                             }
                         )

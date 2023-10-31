@@ -56,7 +56,7 @@ fun GetTransactionsItem(
                 Column(Modifier.padding(start = SpaceSize.DefaultSpaceSize)) {
                     Text(
                         text = description.ifEmpty {
-                            stringResource(R.string.gettransactions_nodescription)
+                            stringResource(R.string.no_description)
                         },
                         overflow = TextOverflow.Ellipsis,
                         style = MaterialTheme.typography.bodyLarge,

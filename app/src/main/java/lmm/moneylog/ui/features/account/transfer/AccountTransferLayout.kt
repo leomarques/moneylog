@@ -53,13 +53,13 @@ fun AccountTransferLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(R.string.account_transfer_topbar_title))
+                    Text(text = stringResource(R.string.topbar_transfer_add))
                 },
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.detailtransaction_arrowback_desc)
+                            contentDescription = stringResource(R.string.arrowback_desc)
                         )
                     }
                 }
@@ -143,11 +143,11 @@ fun AccountTransferContent(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_attach_money_24),
-                    contentDescription = stringResource(R.string.detailtransaction_value_icon_desc)
+                    contentDescription = stringResource(R.string.value)
                 )
             },
             modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
-            title = stringResource(R.string.detailtransaction_value),
+            title = stringResource(R.string.value),
             keyboardType = KeyboardType.Number,
             valueState = valueField,
             getFocus = true
@@ -162,13 +162,13 @@ fun AccountTransferContent(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
-                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc),
+                    contentDescription = stringResource(R.string.account),
                     tint = originAccountColor
                 )
             },
             modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             value = originAccountDisplay,
-            title = stringResource(R.string.account_transfer_origin_account),
+            title = stringResource(R.string.transfer_origin),
             enabled = list.isNotEmpty(),
             onClick = {
                 showOriginAccountPicker = true
@@ -184,13 +184,13 @@ fun AccountTransferContent(
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
-                    contentDescription = stringResource(R.string.detailtransaction_account_icon_desc),
+                    contentDescription = stringResource(R.string.account),
                     tint = destinationAccountColor
                 )
             },
             modifier = Modifier.padding(bottom = SpaceSize.DefaultSpaceSize),
             value = destinationAccountDisplay,
-            title = stringResource(R.string.account_transfer_destination_account),
+            title = stringResource(R.string.transfer_destination),
             enabled = list.isNotEmpty(),
             onClick = {
                 showDestinationAccountPicker = true

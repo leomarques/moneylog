@@ -71,7 +71,7 @@ class AccountTransferViewModel(
                 destinationAccountId == -1 ||
                 originAccountId == destinationAccountId
             ) {
-                onError(R.string.detailtransaction_no_account)
+                onError(R.string.detail_no_account)
             } else {
                 try {
                     val finalValue = value.value.validateValue()
@@ -86,7 +86,7 @@ class AccountTransferViewModel(
                         onSuccess()
                     }
                 } catch (e: NumberFormatException) {
-                    onError(R.string.detailtransaction_invalidvalue)
+                    onError(R.string.detail_invalidvalue)
                 }
             }
         }
