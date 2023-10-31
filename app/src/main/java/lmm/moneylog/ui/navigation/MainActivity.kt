@@ -1,9 +1,8 @@
-package lmm.moneylog.ui
+package lmm.moneylog.ui.navigation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import lmm.moneylog.ui.navigation.Navigation
 import lmm.moneylog.ui.theme.MoneylogTheme
 
 class MainActivity : ComponentActivity() {

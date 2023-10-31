@@ -19,13 +19,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.StateTextField
+import lmm.moneylog.ui.components.IncomeRadioGroup
 import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
 import lmm.moneylog.ui.components.textfields.ClickTextField
+import lmm.moneylog.ui.components.textfields.StateTextField
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.DeleteTransactionConfirmDialog
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionDetailDatePicker
-import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionRadioGroup
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income
 
@@ -100,7 +101,7 @@ fun TransactionDetailContent(
         }
 
         StateTextField(
-            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.value),
             keyboardType = KeyboardType.Number,
             valueState = model.value,
@@ -114,10 +115,11 @@ fun TransactionDetailContent(
             }
         )
 
-        TransactionRadioGroup(
+        IncomeRadioGroup(
             modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
-            model.isIncome
+            isIncome = model.isIncome.value
         ) {
+            model.isIncome.value = it
             onIsIncomeSelected()
         }
 
@@ -137,7 +139,7 @@ fun TransactionDetailContent(
         )
 
         StateTextField(
-            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.detail_description),
             keyboardType = KeyboardType.Text,
             valueState = model.description,
@@ -183,4 +185,19 @@ fun TransactionDetailContent(
             }
         )
     }
+}
+
+@Preview
+@Composable
+fun TransactionDetailContentPreview() {
+    TransactionDetailContent(
+        model = TransactionDetailModel(),
+        showDeleteConfirmDialog = false,
+        onDatePicked = {},
+        onAccountPicked = {},
+        onCategoryPicked = {},
+        onDeleteConfirm = {},
+        onDeleteDismiss = {},
+        onIsIncomeSelected = {}
+    )
 }

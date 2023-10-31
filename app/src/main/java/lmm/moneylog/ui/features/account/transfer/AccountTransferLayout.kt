@@ -30,9 +30,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.MyFab
-import lmm.moneylog.ui.components.StateTextField
 import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
 import lmm.moneylog.ui.components.textfields.ClickTextField
+import lmm.moneylog.ui.components.textfields.StateTextField
 import lmm.moneylog.ui.theme.Size
 
 @OptIn(ExperimentalMaterial3Api::class)

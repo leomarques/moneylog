@@ -13,13 +13,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun MyCircle(
     modifier: Modifier = Modifier,
     color: Color,
     letters: String? = null,
-    size: Dp = 40.dp
+    size: Dp = Size.DefaultCircleSize
 ) {
     Box(
         modifier = modifier,
@@ -27,9 +28,7 @@ fun MyCircle(
     ) {
         Canvas(
             modifier = Modifier.size(size),
-            onDraw = {
-                drawCircle(color = color)
-            }
+            onDraw = { drawCircle(color = color) }
         )
         letters?.let {
             Text(
@@ -40,7 +39,8 @@ fun MyCircle(
                             it.length,
                             2
                         )
-                    ).uppercase(),
+                    )
+                    .uppercase(),
                 style = MaterialTheme.typography.titleMedium,
                 color = Color.White,
                 modifier = Modifier.offset(y = (-1).dp)

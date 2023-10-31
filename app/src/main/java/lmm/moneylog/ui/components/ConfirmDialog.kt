@@ -21,7 +21,6 @@ fun ConfirmDialog(
     icon: ImageVector
 ) {
     AlertDialog(
-        onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(onClick = onConfirm) {
                 Text(text = stringResource(R.string.ok))
@@ -32,22 +31,15 @@ fun ConfirmDialog(
                 Text(text = stringResource(R.string.cancel))
             }
         },
+        onDismissRequest = onDismiss,
         icon = {
             Icon(
                 imageVector = icon,
                 contentDescription = stringResource(R.string.dialog_desc)
             )
         },
-        title = {
-            Text(
-                text = title
-            )
-        },
-        text = {
-            Text(
-                text = description
-            )
-        }
+        title = { Text(text = title) },
+        text = { Text(text = description) }
     )
 }
 

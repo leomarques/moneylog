@@ -1,3 +1,9 @@
+@file:OptIn(
+    ExperimentalAnimationApi::class,
+    ExperimentalComposeUiApi::class,
+    ExperimentalMaterial3Api::class
+)
+
 package lmm.moneylog.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
@@ -31,32 +37,33 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import lmm.moneylog.R
+import lmm.moneylog.ui.theme.Size
 
-@OptIn(ExperimentalMaterial3Api::class)
-@ExperimentalAnimationApi
-@ExperimentalComposeUiApi
 @Composable
 fun SearchTopBar(
     searchText: String,
-    placeholderText: String = "",
-    onSearchTextChanged: (String) -> Unit = {},
-    onClearClick: () -> Unit = {},
-    onArrowBackClick: () -> Unit = {}
+    placeholderText: String,
+    onSearchTextChanged: (String) -> Unit,
+    onClearClick: () -> Unit,
+    onArrowBackClick: () -> Unit
 ) {
     var showClearButton by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
 
     TopAppBar(
-        title = { Text("") },
+        title = { },
         navigationIcon = {
-            IconButton(onClick = { onArrowBackClick() }) {
+            IconButton(onClick = onArrowBackClick) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     modifier = Modifier,
-                    contentDescription = ""
+                    contentDescription = stringResource(id = R.string.arrowback_desc)
                 )
             }
         },
@@ -64,7 +71,7 @@ fun SearchTopBar(
             OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 2.dp)
+                    .padding(vertical = Size.XXSmallSpaceSize)
                     .padding(start = 40.dp)
                     .onFocusChanged { focusState ->
                         showClearButton = (focusState.isFocused)
@@ -87,15 +94,14 @@ fun SearchTopBar(
                         enter = fadeIn(),
                         exit = fadeOut()
                     ) {
-                        IconButton(onClick = { onClearClick() }) {
+                        IconButton(onClick = onClearClick) {
                             Icon(
                                 imageVector = Icons.Filled.Close,
-                                contentDescription = ""
+                                contentDescription = stringResource(R.string.close_desc)
                             )
                         }
                     }
                 },
-                maxLines = 1,
                 singleLine = true,
                 keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(onDone = {
@@ -108,4 +114,16 @@ fun SearchTopBar(
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
     }
+}
+
+@Preview
+@Composable
+fun SearchTopBarPreview() {
+    SearchTopBar(
+        searchText = "",
+        placeholderText = "Search",
+        onSearchTextChanged = {},
+        onClearClick = {},
+        onArrowBackClick = {}
+    )
 }

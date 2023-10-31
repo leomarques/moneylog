@@ -30,11 +30,11 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.ColorPicker
+import lmm.moneylog.ui.components.IncomeRadioGroup
 import lmm.moneylog.ui.components.MyFab
-import lmm.moneylog.ui.components.StateTextField
-import lmm.moneylog.ui.components.textfields.ColorPicker
 import lmm.moneylog.ui.components.textfields.ColorTextField
-import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionRadioGroup
+import lmm.moneylog.ui.components.textfields.StateTextField
 import lmm.moneylog.ui.theme.Size
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -160,17 +160,19 @@ private fun Content(
         }
 
         StateTextField(
-            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,
             valueState = valueState,
             getFocus = !isEdit
         )
 
-        TransactionRadioGroup(
+        IncomeRadioGroup(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            isIncome = isIncome
-        ) {}
+            isIncome = isIncome.value
+        ) {
+            isIncome.value = it
+        }
 
         ColorTextField(
             color = color,

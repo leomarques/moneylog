@@ -30,10 +30,10 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.ColorPicker
 import lmm.moneylog.ui.components.MyFab
-import lmm.moneylog.ui.components.StateTextField
-import lmm.moneylog.ui.components.textfields.ColorPicker
 import lmm.moneylog.ui.components.textfields.ColorTextField
+import lmm.moneylog.ui.components.textfields.StateTextField
 import lmm.moneylog.ui.features.account.archive.ArchiveAccountConfirmDialog
 import lmm.moneylog.ui.theme.Size
 
@@ -157,13 +157,13 @@ private fun Content(
         }
 
         StateTextField(
+            modifier = Modifier.padding(bottom = Size.MediumSpaceSize),
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
                     contentDescription = stringResource(R.string.account)
                 )
             },
-            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,
             valueState = valueState,

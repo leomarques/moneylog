@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 fun ClickTextField(
     modifier: Modifier = Modifier,
     value: String,
-    label: String? = null,
+    label: String,
     enabled: Boolean = true,
     onClick: () -> Unit,
     leadingIcon: @Composable (() -> Unit)? = null
@@ -30,11 +30,7 @@ fun ClickTextField(
             .background(MaterialTheme.colorScheme.surface)
             .fillMaxWidth(),
         value = value,
-        label = {
-            label?.let {
-                Text(text = label)
-            }
-        },
+        label = { Text(text = label) },
         readOnly = true,
         enabled = enabled,
         interactionSource = remember { MutableInteractionSource() }
