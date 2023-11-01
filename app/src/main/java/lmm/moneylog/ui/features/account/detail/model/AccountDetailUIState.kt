@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.account.detail.mvvm
+package lmm.moneylog.ui.features.account.detail.model
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,8 +1,8 @@
 package lmm.moneylog.misc
 
 import android.content.Context
-import lmm.moneylog.ui.features.account.archive.GetArchivedAccountsViewModel
-import lmm.moneylog.ui.features.account.detail.mvvm.AccountDetailViewModel
+import lmm.moneylog.ui.features.account.archive.viewmodel.ArchivedAccountsViewModel
+import lmm.moneylog.ui.features.account.detail.viewmodel.AccountDetailViewModel
 import lmm.moneylog.ui.features.account.list.GetAccountsViewModel
 import lmm.moneylog.ui.features.account.transfer.AccountTransferViewModel
 import lmm.moneylog.ui.features.category.categorydetail.CategoryDetailViewModel
@@ -36,7 +36,7 @@ val appModule = module {
         )
     }
     viewModelOf(::TransactionDetailViewModel)
-    viewModelOf(::GetArchivedAccountsViewModel)
+    viewModelOf(::ArchivedAccountsViewModel)
     viewModelOf(::AccountTransferViewModel)
 
     factory {

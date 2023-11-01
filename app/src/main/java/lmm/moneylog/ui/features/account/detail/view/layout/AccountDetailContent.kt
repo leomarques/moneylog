@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.account.detail.mvvm
+package lmm.moneylog.ui.features.account.detail.view.layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,7 @@ import lmm.moneylog.ui.components.icons.BrushIcon
 import lmm.moneylog.ui.components.misc.ColorPicker
 import lmm.moneylog.ui.components.textfields.ColorTextField
 import lmm.moneylog.ui.components.textfields.StateTextField
-import lmm.moneylog.ui.features.account.archive.ArchiveAccountConfirmDialog
+import lmm.moneylog.ui.features.account.archive.view.components.ArchiveAccountConfirmDialog
 import lmm.moneylog.ui.theme.DarkPurple
 import lmm.moneylog.ui.theme.Size
 

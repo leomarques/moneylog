@@ -9,8 +9,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import lmm.moneylog.ui.features.account.archive.GetArchivedAccountsView
-import lmm.moneylog.ui.features.account.detail.mvvm.AccountDetailView
+import lmm.moneylog.ui.features.account.archive.view.layout.ArchivedAccountsListView
+import lmm.moneylog.ui.features.account.detail.view.layout.AccountDetailView
 import lmm.moneylog.ui.features.account.list.GetAccountsView
 import lmm.moneylog.ui.features.account.transfer.AccountTransferView
 import lmm.moneylog.ui.features.category.categorydetail.CategoryDetailView
@@ -130,7 +130,7 @@ fun MyNavHost(
             route = getArchivedAccountsScreen,
             onArrowBackClick = onArrowBackClick
         ) {
-            GetArchivedAccountsView(onArrowBackClick = onArrowBackClick)
+            ArchivedAccountsListView(onArrowBackClick = onArrowBackClick)
         }
 
         composableExt(

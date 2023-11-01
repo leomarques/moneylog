@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.account.detail.mvvm
+package lmm.moneylog.ui.features.account.detail.viewmodel
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
@@ -15,6 +15,7 @@ import lmm.moneylog.data.account.repositories.AddAccountRepository
 import lmm.moneylog.data.account.repositories.ArchiveAccountRepository
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.account.repositories.UpdateAccountRepository
+import lmm.moneylog.ui.features.account.detail.model.AccountDetailUIState
 import lmm.moneylog.ui.features.toColor
 import lmm.moneylog.ui.features.transaction.transactiondetail.getIdParam
 

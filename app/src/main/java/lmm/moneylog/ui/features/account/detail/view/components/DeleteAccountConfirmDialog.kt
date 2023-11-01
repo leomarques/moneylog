@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.account.detail.components
+package lmm.moneylog.ui.features.account.detail.view.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
