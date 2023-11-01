@@ -8,26 +8,33 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import lmm.moneylog.ui.features.account.archive.model.ArchivedAccountModel
 import lmm.moneylog.ui.features.account.detail.view.components.DeleteAccountConfirmDialog
+import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun ArchivedAccountsContent(
-    onItemClick: (Int) -> Unit,
     list: List<ArchivedAccountModel>,
     onUnArchive: (Int) -> Unit,
-    onDeleteClick: (Int) -> Unit,
-    onDeleteConfirm: () -> Unit,
-    onDismissConfirmDialog: () -> Unit,
-    showDeleteConfirmDialog: Boolean
+    onDeleteConfirm: (Int) -> Unit
 ) {
+    var showDeleteConfirmDialog by remember { mutableStateOf(false) }
+    var idToDelete by remember { mutableIntStateOf(-1) }
+
     if (showDeleteConfirmDialog) {
         DeleteAccountConfirmDialog(
-            onConfirm = onDeleteConfirm,
-            onDismiss = onDismissConfirmDialog
+            onConfirm = {
+                showDeleteConfirmDialog = false
+                onDeleteConfirm(idToDelete)
+            },
+            onDismiss = { showDeleteConfirmDialog = false }
         )
     }
 
@@ -35,19 +42,19 @@ fun ArchivedAccountsContent(
         LazyColumn(
             Modifier.background(
                 color = MaterialTheme.colorScheme.inverseOnSurface,
-                shape = RoundedCornerShape(20.dp)
+                shape = RoundedCornerShape(Size.ListRoundedCornerSize)
             )
         ) {
-            itemsIndexed(list.reversed()) { index, accountModel ->
+            itemsIndexed(list) { index, accountModel ->
                 ArchivedAccountItem(
                     id = accountModel.id,
                     name = accountModel.name,
-                    onItemClick = onItemClick,
+                    showDivider = index != list.size - 1,
                     onUnArchiveClick = onUnArchive,
                     onDeleteClick = { id ->
-                        onDeleteClick(id)
-                    },
-                    showDivider = index != list.size - 1
+                        idToDelete = id
+                        showDeleteConfirmDialog = true
+                    }
                 )
             }
         }
@@ -58,7 +65,6 @@ fun ArchivedAccountsContent(
 @Composable
 fun ArchivedAccountsContentPreview() {
     ArchivedAccountsContent(
-        onItemClick = {},
         list = listOf(
             ArchivedAccountModel(
                 id = 1,
@@ -74,9 +80,6 @@ fun ArchivedAccountsContentPreview() {
             )
         ),
         onUnArchive = {},
-        onDeleteClick = {},
-        onDeleteConfirm = {},
-        onDismissConfirmDialog = {},
-        showDeleteConfirmDialog = false
+        onDeleteConfirm = {}
     )
 }

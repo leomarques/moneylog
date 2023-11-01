@@ -4,11 +4,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,30 +29,10 @@ fun ArchivedAccountsLayout(
                         description = stringResource(R.string.empty_archived_accounts_desc)
                     )
                 } else {
-                    var showDeleteConfirmDialog by remember {
-                        mutableStateOf(false)
-                    }
-
-                    var idToDelete by remember {
-                        mutableIntStateOf(-1)
-                    }
-
                     ArchivedAccountsContent(
-                        onItemClick = {},
                         list = list,
                         onUnArchive = onUnArchive,
-                        onDeleteClick = { id ->
-                            idToDelete = id
-                            showDeleteConfirmDialog = true
-                        },
-                        onDeleteConfirm = {
-                            showDeleteConfirmDialog = false
-                            onDeleteConfirm(idToDelete)
-                        },
-                        onDismissConfirmDialog = {
-                            showDeleteConfirmDialog = false
-                        },
-                        showDeleteConfirmDialog = showDeleteConfirmDialog
+                        onDeleteConfirm = onDeleteConfirm
                     )
                 }
             }

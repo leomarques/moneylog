@@ -26,7 +26,7 @@ class ArchivedAccountsViewModel(
         viewModelScope.launch {
             getAccountsRepository.getAccounts(true).collect { accounts ->
                 _uiState.update {
-                    accounts.map { it.toArchivedAccountModel() }
+                    accounts.reversed().map { it.toArchivedAccountModel() }
                 }
             }
         }

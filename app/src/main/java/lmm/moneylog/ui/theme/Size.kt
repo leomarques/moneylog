@@ -10,6 +10,7 @@ object Size {
     val DefaultSpaceSize = 16.dp
     val XLargeSpaceSize = 64.dp
 
+    val ListRoundedCornerSize = 20.dp
     val OneLineListItemHeight = 56.dp
     val TwoLinesListItemHeight = 72.dp
 
