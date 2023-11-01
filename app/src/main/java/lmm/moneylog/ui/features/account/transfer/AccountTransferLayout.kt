@@ -29,8 +29,8 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.MyFab
 import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
+import lmm.moneylog.ui.components.misc.MyFab
 import lmm.moneylog.ui.components.textfields.ClickTextField
 import lmm.moneylog.ui.components.textfields.StateTextField
 import lmm.moneylog.ui.theme.Size
@@ -149,8 +149,11 @@ fun AccountTransferContent(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.value),
             keyboardType = KeyboardType.Number,
-            valueState = valueField,
-            getFocus = true
+            value = valueField.value,
+            getFocus = true,
+            onValueChange = {
+                valueField.value = it
+            }
         )
 
         Text(

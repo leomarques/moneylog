@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.MyCircle
+import lmm.moneylog.ui.components.misc.MyCircle
 import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income

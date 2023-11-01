@@ -21,8 +21,8 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.IncomeRadioGroup
 import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
+import lmm.moneylog.ui.components.misc.IncomeRadioGroup
 import lmm.moneylog.ui.components.textfields.ClickTextField
 import lmm.moneylog.ui.components.textfields.StateTextField
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.DeleteTransactionConfirmDialog
@@ -104,7 +104,7 @@ fun TransactionDetailContent(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.value),
             keyboardType = KeyboardType.Number,
-            valueState = model.value,
+            value = model.value.value,
             getFocus = !model.isEdit,
             leadingIcon = {
                 Icon(
@@ -112,6 +112,9 @@ fun TransactionDetailContent(
                     contentDescription = stringResource(R.string.value),
                     tint = if (model.isIncome.value) income else Color.Red
                 )
+            },
+            onValueChange = {
+                model.value.value = it
             }
         )
 
@@ -142,12 +145,15 @@ fun TransactionDetailContent(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.detail_description),
             keyboardType = KeyboardType.Text,
-            valueState = model.description,
+            value = model.description.value,
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Create,
                     contentDescription = stringResource(R.string.detail_description)
                 )
+            },
+            onValueChange = {
+                model.description.value = it
             }
         )
 

@@ -9,9 +9,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import lmm.moneylog.ui.features.account.accountdetail.AccountDetailView
 import lmm.moneylog.ui.features.account.archive.GetArchivedAccountsView
-import lmm.moneylog.ui.features.account.getaccounts.GetAccountsView
+import lmm.moneylog.ui.features.account.detail.mvvm.AccountDetailView
+import lmm.moneylog.ui.features.account.list.GetAccountsView
 import lmm.moneylog.ui.features.account.transfer.AccountTransferView
 import lmm.moneylog.ui.features.category.categorydetail.CategoryDetailView
 import lmm.moneylog.ui.features.category.getcategories.GetCategoriesView

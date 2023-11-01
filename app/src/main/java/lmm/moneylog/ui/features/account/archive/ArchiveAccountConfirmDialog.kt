@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.ConfirmDialog
+import lmm.moneylog.ui.components.misc.ConfirmDialog
 
 @Composable
 fun ArchiveAccountConfirmDialog(

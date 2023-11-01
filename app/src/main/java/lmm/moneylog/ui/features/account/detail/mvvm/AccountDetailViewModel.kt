@@ -1,6 +1,5 @@
-package lmm.moneylog.ui.features.account.accountdetail
+package lmm.moneylog.ui.features.account.detail.mvvm
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -16,6 +15,7 @@ import lmm.moneylog.data.account.repositories.AddAccountRepository
 import lmm.moneylog.data.account.repositories.ArchiveAccountRepository
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.account.repositories.UpdateAccountRepository
+import lmm.moneylog.ui.features.toColor
 import lmm.moneylog.ui.features.transaction.transactiondetail.getIdParam
 
 class AccountDetailViewModel(
@@ -26,17 +26,17 @@ class AccountDetailViewModel(
     private val archiveAccountRepository: ArchiveAccountRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(AccountDetailModel())
-    val uiState: StateFlow<AccountDetailModel> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(AccountDetailUIState())
+    val uiState: StateFlow<AccountDetailUIState> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
             savedStateHandle.getIdParam()?.let { id ->
                 getAccountsRepository.getAccountById(id)?.let { account ->
                     _uiState.update {
-                        AccountDetailModel(
-                            name = mutableStateOf(account.name),
-                            color = Color(account.color.toULong()),
+                        AccountDetailUIState(
+                            name = account.name,
+                            color = account.color.toColor(),
                             isEdit = true,
                             id = account.id
                         )
@@ -55,40 +55,44 @@ class AccountDetailViewModel(
         }
     }
 
+    fun onNameChange(name: String) {
+        _uiState.update { it.copy(name = name) }
+    }
+
+    fun onColorPick(color: Color) {
+        _uiState.update { it.copy(color = color) }
+    }
+
     fun onFabClick(
         onSuccess: () -> Unit,
         onError: (Int) -> Unit
     ) {
-        val name = _uiState.value.name.value.trim()
+        val state = _uiState.value
+        val name = state.name.trim()
+        val isEdit = state.isEdit
+
         if (name.isEmpty()) {
             onError(R.string.detail_no_name)
         } else {
             _uiState.update { it.copy(showFab = false) }
 
             viewModelScope.launch {
-                if (_uiState.value.isEdit) {
-                    updateAccountRepository.update(_uiState.value.toAccount())
+                if (isEdit) {
+                    updateAccountRepository.update(state.toAccount())
                 } else {
-                    addAccountRepository.save(_uiState.value.toAccount())
+                    addAccountRepository.save(state.toAccount())
                 }
-                onSuccess()
             }
-        }
-    }
 
-    fun onColorPicked(color: Color) {
-        _uiState.update {
-            it.copy(
-                color = color
-            )
+            onSuccess()
         }
     }
 }
 
-fun AccountDetailModel.toAccount() =
+private fun AccountDetailUIState.toAccount() =
     Account(
         id = id,
-        name = name.value.trim(),
+        name = name.trim(),
         color = color.value.toLong(),
         archived = false
     )

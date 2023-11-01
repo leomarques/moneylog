@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.account.getaccounts
+package lmm.moneylog.ui.features.account.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,9 +38,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.EmptyState
-import lmm.moneylog.ui.components.MyCircle
-import lmm.moneylog.ui.components.MyFab
+import lmm.moneylog.ui.components.misc.EmptyState
+import lmm.moneylog.ui.components.misc.MyCircle
+import lmm.moneylog.ui.components.misc.MyFab
 import lmm.moneylog.ui.textformatters.formatForRs
 import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.Size

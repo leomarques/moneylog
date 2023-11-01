@@ -30,9 +30,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.ColorPicker
-import lmm.moneylog.ui.components.IncomeRadioGroup
-import lmm.moneylog.ui.components.MyFab
+import lmm.moneylog.ui.components.misc.ColorPicker
+import lmm.moneylog.ui.components.misc.IncomeRadioGroup
+import lmm.moneylog.ui.components.misc.MyFab
 import lmm.moneylog.ui.components.textfields.ColorTextField
 import lmm.moneylog.ui.components.textfields.StateTextField
 import lmm.moneylog.ui.theme.Size
@@ -163,8 +163,11 @@ private fun Content(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,
-            valueState = valueState,
-            getFocus = !isEdit
+            value = valueState.value,
+            getFocus = !isEdit,
+            onValueChange = {
+                valueState.value = it
+            }
         )
 
         IncomeRadioGroup(

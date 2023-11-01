@@ -4,7 +4,7 @@
     ExperimentalMaterial3Api::class
 )
 
-package lmm.moneylog.ui.components
+package lmm.moneylog.ui.components.misc
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi

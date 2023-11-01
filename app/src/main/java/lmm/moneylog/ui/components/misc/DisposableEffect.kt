@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.components
+package lmm.moneylog.ui.components.misc
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect

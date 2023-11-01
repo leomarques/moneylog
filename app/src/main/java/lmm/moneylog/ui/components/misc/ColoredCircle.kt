@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.components
+package lmm.moneylog.ui.components.misc
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box

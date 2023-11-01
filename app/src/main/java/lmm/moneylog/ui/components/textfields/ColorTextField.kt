@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.MyCircle
+import lmm.moneylog.ui.components.misc.MyCircle
 import lmm.moneylog.ui.theme.Size
 
 @Composable
