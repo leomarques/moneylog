@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.account.transfer
+package lmm.moneylog.ui.features.account.transfer.model
 
 import androidx.compose.ui.graphics.Color
 

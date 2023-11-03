@@ -6,7 +6,7 @@ import java.time.ZoneId
 import java.time.format.TextStyle
 import java.util.Locale
 
-class LocalDateToDomainTimeInteractorImpl : DomainTimeInteractor {
+class DomainTimeInteractorImpl : DomainTimeInteractor {
 
     override fun getCurrentTimeStamp() =
         Instant.now().toEpochMilli()

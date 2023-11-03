@@ -1,14 +1,12 @@
-package lmm.moneylog.ui.features.account.transfer
+package lmm.moneylog.ui.features.account.transfer.model
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import lmm.moneylog.data.transaction.time.DomainTime
 
 data class AccountTransferUIState(
-    val accounts: List<AccountTransferModel> = emptyList(),
+    val value: String = "",
     val date: DomainTime = DomainTime(0, 0, 0),
-    val value: MutableState<String> = mutableStateOf(""),
+    val accounts: List<AccountTransferModel> = emptyList(),
     val originAccountId: Int = -1,
     val destinationAccountId: Int = -1,
     val originAccountDisplay: String = "",

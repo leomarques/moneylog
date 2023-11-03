@@ -35,7 +35,7 @@ import lmm.moneylog.data.transaction.repositories.impls.DeleteTransactionReposit
 import lmm.moneylog.data.transaction.repositories.impls.GetTransactionsRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.UpdateTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
-import lmm.moneylog.data.transaction.time.LocalDateToDomainTimeInteractorImpl
+import lmm.moneylog.data.transaction.time.DomainTimeInteractorImpl
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
@@ -48,7 +48,7 @@ val dataModule = module {
     single { MoneylogDatabase.getInstance(get()).accountTransferDao() }
 
     factoryOf(::CoroutineDispatcherProviderImpl) { bind<CoroutineDispatcherProvider>() }
-    factoryOf(::LocalDateToDomainTimeInteractorImpl) { bind<DomainTimeInteractor>() }
+    factoryOf(::DomainTimeInteractorImpl) { bind<DomainTimeInteractor>() }
 
     factoryOf(::GetBalanceInteractor)
     factoryOf(::GetBalanceByAccountInteractor)

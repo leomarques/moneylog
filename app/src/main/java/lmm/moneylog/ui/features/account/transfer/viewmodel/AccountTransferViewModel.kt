@@ -1,6 +1,5 @@
-package lmm.moneylog.ui.features.account.transfer
+package lmm.moneylog.ui.features.account.transfer.viewmodel
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,6 +11,9 @@ import lmm.moneylog.R
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
+import lmm.moneylog.ui.features.account.transfer.model.AccountTransferModel
+import lmm.moneylog.ui.features.account.transfer.model.AccountTransferUIState
+import lmm.moneylog.ui.features.toColor
 import lmm.moneylog.ui.features.transaction.transactiondetail.validateValue
 
 class AccountTransferViewModel(
@@ -33,7 +35,7 @@ class AccountTransferViewModel(
                         AccountTransferModel(
                             id = it.id,
                             name = it.name,
-                            color = Color(it.color.toULong())
+                            color = it.color.toColor()
                         )
                     },
                     date = domainTimeInteractor.getCurrentDomainTime()
@@ -62,32 +64,43 @@ class AccountTransferViewModel(
         }
     }
 
+    fun onValueChange(value: String) {
+        _uiState.update { it.copy(value = value) }
+    }
+
     fun onFabClick(
         onSuccess: () -> Unit,
         onError: (Int) -> Unit
     ) {
         with(_uiState.value) {
-            if (originAccountId == -1 ||
-                destinationAccountId == -1 ||
-                originAccountId == destinationAccountId
-            ) {
-                onError(R.string.detail_no_account)
-            } else {
-                try {
-                    val finalValue = value.value.validateValue()
+            if (originAccountId == -1) {
+                onError(R.string.transfer_error_no_origin)
+                return
+            }
+            if (destinationAccountId == -1) {
+                onError(R.string.transfer_error_no_destination)
+                return
+            }
+            if (originAccountId == destinationAccountId) {
+                onError(R.string.transfer_error_same_account)
+                return
+            }
 
-                    viewModelScope.launch {
-                        accountTransferRepository.transfer(
-                            value = finalValue,
-                            date = date,
-                            originAccountId = originAccountId,
-                            destinationAccountId = destinationAccountId
-                        )
-                        onSuccess()
-                    }
-                } catch (e: NumberFormatException) {
-                    onError(R.string.detail_invalidvalue)
+            try {
+                val finalValue = value.validateValue()
+
+                viewModelScope.launch {
+                    accountTransferRepository.transfer(
+                        value = finalValue,
+                        date = date,
+                        originAccountId = originAccountId,
+                        destinationAccountId = destinationAccountId
+                    )
+
+                    onSuccess()
                 }
+            } catch (e: NumberFormatException) {
+                onError(R.string.detail_invalidvalue)
             }
         }
     }
