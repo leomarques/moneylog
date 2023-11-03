@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.fabs.MyFab
+import lmm.moneylog.ui.components.fabs.HideFab
 import lmm.moneylog.ui.components.misc.EmptyState
 import lmm.moneylog.ui.features.account.list.model.AccountModel
 import lmm.moneylog.ui.features.account.list.view.components.AccountsListTopBar
@@ -35,7 +35,7 @@ fun AccountsListLayout(
             )
         },
         floatingActionButton = {
-            MyFab(
+            HideFab(
                 onClick = onFabClick,
                 icon = Icons.Default.Add
             )

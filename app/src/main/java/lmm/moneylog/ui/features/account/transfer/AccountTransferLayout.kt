@@ -30,7 +30,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
-import lmm.moneylog.ui.components.fabs.MyFab
+import lmm.moneylog.ui.components.fabs.HideFab
 import lmm.moneylog.ui.components.textfields.ClickTextField
 import lmm.moneylog.ui.components.textfields.StateTextField
 import lmm.moneylog.ui.theme.Size
@@ -66,7 +66,7 @@ fun AccountTransferLayout(
             )
         },
         floatingActionButton = {
-            MyFab(
+            HideFab(
                 onClick = onFabClick,
                 icon = Icons.Default.Check
             )
