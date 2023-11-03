@@ -1,6 +1,5 @@
-package lmm.moneylog.ui.features.account.list
+package lmm.moneylog.ui.features.account.list.viewmodel
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
@@ -9,8 +8,12 @@ import kotlinx.coroutines.flow.stateIn
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.balance.GetBalanceByAccountInteractor
+import lmm.moneylog.ui.features.account.list.model.AccountModel
+import lmm.moneylog.ui.features.account.list.model.AccountsListUIState
+import lmm.moneylog.ui.features.toColor
+import lmm.moneylog.ui.textformatters.formatForRs
 
-class GetAccountsViewModel(
+class AccountsListViewModel(
     getAccountsRepository: GetAccountsRepository,
     accountTransferRepository: AccountTransferRepository,
     private val getBalanceByAccountInteractor: GetBalanceByAccountInteractor
@@ -41,12 +44,12 @@ class GetAccountsViewModel(
                 AccountModel(
                     id = account.id,
                     name = account.name,
-                    balance = balance,
-                    color = Color(account.color.toULong())
+                    balance = balance.formatForRs(),
+                    color = account.color.toColor()
                 )
             )
         }
 
-        GetAccountsModel(list)
-    }.stateIn(viewModelScope, SharingStarted.Lazily, GetAccountsModel())
+        AccountsListUIState(list.reversed())
+    }.stateIn(viewModelScope, SharingStarted.Lazily, AccountsListUIState())
 }

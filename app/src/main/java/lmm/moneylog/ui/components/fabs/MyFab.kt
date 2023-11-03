@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.components.misc
+package lmm.moneylog.ui.components.fabs
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add

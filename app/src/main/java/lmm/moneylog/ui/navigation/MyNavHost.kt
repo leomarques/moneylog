@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import lmm.moneylog.ui.features.account.archive.view.layout.ArchivedAccountsListView
 import lmm.moneylog.ui.features.account.detail.view.layout.AccountDetailView
-import lmm.moneylog.ui.features.account.list.GetAccountsView
+import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView
 import lmm.moneylog.ui.features.account.transfer.AccountTransferView
 import lmm.moneylog.ui.features.category.categorydetail.CategoryDetailView
 import lmm.moneylog.ui.features.category.getcategories.GetCategoriesView
@@ -80,7 +80,7 @@ fun MyNavHost(
             route = getAccountsScreen,
             onArrowBackClick = onArrowBackClick
         ) {
-            GetAccountsView(
+            AccountsListView(
                 onArrowBackClick = onArrowBackClick,
                 onFabClick = onAccountsFabClick,
                 onItemClick = onAccountsItemClick,

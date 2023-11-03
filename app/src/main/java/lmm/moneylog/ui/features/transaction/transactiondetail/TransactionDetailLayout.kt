@@ -22,7 +22,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.misc.MyFab
+import lmm.moneylog.ui.components.fabs.MyFab
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

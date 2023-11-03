@@ -17,7 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.Size
 
@@ -42,7 +41,7 @@ fun GetTransactionsList(
     LazyColumn(
         Modifier.background(
             color = MaterialTheme.colorScheme.inverseOnSurface,
-            shape = RoundedCornerShape(20.dp)
+            shape = RoundedCornerShape(Size.ListRoundedCornerSize)
         )
     ) {
         grouped.forEach { (date, transactions) ->

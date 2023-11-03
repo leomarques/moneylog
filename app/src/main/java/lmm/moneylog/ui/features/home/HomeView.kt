@@ -15,7 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.components.misc.MyFab
+import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.features.home.balancecard.BalanceCardView
 import lmm.moneylog.ui.theme.Size
 import org.koin.androidx.compose.koinViewModel

@@ -25,8 +25,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.components.misc.EmptyState
-import lmm.moneylog.ui.components.misc.MyFab
 import lmm.moneylog.ui.components.misc.SearchTopBar
 
 @OptIn(
