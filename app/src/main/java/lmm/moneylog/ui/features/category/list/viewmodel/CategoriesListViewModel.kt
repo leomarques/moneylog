@@ -23,7 +23,11 @@ class CategoriesListViewModel(private val getCategoriesRepository: GetCategories
         viewModelScope.launch {
             getCategoriesRepository.getCategories().collect { categories ->
                 _uiState.update {
-                    CategoriesListUIState(categories.toCategoryModelList())
+                    CategoriesListUIState(
+                        categories
+                            .toCategoryModelList()
+                            .reversed()
+                    )
                 }
             }
         }

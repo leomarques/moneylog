@@ -1,7 +1,6 @@
 package lmm.moneylog.ui.features.account.list.view.components
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,7 +17,7 @@ import lmm.moneylog.ui.theme.Size
 fun ListItemContent(
     id: Int,
     onItemClick: (Int) -> Unit,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable (RowScope.() -> Unit)
 ) {
     Row(
         modifier = Modifier
@@ -29,7 +28,6 @@ fun ListItemContent(
                 horizontal = Size.DefaultSpaceSize
             )
             .clickable { onItemClick(id) },
-        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         content()

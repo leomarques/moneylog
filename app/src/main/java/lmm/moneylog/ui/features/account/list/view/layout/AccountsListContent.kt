@@ -12,22 +12,20 @@ fun AccountsListContent(
     list: List<AccountModel>,
     onItemClick: (Int) -> Unit
 ) {
-    LazyList(
-        content = {
-            itemsIndexed(list) { index, accountModel ->
-                with(accountModel) {
-                    AccountsListItem(
-                        id = id,
-                        name = name,
-                        balance = balance,
-                        color = color,
-                        showDivider = index != list.size - 1,
-                        onItemClick = onItemClick
-                    )
-                }
+    LazyList {
+        itemsIndexed(list) { index, accountModel ->
+            with(accountModel) {
+                AccountsListItem(
+                    id = id,
+                    name = name,
+                    balance = balance,
+                    color = color,
+                    showDivider = index != list.size - 1,
+                    onItemClick = onItemClick
+                )
             }
         }
-    )
+    }
 }
 
 @Preview

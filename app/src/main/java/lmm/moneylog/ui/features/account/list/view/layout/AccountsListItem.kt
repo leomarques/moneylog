@@ -1,20 +1,13 @@
 package lmm.moneylog.ui.features.account.list.view.layout
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.misc.MyCircle
 import lmm.moneylog.ui.components.misc.MyDivider
-import lmm.moneylog.ui.features.account.list.view.components.ListItemBalance
 import lmm.moneylog.ui.features.account.list.view.components.ListItemContent
-import lmm.moneylog.ui.features.account.list.view.components.ListItemName
-import lmm.moneylog.ui.theme.Size
-import lmm.moneylog.ui.theme.income
-import lmm.moneylog.ui.theme.outcome
+import lmm.moneylog.ui.features.account.list.view.components.ListItemData
 
 @Composable
 fun AccountsListItem(
@@ -32,18 +25,7 @@ fun AccountsListItem(
             Row {
                 MyCircle(color = color)
 
-                Column(Modifier.padding(start = Size.DefaultSpaceSize)) {
-                    ListItemName(name)
-
-                    ListItemBalance(
-                        balance = balance,
-                        color = if (balance.contains("-")) {
-                            outcome
-                        } else {
-                            income
-                        }
-                    )
-                }
+                ListItemData(name, balance)
             }
         }
     )
