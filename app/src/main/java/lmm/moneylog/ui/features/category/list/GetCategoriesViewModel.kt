@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.category.getcategories
+package lmm.moneylog.ui.features.category.list
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel

@@ -36,10 +36,10 @@ class AccountDetailViewModel(
                 getAccountsRepository.getAccountById(id)?.let { account ->
                     _uiState.update {
                         AccountDetailUIState(
+                            id = account.id,
                             name = account.name,
                             color = account.color.toColor(),
-                            isEdit = true,
-                            id = account.id
+                            isEdit = true
                         )
                     }
                 }
@@ -57,7 +57,7 @@ class AccountDetailViewModel(
     }
 
     fun onNameChange(name: String) {
-        _uiState.update { it.copy(name = name) }
+        _uiState.update { it.copy(name = name.trim()) }
     }
 
     fun onColorPick(color: Color) {
@@ -69,20 +69,18 @@ class AccountDetailViewModel(
         onError: (Int) -> Unit
     ) {
         val state = _uiState.value
-        val name = state.name.trim()
-        val isEdit = state.isEdit
-
-        if (name.isEmpty()) {
+        if (state.name.isEmpty()) {
             onError(R.string.detail_no_name)
-        } else {
-            _uiState.update { it.copy(showFab = false) }
+            return
+        }
 
-            viewModelScope.launch {
-                if (isEdit) {
-                    updateAccountRepository.update(state.toAccount())
-                } else {
-                    addAccountRepository.save(state.toAccount())
-                }
+        _uiState.update { it.copy(showFab = false) }
+
+        viewModelScope.launch {
+            if (state.isEdit) {
+                updateAccountRepository.update(state.toAccount())
+            } else {
+                addAccountRepository.save(state.toAccount())
             }
 
             onSuccess()
@@ -93,7 +91,7 @@ class AccountDetailViewModel(
 private fun AccountDetailUIState.toAccount() =
     Account(
         id = id,
-        name = name.trim(),
+        name = name,
         color = color.value.toLong(),
         archived = false
     )

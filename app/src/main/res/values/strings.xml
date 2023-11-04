@@ -75,6 +75,7 @@
 
     <string name="arrowback_desc">voltar</string>
     <string name="archive_desc">arquivar</string>
+    <string name="delete_desc">apagar</string>
     <string name="transfer_desc">transferir</string>
     <string name="fab_desc">fab</string>
     <string name="search_desc">buscar</string>

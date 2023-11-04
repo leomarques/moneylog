@@ -1,6 +1,5 @@
-package lmm.moneylog.ui.features.category.categorydetail
+package lmm.moneylog.ui.features.category.detail.viewmodel
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -16,6 +15,8 @@ import lmm.moneylog.data.category.repositories.AddCategoryRepository
 import lmm.moneylog.data.category.repositories.DeleteCategoryRepository
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.category.repositories.UpdateCategoryRepository
+import lmm.moneylog.ui.features.category.detail.model.CategoryDetailUIState
+import lmm.moneylog.ui.features.toColor
 import lmm.moneylog.ui.features.transaction.transactiondetail.getIdParam
 
 class CategoryDetailViewModel(
@@ -26,20 +27,20 @@ class CategoryDetailViewModel(
     private val deleteCategoryRepository: DeleteCategoryRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(CategoryDetailModel())
-    val uiState: StateFlow<CategoryDetailModel> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(CategoryDetailUIState())
+    val uiState: StateFlow<CategoryDetailUIState> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
             savedStateHandle.getIdParam()?.let { id ->
                 getCategoriesRepository.getCategoryById(id)?.let { category ->
                     _uiState.update {
-                        CategoryDetailModel(
-                            name = mutableStateOf(category.name),
-                            color = Color(category.color.toULong()),
-                            isEdit = true,
+                        CategoryDetailUIState(
                             id = category.id,
-                            isIncome = mutableStateOf(category.isIncome)
+                            name = category.name,
+                            color = category.color.toColor(),
+                            isIncome = category.isIncome,
+                            isEdit = true
                         )
                     }
                 }
@@ -53,40 +54,46 @@ class CategoryDetailViewModel(
         }
     }
 
+    fun onNameChange(name: String) {
+        _uiState.update { it.copy(name = name.trim()) }
+    }
+
+    fun onIncomeChange(isIncome: Boolean) {
+        _uiState.update { it.copy(isIncome = isIncome) }
+    }
+
+    fun onColorPick(color: Color) {
+        _uiState.update { it.copy(color = color) }
+    }
+
     fun onFabClick(
         onSuccess: () -> Unit,
         onError: (Int) -> Unit
     ) {
-        val name = _uiState.value.name.value.trim()
-        if (name.isEmpty()) {
+        val state = _uiState.value
+        if (state.name.isEmpty()) {
             onError(R.string.detail_no_name)
-        } else {
-            _uiState.update { it.copy(showFab = false) }
-
-            viewModelScope.launch {
-                if (_uiState.value.isEdit) {
-                    updateCategoryRepository.update(_uiState.value.toCategory())
-                } else {
-                    addCategoryRepository.save(_uiState.value.toCategory())
-                }
-                onSuccess()
-            }
+            return
         }
-    }
 
-    fun onColorPicked(color: Color) {
-        _uiState.update {
-            it.copy(
-                color = color
-            )
+        _uiState.update { it.copy(showFab = false) }
+
+        viewModelScope.launch {
+            if (state.isEdit) {
+                updateCategoryRepository.update(state.toCategory())
+            } else {
+                addCategoryRepository.save(state.toCategory())
+            }
+
+            onSuccess()
         }
     }
 }
 
-fun CategoryDetailModel.toCategory() =
+fun CategoryDetailUIState.toCategory() =
     Category(
         id = id,
-        name = name.value.trim(),
+        name = name,
         color = color.value.toLong(),
-        isIncome = isIncome.value
+        isIncome = isIncome
     )

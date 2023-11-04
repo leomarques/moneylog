@@ -5,8 +5,8 @@ import lmm.moneylog.ui.features.account.archive.viewmodel.ArchivedAccountsViewMo
 import lmm.moneylog.ui.features.account.detail.viewmodel.AccountDetailViewModel
 import lmm.moneylog.ui.features.account.list.viewmodel.AccountsListViewModel
 import lmm.moneylog.ui.features.account.transfer.viewmodel.AccountTransferViewModel
-import lmm.moneylog.ui.features.category.categorydetail.CategoryDetailViewModel
-import lmm.moneylog.ui.features.category.getcategories.GetCategoriesViewModel
+import lmm.moneylog.ui.features.category.detail.viewmodel.CategoryDetailViewModel
+import lmm.moneylog.ui.features.category.list.GetCategoriesViewModel
 import lmm.moneylog.ui.features.home.HomeViewModel
 import lmm.moneylog.ui.features.home.balancecard.BalanceCardViewModel
 import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsViewModel

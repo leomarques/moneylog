@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.category.getcategories
+package lmm.moneylog.ui.features.category.list
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
