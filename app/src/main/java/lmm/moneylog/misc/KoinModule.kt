@@ -5,10 +5,10 @@ import lmm.moneylog.ui.features.account.archive.viewmodel.ArchivedAccountsViewMo
 import lmm.moneylog.ui.features.account.detail.viewmodel.AccountDetailViewModel
 import lmm.moneylog.ui.features.account.list.viewmodel.AccountsListViewModel
 import lmm.moneylog.ui.features.account.transfer.viewmodel.AccountTransferViewModel
+import lmm.moneylog.ui.features.balancecard.viewmodel.BalanceCardViewModel
 import lmm.moneylog.ui.features.category.detail.viewmodel.CategoryDetailViewModel
 import lmm.moneylog.ui.features.category.list.viewmodel.CategoriesListViewModel
-import lmm.moneylog.ui.features.home.HomeViewModel
-import lmm.moneylog.ui.features.home.balancecard.BalanceCardViewModel
+import lmm.moneylog.ui.features.home.viewmodel.HomeViewModel
 import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsViewModel
 import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailViewModel
 import org.koin.android.ext.koin.androidContext

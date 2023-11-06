@@ -16,8 +16,8 @@ import lmm.moneylog.R
 
 @Composable
 fun HideFab(
-    onClick: () -> Unit,
-    icon: ImageVector
+    icon: ImageVector,
+    onClick: () -> Unit
 ) {
     var showFab by remember { mutableStateOf(true) }
 

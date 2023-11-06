@@ -15,7 +15,7 @@ import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView
 import lmm.moneylog.ui.features.account.transfer.view.layout.AccountTransferView
 import lmm.moneylog.ui.features.category.detail.view.layout.CategoryDetailView
 import lmm.moneylog.ui.features.category.list.view.layouts.CategoriesListView
-import lmm.moneylog.ui.features.home.HomeView
+import lmm.moneylog.ui.features.home.view.HomeView
 import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsView
 import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailView
 

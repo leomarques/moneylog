@@ -12,6 +12,7 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import lmm.moneylog.data.balance.BalanceModel
 import lmm.moneylog.data.balance.GetBalanceInteractor
+import lmm.moneylog.ui.features.balancecard.viewmodel.BalanceCardViewModel
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
