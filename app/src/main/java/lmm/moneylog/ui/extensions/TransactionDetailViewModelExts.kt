@@ -1,11 +1,13 @@
-package lmm.moneylog.ui.features.transaction.detail.model
+package lmm.moneylog.ui.extensions
 
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
+import androidx.compose.ui.graphics.Color
 import lmm.moneylog.R
+import lmm.moneylog.data.account.Account
+import lmm.moneylog.data.category.Category
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
+import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 
 fun DomainTime.convertToDisplayDate(domainTimeInteractor: DomainTimeInteractor) =
     "$day ${domainTimeInteractor.getMonthName(month)}, $year"
@@ -24,11 +26,11 @@ fun String.validateValue(isIncome: Boolean = true): Double {
 }
 
 fun Transaction.toDetailModel(domainTimeInteractor: DomainTimeInteractor) =
-    TransactionDetailModel(
+    TransactionDetailUIState(
         id = id,
-        value = mutableStateOf(value.toPositiveString()),
-        isIncome = mutableStateOf(value > 0),
-        description = mutableStateOf(description),
+        value = value.toPositiveString(),
+        isIncome = value > 0,
+        description = description,
         date = date,
         displayDate = date.convertToDisplayDate(domainTimeInteractor),
         isEdit = true,
@@ -46,17 +48,31 @@ private fun Double.isWhole() = this % 1.0 == 0.0
 
 private fun String.removeDecimal() = substring(0, length - 2)
 
-fun TransactionDetailModel.toTransaction(): Transaction = Transaction(
-    value = value.value.validateValue(isIncome.value),
+fun TransactionDetailUIState.toTransaction(): Transaction = Transaction(
+    value = value.validateValue(isIncome),
     date = date,
-    description = description.value,
+    description = description,
     id = id,
     accountId = accountId,
     categoryId = categoryId
 )
 
-fun SavedStateHandle.getIdParam(): Int? {
-    get<Int>("id")?.let { id ->
-        return if (id != -1) id else null
-    } ?: return null
+fun Color?.orDefaultColor(): Color {
+    return this ?: Color.Gray
+}
+
+fun List<Account>.getAccountById(accountId: Int?): (Pair<String, Color>)? {
+    return firstOrNull {
+        it.id == accountId
+    }?.let {
+        it.name to it.color.toComposeColor()
+    }
+}
+
+fun List<Category>.getCategoryById(categoryId: Int?): (Pair<String, Color>)? {
+    return firstOrNull {
+        it.id == categoryId
+    }?.let {
+        it.name to it.color.toComposeColor()
+    }
 }

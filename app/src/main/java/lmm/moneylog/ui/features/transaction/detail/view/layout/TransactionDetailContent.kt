@@ -25,7 +25,7 @@ import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
 import lmm.moneylog.ui.components.misc.IncomeRadioGroup
 import lmm.moneylog.ui.components.textfields.ClickTextField
 import lmm.moneylog.ui.components.textfields.StateTextField
-import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailModel
+import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 import lmm.moneylog.ui.features.transaction.detail.view.components.DeleteTransactionConfirmDialog
 import lmm.moneylog.ui.features.transaction.detail.view.components.TransactionDetailDatePicker
 import lmm.moneylog.ui.theme.Size
@@ -35,21 +35,21 @@ import lmm.moneylog.ui.theme.outcome
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionDetailContent(
-    model: TransactionDetailModel,
+    model: TransactionDetailUIState,
     showDeleteConfirmDialog: Boolean,
     onDatePicked: (Long) -> Unit,
     onAccountPicked: (Int) -> Unit,
     onCategoryPicked: (Int) -> Unit,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit,
-    onIsIncomeSelected: () -> Unit
+    onIsIncomeSelect: () -> Unit
 ) {
     Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         var showDatePicker by remember { mutableStateOf(false) }
         var showAccountPicker by remember { mutableStateOf(false) }
         var showCategoryPicker by remember { mutableStateOf(false) }
 
-        val filteredCategories = model.categories.filter { it.isIncome == model.isIncome.value }
+        val filteredCategories = model.categories.filter { it.isIncome == model.isIncome }
 
         if (showDatePicker) {
             TransactionDetailDatePicker(
@@ -106,26 +106,26 @@ fun TransactionDetailContent(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.value),
             keyboardType = KeyboardType.Number,
-            value = model.value.value,
+            value = model.value,
             getFocus = !model.isEdit,
             leadingIcon = {
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_attach_money_24),
                     contentDescription = stringResource(R.string.value),
-                    tint = if (model.isIncome.value) income else outcome
+                    tint = if (model.isIncome) income else outcome
                 )
             },
             onValueChange = {
-                model.value.value = it
+//                model.value = it
             }
         )
 
         IncomeRadioGroup(
             modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
-            isIncome = model.isIncome.value
+            isIncome = model.isIncome
         ) {
-            model.isIncome.value = it
-            onIsIncomeSelected()
+//            model.isIncome = it
+            onIsIncomeSelect()
         }
 
         ClickTextField(
@@ -147,7 +147,7 @@ fun TransactionDetailContent(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             title = stringResource(R.string.detail_description),
             keyboardType = KeyboardType.Text,
-            value = model.description.value,
+            value = model.description,
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Create,
@@ -155,7 +155,7 @@ fun TransactionDetailContent(
                 )
             },
             onValueChange = {
-                model.description.value = it
+//                model.description = it
             }
         )
 
@@ -199,13 +199,13 @@ fun TransactionDetailContent(
 @Composable
 fun TransactionDetailContentPreview() {
     TransactionDetailContent(
-        model = TransactionDetailModel(),
+        model = TransactionDetailUIState(),
         showDeleteConfirmDialog = false,
         onDatePicked = {},
         onAccountPicked = {},
         onCategoryPicked = {},
         onDeleteConfirm = {},
         onDeleteDismiss = {},
-        onIsIncomeSelected = {}
+        onIsIncomeSelect = {}
     )
 }

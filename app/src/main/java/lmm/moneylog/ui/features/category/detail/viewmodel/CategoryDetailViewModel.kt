@@ -15,9 +15,9 @@ import lmm.moneylog.data.category.repositories.AddCategoryRepository
 import lmm.moneylog.data.category.repositories.DeleteCategoryRepository
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.category.repositories.UpdateCategoryRepository
+import lmm.moneylog.ui.extensions.getIdParam
+import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.category.detail.model.CategoryDetailUIState
-import lmm.moneylog.ui.features.transaction.detail.model.getIdParam
-import lmm.moneylog.ui.misc.toColor
 
 class CategoryDetailViewModel(
     savedStateHandle: SavedStateHandle,
@@ -38,7 +38,7 @@ class CategoryDetailViewModel(
                         CategoryDetailUIState(
                             id = category.id,
                             name = category.name,
-                            color = category.color.toColor(),
+                            color = category.color.toComposeColor(),
                             isIncome = category.isIncome,
                             isEdit = true
                         )

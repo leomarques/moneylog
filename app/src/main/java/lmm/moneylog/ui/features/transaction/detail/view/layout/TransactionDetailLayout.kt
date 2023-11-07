@@ -23,19 +23,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.fabs.MyFab
-import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailModel
+import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionDetailLayout(
-    model: TransactionDetailModel,
+    uiState: TransactionDetailUIState,
     onArrowBackClick: () -> Unit,
     onDeleteConfirmClick: () -> Unit,
     onFabClick: () -> Unit,
-    onDatePicked: (Long) -> Unit,
-    onAccountPicked: (Int) -> Unit,
-    onCategoryPicked: (Int) -> Unit,
-    onIsIncomeSelected: () -> Unit
+    onDatePick: (Long) -> Unit,
+    onAccountPick: (Int) -> Unit,
+    onCategoryPick: (Int) -> Unit,
+    onIsIncomeSelect: () -> Unit
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
@@ -43,7 +43,7 @@ fun TransactionDetailLayout(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = stringResource(model.titleResourceId))
+                    Text(text = stringResource(uiState.titleResourceId))
                 },
                 navigationIcon = {
                     val focusManager = LocalFocusManager.current
@@ -60,7 +60,7 @@ fun TransactionDetailLayout(
                     }
                 },
                 actions = {
-                    if (model.isEdit) {
+                    if (uiState.isEdit) {
                         IconButton(
                             onClick = { showDeleteConfirmDialog.value = true },
                             content = {
@@ -75,7 +75,7 @@ fun TransactionDetailLayout(
             )
         },
         floatingActionButton = {
-            if (model.showFab) {
+            if (uiState.showFab) {
                 MyFab(
                     onClick = onFabClick,
                     icon = Icons.Default.Check
@@ -86,17 +86,17 @@ fun TransactionDetailLayout(
         content = { paddingValues ->
             Surface(Modifier.padding(paddingValues)) {
                 TransactionDetailContent(
-                    model = model,
+                    model = uiState,
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
-                    onDatePicked = onDatePicked,
-                    onAccountPicked = onAccountPicked,
-                    onCategoryPicked = onCategoryPicked,
+                    onIsIncomeSelect = onIsIncomeSelect,
+                    onDatePicked = onDatePick,
+                    onAccountPicked = onAccountPick,
+                    onCategoryPicked = onCategoryPick,
+                    onDeleteDismiss = { showDeleteConfirmDialog.value = false },
                     onDeleteConfirm = {
                         showDeleteConfirmDialog.value = false
                         onDeleteConfirmClick()
-                    },
-                    onDeleteDismiss = { showDeleteConfirmDialog.value = false },
-                    onIsIncomeSelected = onIsIncomeSelected
+                    }
                 )
             }
         }
@@ -108,13 +108,13 @@ fun TransactionDetailLayout(
 @Composable
 fun TransactionDetailLayoutPreview() {
     TransactionDetailLayout(
-        model = TransactionDetailModel(),
+        uiState = TransactionDetailUIState(),
         onArrowBackClick = {},
         onDeleteConfirmClick = {},
         onFabClick = {},
-        onDatePicked = {},
-        onAccountPicked = {},
-        onCategoryPicked = {},
-        onIsIncomeSelected = {}
+        onDatePick = {},
+        onAccountPick = {},
+        onCategoryPick = {},
+        onIsIncomeSelect = {}
     )
 }

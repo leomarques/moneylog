@@ -1,12 +1,10 @@
 package lmm.moneylog.ui.features.transaction.detail.view.layout
 
-import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import lmm.moneylog.R
+import lmm.moneylog.ui.components.misc.showToast
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -15,17 +13,16 @@ fun TransactionDetailView(
     onArrowBackClick: () -> Unit,
     viewModel: TransactionDetailViewModel = koinViewModel()
 ) {
-    val current = LocalContext.current
-    val invalidValueErrorText = stringResource(R.string.detail_invalidvalue)
-    val noAccountErrorText = stringResource(R.string.detail_no_account)
-    val noCategoryErrorText = stringResource(R.string.detail_no_category)
-    val error = stringResource(R.string.error)
-
     val uiState by viewModel.uiState.collectAsState()
+    val current = LocalContext.current
 
     TransactionDetailLayout(
-        model = uiState,
+        uiState = uiState,
         onArrowBackClick = onArrowBackClick,
+        onIsIncomeSelect = { viewModel.clearCategory() },
+        onDatePick = { date -> viewModel.onDatePick(date) },
+        onAccountPick = { index -> viewModel.onAccountPick(index) },
+        onCategoryPick = { index -> viewModel.onCategoryPick(index) },
         onDeleteConfirmClick = {
             viewModel.deleteTransaction()
             onArrowBackClick()
@@ -33,37 +30,8 @@ fun TransactionDetailView(
         onFabClick = {
             viewModel.onFabClick(
                 onSuccess = onArrowBackClick,
-                onError = { stringId ->
-                    Toast.makeText(
-                        current,
-                        when (stringId) {
-                            R.string.detail_no_account ->
-                                noAccountErrorText
-
-                            R.string.detail_no_category ->
-                                noCategoryErrorText
-
-                            R.string.detail_invalidvalue ->
-                                invalidValueErrorText
-
-                            else -> error
-                        },
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+                onError = { stringId -> showToast(current, stringId) }
             )
-        },
-        onDatePicked = { datePicked ->
-            viewModel.onDatePicked(datePicked)
-        },
-        onAccountPicked = { index ->
-            viewModel.onAccountPicked(index)
-        },
-        onCategoryPicked = { index ->
-            viewModel.onCategoryPicked(index)
-        },
-        onIsIncomeSelected = {
-            viewModel.onIsIncomeSelected()
         }
     )
 }

@@ -1,88 +1,119 @@
 package lmm.moneylog.ui.features.transaction.detail.viewmodel
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
+import lmm.moneylog.data.account.Account
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
+import lmm.moneylog.data.category.Category
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.transaction.repositories.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
-import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailModel
-import lmm.moneylog.ui.features.transaction.detail.model.convertToDisplayDate
-import lmm.moneylog.ui.features.transaction.detail.model.getIdParam
-import lmm.moneylog.ui.features.transaction.detail.model.toDetailModel
-import lmm.moneylog.ui.features.transaction.detail.model.toTransaction
+import lmm.moneylog.ui.extensions.convertToDisplayDate
+import lmm.moneylog.ui.extensions.getAccountById
+import lmm.moneylog.ui.extensions.getCategoryById
+import lmm.moneylog.ui.extensions.getIdParam
+import lmm.moneylog.ui.extensions.orDefaultColor
+import lmm.moneylog.ui.extensions.toComposeColor
+import lmm.moneylog.ui.extensions.toDetailModel
+import lmm.moneylog.ui.extensions.toTransaction
+import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
+import lmm.moneylog.ui.theme.defaultColor
 
 class TransactionDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    private val getTransactionsRepository: GetTransactionsRepository,
+    getTransactionsRepository: GetTransactionsRepository,
+    getAccountsRepository: GetAccountsRepository,
+    getCategoriesRepository: GetCategoriesRepository,
     private val addTransactionRepository: AddTransactionRepository,
     private val updateTransactionRepository: UpdateTransactionRepository,
     private val deleteTransactionRepository: DeleteTransactionRepository,
-    private val getAccountsRepository: GetAccountsRepository,
-    private val getCategoriesRepository: GetCategoriesRepository,
     private val domainTimeInteractor: DomainTimeInteractor
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(TransactionDetailModel())
-    val uiState: StateFlow<TransactionDetailModel> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(TransactionDetailUIState())
+    val uiState: StateFlow<TransactionDetailUIState> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
+            val accountsAsync = async { getAccountsRepository.getAccountsSuspend() }
+            val categoriesAsync = async { getCategoriesRepository.getCategoriesSuspend() }
+
             val idParam = savedStateHandle.getIdParam()
-
             if (idParam != null) {
-                getTransactionsRepository.getTransactionById(idParam)?.let { transaction ->
-                    _uiState.update {
-                        transaction.toDetailModel(domainTimeInteractor)
-                    }
-                }
-            } else {
-                _uiState.update {
-                    val currentDate = with(domainTimeInteractor) {
-                        timeStampToDomainTime(getCurrentTimeStamp())
-                    }
-                    TransactionDetailModel(
-                        date = currentDate,
-                        displayDate = currentDate.convertToDisplayDate(domainTimeInteractor)
-                    )
-                }
-            }
-
-            val accounts = getAccountsRepository.getAccountsSuspend()
-            val categories = getCategoriesRepository.getCategoriesSuspend()
-
-            val account = accounts.firstOrNull {
-                it.id == _uiState.value.accountId
-            }?.let {
-                it.name to Color(it.color.toULong())
-            }
-            val category = categories.firstOrNull {
-                it.id == _uiState.value.categoryId
-            }?.let {
-                it.name to Color(it.color.toULong())
-            }
-
-            _uiState.update {
-                it.copy(
-                    accounts = accounts,
-                    categories = categories,
-                    displayAccount = account?.first.orEmpty(),
-                    displayCategory = category?.first.orEmpty(),
-                    displayAccountColor = account?.second ?: Color.Gray,
-                    displayCategoryColor = category?.second ?: Color.Gray
+                setupEdit(
+                    getTransactionsRepository = getTransactionsRepository,
+                    idParam = idParam
                 )
+            } else {
+                setupAdd(accountsAsync, categoriesAsync)
             }
+
+            setupAccountsAndCategories(
+                accountsAsync = accountsAsync,
+                categoriesAsync = categoriesAsync
+            )
+        }
+    }
+
+    private suspend fun setupEdit(
+        getTransactionsRepository: GetTransactionsRepository,
+        idParam: Int
+    ) {
+        getTransactionsRepository.getTransactionById(idParam)?.let { transaction ->
+            _uiState.update {
+                transaction.toDetailModel(domainTimeInteractor)
+            }
+        }
+    }
+
+    private suspend fun setupAdd(
+        accountsAsync: Deferred<List<Account>>,
+        categoriesAsync: Deferred<List<Category>>
+    ) {
+        _uiState.update {
+            val currentDate = domainTimeInteractor.getCurrentDomainTime()
+            val accountId = accountsAsync.await().firstOrNull()?.id
+            val categoryId = categoriesAsync.await().firstOrNull()?.id
+
+            TransactionDetailUIState(
+                accountId = accountId,
+                categoryId = categoryId,
+                date = currentDate,
+                displayDate = currentDate.convertToDisplayDate(domainTimeInteractor)
+            )
+        }
+    }
+
+    private suspend fun setupAccountsAndCategories(
+        accountsAsync: Deferred<List<Account>>,
+        categoriesAsync: Deferred<List<Category>>
+    ) {
+        val accounts = accountsAsync.await()
+        val categories = categoriesAsync.await()
+        val account = accounts.getAccountById(_uiState.value.accountId)
+        val category = categories.getCategoryById(_uiState.value.categoryId)
+
+        _uiState.update {
+            it.copy(
+                accounts = accounts,
+                categories = categories,
+                displayAccount = account?.first.orEmpty(),
+                displayCategory = category?.first.orEmpty(),
+                displayAccountColor = account?.second.orDefaultColor(),
+                displayCategoryColor = category?.second.orDefaultColor()
+            )
         }
     }
 
@@ -92,7 +123,17 @@ class TransactionDetailViewModel(
         }
     }
 
-    fun onDatePicked(timeStamp: Long) {
+    fun clearCategory() {
+        _uiState.update {
+            it.copy(
+                categoryId = null,
+                displayCategory = "",
+                displayCategoryColor = defaultColor
+            )
+        }
+    }
+
+    fun onDatePick(timeStamp: Long) {
         _uiState.update {
             val domainTime = domainTimeInteractor.timeStampToDomainTime(timeStamp)
             it.copy(
@@ -102,29 +143,31 @@ class TransactionDetailViewModel(
         }
     }
 
-    fun onAccountPicked(index: Int) {
+    fun onAccountPick(index: Int) {
         _uiState.update {
-            val account = _uiState.value.accounts[index]
-            it.copy(
-                displayAccount = account.name,
-                displayAccountColor = Color(account.color.toULong()),
-                accountId = account.id
-            )
+            with(_uiState.value.accounts[index]) {
+                it.copy(
+                    accountId = id,
+                    displayAccount = name,
+                    displayAccountColor = color.toComposeColor()
+                )
+            }
         }
     }
 
-    fun onCategoryPicked(index: Int) {
-        val uiStateValue = _uiState.value
-        val filteredCategories = uiStateValue.categories
-            .filter { cat -> cat.isIncome == uiStateValue.isIncome.value }
+    fun onCategoryPick(index: Int) {
+        val filteredCategories = with(_uiState.value) {
+            categories.filter { it.isIncome == isIncome }
+        }
 
         _uiState.update {
-            val category = filteredCategories[index]
-            it.copy(
-                displayCategory = category.name,
-                displayCategoryColor = Color(category.color.toULong()),
-                categoryId = category.id
-            )
+            with(filteredCategories[index]) {
+                it.copy(
+                    categoryId = id,
+                    displayCategory = name,
+                    displayCategoryColor = color.toComposeColor()
+                )
+            }
         }
     }
 
@@ -133,37 +176,31 @@ class TransactionDetailViewModel(
         onError: (Int) -> Unit
     ) {
         try {
-            val transaction = _uiState.value.toTransaction()
-            if (transaction.accountId == null) {
-                onError(R.string.detail_no_account)
-            } else {
-                if (transaction.categoryId == null) {
-                    onError(R.string.detail_no_category)
-                } else {
-                    _uiState.update { it.copy(showFab = false) }
+            val state = _uiState.value
+            with(state.toTransaction()) {
+                if (accountId == null) {
+                    onError(R.string.detail_no_account)
+                    return
+                }
 
-                    viewModelScope.launch {
-                        if (_uiState.value.isEdit) {
-                            updateTransactionRepository.update(transaction)
-                        } else {
-                            addTransactionRepository.save(transaction)
-                        }
-                        onSuccess()
+                if (categoryId == null) {
+                    onError(R.string.detail_no_category)
+                    return
+                }
+
+                _uiState.update { it.copy(showFab = false) }
+
+                viewModelScope.launch {
+                    if (state.isEdit) {
+                        updateTransactionRepository.update(this@with)
+                    } else {
+                        addTransactionRepository.save(this@with)
                     }
+                    onSuccess()
                 }
             }
         } catch (e: NumberFormatException) {
             onError(R.string.detail_invalidvalue)
-        }
-    }
-
-    fun onIsIncomeSelected() {
-        _uiState.update {
-            it.copy(
-                displayCategory = "",
-                displayCategoryColor = Color.Gray,
-                categoryId = null
-            )
         }
     }
 }

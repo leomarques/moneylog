@@ -11,10 +11,10 @@ import lmm.moneylog.R
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
+import lmm.moneylog.ui.extensions.toComposeColor
+import lmm.moneylog.ui.extensions.validateValue
 import lmm.moneylog.ui.features.account.transfer.model.AccountTransferModel
 import lmm.moneylog.ui.features.account.transfer.model.AccountTransferUIState
-import lmm.moneylog.ui.features.transaction.detail.model.validateValue
-import lmm.moneylog.ui.misc.toColor
 
 class AccountTransferViewModel(
     private val accountTransferRepository: AccountTransferRepository,
@@ -35,7 +35,7 @@ class AccountTransferViewModel(
                         AccountTransferModel(
                             id = it.id,
                             name = it.name,
-                            color = it.color.toColor()
+                            color = it.color.toComposeColor()
                         )
                     },
                     date = domainTimeInteractor.getCurrentDomainTime()

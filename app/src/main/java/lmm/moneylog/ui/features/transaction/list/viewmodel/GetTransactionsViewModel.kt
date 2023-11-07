@@ -14,9 +14,9 @@ import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.time.DomainTime
+import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.features.transaction.list.model.GetTransactionsModel
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
-import lmm.moneylog.ui.misc.formatForRs
 
 const val getTransactionsIncome = "income"
 const val getTransactionsOutcome = "outcome"

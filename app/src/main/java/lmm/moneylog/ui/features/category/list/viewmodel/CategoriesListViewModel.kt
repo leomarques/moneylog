@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.category.Category
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
+import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.category.list.model.CategoriesListUIState
 import lmm.moneylog.ui.features.category.list.model.CategoryModel
-import lmm.moneylog.ui.misc.toColor
 
 class CategoriesListViewModel(private val getCategoriesRepository: GetCategoriesRepository) :
     ViewModel() {
@@ -39,7 +39,7 @@ fun List<Category>.toCategoryModelList(): List<CategoryModel> {
         CategoryModel(
             id = it.id,
             name = it.name,
-            color = it.color.toColor(),
+            color = it.color.toComposeColor(),
             isIncome = it.isIncome
         )
     }

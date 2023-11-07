@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 val income = Color(0xFF009f23)
 val outcome = Color(0xFFD1282C)
+val defaultColor = Color.Gray
 
 val DarkRed = Color(0xFF693738)
 val DarkBlue = Color(0xFF28456c)

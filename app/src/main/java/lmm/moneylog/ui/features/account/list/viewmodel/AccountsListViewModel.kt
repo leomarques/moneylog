@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.stateIn
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.balance.GetBalanceByAccountInteractor
+import lmm.moneylog.ui.extensions.formatForRs
+import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.account.list.model.AccountModel
 import lmm.moneylog.ui.features.account.list.model.AccountsListUIState
-import lmm.moneylog.ui.misc.formatForRs
-import lmm.moneylog.ui.misc.toColor
 
 class AccountsListViewModel(
     getAccountsRepository: GetAccountsRepository,
@@ -45,7 +45,7 @@ class AccountsListViewModel(
                     id = account.id,
                     name = account.name,
                     balance = balance.formatForRs(),
-                    color = account.color.toColor()
+                    color = account.color.toComposeColor()
                 )
             )
         }

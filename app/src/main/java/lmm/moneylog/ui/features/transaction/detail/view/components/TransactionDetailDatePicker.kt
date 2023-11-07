@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.features.transaction.detail.view.components
 
-import android.annotation.SuppressLint
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -9,21 +8,21 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnrememberedMutableState")
 @Composable
 fun TransactionDetailDatePicker(
     onConfirm: (Long) -> Unit,
     onDismiss: () -> Unit
 ) {
     val datePickerState = rememberDatePickerState()
-    val confirmEnabled = derivedStateOf { datePickerState.selectedDateMillis != null }
+    val confirmEnabled = remember { derivedStateOf { datePickerState.selectedDateMillis != null } }
 
     DatePickerDialog(
-        onDismissRequest = onDismiss,
         confirmButton = {
             TextButton(
                 onClick = {
@@ -36,13 +35,21 @@ fun TransactionDetailDatePicker(
             }
         },
         dismissButton = {
-            TextButton(
-                onClick = onDismiss
-            ) {
+            TextButton(onDismiss) {
                 Text(stringResource(R.string.cancel))
             }
-        }
+        },
+        onDismissRequest = onDismiss
     ) {
         DatePicker(state = datePickerState)
     }
+}
+
+@Preview
+@Composable
+fun TransactionDetailDatePickerPreview() {
+    TransactionDetailDatePicker(
+        onConfirm = {},
+        onDismiss = {}
+    )
 }

@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.balance.GetBalanceInteractor
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
+import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.features.balancecard.model.BalanceCardUIState
-import lmm.moneylog.ui.misc.formatForRs
 
 class BalanceCardViewModel(
     interactor: GetBalanceInteractor,
