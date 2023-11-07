@@ -15,6 +15,7 @@ import lmm.moneylog.ui.components.textfields.ClickTextField
 import lmm.moneylog.ui.components.textfields.StateTextField
 import lmm.moneylog.ui.features.account.transfer.model.AccountTransferModel
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountTransferFields(
@@ -74,7 +75,7 @@ fun TransferFieldsPreview() {
         value = "100",
         list = emptyList(),
         originAccountDisplay = "Conta 1",
-        originAccountColor = Color.Red,
+        originAccountColor = outcome,
         destinationAccountDisplay = "Conta 2",
         destinationAccountColor = Color.Blue,
         onValueChange = {},

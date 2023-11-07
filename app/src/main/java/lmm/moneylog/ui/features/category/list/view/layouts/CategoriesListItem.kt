@@ -13,6 +13,7 @@ import lmm.moneylog.ui.components.misc.MyDivider
 import lmm.moneylog.ui.features.account.list.view.components.ListItemContent
 import lmm.moneylog.ui.features.account.list.view.components.ListItemName
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun CategoriesListItem(
@@ -52,7 +53,7 @@ fun CategoriesListItemPreview() {
         CategoriesListItem(
             id = 0,
             name = "Category",
-            color = Color.Red,
+            color = outcome,
             showDivider = true,
             onItemClick = {}
         )

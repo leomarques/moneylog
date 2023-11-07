@@ -8,6 +8,7 @@ import lmm.moneylog.ui.components.misc.MyCircle
 import lmm.moneylog.ui.components.misc.MyDivider
 import lmm.moneylog.ui.features.account.list.view.components.ListItemContent
 import lmm.moneylog.ui.features.account.list.view.components.ListItemData
+import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountsListItem(
@@ -42,7 +43,7 @@ fun AccountsListItemPreview() {
         id = 1,
         name = "Account name",
         balance = "R$ 1.000,00",
-        color = Color.Red,
+        color = outcome,
         showDivider = true,
         onItemClick = {}
     )

@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.features.category.detail.view.components.CategoryDetailDialogs
 import lmm.moneylog.ui.features.category.detail.view.components.CategoryDetailFields
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun CategoryDetailContent(
@@ -53,7 +54,7 @@ fun CategoryDetailContent(
 fun CategoryDetailContentPreview() {
     CategoryDetailContent(
         name = "Food",
-        color = Color.Red,
+        color = outcome,
         isEdit = true,
         isIncome = false,
         showDeleteConfirmDialog = false,

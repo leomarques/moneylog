@@ -22,6 +22,7 @@ import lmm.moneylog.ui.components.misc.MyCircle
 import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income
+import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun GetTransactionsItem(
@@ -93,7 +94,7 @@ fun GetTransactionsItem(
                 if (isIncome) {
                     income
                 } else {
-                    Color.Red
+                    outcome
                 },
                 textAlign = TextAlign.End,
                 style = MaterialTheme.typography.bodyMedium,

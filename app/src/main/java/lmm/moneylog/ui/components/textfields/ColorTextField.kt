@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.misc.MyCircle
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun ColorTextField(
@@ -61,7 +62,7 @@ fun ColorTextField(
 @Composable
 fun ColorTextFieldPreview() {
     ColorTextField(
-        color = Color.Red,
+        color = outcome,
         onClick = {}
     )
 }

@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import lmm.moneylog.data.balance.GetBalanceInteractor
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
 import lmm.moneylog.ui.features.balancecard.model.BalanceCardUIState
-import lmm.moneylog.ui.textformatters.formatForRs
+import lmm.moneylog.ui.misc.formatForRs
 
 class BalanceCardViewModel(
     interactor: GetBalanceInteractor,

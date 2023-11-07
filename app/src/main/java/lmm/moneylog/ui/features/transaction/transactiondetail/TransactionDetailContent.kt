@@ -29,6 +29,7 @@ import lmm.moneylog.ui.features.transaction.transactiondetail.components.DeleteT
 import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionDetailDatePicker
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income
+import lmm.moneylog.ui.theme.outcome
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -110,7 +111,7 @@ fun TransactionDetailContent(
                 Icon(
                     imageVector = ImageVector.vectorResource(id = R.drawable.outline_attach_money_24),
                     contentDescription = stringResource(R.string.value),
-                    tint = if (model.isIncome.value) income else Color.Red
+                    tint = if (model.isIncome.value) income else outcome
                 )
             },
             onValueChange = {

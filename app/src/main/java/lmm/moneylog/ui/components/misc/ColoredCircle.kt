@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun MyCircle(
@@ -53,7 +54,7 @@ fun MyCircle(
 @Composable
 fun MyCirclePreview() {
     MyCircle(
-        color = Color.Red,
+        color = outcome,
         letters = "AL"
     )
 }

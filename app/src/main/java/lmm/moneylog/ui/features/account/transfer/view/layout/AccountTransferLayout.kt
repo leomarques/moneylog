@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.fabs.HideFab
 import lmm.moneylog.ui.features.account.transfer.model.AccountTransferModel
 import lmm.moneylog.ui.features.account.transfer.view.components.AccountTransferTopBar
+import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountTransferLayout(
@@ -63,7 +64,7 @@ fun AccountTransferLayoutPreview() {
         accounts = emptyList(),
         originAccountDisplay = "Nubank",
         destinationAccountDisplay = "Itaú",
-        originAccountColor = Color.Red,
+        originAccountColor = outcome,
         destinationAccountColor = Color.Blue,
         onArrowBackClick = {},
         onOriginAccountPicked = {},

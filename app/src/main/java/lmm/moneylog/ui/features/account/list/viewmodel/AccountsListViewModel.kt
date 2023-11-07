@@ -10,8 +10,8 @@ import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.balance.GetBalanceByAccountInteractor
 import lmm.moneylog.ui.features.account.list.model.AccountModel
 import lmm.moneylog.ui.features.account.list.model.AccountsListUIState
-import lmm.moneylog.ui.features.toColor
-import lmm.moneylog.ui.textformatters.formatForRs
+import lmm.moneylog.ui.misc.formatForRs
+import lmm.moneylog.ui.misc.toColor
 
 class AccountsListViewModel(
     getAccountsRepository: GetAccountsRepository,

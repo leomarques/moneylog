@@ -3,7 +3,7 @@ package lmm.moneylog.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val income = Color(0xFF009f23)
-val outcome = Color(0xFF883133)
+val outcome = Color(0xFFD1282C)
 
 val DarkRed = Color(0xFF693738)
 val DarkBlue = Color(0xFF28456c)

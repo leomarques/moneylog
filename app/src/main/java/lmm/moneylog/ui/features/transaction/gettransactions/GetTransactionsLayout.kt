@@ -21,13 +21,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.components.misc.EmptyState
 import lmm.moneylog.ui.components.misc.SearchTopBar
+import lmm.moneylog.ui.theme.outcome
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -134,7 +134,7 @@ fun Preview() {
                     id = 0,
                     account = "Nubank",
                     category = "Roupa",
-                    categoryColor = Color.Red
+                    categoryColor = outcome
                 ),
                 TransactionModel(
                     value = "R$1,00",
@@ -144,7 +144,7 @@ fun Preview() {
                     id = 0,
                     account = "Nubank",
                     category = "Roupa",
-                    categoryColor = Color.Red
+                    categoryColor = outcome
                 )
             ),
             R.string.transactions

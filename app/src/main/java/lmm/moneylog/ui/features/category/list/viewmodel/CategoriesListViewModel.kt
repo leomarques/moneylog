@@ -11,7 +11,7 @@ import lmm.moneylog.data.category.Category
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.ui.features.category.list.model.CategoriesListUIState
 import lmm.moneylog.ui.features.category.list.model.CategoryModel
-import lmm.moneylog.ui.features.toColor
+import lmm.moneylog.ui.misc.toColor
 
 class CategoriesListViewModel(private val getCategoriesRepository: GetCategoriesRepository) :
     ViewModel() {

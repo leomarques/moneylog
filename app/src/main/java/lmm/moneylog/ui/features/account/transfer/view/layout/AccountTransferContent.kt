@@ -12,6 +12,7 @@ import lmm.moneylog.ui.features.account.transfer.model.AccountTransferModel
 import lmm.moneylog.ui.features.account.transfer.view.components.AccountTransferDialogs
 import lmm.moneylog.ui.features.account.transfer.view.components.AccountTransferFields
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountTransferContent(
@@ -61,7 +62,7 @@ fun AccountTransferContentPreview() {
         list = emptyList(),
         originAccountDisplay = "Nubank",
         destinationAccountDisplay = "Itaú",
-        originAccountColor = Color.Red,
+        originAccountColor = outcome,
         destinationAccountColor = Color.Blue,
         onOriginAccountPicked = {},
         onDestinationAccountPicked = {},

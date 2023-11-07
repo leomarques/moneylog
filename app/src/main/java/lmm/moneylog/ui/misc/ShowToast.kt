@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features
+package lmm.moneylog.ui.misc
 
 import android.content.Context
 import android.widget.Toast

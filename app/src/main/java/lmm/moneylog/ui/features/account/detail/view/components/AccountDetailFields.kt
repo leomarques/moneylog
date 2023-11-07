@@ -17,6 +17,7 @@ import lmm.moneylog.ui.components.icons.BrushIcon
 import lmm.moneylog.ui.components.textfields.ColorTextField
 import lmm.moneylog.ui.components.textfields.StateTextField
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountDetailFields(
@@ -55,7 +56,7 @@ fun AccountDetailFieldsPreview() {
         name = "Account",
         isEdit = false,
         onNameChange = {},
-        color = Color.Red,
+        color = outcome,
         showColorsDialog = mutableStateOf(false)
     )
 }

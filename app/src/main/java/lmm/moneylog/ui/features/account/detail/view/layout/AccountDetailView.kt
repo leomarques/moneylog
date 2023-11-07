@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import lmm.moneylog.ui.features.account.detail.viewmodel.AccountDetailViewModel
-import lmm.moneylog.ui.features.showToast
+import lmm.moneylog.ui.misc.showToast
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

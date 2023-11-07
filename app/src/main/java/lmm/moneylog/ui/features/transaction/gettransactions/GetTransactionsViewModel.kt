@@ -13,8 +13,8 @@ import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
-import lmm.moneylog.ui.textformatters.formatDate
-import lmm.moneylog.ui.textformatters.formatForRs
+import lmm.moneylog.data.transaction.time.DomainTime
+import lmm.moneylog.ui.misc.formatForRs
 
 const val getTransactionsIncome = "income"
 const val getTransactionsOutcome = "outcome"
@@ -122,3 +122,5 @@ private fun List<Transaction>.toModel(
         titleResourceId = titleResourceId
     )
 }
+
+fun DomainTime.formatDate() = "$day/$month/$year"

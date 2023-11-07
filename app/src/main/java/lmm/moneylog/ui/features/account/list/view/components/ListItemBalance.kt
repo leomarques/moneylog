@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun ListItemBalance(
@@ -37,6 +38,6 @@ fun ListItemBalance(
 fun ListItemBalancePreview() {
     ListItemBalance(
         balance = "R$ 1.000,00",
-        color = Color.Red
+        color = outcome
     )
 }
