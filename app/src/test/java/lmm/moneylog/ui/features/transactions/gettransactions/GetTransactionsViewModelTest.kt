@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
+import lmm.moneylog.data.account.repositories.GetAccountsRepository
+import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.time.DomainTime
@@ -26,7 +28,9 @@ class GetTransactionsViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     private lateinit var viewModel: GetTransactionsViewModel
-    private val repository: GetTransactionsRepository = mockk()
+    private val getTransactionsRepository: GetTransactionsRepository = mockk()
+    private val getAccountsRepository: GetAccountsRepository = mockk()
+    private val getCategoriesRepository: GetCategoriesRepository = mockk()
 
     @Before
     fun setUp() {
@@ -44,14 +48,20 @@ class GetTransactionsViewModelTest {
         )
         val listAsFlow = listOf(listOf(transaction)).asFlow()
 
-        every { repository.getIncomeTransactions() } returns listAsFlow
-        every { repository.getOutcomeTransactions() } returns listAsFlow
-        every { repository.getAllTransactions() } returns listAsFlow
+        every { getTransactionsRepository.getIncomeTransactions() } returns listAsFlow
+        every { getTransactionsRepository.getOutcomeTransactions() } returns listAsFlow
+        every { getTransactionsRepository.getAllTransactions() } returns listAsFlow
     }
 
     @Test
     fun `should get income transactions`() {
-        viewModel = GetTransactionsViewModel("income", repository)
+        viewModel = GetTransactionsViewModel(
+            typeOfValue = "income",
+            getTransactionsRepository = getTransactionsRepository,
+            getAccountsRepository = getAccountsRepository,
+            getCategoriesRepository = getCategoriesRepository
+        )
+
         val transactions = viewModel.uiState.value.transactions
         assert(transactions.size == 1)
 
@@ -64,7 +74,13 @@ class GetTransactionsViewModelTest {
 
     @Test
     fun `should get outcome transactions`() {
-        viewModel = GetTransactionsViewModel("outcome", repository)
+        viewModel = GetTransactionsViewModel(
+            typeOfValue = "outcome",
+            getTransactionsRepository = getTransactionsRepository,
+            getAccountsRepository = getAccountsRepository,
+            getCategoriesRepository = getCategoriesRepository
+        )
+
         val transactions = viewModel.uiState.value.transactions
         assert(transactions.size == 1)
 
@@ -77,7 +93,13 @@ class GetTransactionsViewModelTest {
 
     @Test
     fun `should get all transactions`() {
-        viewModel = GetTransactionsViewModel("all", repository)
+        viewModel = GetTransactionsViewModel(
+            typeOfValue = "all",
+            getTransactionsRepository = getTransactionsRepository,
+            getAccountsRepository = getAccountsRepository,
+            getCategoriesRepository = getCategoriesRepository
+        )
+
         val transactions = viewModel.uiState.value.transactions
         assert(transactions.size == 1)
 
