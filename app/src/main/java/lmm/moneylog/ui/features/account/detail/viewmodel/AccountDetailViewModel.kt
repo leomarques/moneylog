@@ -16,7 +16,7 @@ import lmm.moneylog.data.account.repositories.ArchiveAccountRepository
 import lmm.moneylog.data.account.repositories.GetAccountsRepository
 import lmm.moneylog.data.account.repositories.UpdateAccountRepository
 import lmm.moneylog.ui.features.account.detail.model.AccountDetailUIState
-import lmm.moneylog.ui.features.transaction.transactiondetail.getIdParam
+import lmm.moneylog.ui.features.transaction.detail.model.getIdParam
 import lmm.moneylog.ui.misc.toColor
 
 class AccountDetailViewModel(

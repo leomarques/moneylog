@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.transactiondetail.components
+package lmm.moneylog.ui.features.transaction.detail.view.components
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.DatePicker

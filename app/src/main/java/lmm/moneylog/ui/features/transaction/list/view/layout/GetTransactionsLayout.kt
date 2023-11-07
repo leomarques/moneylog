@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.gettransactions
+package lmm.moneylog.ui.features.transaction.list.view.layout
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.padding
@@ -27,6 +27,8 @@ import lmm.moneylog.R
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.components.misc.EmptyState
 import lmm.moneylog.ui.components.misc.SearchTopBar
+import lmm.moneylog.ui.features.transaction.list.model.GetTransactionsModel
+import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
 import lmm.moneylog.ui.theme.outcome
 
 @OptIn(

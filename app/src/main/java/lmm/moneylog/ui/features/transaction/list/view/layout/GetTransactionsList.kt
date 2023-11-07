@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.gettransactions
+package lmm.moneylog.ui.features.transaction.list.view.layout
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
 import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.Size
 

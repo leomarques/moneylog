@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.transactiondetail
+package lmm.moneylog.ui.features.transaction.detail.model
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle

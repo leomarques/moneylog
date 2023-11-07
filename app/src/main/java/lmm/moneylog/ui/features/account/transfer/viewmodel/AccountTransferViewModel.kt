@@ -13,7 +13,7 @@ import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
 import lmm.moneylog.ui.features.account.transfer.model.AccountTransferModel
 import lmm.moneylog.ui.features.account.transfer.model.AccountTransferUIState
-import lmm.moneylog.ui.features.transaction.transactiondetail.validateValue
+import lmm.moneylog.ui.features.transaction.detail.model.validateValue
 import lmm.moneylog.ui.misc.toColor
 
 class AccountTransferViewModel(

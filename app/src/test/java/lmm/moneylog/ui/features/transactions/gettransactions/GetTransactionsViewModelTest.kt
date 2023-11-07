@@ -13,7 +13,7 @@ import kotlinx.coroutines.test.setMain
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.time.DomainTime
-import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsViewModel
+import lmm.moneylog.ui.features.transaction.list.viewmodel.GetTransactionsViewModel
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule

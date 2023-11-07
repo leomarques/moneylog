@@ -9,8 +9,8 @@ import lmm.moneylog.ui.features.balancecard.viewmodel.BalanceCardViewModel
 import lmm.moneylog.ui.features.category.detail.viewmodel.CategoryDetailViewModel
 import lmm.moneylog.ui.features.category.list.viewmodel.CategoriesListViewModel
 import lmm.moneylog.ui.features.home.viewmodel.HomeViewModel
-import lmm.moneylog.ui.features.transaction.gettransactions.GetTransactionsViewModel
-import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailViewModel
+import lmm.moneylog.ui.features.transaction.list.viewmodel.GetTransactionsViewModel
+import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf

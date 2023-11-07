@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.transactiondetail
+package lmm.moneylog.ui.features.transaction.detail.view.layout
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.padding
@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.fabs.MyFab
+import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

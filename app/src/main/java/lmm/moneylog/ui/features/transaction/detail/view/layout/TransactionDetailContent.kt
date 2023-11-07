@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.transactiondetail
+package lmm.moneylog.ui.features.transaction.detail.view.layout
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -25,8 +25,9 @@ import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
 import lmm.moneylog.ui.components.misc.IncomeRadioGroup
 import lmm.moneylog.ui.components.textfields.ClickTextField
 import lmm.moneylog.ui.components.textfields.StateTextField
-import lmm.moneylog.ui.features.transaction.transactiondetail.components.DeleteTransactionConfirmDialog
-import lmm.moneylog.ui.features.transaction.transactiondetail.components.TransactionDetailDatePicker
+import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailModel
+import lmm.moneylog.ui.features.transaction.detail.view.components.DeleteTransactionConfirmDialog
+import lmm.moneylog.ui.features.transaction.detail.view.components.TransactionDetailDatePicker
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income
 import lmm.moneylog.ui.theme.outcome

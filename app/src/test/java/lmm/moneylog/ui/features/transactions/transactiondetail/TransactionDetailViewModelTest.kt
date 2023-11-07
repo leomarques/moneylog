@@ -22,7 +22,7 @@ import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
 import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
-import lmm.moneylog.ui.features.transaction.transactiondetail.TransactionDetailViewModel
+import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule

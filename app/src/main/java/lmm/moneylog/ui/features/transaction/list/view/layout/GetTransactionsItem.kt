@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.gettransactions
+package lmm.moneylog.ui.features.transaction.list.view.layout
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.misc.MyCircle
+import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
 import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income

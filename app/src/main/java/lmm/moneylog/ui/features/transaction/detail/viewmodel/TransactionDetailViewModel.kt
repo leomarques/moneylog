@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.transactiondetail
+package lmm.moneylog.ui.features.transaction.detail.viewmodel
 
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
@@ -17,6 +17,11 @@ import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
+import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailModel
+import lmm.moneylog.ui.features.transaction.detail.model.convertToDisplayDate
+import lmm.moneylog.ui.features.transaction.detail.model.getIdParam
+import lmm.moneylog.ui.features.transaction.detail.model.toDetailModel
+import lmm.moneylog.ui.features.transaction.detail.model.toTransaction
 
 class TransactionDetailViewModel(
     savedStateHandle: SavedStateHandle,

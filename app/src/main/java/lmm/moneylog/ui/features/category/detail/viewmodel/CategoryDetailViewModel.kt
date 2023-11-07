@@ -16,7 +16,7 @@ import lmm.moneylog.data.category.repositories.DeleteCategoryRepository
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.category.repositories.UpdateCategoryRepository
 import lmm.moneylog.ui.features.category.detail.model.CategoryDetailUIState
-import lmm.moneylog.ui.features.transaction.transactiondetail.getIdParam
+import lmm.moneylog.ui.features.transaction.detail.model.getIdParam
 import lmm.moneylog.ui.misc.toColor
 
 class CategoryDetailViewModel(

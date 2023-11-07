@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.gettransactions
+package lmm.moneylog.ui.features.transaction.list.model
 
 data class GetTransactionsModel(
     val transactions: List<TransactionModel> = emptyList(),

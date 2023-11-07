@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.transactiondetail
+package lmm.moneylog.ui.features.transaction.detail.view.layout
 
 import android.widget.Toast
 import androidx.compose.runtime.Composable
@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import lmm.moneylog.R
+import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
