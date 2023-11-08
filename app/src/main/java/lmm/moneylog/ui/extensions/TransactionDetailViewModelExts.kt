@@ -9,21 +9,14 @@ import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 
-fun DomainTime.convertToDisplayDate(domainTimeInteractor: DomainTimeInteractor) =
-    "$day ${domainTimeInteractor.getMonthName(month)}, $year"
-
-fun String.validateValue(isIncome: Boolean = true): Double {
-    val value = toDouble()
-    if (value <= 0.0) {
-        throw java.lang.NumberFormatException("Negative number")
-    }
-
-    return if (isIncome) {
-        value
-    } else {
-        -value
-    }
-}
+fun TransactionDetailUIState.toTransaction(): Transaction = Transaction(
+    value = value.validateValue(isIncome),
+    date = date,
+    description = description,
+    id = id,
+    accountId = accountId,
+    categoryId = categoryId
+)
 
 fun Transaction.toDetailModel(domainTimeInteractor: DomainTimeInteractor) =
     TransactionDetailUIState(
@@ -48,18 +41,8 @@ private fun Double.isWhole() = this % 1.0 == 0.0
 
 private fun String.removeDecimal() = substring(0, length - 2)
 
-fun TransactionDetailUIState.toTransaction(): Transaction = Transaction(
-    value = value.validateValue(isIncome),
-    date = date,
-    description = description,
-    id = id,
-    accountId = accountId,
-    categoryId = categoryId
-)
-
-fun Color?.orDefaultColor(): Color {
-    return this ?: Color.Gray
-}
+fun DomainTime.convertToDisplayDate(domainTimeInteractor: DomainTimeInteractor) =
+    "$day ${domainTimeInteractor.getMonthName(month)}, $year"
 
 fun List<Account>.getAccountById(accountId: Int?): (Pair<String, Color>)? {
     return firstOrNull {
