@@ -15,7 +15,7 @@ import lmm.moneylog.ui.components.fabs.HideFab
 import lmm.moneylog.ui.components.misc.EmptyState
 import lmm.moneylog.ui.features.account.list.model.AccountModel
 import lmm.moneylog.ui.features.account.list.view.components.AccountsListTopBar
-import lmm.moneylog.ui.theme.DarkRed
+import lmm.moneylog.ui.theme.darkRed
 
 @Composable
 fun AccountsListLayout(
@@ -68,19 +68,19 @@ fun AccountsListLayoutPreview() {
                 id = 0,
                 name = "Itaú",
                 balance = "R$200.0",
-                color = DarkRed
+                color = darkRed
             ),
             AccountModel(
                 id = 0,
                 name = "Itaú",
                 balance = "R$200.0",
-                color = DarkRed
+                color = darkRed
             ),
             AccountModel(
                 id = 0,
                 name = "Itaú",
                 balance = "R$200.0",
-                color = DarkRed
+                color = darkRed
             )
         ),
         onArrowBackClick = { },

@@ -10,9 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.theme.DarkPurple
-import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.darkPurple
+import lmm.moneylog.ui.theme.darkRed
 
 @Composable
 fun BottomSheetContent(
@@ -51,8 +51,8 @@ fun BottomSheetContent(
 fun BottomSheetContentPreview() {
     BottomSheetContent(
         list = listOf(
-            Pair("Nubank", DarkPurple),
-            Pair("Santander", DarkRed)
+            Pair("Nubank", darkPurple),
+            Pair("Santander", darkRed)
         ),
         onConfirm = {},
         onDismiss = {}

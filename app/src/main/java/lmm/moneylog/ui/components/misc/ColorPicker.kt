@@ -15,15 +15,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
-import lmm.moneylog.ui.theme.DarkBlue
-import lmm.moneylog.ui.theme.DarkBrow
-import lmm.moneylog.ui.theme.DarkGreen
-import lmm.moneylog.ui.theme.DarkOrange
-import lmm.moneylog.ui.theme.DarkPink
-import lmm.moneylog.ui.theme.DarkPurple
-import lmm.moneylog.ui.theme.DarkRed
-import lmm.moneylog.ui.theme.DarkYellow
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.darkBlue
+import lmm.moneylog.ui.theme.darkBrow
+import lmm.moneylog.ui.theme.darkGreen
+import lmm.moneylog.ui.theme.darkOrange
+import lmm.moneylog.ui.theme.darkPink
+import lmm.moneylog.ui.theme.darkPurple
+import lmm.moneylog.ui.theme.darkRed
+import lmm.moneylog.ui.theme.darkYellow
 
 @Composable
 fun ColorPicker(
@@ -31,14 +31,14 @@ fun ColorPicker(
     onDismiss: () -> Unit
 ) {
     val list = mutableListOf(
-        DarkRed,
-        DarkBlue,
-        DarkGreen,
-        DarkYellow,
-        DarkOrange,
-        DarkPurple,
-        DarkPink,
-        DarkBrow
+        darkRed,
+        darkBlue,
+        darkGreen,
+        darkYellow,
+        darkOrange,
+        darkPurple,
+        darkPink,
+        darkBrow
     )
 
     Dialog(
@@ -97,7 +97,7 @@ fun ColorPickerPreview() {
 @Composable
 fun ColorItemPreview() {
     ColorItem(
-        color = DarkRed,
+        color = darkRed,
         onItemClick = {}
     )
 }

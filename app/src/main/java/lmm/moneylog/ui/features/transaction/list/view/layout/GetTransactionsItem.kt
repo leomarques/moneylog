@@ -20,8 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.misc.MyCircle
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
-import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.darkRed
 import lmm.moneylog.ui.theme.income
 import lmm.moneylog.ui.theme.outcome
 
@@ -118,9 +118,9 @@ fun GetTransactionsItemPreview() {
             category = "B",
             date = "01/01/2001",
             id = 0,
-            categoryColor = DarkRed
+            categoryColor = darkRed
         ),
         onItemClick = {},
-        color = DarkRed
+        color = darkRed
     )
 }

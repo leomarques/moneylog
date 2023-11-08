@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
-import lmm.moneylog.ui.theme.DarkRed
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.darkRed
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -87,7 +87,7 @@ fun GetTransactionsListPreview() {
                 category = "B",
                 date = "01/01/2001",
                 id = 0,
-                categoryColor = DarkRed
+                categoryColor = darkRed
             ),
             TransactionModel(
                 value = "Nome",
@@ -97,7 +97,7 @@ fun GetTransactionsListPreview() {
                 category = "B",
                 date = "01/01/2001",
                 id = 0,
-                categoryColor = DarkRed
+                categoryColor = darkRed
             ),
             TransactionModel(
                 value = "Nome",
@@ -107,7 +107,7 @@ fun GetTransactionsListPreview() {
                 category = "B",
                 date = "01/01/2001",
                 id = 0,
-                categoryColor = DarkRed
+                categoryColor = darkRed
             )
         ),
         filter = mutableStateOf(""),

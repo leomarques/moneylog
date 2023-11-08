@@ -10,8 +10,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.features.account.detail.view.components.AccountDetailDialogs
 import lmm.moneylog.ui.features.account.detail.view.components.AccountDetailFields
-import lmm.moneylog.ui.theme.DarkPurple
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.darkPurple
 
 @Composable
 fun AccountDetailContent(
@@ -50,7 +50,7 @@ fun AccountDetailContent(
 fun AccountDetailContentPreview() {
     AccountDetailContent(
         name = "Nubank",
-        color = DarkPurple,
+        color = darkPurple,
         isEdit = true,
         showArchiveConfirmDialog = false,
         onArchiveConfirm = {},

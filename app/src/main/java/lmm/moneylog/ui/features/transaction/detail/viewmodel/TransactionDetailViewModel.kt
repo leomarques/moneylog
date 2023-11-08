@@ -123,14 +123,23 @@ class TransactionDetailViewModel(
         }
     }
 
-    fun clearCategory() {
+    fun onIsIncomeSelect(isIncome: Boolean) {
         _uiState.update {
             it.copy(
+                isIncome = isIncome,
                 categoryId = null,
                 displayCategory = "",
                 displayCategoryColor = defaultColor
             )
         }
+    }
+
+    fun onValueChange(value: String) {
+        _uiState.update { it.copy(value = value) }
+    }
+
+    fun onDescriptionChange(description: String) {
+        _uiState.update { it.copy(description = description) }
     }
 
     fun onDatePick(timeStamp: Long) {

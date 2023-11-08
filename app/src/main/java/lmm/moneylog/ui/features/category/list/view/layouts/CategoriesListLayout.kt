@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.fabs.HideFab
 import lmm.moneylog.ui.features.category.list.model.CategoryModel
 import lmm.moneylog.ui.features.category.list.view.components.CategoriesListTopBar
-import lmm.moneylog.ui.theme.DarkRed
+import lmm.moneylog.ui.theme.darkRed
 
 @Composable
 fun CategoriesListLayout(
@@ -52,19 +52,19 @@ fun CategoriesListLayoutPreview() {
             CategoryModel(
                 id = 0,
                 name = "Alimentação",
-                color = DarkRed,
+                color = darkRed,
                 isIncome = true
             ),
             CategoryModel(
                 id = 0,
                 name = "Moradia",
-                color = DarkRed,
+                color = darkRed,
                 isIncome = true
             ),
             CategoryModel(
                 id = 0,
                 name = "Transporte",
-                color = DarkRed,
+                color = darkRed,
                 isIncome = false
             )
         ),

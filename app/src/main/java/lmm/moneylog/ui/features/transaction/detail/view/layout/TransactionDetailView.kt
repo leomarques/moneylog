@@ -19,10 +19,6 @@ fun TransactionDetailView(
     TransactionDetailLayout(
         uiState = uiState,
         onArrowBackClick = onArrowBackClick,
-        onIsIncomeSelect = { viewModel.clearCategory() },
-        onDatePick = { date -> viewModel.onDatePick(date) },
-        onAccountPick = { index -> viewModel.onAccountPick(index) },
-        onCategoryPick = { index -> viewModel.onCategoryPick(index) },
         onDeleteConfirmClick = {
             viewModel.deleteTransaction()
             onArrowBackClick()
@@ -32,6 +28,12 @@ fun TransactionDetailView(
                 onSuccess = onArrowBackClick,
                 onError = { stringId -> showToast(current, stringId) }
             )
-        }
+        },
+        onDatePick = { date -> viewModel.onDatePick(date) },
+        onAccountPick = { index -> viewModel.onAccountPick(index) },
+        onCategoryPick = { index -> viewModel.onCategoryPick(index) },
+        onIsIncomeSelect = { viewModel.onIsIncomeSelect(it) },
+        onValueChange = { viewModel.onValueChange(it) },
+        onDescriptionChange = { viewModel.onDescriptionChange(it) }
     )
 }
