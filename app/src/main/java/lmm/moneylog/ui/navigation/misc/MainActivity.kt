@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.navigation
+package lmm.moneylog.ui.navigation.misc
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

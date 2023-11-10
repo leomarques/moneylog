@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.navigation
+package lmm.moneylog.ui.navigation.navhost
 
 import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
@@ -9,6 +9,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import lmm.moneylog.ui.extensions.composableExt
+import lmm.moneylog.ui.extensions.toTransactionType
 import lmm.moneylog.ui.features.account.archive.view.layout.ArchivedAccountsListView
 import lmm.moneylog.ui.features.account.detail.view.layout.AccountDetailView
 import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView
@@ -18,6 +20,17 @@ import lmm.moneylog.ui.features.category.list.view.layouts.CategoriesListView
 import lmm.moneylog.ui.features.home.view.HomeView
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
 import lmm.moneylog.ui.features.transaction.list.view.layout.GetTransactionsView
+import lmm.moneylog.ui.navigation.misc.accountDetailScreen
+import lmm.moneylog.ui.navigation.misc.accountsListScreen
+import lmm.moneylog.ui.navigation.misc.archivedAccountsListScreen
+import lmm.moneylog.ui.navigation.misc.categoriesListScreen
+import lmm.moneylog.ui.navigation.misc.categoryDetailScreen
+import lmm.moneylog.ui.navigation.misc.homeScreen
+import lmm.moneylog.ui.navigation.misc.paramId
+import lmm.moneylog.ui.navigation.misc.paramTypeOfValue
+import lmm.moneylog.ui.navigation.misc.transactionDetailScreen
+import lmm.moneylog.ui.navigation.misc.transactionsListScreen
+import lmm.moneylog.ui.navigation.misc.transferScreen
 
 @Composable
 fun MyNavHost(
@@ -41,6 +54,13 @@ fun MyNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
+        val arguments = listOf(
+            navArgument(paramId) {
+                defaultValue = -1
+                type = NavType.IntType
+            }
+        )
+
         composable(homeScreen) {
             HomeView(
                 onFabClick = onHomeFabClick,
@@ -49,16 +69,15 @@ fun MyNavHost(
         }
 
         composableExt(
-            route = "$getTransactionsScreen/{$paramTypeOfValue}",
+            route = "$transactionsListScreen/{$paramTypeOfValue}",
             onArrowBackClick = onArrowBackClick
         ) { backStackEntry ->
             val param = backStackEntry?.arguments?.getString(paramTypeOfValue)
-            val typeOfValue = convertTransactionTypeParam(param)
 
             GetTransactionsView(
                 onArrowBackClick = onArrowBackClick,
                 onFabClick = onTransactionsFabClick,
-                typeOfValue = typeOfValue,
+                typeOfValue = param.toTransactionType(),
                 onItemClick = onTransactionsItemClick
             )
         }
@@ -66,18 +85,13 @@ fun MyNavHost(
         composableExt(
             route = "$transactionDetailScreen?$paramId={$paramId}",
             onArrowBackClick = onArrowBackClick,
-            arguments = listOf(
-                navArgument(paramId) {
-                    defaultValue = -1
-                    type = NavType.IntType
-                }
-            )
+            arguments = arguments
         ) {
-            TransactionDetailView(onArrowBackClick)
+            TransactionDetailView(onArrowBackClick = onArrowBackClick)
         }
 
         composableExt(
-            route = getAccountsScreen,
+            route = accountsListScreen,
             onArrowBackClick = onArrowBackClick
         ) {
             AccountsListView(
@@ -92,18 +106,13 @@ fun MyNavHost(
         composableExt(
             route = "$accountDetailScreen?$paramId={$paramId}",
             onArrowBackClick = onArrowBackClick,
-            arguments = listOf(
-                navArgument(paramId) {
-                    defaultValue = -1
-                    type = NavType.IntType
-                }
-            )
+            arguments = arguments
         ) {
-            AccountDetailView(onArrowBackClick)
+            AccountDetailView(onArrowBackClick = onArrowBackClick)
         }
 
         composableExt(
-            route = getCategoriesScreen,
+            route = categoriesListScreen,
             onArrowBackClick = onArrowBackClick
         ) {
             CategoriesListView(
@@ -116,18 +125,13 @@ fun MyNavHost(
         composableExt(
             route = "$categoryDetailScreen?$paramId={$paramId}",
             onArrowBackClick = onArrowBackClick,
-            arguments = listOf(
-                navArgument(paramId) {
-                    defaultValue = -1
-                    type = NavType.IntType
-                }
-            )
+            arguments = arguments
         ) {
-            CategoryDetailView(onArrowBackClick)
+            CategoryDetailView(onArrowBackClick = onArrowBackClick)
         }
 
         composableExt(
-            route = getArchivedAccountsScreen,
+            route = archivedAccountsListScreen,
             onArrowBackClick = onArrowBackClick
         ) {
             ArchivedAccountsListView(onArrowBackClick = onArrowBackClick)

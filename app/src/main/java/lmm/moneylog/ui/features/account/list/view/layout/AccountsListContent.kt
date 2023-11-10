@@ -2,10 +2,10 @@ package lmm.moneylog.ui.features.account.list.view.layout
 
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.misc.LazyList
 import lmm.moneylog.ui.features.account.list.model.AccountModel
+import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun AccountsListContent(
@@ -37,13 +37,13 @@ fun AccountsListContentPreview() {
                 id = 0,
                 name = "Bank",
                 balance = "R$1000.0",
-                color = Color.Gray
+                color = neutralColor
             ),
             AccountModel(
                 id = 1,
                 name = "Cash",
                 balance = "R$100.0",
-                color = Color.Gray
+                color = neutralColor
             )
         ),
         onItemClick = {}

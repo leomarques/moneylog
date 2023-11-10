@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.misc.MyCircle
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun BottomSheetItem(
@@ -36,7 +37,7 @@ fun BottomSheetItem(
     ) {
         MyCircle(
             modifier = Modifier.padding(end = Size.DefaultSpaceSize),
-            color = color ?: Color.Gray,
+            color = color ?: neutralColor,
             size = Size.SmallCircleSize
         )
 
@@ -48,7 +49,7 @@ fun BottomSheetItem(
             color = if (text.isNotEmpty()) {
                 MaterialTheme.colorScheme.onSurface
             } else {
-                Color.Gray
+                neutralColor
             }
         )
     }

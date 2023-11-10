@@ -10,7 +10,7 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Moneylog" >
         <activity
-            android:name="lmm.moneylog.ui.navigation.MainActivity"
+            android:name="lmm.moneylog.ui.navigation.misc.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

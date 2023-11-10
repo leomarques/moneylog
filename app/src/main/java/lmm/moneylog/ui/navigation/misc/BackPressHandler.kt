@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.navigation
+package lmm.moneylog.ui.navigation.misc
 
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.OnBackPressedDispatcher

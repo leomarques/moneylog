@@ -5,7 +5,7 @@ import lmm.moneylog.R
 import lmm.moneylog.data.account.Account
 import lmm.moneylog.data.category.Category
 import lmm.moneylog.data.transaction.time.DomainTime
-import lmm.moneylog.ui.theme.defaultColor
+import lmm.moneylog.ui.theme.neutralColor
 
 data class TransactionDetailUIState(
     val id: Int = -1,
@@ -18,8 +18,8 @@ data class TransactionDetailUIState(
     val displayDate: String = "",
     val displayAccount: String = "",
     val displayCategory: String = "",
-    val displayAccountColor: Color = defaultColor,
-    val displayCategoryColor: Color = defaultColor,
+    val displayAccountColor: Color = neutralColor,
+    val displayCategoryColor: Color = neutralColor,
     val accountId: Int? = null,
     val categoryId: Int? = null,
     val date: DomainTime = DomainTime(),

@@ -23,6 +23,7 @@ import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.darkRed
 import lmm.moneylog.ui.theme.income
+import lmm.moneylog.ui.theme.neutralColor
 import lmm.moneylog.ui.theme.outcome
 
 @Composable
@@ -64,7 +65,7 @@ fun GetTransactionsItem(
                         style = MaterialTheme.typography.bodyLarge,
                         maxLines = 1,
                         color = if (description.isEmpty()) {
-                            Color.Gray
+                            neutralColor
                         } else {
                             MaterialTheme.colorScheme.onSurface
                         }

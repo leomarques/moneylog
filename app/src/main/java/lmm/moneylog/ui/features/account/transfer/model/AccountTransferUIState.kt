@@ -2,6 +2,7 @@ package lmm.moneylog.ui.features.account.transfer.model
 
 import androidx.compose.ui.graphics.Color
 import lmm.moneylog.data.transaction.time.DomainTime
+import lmm.moneylog.ui.theme.neutralColor
 
 data class AccountTransferUIState(
     val value: String = "",
@@ -11,6 +12,6 @@ data class AccountTransferUIState(
     val destinationAccountId: Int = -1,
     val originAccountDisplay: String = "",
     val destinationAccountDisplay: String = "",
-    val originAccountColor: Color = Color.Gray,
-    val destinationAccountColor: Color = Color.Gray
+    val originAccountColor: Color = neutralColor,
+    val destinationAccountColor: Color = neutralColor
 )

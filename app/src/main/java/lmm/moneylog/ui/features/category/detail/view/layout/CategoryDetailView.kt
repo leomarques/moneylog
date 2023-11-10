@@ -10,8 +10,8 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CategoryDetailView(
-    onArrowBackClick: () -> Unit,
-    viewModel: CategoryDetailViewModel = koinViewModel()
+    viewModel: CategoryDetailViewModel = koinViewModel(),
+    onArrowBackClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 

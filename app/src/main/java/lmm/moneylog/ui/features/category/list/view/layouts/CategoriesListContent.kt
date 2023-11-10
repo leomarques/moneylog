@@ -13,6 +13,7 @@ import lmm.moneylog.R
 import lmm.moneylog.ui.features.category.list.model.CategoryModel
 import lmm.moneylog.ui.features.category.list.view.components.CategoriesTabContent
 import lmm.moneylog.ui.features.category.list.view.components.CategoriesTabs
+import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun CategoriesListContent(
@@ -50,19 +51,19 @@ fun CategoriesListContentPreview() {
             CategoryModel(
                 id = 1,
                 name = "Category 1",
-                color = androidx.compose.ui.graphics.Color.Gray,
+                color = neutralColor,
                 isIncome = true
             ),
             CategoryModel(
                 id = 2,
                 name = "Category 2",
-                color = androidx.compose.ui.graphics.Color.Gray,
+                color = neutralColor,
                 isIncome = false
             ),
             CategoryModel(
                 id = 3,
                 name = "Category 3",
-                color = androidx.compose.ui.graphics.Color.Gray,
+                color = neutralColor,
                 isIncome = true
             )
         )

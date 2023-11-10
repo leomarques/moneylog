@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.features.category.detail.view.components.CategoryDetailTopBar
+import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun CategoryDetailLayout(
@@ -75,7 +76,7 @@ fun CategoryDetailLayout(
 fun CategoryDetailLayoutPreview() {
     CategoryDetailLayout(
         name = "",
-        color = Color.Gray,
+        color = neutralColor,
         isEdit = false,
         isIncome = true,
         showFab = true,

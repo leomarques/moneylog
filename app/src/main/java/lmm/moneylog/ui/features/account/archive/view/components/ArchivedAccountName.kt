@@ -4,11 +4,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun ArchivedAccountName(name: String) {
@@ -18,7 +18,7 @@ fun ArchivedAccountName(name: String) {
         maxLines = 1,
         style = MaterialTheme.typography.bodyLarge,
         color = if (name.isEmpty()) {
-            Color.Gray
+            neutralColor
         } else {
             MaterialTheme.colorScheme.onSurface
         }

@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.navigation
+package lmm.moneylog.ui.extensions
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
@@ -8,6 +8,20 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import lmm.moneylog.ui.features.balancecard.view.layout.balanceCardIncome
+import lmm.moneylog.ui.features.balancecard.view.layout.balanceCardOutcome
+import lmm.moneylog.ui.features.transaction.list.viewmodel.getTransactionsAll
+import lmm.moneylog.ui.features.transaction.list.viewmodel.getTransactionsIncome
+import lmm.moneylog.ui.features.transaction.list.viewmodel.getTransactionsOutcome
+import lmm.moneylog.ui.navigation.misc.BackPressHandler
+import lmm.moneylog.ui.navigation.misc.accountDetailScreen
+import lmm.moneylog.ui.navigation.misc.accountsListScreen
+import lmm.moneylog.ui.navigation.misc.archivedAccountsListScreen
+import lmm.moneylog.ui.navigation.misc.categoriesListScreen
+import lmm.moneylog.ui.navigation.misc.categoryDetailScreen
+import lmm.moneylog.ui.navigation.misc.homeScreen
+import lmm.moneylog.ui.navigation.misc.transactionDetailScreen
+import lmm.moneylog.ui.navigation.misc.transactionsListScreen
 
 fun NavGraphBuilder.composableExt(
     route: String,
@@ -43,12 +57,12 @@ fun NavHostController.navigatePopUpTo(
 fun MutableIntState.updateIndex(destination: String) {
     when (destination.split("/", "?")[0]) {
         homeScreen -> 0
-        getTransactionsScreen -> 1
+        transactionsListScreen -> 1
         transactionDetailScreen -> 1
-        getAccountsScreen -> 2
-        getArchivedAccountsScreen -> 2
+        accountsListScreen -> 2
+        archivedAccountsListScreen -> 2
         accountDetailScreen -> 2
-        getCategoriesScreen -> 3
+        categoriesListScreen -> 3
         categoryDetailScreen -> 3
         else -> 0
     }.also { intValue = it }
@@ -57,13 +71,19 @@ fun MutableIntState.updateIndex(destination: String) {
 fun MutableState<Boolean>.updateShow(destination: String) {
     value = when (destination.split("/", "?")[0]) {
         homeScreen -> true
-        getTransactionsScreen -> true
+        transactionsListScreen -> true
         transactionDetailScreen -> false
-        getAccountsScreen -> true
-        getArchivedAccountsScreen -> true
+        accountsListScreen -> true
+        archivedAccountsListScreen -> true
         accountDetailScreen -> false
-        getCategoriesScreen -> true
+        categoriesListScreen -> true
         categoryDetailScreen -> false
         else -> true
     }
+}
+
+fun String?.toTransactionType() = when (this) {
+    balanceCardIncome -> getTransactionsIncome
+    balanceCardOutcome -> getTransactionsOutcome
+    else -> getTransactionsAll
 }

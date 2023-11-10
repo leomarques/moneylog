@@ -29,7 +29,7 @@ import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.extensions.toDetailModel
 import lmm.moneylog.ui.extensions.toTransaction
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
-import lmm.moneylog.ui.theme.defaultColor
+import lmm.moneylog.ui.theme.neutralColor
 
 class TransactionDetailViewModel(
     savedStateHandle: SavedStateHandle,
@@ -129,7 +129,7 @@ class TransactionDetailViewModel(
                 isIncome = isIncome,
                 categoryId = null,
                 displayCategory = "",
-                displayCategoryColor = defaultColor
+                displayCategoryColor = neutralColor
             )
         }
     }

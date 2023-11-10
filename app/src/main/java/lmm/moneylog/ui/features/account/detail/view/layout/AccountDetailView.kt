@@ -10,8 +10,8 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AccountDetailView(
-    onArrowBackClick: () -> Unit,
-    viewModel: AccountDetailViewModel = koinViewModel()
+    viewModel: AccountDetailViewModel = koinViewModel(),
+    onArrowBackClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val current = LocalContext.current

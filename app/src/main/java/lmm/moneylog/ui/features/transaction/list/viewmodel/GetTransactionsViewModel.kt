@@ -17,6 +17,7 @@ import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.features.transaction.list.model.GetTransactionsModel
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
+import lmm.moneylog.ui.theme.neutralColor
 
 const val getTransactionsIncome = "income"
 const val getTransactionsOutcome = "outcome"
@@ -117,7 +118,7 @@ private fun List<Transaction>.toModel(
                     id = id,
                     account = accountMap[accountId].orEmpty(),
                     category = categoriesMap[categoryId].orEmpty(),
-                    categoryColor = categoriesColorMap[categoryId] ?: Color.Gray
+                    categoryColor = categoriesColorMap[categoryId] ?: neutralColor
                 )
             }
         },

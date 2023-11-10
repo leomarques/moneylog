@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.features.account.detail.view.components.AccountDetailTopAppBar
+import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun AccountDetailLayout(
@@ -73,7 +74,7 @@ fun AccountDetailLayout(
 fun AccountDetailLayoutPreview() {
     AccountDetailLayout(
         name = "",
-        color = Color.Gray,
+        color = neutralColor,
         isEdit = false,
         showFab = true,
         onArrowBackClick = {},
