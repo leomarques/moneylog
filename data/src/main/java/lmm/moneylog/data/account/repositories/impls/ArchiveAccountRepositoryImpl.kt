@@ -1,7 +1,7 @@
 package lmm.moneylog.data.account.repositories.impls
 
 import lmm.moneylog.data.account.database.AccountDao
-import lmm.moneylog.data.account.repositories.ArchiveAccountRepository
+import lmm.moneylog.data.account.repositories.interfaces.ArchiveAccountRepository
 
 class ArchiveAccountRepositoryImpl(
     private val accountDao: AccountDao

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import lmm.moneylog.data.account.repositories.GetAccountsRepository
+import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.category.repositories.GetCategoriesRepository
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository

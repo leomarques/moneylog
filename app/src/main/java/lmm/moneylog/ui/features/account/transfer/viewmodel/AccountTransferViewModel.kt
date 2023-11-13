@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
-import lmm.moneylog.data.account.repositories.GetAccountsRepository
+import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.transaction.time.DomainTimeInteractor
 import lmm.moneylog.ui.extensions.toComposeColor

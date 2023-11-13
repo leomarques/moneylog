@@ -2,7 +2,7 @@ package lmm.moneylog.ui.extensions
 
 import androidx.compose.ui.graphics.Color
 import lmm.moneylog.R
-import lmm.moneylog.data.account.Account
+import lmm.moneylog.data.account.repositories.model.Account
 import lmm.moneylog.data.category.Category
 import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.time.DomainTime

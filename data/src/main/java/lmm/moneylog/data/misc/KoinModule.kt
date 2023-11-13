@@ -1,15 +1,15 @@
-package lmm.moneylog.data
+package lmm.moneylog.data.misc
 
-import lmm.moneylog.data.account.repositories.AddAccountRepository
-import lmm.moneylog.data.account.repositories.ArchiveAccountRepository
-import lmm.moneylog.data.account.repositories.DeleteAccountRepository
-import lmm.moneylog.data.account.repositories.GetAccountsRepository
-import lmm.moneylog.data.account.repositories.UpdateAccountRepository
 import lmm.moneylog.data.account.repositories.impls.AddAccountRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.ArchiveAccountRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.DeleteAccountRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.GetAccountsRepositoryImpl
 import lmm.moneylog.data.account.repositories.impls.UpdateAccountRepositoryImpl
+import lmm.moneylog.data.account.repositories.interfaces.AddAccountRepository
+import lmm.moneylog.data.account.repositories.interfaces.ArchiveAccountRepository
+import lmm.moneylog.data.account.repositories.interfaces.DeleteAccountRepository
+import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
+import lmm.moneylog.data.account.repositories.interfaces.UpdateAccountRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepositoryImpl
 import lmm.moneylog.data.balance.GetBalanceByAccountInteractor

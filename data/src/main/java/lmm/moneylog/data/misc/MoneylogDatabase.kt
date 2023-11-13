@@ -1,4 +1,4 @@
-package lmm.moneylog.data
+package lmm.moneylog.data.misc
 
 import android.content.Context
 import androidx.room.Database

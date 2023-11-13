@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import lmm.moneylog.data.account.repositories.GetAccountsRepository
+import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.balance.GetBalanceByAccountInteractor
 import lmm.moneylog.ui.extensions.formatForRs

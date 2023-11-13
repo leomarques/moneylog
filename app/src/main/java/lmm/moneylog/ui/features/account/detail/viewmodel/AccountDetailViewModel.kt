@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
-import lmm.moneylog.data.account.Account
-import lmm.moneylog.data.account.repositories.AddAccountRepository
-import lmm.moneylog.data.account.repositories.ArchiveAccountRepository
-import lmm.moneylog.data.account.repositories.GetAccountsRepository
-import lmm.moneylog.data.account.repositories.UpdateAccountRepository
+import lmm.moneylog.data.account.repositories.interfaces.AddAccountRepository
+import lmm.moneylog.data.account.repositories.interfaces.ArchiveAccountRepository
+import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
+import lmm.moneylog.data.account.repositories.interfaces.UpdateAccountRepository
+import lmm.moneylog.data.account.repositories.model.Account
 import lmm.moneylog.ui.extensions.getIdParam
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.account.detail.model.AccountDetailUIState
