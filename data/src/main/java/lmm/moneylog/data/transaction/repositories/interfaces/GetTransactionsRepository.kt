@@ -1,7 +1,7 @@
-package lmm.moneylog.data.transaction.repositories
+package lmm.moneylog.data.transaction.repositories.interfaces
 
 import kotlinx.coroutines.flow.Flow
-import lmm.moneylog.data.transaction.Transaction
+import lmm.moneylog.data.transaction.model.Transaction
 
 interface GetTransactionsRepository {
     suspend fun getTransactionById(id: Int): Transaction?

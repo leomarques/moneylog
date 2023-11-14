@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import lmm.moneylog.data.category.Category
-import lmm.moneylog.data.category.repositories.GetCategoriesRepository
+import lmm.moneylog.data.category.model.Category
+import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.category.list.model.CategoriesListUIState
 import lmm.moneylog.ui.features.category.list.model.CategoryModel

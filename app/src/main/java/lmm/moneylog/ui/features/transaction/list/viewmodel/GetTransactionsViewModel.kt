@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
-import lmm.moneylog.data.category.repositories.GetCategoriesRepository
-import lmm.moneylog.data.transaction.Transaction
-import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
+import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
+import lmm.moneylog.data.transaction.model.Transaction
+import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.features.transaction.list.model.GetTransactionsModel

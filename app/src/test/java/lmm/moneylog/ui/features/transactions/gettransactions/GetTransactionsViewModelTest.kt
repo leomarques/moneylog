@@ -11,9 +11,9 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
-import lmm.moneylog.data.category.repositories.GetCategoriesRepository
-import lmm.moneylog.data.transaction.Transaction
-import lmm.moneylog.data.transaction.repositories.GetTransactionsRepository
+import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
+import lmm.moneylog.data.transaction.model.Transaction
+import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GetTransactionsViewModel
 import org.junit.After

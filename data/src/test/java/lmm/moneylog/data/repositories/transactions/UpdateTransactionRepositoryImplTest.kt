@@ -3,9 +3,9 @@ package lmm.moneylog.data.repositories.transactions
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.database.TransactionDao
 import lmm.moneylog.data.transaction.database.TransactionEntity
+import lmm.moneylog.data.transaction.model.Transaction
 import lmm.moneylog.data.transaction.repositories.impls.UpdateTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.time.DomainTime
 import org.junit.Test

@@ -1,4 +1,4 @@
-package lmm.moneylog.data.balance
+package lmm.moneylog.data.balance.model
 
 data class BalanceModel(
     val total: Double,

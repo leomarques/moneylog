@@ -1,4 +1,4 @@
-package lmm.moneylog.data.transaction
+package lmm.moneylog.data.transaction.model
 
 import lmm.moneylog.data.transaction.time.DomainTime
 

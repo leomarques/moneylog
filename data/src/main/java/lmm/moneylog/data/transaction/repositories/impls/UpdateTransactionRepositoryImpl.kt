@@ -1,9 +1,9 @@
 package lmm.moneylog.data.transaction.repositories.impls
 
-import lmm.moneylog.data.transaction.Transaction
 import lmm.moneylog.data.transaction.database.TransactionDao
 import lmm.moneylog.data.transaction.database.TransactionEntity
-import lmm.moneylog.data.transaction.repositories.UpdateTransactionRepository
+import lmm.moneylog.data.transaction.model.Transaction
+import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRepository
 
 class UpdateTransactionRepositoryImpl(
     private val transactionDao: TransactionDao

@@ -1,4 +1,6 @@
-package lmm.moneylog.data.balance
+package lmm.moneylog.data.balance.interactors
+
+import lmm.moneylog.data.balance.repositories.GetBalanceRepository
 
 class GetBalanceByAccountInteractor(
     private val getBalanceRepository: GetBalanceRepository

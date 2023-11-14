@@ -1,4 +1,4 @@
-package lmm.moneylog.data.transaction.database
+package lmm.moneylog.data.transaction.model
 
 data class TransactionBalance(
     val value: Double,

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
-import lmm.moneylog.data.balance.GetBalanceByAccountInteractor
+import lmm.moneylog.data.balance.interactors.GetBalanceByAccountInteractor
 import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.account.list.model.AccountModel

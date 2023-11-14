@@ -1,7 +1,7 @@
 package lmm.moneylog.data.transaction.repositories.impls
 
 import lmm.moneylog.data.transaction.database.TransactionDao
-import lmm.moneylog.data.transaction.repositories.DeleteTransactionRepository
+import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository
 
 class DeleteTransactionRepositoryImpl(
     private val transactionDao: TransactionDao

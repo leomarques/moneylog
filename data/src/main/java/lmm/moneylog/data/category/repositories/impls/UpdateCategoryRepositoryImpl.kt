@@ -1,9 +1,9 @@
 package lmm.moneylog.data.category.repositories.impls
 
-import lmm.moneylog.data.category.Category
 import lmm.moneylog.data.category.database.CategoryDao
 import lmm.moneylog.data.category.database.CategoryEntity
-import lmm.moneylog.data.category.repositories.UpdateCategoryRepository
+import lmm.moneylog.data.category.model.Category
+import lmm.moneylog.data.category.repositories.interfaces.UpdateCategoryRepository
 
 class UpdateCategoryRepositoryImpl(
     private val categoryDao: CategoryDao

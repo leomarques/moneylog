@@ -1,6 +1,8 @@
-package lmm.moneylog.data.balance
+package lmm.moneylog.data.balance.interactors
 
 import kotlinx.coroutines.flow.map
+import lmm.moneylog.data.balance.model.BalanceModel
+import lmm.moneylog.data.balance.repositories.GetBalanceRepository
 
 class GetBalanceInteractor(private val repository: GetBalanceRepository) {
 

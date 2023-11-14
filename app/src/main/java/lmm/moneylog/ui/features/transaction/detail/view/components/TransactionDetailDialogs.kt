@@ -8,7 +8,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.data.account.repositories.model.Account
-import lmm.moneylog.data.category.Category
+import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
 import lmm.moneylog.ui.extensions.toComposeColor
 

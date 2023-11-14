@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
-import lmm.moneylog.data.category.Category
-import lmm.moneylog.data.category.repositories.AddCategoryRepository
-import lmm.moneylog.data.category.repositories.DeleteCategoryRepository
-import lmm.moneylog.data.category.repositories.GetCategoriesRepository
-import lmm.moneylog.data.category.repositories.UpdateCategoryRepository
+import lmm.moneylog.data.category.model.Category
+import lmm.moneylog.data.category.repositories.interfaces.AddCategoryRepository
+import lmm.moneylog.data.category.repositories.interfaces.DeleteCategoryRepository
+import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
+import lmm.moneylog.data.category.repositories.interfaces.UpdateCategoryRepository
 import lmm.moneylog.ui.extensions.getIdParam
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.category.detail.model.CategoryDetailUIState

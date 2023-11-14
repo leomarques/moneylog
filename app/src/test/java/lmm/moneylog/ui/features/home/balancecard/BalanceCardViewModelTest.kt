@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import lmm.moneylog.data.balance.BalanceModel
-import lmm.moneylog.data.balance.GetBalanceInteractor
+import lmm.moneylog.data.balance.interactors.GetBalanceInteractor
+import lmm.moneylog.data.balance.model.BalanceModel
 import lmm.moneylog.data.transaction.time.DomainTimeInteractorImpl
 import lmm.moneylog.ui.features.balancecard.viewmodel.BalanceCardViewModel
 import org.junit.After
