@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.features.transaction.list.view.layout
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -19,7 +18,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,20 +25,16 @@ import lmm.moneylog.R
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.components.misc.EmptyState
 import lmm.moneylog.ui.components.misc.SearchTopBar
-import lmm.moneylog.ui.features.transaction.list.model.GetTransactionsModel
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
+import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
 import lmm.moneylog.ui.theme.outcome
 
-@OptIn(
-    ExperimentalMaterial3Api::class,
-    ExperimentalAnimationApi::class,
-    ExperimentalComposeUiApi::class
-)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GetTransactionsLayout(
+fun TransactionsListLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
-    model: GetTransactionsModel,
+    model: TransactionsListUIState,
     onItemClick: (Int) -> Unit
 ) {
     val showTopBar = remember { mutableStateOf(true) }
@@ -104,7 +98,7 @@ fun GetTransactionsLayout(
                 Modifier.padding(top = paddingValues.calculateTopPadding())
             ) {
                 if (model.transactions.isNotEmpty()) {
-                    GetTransactionsList(
+                    TransactionsListContent(
                         list = model.transactions,
                         filter = filter,
                         onItemClick = onItemClick
@@ -122,12 +116,13 @@ fun GetTransactionsLayout(
 
 @Preview
 @Composable
-fun Preview() {
-    GetTransactionsLayout(
+fun TransactionsListLayoutPreview() {
+    TransactionsListLayout(
         onArrowBackClick = {},
         onFabClick = {},
-        model = GetTransactionsModel(
-            listOf(
+        model = TransactionsListUIState(
+            titleResourceId = R.string.transactions,
+            transactions = listOf(
                 TransactionModel(
                     value = "R$50,00",
                     isIncome = true,
@@ -148,8 +143,7 @@ fun Preview() {
                     category = "Roupa",
                     categoryColor = outcome
                 )
-            ),
-            R.string.transactions
+            )
         ),
         onItemClick = {}
     )

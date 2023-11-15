@@ -27,7 +27,7 @@ import lmm.moneylog.ui.theme.neutralColor
 import lmm.moneylog.ui.theme.outcome
 
 @Composable
-fun GetTransactionsItem(
+fun TransactionsListItem(
     transaction: TransactionModel,
     onItemClick: (Int) -> Unit,
     color: Color
@@ -92,12 +92,7 @@ fun GetTransactionsItem(
                     .weight(0.25f)
                     .padding(start = Size.DefaultSpaceSize),
                 text = value,
-                color =
-                if (isIncome) {
-                    income
-                } else {
-                    outcome
-                },
+                color = if (isIncome) income else outcome,
                 textAlign = TextAlign.End,
                 style = MaterialTheme.typography.bodyMedium,
                 overflow = TextOverflow.Ellipsis,
@@ -109,8 +104,8 @@ fun GetTransactionsItem(
 
 @Preview
 @Composable
-fun GetTransactionsItemPreview() {
-    GetTransactionsItem(
+fun TransactionsListItemPreview() {
+    TransactionsListItem(
         transaction = TransactionModel(
             value = "Nome",
             isIncome = true,

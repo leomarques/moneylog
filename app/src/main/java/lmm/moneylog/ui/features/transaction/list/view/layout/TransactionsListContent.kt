@@ -23,18 +23,17 @@ import lmm.moneylog.ui.theme.darkRed
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun GetTransactionsList(
+fun TransactionsListContent(
     list: List<TransactionModel>,
     filter: MutableState<String>,
     onItemClick: (Int) -> Unit
 ) {
     val grouped = list
         .filter { transaction ->
-            transaction.description
-                .startsWith(
-                    prefix = filter.value,
-                    ignoreCase = true
-                )
+            transaction.description.startsWith(
+                prefix = filter.value,
+                ignoreCase = true
+            )
         }
         .reversed()
         .groupBy { it.date }
@@ -63,7 +62,7 @@ fun GetTransactionsList(
             }
 
             items(transactions) { transaction ->
-                GetTransactionsItem(
+                TransactionsListItem(
                     transaction = transaction,
                     onItemClick = onItemClick,
                     color = transaction.categoryColor
@@ -76,8 +75,8 @@ fun GetTransactionsList(
 @SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
-fun GetTransactionsListPreview() {
-    GetTransactionsList(
+fun TransactionsListContentPreview() {
+    TransactionsListContent(
         list = listOf(
             TransactionModel(
                 value = "Nome",

@@ -10,7 +10,7 @@ import lmm.moneylog.ui.features.category.detail.viewmodel.CategoryDetailViewMode
 import lmm.moneylog.ui.features.category.list.viewmodel.CategoriesListViewModel
 import lmm.moneylog.ui.features.home.viewmodel.HomeViewModel
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
-import lmm.moneylog.ui.features.transaction.list.viewmodel.GetTransactionsViewModel
+import lmm.moneylog.ui.features.transaction.list.viewmodel.TransactionsListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -28,7 +28,7 @@ val appModule = module {
     viewModelOf(::BalanceCardViewModel)
 
     viewModel { parameters ->
-        GetTransactionsViewModel(
+        TransactionsListViewModel(
             typeOfValue = parameters.get(),
             getTransactionsRepository = get(),
             getAccountsRepository = get(),

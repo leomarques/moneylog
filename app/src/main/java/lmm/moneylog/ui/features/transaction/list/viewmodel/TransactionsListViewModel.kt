@@ -11,32 +11,23 @@ import kotlinx.coroutines.launch
 import lmm.moneylog.R
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
-import lmm.moneylog.data.transaction.model.Transaction
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
-import lmm.moneylog.data.transaction.time.DomainTime
-import lmm.moneylog.ui.extensions.formatForRs
-import lmm.moneylog.ui.features.transaction.list.model.GetTransactionsModel
-import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
-import lmm.moneylog.ui.theme.neutralColor
+import lmm.moneylog.ui.extensions.toModel
+import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
 
 const val getTransactionsIncome = "income"
 const val getTransactionsOutcome = "outcome"
 const val getTransactionsAll = "all"
 
-class GetTransactionsViewModel(
+class TransactionsListViewModel(
     private val typeOfValue: String?,
     private val getTransactionsRepository: GetTransactionsRepository,
     private val getAccountsRepository: GetAccountsRepository,
     private val getCategoriesRepository: GetCategoriesRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(
-        GetTransactionsModel(
-            titleResourceId =
-            R.string.transactions
-        )
-    )
-    val uiState: StateFlow<GetTransactionsModel> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(TransactionsListUIState(R.string.transactions))
+    val uiState: StateFlow<TransactionsListUIState> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -58,7 +49,7 @@ class GetTransactionsViewModel(
                     getTransactionsRepository.getIncomeTransactions().collect { transactions ->
                         _uiState.update {
                             transactions.toModel(
-                                R.string.incomes,
+                                titleResourceId = R.string.incomes,
                                 accountMap = accountsMap,
                                 categoriesMap = categoriesMap,
                                 categoriesColorMap = categoriesColorMap
@@ -71,7 +62,7 @@ class GetTransactionsViewModel(
                     getTransactionsRepository.getOutcomeTransactions().collect { transactions ->
                         _uiState.update {
                             transactions.toModel(
-                                R.string.outcomes,
+                                titleResourceId = R.string.outcomes,
                                 accountMap = accountsMap,
                                 categoriesMap = categoriesMap,
                                 categoriesColorMap = categoriesColorMap
@@ -84,7 +75,7 @@ class GetTransactionsViewModel(
                     getTransactionsRepository.getAllTransactions().collect { transactions ->
                         _uiState.update {
                             transactions.toModel(
-                                R.string.transactions,
+                                titleResourceId = R.string.transactions,
                                 accountMap = accountsMap,
                                 categoriesMap = categoriesMap,
                                 categoriesColorMap = categoriesColorMap
@@ -96,34 +87,3 @@ class GetTransactionsViewModel(
         }
     }
 }
-
-private fun List<Transaction>.toModel(
-    titleResourceId: Int,
-    accountMap: Map<Int, String>,
-    categoriesMap: Map<Int, String>,
-    categoriesColorMap: Map<Int, Color>
-): GetTransactionsModel {
-    return GetTransactionsModel(
-        transactions = sortedBy { it.date }.map { transaction ->
-            with(transaction) {
-                TransactionModel(
-                    value = if (value < 0.0) {
-                        (-value).formatForRs()
-                    } else {
-                        value.formatForRs()
-                    },
-                    isIncome = value > 0,
-                    description = description,
-                    date = date.formatDate(),
-                    id = id,
-                    account = accountMap[accountId].orEmpty(),
-                    category = categoriesMap[categoryId].orEmpty(),
-                    categoryColor = categoriesColorMap[categoryId] ?: neutralColor
-                )
-            }
-        },
-        titleResourceId = titleResourceId
-    )
-}
-
-fun DomainTime.formatDate() = "$day/$month/$year"

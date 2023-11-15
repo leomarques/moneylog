@@ -19,7 +19,7 @@ import lmm.moneylog.ui.features.category.detail.view.layout.CategoryDetailView
 import lmm.moneylog.ui.features.category.list.view.layouts.CategoriesListView
 import lmm.moneylog.ui.features.home.view.HomeView
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
-import lmm.moneylog.ui.features.transaction.list.view.layout.GetTransactionsView
+import lmm.moneylog.ui.features.transaction.list.view.layout.TransactionsListView
 import lmm.moneylog.ui.navigation.misc.accountDetailScreen
 import lmm.moneylog.ui.navigation.misc.accountsListScreen
 import lmm.moneylog.ui.navigation.misc.archivedAccountsListScreen
@@ -74,7 +74,7 @@ fun MyNavHost(
         ) { backStackEntry ->
             val param = backStackEntry?.arguments?.getString(paramTypeOfValue)
 
-            GetTransactionsView(
+            TransactionsListView(
                 onArrowBackClick = onArrowBackClick,
                 onFabClick = onTransactionsFabClick,
                 typeOfValue = param.toTransactionType(),
