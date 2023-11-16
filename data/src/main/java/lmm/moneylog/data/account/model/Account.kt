@@ -1,4 +1,4 @@
-package lmm.moneylog.data.account.repositories.model
+package lmm.moneylog.data.account.model
 
 data class Account(
     val id: Int = -1,

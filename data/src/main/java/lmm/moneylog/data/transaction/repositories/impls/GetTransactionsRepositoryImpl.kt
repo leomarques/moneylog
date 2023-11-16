@@ -1,11 +1,11 @@
 package lmm.moneylog.data.transaction.repositories.impls
 
 import kotlinx.coroutines.flow.map
+import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.data.transaction.database.TransactionDao
 import lmm.moneylog.data.transaction.database.TransactionEntity
 import lmm.moneylog.data.transaction.model.Transaction
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
-import lmm.moneylog.data.transaction.time.DomainTime
 
 class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) :
     GetTransactionsRepository {

@@ -4,8 +4,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import lmm.moneylog.data.account.database.AccountDao
 import lmm.moneylog.data.account.database.AccountEntity
+import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
-import lmm.moneylog.data.account.repositories.model.Account
 
 class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
     GetAccountsRepository {

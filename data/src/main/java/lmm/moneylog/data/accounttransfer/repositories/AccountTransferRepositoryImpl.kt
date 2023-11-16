@@ -2,10 +2,10 @@ package lmm.moneylog.data.accounttransfer.repositories
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import lmm.moneylog.data.accounttransfer.AccountTransfer
 import lmm.moneylog.data.accounttransfer.database.AccountTransferDao
 import lmm.moneylog.data.accounttransfer.database.AccountTransferEntity
-import lmm.moneylog.data.transaction.time.DomainTime
+import lmm.moneylog.data.accounttransfer.model.AccountTransfer
+import lmm.moneylog.data.time.model.DomainTime
 
 class AccountTransferRepositoryImpl(
     private val accountTransferDao: AccountTransferDao

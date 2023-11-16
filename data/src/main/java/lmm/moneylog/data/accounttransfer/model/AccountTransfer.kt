@@ -1,4 +1,4 @@
-package lmm.moneylog.data.accounttransfer
+package lmm.moneylog.data.accounttransfer.model
 
 data class AccountTransfer(
     val value: Double,

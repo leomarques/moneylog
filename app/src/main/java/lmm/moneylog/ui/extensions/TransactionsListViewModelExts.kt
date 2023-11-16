@@ -1,8 +1,8 @@
 package lmm.moneylog.ui.extensions
 
 import androidx.compose.ui.graphics.Color
+import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.data.transaction.model.Transaction
-import lmm.moneylog.data.transaction.time.DomainTime
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
 import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
 import lmm.moneylog.ui.theme.neutralColor

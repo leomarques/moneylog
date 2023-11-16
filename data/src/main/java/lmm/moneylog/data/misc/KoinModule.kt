@@ -24,8 +24,8 @@ import lmm.moneylog.data.category.repositories.interfaces.AddCategoryRepository
 import lmm.moneylog.data.category.repositories.interfaces.DeleteCategoryRepository
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.category.repositories.interfaces.UpdateCategoryRepository
-import lmm.moneylog.data.coroutine.CoroutineDispatcherProvider
-import lmm.moneylog.data.coroutine.CoroutineDispatcherProviderImpl
+import lmm.moneylog.data.time.repositories.DomainTimeRepository
+import lmm.moneylog.data.time.repositories.DomainTimeRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.AddTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.DeleteTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.GetTransactionsRepositoryImpl
@@ -34,8 +34,6 @@ import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepos
 import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRepository
-import lmm.moneylog.data.transaction.time.DomainTimeInteractor
-import lmm.moneylog.data.transaction.time.DomainTimeInteractorImpl
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
@@ -47,8 +45,7 @@ val dataModule = module {
     single { MoneylogDatabase.getInstance(get()).categoryDao() }
     single { MoneylogDatabase.getInstance(get()).accountTransferDao() }
 
-    factoryOf(::CoroutineDispatcherProviderImpl) { bind<CoroutineDispatcherProvider>() }
-    factoryOf(::DomainTimeInteractorImpl) { bind<DomainTimeInteractor>() }
+    factoryOf(::DomainTimeRepositoryImpl) { bind<DomainTimeRepository>() }
 
     factoryOf(::GetBalanceInteractor)
     factoryOf(::GetBalanceByAccountInteractor)

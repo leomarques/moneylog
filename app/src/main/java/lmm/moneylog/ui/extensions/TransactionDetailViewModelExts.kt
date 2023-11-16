@@ -2,11 +2,11 @@ package lmm.moneylog.ui.extensions
 
 import androidx.compose.ui.graphics.Color
 import lmm.moneylog.R
-import lmm.moneylog.data.account.repositories.model.Account
+import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.category.model.Category
+import lmm.moneylog.data.time.model.DomainTime
+import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.model.Transaction
-import lmm.moneylog.data.transaction.time.DomainTime
-import lmm.moneylog.data.transaction.time.DomainTimeInteractor
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 
 fun TransactionDetailUIState.toTransaction(): Transaction = Transaction(
@@ -18,14 +18,14 @@ fun TransactionDetailUIState.toTransaction(): Transaction = Transaction(
     categoryId = categoryId
 )
 
-fun Transaction.toDetailModel(domainTimeInteractor: DomainTimeInteractor) =
+fun Transaction.toDetailModel(domainTimeRepository: DomainTimeRepository) =
     TransactionDetailUIState(
         id = id,
         value = value.toPositiveString(),
         isIncome = value > 0,
         description = description,
         date = date,
-        displayDate = date.convertToDisplayDate(domainTimeInteractor),
+        displayDate = date.convertToDisplayDate(domainTimeRepository),
         isEdit = true,
         titleResourceId = R.string.detail_topbar_transaction_edit,
         accountId = accountId,
@@ -41,8 +41,8 @@ private fun Double.isWhole() = this % 1.0 == 0.0
 
 private fun String.removeDecimal() = substring(0, length - 2)
 
-fun DomainTime.convertToDisplayDate(domainTimeInteractor: DomainTimeInteractor) =
-    "$day ${domainTimeInteractor.getMonthName(month)}, $year"
+fun DomainTime.convertToDisplayDate(domainTimeRepository: DomainTimeRepository) =
+    "$day ${domainTimeRepository.getMonthName(month)}, $year"
 
 fun List<Account>.getAccountById(accountId: Int?): (Pair<String, Color>)? {
     return firstOrNull {

@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.account.repositories.interfaces.ArchiveAccountRepository
 import lmm.moneylog.data.account.repositories.interfaces.DeleteAccountRepository
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
-import lmm.moneylog.data.account.repositories.model.Account
 import lmm.moneylog.ui.features.account.archive.model.ArchivedAccountModel
 
 class ArchivedAccountsViewModel(

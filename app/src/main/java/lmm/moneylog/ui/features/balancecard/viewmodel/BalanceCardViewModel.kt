@@ -7,19 +7,19 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.balance.interactors.GetBalanceInteractor
-import lmm.moneylog.data.transaction.time.DomainTimeInteractor
+import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.features.balancecard.model.BalanceCardUIState
 
 class BalanceCardViewModel(
     interactor: GetBalanceInteractor,
-    domainTimeInteractor: DomainTimeInteractor
+    domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(BalanceCardUIState())
     val uiState: StateFlow<BalanceCardUIState> = _uiState.asStateFlow()
 
     init {
-        val currentDomainTime = domainTimeInteractor.getCurrentDomainTime()
+        val currentDomainTime = domainTimeRepository.getCurrentDomainTime()
 
         viewModelScope.launch {
             interactor.execute(
@@ -31,7 +31,7 @@ class BalanceCardViewModel(
                         total = total.formatForRs(),
                         credit = credit.formatForRs(),
                         debt = debt.formatForRs(),
-                        month = domainTimeInteractor.getCurrentMonthName()
+                        month = domainTimeRepository.getCurrentMonthName()
                     )
                 }
             }

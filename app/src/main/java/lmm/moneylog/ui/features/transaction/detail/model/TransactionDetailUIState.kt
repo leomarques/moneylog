@@ -2,9 +2,9 @@ package lmm.moneylog.ui.features.transaction.detail.model
 
 import androidx.compose.ui.graphics.Color
 import lmm.moneylog.R
-import lmm.moneylog.data.account.repositories.model.Account
+import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.category.model.Category
-import lmm.moneylog.data.transaction.time.DomainTime
+import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.ui.theme.neutralColor
 
 data class TransactionDetailUIState(

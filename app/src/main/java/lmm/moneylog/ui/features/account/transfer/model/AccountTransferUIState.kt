@@ -1,7 +1,7 @@
 package lmm.moneylog.ui.features.account.transfer.model
 
 import androidx.compose.ui.graphics.Color
-import lmm.moneylog.data.transaction.time.DomainTime
+import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.ui.theme.neutralColor
 
 data class AccountTransferUIState(

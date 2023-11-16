@@ -11,15 +11,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
+import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
-import lmm.moneylog.data.account.repositories.model.Account
 import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
+import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRepository
-import lmm.moneylog.data.transaction.time.DomainTimeInteractor
 import lmm.moneylog.ui.extensions.convertToDisplayDate
 import lmm.moneylog.ui.extensions.getAccountById
 import lmm.moneylog.ui.extensions.getCategoryById
@@ -39,7 +39,7 @@ class TransactionDetailViewModel(
     private val addTransactionRepository: AddTransactionRepository,
     private val updateTransactionRepository: UpdateTransactionRepository,
     private val deleteTransactionRepository: DeleteTransactionRepository,
-    private val domainTimeInteractor: DomainTimeInteractor
+    private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(TransactionDetailUIState())
@@ -73,7 +73,7 @@ class TransactionDetailViewModel(
     ) {
         getTransactionsRepository.getTransactionById(idParam)?.let { transaction ->
             _uiState.update {
-                transaction.toDetailModel(domainTimeInteractor)
+                transaction.toDetailModel(domainTimeRepository)
             }
         }
     }
@@ -83,7 +83,7 @@ class TransactionDetailViewModel(
         categoriesAsync: Deferred<List<Category>>
     ) {
         _uiState.update {
-            val currentDate = domainTimeInteractor.getCurrentDomainTime()
+            val currentDate = domainTimeRepository.getCurrentDomainTime()
             val accountId = accountsAsync.await().firstOrNull()?.id
             val categoryId = categoriesAsync.await().firstOrNull()?.id
 
@@ -91,7 +91,7 @@ class TransactionDetailViewModel(
                 accountId = accountId,
                 categoryId = categoryId,
                 date = currentDate,
-                displayDate = currentDate.convertToDisplayDate(domainTimeInteractor)
+                displayDate = currentDate.convertToDisplayDate(domainTimeRepository)
             )
         }
     }
@@ -144,10 +144,10 @@ class TransactionDetailViewModel(
 
     fun onDatePick(timeStamp: Long) {
         _uiState.update {
-            val domainTime = domainTimeInteractor.timeStampToDomainTime(timeStamp)
+            val domainTime = domainTimeRepository.timeStampToDomainTime(timeStamp)
             it.copy(
                 date = domainTime,
-                displayDate = domainTime.convertToDisplayDate(domainTimeInteractor)
+                displayDate = domainTime.convertToDisplayDate(domainTimeRepository)
             )
         }
     }

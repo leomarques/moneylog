@@ -1,6 +1,8 @@
-package lmm.moneylog.data.transaction.time
+package lmm.moneylog.data.time.repositories
 
-interface DomainTimeInteractor {
+import lmm.moneylog.data.time.model.DomainTime
+
+interface DomainTimeRepository {
     fun getCurrentTimeStamp(): Long
     fun getCurrentDomainTime(): DomainTime
     fun timeStampToDomainTime(timeStamp: Long): DomainTime

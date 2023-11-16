@@ -1,12 +1,13 @@
-package lmm.moneylog.data.transaction.time
+package lmm.moneylog.data.time.repositories
 
+import lmm.moneylog.data.time.model.DomainTime
 import java.time.Instant
 import java.time.Month
 import java.time.ZoneId
 import java.time.format.TextStyle
 import java.util.Locale
 
-class DomainTimeInteractorImpl : DomainTimeInteractor {
+class DomainTimeRepositoryImpl : DomainTimeRepository {
 
     override fun getCurrentTimeStamp() =
         Instant.now().toEpochMilli()

@@ -1,14 +1,14 @@
 package lmm.moneylog.data.domaintime
 
-import lmm.moneylog.data.transaction.time.DomainTimeInteractorImpl
+import lmm.moneylog.data.time.repositories.DomainTimeRepositoryImpl
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class LocalDateTimeToDomainTimeInteractorImplTest {
+class DomainTimeRepositoryImplTest {
 
     @Test
     fun `should convert timestamp to DomainTime`() {
-        val converter = DomainTimeInteractorImpl()
+        val converter = DomainTimeRepositoryImpl()
         val domainTime = converter.timeStampToDomainTime(1683733471712)
 
         with(domainTime) {

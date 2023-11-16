@@ -1,6 +1,6 @@
 package lmm.moneylog.data.transaction.model
 
-import lmm.moneylog.data.transaction.time.DomainTime
+import lmm.moneylog.data.time.model.DomainTime
 
 data class Transaction(
     val id: Int = -1,
