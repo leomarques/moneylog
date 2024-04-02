@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import lmm.moneylog.ui.features.transaction.list.viewmodel.TransactionsListViewModel
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
@@ -14,9 +14,8 @@ fun TransactionsListView(
     typeOfValue: String?,
     onItemClick: (Int) -> Unit
 ) {
-    val viewModel = getViewModel<TransactionsListViewModel>(
-        parameters = { parametersOf(typeOfValue) }
-    )
+    val viewModel = koinViewModel<TransactionsListViewModel>(
+        parameters = { parametersOf(typeOfValue) })
     val transactionsModel by viewModel.uiState.collectAsState()
 
     TransactionsListLayout(

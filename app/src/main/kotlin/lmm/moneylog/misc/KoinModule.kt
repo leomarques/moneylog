@@ -25,7 +25,8 @@ val appModule = module {
     viewModelOf(::CategoriesListViewModel)
     viewModelOf(::CategoryDetailViewModel)
 
-    viewModelOf(::BalanceCardViewModel)
+    viewModelOf(:: BalanceCardViewModel)
+
 
     viewModel { parameters ->
         TransactionsListViewModel(
