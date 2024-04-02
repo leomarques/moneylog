@@ -2,8 +2,7 @@
 composeBom            = "2024.03.00"
 coreTesting           = "2.2.0"
 junit                 = "4.13.2"
-koinAndroid           = "3.5.0"
-koinAndroidxCompose   = "3.5.0"
+koinAndroidxCompose   = "3.5.3"
 kotlinxCoroutinesTest = "1.7.3"
 material3             = "1.2.1"
 mockk                 = "1.13.7"
@@ -26,7 +25,6 @@ navigation-compose 	    = { group = "androidx.navigation",        name = "naviga
 room-compiler      	    = { group = "androidx.room",              name = "room-compiler", 			version.ref = "room" }
 room-ktx    			= { group = "androidx.room", 			  name = "room-ktx", 				version.ref = "room" }
 room-runtime       	    = { group = "androidx.room", 			  name = "room-runtime", 			version.ref = "room" }
-koin-android       	    = { group = "io.insert-koin", 			  name = "koin-android", 			version.ref = "koinAndroid" }
 koin-androidx-compose   = { group = "io.insert-koin",             name = "koin-androidx-compose", 	version.ref = "koinAndroidxCompose" }
 mockk       			= { group = "io.mockk", 				  name = "mockk", 					version.ref = "mockk" }
 junit       			= { group = "junit", 					  name = "junit", 					version.ref = "junit" }
@@ -34,7 +32,6 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", 	  name = "kotlinx-
 
 [bundles]
 compose = ["material3", "ui-tooling-preview", "ui-tooling", "navigation-compose"]
-koin    = ["koin-android", "koin-androidx-compose"]
 room    = ["room-ktx", "room-runtime"]
 test    = ["core-testing", "kotlinx-coroutines-test", "mockk", "junit"]
 

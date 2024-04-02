@@ -54,6 +54,6 @@ dependencies {
     implementation(project(mapOf("path" to ":data")))
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
-    implementation(libs.bundles.koin)
+    implementation(libs.koin.androidx.compose)
     testImplementation(libs.bundles.test)
 }

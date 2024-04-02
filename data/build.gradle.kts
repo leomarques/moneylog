@@ -37,6 +37,6 @@ android {
 dependencies {
     ksp(libs.room.compiler)
     implementation(libs.bundles.room)
-    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
     testImplementation(libs.bundles.test)
 }
