@@ -40,7 +40,6 @@ import org.koin.dsl.module
 
 val dataModule =
     module {
-
         single { MoneylogDatabase.getInstance(get()).transactionDao() }
         single { MoneylogDatabase.getInstance(get()).accountDao() }
         single { MoneylogDatabase.getInstance(get()).categoryDao() }

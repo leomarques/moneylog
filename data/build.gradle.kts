@@ -38,8 +38,8 @@ android {
 }
 
 dependencies {
-    ksp(libs.room.compiler)
     implementation(libs.bundles.room)
-    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.core)
+    ksp(libs.room.compiler)
     testImplementation(libs.bundles.test)
 }
