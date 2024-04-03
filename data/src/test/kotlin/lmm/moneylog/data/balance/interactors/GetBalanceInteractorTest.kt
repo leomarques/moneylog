@@ -26,12 +26,23 @@ class GetBalanceInteractorTest {
     }
 
     @Test
-    fun execute() {
+    fun `should calculate correct balance for given month and year`() {
         runBlocking {
             interactor.execute(5, 2021).collect {
                 assert(it.total == 5.0)
                 assert(it.credit == 9.0)
                 assert(it.debt == -5.0)
+            }
+        }
+    }
+
+    @Test
+    fun `should return zero balance for month with no transactions`() {
+        runBlocking {
+            interactor.execute(6, 2021).collect {
+                assert(it.total == 0.0)
+                assert(it.credit == 0.0)
+                assert(it.debt == 0.0)
             }
         }
     }
