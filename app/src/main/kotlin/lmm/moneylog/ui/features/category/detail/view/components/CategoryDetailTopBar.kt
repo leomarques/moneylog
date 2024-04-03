@@ -24,7 +24,7 @@ fun CategoryDetailTopBar(
                         if (isEdit) {
                             R.string.detail_topbar_category_edit
                         } else {
-                            R.string.detail_topbar_category_edit
+                            R.string.detail_topbar_category_add
                         }
                     )
             )

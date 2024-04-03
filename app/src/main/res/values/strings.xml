@@ -15,10 +15,8 @@
     <string name="name">Nome</string>
     <string name="cancel">Cancelar</string>
     <string name="ok">OK</string>
-    <string name="type">Tipo</string>
     <string name="unarchive">Desarquivar</string>
     <string name="delete">Apagar</string>
-    <string name="error">Erro</string>
 
     <string name="navbar_home">Início</string>
     <string name="balancecard_total">Saldo em contas</string>
@@ -78,8 +76,6 @@
     <string name="delete_desc">apagar</string>
     <string name="transfer_desc">transferir</string>
     <string name="fab_desc">fab</string>
-    <string name="search_desc">buscar</string>
-    <string name="clear_search_desc">limpar busca</string>
     <string name="dialog_desc">dialog</string>
     <string name="more_options_desc">mais opções</string>
     <string name="date_desc">data</string>
