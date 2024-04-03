@@ -6,7 +6,6 @@ import lmm.moneylog.data.account.repositories.interfaces.ArchiveAccountRepositor
 class ArchiveAccountRepositoryImpl(
     private val accountDao: AccountDao
 ) : ArchiveAccountRepository {
-
     override suspend fun updateArchived(
         id: Int,
         archived: Boolean

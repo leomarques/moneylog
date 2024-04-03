@@ -6,7 +6,6 @@ import lmm.moneylog.data.category.repositories.interfaces.DeleteCategoryReposito
 class DeleteCategoryRepositoryImpl(
     private val categoryDao: CategoryDao
 ) : DeleteCategoryRepository {
-
     override suspend fun delete(id: Int) {
         categoryDao.delete(id)
     }

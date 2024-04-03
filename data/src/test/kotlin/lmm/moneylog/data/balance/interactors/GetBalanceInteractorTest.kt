@@ -15,13 +15,14 @@ class GetBalanceInteractorTest {
 
     @Before
     fun setUp() {
-        every { getBalanceRepository.getAllTransactionsValues() } returns flow {
-            listOf(
-                TransactionBalance(1.0, 5, 2021),
-                TransactionBalance(9.0, 5, 2021),
-                TransactionBalance(-5.0, 5, 2021)
-            )
-        }
+        every { getBalanceRepository.getAllTransactionsValues() } returns
+            flow {
+                listOf(
+                    TransactionBalance(1.0, 5, 2021),
+                    TransactionBalance(9.0, 5, 2021),
+                    TransactionBalance(-5.0, 5, 2021)
+                )
+            }
     }
 
     @Test

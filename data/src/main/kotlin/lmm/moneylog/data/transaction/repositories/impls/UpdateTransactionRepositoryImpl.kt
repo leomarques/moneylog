@@ -9,7 +9,6 @@ class UpdateTransactionRepositoryImpl(
     private val transactionDao: TransactionDao
 ) :
     UpdateTransactionRepository {
-
     override suspend fun update(transaction: Transaction) {
         transactionDao.update(
             with(transaction) {

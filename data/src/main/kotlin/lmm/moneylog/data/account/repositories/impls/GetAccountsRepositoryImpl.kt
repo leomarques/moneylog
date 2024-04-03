@@ -9,7 +9,6 @@ import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 
 class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
     GetAccountsRepository {
-
     override suspend fun getAccountById(id: Int): Account? {
         val account = accountDao.selectAccountById(id)
         return if (account != null) {

@@ -24,21 +24,22 @@ import lmm.moneylog.data.transaction.database.TransactionEntity
     exportSchema = true
 )
 abstract class MoneylogDatabase : RoomDatabase() {
-
     abstract fun transactionDao(): TransactionDao
+
     abstract fun accountDao(): AccountDao
+
     abstract fun categoryDao(): CategoryDao
+
     abstract fun accountTransferDao(): AccountTransferDao
 
     companion object {
-
         @Volatile
-        private var INSTANCE: MoneylogDatabase? = null
+        private var instance: MoneylogDatabase? = null
 
         fun getInstance(context: Context): MoneylogDatabase =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE
-                    ?: buildDatabase(context).also { INSTANCE = it }
+            instance ?: synchronized(this) {
+                instance
+                    ?: buildDatabase(context).also { instance = it }
             }
 
         private fun buildDatabase(context: Context) =

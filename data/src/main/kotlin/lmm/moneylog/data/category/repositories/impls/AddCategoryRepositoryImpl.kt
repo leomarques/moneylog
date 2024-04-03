@@ -8,7 +8,6 @@ import lmm.moneylog.data.category.repositories.interfaces.AddCategoryRepository
 class AddCategoryRepositoryImpl(
     private val categoryDao: CategoryDao
 ) : AddCategoryRepository {
-
     override suspend fun save(category: Category) {
         categoryDao.insert(
             with(category) {

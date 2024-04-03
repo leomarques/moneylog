@@ -8,7 +8,6 @@ import lmm.moneylog.data.account.repositories.interfaces.AddAccountRepository
 class AddAccountRepositoryImpl(
     private val accountDao: AccountDao
 ) : AddAccountRepository {
-
     override suspend fun save(account: Account) {
         accountDao.insert(
             with(account) {

@@ -10,7 +10,6 @@ import lmm.moneylog.data.time.model.DomainTime
 class AccountTransferRepositoryImpl(
     private val accountTransferDao: AccountTransferDao
 ) : AccountTransferRepository {
-
     override suspend fun transfer(
         value: Double,
         date: DomainTime,

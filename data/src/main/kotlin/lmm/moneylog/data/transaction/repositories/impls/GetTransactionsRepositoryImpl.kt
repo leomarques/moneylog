@@ -9,7 +9,6 @@ import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepo
 
 class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) :
     GetTransactionsRepository {
-
     override suspend fun getTransactionById(id: Int): Transaction? {
         val transaction = transactionDao.selectTransactionById(id)
         return if (transaction != null) {
@@ -18,11 +17,12 @@ class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) 
                     id = id,
                     value = value,
                     description = description,
-                    date = DomainTime(
-                        day = day,
-                        month = month,
-                        year = year
-                    ),
+                    date =
+                        DomainTime(
+                            day = day,
+                            month = month,
+                            year = year
+                        ),
                     accountId = accountId,
                     categoryId = categoryId
                 )
@@ -54,11 +54,12 @@ class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) 
                     id = id,
                     value = value,
                     description = description,
-                    date = DomainTime(
-                        day = day,
-                        month = month,
-                        year = year
-                    ),
+                    date =
+                        DomainTime(
+                            day = day,
+                            month = month,
+                            year = year
+                        ),
                     accountId = accountId,
                     categoryId = categoryId
                 )

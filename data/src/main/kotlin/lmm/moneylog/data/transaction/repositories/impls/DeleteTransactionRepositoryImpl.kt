@@ -6,7 +6,6 @@ import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRe
 class DeleteTransactionRepositoryImpl(
     private val transactionDao: TransactionDao
 ) : DeleteTransactionRepository {
-
     override suspend fun delete(id: Int) {
         transactionDao.delete(id)
     }

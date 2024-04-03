@@ -8,17 +8,16 @@ import java.time.format.TextStyle
 import java.util.Locale
 
 class DomainTimeRepositoryImpl : DomainTimeRepository {
-
-    override fun getCurrentTimeStamp() =
-        Instant.now().toEpochMilli()
+    override fun getCurrentTimeStamp() = Instant.now().toEpochMilli()
 
     override fun getCurrentDomainTime() = timeStampToDomainTime(getCurrentTimeStamp())
 
     override fun timeStampToDomainTime(timeStamp: Long): DomainTime {
-        val localDate = Instant
-            .ofEpochMilli(timeStamp)
-            .atZone(ZoneId.systemDefault())
-            .toLocalDate()
+        val localDate =
+            Instant
+                .ofEpochMilli(timeStamp)
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate()
 
         with(localDate) {
             return DomainTime(
@@ -29,9 +28,7 @@ class DomainTimeRepositoryImpl : DomainTimeRepository {
         }
     }
 
-    override fun getMonthName(number: Int): String =
-        Month.of(number).getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())
+    override fun getMonthName(number: Int): String = Month.of(number).getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())
 
-    override fun getCurrentMonthName() =
-        getCurrentDomainTime().month.let(::getMonthName).replaceFirstChar(Char::titlecase)
+    override fun getCurrentMonthName() = getCurrentDomainTime().month.let(::getMonthName).replaceFirstChar(Char::titlecase)
 }

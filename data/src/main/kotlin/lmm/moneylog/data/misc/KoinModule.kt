@@ -38,33 +38,34 @@ import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
-val dataModule = module {
+val dataModule =
+    module {
 
-    single { MoneylogDatabase.getInstance(get()).transactionDao() }
-    single { MoneylogDatabase.getInstance(get()).accountDao() }
-    single { MoneylogDatabase.getInstance(get()).categoryDao() }
-    single { MoneylogDatabase.getInstance(get()).accountTransferDao() }
+        single { MoneylogDatabase.getInstance(get()).transactionDao() }
+        single { MoneylogDatabase.getInstance(get()).accountDao() }
+        single { MoneylogDatabase.getInstance(get()).categoryDao() }
+        single { MoneylogDatabase.getInstance(get()).accountTransferDao() }
 
-    factoryOf(::DomainTimeRepositoryImpl) { bind<DomainTimeRepository>() }
+        factoryOf(::DomainTimeRepositoryImpl) { bind<DomainTimeRepository>() }
 
-    factoryOf(::GetBalanceInteractor)
-    factoryOf(::GetBalanceByAccountInteractor)
-    factoryOf(::GetBalanceRepositoryImpl) { bind<GetBalanceRepository>() }
+        factoryOf(::GetBalanceInteractor)
+        factoryOf(::GetBalanceByAccountInteractor)
+        factoryOf(::GetBalanceRepositoryImpl) { bind<GetBalanceRepository>() }
 
-    factoryOf(::AddAccountRepositoryImpl) { bind<AddAccountRepository>() }
-    factoryOf(::GetAccountsRepositoryImpl) { bind<GetAccountsRepository>() }
-    factoryOf(::UpdateAccountRepositoryImpl) { bind<UpdateAccountRepository>() }
-    factoryOf(::DeleteAccountRepositoryImpl) { bind<DeleteAccountRepository>() }
-    factoryOf(::ArchiveAccountRepositoryImpl) { bind<ArchiveAccountRepository>() }
-    factoryOf(::AccountTransferRepositoryImpl) { bind<AccountTransferRepository>() }
+        factoryOf(::AddAccountRepositoryImpl) { bind<AddAccountRepository>() }
+        factoryOf(::GetAccountsRepositoryImpl) { bind<GetAccountsRepository>() }
+        factoryOf(::UpdateAccountRepositoryImpl) { bind<UpdateAccountRepository>() }
+        factoryOf(::DeleteAccountRepositoryImpl) { bind<DeleteAccountRepository>() }
+        factoryOf(::ArchiveAccountRepositoryImpl) { bind<ArchiveAccountRepository>() }
+        factoryOf(::AccountTransferRepositoryImpl) { bind<AccountTransferRepository>() }
 
-    factoryOf(::AddCategoryRepositoryImpl) { bind<AddCategoryRepository>() }
-    factoryOf(::GetCategoriesRepositoryImpl) { bind<GetCategoriesRepository>() }
-    factoryOf(::UpdateCategoryRepositoryImpl) { bind<UpdateCategoryRepository>() }
-    factoryOf(::DeleteCategoryRepositoryImpl) { bind<DeleteCategoryRepository>() }
+        factoryOf(::AddCategoryRepositoryImpl) { bind<AddCategoryRepository>() }
+        factoryOf(::GetCategoriesRepositoryImpl) { bind<GetCategoriesRepository>() }
+        factoryOf(::UpdateCategoryRepositoryImpl) { bind<UpdateCategoryRepository>() }
+        factoryOf(::DeleteCategoryRepositoryImpl) { bind<DeleteCategoryRepository>() }
 
-    factoryOf(::AddTransactionRepositoryImpl) { bind<AddTransactionRepository>() }
-    factoryOf(::GetTransactionsRepositoryImpl) { bind<GetTransactionsRepository>() }
-    factoryOf(::UpdateTransactionRepositoryImpl) { bind<UpdateTransactionRepository>() }
-    factoryOf(::DeleteTransactionRepositoryImpl) { bind<DeleteTransactionRepository>() }
-}
+        factoryOf(::AddTransactionRepositoryImpl) { bind<AddTransactionRepository>() }
+        factoryOf(::GetTransactionsRepositoryImpl) { bind<GetTransactionsRepository>() }
+        factoryOf(::UpdateTransactionRepositoryImpl) { bind<UpdateTransactionRepository>() }
+        factoryOf(::DeleteTransactionRepositoryImpl) { bind<DeleteTransactionRepository>() }
+    }

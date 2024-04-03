@@ -5,7 +5,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class DomainTimeRepositoryImplTest {
-
     @Test
     fun `should convert timestamp to DomainTime`() {
         val converter = DomainTimeRepositoryImpl()
