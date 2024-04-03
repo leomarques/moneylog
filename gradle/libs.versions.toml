@@ -5,6 +5,8 @@ junit                 = "4.13.2"
 koinAndroidxCompose   = "3.5.3"
 kotlinxCoroutinesTest = "1.7.3"
 material3             = "1.2.1"
+uiTestJunit4          = "1.6.4"
+uiTestManifest        = "1.6.4"
 mockk                 = "1.13.7"
 navigationCompose     = "2.7.7"
 room                  = "2.6.1"
@@ -19,6 +21,8 @@ jlleitschuhGradleKtlint = "12.1.0"
 core-testing            = { group = "androidx.arch.core",         name = "core-testing", 			version.ref = "coreTesting" }
 compose-bom 			= { group = "androidx.compose",           name = "compose-bom", 			version.ref = "composeBom" }
 material3   			= { group = "androidx.compose.material3", name = "material3", 				version.ref = "material3" }
+ui-test-junit4 	        = { group = "androidx.compose.ui",        name = "ui-test-junit4",          version.ref = "uiTestJunit4" }
+ui-test-manifest 	    = { group = "androidx.compose.ui",        name = "ui-test-manifest",        version.ref = "uiTestManifest" }
 ui-tooling-preview 	    = { group = "androidx.compose.ui",        name = "ui-tooling-preview" }
 ui-tooling  			= { group = "androidx.compose.ui",        name = "ui-tooling" }
 navigation-compose 	    = { group = "androidx.navigation",        name = "navigation-compose", 		version.ref = "navigationCompose" }
@@ -31,9 +35,10 @@ junit       			= { group = "junit", 					  name = "junit", 					version.ref = "j
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", 	  name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 
 [bundles]
-compose = ["material3", "ui-tooling-preview", "ui-tooling", "navigation-compose"]
-room    = ["room-ktx", "room-runtime"]
-test    = ["core-testing", "kotlinx-coroutines-test", "mockk", "junit"]
+android-test = ["ui-test-manifest", "ui-test-junit4"]
+compose      = ["material3", "ui-tooling-preview", "ui-tooling", "navigation-compose"]
+room         = ["room-ktx", "room-runtime"]
+test         = ["core-testing", "kotlinx-coroutines-test", "mockk", "junit"]
 
 [plugins]
 android-application 	  = { id = "com.android.application", 		version.ref = "androidApplication" }
