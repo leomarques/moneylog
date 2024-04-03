@@ -15,24 +15,25 @@ fun MyNavigationBar(
     onClick: (Int) -> Unit
 ) {
     BaseNavigationBar(
-        items = listOf(
-            Pair(
-                stringResource(R.string.navbar_home),
-                Icons.Default.Home
+        items =
+            listOf(
+                Pair(
+                    stringResource(R.string.navbar_home),
+                    Icons.Default.Home
+                ),
+                Pair(
+                    stringResource(R.string.transactions),
+                    ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24)
+                ),
+                Pair(
+                    stringResource(R.string.accounts),
+                    ImageVector.vectorResource(id = R.drawable.outline_account_balance_24)
+                ),
+                Pair(
+                    stringResource(R.string.categories),
+                    ImageVector.vectorResource(id = R.drawable.outline_category_24)
+                )
             ),
-            Pair(
-                stringResource(R.string.transactions),
-                ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24)
-            ),
-            Pair(
-                stringResource(R.string.accounts),
-                ImageVector.vectorResource(id = R.drawable.outline_account_balance_24)
-            ),
-            Pair(
-                stringResource(R.string.categories),
-                ImageVector.vectorResource(id = R.drawable.outline_category_24)
-            )
-        ),
         selectedIndex = selectedIndex,
         onClick = onClick
     )

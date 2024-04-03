@@ -10,11 +10,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import lmm.moneylog.ui.extensions.navigatePopUpTo
-import lmm.moneylog.ui.navigation.misc.accountsListScreen
-import lmm.moneylog.ui.navigation.misc.categoriesListScreen
-import lmm.moneylog.ui.navigation.misc.homeScreen
-import lmm.moneylog.ui.navigation.misc.paramTypeAll
-import lmm.moneylog.ui.navigation.misc.transactionsListScreen
+import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
+import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
+import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 
 @Composable
 fun BottomBar(
@@ -28,7 +28,7 @@ fun BottomBar(
             when (index) {
                 0 -> {
                     navController.navigatePopUpTo(
-                        destination = homeScreen,
+                        destination = HOME_SCREEN,
                         navBarSelectedIndex = navBarSelectedIndex,
                         showNavigationBar = showNavigationBar
                     )
@@ -36,7 +36,7 @@ fun BottomBar(
 
                 1 -> {
                     navController.navigatePopUpTo(
-                        destination = "$transactionsListScreen/$paramTypeAll",
+                        destination = "$TRANSACTIONS_LIST_SCREEN/$PARAM_TYPE_ALL",
                         navBarSelectedIndex = navBarSelectedIndex,
                         showNavigationBar = showNavigationBar
                     )
@@ -44,7 +44,7 @@ fun BottomBar(
 
                 2 -> {
                     navController.navigatePopUpTo(
-                        destination = accountsListScreen,
+                        destination = ACCOUNTS_LIST_SCREEN,
                         navBarSelectedIndex = navBarSelectedIndex,
                         showNavigationBar = showNavigationBar
                     )
@@ -52,7 +52,7 @@ fun BottomBar(
 
                 3 -> {
                     navController.navigatePopUpTo(
-                        destination = categoriesListScreen,
+                        destination = CATEGORIES_LIST_SCREEN,
                         navBarSelectedIndex = navBarSelectedIndex,
                         showNavigationBar = showNavigationBar
                     )

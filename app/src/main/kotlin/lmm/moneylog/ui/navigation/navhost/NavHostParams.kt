@@ -10,15 +10,15 @@ import androidx.navigation.NavHostController
 import lmm.moneylog.ui.extensions.navigatePopUpTo
 import lmm.moneylog.ui.extensions.updateIndex
 import lmm.moneylog.ui.extensions.updateShow
-import lmm.moneylog.ui.navigation.misc.accountDetailScreen
-import lmm.moneylog.ui.navigation.misc.accountsListScreen
-import lmm.moneylog.ui.navigation.misc.archivedAccountsListScreen
-import lmm.moneylog.ui.navigation.misc.categoryDetailScreen
-import lmm.moneylog.ui.navigation.misc.paramId
-import lmm.moneylog.ui.navigation.misc.paramTypeAll
-import lmm.moneylog.ui.navigation.misc.transactionDetailScreen
-import lmm.moneylog.ui.navigation.misc.transactionsListScreen
-import lmm.moneylog.ui.navigation.misc.transferScreen
+import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.PARAM_ID
+import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
+import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
 
 @Composable
 fun NavHostParams(
@@ -34,21 +34,21 @@ fun NavHostParams(
         startDestination = startDestination,
         onHomeFabClick = {
             navController.navigatePopUpTo(
-                destination = transactionDetailScreen,
+                destination = TRANSACTION_DETAIL_SCREEN,
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )
         },
         onBalanceCardClick = { typeOfValue ->
-            if (typeOfValue == paramTypeAll) {
+            if (typeOfValue == PARAM_TYPE_ALL) {
                 navController.navigatePopUpTo(
-                    destination = accountsListScreen,
+                    destination = ACCOUNTS_LIST_SCREEN,
                     navBarSelectedIndex = navBarSelectedIndex,
                     showNavigationBar = showNavigationBar
                 )
             } else {
                 navController.navigatePopUpTo(
-                    destination = "$transactionsListScreen/$typeOfValue",
+                    destination = "$TRANSACTIONS_LIST_SCREEN/$typeOfValue",
                     navBarSelectedIndex = navBarSelectedIndex,
                     showNavigationBar = showNavigationBar
                 )
@@ -63,56 +63,56 @@ fun NavHostParams(
         },
         onTransactionsFabClick = {
             navController.navigatePopUpTo(
-                destination = transactionDetailScreen,
+                destination = TRANSACTION_DETAIL_SCREEN,
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )
         },
         onTransactionsItemClick = { id ->
             navController.navigatePopUpTo(
-                destination = "$transactionDetailScreen?$paramId=$id",
+                destination = "$TRANSACTION_DETAIL_SCREEN?$PARAM_ID=$id",
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )
         },
         onAccountsFabClick = {
             navController.navigatePopUpTo(
-                destination = accountDetailScreen,
+                destination = ACCOUNT_DETAIL_SCREEN,
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )
         },
         onAccountsItemClick = { id ->
             navController.navigatePopUpTo(
-                destination = "$accountDetailScreen?$paramId=$id",
+                destination = "$ACCOUNT_DETAIL_SCREEN?$PARAM_ID=$id",
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )
         },
         onCategoriesFabClick = {
             navController.navigatePopUpTo(
-                destination = categoryDetailScreen,
+                destination = CATEGORY_DETAIL_SCREEN,
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )
         },
         onCategoriesItemClick = { id ->
             navController.navigatePopUpTo(
-                destination = "$categoryDetailScreen?$paramId=$id",
+                destination = "$CATEGORY_DETAIL_SCREEN?$PARAM_ID=$id",
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )
         },
         onArchivedIconClick = {
             navController.navigatePopUpTo(
-                destination = archivedAccountsListScreen,
+                destination = ARCHIVED_ACCOUNTS_LIST_SCREEN,
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )
         },
         onTransferIconClick = {
             navController.navigatePopUpTo(
-                destination = transferScreen,
+                destination = TRANSFER_SCREEN,
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )

@@ -26,7 +26,6 @@ class CategoryDetailViewModel(
     private val updateCategoryRepository: UpdateCategoryRepository,
     private val deleteCategoryRepository: DeleteCategoryRepository
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow(CategoryDetailUIState())
     val uiState: StateFlow<CategoryDetailUIState> = _uiState.asStateFlow()
 

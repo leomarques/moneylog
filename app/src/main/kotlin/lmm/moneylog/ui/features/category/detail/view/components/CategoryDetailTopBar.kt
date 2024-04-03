@@ -19,13 +19,14 @@ fun CategoryDetailTopBar(
     TopAppBar(
         title = {
             Text(
-                text = stringResource(
-                    if (isEdit) {
-                        R.string.detail_topbar_category_edit
-                    } else {
-                        R.string.detail_topbar_category_edit
-                    }
-                )
+                text =
+                    stringResource(
+                        if (isEdit) {
+                            R.string.detail_topbar_category_edit
+                        } else {
+                            R.string.detail_topbar_category_edit
+                        }
+                    )
             )
         },
         navigationIcon = { ArrowBackIcon(onArrowBackClick) },

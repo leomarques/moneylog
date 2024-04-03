@@ -19,11 +19,12 @@ fun ListItemData(
 
         ListItemBalance(
             balance = balance,
-            color = if (balance.contains("-")) {
-                outcome
-            } else {
-                income
-            }
+            color =
+                if (balance.contains("-")) {
+                    outcome
+                } else {
+                    income
+                }
         )
     }
 }

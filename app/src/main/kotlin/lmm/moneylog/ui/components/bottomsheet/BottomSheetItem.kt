@@ -27,12 +27,13 @@ fun BottomSheetItem(
     color: Color? = null
 ) {
     Row(
-        modifier = Modifier
-            .background(MaterialTheme.colorScheme.surface)
-            .fillMaxWidth()
-            .height(Size.OneLineListItemHeight)
-            .padding(horizontal = Size.DefaultSpaceSize)
-            .clickable { onItemClick() },
+        modifier =
+            Modifier
+                .background(MaterialTheme.colorScheme.surface)
+                .fillMaxWidth()
+                .height(Size.OneLineListItemHeight)
+                .padding(horizontal = Size.DefaultSpaceSize)
+                .clickable { onItemClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         MyCircle(
@@ -46,11 +47,12 @@ fun BottomSheetItem(
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
             style = MaterialTheme.typography.bodyLarge,
-            color = if (text.isNotEmpty()) {
-                MaterialTheme.colorScheme.onSurface
-            } else {
-                neutralColor
-            }
+            color =
+                if (text.isNotEmpty()) {
+                    MaterialTheme.colorScheme.onSurface
+                } else {
+                    neutralColor
+                }
         )
     }
 }

@@ -45,20 +45,21 @@ fun ArchivedAccountsLayout(
 fun ArchivedAccountsLayoutPreview() {
     ArchivedAccountsLayout(
         onArrowBackClick = { },
-        list = listOf(
-            ArchivedAccountModel(
-                id = 0,
-                name = "Itaú"
+        list =
+            listOf(
+                ArchivedAccountModel(
+                    id = 0,
+                    name = "Itaú"
+                ),
+                ArchivedAccountModel(
+                    id = 0,
+                    name = "Itaú"
+                ),
+                ArchivedAccountModel(
+                    id = 0,
+                    name = "Itaú"
+                )
             ),
-            ArchivedAccountModel(
-                id = 0,
-                name = "Itaú"
-            ),
-            ArchivedAccountModel(
-                id = 0,
-                name = "Itaú"
-            )
-        ),
         onDeleteConfirm = {},
         onUnArchive = {}
     )

@@ -23,9 +23,10 @@ fun HomeLayout(
     onHideClick: () -> Unit
 ) {
     Scaffold(
-        modifier = Modifier
-            .padding(horizontal = Size.DefaultSpaceSize)
-            .padding(top = Size.DefaultSpaceSize),
+        modifier =
+            Modifier
+                .padding(horizontal = Size.DefaultSpaceSize)
+                .padding(top = Size.DefaultSpaceSize),
         floatingActionButton = {
             HideFab(
                 icon = Icons.Default.Add,

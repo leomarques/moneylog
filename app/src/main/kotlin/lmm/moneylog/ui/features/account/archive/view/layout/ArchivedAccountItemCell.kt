@@ -20,13 +20,14 @@ fun ArchivedAccountItemCell(
     onClick: () -> Unit
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(Size.OneLineListItemHeight)
-            .padding(
-                vertical = Size.SmallSpaceSize,
-                horizontal = Size.DefaultSpaceSize
-            ),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(Size.OneLineListItemHeight)
+                .padding(
+                    vertical = Size.SmallSpaceSize,
+                    horizontal = Size.DefaultSpaceSize
+                ),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

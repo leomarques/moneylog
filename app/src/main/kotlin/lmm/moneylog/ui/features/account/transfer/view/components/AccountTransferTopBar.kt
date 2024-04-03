@@ -14,9 +14,7 @@ import lmm.moneylog.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AccountTransferTopBar(
-    onArrowBackClick: () -> Unit
-) {
+fun AccountTransferTopBar(onArrowBackClick: () -> Unit) {
     TopAppBar(
         title = { Text(text = stringResource(R.string.topbar_transfer_add)) },
         navigationIcon = {

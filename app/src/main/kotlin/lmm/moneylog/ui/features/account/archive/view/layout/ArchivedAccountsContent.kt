@@ -65,20 +65,21 @@ fun ArchivedAccountsContent(
 @Composable
 fun ArchivedAccountsContentPreview() {
     ArchivedAccountsContent(
-        list = listOf(
-            ArchivedAccountModel(
-                id = 1,
-                name = "Account 1"
+        list =
+            listOf(
+                ArchivedAccountModel(
+                    id = 1,
+                    name = "Account 1"
+                ),
+                ArchivedAccountModel(
+                    id = 2,
+                    name = "Account 2"
+                ),
+                ArchivedAccountModel(
+                    id = 3,
+                    name = "Account 3"
+                )
             ),
-            ArchivedAccountModel(
-                id = 2,
-                name = "Account 2"
-            ),
-            ArchivedAccountModel(
-                id = 3,
-                name = "Account 3"
-            )
-        ),
         onUnArchive = {},
         onDeleteConfirm = {}
     )

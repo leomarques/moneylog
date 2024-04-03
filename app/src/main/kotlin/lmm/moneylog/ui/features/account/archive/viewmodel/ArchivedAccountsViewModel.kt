@@ -18,7 +18,6 @@ class ArchivedAccountsViewModel(
     private val archiveAccountRepository: ArchiveAccountRepository,
     private val deleteAccountRepository: DeleteAccountRepository
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow(listOf<ArchivedAccountModel>())
     val uiState: StateFlow<List<ArchivedAccountModel>> = _uiState.asStateFlow()
 

@@ -21,10 +21,11 @@ fun CategoriesListContent(
     list: List<CategoryModel>
 ) {
     val tabIndex = remember { mutableIntStateOf(0) }
-    val tabs = listOf(
-        stringResource(id = R.string.incomes),
-        stringResource(id = R.string.outcomes)
-    )
+    val tabs =
+        listOf(
+            stringResource(id = R.string.incomes),
+            stringResource(id = R.string.outcomes)
+        )
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -47,25 +48,26 @@ fun CategoriesListContent(
 fun CategoriesListContentPreview() {
     CategoriesListContent(
         onItemClick = { },
-        list = listOf(
-            CategoryModel(
-                id = 1,
-                name = "Category 1",
-                color = neutralColor,
-                isIncome = true
-            ),
-            CategoryModel(
-                id = 2,
-                name = "Category 2",
-                color = neutralColor,
-                isIncome = false
-            ),
-            CategoryModel(
-                id = 3,
-                name = "Category 3",
-                color = neutralColor,
-                isIncome = true
+        list =
+            listOf(
+                CategoryModel(
+                    id = 1,
+                    name = "Category 1",
+                    color = neutralColor,
+                    isIncome = true
+                ),
+                CategoryModel(
+                    id = 2,
+                    name = "Category 2",
+                    color = neutralColor,
+                    isIncome = false
+                ),
+                CategoryModel(
+                    id = 3,
+                    name = "Category 3",
+                    color = neutralColor,
+                    isIncome = true
+                )
             )
-        )
     )
 }

@@ -27,12 +27,13 @@ class BalanceCardViewModel(
                 yearNumber = currentDomainTime.year
             ).collect {
                 with(it) {
-                    _uiState.value = BalanceCardUIState(
-                        total = total.formatForRs(),
-                        credit = credit.formatForRs(),
-                        debt = debt.formatForRs(),
-                        month = domainTimeRepository.getCurrentMonthName()
-                    )
+                    _uiState.value =
+                        BalanceCardUIState(
+                            total = total.formatForRs(),
+                            credit = credit.formatForRs(),
+                            debt = debt.formatForRs(),
+                            month = domainTimeRepository.getCurrentMonthName()
+                        )
                 }
             }
         }

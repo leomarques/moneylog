@@ -40,26 +40,27 @@ fun CategoriesTabContent(
 @Composable
 fun CategoriesTabContentPreview() {
     CategoriesTabContent(
-        list = listOf(
-            CategoryModel(
-                id = 1,
-                name = "Category 1",
-                color = neutralColor,
-                isIncome = true
+        list =
+            listOf(
+                CategoryModel(
+                    id = 1,
+                    name = "Category 1",
+                    color = neutralColor,
+                    isIncome = true
+                ),
+                CategoryModel(
+                    id = 2,
+                    name = "Category 2",
+                    color = neutralColor,
+                    isIncome = false
+                ),
+                CategoryModel(
+                    id = 3,
+                    name = "Category 3",
+                    color = neutralColor,
+                    isIncome = true
+                )
             ),
-            CategoryModel(
-                id = 2,
-                name = "Category 2",
-                color = neutralColor,
-                isIncome = false
-            ),
-            CategoryModel(
-                id = 3,
-                name = "Category 3",
-                color = neutralColor,
-                isIncome = true
-            )
-        ),
         onItemClick = {}
     )
 }

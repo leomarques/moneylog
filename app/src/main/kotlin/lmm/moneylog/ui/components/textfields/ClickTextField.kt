@@ -26,23 +26,25 @@ fun ClickTextField(
     leadingIcon: @Composable (() -> Unit)? = null
 ) {
     OutlinedTextField(
-        modifier = modifier
-            .background(MaterialTheme.colorScheme.surface)
-            .fillMaxWidth(),
+        modifier =
+            modifier
+                .background(MaterialTheme.colorScheme.surface)
+                .fillMaxWidth(),
         value = value,
         label = { Text(text = label) },
         readOnly = true,
         enabled = enabled,
-        interactionSource = remember { MutableInteractionSource() }
-            .also { interactionSource ->
-                LaunchedEffect(interactionSource) {
-                    interactionSource.interactions.collect {
-                        if (it is PressInteraction.Release) {
-                            onClick.invoke()
+        interactionSource =
+            remember { MutableInteractionSource() }
+                .also { interactionSource ->
+                    LaunchedEffect(interactionSource) {
+                        interactionSource.interactions.collect {
+                            if (it is PressInteraction.Release) {
+                                onClick.invoke()
+                            }
                         }
                     }
-                }
-            },
+                },
         onValueChange = { },
         leadingIcon = leadingIcon
     )

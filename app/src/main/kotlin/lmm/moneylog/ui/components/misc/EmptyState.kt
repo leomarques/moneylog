@@ -22,9 +22,10 @@ fun EmptyState(
     description: String
 ) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surface),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.surface),
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -33,10 +34,11 @@ fun EmptyState(
                 style = MaterialTheme.typography.titleLarge
             )
             Text(
-                modifier = Modifier.padding(
-                    horizontal = Size.XLargeSpaceSize,
-                    vertical = Size.SmallSpaceSize
-                ),
+                modifier =
+                    Modifier.padding(
+                        horizontal = Size.XLargeSpaceSize,
+                        vertical = Size.SmallSpaceSize
+                    ),
                 text = description,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.bodyLarge

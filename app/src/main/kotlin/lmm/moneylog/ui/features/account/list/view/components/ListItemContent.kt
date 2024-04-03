@@ -20,14 +20,15 @@ fun ListItemContent(
     content: @Composable (RowScope.() -> Unit)
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(Size.TwoLinesListItemHeight)
-            .padding(
-                vertical = Size.DefaultSpaceSize,
-                horizontal = Size.DefaultSpaceSize
-            )
-            .clickable { onItemClick(id) },
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(Size.TwoLinesListItemHeight)
+                .padding(
+                    vertical = Size.DefaultSpaceSize,
+                    horizontal = Size.DefaultSpaceSize
+                )
+                .clickable { onItemClick(id) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         content()

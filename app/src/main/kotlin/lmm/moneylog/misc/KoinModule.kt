@@ -16,34 +16,33 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
-val appModule = module {
+val appModule =
+    module {
+        viewModelOf(::HomeViewModel)
+        viewModelOf(::AccountsListViewModel)
+        viewModelOf(::AccountDetailViewModel)
 
-    viewModelOf(::HomeViewModel)
-    viewModelOf(::AccountsListViewModel)
-    viewModelOf(::AccountDetailViewModel)
+        viewModelOf(::CategoriesListViewModel)
+        viewModelOf(::CategoryDetailViewModel)
 
-    viewModelOf(::CategoriesListViewModel)
-    viewModelOf(::CategoryDetailViewModel)
+        viewModelOf(::BalanceCardViewModel)
 
-    viewModelOf(:: BalanceCardViewModel)
+        viewModel { parameters ->
+            TransactionsListViewModel(
+                typeOfValue = parameters.get(),
+                getTransactionsRepository = get(),
+                getAccountsRepository = get(),
+                getCategoriesRepository = get()
+            )
+        }
+        viewModelOf(::TransactionDetailViewModel)
+        viewModelOf(::ArchivedAccountsViewModel)
+        viewModelOf(::AccountTransferViewModel)
 
-
-    viewModel { parameters ->
-        TransactionsListViewModel(
-            typeOfValue = parameters.get(),
-            getTransactionsRepository = get(),
-            getAccountsRepository = get(),
-            getCategoriesRepository = get()
-        )
+        factory {
+            androidContext().getSharedPreferences(
+                "moneylog",
+                Context.MODE_PRIVATE
+            )
+        }
     }
-    viewModelOf(::TransactionDetailViewModel)
-    viewModelOf(::ArchivedAccountsViewModel)
-    viewModelOf(::AccountTransferViewModel)
-
-    factory {
-        androidContext().getSharedPreferences(
-            "moneylog",
-            Context.MODE_PRIVATE
-        )
-    }
-}

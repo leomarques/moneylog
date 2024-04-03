@@ -33,14 +33,15 @@ fun TransactionsListItem(
     color: Color
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(Size.TwoLinesListItemHeight)
-            .padding(
-                vertical = Size.SmallSpaceSize,
-                horizontal = Size.DefaultSpaceSize
-            )
-            .clickable { onItemClick(transaction.id) },
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(Size.TwoLinesListItemHeight)
+                .padding(
+                    vertical = Size.SmallSpaceSize,
+                    horizontal = Size.DefaultSpaceSize
+                )
+                .clickable { onItemClick(transaction.id) },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -58,25 +59,29 @@ fun TransactionsListItem(
 
                 Column(Modifier.padding(start = Size.DefaultSpaceSize)) {
                     Text(
-                        text = description.ifEmpty {
-                            stringResource(R.string.no_description)
-                        },
+                        text =
+                            description.ifEmpty {
+                                stringResource(R.string.no_description)
+                            },
                         overflow = TextOverflow.Ellipsis,
                         style = MaterialTheme.typography.bodyLarge,
                         maxLines = 1,
-                        color = if (description.isEmpty()) {
-                            neutralColor
-                        } else {
-                            MaterialTheme.colorScheme.onSurface
-                        }
+                        color =
+                            if (description.isEmpty()) {
+                                neutralColor
+                            } else {
+                                MaterialTheme.colorScheme.onSurface
+                            }
                     )
 
-                    val categoryString = category.ifEmpty {
-                        stringResource(R.string.no_category)
-                    }
-                    val accountString = account.ifEmpty {
-                        stringResource(R.string.no_account)
-                    }
+                    val categoryString =
+                        category.ifEmpty {
+                            stringResource(R.string.no_category)
+                        }
+                    val accountString =
+                        account.ifEmpty {
+                            stringResource(R.string.no_account)
+                        }
                     Text(
                         text = "$categoryString | $accountString",
                         style = MaterialTheme.typography.bodyMedium,
@@ -88,9 +93,10 @@ fun TransactionsListItem(
             }
 
             Text(
-                modifier = Modifier
-                    .weight(0.25f)
-                    .padding(start = Size.DefaultSpaceSize),
+                modifier =
+                    Modifier
+                        .weight(0.25f)
+                        .padding(start = Size.DefaultSpaceSize),
                 text = value,
                 color = if (isIncome) income else outcome,
                 textAlign = TextAlign.End,
@@ -106,16 +112,17 @@ fun TransactionsListItem(
 @Composable
 fun TransactionsListItemPreview() {
     TransactionsListItem(
-        transaction = TransactionModel(
-            value = "Nome",
-            isIncome = true,
-            description = "Desc",
-            account = "A",
-            category = "B",
-            date = "01/01/2001",
-            id = 0,
-            categoryColor = darkRed
-        ),
+        transaction =
+            TransactionModel(
+                value = "Nome",
+                isIncome = true,
+                description = "Desc",
+                account = "A",
+                category = "B",
+                date = "01/01/2001",
+                id = 0,
+                categoryColor = darkRed
+            ),
         onItemClick = {},
         color = darkRed
     )

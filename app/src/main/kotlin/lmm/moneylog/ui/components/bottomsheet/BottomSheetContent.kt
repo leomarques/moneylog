@@ -21,13 +21,14 @@ fun BottomSheetContent(
     onDismiss: () -> Unit
 ) {
     LazyColumn(
-        modifier = Modifier
-            .background(MaterialTheme.colorScheme.surface)
-            .padding(horizontal = Size.DefaultSpaceSize)
-            .padding(
-                top = Size.SmallSpaceSize,
-                bottom = Size.XLargeSpaceSize
-            )
+        modifier =
+            Modifier
+                .background(MaterialTheme.colorScheme.surface)
+                .padding(horizontal = Size.DefaultSpaceSize)
+                .padding(
+                    top = Size.SmallSpaceSize,
+                    bottom = Size.XLargeSpaceSize
+                )
     ) {
         itemsIndexed(list) { index, item ->
             BottomSheetItem(
@@ -50,10 +51,11 @@ fun BottomSheetContent(
 @Composable
 fun BottomSheetContentPreview() {
     BottomSheetContent(
-        list = listOf(
-            Pair("Nubank", darkPurple),
-            Pair("Santander", darkRed)
-        ),
+        list =
+            listOf(
+                Pair("Nubank", darkPurple),
+                Pair("Santander", darkRed)
+            ),
         onConfirm = {},
         onDismiss = {}
     )

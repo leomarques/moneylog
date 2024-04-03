@@ -9,14 +9,15 @@ import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.model.Transaction
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 
-fun TransactionDetailUIState.toTransaction(): Transaction = Transaction(
-    value = value.validateValue(isIncome),
-    date = date,
-    description = description,
-    id = id,
-    accountId = accountId,
-    categoryId = categoryId
-)
+fun TransactionDetailUIState.toTransaction(): Transaction =
+    Transaction(
+        value = value.validateValue(isIncome),
+        date = date,
+        description = description,
+        id = id,
+        accountId = accountId,
+        categoryId = categoryId
+    )
 
 fun Transaction.toDetailModel(domainTimeRepository: DomainTimeRepository) =
     TransactionDetailUIState(
@@ -41,8 +42,7 @@ private fun Double.isWhole() = this % 1.0 == 0.0
 
 private fun String.removeDecimal() = substring(0, length - 2)
 
-fun DomainTime.convertToDisplayDate(domainTimeRepository: DomainTimeRepository) =
-    "$day ${domainTimeRepository.getMonthName(month)}, $year"
+fun DomainTime.convertToDisplayDate(domainTimeRepository: DomainTimeRepository) = "$day ${domainTimeRepository.getMonthName(month)}, $year"
 
 fun List<Account>.getAccountById(accountId: Int?): (Pair<String, Color>)? {
     return firstOrNull {

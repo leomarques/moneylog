@@ -26,7 +26,6 @@ class AccountDetailViewModel(
     private val updateAccountRepository: UpdateAccountRepository,
     private val archiveAccountRepository: ArchiveAccountRepository
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow(AccountDetailUIState())
     val uiState: StateFlow<AccountDetailUIState> = _uiState.asStateFlow()
 

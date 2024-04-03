@@ -17,11 +17,12 @@ import lmm.moneylog.ui.theme.Size
 @Composable
 fun BalanceCardContent(content: @Composable () -> Unit) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(Size.DefaultSpaceSize))
-            .background(MaterialTheme.colorScheme.tertiaryContainer)
-            .padding(Size.DefaultSpaceSize),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(Size.DefaultSpaceSize))
+                .background(MaterialTheme.colorScheme.tertiaryContainer)
+                .padding(Size.DefaultSpaceSize),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         content()

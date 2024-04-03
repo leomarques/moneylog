@@ -14,24 +14,26 @@ fun List<Transaction>.toModel(
     categoriesColorMap: Map<Int, Color>
 ): TransactionsListUIState {
     return TransactionsListUIState(
-        transactions = sortedBy { it.date }.map { transaction ->
-            with(transaction) {
-                TransactionModel(
-                    value = if (value < 0.0) {
-                        (-value).formatForRs()
-                    } else {
-                        value.formatForRs()
-                    },
-                    isIncome = value > 0,
-                    description = description,
-                    date = date.formatDate(),
-                    id = id,
-                    account = accountMap[accountId].orEmpty(),
-                    category = categoriesMap[categoryId].orEmpty(),
-                    categoryColor = categoriesColorMap[categoryId] ?: neutralColor
-                )
-            }
-        },
+        transactions =
+            sortedBy { it.date }.map { transaction ->
+                with(transaction) {
+                    TransactionModel(
+                        value =
+                            if (value < 0.0) {
+                                (-value).formatForRs()
+                            } else {
+                                value.formatForRs()
+                            },
+                        isIncome = value > 0,
+                        description = description,
+                        date = date.formatDate(),
+                        id = id,
+                        account = accountMap[accountId].orEmpty(),
+                        category = categoriesMap[categoryId].orEmpty(),
+                        categoryColor = categoriesColorMap[categoryId] ?: neutralColor
+                    )
+                }
+            },
         titleResourceId = titleResourceId
     )
 }

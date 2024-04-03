@@ -34,22 +34,25 @@ fun StateTextField(
     val focusRequester = remember { FocusRequester() }
 
     OutlinedTextField(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.surface)
-            .focusRequester(focusRequester),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.surface)
+                .focusRequester(focusRequester),
         value = value,
         label = { Text(text = title) },
         leadingIcon = leadingIcon,
         onValueChange = onValueChange,
-        keyboardOptions = KeyboardOptions.Default.copy(
-            keyboardType = keyboardType,
-            imeAction = ImeAction.Done,
-            capitalization = KeyboardCapitalization.Sentences
-        ),
-        keyboardActions = KeyboardActions(
-            onDone = { focusManager.clearFocus() }
-        )
+        keyboardOptions =
+            KeyboardOptions.Default.copy(
+                keyboardType = keyboardType,
+                imeAction = ImeAction.Done,
+                capitalization = KeyboardCapitalization.Sentences
+            ),
+        keyboardActions =
+            KeyboardActions(
+                onDone = { focusManager.clearFocus() }
+            )
     )
 
     if (getFocus) {

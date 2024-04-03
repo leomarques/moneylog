@@ -32,20 +32,21 @@ fun AccountsListContent(
 @Composable
 fun AccountsListContentPreview() {
     AccountsListContent(
-        list = listOf(
-            AccountModel(
-                id = 0,
-                name = "Bank",
-                balance = "R$1000.0",
-                color = neutralColor
+        list =
+            listOf(
+                AccountModel(
+                    id = 0,
+                    name = "Bank",
+                    balance = "R$1000.0",
+                    color = neutralColor
+                ),
+                AccountModel(
+                    id = 1,
+                    name = "Cash",
+                    balance = "R$100.0",
+                    color = neutralColor
+                )
             ),
-            AccountModel(
-                id = 1,
-                name = "Cash",
-                balance = "R$100.0",
-                color = neutralColor
-            )
-        ),
         onItemClick = {}
     )
 }

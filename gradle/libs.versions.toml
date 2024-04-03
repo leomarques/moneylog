@@ -13,7 +13,7 @@ androidApplication      = "8.3.1"
 androidLibrary          = "8.3.1"
 googleDevtoolsKsp       = "1.9.10-1.0.13"
 jetbrainsKotlinAndroid  = "1.9.10"
-jlleitschuhGradleKtlint = "11.6.0"
+jlleitschuhGradleKtlint = "12.1.0"
 
 [libraries]
 core-testing            = { group = "androidx.arch.core",         name = "core-testing", 			version.ref = "coreTesting" }

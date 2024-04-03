@@ -19,13 +19,14 @@ fun AccountDetailTopAppBar(
     TopAppBar(
         title = {
             Text(
-                text = stringResource(
-                    if (isEdit) {
-                        R.string.detail_topbar_account_edit
-                    } else {
-                        R.string.detail_topbar_account_add
-                    }
-                )
+                text =
+                    stringResource(
+                        if (isEdit) {
+                            R.string.detail_topbar_account_edit
+                        } else {
+                            R.string.detail_topbar_account_add
+                        }
+                    )
             )
         },
         navigationIcon = { ArrowBackIcon(onArrowBackClick) },

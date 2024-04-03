@@ -14,8 +14,8 @@ fun TransactionsListView(
     typeOfValue: String?,
     onItemClick: (Int) -> Unit
 ) {
-    val viewModel = koinViewModel<TransactionsListViewModel>(
-        parameters = { parametersOf(typeOfValue) })
+    val viewModel =
+        koinViewModel<TransactionsListViewModel>(parameters = { parametersOf(typeOfValue) })
     val transactionsModel by viewModel.uiState.collectAsState()
 
     TransactionsListLayout(

@@ -15,9 +15,9 @@ import lmm.moneylog.ui.theme.MoneylogTheme
 import lmm.moneylog.ui.theme.income
 import lmm.moneylog.ui.theme.outcome
 
-const val balanceCardAll = "all"
-const val balanceCardIncome = "income"
-const val balanceCardOutcome = "outcome"
+const val BALANCE_CARD_ALL = "all"
+const val BALANCE_CARD_INCOME = "income"
+const val BALANCE_CARD_OUTCOME = "outcome"
 
 @Composable
 fun BalanceCardLayout(
@@ -32,7 +32,7 @@ fun BalanceCardLayout(
     BalanceCardContent {
         Balance(
             value = total,
-            onClick = { onClick(balanceCardAll) },
+            onClick = { onClick(BALANCE_CARD_ALL) },
             hideValues = hideValues,
             month = month
         )
@@ -49,7 +49,7 @@ fun BalanceCardLayout(
                 value = credit,
                 color = income,
                 hideValue = hideValues,
-                onClick = { onClick(balanceCardIncome) }
+                onClick = { onClick(BALANCE_CARD_INCOME) }
             )
 
             Amount(
@@ -58,7 +58,7 @@ fun BalanceCardLayout(
                 value = debt,
                 color = outcome,
                 hideValue = hideValues,
-                onClick = { onClick(balanceCardOutcome) }
+                onClick = { onClick(BALANCE_CARD_OUTCOME) }
             )
         }
     }

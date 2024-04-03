@@ -15,7 +15,6 @@ import lmm.moneylog.ui.features.category.list.model.CategoryModel
 
 class CategoriesListViewModel(private val getCategoriesRepository: GetCategoriesRepository) :
     ViewModel() {
-
     private val _uiState = MutableStateFlow(CategoriesListUIState())
     val uiState: StateFlow<CategoriesListUIState> = _uiState.asStateFlow()
 

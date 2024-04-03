@@ -30,28 +30,30 @@ fun ColorPicker(
     onConfirm: (Color) -> Unit,
     onDismiss: () -> Unit
 ) {
-    val list = mutableListOf(
-        darkRed,
-        darkBlue,
-        darkGreen,
-        darkYellow,
-        darkOrange,
-        darkPurple,
-        darkPink,
-        darkBrow
-    )
+    val list =
+        mutableListOf(
+            darkRed,
+            darkBlue,
+            darkGreen,
+            darkYellow,
+            darkOrange,
+            darkPurple,
+            darkPink,
+            darkBrow
+        )
 
     Dialog(
         onDismissRequest = onDismiss,
         content = {
             LazyColumn(
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.surface)
-                    .wrapContentWidth()
-                    .padding(
-                        horizontal = Size.DefaultSpaceSize,
-                        vertical = Size.SmallSpaceSize
-                    )
+                modifier =
+                    Modifier
+                        .background(MaterialTheme.colorScheme.surface)
+                        .wrapContentWidth()
+                        .padding(
+                            horizontal = Size.DefaultSpaceSize,
+                            vertical = Size.SmallSpaceSize
+                        )
             ) {
                 items(list) { item ->
                     ColorItem(color = item) {
@@ -70,14 +72,15 @@ fun ColorItem(
     onItemClick: () -> Unit
 ) {
     Box(
-        modifier = Modifier
-            .background(MaterialTheme.colorScheme.surface)
-            .height(Size.TwoLinesListItemHeight)
-            .padding(
-                vertical = Size.SmallSpaceSize,
-                horizontal = Size.DefaultSpaceSize
-            )
-            .clickable { onItemClick() },
+        modifier =
+            Modifier
+                .background(MaterialTheme.colorScheme.surface)
+                .height(Size.TwoLinesListItemHeight)
+                .padding(
+                    vertical = Size.SmallSpaceSize,
+                    horizontal = Size.DefaultSpaceSize
+                )
+                .clickable { onItemClick() },
         contentAlignment = Alignment.Center
     ) {
         MyCircle(color = color)

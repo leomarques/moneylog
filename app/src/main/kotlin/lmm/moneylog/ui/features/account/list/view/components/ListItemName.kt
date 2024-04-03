@@ -21,11 +21,12 @@ fun ListItemName(
         overflow = TextOverflow.Ellipsis,
         maxLines = 1,
         style = MaterialTheme.typography.bodyLarge,
-        color = if (name.isEmpty()) {
-            neutralColor
-        } else {
-            MaterialTheme.colorScheme.onSurface
-        }
+        color =
+            if (name.isEmpty()) {
+                neutralColor
+            } else {
+                MaterialTheme.colorScheme.onSurface
+            }
     )
 }
 

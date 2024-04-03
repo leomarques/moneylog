@@ -23,10 +23,11 @@ fun MoreOptionsDropDown(
 ) {
     DropdownMenu(
         expanded = expanded,
-        offset = DpOffset(
-            x = offset,
-            y = 0.dp
-        ),
+        offset =
+            DpOffset(
+                x = offset,
+                y = 0.dp
+            ),
         onDismissRequest = onDismissRequest
     ) {
         val unarchive = stringResource(R.string.unarchive)

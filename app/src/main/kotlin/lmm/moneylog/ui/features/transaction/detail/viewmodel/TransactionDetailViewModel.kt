@@ -41,7 +41,6 @@ class TransactionDetailViewModel(
     private val deleteTransactionRepository: DeleteTransactionRepository,
     private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow(TransactionDetailUIState())
     val uiState: StateFlow<TransactionDetailUIState> = _uiState.asStateFlow()
 
@@ -165,9 +164,10 @@ class TransactionDetailViewModel(
     }
 
     fun onCategoryPick(index: Int) {
-        val filteredCategories = with(_uiState.value) {
-            categories.filter { it.isIncome == isIncome }
-        }
+        val filteredCategories =
+            with(_uiState.value) {
+                categories.filter { it.isIncome == isIncome }
+            }
 
         _uiState.update {
             with(filteredCategories[index]) {

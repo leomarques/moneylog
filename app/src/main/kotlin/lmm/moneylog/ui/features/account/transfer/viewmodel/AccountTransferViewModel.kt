@@ -21,7 +21,6 @@ class AccountTransferViewModel(
     private val getAccountsRepository: GetAccountsRepository,
     private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow(AccountTransferUIState())
     val uiState: StateFlow<AccountTransferUIState> = _uiState.asStateFlow()
 
@@ -31,13 +30,14 @@ class AccountTransferViewModel(
 
             _uiState.update {
                 AccountTransferUIState(
-                    accounts = accounts.map {
-                        AccountTransferModel(
-                            id = it.id,
-                            name = it.name,
-                            color = it.color.toComposeColor()
-                        )
-                    },
+                    accounts =
+                        accounts.map {
+                            AccountTransferModel(
+                                id = it.id,
+                                name = it.name,
+                                color = it.color.toComposeColor()
+                            )
+                        },
                     date = domainTimeRepository.getCurrentDomainTime()
                 )
             }

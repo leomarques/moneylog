@@ -20,17 +20,17 @@ import lmm.moneylog.ui.features.category.list.view.layouts.CategoriesListView
 import lmm.moneylog.ui.features.home.view.HomeView
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
 import lmm.moneylog.ui.features.transaction.list.view.layout.TransactionsListView
-import lmm.moneylog.ui.navigation.misc.accountDetailScreen
-import lmm.moneylog.ui.navigation.misc.accountsListScreen
-import lmm.moneylog.ui.navigation.misc.archivedAccountsListScreen
-import lmm.moneylog.ui.navigation.misc.categoriesListScreen
-import lmm.moneylog.ui.navigation.misc.categoryDetailScreen
-import lmm.moneylog.ui.navigation.misc.homeScreen
-import lmm.moneylog.ui.navigation.misc.paramId
-import lmm.moneylog.ui.navigation.misc.paramTypeOfValue
-import lmm.moneylog.ui.navigation.misc.transactionDetailScreen
-import lmm.moneylog.ui.navigation.misc.transactionsListScreen
-import lmm.moneylog.ui.navigation.misc.transferScreen
+import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
+import lmm.moneylog.ui.navigation.misc.PARAM_ID
+import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_OF_VALUE
+import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
 
 @Composable
 fun MyNavHost(
@@ -54,14 +54,15 @@ fun MyNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        val arguments = listOf(
-            navArgument(paramId) {
-                defaultValue = -1
-                type = NavType.IntType
-            }
-        )
+        val arguments =
+            listOf(
+                navArgument(PARAM_ID) {
+                    defaultValue = -1
+                    type = NavType.IntType
+                }
+            )
 
-        composable(homeScreen) {
+        composable(HOME_SCREEN) {
             HomeView(
                 onFabClick = onHomeFabClick,
                 onClick = onBalanceCardClick
@@ -69,10 +70,10 @@ fun MyNavHost(
         }
 
         composableExt(
-            route = "$transactionsListScreen/{$paramTypeOfValue}",
+            route = "$TRANSACTIONS_LIST_SCREEN/{$PARAM_TYPE_OF_VALUE}",
             onArrowBackClick = onArrowBackClick
         ) { backStackEntry ->
-            val param = backStackEntry?.arguments?.getString(paramTypeOfValue)
+            val param = backStackEntry?.arguments?.getString(PARAM_TYPE_OF_VALUE)
 
             TransactionsListView(
                 onArrowBackClick = onArrowBackClick,
@@ -83,7 +84,7 @@ fun MyNavHost(
         }
 
         composableExt(
-            route = "$transactionDetailScreen?$paramId={$paramId}",
+            route = "$TRANSACTION_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
             onArrowBackClick = onArrowBackClick,
             arguments = arguments
         ) {
@@ -91,7 +92,7 @@ fun MyNavHost(
         }
 
         composableExt(
-            route = accountsListScreen,
+            route = ACCOUNTS_LIST_SCREEN,
             onArrowBackClick = onArrowBackClick
         ) {
             AccountsListView(
@@ -104,7 +105,7 @@ fun MyNavHost(
         }
 
         composableExt(
-            route = "$accountDetailScreen?$paramId={$paramId}",
+            route = "$ACCOUNT_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
             onArrowBackClick = onArrowBackClick,
             arguments = arguments
         ) {
@@ -112,7 +113,7 @@ fun MyNavHost(
         }
 
         composableExt(
-            route = categoriesListScreen,
+            route = CATEGORIES_LIST_SCREEN,
             onArrowBackClick = onArrowBackClick
         ) {
             CategoriesListView(
@@ -123,7 +124,7 @@ fun MyNavHost(
         }
 
         composableExt(
-            route = "$categoryDetailScreen?$paramId={$paramId}",
+            route = "$CATEGORY_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
             onArrowBackClick = onArrowBackClick,
             arguments = arguments
         ) {
@@ -131,14 +132,14 @@ fun MyNavHost(
         }
 
         composableExt(
-            route = archivedAccountsListScreen,
+            route = ARCHIVED_ACCOUNTS_LIST_SCREEN,
             onArrowBackClick = onArrowBackClick
         ) {
             ArchivedAccountsListView(onArrowBackClick = onArrowBackClick)
         }
 
         composableExt(
-            route = transferScreen,
+            route = TRANSFER_SCREEN,
             onArrowBackClick = onArrowBackClick
         ) {
             AccountTransferView(onArrowBackClick = onArrowBackClick)

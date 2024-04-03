@@ -4,7 +4,6 @@ import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
 class ValueExtTest {
-
     @Test
     fun testFormatForRs() {
         assertEquals("R$1.234.567,89", 1234567.89.formatForRs())

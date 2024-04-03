@@ -28,15 +28,16 @@ fun TransactionsListContent(
     filter: MutableState<String>,
     onItemClick: (Int) -> Unit
 ) {
-    val grouped = list
-        .filter { transaction ->
-            transaction.description.startsWith(
-                prefix = filter.value,
-                ignoreCase = true
-            )
-        }
-        .reversed()
-        .groupBy { it.date }
+    val grouped =
+        list
+            .filter { transaction ->
+                transaction.description.startsWith(
+                    prefix = filter.value,
+                    ignoreCase = true
+                )
+            }
+            .reversed()
+            .groupBy { it.date }
 
     LazyColumn(
         Modifier.background(
@@ -52,9 +53,10 @@ fun TransactionsListContent(
                 ) {
                     Text(
                         text = date,
-                        modifier = Modifier
-                            .padding(vertical = Size.SmallSpaceSize)
-                            .padding(start = Size.DefaultSpaceSize),
+                        modifier =
+                            Modifier
+                                .padding(vertical = Size.SmallSpaceSize)
+                                .padding(start = Size.DefaultSpaceSize),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold
                     )
@@ -77,38 +79,39 @@ fun TransactionsListContent(
 @Composable
 fun TransactionsListContentPreview() {
     TransactionsListContent(
-        list = listOf(
-            TransactionModel(
-                value = "Nome",
-                isIncome = true,
-                description = "Desc",
-                account = "A",
-                category = "B",
-                date = "01/01/2001",
-                id = 0,
-                categoryColor = darkRed
+        list =
+            listOf(
+                TransactionModel(
+                    value = "Nome",
+                    isIncome = true,
+                    description = "Desc",
+                    account = "A",
+                    category = "B",
+                    date = "01/01/2001",
+                    id = 0,
+                    categoryColor = darkRed
+                ),
+                TransactionModel(
+                    value = "Nome",
+                    isIncome = true,
+                    description = "Desc",
+                    account = "A",
+                    category = "B",
+                    date = "01/01/2001",
+                    id = 0,
+                    categoryColor = darkRed
+                ),
+                TransactionModel(
+                    value = "Nome",
+                    isIncome = true,
+                    description = "Desc",
+                    account = "A",
+                    category = "B",
+                    date = "01/01/2001",
+                    id = 0,
+                    categoryColor = darkRed
+                )
             ),
-            TransactionModel(
-                value = "Nome",
-                isIncome = true,
-                description = "Desc",
-                account = "A",
-                category = "B",
-                date = "01/01/2001",
-                id = 0,
-                categoryColor = darkRed
-            ),
-            TransactionModel(
-                value = "Nome",
-                isIncome = true,
-                description = "Desc",
-                account = "A",
-                category = "B",
-                date = "01/01/2001",
-                id = 0,
-                categoryColor = darkRed
-            )
-        ),
         filter = mutableStateOf(""),
         onItemClick = {}
     )

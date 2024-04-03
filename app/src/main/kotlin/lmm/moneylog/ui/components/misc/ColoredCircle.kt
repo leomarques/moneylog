@@ -33,15 +33,17 @@ fun MyCircle(
         )
         letters?.let {
             Text(
-                text = it
-                    .substring(
-                        startIndex = 0,
-                        endIndex = Integer.min(
-                            it.length,
-                            2
+                text =
+                    it
+                        .substring(
+                            startIndex = 0,
+                            endIndex =
+                                Integer.min(
+                                    it.length,
+                                    2
+                                )
                         )
-                    )
-                    .uppercase(),
+                        .uppercase(),
                 style = MaterialTheme.typography.titleMedium,
                 color = Color.White,
                 modifier = Modifier.offset(y = (-1).dp)

@@ -15,9 +15,9 @@ import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepo
 import lmm.moneylog.ui.extensions.toModel
 import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
 
-const val getTransactionsIncome = "income"
-const val getTransactionsOutcome = "outcome"
-const val getTransactionsAll = "all"
+const val GET_TRANSACTIONS_INCOME = "income"
+const val GET_TRANSACTIONS_OUTCOME = "outcome"
+const val GET_TRANSACTIONS_ALL = "all"
 
 class TransactionsListViewModel(
     private val typeOfValue: String?,
@@ -25,7 +25,6 @@ class TransactionsListViewModel(
     private val getAccountsRepository: GetAccountsRepository,
     private val getCategoriesRepository: GetCategoriesRepository
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow(TransactionsListUIState(R.string.transactions))
     val uiState: StateFlow<TransactionsListUIState> = _uiState.asStateFlow()
 
@@ -34,18 +33,21 @@ class TransactionsListViewModel(
             val accounts = getAccountsRepository.getAccountsSuspend()
             val categories = getCategoriesRepository.getCategoriesSuspend()
 
-            val accountsMap = accounts.associate {
-                it.id to it.name
-            }
-            val categoriesMap = categories.associate {
-                it.id to it.name
-            }
-            val categoriesColorMap = categories.associate {
-                it.id to Color(it.color.toULong())
-            }
+            val accountsMap =
+                accounts.associate {
+                    it.id to it.name
+                }
+            val categoriesMap =
+                categories.associate {
+                    it.id to it.name
+                }
+            val categoriesColorMap =
+                categories.associate {
+                    it.id to Color(it.color.toULong())
+                }
 
             when (typeOfValue) {
-                getTransactionsIncome -> {
+                GET_TRANSACTIONS_INCOME -> {
                     getTransactionsRepository.getIncomeTransactions().collect { transactions ->
                         _uiState.update {
                             transactions.toModel(
@@ -58,7 +60,7 @@ class TransactionsListViewModel(
                     }
                 }
 
-                getTransactionsOutcome -> {
+                GET_TRANSACTIONS_OUTCOME -> {
                     getTransactionsRepository.getOutcomeTransactions().collect { transactions ->
                         _uiState.update {
                             transactions.toModel(

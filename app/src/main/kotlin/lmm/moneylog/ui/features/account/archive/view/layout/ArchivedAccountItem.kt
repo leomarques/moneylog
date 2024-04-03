@@ -31,11 +31,12 @@ fun ArchivedAccountItem(
     val density = LocalDensity.current
 
     Box(
-        modifier = Modifier
-            .pointerInteropFilter {
-                offset = with(density) { it.x.toDp() }
-                false
-            }
+        modifier =
+            Modifier
+                .pointerInteropFilter {
+                    offset = with(density) { it.x.toDp() }
+                    false
+                }
     ) {
         ArchivedAccountItemCell(name) {
             expanded = true
