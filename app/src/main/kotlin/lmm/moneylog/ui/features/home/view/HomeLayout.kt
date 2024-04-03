@@ -9,6 +9,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.fabs.HideFab
 import lmm.moneylog.ui.features.balancecard.view.layout.BalanceCardView
@@ -35,7 +36,7 @@ fun HomeLayout(
         },
         floatingActionButtonPosition = FabPosition.Center,
         content = {
-            Surface {
+            Surface(Modifier.testTag("HomeScreen")) {
                 BalanceCardView(
                     hideValues = hideValues,
                     onClick = onClick,

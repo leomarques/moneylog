@@ -8,6 +8,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
@@ -42,7 +43,11 @@ fun AccountsListLayout(
         },
         floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
-            Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
+            Surface(
+                Modifier
+                    .padding(top = paddingValues.calculateTopPadding())
+                    .testTag("AccountsListScreen")
+            ) {
                 if (list.isNotEmpty()) {
                     AccountsListContent(
                         list = list,

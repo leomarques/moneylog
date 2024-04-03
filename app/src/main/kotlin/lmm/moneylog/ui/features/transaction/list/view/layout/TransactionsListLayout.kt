@@ -19,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
@@ -95,7 +96,9 @@ fun TransactionsListLayout(
         },
         content = { paddingValues ->
             Surface(
-                Modifier.padding(top = paddingValues.calculateTopPadding())
+                Modifier
+                    .padding(top = paddingValues.calculateTopPadding())
+                    .testTag("TransactionsListScreen")
             ) {
                 if (model.transactions.isNotEmpty()) {
                     TransactionsListContent(
