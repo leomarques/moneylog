@@ -33,7 +33,8 @@ fun CategoryDetailFields(
         title = stringResource(R.string.name),
         keyboardType = KeyboardType.Text,
         getFocus = !isEdit,
-        onValueChange = onNameChange
+        onValueChange = onNameChange,
+        testTag = "CategoryNameTextField"
     )
 
     IncomeRadioGroup(
