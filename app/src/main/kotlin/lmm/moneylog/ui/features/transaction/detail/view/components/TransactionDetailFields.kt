@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.features.transaction.detail.view.components
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -31,60 +32,63 @@ fun TransactionDetailFields(
     uisAccountsFieldEnabled: Boolean,
     onDateClick: () -> Unit
 ) {
-    StateTextField(
-        modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-        value = uiState.value,
-        title = stringResource(R.string.value),
-        keyboardType = KeyboardType.Number,
-        getFocus = !uiState.isEdit,
-        leadingIcon = { ValueIcon(tint = if (uiState.isIncome) income else outcome) },
-        onValueChange = onValueChange
-    )
+    Column {
+        StateTextField(
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
+            value = uiState.value,
+            title = stringResource(R.string.value),
+            keyboardType = KeyboardType.Number,
+            getFocus = !uiState.isEdit,
+            leadingIcon = { ValueIcon(tint = if (uiState.isIncome) income else outcome) },
+            onValueChange = onValueChange,
+            testTag = "ValueTextField"
+        )
 
-    IncomeRadioGroup(
-        modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
-        isIncome = uiState.isIncome,
-        onClick = { onIsIncomeSelect(it) }
-    )
+        IncomeRadioGroup(
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
+            isIncome = uiState.isIncome,
+            onClick = { onIsIncomeSelect(it) }
+        )
 
-    ClickTextField(
-        modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-        value = uiState.displayDate,
-        label = stringResource(R.string.detail_date),
-        leadingIcon = { DateIcon() },
-        onClick = onDateClick
-    )
+        ClickTextField(
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
+            value = uiState.displayDate,
+            label = stringResource(R.string.detail_date),
+            leadingIcon = { DateIcon() },
+            onClick = onDateClick
+        )
 
-    StateTextField(
-        modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-        value = uiState.description,
-        title = stringResource(R.string.detail_description),
-        keyboardType = KeyboardType.Text,
-        leadingIcon = { DescriptionIcon() },
-        onValueChange = onDescriptionChange
-    )
+        StateTextField(
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
+            value = uiState.description,
+            title = stringResource(R.string.detail_description),
+            keyboardType = KeyboardType.Text,
+            leadingIcon = { DescriptionIcon() },
+            onValueChange = onDescriptionChange
+        )
 
-    ClickTextField(
-        modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-        label = stringResource(R.string.account),
-        value = uiState.displayAccount,
-        enabled = uisAccountsFieldEnabled,
-        leadingIcon = { AccountIcon(uiState.displayAccountColor) },
-        onClick = onAccountClick
-    )
+        ClickTextField(
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
+            label = stringResource(R.string.account),
+            value = uiState.displayAccount,
+            enabled = uisAccountsFieldEnabled,
+            leadingIcon = { AccountIcon(uiState.displayAccountColor) },
+            onClick = onAccountClick
+        )
 
-    ClickTextField(
-        modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
-        label = stringResource(R.string.category),
-        value = uiState.displayCategory,
-        enabled = isCategoriesFieldEnabled,
-        leadingIcon = { CategoryIcon(uiState.displayCategoryColor) },
-        onClick = onCategoryClick
-    )
+        ClickTextField(
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
+            label = stringResource(R.string.category),
+            value = uiState.displayCategory,
+            enabled = isCategoriesFieldEnabled,
+            leadingIcon = { CategoryIcon(uiState.displayCategoryColor) },
+            onClick = onCategoryClick
+        )
+    }
 }
 
 @SuppressLint("UnrememberedMutableState")
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun TransactionDetailFieldsPreview() {
     TransactionDetailFields(

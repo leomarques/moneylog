@@ -32,10 +32,11 @@ fun AccountDetailFields(
             modifier = Modifier.padding(bottom = Size.MediumSpaceSize),
             value = name,
             title = stringResource(R.string.name),
-            leadingIcon = { AccountIcon() },
             keyboardType = KeyboardType.Text,
             getFocus = !isEdit,
-            onValueChange = onNameChange
+            leadingIcon = { AccountIcon() },
+            onValueChange = onNameChange,
+            testTag = "AccountNameTextField"
         )
 
         ColorTextField(
@@ -49,7 +50,7 @@ fun AccountDetailFields(
 }
 
 @SuppressLint("UnrememberedMutableState")
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun AccountDetailFieldsPreview() {
     AccountDetailFields(

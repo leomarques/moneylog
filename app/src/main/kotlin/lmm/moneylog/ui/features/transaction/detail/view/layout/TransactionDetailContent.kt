@@ -61,7 +61,7 @@ fun TransactionDetailContent(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun TransactionDetailContentPreview() {
     TransactionDetailContent(

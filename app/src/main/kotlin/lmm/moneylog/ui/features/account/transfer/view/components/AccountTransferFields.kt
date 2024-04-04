@@ -32,10 +32,10 @@ fun AccountTransferFields(
     StateTextField(
         modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
         value = value,
-        leadingIcon = { ValueIcon() },
         title = stringResource(R.string.value),
         keyboardType = KeyboardType.Number,
         getFocus = true,
+        leadingIcon = { ValueIcon() },
         onValueChange = onValueChange
     )
 
