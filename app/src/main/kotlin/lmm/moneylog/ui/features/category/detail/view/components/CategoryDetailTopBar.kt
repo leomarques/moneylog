@@ -29,10 +29,10 @@ fun CategoryDetailTopBar(
                     )
             )
         },
-        navigationIcon = { ArrowBackIcon(onArrowBackClick) },
+        navigationIcon = { ArrowBackIcon(onClick = onArrowBackClick) },
         actions = {
             if (isEdit) {
-                DeleteActionButton(onDeleteIconClick)
+                DeleteActionButton(onClick = onDeleteIconClick)
             }
         }
     )
