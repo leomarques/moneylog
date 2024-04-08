@@ -59,26 +59,26 @@ fun CategoriesListLayoutPreview() {
         onArrowBackClick = { },
         onFabClick = { },
         list =
-        listOf(
-            CategoryModel(
-                id = 0,
-                name = "Alimentação",
-                color = darkRed,
-                isIncome = true
+            listOf(
+                CategoryModel(
+                    id = 0,
+                    name = "Alimentação",
+                    color = darkRed,
+                    isIncome = true
+                ),
+                CategoryModel(
+                    id = 0,
+                    name = "Moradia",
+                    color = darkRed,
+                    isIncome = true
+                ),
+                CategoryModel(
+                    id = 0,
+                    name = "Transporte",
+                    color = darkRed,
+                    isIncome = false
+                )
             ),
-            CategoryModel(
-                id = 0,
-                name = "Moradia",
-                color = darkRed,
-                isIncome = true
-            ),
-            CategoryModel(
-                id = 0,
-                name = "Transporte",
-                color = darkRed,
-                isIncome = false
-            )
-        ),
         onItemClick = {}
     )
 }
