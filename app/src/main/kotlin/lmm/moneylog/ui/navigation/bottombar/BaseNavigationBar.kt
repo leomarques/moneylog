@@ -16,7 +16,7 @@ fun BaseNavigationBar(
     modifier: Modifier = Modifier,
     onClick: (Int) -> Unit
 ) {
-    NavigationBar {
+    NavigationBar(modifier) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 modifier = Modifier.testTag("BaseNavigationBarItem$index"),

@@ -35,7 +35,7 @@ fun TransactionsListItem(
 ) {
     Row(
         modifier =
-            Modifier
+            modifier
                 .fillMaxWidth()
                 .height(Size.TwoLinesListItemHeight)
                 .padding(
@@ -109,9 +109,9 @@ fun TransactionsListItem(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun TransactionsListItemPreview() {
+private fun TransactionsListItemPreview() {
     TransactionsListItem(
         transaction =
             TransactionModel(

@@ -45,7 +45,7 @@ fun ConfirmDialog(
 
 @Preview
 @Composable
-fun ConfirmDialogPreview() {
+private fun ConfirmDialogPreview() {
     ConfirmDialog(
         onConfirm = {},
         onDismiss = {},

@@ -30,7 +30,7 @@ fun BalanceCardLayout(
     modifier: Modifier = Modifier,
     onClick: (String) -> Unit
 ) {
-    BalanceCardContent {
+    BalanceCardContent(modifier) {
         Balance(
             value = total,
             onClick = { onClick(BALANCE_CARD_ALL) },
@@ -67,7 +67,7 @@ fun BalanceCardLayout(
 
 @Preview
 @Composable
-fun BalanceCardPreview() {
+private fun BalanceCardPreview() {
     MoneylogTheme {
         BalanceCardLayout(
             total = "R$9999999999999999999999999999999999999999999999999999999999999999999,00,00",

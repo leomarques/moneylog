@@ -22,8 +22,9 @@ fun AccountsListTopBar(
     onTransferIconClick: () -> Unit
 ) {
     TopAppBar(
+        modifier = modifier,
         title = { Text(text = stringResource(id = R.string.accounts)) },
-        navigationIcon = { ArrowBackIcon(modifier, onArrowBackClick) },
+        navigationIcon = { ArrowBackIcon(onClick = onArrowBackClick) },
         actions = {
             IconButton(
                 onClick = onArchivedIconClick,
@@ -49,7 +50,7 @@ fun AccountsListTopBar(
 
 @Preview
 @Composable
-fun AccountsListTopBarPreview() {
+private fun AccountsListTopBarPreview() {
     AccountsListTopBar(
         onArrowBackClick = {},
         onArchivedIconClick = {},

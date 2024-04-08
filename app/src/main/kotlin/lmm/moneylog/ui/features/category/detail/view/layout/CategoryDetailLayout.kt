@@ -34,6 +34,7 @@ fun CategoryDetailLayout(
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
     Scaffold(
+        modifier = modifier,
         topBar = {
             CategoryDetailTopBar(
                 isEdit = isEdit,
@@ -74,7 +75,7 @@ fun CategoryDetailLayout(
 
 @Preview
 @Composable
-fun CategoryDetailLayoutPreview() {
+private fun CategoryDetailLayoutPreview() {
     CategoryDetailLayout(
         name = "",
         color = neutralColor,

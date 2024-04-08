@@ -34,6 +34,7 @@ fun AccountDetailLayout(
     var showArchiveConfirmDialog by remember { mutableStateOf(false) }
 
     Scaffold(
+        modifier = modifier,
         topBar = {
             AccountDetailTopAppBar(
                 isEdit = isEdit,
@@ -72,7 +73,7 @@ fun AccountDetailLayout(
 
 @Preview
 @Composable
-fun AccountDetailLayoutPreview() {
+private fun AccountDetailLayoutPreview() {
     AccountDetailLayout(
         name = "",
         color = neutralColor,

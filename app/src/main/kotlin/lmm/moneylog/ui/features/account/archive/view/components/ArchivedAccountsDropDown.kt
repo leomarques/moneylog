@@ -24,6 +24,7 @@ fun MoreOptionsDropDown(
     onDismissRequest: () -> Unit
 ) {
     DropdownMenu(
+        modifier = modifier,
         expanded = expanded,
         offset =
             DpOffset(
@@ -62,9 +63,9 @@ fun MoreOptionsDropDown(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun MoreOptionsDropDownPreview() {
+private fun MoreOptionsDropDownPreview() {
     MoreOptionsDropDown(
         id = 1,
         expanded = true,

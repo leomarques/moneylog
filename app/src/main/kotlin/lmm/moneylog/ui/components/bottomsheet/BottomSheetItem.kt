@@ -28,7 +28,7 @@ fun BottomSheetItem(
 ) {
     Row(
         modifier =
-            Modifier
+            modifier
                 .fillMaxWidth()
                 .height(Size.OneLineListItemHeight)
                 .padding(horizontal = Size.DefaultSpaceSize)

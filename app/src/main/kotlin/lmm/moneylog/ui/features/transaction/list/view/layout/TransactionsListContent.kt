@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.features.transaction.list.view.layout
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,7 +41,7 @@ fun TransactionsListContent(
             .groupBy { it.date }
 
     LazyColumn(
-        Modifier.background(
+        modifier.background(
             color = MaterialTheme.colorScheme.inverseOnSurface,
             shape = RoundedCornerShape(Size.ListRoundedCornerSize)
         )
@@ -75,10 +75,9 @@ fun TransactionsListContent(
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
-fun TransactionsListContentPreview() {
+private fun TransactionsListContentPreview() {
     TransactionsListContent(
         list =
             listOf(
@@ -113,7 +112,7 @@ fun TransactionsListContentPreview() {
                     categoryColor = darkRed
                 )
             ),
-        filter = mutableStateOf(""),
+        filter = remember { mutableStateOf("") },
         onItemClick = {}
     )
 }

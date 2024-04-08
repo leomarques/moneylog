@@ -31,12 +31,8 @@ fun AccountTransferLayout(
     onFabClick: () -> Unit
 ) {
     Scaffold(
-        topBar = {
-            AccountTransferTopBar(
-                modifier = modifier,
-                onArrowBackClick = onArrowBackClick
-            )
-        },
+        modifier = modifier,
+        topBar = { AccountTransferTopBar(onArrowBackClick = onArrowBackClick) },
         floatingActionButton = {
             HideFab(
                 onClick = onFabClick,
@@ -64,7 +60,7 @@ fun AccountTransferLayout(
 
 @Preview
 @Composable
-fun AccountTransferLayoutPreview() {
+private fun AccountTransferLayoutPreview() {
     AccountTransferLayout(
         value = "",
         accounts = emptyList(),

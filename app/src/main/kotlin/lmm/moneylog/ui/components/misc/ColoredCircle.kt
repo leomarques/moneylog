@@ -54,7 +54,7 @@ fun MyCircle(
 
 @Preview
 @Composable
-fun MyCirclePreview() {
+private fun MyCirclePreview() {
     MyCircle(
         color = outcome,
         letters = "AL"

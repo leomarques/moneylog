@@ -1,6 +1,5 @@
 @file:OptIn(
     ExperimentalAnimationApi::class,
-    ExperimentalComposeUiApi::class,
     ExperimentalMaterial3Api::class
 )
 
@@ -30,7 +29,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -58,6 +56,7 @@ fun SearchTopBar(
     val focusRequester = remember { FocusRequester() }
 
     TopAppBar(
+        modifier = modifier,
         title = { },
         navigationIcon = {
             IconButton(onClick = onArrowBackClick) {
@@ -122,7 +121,7 @@ fun SearchTopBar(
 
 @Preview
 @Composable
-fun SearchTopBarPreview() {
+private fun SearchTopBarPreview() {
     SearchTopBar(
         searchText = "",
         placeholderText = "Search",

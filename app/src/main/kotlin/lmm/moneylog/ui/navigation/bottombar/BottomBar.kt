@@ -1,12 +1,11 @@
 package lmm.moneylog.ui.navigation.bottombar
 
-import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
@@ -21,8 +20,7 @@ import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 fun BottomBar(
     navBarSelectedIndex: MutableIntState,
     navController: NavHostController,
-    showNavigationBar: MutableState<Boolean>,
-    modifier: Modifier = Modifier
+    showNavigationBar: MutableState<Boolean>
 ) {
     MyNavigationBar(
         selectedIndex = navBarSelectedIndex.intValue,
@@ -64,13 +62,12 @@ fun BottomBar(
     )
 }
 
-@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
-fun BottomBarPreview() {
+private fun BottomBarPreview() {
     BottomBar(
-        navBarSelectedIndex = mutableIntStateOf(0),
+        navBarSelectedIndex = remember { mutableIntStateOf(0) },
         navController = NavHostController(LocalContext.current),
-        showNavigationBar = mutableStateOf(true)
+        showNavigationBar = remember { mutableStateOf(true) }
     )
 }

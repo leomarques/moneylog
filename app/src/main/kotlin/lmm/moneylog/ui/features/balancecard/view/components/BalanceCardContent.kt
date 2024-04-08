@@ -21,7 +21,7 @@ fun BalanceCardContent(
 ) {
     Column(
         modifier =
-            Modifier
+            modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(Size.DefaultSpaceSize))
                 .background(MaterialTheme.colorScheme.tertiaryContainer)
@@ -34,7 +34,7 @@ fun BalanceCardContent(
 
 @Preview
 @Composable
-fun BalanceCardContentPreview() {
+private fun BalanceCardContentPreview() {
     BalanceCardContent {
         Text("BalanceCardContent")
     }

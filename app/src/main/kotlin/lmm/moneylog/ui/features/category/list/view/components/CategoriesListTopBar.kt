@@ -19,6 +19,7 @@ fun CategoriesListTopBar(
     onArrowBackClick: () -> Unit
 ) {
     TopAppBar(
+        modifier = modifier,
         title = {
             Text(text = stringResource(id = R.string.categories))
         },

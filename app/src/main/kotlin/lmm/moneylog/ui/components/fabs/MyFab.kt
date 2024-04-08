@@ -14,12 +14,12 @@ import lmm.moneylog.R
 
 @Composable
 fun MyFab(
-    onClick: () -> Unit,
     icon: ImageVector,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
     FloatingActionButton(
-        modifier = Modifier.testTag("Fab"),
+        modifier = modifier.testTag("Fab"),
         onClick = onClick
     ) {
         Icon(
@@ -31,7 +31,7 @@ fun MyFab(
 
 @Preview
 @Composable
-fun MyFabPreview() {
+private fun MyFabPreview() {
     MyFab(
         onClick = {},
         icon = Icons.Default.Add

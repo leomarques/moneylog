@@ -20,6 +20,7 @@ fun ArchivedAccountsTopBar(
     onArrowBackClick: () -> Unit
 ) {
     TopAppBar(
+        modifier = modifier,
         title = {
             Text(text = stringResource(id = R.string.topbar_archived_accounts))
         },
@@ -36,6 +37,6 @@ fun ArchivedAccountsTopBar(
 
 @Preview
 @Composable
-fun ArchivedAccountsTopBarPreview() {
+private fun ArchivedAccountsTopBarPreview() {
     ArchivedAccountsTopBar(onArrowBackClick = {})
 }

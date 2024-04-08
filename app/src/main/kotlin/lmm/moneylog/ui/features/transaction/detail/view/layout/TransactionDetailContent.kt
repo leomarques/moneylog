@@ -26,7 +26,7 @@ fun TransactionDetailContent(
     modifier: Modifier = Modifier,
     onDescriptionChange: (String) -> Unit
 ) {
-    Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {
+    Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         val showDatePicker = remember { mutableStateOf(false) }
         val showAccountPicker = remember { mutableStateOf(false) }
         val showCategoryPicker = remember { mutableStateOf(false) }
@@ -64,7 +64,7 @@ fun TransactionDetailContent(
 
 @Preview(showBackground = true)
 @Composable
-fun TransactionDetailContentPreview() {
+private fun TransactionDetailContentPreview() {
     TransactionDetailContent(
         uiState = TransactionDetailUIState(),
         showDeleteConfirmDialog = false,

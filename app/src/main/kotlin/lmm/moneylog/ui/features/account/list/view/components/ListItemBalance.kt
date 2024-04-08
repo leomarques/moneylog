@@ -18,7 +18,7 @@ fun ListItemBalance(
     color: Color,
     modifier: Modifier = Modifier
 ) {
-    Row {
+    Row(modifier) {
         Text(
             text = stringResource(R.string.list_account_balance),
             style = MaterialTheme.typography.bodyMedium,
@@ -35,9 +35,9 @@ fun ListItemBalance(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ListItemBalancePreview() {
+private fun ListItemBalancePreview() {
     ListItemBalance(
         balance = "R$ 1.000,00",
         color = outcome

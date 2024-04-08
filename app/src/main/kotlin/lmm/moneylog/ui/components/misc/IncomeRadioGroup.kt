@@ -1,9 +1,7 @@
 package lmm.moneylog.ui.components.misc
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +17,7 @@ fun IncomeRadioGroup(
     modifier: Modifier = Modifier,
     onClick: (Boolean) -> Unit
 ) {
-    Row(modifier = modifier.background(MaterialTheme.colorScheme.surface)) {
+    Row(modifier) {
         IncomeRadioButton(
             isSelected = isIncome,
             text = stringResource(R.string.income),
@@ -42,10 +40,11 @@ fun IncomeRadioGroup(
 private fun IncomeRadioButton(
     isSelected: Boolean,
     text: String,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Row(
-        modifier = Modifier.clickable { onClick() },
+        modifier = modifier.clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         RadioButton(
@@ -56,18 +55,18 @@ private fun IncomeRadioButton(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun IncomeRadioGroupPreview() {
+private fun IncomeRadioGroupPreview() {
     IncomeRadioGroup(
         isIncome = true,
         onClick = {}
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun IncomeRadioButtonPreview() {
+private fun IncomeRadioButtonPreview() {
     IncomeRadioButton(
         isSelected = true,
         text = stringResource(R.string.income),

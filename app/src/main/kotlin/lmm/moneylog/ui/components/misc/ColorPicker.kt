@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.components.misc
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,8 +46,7 @@ fun ColorPicker(
         content = {
             LazyColumn(
                 modifier =
-                    Modifier
-                        .background(MaterialTheme.colorScheme.surface)
+                    modifier
                         .wrapContentWidth()
                         .padding(
                             horizontal = Size.DefaultSpaceSize,
@@ -58,7 +55,6 @@ fun ColorPicker(
             ) {
                 items(list) { item ->
                     ColorItem(
-                        modifier = modifier,
                         color = item
                     ) {
                         onDismiss()
@@ -78,8 +74,7 @@ fun ColorItem(
 ) {
     Box(
         modifier =
-            Modifier
-                .background(MaterialTheme.colorScheme.surface)
+            modifier
                 .height(Size.TwoLinesListItemHeight)
                 .padding(
                     vertical = Size.SmallSpaceSize,
@@ -92,18 +87,18 @@ fun ColorItem(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ColorPickerPreview() {
+private fun ColorPickerPreview() {
     ColorPicker(
         onDismiss = {},
         onConfirm = {}
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ColorItemPreview() {
+private fun ColorItemPreview() {
     ColorItem(
         color = darkRed,
         onItemClick = {}

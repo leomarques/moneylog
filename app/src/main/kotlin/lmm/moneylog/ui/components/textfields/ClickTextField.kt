@@ -1,13 +1,11 @@
 package lmm.moneylog.ui.components.textfields
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,7 +26,6 @@ fun ClickTextField(
     OutlinedTextField(
         modifier =
             modifier
-                .background(MaterialTheme.colorScheme.surface)
                 .fillMaxWidth(),
         value = value,
         label = { Text(text = label) },
@@ -50,9 +47,9 @@ fun ClickTextField(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ClickTextFieldPreview() {
+private fun ClickTextFieldPreview() {
     ClickTextField(
         value = "Nubank",
         label = "Label",

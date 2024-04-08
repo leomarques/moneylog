@@ -1,12 +1,10 @@
 package lmm.moneylog.ui.components.textfields
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,12 +26,9 @@ fun ColorTextField(
     modifier: Modifier = Modifier,
     leadingIcon: (@Composable () -> Unit)? = null
 ) {
-    Box(contentAlignment = Alignment.CenterStart) {
+    Box(modifier = modifier, contentAlignment = Alignment.CenterStart) {
         OutlinedTextField(
-            modifier =
-                Modifier
-                    .background(MaterialTheme.colorScheme.surface)
-                    .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             value = stringResource(R.string.color),
             readOnly = true,
             interactionSource =
@@ -62,9 +57,9 @@ fun ColorTextField(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ColorTextFieldPreview() {
+private fun ColorTextFieldPreview() {
     ColorTextField(
         color = outcome,
         onClick = {}

@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.components.misc
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,9 +23,8 @@ fun EmptyState(
 ) {
     Box(
         modifier =
-            Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.surface),
+            modifier
+                .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -48,9 +46,9 @@ fun EmptyState(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun EmptyStatePreview() {
+private fun EmptyStatePreview() {
     EmptyState(
         stringResource(R.string.empty_transactions_title),
         stringResource(R.string.empty_transactions_desc)

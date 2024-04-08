@@ -24,7 +24,7 @@ fun DeleteTransactionConfirmDialog(
 
 @Preview
 @Composable
-fun DeleteTransactionConfirmDialogPreview() {
+private fun DeleteTransactionConfirmDialogPreview() {
     DeleteTransactionConfirmDialog(
         onConfirm = {},
         onDismiss = {}

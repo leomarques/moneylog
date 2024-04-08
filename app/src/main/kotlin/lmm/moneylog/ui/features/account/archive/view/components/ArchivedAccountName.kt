@@ -17,6 +17,7 @@ fun ArchivedAccountName(
     modifier: Modifier = Modifier
 ) {
     Text(
+        modifier = modifier,
         text = name.ifEmpty { stringResource(R.string.no_description) },
         overflow = TextOverflow.Ellipsis,
         maxLines = 1,
@@ -32,7 +33,7 @@ fun ArchivedAccountName(
 
 @Preview
 @Composable
-fun ArchivedAccountNamePreview() {
+private fun ArchivedAccountNamePreview() {
     Surface {
         ArchivedAccountName(name = "Account Name")
     }

@@ -1,11 +1,11 @@
 package lmm.moneylog.ui.features.transaction.detail.view.components
 
-import android.annotation.SuppressLint
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.category.model.Category
@@ -66,16 +66,15 @@ fun TransactionDetailDialogs(
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
-fun TransactionDetailDialogsPreview() {
+private fun TransactionDetailDialogsPreview() {
     TransactionDetailDialogs(
         accounts = listOf(),
         categories = listOf(),
-        showDatePicker = mutableStateOf(false),
-        showAccountPicker = mutableStateOf(false),
-        showCategoryPicker = mutableStateOf(false),
+        showDatePicker = remember { mutableStateOf(false) },
+        showAccountPicker = remember { mutableStateOf(false) },
+        showCategoryPicker = remember { mutableStateOf(false) },
         onDatePicked = {},
         onAccountPicked = {},
         onCategoryPicked = {},

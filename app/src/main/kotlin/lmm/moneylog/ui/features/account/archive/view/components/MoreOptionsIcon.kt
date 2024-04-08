@@ -15,7 +15,10 @@ fun MoreOptionsIcon(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    IconButton(onClick = onClick) {
+    IconButton(
+        modifier = modifier,
+        onClick = onClick
+    ) {
         Icon(
             imageVector = Icons.Default.MoreVert,
             contentDescription = stringResource(R.string.more_options_desc)
@@ -23,8 +26,8 @@ fun MoreOptionsIcon(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun MoreOptionsIconPreview() {
+private fun MoreOptionsIconPreview() {
     MoreOptionsIcon(onClick = {})
 }

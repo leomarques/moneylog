@@ -25,7 +25,7 @@ fun Balance(
     onClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier.clickable { onClick() },
+        modifier = modifier.clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
@@ -55,7 +55,7 @@ fun Balance(
 
 @Preview
 @Composable
-fun BalancePreview() {
+private fun BalancePreview() {
     Surface {
         Balance(
             value = "R$ 1.000,00",

@@ -21,6 +21,7 @@ fun Navigation(
     val navBarSelectedIndex = remember { mutableIntStateOf(0) }
 
     Scaffold(
+        modifier = modifier,
         bottomBar = {
             if (showNavigationBar.value) {
                 BottomBar(

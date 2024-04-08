@@ -25,6 +25,7 @@ fun TransactionDetailDatePicker(
     val confirmEnabled = remember { derivedStateOf { datePickerState.selectedDateMillis != null } }
 
     DatePickerDialog(
+        modifier = modifier,
         confirmButton = {
             TextButton(
                 onClick = {
@@ -49,7 +50,7 @@ fun TransactionDetailDatePicker(
 
 @Preview
 @Composable
-fun TransactionDetailDatePickerPreview() {
+private fun TransactionDetailDatePickerPreview() {
     TransactionDetailDatePicker(
         onConfirm = {},
         onDismiss = {}

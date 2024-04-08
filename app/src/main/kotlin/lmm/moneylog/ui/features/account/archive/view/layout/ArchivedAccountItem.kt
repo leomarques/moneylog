@@ -33,7 +33,7 @@ fun ArchivedAccountItem(
 
     Box(
         modifier =
-            Modifier
+            modifier
                 .pointerInteropFilter {
                     offset = with(density) { it.x.toDp() }
                     false
@@ -60,7 +60,7 @@ fun ArchivedAccountItem(
 
 @Preview
 @Composable
-fun ArchivedAccountItemPreview() {
+private fun ArchivedAccountItemPreview() {
     Box(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
         ArchivedAccountItem(
             id = 0,

@@ -45,7 +45,7 @@ fun Amount(
 
 @Preview
 @Composable
-fun AmountPreview() {
+private fun AmountPreview() {
     Surface {
         Amount(
             modifier = Modifier,

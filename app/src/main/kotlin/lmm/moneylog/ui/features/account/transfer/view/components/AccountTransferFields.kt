@@ -31,7 +31,7 @@ fun AccountTransferFields(
     modifier: Modifier = Modifier,
     onDestinationAccountPicked: () -> Unit
 ) {
-    Column(modifier = modifier) {
+    Column(modifier) {
         StateTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             value = value,
@@ -72,9 +72,9 @@ fun AccountTransferFields(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun TransferFieldsPreview() {
+private fun TransferFieldsPreview() {
     AccountTransferFields(
         value = "100",
         list = emptyList(),

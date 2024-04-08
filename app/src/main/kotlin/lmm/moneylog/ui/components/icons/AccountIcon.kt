@@ -17,14 +17,15 @@ fun AccountIcon(
     tint: Color? = null
 ) {
     Icon(
+        modifier = modifier,
         imageVector = ImageVector.vectorResource(R.drawable.outline_account_balance_24),
         contentDescription = stringResource(R.string.account),
         tint = tint ?: LocalContentColor.current
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun AccountIconPreview() {
+private fun AccountIconPreview() {
     AccountIcon()
 }

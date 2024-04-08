@@ -44,6 +44,7 @@ fun TransactionsListLayout(
     var showFab by remember { mutableStateOf(true) }
 
     Scaffold(
+        modifier = modifier,
         topBar = {
             if (showTopBar.value) {
                 TopAppBar(
@@ -120,7 +121,7 @@ fun TransactionsListLayout(
 
 @Preview
 @Composable
-fun TransactionsListLayoutPreview() {
+private fun TransactionsListLayoutPreview() {
     TransactionsListLayout(
         onArrowBackClick = {},
         onFabClick = {},

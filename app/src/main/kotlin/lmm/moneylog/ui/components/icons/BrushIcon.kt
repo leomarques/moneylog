@@ -12,13 +12,14 @@ import lmm.moneylog.R
 @Composable
 fun BrushIcon(modifier: Modifier = Modifier) {
     Icon(
+        modifier = modifier,
         imageVector = ImageVector.vectorResource(R.drawable.outline_brush_24),
         contentDescription = stringResource(R.string.color)
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun BrushIconPreview() {
+private fun BrushIconPreview() {
     BrushIcon()
 }

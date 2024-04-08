@@ -26,7 +26,7 @@ fun HideFab(
 
     if (showFab) {
         FloatingActionButton(
-            modifier = Modifier.testTag("Fab"),
+            modifier = modifier.testTag("Fab"),
             onClick = {
                 showFab = false
                 onClick()

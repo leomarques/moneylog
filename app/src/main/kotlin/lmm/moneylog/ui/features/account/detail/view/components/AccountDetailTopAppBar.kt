@@ -19,6 +19,7 @@ fun AccountDetailTopAppBar(
     onArchiveIconClick: () -> Unit
 ) {
     TopAppBar(
+        modifier = modifier,
         title = {
             Text(
                 text =
@@ -32,17 +33,11 @@ fun AccountDetailTopAppBar(
             )
         },
         navigationIcon = {
-            ArrowBackIcon(
-                modifier = modifier,
-                onClick = onArrowBackClick
-            )
+            ArrowBackIcon(onClick = onArrowBackClick)
         },
         actions = {
             if (isEdit) {
-                ArchiveActionButton(
-                    modifier = modifier,
-                    onClick = onArchiveIconClick
-                )
+                ArchiveActionButton(onClick = onArchiveIconClick)
             }
         }
     )
@@ -50,7 +45,7 @@ fun AccountDetailTopAppBar(
 
 @Preview
 @Composable
-fun AccountDetailTopAppBarPreview() {
+private fun AccountDetailTopAppBarPreview() {
     AccountDetailTopAppBar(
         isEdit = true,
         onArrowBackClick = {},

@@ -25,6 +25,7 @@ fun CategoriesListItem(
     onItemClick: (Int) -> Unit
 ) {
     ListItemContent(
+        modifier = modifier,
         id = id,
         onItemClick = onItemClick,
         content = {
@@ -49,7 +50,7 @@ fun CategoriesListItem(
 
 @Preview
 @Composable
-fun CategoriesListItemPreview() {
+private fun CategoriesListItemPreview() {
     Surface {
         CategoriesListItem(
             id = 0,

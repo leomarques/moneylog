@@ -20,6 +20,7 @@ fun TransactionDetailTopBar(
     onArrowBackClick: () -> Unit
 ) {
     TopAppBar(
+        modifier = modifier,
         title = {
             Text(
                 text =
@@ -41,7 +42,7 @@ fun TransactionDetailTopBar(
 
 @Preview
 @Composable
-fun TransactionDetailTopBarPreview() {
+private fun TransactionDetailTopBarPreview() {
     TransactionDetailTopBar(
         isEdit = true,
         onDeleteClick = {},

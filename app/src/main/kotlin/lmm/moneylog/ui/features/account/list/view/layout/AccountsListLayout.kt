@@ -29,6 +29,7 @@ fun AccountsListLayout(
     onTransferIconClick: () -> Unit
 ) {
     Scaffold(
+        modifier = modifier,
         topBar = {
             AccountsListTopBar(
                 onArrowBackClick = onArrowBackClick,
@@ -67,7 +68,7 @@ fun AccountsListLayout(
 
 @Preview
 @Composable
-fun AccountsListLayoutPreview() {
+private fun AccountsListLayoutPreview() {
     AccountsListLayout(
         list =
             listOf(

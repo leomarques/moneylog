@@ -24,12 +24,8 @@ fun CategoriesListLayout(
     onItemClick: (Int) -> Unit
 ) {
     Scaffold(
-        topBar = {
-            CategoriesListTopBar(
-                modifier = modifier,
-                onArrowBackClick = onArrowBackClick
-            )
-        },
+        modifier = modifier,
+        topBar = { CategoriesListTopBar(onArrowBackClick = onArrowBackClick) },
         floatingActionButton = {
             HideFab(
                 onClick = onFabClick,
@@ -54,7 +50,7 @@ fun CategoriesListLayout(
 
 @Preview
 @Composable
-fun CategoriesListLayoutPreview() {
+private fun CategoriesListLayoutPreview() {
     CategoriesListLayout(
         onArrowBackClick = { },
         onFabClick = { },

@@ -9,11 +9,11 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun MyDivider(modifier: Modifier = Modifier) {
-    HorizontalDivider(Modifier.padding(horizontal = Size.DefaultSpaceSize))
+    HorizontalDivider(modifier.padding(horizontal = Size.DefaultSpaceSize))
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun MyDividerPreview() {
+private fun MyDividerPreview() {
     MyDivider()
 }

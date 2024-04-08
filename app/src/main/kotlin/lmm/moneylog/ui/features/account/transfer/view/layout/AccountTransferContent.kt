@@ -27,7 +27,7 @@ fun AccountTransferContent(
     modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit
 ) {
-    Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {
+    Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         val showOriginAccountPicker = remember { mutableStateOf(false) }
         val showDestinationAccountPicker = remember { mutableStateOf(false) }
 
@@ -55,9 +55,9 @@ fun AccountTransferContent(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun AccountTransferContentPreview() {
+private fun AccountTransferContentPreview() {
     AccountTransferContent(
         value = "",
         list = emptyList(),

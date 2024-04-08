@@ -12,13 +12,14 @@ import lmm.moneylog.R
 @Composable
 fun DescriptionIcon(modifier: Modifier = Modifier) {
     Icon(
+        modifier = modifier,
         imageVector = Icons.Default.Create,
         contentDescription = stringResource(R.string.detail_description)
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun DescriptionIconPreview() {
+private fun DescriptionIconPreview() {
     DescriptionIcon()
 }

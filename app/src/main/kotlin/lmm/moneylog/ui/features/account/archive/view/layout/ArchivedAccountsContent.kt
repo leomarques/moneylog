@@ -39,7 +39,7 @@ fun ArchivedAccountsContent(
         )
     }
 
-    Column(Modifier.fillMaxWidth()) {
+    Column(modifier.fillMaxWidth()) {
         LazyColumn(
             Modifier.background(
                 color = MaterialTheme.colorScheme.inverseOnSurface,
@@ -64,7 +64,7 @@ fun ArchivedAccountsContent(
 
 @Preview
 @Composable
-fun ArchivedAccountsContentPreview() {
+private fun ArchivedAccountsContentPreview() {
     ArchivedAccountsContent(
         list =
             listOf(

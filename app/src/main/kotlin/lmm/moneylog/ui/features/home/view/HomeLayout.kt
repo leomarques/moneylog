@@ -26,7 +26,7 @@ fun HomeLayout(
 ) {
     Scaffold(
         modifier =
-            Modifier
+            modifier
                 .padding(horizontal = Size.DefaultSpaceSize)
                 .padding(top = Size.DefaultSpaceSize),
         floatingActionButton = {
@@ -50,7 +50,7 @@ fun HomeLayout(
 
 @Preview
 @Composable
-fun HomeLayoutPreview() {
+private fun HomeLayoutPreview() {
     HomeLayout(
         onFabClick = {},
         onClick = {},

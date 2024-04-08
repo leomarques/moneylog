@@ -25,7 +25,7 @@ fun AccountDetailContent(
     modifier: Modifier = Modifier,
     onNameChange: (String) -> Unit
 ) {
-    Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {
+    Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         val showColorsDialog = remember { mutableStateOf(false) }
 
         AccountDetailDialogs(
@@ -46,9 +46,9 @@ fun AccountDetailContent(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun AccountDetailContentPreview() {
+private fun AccountDetailContentPreview() {
     AccountDetailContent(
         name = "Nubank",
         color = darkPurple,

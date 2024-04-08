@@ -19,7 +19,7 @@ fun CategoriesTabContent(
     onItemClick: (Int) -> Unit
 ) {
     if (list.isNotEmpty()) {
-        LazyList {
+        LazyList(modifier) {
             itemsIndexed(list) { index, category ->
                 CategoriesListItem(
                     id = category.id,
@@ -32,6 +32,7 @@ fun CategoriesTabContent(
         }
     } else {
         EmptyState(
+            modifier = modifier,
             title = stringResource(R.string.empty_categories_title),
             description = stringResource(R.string.empty_categories_desc)
         )
@@ -40,7 +41,7 @@ fun CategoriesTabContent(
 
 @Preview
 @Composable
-fun CategoriesTabContentPreview() {
+private fun CategoriesTabContentPreview() {
     CategoriesTabContent(
         list =
             listOf(

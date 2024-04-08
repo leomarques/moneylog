@@ -19,6 +19,7 @@ fun ArrowBackIcon(
     val focusManager = LocalFocusManager.current
 
     IconButton(
+        modifier = modifier,
         onClick = {
             focusManager.clearFocus()
             onClick()
@@ -31,8 +32,8 @@ fun ArrowBackIcon(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ArrowBackIconPreview() {
+private fun ArrowBackIconPreview() {
     ArrowBackIcon(onClick = {})
 }

@@ -30,8 +30,8 @@ fun ListItemName(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ListItemNamePreview() {
+private fun ListItemNamePreview() {
     ListItemName(name = "Account name")
 }

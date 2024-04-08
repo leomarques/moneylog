@@ -22,6 +22,7 @@ fun AccountsListItem(
     onItemClick: (Int) -> Unit
 ) {
     ListItemContent(
+        modifier = modifier,
         id = id,
         onItemClick = onItemClick,
         content = {
@@ -38,9 +39,9 @@ fun AccountsListItem(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun AccountsListItemPreview() {
+private fun AccountsListItemPreview() {
     AccountsListItem(
         id = 1,
         name = "Account name",

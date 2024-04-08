@@ -17,13 +17,14 @@ fun CategoryIcon(
     modifier: Modifier = Modifier
 ) {
     Icon(
+        modifier = modifier,
         imageVector = ImageVector.vectorResource(id = R.drawable.outline_category_24),
         contentDescription = stringResource(R.string.category),
         tint = tint
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun CategoryIconPreview() {
     CategoryIcon(tint = darkRed)

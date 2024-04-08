@@ -16,6 +16,7 @@ fun DeleteActionButton(
     onClick: () -> Unit
 ) {
     IconButton(
+        modifier = modifier,
         onClick = onClick,
         content = {
             Icon(
@@ -26,8 +27,8 @@ fun DeleteActionButton(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun DeleteActionButtonPreview() {
+private fun DeleteActionButtonPreview() {
     DeleteActionButton(onClick = {})
 }

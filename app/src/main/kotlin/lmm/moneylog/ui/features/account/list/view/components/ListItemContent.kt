@@ -22,7 +22,7 @@ fun ListItemContent(
 ) {
     Row(
         modifier =
-            Modifier
+            modifier
                 .fillMaxWidth()
                 .height(Size.TwoLinesListItemHeight)
                 .padding(
@@ -36,9 +36,9 @@ fun ListItemContent(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ListItemContentPreview() {
+private fun ListItemContentPreview() {
     ListItemContent(
         id = 1,
         onItemClick = {},

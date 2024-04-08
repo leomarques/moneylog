@@ -15,7 +15,7 @@ fun LazyList(
     content: LazyListScope.() -> Unit
 ) {
     LazyColumn(
-        Modifier.background(
+        modifier.background(
             color = MaterialTheme.colorScheme.inverseOnSurface,
             shape = RoundedCornerShape(Size.ListRoundedCornerSize)
         )

@@ -1,10 +1,8 @@
 package lmm.moneylog.ui.components.textfields
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,7 +37,6 @@ fun StateTextField(
         modifier =
             modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.surface)
                 .focusRequester(focusRequester)
                 .testTag(testTag),
         value = value,
@@ -71,9 +68,9 @@ fun StateTextField(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun StateTextFieldPreview() {
+private fun StateTextFieldPreview() {
     StateTextField(
         value = "Value",
         title = "Title",

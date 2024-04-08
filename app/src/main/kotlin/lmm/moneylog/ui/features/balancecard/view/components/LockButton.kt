@@ -21,7 +21,7 @@ fun LockButton(
 ) {
     IconButton(
         onClick = onHideClick,
-        modifier = Modifier.padding(vertical = Size.XSmallSpaceSize)
+        modifier = modifier.padding(vertical = Size.XSmallSpaceSize)
     ) {
         Icon(
             imageVector = if (isHidden) Icons.Filled.Lock else Icons.Outlined.Lock,
@@ -30,9 +30,9 @@ fun LockButton(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun LockButtonPreview() {
+private fun LockButtonPreview() {
     LockButton(
         onHideClick = {},
         isHidden = false

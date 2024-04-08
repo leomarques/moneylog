@@ -30,7 +30,7 @@ fun NavHostParams(
     modifier: Modifier = Modifier
 ) {
     MyNavHost(
-        modifier = Modifier.padding(paddingValues),
+        modifier = modifier.padding(paddingValues),
         navController = navController,
         startDestination = startDestination,
         onHomeFabClick = {

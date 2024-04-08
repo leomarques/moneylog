@@ -21,12 +21,8 @@ fun ArchivedAccountsLayout(
     onDeleteConfirm: (Int) -> Unit
 ) {
     Scaffold(
-        topBar = {
-            ArchivedAccountsTopBar(
-                modifier = modifier,
-                onArrowBackClick = onArrowBackClick
-            )
-        },
+        modifier = modifier,
+        topBar = { ArchivedAccountsTopBar(onArrowBackClick = onArrowBackClick) },
         content = { paddingValues ->
             Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
                 if (list.isEmpty()) {
@@ -48,7 +44,7 @@ fun ArchivedAccountsLayout(
 
 @Preview
 @Composable
-fun ArchivedAccountsLayoutPreview() {
+private fun ArchivedAccountsLayoutPreview() {
     ArchivedAccountsLayout(
         onArrowBackClick = { },
         list =

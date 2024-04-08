@@ -15,6 +15,7 @@ fun ArchiveActionButton(
     onClick: () -> Unit
 ) {
     IconButton(
+        modifier = modifier,
         onClick = onClick,
         content = {
             Icon(
@@ -25,8 +26,8 @@ fun ArchiveActionButton(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ArchiveActionButtonPreview() {
+private fun ArchiveActionButtonPreview() {
     ArchiveActionButton(onClick = {})
 }

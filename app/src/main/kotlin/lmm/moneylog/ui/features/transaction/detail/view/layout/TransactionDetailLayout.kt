@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.features.transaction.detail.view.layout
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -33,6 +32,7 @@ fun TransactionDetailLayout(
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
     Scaffold(
+        modifier = modifier,
         topBar = {
             TransactionDetailTopBar(
                 onArrowBackClick = onArrowBackClick,
@@ -71,10 +71,9 @@ fun TransactionDetailLayout(
     )
 }
 
-@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
-fun TransactionDetailLayoutPreview() {
+private fun TransactionDetailLayoutPreview() {
     TransactionDetailLayout(
         uiState = TransactionDetailUIState(),
         onArrowBackClick = {},

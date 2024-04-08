@@ -19,6 +19,7 @@ fun CategoryDetailTopBar(
     onDeleteIconClick: () -> Unit
 ) {
     TopAppBar(
+        modifier = modifier,
         title = {
             Text(
                 text =

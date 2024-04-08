@@ -29,7 +29,7 @@ fun CategoriesListContent(
         )
 
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CategoriesTabs(
@@ -44,9 +44,9 @@ fun CategoriesListContent(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun CategoriesListContentPreview() {
+private fun CategoriesListContentPreview() {
     CategoriesListContent(
         onItemClick = { },
         list =

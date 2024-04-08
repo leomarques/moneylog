@@ -24,7 +24,7 @@ fun ArchiveAccountConfirmDialog(
 
 @Preview
 @Composable
-fun ArchiveAccountConfirmDialogPreview() {
+private fun ArchiveAccountConfirmDialogPreview() {
     ArchiveAccountConfirmDialog(
         onConfirm = {},
         onDismiss = {}

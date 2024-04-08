@@ -27,5 +27,7 @@ class ValueExtTest {
         assertEquals("R$1.234.567,00", 1234567.0.formatForRs())
 
         assertEquals("R$0,00", 0.0.formatForRs())
+
+        assertEquals("R$-226,00", (-226.0).formatForRs())
     }
 }

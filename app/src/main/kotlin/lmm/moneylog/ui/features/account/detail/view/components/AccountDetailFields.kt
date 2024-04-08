@@ -1,11 +1,11 @@
 package lmm.moneylog.ui.features.account.detail.view.components
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -28,9 +28,9 @@ fun AccountDetailFields(
     modifier: Modifier = Modifier,
     onNameChange: (String) -> Unit
 ) {
-    Column {
+    Column(modifier) {
         StateTextField(
-            modifier = modifier.padding(bottom = Size.MediumSpaceSize),
+            modifier = Modifier.padding(bottom = Size.MediumSpaceSize),
             value = name,
             title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,
@@ -50,15 +50,14 @@ fun AccountDetailFields(
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
 @Preview(showBackground = true)
 @Composable
-fun AccountDetailFieldsPreview() {
+private fun AccountDetailFieldsPreview() {
     AccountDetailFields(
         name = "Account",
         isEdit = false,
         onNameChange = {},
         color = outcome,
-        showColorsDialog = mutableStateOf(false)
+        showColorsDialog = remember { mutableStateOf(false) }
     )
 }

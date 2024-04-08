@@ -27,7 +27,7 @@ fun CategoryDetailContent(
     modifier: Modifier = Modifier,
     onIncomeChange: (Boolean) -> Unit
 ) {
-    Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {
+    Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         val showColorsDialog = remember { mutableStateOf(false) }
 
         CategoryDetailDialogs(
@@ -50,9 +50,9 @@ fun CategoryDetailContent(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun CategoryDetailContentPreview() {
+private fun CategoryDetailContentPreview() {
     CategoryDetailContent(
         name = "Food",
         color = outcome,

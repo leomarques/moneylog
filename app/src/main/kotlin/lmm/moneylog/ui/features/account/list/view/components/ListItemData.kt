@@ -15,7 +15,7 @@ fun ListItemData(
     balance: String,
     modifier: Modifier = Modifier
 ) {
-    Column(Modifier.padding(start = Size.DefaultSpaceSize)) {
+    Column(modifier.padding(start = Size.DefaultSpaceSize)) {
         ListItemName(name = name)
 
         ListItemBalance(
@@ -30,9 +30,9 @@ fun ListItemData(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ListItemDataPreview() {
+private fun ListItemDataPreview() {
     ListItemData(
         name = "Account name",
         balance = "R$ 1.000,00"

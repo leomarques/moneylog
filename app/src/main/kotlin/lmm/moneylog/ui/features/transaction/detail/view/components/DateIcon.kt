@@ -12,13 +12,14 @@ import lmm.moneylog.R
 @Composable
 fun DateIcon(modifier: Modifier = Modifier) {
     Icon(
+        modifier = modifier,
         imageVector = Icons.Default.DateRange,
         contentDescription = stringResource(R.string.date_desc)
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun DateIconPreview() {
+private fun DateIconPreview() {
     DateIcon()
 }

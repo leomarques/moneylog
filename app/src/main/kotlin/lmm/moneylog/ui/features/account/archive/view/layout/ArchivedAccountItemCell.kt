@@ -22,7 +22,7 @@ fun ArchivedAccountItemCell(
 ) {
     Row(
         modifier =
-            Modifier
+            modifier
                 .fillMaxWidth()
                 .height(Size.OneLineListItemHeight)
                 .padding(
@@ -32,10 +32,7 @@ fun ArchivedAccountItemCell(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        ArchivedAccountName(
-            modifier = modifier,
-            name = name
-        )
+        ArchivedAccountName(name)
 
         MoreOptionsIcon(onClick = onClick)
     }
@@ -43,7 +40,7 @@ fun ArchivedAccountItemCell(
 
 @Preview
 @Composable
-fun ArchivedAccountItemCellPreview() {
+private fun ArchivedAccountItemCellPreview() {
     Surface {
         ArchivedAccountItemCell(
             name = "Account Name",

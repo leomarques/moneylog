@@ -30,7 +30,7 @@ fun AccountsListContent(
 
 @Preview
 @Composable
-fun AccountsListContentPreview() {
+private fun AccountsListContentPreview() {
     AccountsListContent(
         list =
             listOf(

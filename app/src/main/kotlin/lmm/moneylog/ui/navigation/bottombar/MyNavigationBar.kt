@@ -41,6 +41,6 @@ fun MyNavigationBar(
 
 @Preview
 @Composable
-fun MyNavigationBarPreview() {
+private fun MyNavigationBarPreview() {
     MyNavigationBar(selectedIndex = 0) {}
 }

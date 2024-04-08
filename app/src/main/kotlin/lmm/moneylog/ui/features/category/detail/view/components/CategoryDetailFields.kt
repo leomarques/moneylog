@@ -1,11 +1,11 @@
 package lmm.moneylog.ui.features.category.detail.view.components
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -29,7 +29,7 @@ fun CategoryDetailFields(
     showColorsDialog: MutableState<Boolean>,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
+    Column(modifier) {
         StateTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             value = name,
@@ -54,8 +54,7 @@ fun CategoryDetailFields(
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun CategoryDetailFieldsPreview() {
     CategoryDetailFields(
@@ -65,6 +64,6 @@ private fun CategoryDetailFieldsPreview() {
         isIncome = false,
         onIncomeChange = {},
         color = Color.White,
-        showColorsDialog = mutableStateOf(false)
+        showColorsDialog = remember { mutableStateOf(false) }
     )
 }

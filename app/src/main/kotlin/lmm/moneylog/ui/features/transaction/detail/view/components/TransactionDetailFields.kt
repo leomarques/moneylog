@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.features.transaction.detail.view.components
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -33,7 +32,7 @@ fun TransactionDetailFields(
     modifier: Modifier = Modifier,
     onDateClick: () -> Unit
 ) {
-    Column {
+    Column(modifier) {
         StateTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             value = uiState.value,
@@ -88,10 +87,9 @@ fun TransactionDetailFields(
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
 @Preview(showBackground = true)
 @Composable
-fun TransactionDetailFieldsPreview() {
+private fun TransactionDetailFieldsPreview() {
     TransactionDetailFields(
         uiState = TransactionDetailUIState(),
         onIsIncomeSelect = {},

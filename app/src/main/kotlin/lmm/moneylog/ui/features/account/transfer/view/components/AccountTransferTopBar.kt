@@ -20,6 +20,7 @@ fun AccountTransferTopBar(
     onArrowBackClick: () -> Unit
 ) {
     TopAppBar(
+        modifier = modifier,
         title = { Text(text = stringResource(R.string.topbar_transfer_add)) },
         navigationIcon = {
             IconButton(onClick = onArrowBackClick) {
@@ -34,6 +35,6 @@ fun AccountTransferTopBar(
 
 @Preview
 @Composable
-fun AccountTransferTopBarPreview() {
+private fun AccountTransferTopBarPreview() {
     AccountTransferTopBar(onArrowBackClick = {})
 }

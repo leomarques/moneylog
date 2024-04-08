@@ -17,14 +17,15 @@ fun ValueIcon(
     tint: Color? = null
 ) {
     Icon(
+        modifier = modifier,
         imageVector = ImageVector.vectorResource(id = R.drawable.outline_attach_money_24),
         contentDescription = stringResource(R.string.value),
         tint = tint ?: LocalContentColor.current
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun ValueIconPreview() {
+private fun ValueIconPreview() {
     ValueIcon()
 }
