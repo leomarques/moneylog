@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.features.category.detail.view.components
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -28,27 +29,29 @@ fun CategoryDetailFields(
     showColorsDialog: MutableState<Boolean>,
     modifier: Modifier = Modifier
 ) {
-    StateTextField(
-        modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-        value = name,
-        title = stringResource(R.string.name),
-        keyboardType = KeyboardType.Text,
-        getFocus = !isEdit,
-        onValueChange = onNameChange,
-        testTag = "CategoryNameTextField"
-    )
+    Column(modifier = modifier) {
+        StateTextField(
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
+            value = name,
+            title = stringResource(R.string.name),
+            keyboardType = KeyboardType.Text,
+            getFocus = !isEdit,
+            onValueChange = onNameChange,
+            testTag = "CategoryNameTextField"
+        )
 
-    IncomeRadioGroup(
-        modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-        isIncome = isIncome,
-        onClick = onIncomeChange
-    )
+        IncomeRadioGroup(
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
+            isIncome = isIncome,
+            onClick = onIncomeChange
+        )
 
-    ColorTextField(
-        color = color,
-        leadingIcon = { BrushIcon() },
-        onClick = { showColorsDialog.value = true }
-    )
+        ColorTextField(
+            color = color,
+            leadingIcon = { BrushIcon() },
+            onClick = { showColorsDialog.value = true }
+        )
+    }
 }
 
 @SuppressLint("UnrememberedMutableState")

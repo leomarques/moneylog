@@ -21,9 +21,9 @@ import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun BottomSheetItem(
-    modifier: Modifier = Modifier,
     text: String,
     onItemClick: () -> Unit,
+    modifier: Modifier = Modifier,
     color: Color? = null
 ) {
     Row(

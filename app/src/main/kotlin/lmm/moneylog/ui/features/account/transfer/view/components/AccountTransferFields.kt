@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.account.transfer.view.components
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,43 +31,45 @@ fun AccountTransferFields(
     modifier: Modifier = Modifier,
     onDestinationAccountPicked: () -> Unit
 ) {
-    StateTextField(
-        modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-        value = value,
-        title = stringResource(R.string.value),
-        keyboardType = KeyboardType.Number,
-        getFocus = true,
-        leadingIcon = { ValueIcon() },
-        onValueChange = onValueChange
-    )
+    Column(modifier = modifier) {
+        StateTextField(
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
+            value = value,
+            title = stringResource(R.string.value),
+            keyboardType = KeyboardType.Number,
+            getFocus = true,
+            leadingIcon = { ValueIcon() },
+            onValueChange = onValueChange
+        )
 
-    Text(
-        modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
-        text = stringResource(R.string.transfer_from)
-    )
+        Text(
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
+            text = stringResource(R.string.transfer_from)
+        )
 
-    ClickTextField(
-        modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-        value = originAccountDisplay,
-        label = stringResource(R.string.transfer_origin),
-        leadingIcon = { AccountIcon(tint = originAccountColor) },
-        enabled = list.isNotEmpty(),
-        onClick = onOriginAccountPicked
-    )
+        ClickTextField(
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
+            value = originAccountDisplay,
+            label = stringResource(R.string.transfer_origin),
+            leadingIcon = { AccountIcon(tint = originAccountColor) },
+            enabled = list.isNotEmpty(),
+            onClick = onOriginAccountPicked
+        )
 
-    Text(
-        modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
-        text = stringResource(R.string.transfer_to)
-    )
+        Text(
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
+            text = stringResource(R.string.transfer_to)
+        )
 
-    ClickTextField(
-        modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-        value = destinationAccountDisplay,
-        label = stringResource(R.string.transfer_destination),
-        leadingIcon = { AccountIcon(tint = destinationAccountColor) },
-        enabled = list.isNotEmpty(),
-        onClick = onDestinationAccountPicked
-    )
+        ClickTextField(
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
+            value = destinationAccountDisplay,
+            label = stringResource(R.string.transfer_destination),
+            leadingIcon = { AccountIcon(tint = destinationAccountColor) },
+            enabled = list.isNotEmpty(),
+            onClick = onDestinationAccountPicked
+        )
+    }
 }
 
 @Preview

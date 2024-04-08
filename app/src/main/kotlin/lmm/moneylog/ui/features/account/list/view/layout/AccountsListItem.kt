@@ -2,6 +2,7 @@ package lmm.moneylog.ui.features.account.list.view.layout
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.misc.MyCircle
@@ -17,6 +18,7 @@ fun AccountsListItem(
     balance: String,
     color: Color,
     showDivider: Boolean,
+    modifier: Modifier = Modifier,
     onItemClick: (Int) -> Unit
 ) {
     ListItemContent(

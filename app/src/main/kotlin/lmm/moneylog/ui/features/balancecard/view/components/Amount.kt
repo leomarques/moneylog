@@ -16,12 +16,12 @@ import lmm.moneylog.ui.theme.income
 
 @Composable
 fun Amount(
-    modifier: Modifier,
     title: String,
     value: String,
     color: Color,
     onClick: () -> Unit,
-    hideValue: Boolean
+    hideValue: Boolean,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier.clickable { onClick() },

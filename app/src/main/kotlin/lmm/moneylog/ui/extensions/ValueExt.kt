@@ -1,5 +1,7 @@
 package lmm.moneylog.ui.extensions
 
+import java.util.Locale.getDefault
+
 fun String.validateValue(isIncome: Boolean = true): Double {
     val value = replace(",", ".").toDouble()
     if (value <= 0.0) {
@@ -15,7 +17,7 @@ fun String.validateValue(isIncome: Boolean = true): Double {
 
 fun Double.formatForRs(): String {
     // Convert the number to a string, replacing '.' with ',' and formatting to two decimal places
-    val formattedNumber = String.format("%.2f", this).replace('.', ',')
+    val formattedNumber = String.format(getDefault(), "%.2f", this).replace('.', ',')
 
     // Split the string into two parts: before and after the decimal separator
     val parts = formattedNumber.split(',')

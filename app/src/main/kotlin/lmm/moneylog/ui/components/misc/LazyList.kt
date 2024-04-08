@@ -10,7 +10,10 @@ import androidx.compose.ui.Modifier
 import lmm.moneylog.ui.theme.Size
 
 @Composable
-fun LazyList(content: LazyListScope.() -> Unit) {
+fun LazyList(
+    modifier: Modifier = Modifier,
+    content: LazyListScope.() -> Unit
+) {
     LazyColumn(
         Modifier.background(
             color = MaterialTheme.colorScheme.inverseOnSurface,
