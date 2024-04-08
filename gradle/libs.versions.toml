@@ -1,5 +1,6 @@
 [versions]
 composeBom            = "2024.04.00"
+composeRules          = "0.3.13"
 coreTesting           = "2.2.0"
 junit                 = "4.13.2"
 koin                  = "3.5.3"
@@ -12,6 +13,7 @@ uiTest                = "1.6.5"
 
 androidApplication      = "8.3.1"
 androidLibrary          = "8.3.1"
+detekt                  = "1.23.6"
 googleDevtoolsKsp       = "1.9.22-1.0.17"
 jetbrainsKotlinAndroid  = "1.9.22"
 jlleitschuhGradleKtlint = "12.1.0"
@@ -31,6 +33,7 @@ room-runtime       	    = { group = "androidx.room", 			  name = "room-runtime",
 koin-androidx-compose   = { group = "io.insert-koin",             name = "koin-androidx-compose", 	version.ref = "koin" }
 koin-core               = { group = "io.insert-koin",             name = "koin-core", 	            version.ref = "koin" }
 mockk       			= { group = "io.mockk", 				  name = "mockk", 					version.ref = "mockk" }
+compose-rules           = { group = "io.nlopez.compose.rules",    name = "detekt",                  version.ref = "composeRules" }
 junit       			= { group = "junit", 					  name = "junit", 					version.ref = "junit" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", 	  name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 
@@ -44,5 +47,6 @@ test         = ["core-testing", "kotlinx-coroutines-test", "mockk", "junit"]
 android-application 	  = { id = "com.android.application", 		version.ref = "androidApplication" }
 android-library 		  = { id = "com.android.library", 			version.ref = "androidLibrary" }
 google-devtools-ksp 	  = { id = "com.google.devtools.ksp", 		version.ref = "googleDevtoolsKsp" }
+detekt                    = { id = "io.gitlab.arturbosch.detekt",   version.ref = "detekt" }
 jetbrains-kotlin-android  = { id = "org.jetbrains.kotlin.android", 	version.ref = "jetbrainsKotlinAndroid" }
 jlleitschuh-gradle-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "jlleitschuhGradleKtlint" }

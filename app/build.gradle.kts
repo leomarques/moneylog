@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.detekt)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jlleitschuh.gradle.ktlint)
 }
@@ -51,11 +52,21 @@ android {
     }
 }
 
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config.setFrom(files(
+        "$rootDir/gradle/detekt.yml",
+        "$rootDir/gradle/detekt-compose.yml"
+    ))
+}
+
 dependencies {
     implementation(project(mapOf("path" to ":data")))
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
     implementation(libs.koin.androidx.compose)
+    detektPlugins(libs.compose.rules)
     androidTestImplementation(libs.bundles.android.test)
     testImplementation(libs.bundles.test)
 }
