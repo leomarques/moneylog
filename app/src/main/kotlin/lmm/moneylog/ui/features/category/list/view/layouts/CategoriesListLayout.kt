@@ -24,7 +24,12 @@ fun CategoriesListLayout(
     onItemClick: (Int) -> Unit
 ) {
     Scaffold(
-        topBar = { CategoriesListTopBar(onArrowBackClick) },
+        topBar = {
+            CategoriesListTopBar(
+                modifier = modifier,
+                onArrowBackClick = onArrowBackClick
+            )
+        },
         floatingActionButton = {
             HideFab(
                 onClick = onFabClick,
@@ -54,26 +59,26 @@ fun CategoriesListLayoutPreview() {
         onArrowBackClick = { },
         onFabClick = { },
         list =
-            listOf(
-                CategoryModel(
-                    id = 0,
-                    name = "Alimentação",
-                    color = darkRed,
-                    isIncome = true
-                ),
-                CategoryModel(
-                    id = 0,
-                    name = "Moradia",
-                    color = darkRed,
-                    isIncome = true
-                ),
-                CategoryModel(
-                    id = 0,
-                    name = "Transporte",
-                    color = darkRed,
-                    isIncome = false
-                )
+        listOf(
+            CategoryModel(
+                id = 0,
+                name = "Alimentação",
+                color = darkRed,
+                isIncome = true
             ),
+            CategoryModel(
+                id = 0,
+                name = "Moradia",
+                color = darkRed,
+                isIncome = true
+            ),
+            CategoryModel(
+                id = 0,
+                name = "Transporte",
+                color = darkRed,
+                isIncome = false
+            )
+        ),
         onItemClick = {}
     )
 }

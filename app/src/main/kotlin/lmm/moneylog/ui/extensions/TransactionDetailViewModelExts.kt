@@ -42,8 +42,9 @@ private fun Double.isWhole() = this % 1.0 == 0.0
 
 private fun String.removeDecimal() = substring(0, length - 2)
 
-fun DomainTime.convertToDisplayDate(domainTimeRepository: DomainTimeRepository) =
-    "$day ${domainTimeRepository.getMonthName(month)}, $year"
+fun DomainTime.convertToDisplayDate(domainTimeRepository: DomainTimeRepository): String {
+    return "$day ${domainTimeRepository.getMonthName(month)}, $year"
+}
 
 fun List<Account>.getAccountById(accountId: Int?): (Pair<String, Color>)? {
     return firstOrNull {
