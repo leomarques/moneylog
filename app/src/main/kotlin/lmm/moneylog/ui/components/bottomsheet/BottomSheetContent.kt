@@ -16,6 +16,7 @@ import lmm.moneylog.ui.theme.darkRed
 
 @Composable
 fun BottomSheetContent(
+    modifier: Modifier = Modifier,
     list: List<Pair<String, Color>>,
     onConfirm: (Int) -> Unit,
     onDismiss: () -> Unit
@@ -49,7 +50,7 @@ fun BottomSheetContent(
 
 @Preview
 @Composable
-fun BottomSheetContentPreview() {
+private fun BottomSheetContentPreview() {
     BottomSheetContent(
         list =
             listOf(

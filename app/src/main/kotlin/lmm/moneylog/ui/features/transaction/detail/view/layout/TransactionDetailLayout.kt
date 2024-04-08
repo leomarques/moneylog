@@ -18,6 +18,7 @@ import lmm.moneylog.ui.features.transaction.detail.view.components.TransactionDe
 
 @Composable
 fun TransactionDetailLayout(
+    modifier: Modifier = Modifier,
     uiState: TransactionDetailUIState,
     onArrowBackClick: () -> Unit,
     onDeleteConfirmClick: () -> Unit,

@@ -20,6 +20,7 @@ import lmm.moneylog.ui.theme.darkRed
 
 @Composable
 fun AccountsListLayout(
+    modifier: Modifier = Modifier,
     list: List<AccountModel>,
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,

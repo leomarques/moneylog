@@ -46,6 +46,7 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun SearchTopBar(
+    modifier: Modifier = Modifier,
     searchText: String,
     placeholderText: String,
     onSearchTextChanged: (String) -> Unit,

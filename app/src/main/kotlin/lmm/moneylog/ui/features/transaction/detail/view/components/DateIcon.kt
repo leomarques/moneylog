@@ -4,12 +4,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 
 @Composable
-fun DateIcon() {
+fun DateIcon(modifier: Modifier = Modifier) {
     Icon(
         imageVector = Icons.Default.DateRange,
         contentDescription = stringResource(R.string.date_desc)

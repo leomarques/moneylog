@@ -21,6 +21,7 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountDetailFields(
+    modifier: Modifier = Modifier,
     name: String,
     color: Color,
     isEdit: Boolean,
@@ -29,7 +30,7 @@ fun AccountDetailFields(
 ) {
     Column {
         StateTextField(
-            modifier = Modifier.padding(bottom = Size.MediumSpaceSize),
+            modifier = modifier.padding(bottom = Size.MediumSpaceSize),
             value = name,
             title = stringResource(R.string.name),
             keyboardType = KeyboardType.Text,

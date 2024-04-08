@@ -19,6 +19,7 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun CategoryDetailFields(
+    modifier: Modifier = Modifier,
     name: String,
     isEdit: Boolean,
     onNameChange: (String) -> Unit,

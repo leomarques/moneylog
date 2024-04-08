@@ -17,6 +17,7 @@ import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun CategoriesListContent(
+    modifier: Modifier = Modifier,
     onItemClick: (Int) -> Unit,
     list: List<CategoryModel>
 ) {

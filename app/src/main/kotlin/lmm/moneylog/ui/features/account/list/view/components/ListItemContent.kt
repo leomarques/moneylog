@@ -15,6 +15,7 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun ListItemContent(
+    modifier: Modifier = Modifier,
     id: Int,
     onItemClick: (Int) -> Unit,
     content: @Composable (RowScope.() -> Unit)

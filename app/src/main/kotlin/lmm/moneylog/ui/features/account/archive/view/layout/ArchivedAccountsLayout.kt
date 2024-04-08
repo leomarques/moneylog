@@ -14,13 +14,19 @@ import lmm.moneylog.ui.features.account.archive.view.components.ArchivedAccounts
 
 @Composable
 fun ArchivedAccountsLayout(
+    modifier: Modifier = Modifier,
     list: List<ArchivedAccountModel>,
     onArrowBackClick: () -> Unit,
     onUnArchive: (Int) -> Unit,
     onDeleteConfirm: (Int) -> Unit
 ) {
     Scaffold(
-        topBar = { ArchivedAccountsTopBar(onArrowBackClick) },
+        topBar = {
+            ArchivedAccountsTopBar(
+                modifier = modifier,
+                onArrowBackClick = onArrowBackClick
+            )
+        },
         content = { paddingValues ->
             Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
                 if (list.isEmpty()) {

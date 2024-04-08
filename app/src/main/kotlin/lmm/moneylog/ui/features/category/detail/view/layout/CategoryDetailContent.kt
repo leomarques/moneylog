@@ -15,6 +15,7 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun CategoryDetailContent(
+    modifier: Modifier = Modifier,
     name: String,
     color: Color,
     isEdit: Boolean,

@@ -18,6 +18,7 @@ import lmm.moneylog.ui.theme.Size
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeLayout(
+    modifier: Modifier = Modifier,
     hideValues: Boolean,
     onFabClick: () -> Unit,
     onClick: (String) -> Unit,

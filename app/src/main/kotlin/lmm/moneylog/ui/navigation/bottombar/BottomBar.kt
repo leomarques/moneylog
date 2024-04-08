@@ -6,6 +6,7 @@ import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
@@ -18,6 +19,7 @@ import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 
 @Composable
 fun BottomBar(
+    modifier: Modifier = Modifier,
     navBarSelectedIndex: MutableIntState,
     navController: NavHostController,
     showNavigationBar: MutableState<Boolean>

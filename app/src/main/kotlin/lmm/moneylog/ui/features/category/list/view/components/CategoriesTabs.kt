@@ -14,6 +14,7 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun CategoriesTabs(
+    modifier: Modifier = Modifier,
     tabIndex: MutableState<Int>,
     tabs: List<String>
 ) {

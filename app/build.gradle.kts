@@ -55,10 +55,12 @@ android {
 detekt {
     buildUponDefaultConfig = true
     allRules = false
-    config.setFrom(files(
-        "$rootDir/gradle/detekt.yml",
-        "$rootDir/gradle/detekt-compose.yml"
-    ))
+    config.setFrom(
+        files(
+            "$rootDir/gradle/detekt.yml",
+            "$rootDir/gradle/detekt-compose.yml"
+        )
+    )
 }
 
 dependencies {

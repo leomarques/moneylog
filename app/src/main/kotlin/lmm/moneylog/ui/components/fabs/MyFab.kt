@@ -14,6 +14,7 @@ import lmm.moneylog.R
 
 @Composable
 fun MyFab(
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
     icon: ImageVector
 ) {

@@ -18,6 +18,7 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun EmptyState(
+    modifier: Modifier = Modifier,
     title: String,
     description: String
 ) {

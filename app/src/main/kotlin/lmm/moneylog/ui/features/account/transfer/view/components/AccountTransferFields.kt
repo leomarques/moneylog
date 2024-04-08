@@ -19,6 +19,7 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountTransferFields(
+    modifier: Modifier = Modifier,
     value: String,
     list: List<AccountTransferModel>,
     originAccountDisplay: String,

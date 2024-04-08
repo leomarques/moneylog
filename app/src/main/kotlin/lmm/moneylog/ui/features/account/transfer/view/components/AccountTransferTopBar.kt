@@ -8,13 +8,17 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AccountTransferTopBar(onArrowBackClick: () -> Unit) {
+fun AccountTransferTopBar(
+    modifier: Modifier = Modifier,
+    onArrowBackClick: () -> Unit
+) {
     TopAppBar(
         title = { Text(text = stringResource(R.string.topbar_transfer_add)) },
         navigationIcon = {

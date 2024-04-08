@@ -33,6 +33,7 @@ import lmm.moneylog.ui.theme.outcome
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionsListLayout(
+    modifier: Modifier = Modifier,
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     model: TransactionsListUIState,

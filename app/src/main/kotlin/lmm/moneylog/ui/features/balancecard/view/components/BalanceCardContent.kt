@@ -15,14 +15,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.theme.Size
 
 @Composable
-fun BalanceCardContent(content: @Composable () -> Unit) {
+fun BalanceCardContent(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
     Column(
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(Size.DefaultSpaceSize))
-                .background(MaterialTheme.colorScheme.tertiaryContainer)
-                .padding(Size.DefaultSpaceSize),
+        Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(Size.DefaultSpaceSize))
+            .background(MaterialTheme.colorScheme.tertiaryContainer)
+            .padding(Size.DefaultSpaceSize),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         content()

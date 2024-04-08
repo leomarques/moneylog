@@ -11,6 +11,7 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun ListItemData(
+    modifier: Modifier = Modifier,
     name: String,
     balance: String
 ) {

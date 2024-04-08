@@ -20,6 +20,7 @@ import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun AccountDetailLayout(
+    modifier: Modifier = Modifier,
     name: String,
     color: Color,
     isEdit: Boolean,

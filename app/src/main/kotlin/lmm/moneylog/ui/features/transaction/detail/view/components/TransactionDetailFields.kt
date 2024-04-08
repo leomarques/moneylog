@@ -22,6 +22,7 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun TransactionDetailFields(
+    modifier: Modifier = Modifier,
     uiState: TransactionDetailUIState,
     onIsIncomeSelect: (Boolean) -> Unit,
     onAccountClick: () -> Unit,
@@ -72,7 +73,7 @@ fun TransactionDetailFields(
             label = stringResource(R.string.account),
             value = uiState.displayAccount,
             enabled = uisAccountsFieldEnabled,
-            leadingIcon = { AccountIcon(uiState.displayAccountColor) },
+            leadingIcon = { AccountIcon(tint = uiState.displayAccountColor) },
             onClick = onAccountClick
         )
 
@@ -81,7 +82,7 @@ fun TransactionDetailFields(
             label = stringResource(R.string.category),
             value = uiState.displayCategory,
             enabled = isCategoriesFieldEnabled,
-            leadingIcon = { CategoryIcon(uiState.displayCategoryColor) },
+            leadingIcon = { CategoryIcon(tint = uiState.displayCategoryColor) },
             onClick = onCategoryClick
         )
     }

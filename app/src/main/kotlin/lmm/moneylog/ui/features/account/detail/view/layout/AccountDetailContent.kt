@@ -15,6 +15,7 @@ import lmm.moneylog.ui.theme.darkPurple
 
 @Composable
 fun AccountDetailContent(
+    modifier: Modifier = Modifier,
     name: String,
     color: Color,
     isEdit: Boolean,

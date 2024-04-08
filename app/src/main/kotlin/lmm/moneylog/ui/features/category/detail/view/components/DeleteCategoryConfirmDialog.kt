@@ -3,6 +3,7 @@ package lmm.moneylog.ui.features.category.detail.view.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
@@ -10,6 +11,7 @@ import lmm.moneylog.ui.components.misc.ConfirmDialog
 
 @Composable
 fun DeleteCategoryConfirmDialog(
+    modifier: Modifier = Modifier,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {

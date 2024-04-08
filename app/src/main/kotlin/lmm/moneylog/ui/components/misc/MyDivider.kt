@@ -8,7 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.theme.Size
 
 @Composable
-fun MyDivider() {
+fun MyDivider(modifier: Modifier = Modifier) {
     HorizontalDivider(Modifier.padding(horizontal = Size.DefaultSpaceSize))
 }
 

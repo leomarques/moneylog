@@ -22,6 +22,7 @@ import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
 
 @Composable
 fun NavHostParams(
+    modifier: Modifier = Modifier,
     navController: NavHostController,
     startDestination: String,
     paddingValues: PaddingValues,

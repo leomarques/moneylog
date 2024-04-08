@@ -23,6 +23,7 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun ColorTextField(
+    modifier: Modifier = Modifier,
     color: Color,
     onClick: (() -> Unit),
     leadingIcon: (@Composable () -> Unit)? = null

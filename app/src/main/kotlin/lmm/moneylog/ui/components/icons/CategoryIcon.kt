@@ -2,6 +2,7 @@ package lmm.moneylog.ui.components.icons
 
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -11,7 +12,10 @@ import lmm.moneylog.R
 import lmm.moneylog.ui.theme.darkRed
 
 @Composable
-fun CategoryIcon(tint: Color) {
+fun CategoryIcon(
+    modifier: Modifier = Modifier,
+    tint: Color
+) {
     Icon(
         imageVector = ImageVector.vectorResource(id = R.drawable.outline_category_24),
         contentDescription = stringResource(R.string.category),

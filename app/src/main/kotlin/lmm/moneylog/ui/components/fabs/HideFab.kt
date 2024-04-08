@@ -18,6 +18,7 @@ import lmm.moneylog.R
 
 @Composable
 fun HideFab(
+    modifier: Modifier = Modifier,
     icon: ImageVector,
     onClick: () -> Unit
 ) {
@@ -41,7 +42,7 @@ fun HideFab(
 
 @Preview
 @Composable
-fun HideFabPreview() {
+private fun HideFabPreview() {
     HideFab(
         onClick = {},
         icon = Icons.Default.Add

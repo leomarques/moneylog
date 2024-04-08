@@ -14,6 +14,7 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun TransactionDetailContent(
+    modifier: Modifier = Modifier,
     uiState: TransactionDetailUIState,
     showDeleteConfirmDialog: Boolean,
     onDatePicked: (Long) -> Unit,

@@ -2,6 +2,7 @@ package lmm.moneylog.ui.features.category.list.view.components
 
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
@@ -13,6 +14,7 @@ import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun CategoriesTabContent(
+    modifier: Modifier = Modifier,
     list: List<CategoryModel>,
     onItemClick: (Int) -> Unit
 ) {

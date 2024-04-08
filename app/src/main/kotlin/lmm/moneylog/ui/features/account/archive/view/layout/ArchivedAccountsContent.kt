@@ -21,6 +21,7 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun ArchivedAccountsContent(
+    modifier: Modifier = Modifier,
     list: List<ArchivedAccountModel>,
     onUnArchive: (Int) -> Unit,
     onDeleteConfirm: (Int) -> Unit

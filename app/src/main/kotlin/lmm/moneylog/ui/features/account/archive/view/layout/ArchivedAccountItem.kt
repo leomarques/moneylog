@@ -20,6 +20,7 @@ import lmm.moneylog.ui.features.account.archive.view.components.MoreOptionsDropD
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ArchivedAccountItem(
+    modifier: Modifier = Modifier,
     id: Int,
     name: String,
     showDivider: Boolean,

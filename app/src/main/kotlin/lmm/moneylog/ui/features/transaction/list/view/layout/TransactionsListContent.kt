@@ -24,6 +24,7 @@ import lmm.moneylog.ui.theme.darkRed
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TransactionsListContent(
+    modifier: Modifier = Modifier,
     list: List<TransactionModel>,
     filter: MutableState<String>,
     onItemClick: (Int) -> Unit

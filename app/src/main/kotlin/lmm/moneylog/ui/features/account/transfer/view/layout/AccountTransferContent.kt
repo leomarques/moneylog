@@ -16,6 +16,7 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountTransferContent(
+    modifier: Modifier = Modifier,
     value: String,
     list: List<AccountTransferModel>,
     originAccountDisplay: String,

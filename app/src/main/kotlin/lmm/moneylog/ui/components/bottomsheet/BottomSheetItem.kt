@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.components.bottomsheet
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +21,7 @@ import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun BottomSheetItem(
+    modifier: Modifier = Modifier,
     text: String,
     onItemClick: () -> Unit,
     color: Color? = null
@@ -29,7 +29,6 @@ fun BottomSheetItem(
     Row(
         modifier =
             Modifier
-                .background(MaterialTheme.colorScheme.surface)
                 .fillMaxWidth()
                 .height(Size.OneLineListItemHeight)
                 .padding(horizontal = Size.DefaultSpaceSize)
@@ -57,9 +56,9 @@ fun BottomSheetItem(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun BottomSheetItemPreview() {
+private fun BottomSheetItemPreview() {
     BottomSheetItem(
         text = "Alimentação",
         onItemClick = {}

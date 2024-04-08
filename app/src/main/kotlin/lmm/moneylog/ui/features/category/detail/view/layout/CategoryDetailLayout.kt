@@ -18,6 +18,7 @@ import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun CategoryDetailLayout(
+    modifier: Modifier = Modifier,
     name: String,
     color: Color,
     isEdit: Boolean,

@@ -16,6 +16,7 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun ArchivedAccountItemCell(
+    modifier: Modifier = Modifier,
     name: String,
     onClick: () -> Unit
 ) {
@@ -31,9 +32,12 @@ fun ArchivedAccountItemCell(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        ArchivedAccountName(name)
+        ArchivedAccountName(
+            modifier = modifier,
+            name = name
+        )
 
-        MoreOptionsIcon(onClick)
+        MoreOptionsIcon(onClick = onClick)
     }
 }
 

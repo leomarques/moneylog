@@ -34,9 +34,9 @@ import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
 
 @Composable
 fun MyNavHost(
+    modifier: Modifier = Modifier,
     navController: NavHostController,
     startDestination: String,
-    modifier: Modifier = Modifier,
     onHomeFabClick: () -> Unit,
     onBalanceCardClick: (String) -> Unit,
     onArrowBackClick: () -> Unit,

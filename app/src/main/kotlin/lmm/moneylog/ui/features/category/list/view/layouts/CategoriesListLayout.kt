@@ -17,6 +17,7 @@ import lmm.moneylog.ui.theme.darkRed
 
 @Composable
 fun CategoriesListLayout(
+    modifier: Modifier = Modifier,
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     list: List<CategoryModel>,
