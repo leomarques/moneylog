@@ -21,11 +21,11 @@ fun BalanceCardContent(
 ) {
     Column(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(Size.DefaultSpaceSize))
-            .background(MaterialTheme.colorScheme.tertiaryContainer)
-            .padding(Size.DefaultSpaceSize),
+            Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(Size.DefaultSpaceSize))
+                .background(MaterialTheme.colorScheme.tertiaryContainer)
+                .padding(Size.DefaultSpaceSize),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         content()

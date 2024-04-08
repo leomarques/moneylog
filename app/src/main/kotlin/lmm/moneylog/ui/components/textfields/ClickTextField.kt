@@ -27,24 +27,24 @@ fun ClickTextField(
 ) {
     OutlinedTextField(
         modifier =
-        modifier
-            .background(MaterialTheme.colorScheme.surface)
-            .fillMaxWidth(),
+            modifier
+                .background(MaterialTheme.colorScheme.surface)
+                .fillMaxWidth(),
         value = value,
         label = { Text(text = label) },
         readOnly = true,
         enabled = enabled,
         interactionSource =
-        remember { MutableInteractionSource() }
-            .also { interactionSource ->
-                LaunchedEffect(interactionSource) {
-                    interactionSource.interactions.collect {
-                        if (it is PressInteraction.Release) {
-                            onClick.invoke()
+            remember { MutableInteractionSource() }
+                .also { interactionSource ->
+                    LaunchedEffect(interactionSource) {
+                        interactionSource.interactions.collect {
+                            if (it is PressInteraction.Release) {
+                                onClick.invoke()
+                            }
                         }
                     }
-                }
-            },
+                },
         onValueChange = { },
         leadingIcon = leadingIcon
     )

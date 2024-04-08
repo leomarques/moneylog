@@ -22,13 +22,13 @@ fun AccountDetailTopAppBar(
         title = {
             Text(
                 text =
-                stringResource(
-                    if (isEdit) {
-                        R.string.detail_topbar_account_edit
-                    } else {
-                        R.string.detail_topbar_account_add
-                    }
-                )
+                    stringResource(
+                        if (isEdit) {
+                            R.string.detail_topbar_account_edit
+                        } else {
+                            R.string.detail_topbar_account_add
+                        }
+                    )
             )
         },
         navigationIcon = {

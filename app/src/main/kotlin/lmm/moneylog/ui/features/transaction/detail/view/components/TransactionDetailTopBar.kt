@@ -23,13 +23,13 @@ fun TransactionDetailTopBar(
         title = {
             Text(
                 text =
-                stringResource(
-                    if (isEdit) {
-                        R.string.detail_topbar_transaction_edit
-                    } else {
-                        R.string.detail_topbar_transaction_add
-                    }
-                )
+                    stringResource(
+                        if (isEdit) {
+                            R.string.detail_topbar_transaction_edit
+                        } else {
+                            R.string.detail_topbar_transaction_add
+                        }
+                    )
             )
         },
         navigationIcon = { ArrowBackIcon(onClick = onArrowBackClick) },

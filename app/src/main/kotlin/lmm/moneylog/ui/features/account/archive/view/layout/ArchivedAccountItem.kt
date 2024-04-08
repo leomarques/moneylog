@@ -33,11 +33,11 @@ fun ArchivedAccountItem(
 
     Box(
         modifier =
-        Modifier
-            .pointerInteropFilter {
-                offset = with(density) { it.x.toDp() }
-                false
-            }
+            Modifier
+                .pointerInteropFilter {
+                    offset = with(density) { it.x.toDp() }
+                    false
+                }
     ) {
         ArchivedAccountItemCell(name) {
             expanded = true

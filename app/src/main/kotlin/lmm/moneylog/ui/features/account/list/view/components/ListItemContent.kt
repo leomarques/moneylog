@@ -22,14 +22,14 @@ fun ListItemContent(
 ) {
     Row(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .height(Size.TwoLinesListItemHeight)
-            .padding(
-                vertical = Size.DefaultSpaceSize,
-                horizontal = Size.DefaultSpaceSize
-            )
-            .clickable { onItemClick(id) },
+            Modifier
+                .fillMaxWidth()
+                .height(Size.TwoLinesListItemHeight)
+                .padding(
+                    vertical = Size.DefaultSpaceSize,
+                    horizontal = Size.DefaultSpaceSize
+                )
+                .clickable { onItemClick(id) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         content()

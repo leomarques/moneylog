@@ -31,31 +31,31 @@ fun ColorTextField(
     Box(contentAlignment = Alignment.CenterStart) {
         OutlinedTextField(
             modifier =
-            Modifier
-                .background(MaterialTheme.colorScheme.surface)
-                .fillMaxWidth(),
+                Modifier
+                    .background(MaterialTheme.colorScheme.surface)
+                    .fillMaxWidth(),
             value = stringResource(R.string.color),
             readOnly = true,
             interactionSource =
-            remember { MutableInteractionSource() }
-                .also { interactionSource ->
-                    LaunchedEffect(interactionSource) {
-                        interactionSource.interactions.collect {
-                            if (it is PressInteraction.Release) {
-                                onClick.invoke()
+                remember { MutableInteractionSource() }
+                    .also { interactionSource ->
+                        LaunchedEffect(interactionSource) {
+                            interactionSource.interactions.collect {
+                                if (it is PressInteraction.Release) {
+                                    onClick.invoke()
+                                }
                             }
                         }
-                    }
-                },
+                    },
             onValueChange = { },
             leadingIcon = leadingIcon
         )
 
         MyCircle(
             modifier =
-            Modifier
-                .align(Alignment.CenterEnd)
-                .padding(end = Size.DefaultSpaceSize),
+                Modifier
+                    .align(Alignment.CenterEnd)
+                    .padding(end = Size.DefaultSpaceSize),
             color = color,
             size = Size.SmallCircleSize
         )

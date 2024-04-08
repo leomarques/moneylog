@@ -35,14 +35,14 @@ fun TransactionsListItem(
 ) {
     Row(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .height(Size.TwoLinesListItemHeight)
-            .padding(
-                vertical = Size.SmallSpaceSize,
-                horizontal = Size.DefaultSpaceSize
-            )
-            .clickable { onItemClick(transaction.id) },
+            Modifier
+                .fillMaxWidth()
+                .height(Size.TwoLinesListItemHeight)
+                .padding(
+                    vertical = Size.SmallSpaceSize,
+                    horizontal = Size.DefaultSpaceSize
+                )
+                .clickable { onItemClick(transaction.id) },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -61,18 +61,18 @@ fun TransactionsListItem(
                 Column(Modifier.padding(start = Size.DefaultSpaceSize)) {
                     Text(
                         text =
-                        description.ifEmpty {
-                            stringResource(R.string.no_description)
-                        },
+                            description.ifEmpty {
+                                stringResource(R.string.no_description)
+                            },
                         overflow = TextOverflow.Ellipsis,
                         style = MaterialTheme.typography.bodyLarge,
                         maxLines = 1,
                         color =
-                        if (description.isEmpty()) {
-                            neutralColor
-                        } else {
-                            MaterialTheme.colorScheme.onSurface
-                        }
+                            if (description.isEmpty()) {
+                                neutralColor
+                            } else {
+                                MaterialTheme.colorScheme.onSurface
+                            }
                     )
 
                     val categoryString =
@@ -95,9 +95,9 @@ fun TransactionsListItem(
 
             Text(
                 modifier =
-                Modifier
-                    .weight(0.25f)
-                    .padding(start = Size.DefaultSpaceSize),
+                    Modifier
+                        .weight(0.25f)
+                        .padding(start = Size.DefaultSpaceSize),
                 text = value,
                 color = if (isIncome) income else outcome,
                 textAlign = TextAlign.End,
@@ -114,16 +114,16 @@ fun TransactionsListItem(
 fun TransactionsListItemPreview() {
     TransactionsListItem(
         transaction =
-        TransactionModel(
-            value = "Nome",
-            isIncome = true,
-            description = "Desc",
-            account = "A",
-            category = "B",
-            date = "01/01/2001",
-            id = 0,
-            categoryColor = darkRed
-        ),
+            TransactionModel(
+                value = "Nome",
+                isIncome = true,
+                description = "Desc",
+                account = "A",
+                category = "B",
+                date = "01/01/2001",
+                id = 0,
+                categoryColor = darkRed
+            ),
         onItemClick = {},
         color = darkRed
     )

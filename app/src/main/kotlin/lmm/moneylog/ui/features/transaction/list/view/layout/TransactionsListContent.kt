@@ -55,9 +55,9 @@ fun TransactionsListContent(
                     Text(
                         text = date,
                         modifier =
-                        Modifier
-                            .padding(vertical = Size.SmallSpaceSize)
-                            .padding(start = Size.DefaultSpaceSize),
+                            Modifier
+                                .padding(vertical = Size.SmallSpaceSize)
+                                .padding(start = Size.DefaultSpaceSize),
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold
                     )
@@ -81,38 +81,38 @@ fun TransactionsListContent(
 fun TransactionsListContentPreview() {
     TransactionsListContent(
         list =
-        listOf(
-            TransactionModel(
-                value = "Nome",
-                isIncome = true,
-                description = "Desc",
-                account = "A",
-                category = "B",
-                date = "01/01/2001",
-                id = 0,
-                categoryColor = darkRed
+            listOf(
+                TransactionModel(
+                    value = "Nome",
+                    isIncome = true,
+                    description = "Desc",
+                    account = "A",
+                    category = "B",
+                    date = "01/01/2001",
+                    id = 0,
+                    categoryColor = darkRed
+                ),
+                TransactionModel(
+                    value = "Nome",
+                    isIncome = true,
+                    description = "Desc",
+                    account = "A",
+                    category = "B",
+                    date = "01/01/2001",
+                    id = 0,
+                    categoryColor = darkRed
+                ),
+                TransactionModel(
+                    value = "Nome",
+                    isIncome = true,
+                    description = "Desc",
+                    account = "A",
+                    category = "B",
+                    date = "01/01/2001",
+                    id = 0,
+                    categoryColor = darkRed
+                )
             ),
-            TransactionModel(
-                value = "Nome",
-                isIncome = true,
-                description = "Desc",
-                account = "A",
-                category = "B",
-                date = "01/01/2001",
-                id = 0,
-                categoryColor = darkRed
-            ),
-            TransactionModel(
-                value = "Nome",
-                isIncome = true,
-                description = "Desc",
-                account = "A",
-                category = "B",
-                date = "01/01/2001",
-                id = 0,
-                categoryColor = darkRed
-            )
-        ),
         filter = mutableStateOf(""),
         onItemClick = {}
     )

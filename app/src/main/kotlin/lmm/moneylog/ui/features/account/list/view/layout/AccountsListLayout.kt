@@ -70,26 +70,26 @@ fun AccountsListLayout(
 fun AccountsListLayoutPreview() {
     AccountsListLayout(
         list =
-        listOf(
-            AccountModel(
-                id = 0,
-                name = "Itaú",
-                balance = "R$200.0",
-                color = darkRed
+            listOf(
+                AccountModel(
+                    id = 0,
+                    name = "Itaú",
+                    balance = "R$200.0",
+                    color = darkRed
+                ),
+                AccountModel(
+                    id = 0,
+                    name = "Itaú",
+                    balance = "R$200.0",
+                    color = darkRed
+                ),
+                AccountModel(
+                    id = 0,
+                    name = "Itaú",
+                    balance = "R$200.0",
+                    color = darkRed
+                )
             ),
-            AccountModel(
-                id = 0,
-                name = "Itaú",
-                balance = "R$200.0",
-                color = darkRed
-            ),
-            AccountModel(
-                id = 0,
-                name = "Itaú",
-                balance = "R$200.0",
-                color = darkRed
-            )
-        ),
         onArrowBackClick = { },
         onFabClick = { },
         onItemClick = {},

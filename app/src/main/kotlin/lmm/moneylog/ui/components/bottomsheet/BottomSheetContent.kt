@@ -23,13 +23,13 @@ fun BottomSheetContent(
 ) {
     LazyColumn(
         modifier =
-        Modifier
-            .background(MaterialTheme.colorScheme.surface)
-            .padding(horizontal = Size.DefaultSpaceSize)
-            .padding(
-                top = Size.SmallSpaceSize,
-                bottom = Size.XLargeSpaceSize
-            )
+            Modifier
+                .background(MaterialTheme.colorScheme.surface)
+                .padding(horizontal = Size.DefaultSpaceSize)
+                .padding(
+                    top = Size.SmallSpaceSize,
+                    bottom = Size.XLargeSpaceSize
+                )
     ) {
         itemsIndexed(list) { index, item ->
             BottomSheetItem(
@@ -53,10 +53,10 @@ fun BottomSheetContent(
 private fun BottomSheetContentPreview() {
     BottomSheetContent(
         list =
-        listOf(
-            Pair("Nubank", darkPurple),
-            Pair("Santander", darkRed)
-        ),
+            listOf(
+                Pair("Nubank", darkPurple),
+                Pair("Santander", darkRed)
+            ),
         onConfirm = {},
         onDismiss = {}
     )

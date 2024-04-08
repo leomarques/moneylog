@@ -71,26 +71,26 @@ fun SearchTopBar(
         actions = {
             OutlinedTextField(
                 modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = Size.XXSmallSpaceSize)
-                    .padding(start = 40.dp)
-                    .onFocusChanged { focusState ->
-                        showClearButton = (focusState.isFocused)
-                    }
-                    .focusRequester(focusRequester),
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = Size.XXSmallSpaceSize)
+                        .padding(start = 40.dp)
+                        .onFocusChanged { focusState ->
+                            showClearButton = (focusState.isFocused)
+                        }
+                        .focusRequester(focusRequester),
                 value = searchText,
                 onValueChange = onSearchTextChanged,
                 placeholder = {
                     Text(text = placeholderText)
                 },
                 colors =
-                TextFieldDefaults.colors(
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent
-                ),
+                    TextFieldDefaults.colors(
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        focusedContainerColor = Color.Transparent,
+                        unfocusedContainerColor = Color.Transparent
+                    ),
                 trailingIcon = {
                     AnimatedVisibility(
                         visible = showClearButton,
@@ -108,9 +108,9 @@ fun SearchTopBar(
                 singleLine = true,
                 keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
                 keyboardActions =
-                KeyboardActions(onDone = {
-                    keyboardController?.hide()
-                })
+                    KeyboardActions(onDone = {
+                        keyboardController?.hide()
+                    })
             )
         }
     )

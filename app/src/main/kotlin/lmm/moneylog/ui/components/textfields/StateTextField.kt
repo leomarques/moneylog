@@ -37,25 +37,25 @@ fun StateTextField(
 
     OutlinedTextField(
         modifier =
-        modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.surface)
-            .focusRequester(focusRequester)
-            .testTag(testTag),
+            modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.surface)
+                .focusRequester(focusRequester)
+                .testTag(testTag),
         value = value,
         label = { Text(text = title) },
         leadingIcon = leadingIcon,
         onValueChange = onValueChange,
         keyboardOptions =
-        KeyboardOptions.Default.copy(
-            keyboardType = keyboardType,
-            imeAction = ImeAction.Done,
-            capitalization = KeyboardCapitalization.Sentences
-        ),
+            KeyboardOptions.Default.copy(
+                keyboardType = keyboardType,
+                imeAction = ImeAction.Done,
+                capitalization = KeyboardCapitalization.Sentences
+            ),
         keyboardActions =
-        KeyboardActions(
-            onDone = { focusManager.clearFocus() }
-        )
+            KeyboardActions(
+                onDone = { focusManager.clearFocus() }
+            )
     )
 
     if (getFocus) {
