@@ -13,19 +13,19 @@ import lmm.moneylog.ui.features.balancecard.view.layout.BALANCE_CARD_OUTCOME
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_ALL
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_INCOME
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_OUTCOME
+import lmm.moneylog.ui.navigation.misc.ACCOUNTS_INDEX
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
-import lmm.moneylog.ui.navigation.misc.AccountsIndex
 import lmm.moneylog.ui.navigation.misc.BackPressHandler
+import lmm.moneylog.ui.navigation.misc.CATEGORIES_INDEX
 import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
-import lmm.moneylog.ui.navigation.misc.CategoriesIndex
+import lmm.moneylog.ui.navigation.misc.HOME_INDEX
 import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
-import lmm.moneylog.ui.navigation.misc.HomeIndex
+import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_INDEX
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
-import lmm.moneylog.ui.navigation.misc.TransactionsIndex
 
 fun NavGraphBuilder.composableExt(
     route: String,
@@ -60,15 +60,15 @@ fun NavHostController.navigatePopUpTo(
 
 fun MutableIntState.updateIndex(destination: String) {
     when (destination.split("/", "?")[0]) {
-        HOME_SCREEN -> HomeIndex
-        TRANSACTIONS_LIST_SCREEN -> TransactionsIndex
-        TRANSACTION_DETAIL_SCREEN -> TransactionsIndex
-        ACCOUNTS_LIST_SCREEN -> AccountsIndex
-        ARCHIVED_ACCOUNTS_LIST_SCREEN -> AccountsIndex
-        ACCOUNT_DETAIL_SCREEN -> AccountsIndex
-        CATEGORIES_LIST_SCREEN -> CategoriesIndex
-        CATEGORY_DETAIL_SCREEN -> CategoriesIndex
-        else -> HomeIndex
+        HOME_SCREEN -> HOME_INDEX
+        TRANSACTIONS_LIST_SCREEN -> TRANSACTIONS_INDEX
+        TRANSACTION_DETAIL_SCREEN -> TRANSACTIONS_INDEX
+        ACCOUNTS_LIST_SCREEN -> ACCOUNTS_INDEX
+        ARCHIVED_ACCOUNTS_LIST_SCREEN -> ACCOUNTS_INDEX
+        ACCOUNT_DETAIL_SCREEN -> ACCOUNTS_INDEX
+        CATEGORIES_LIST_SCREEN -> CATEGORIES_INDEX
+        CATEGORY_DETAIL_SCREEN -> CATEGORIES_INDEX
+        else -> HOME_INDEX
     }.also { intValue = it }
 }
 

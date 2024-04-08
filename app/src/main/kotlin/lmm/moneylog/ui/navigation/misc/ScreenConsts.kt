@@ -14,7 +14,7 @@ const val PARAM_TYPE_OF_VALUE = "typeOfValue"
 const val PARAM_TYPE_ALL = "all"
 const val PARAM_ID = "id"
 
-const val HomeIndex = 0
-const val TransactionsIndex = 1
-const val AccountsIndex = 2
-const val CategoriesIndex = 3
+const val HOME_INDEX = 0
+const val TRANSACTIONS_INDEX = 1
+const val ACCOUNTS_INDEX = 2
+const val CATEGORIES_INDEX = 3
