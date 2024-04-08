@@ -59,10 +59,21 @@ class TransactionDetailViewModel(
                 setupAdd(accountsAsync, categoriesAsync)
             }
 
-            setupAccountsAndCategories(
-                accountsAsync = accountsAsync,
-                categoriesAsync = categoriesAsync
-            )
+            val accounts = accountsAsync.await()
+            val categories = categoriesAsync.await()
+            val account = accounts.getAccountById(_uiState.value.accountId)
+            val category = categories.getCategoryById(_uiState.value.categoryId)
+
+            _uiState.update {
+                it.copy(
+                    accounts = accounts,
+                    categories = categories,
+                    displayAccount = account?.first.orEmpty(),
+                    displayCategory = category?.first.orEmpty(),
+                    displayAccountColor = account?.second.orDefaultColor(),
+                    displayCategoryColor = category?.second.orDefaultColor()
+                )
+            }
         }
     }
 
@@ -91,27 +102,6 @@ class TransactionDetailViewModel(
                 categoryId = categoryId,
                 date = currentDate,
                 displayDate = currentDate.convertToDisplayDate(domainTimeRepository)
-            )
-        }
-    }
-
-    private suspend fun setupAccountsAndCategories(
-        accountsAsync: Deferred<List<Account>>,
-        categoriesAsync: Deferred<List<Category>>
-    ) {
-        val accounts = accountsAsync.await()
-        val categories = categoriesAsync.await()
-        val account = accounts.getAccountById(_uiState.value.accountId)
-        val category = categories.getCategoryById(_uiState.value.categoryId)
-
-        _uiState.update {
-            it.copy(
-                accounts = accounts,
-                categories = categories,
-                displayAccount = account?.first.orEmpty(),
-                displayCategory = category?.first.orEmpty(),
-                displayAccountColor = account?.second.orDefaultColor(),
-                displayCategoryColor = category?.second.orDefaultColor()
             )
         }
     }

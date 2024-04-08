@@ -69,7 +69,6 @@
     <string name="transfer_destination">Conta destino</string>
     <string name="transfer_error_no_origin">Preencha a conta de origem</string>
     <string name="transfer_error_no_destination">Preencha a conta de destino</string>
-    <string name="transfer_error_same_account">As contas de origem e destino são iguais</string>
 
     <string name="arrowback_desc">voltar</string>
     <string name="archive_desc">arquivar</string>

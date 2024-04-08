@@ -36,7 +36,7 @@ fun MoneylogTheme(
     if (!view.isInEditMode) {
         val currentWindow =
             (view.context as? Activity)?.window
-                ?: throw Exception("Not in an activity - unable to get Window reference")
+                ?: throw RuntimeException("Not in an activity - unable to get Window reference")
 
         SideEffect {
             (view.context as Activity).window.statusBarColor = colorScheme.primary.toArgb()

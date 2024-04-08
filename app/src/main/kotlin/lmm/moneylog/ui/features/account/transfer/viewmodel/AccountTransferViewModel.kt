@@ -81,10 +81,6 @@ class AccountTransferViewModel(
                 onError(R.string.transfer_error_no_destination)
                 return
             }
-            if (originAccountId == destinationAccountId) {
-                onError(R.string.transfer_error_same_account)
-                return
-            }
 
             try {
                 val finalValue = value.validateValue()

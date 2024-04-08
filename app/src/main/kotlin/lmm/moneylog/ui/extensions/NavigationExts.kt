@@ -16,12 +16,16 @@ import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_OUTC
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.AccountsIndex
 import lmm.moneylog.ui.navigation.misc.BackPressHandler
 import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.CategoriesIndex
 import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
+import lmm.moneylog.ui.navigation.misc.HomeIndex
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.TransactionsIndex
 
 fun NavGraphBuilder.composableExt(
     route: String,
@@ -56,15 +60,15 @@ fun NavHostController.navigatePopUpTo(
 
 fun MutableIntState.updateIndex(destination: String) {
     when (destination.split("/", "?")[0]) {
-        HOME_SCREEN -> 0
-        TRANSACTIONS_LIST_SCREEN -> 1
-        TRANSACTION_DETAIL_SCREEN -> 1
-        ACCOUNTS_LIST_SCREEN -> 2
-        ARCHIVED_ACCOUNTS_LIST_SCREEN -> 2
-        ACCOUNT_DETAIL_SCREEN -> 2
-        CATEGORIES_LIST_SCREEN -> 3
-        CATEGORY_DETAIL_SCREEN -> 3
-        else -> 0
+        HOME_SCREEN -> HomeIndex
+        TRANSACTIONS_LIST_SCREEN -> TransactionsIndex
+        TRANSACTION_DETAIL_SCREEN -> TransactionsIndex
+        ACCOUNTS_LIST_SCREEN -> AccountsIndex
+        ARCHIVED_ACCOUNTS_LIST_SCREEN -> AccountsIndex
+        ACCOUNT_DETAIL_SCREEN -> AccountsIndex
+        CATEGORIES_LIST_SCREEN -> CategoriesIndex
+        CATEGORY_DETAIL_SCREEN -> CategoriesIndex
+        else -> HomeIndex
     }.also { intValue = it }
 }
 

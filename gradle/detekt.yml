@@ -119,8 +119,8 @@ complexity:
     ignoreAnnotated: ['Composable', 'Preview']
   LongParameterList:
     active: true
-    functionThreshold: 6
-    constructorThreshold: 7
+    functionThreshold: 32
+    constructorThreshold: 32
     ignoreDefaultParameters: true
     ignoreDataClasses: true
     ignoreAnnotatedParameter: [ ]
@@ -279,7 +279,6 @@ exceptions:
     exceptionNames:
       - 'Error'
       - 'Exception'
-      - 'RuntimeException'
       - 'Throwable'
 
 naming:
@@ -550,6 +549,7 @@ style:
       - '0'
       - '1'
       - '2'
+      - '3'
     ignoreHashCodeFunction: true
     ignorePropertyDeclaration: true
     ignoreLocalVariableDeclaration: false
