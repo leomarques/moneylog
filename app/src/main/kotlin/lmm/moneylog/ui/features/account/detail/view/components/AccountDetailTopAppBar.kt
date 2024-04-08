@@ -13,22 +13,22 @@ import lmm.moneylog.ui.components.icons.ArrowBackIcon
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AccountDetailTopAppBar(
-    modifier: Modifier = Modifier,
     isEdit: Boolean,
     onArrowBackClick: () -> Unit,
+    modifier: Modifier = Modifier,
     onArchiveIconClick: () -> Unit
 ) {
     TopAppBar(
         title = {
             Text(
                 text =
-                    stringResource(
-                        if (isEdit) {
-                            R.string.detail_topbar_account_edit
-                        } else {
-                            R.string.detail_topbar_account_add
-                        }
-                    )
+                stringResource(
+                    if (isEdit) {
+                        R.string.detail_topbar_account_edit
+                    } else {
+                        R.string.detail_topbar_account_add
+                    }
+                )
             )
         },
         navigationIcon = {

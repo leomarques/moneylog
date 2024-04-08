@@ -17,9 +17,9 @@ import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun CategoriesListContent(
-    modifier: Modifier = Modifier,
     onItemClick: (Int) -> Unit,
-    list: List<CategoryModel>
+    list: List<CategoryModel>,
+    modifier: Modifier = Modifier
 ) {
     val tabIndex = remember { mutableIntStateOf(0) }
     val tabs =

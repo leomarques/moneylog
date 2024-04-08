@@ -23,13 +23,13 @@ import lmm.moneylog.ui.components.misc.OnLifecycleEvent
 
 @Composable
 fun StateTextField(
-    modifier: Modifier = Modifier,
     value: String,
     title: String,
     keyboardType: KeyboardType,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     getFocus: Boolean = false,
     leadingIcon: @Composable (() -> Unit)? = null,
-    onValueChange: (String) -> Unit,
     testTag: String = ""
 ) {
     val focusManager = LocalFocusManager.current
@@ -37,25 +37,25 @@ fun StateTextField(
 
     OutlinedTextField(
         modifier =
-            modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.surface)
-                .focusRequester(focusRequester)
-                .testTag(testTag),
+        modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surface)
+            .focusRequester(focusRequester)
+            .testTag(testTag),
         value = value,
         label = { Text(text = title) },
         leadingIcon = leadingIcon,
         onValueChange = onValueChange,
         keyboardOptions =
-            KeyboardOptions.Default.copy(
-                keyboardType = keyboardType,
-                imeAction = ImeAction.Done,
-                capitalization = KeyboardCapitalization.Sentences
-            ),
+        KeyboardOptions.Default.copy(
+            keyboardType = keyboardType,
+            imeAction = ImeAction.Done,
+            capitalization = KeyboardCapitalization.Sentences
+        ),
         keyboardActions =
-            KeyboardActions(
-                onDone = { focusManager.clearFocus() }
-            )
+        KeyboardActions(
+            onDone = { focusManager.clearFocus() }
+        )
     )
 
     if (getFocus) {

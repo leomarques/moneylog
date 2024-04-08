@@ -15,7 +15,6 @@ import lmm.moneylog.ui.theme.darkPurple
 
 @Composable
 fun AccountDetailContent(
-    modifier: Modifier = Modifier,
     name: String,
     color: Color,
     isEdit: Boolean,
@@ -23,6 +22,7 @@ fun AccountDetailContent(
     onArchiveConfirm: () -> Unit,
     onArchiveDismiss: () -> Unit,
     onColorPick: (Color) -> Unit,
+    modifier: Modifier = Modifier,
     onNameChange: (String) -> Unit
 ) {
     Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {

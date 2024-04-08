@@ -14,10 +14,10 @@ import lmm.moneylog.ui.features.account.archive.view.components.ArchivedAccounts
 
 @Composable
 fun ArchivedAccountsLayout(
-    modifier: Modifier = Modifier,
     list: List<ArchivedAccountModel>,
     onArrowBackClick: () -> Unit,
     onUnArchive: (Int) -> Unit,
+    modifier: Modifier = Modifier,
     onDeleteConfirm: (Int) -> Unit
 ) {
     Scaffold(
@@ -52,20 +52,20 @@ fun ArchivedAccountsLayoutPreview() {
     ArchivedAccountsLayout(
         onArrowBackClick = { },
         list =
-            listOf(
-                ArchivedAccountModel(
-                    id = 0,
-                    name = "Itaú"
-                ),
-                ArchivedAccountModel(
-                    id = 0,
-                    name = "Itaú"
-                ),
-                ArchivedAccountModel(
-                    id = 0,
-                    name = "Itaú"
-                )
+        listOf(
+            ArchivedAccountModel(
+                id = 0,
+                name = "Itaú"
             ),
+            ArchivedAccountModel(
+                id = 0,
+                name = "Itaú"
+            ),
+            ArchivedAccountModel(
+                id = 0,
+                name = "Itaú"
+            )
+        ),
         onDeleteConfirm = {},
         onUnArchive = {}
     )

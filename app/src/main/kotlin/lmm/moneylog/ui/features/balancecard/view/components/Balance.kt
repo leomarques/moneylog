@@ -18,10 +18,10 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun Balance(
-    modifier: Modifier = Modifier,
     value: String,
     month: String,
     hideValues: Boolean,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Column(

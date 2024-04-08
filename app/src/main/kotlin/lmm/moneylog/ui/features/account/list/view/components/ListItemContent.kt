@@ -15,21 +15,21 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun ListItemContent(
-    modifier: Modifier = Modifier,
     id: Int,
     onItemClick: (Int) -> Unit,
+    modifier: Modifier = Modifier,
     content: @Composable (RowScope.() -> Unit)
 ) {
     Row(
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .height(Size.TwoLinesListItemHeight)
-                .padding(
-                    vertical = Size.DefaultSpaceSize,
-                    horizontal = Size.DefaultSpaceSize
-                )
-                .clickable { onItemClick(id) },
+        Modifier
+            .fillMaxWidth()
+            .height(Size.TwoLinesListItemHeight)
+            .padding(
+                vertical = Size.DefaultSpaceSize,
+                horizontal = Size.DefaultSpaceSize
+            )
+            .clickable { onItemClick(id) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         content()

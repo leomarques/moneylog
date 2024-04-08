@@ -16,8 +16,8 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun ArchivedAccountItemCell(
-    modifier: Modifier = Modifier,
     name: String,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Row(

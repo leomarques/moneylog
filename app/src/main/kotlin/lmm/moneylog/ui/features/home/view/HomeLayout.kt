@@ -18,17 +18,17 @@ import lmm.moneylog.ui.theme.Size
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeLayout(
-    modifier: Modifier = Modifier,
     hideValues: Boolean,
     onFabClick: () -> Unit,
     onClick: (String) -> Unit,
+    modifier: Modifier = Modifier,
     onHideClick: () -> Unit
 ) {
     Scaffold(
         modifier =
-            Modifier
-                .padding(horizontal = Size.DefaultSpaceSize)
-                .padding(top = Size.DefaultSpaceSize),
+        Modifier
+            .padding(horizontal = Size.DefaultSpaceSize)
+            .padding(top = Size.DefaultSpaceSize),
         floatingActionButton = {
             HideFab(
                 icon = Icons.Default.Add,

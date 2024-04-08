@@ -12,8 +12,8 @@ import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun ListItemName(
-    modifier: Modifier = Modifier,
-    name: String
+    name: String,
+    modifier: Modifier = Modifier
 ) {
     Text(
         modifier = modifier,

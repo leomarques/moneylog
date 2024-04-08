@@ -16,9 +16,9 @@ import lmm.moneylog.ui.components.icons.ArrowBackIcon
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun AccountsListTopBar(
-    modifier: Modifier = Modifier,
     onArrowBackClick: () -> Unit,
     onArchivedIconClick: () -> Unit,
+    modifier: Modifier = Modifier,
     onTransferIconClick: () -> Unit
 ) {
     TopAppBar(

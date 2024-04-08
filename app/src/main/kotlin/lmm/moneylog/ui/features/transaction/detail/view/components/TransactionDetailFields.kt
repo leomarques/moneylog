@@ -22,7 +22,6 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun TransactionDetailFields(
-    modifier: Modifier = Modifier,
     uiState: TransactionDetailUIState,
     onIsIncomeSelect: (Boolean) -> Unit,
     onAccountClick: () -> Unit,
@@ -31,6 +30,7 @@ fun TransactionDetailFields(
     onDescriptionChange: (String) -> Unit,
     isCategoriesFieldEnabled: Boolean,
     uisAccountsFieldEnabled: Boolean,
+    modifier: Modifier = Modifier,
     onDateClick: () -> Unit
 ) {
     Column {

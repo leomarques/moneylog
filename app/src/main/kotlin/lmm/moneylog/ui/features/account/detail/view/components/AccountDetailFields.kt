@@ -21,11 +21,11 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountDetailFields(
-    modifier: Modifier = Modifier,
     name: String,
     color: Color,
     isEdit: Boolean,
     showColorsDialog: MutableState<Boolean>,
+    modifier: Modifier = Modifier,
     onNameChange: (String) -> Unit
 ) {
     Column {

@@ -17,11 +17,11 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun CategoriesListItem(
-    modifier: Modifier = Modifier,
     id: Int,
     name: String,
     color: Color,
     showDivider: Boolean,
+    modifier: Modifier = Modifier,
     onItemClick: (Int) -> Unit
 ) {
     ListItemContent(

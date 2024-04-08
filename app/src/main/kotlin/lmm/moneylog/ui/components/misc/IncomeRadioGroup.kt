@@ -15,8 +15,8 @@ import lmm.moneylog.R
 
 @Composable
 fun IncomeRadioGroup(
-    modifier: Modifier = Modifier,
     isIncome: Boolean,
+    modifier: Modifier = Modifier,
     onClick: (Boolean) -> Unit
 ) {
     Row(modifier = modifier.background(MaterialTheme.colorScheme.surface)) {

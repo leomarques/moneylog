@@ -16,20 +16,20 @@ import lmm.moneylog.ui.theme.darkRed
 
 @Composable
 fun BottomSheetContent(
-    modifier: Modifier = Modifier,
     list: List<Pair<String, Color>>,
     onConfirm: (Int) -> Unit,
+    modifier: Modifier = Modifier,
     onDismiss: () -> Unit
 ) {
     LazyColumn(
         modifier =
-            Modifier
-                .background(MaterialTheme.colorScheme.surface)
-                .padding(horizontal = Size.DefaultSpaceSize)
-                .padding(
-                    top = Size.SmallSpaceSize,
-                    bottom = Size.XLargeSpaceSize
-                )
+        Modifier
+            .background(MaterialTheme.colorScheme.surface)
+            .padding(horizontal = Size.DefaultSpaceSize)
+            .padding(
+                top = Size.SmallSpaceSize,
+                bottom = Size.XLargeSpaceSize
+            )
     ) {
         itemsIndexed(list) { index, item ->
             BottomSheetItem(
@@ -53,10 +53,10 @@ fun BottomSheetContent(
 private fun BottomSheetContentPreview() {
     BottomSheetContent(
         list =
-            listOf(
-                Pair("Nubank", darkPurple),
-                Pair("Santander", darkRed)
-            ),
+        listOf(
+            Pair("Nubank", darkPurple),
+            Pair("Santander", darkRed)
+        ),
         onConfirm = {},
         onDismiss = {}
     )

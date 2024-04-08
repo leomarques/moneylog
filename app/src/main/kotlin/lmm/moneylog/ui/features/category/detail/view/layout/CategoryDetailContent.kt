@@ -15,7 +15,6 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun CategoryDetailContent(
-    modifier: Modifier = Modifier,
     name: String,
     color: Color,
     isEdit: Boolean,
@@ -25,6 +24,7 @@ fun CategoryDetailContent(
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit,
     onNameChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     onIncomeChange: (Boolean) -> Unit
 ) {
     Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {

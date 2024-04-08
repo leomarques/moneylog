@@ -21,13 +21,13 @@ const val BALANCE_CARD_OUTCOME = "outcome"
 
 @Composable
 fun BalanceCardLayout(
-    modifier: Modifier = Modifier,
     total: String,
     credit: String,
     debt: String,
     month: String,
     hideValues: Boolean,
     onHideClick: () -> Unit,
+    modifier: Modifier = Modifier,
     onClick: (String) -> Unit
 ) {
     BalanceCardContent {

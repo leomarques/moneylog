@@ -20,7 +20,6 @@ import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun AccountDetailLayout(
-    modifier: Modifier = Modifier,
     name: String,
     color: Color,
     isEdit: Boolean,
@@ -29,6 +28,7 @@ fun AccountDetailLayout(
     onFabClick: () -> Unit,
     onArchiveConfirm: () -> Unit,
     onColorPick: (Color) -> Unit,
+    modifier: Modifier = Modifier,
     onNameChange: (String) -> Unit
 ) {
     var showArchiveConfirmDialog by remember { mutableStateOf(false) }

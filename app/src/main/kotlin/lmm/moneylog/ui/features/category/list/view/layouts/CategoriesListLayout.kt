@@ -17,10 +17,10 @@ import lmm.moneylog.ui.theme.darkRed
 
 @Composable
 fun CategoriesListLayout(
-    modifier: Modifier = Modifier,
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     list: List<CategoryModel>,
+    modifier: Modifier = Modifier,
     onItemClick: (Int) -> Unit
 ) {
     Scaffold(
@@ -54,26 +54,26 @@ fun CategoriesListLayoutPreview() {
         onArrowBackClick = { },
         onFabClick = { },
         list =
-            listOf(
-                CategoryModel(
-                    id = 0,
-                    name = "Alimentação",
-                    color = darkRed,
-                    isIncome = true
-                ),
-                CategoryModel(
-                    id = 0,
-                    name = "Moradia",
-                    color = darkRed,
-                    isIncome = true
-                ),
-                CategoryModel(
-                    id = 0,
-                    name = "Transporte",
-                    color = darkRed,
-                    isIncome = false
-                )
+        listOf(
+            CategoryModel(
+                id = 0,
+                name = "Alimentação",
+                color = darkRed,
+                isIncome = true
             ),
+            CategoryModel(
+                id = 0,
+                name = "Moradia",
+                color = darkRed,
+                isIncome = true
+            ),
+            CategoryModel(
+                id = 0,
+                name = "Transporte",
+                color = darkRed,
+                isIncome = false
+            )
+        ),
         onItemClick = {}
     )
 }

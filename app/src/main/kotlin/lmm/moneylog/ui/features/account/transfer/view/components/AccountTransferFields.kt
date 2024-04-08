@@ -19,7 +19,6 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountTransferFields(
-    modifier: Modifier = Modifier,
     value: String,
     list: List<AccountTransferModel>,
     originAccountDisplay: String,
@@ -28,6 +27,7 @@ fun AccountTransferFields(
     destinationAccountColor: Color,
     onValueChange: (String) -> Unit,
     onOriginAccountPicked: () -> Unit,
+    modifier: Modifier = Modifier,
     onDestinationAccountPicked: () -> Unit
 ) {
     StateTextField(

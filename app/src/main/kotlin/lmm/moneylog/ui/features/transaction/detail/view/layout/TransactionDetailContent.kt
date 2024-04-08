@@ -14,7 +14,6 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun TransactionDetailContent(
-    modifier: Modifier = Modifier,
     uiState: TransactionDetailUIState,
     showDeleteConfirmDialog: Boolean,
     onDatePicked: (Long) -> Unit,
@@ -24,6 +23,7 @@ fun TransactionDetailContent(
     onDeleteDismiss: () -> Unit,
     onIsIncomeSelect: (Boolean) -> Unit,
     onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     onDescriptionChange: (String) -> Unit
 ) {
     Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {

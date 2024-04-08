@@ -19,10 +19,10 @@ import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 
 @Composable
 fun BottomBar(
-    modifier: Modifier = Modifier,
     navBarSelectedIndex: MutableIntState,
     navController: NavHostController,
-    showNavigationBar: MutableState<Boolean>
+    showNavigationBar: MutableState<Boolean>,
+    modifier: Modifier = Modifier
 ) {
     MyNavigationBar(
         selectedIndex = navBarSelectedIndex.intValue,

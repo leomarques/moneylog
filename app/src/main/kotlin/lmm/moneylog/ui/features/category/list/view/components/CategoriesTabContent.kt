@@ -14,8 +14,8 @@ import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun CategoriesTabContent(
-    modifier: Modifier = Modifier,
     list: List<CategoryModel>,
+    modifier: Modifier = Modifier,
     onItemClick: (Int) -> Unit
 ) {
     if (list.isNotEmpty()) {
@@ -43,26 +43,26 @@ fun CategoriesTabContent(
 fun CategoriesTabContentPreview() {
     CategoriesTabContent(
         list =
-            listOf(
-                CategoryModel(
-                    id = 1,
-                    name = "Category 1",
-                    color = neutralColor,
-                    isIncome = true
-                ),
-                CategoryModel(
-                    id = 2,
-                    name = "Category 2",
-                    color = neutralColor,
-                    isIncome = false
-                ),
-                CategoryModel(
-                    id = 3,
-                    name = "Category 3",
-                    color = neutralColor,
-                    isIncome = true
-                )
+        listOf(
+            CategoryModel(
+                id = 1,
+                name = "Category 1",
+                color = neutralColor,
+                isIncome = true
             ),
+            CategoryModel(
+                id = 2,
+                name = "Category 2",
+                color = neutralColor,
+                isIncome = false
+            ),
+            CategoryModel(
+                id = 3,
+                name = "Category 3",
+                color = neutralColor,
+                isIncome = true
+            )
+        ),
         onItemClick = {}
     )
 }

@@ -20,12 +20,12 @@ import lmm.moneylog.ui.theme.darkRed
 
 @Composable
 fun AccountsListLayout(
-    modifier: Modifier = Modifier,
     list: List<AccountModel>,
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     onItemClick: (Int) -> Unit,
     onArchivedIconClick: () -> Unit,
+    modifier: Modifier = Modifier,
     onTransferIconClick: () -> Unit
 ) {
     Scaffold(
@@ -70,26 +70,26 @@ fun AccountsListLayout(
 fun AccountsListLayoutPreview() {
     AccountsListLayout(
         list =
-            listOf(
-                AccountModel(
-                    id = 0,
-                    name = "Itaú",
-                    balance = "R$200.0",
-                    color = darkRed
-                ),
-                AccountModel(
-                    id = 0,
-                    name = "Itaú",
-                    balance = "R$200.0",
-                    color = darkRed
-                ),
-                AccountModel(
-                    id = 0,
-                    name = "Itaú",
-                    balance = "R$200.0",
-                    color = darkRed
-                )
+        listOf(
+            AccountModel(
+                id = 0,
+                name = "Itaú",
+                balance = "R$200.0",
+                color = darkRed
             ),
+            AccountModel(
+                id = 0,
+                name = "Itaú",
+                balance = "R$200.0",
+                color = darkRed
+            ),
+            AccountModel(
+                id = 0,
+                name = "Itaú",
+                balance = "R$200.0",
+                color = darkRed
+            )
+        ),
         onArrowBackClick = { },
         onFabClick = { },
         onItemClick = {},

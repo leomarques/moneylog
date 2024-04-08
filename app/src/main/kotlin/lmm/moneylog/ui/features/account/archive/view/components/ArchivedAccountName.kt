@@ -13,8 +13,8 @@ import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 fun ArchivedAccountName(
-    modifier: Modifier = Modifier,
-    name: String
+    name: String,
+    modifier: Modifier = Modifier
 ) {
     Text(
         text = name.ifEmpty { stringResource(R.string.no_description) },

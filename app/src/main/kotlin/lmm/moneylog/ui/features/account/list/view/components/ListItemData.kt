@@ -11,9 +11,9 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun ListItemData(
-    modifier: Modifier = Modifier,
     name: String,
-    balance: String
+    balance: String,
+    modifier: Modifier = Modifier
 ) {
     Column(Modifier.padding(start = Size.DefaultSpaceSize)) {
         ListItemName(name = name)

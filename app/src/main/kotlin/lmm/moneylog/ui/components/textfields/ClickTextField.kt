@@ -18,33 +18,33 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ClickTextField(
-    modifier: Modifier = Modifier,
     value: String,
     label: String,
-    enabled: Boolean = true,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     leadingIcon: @Composable (() -> Unit)? = null
 ) {
     OutlinedTextField(
         modifier =
-            modifier
-                .background(MaterialTheme.colorScheme.surface)
-                .fillMaxWidth(),
+        modifier
+            .background(MaterialTheme.colorScheme.surface)
+            .fillMaxWidth(),
         value = value,
         label = { Text(text = label) },
         readOnly = true,
         enabled = enabled,
         interactionSource =
-            remember { MutableInteractionSource() }
-                .also { interactionSource ->
-                    LaunchedEffect(interactionSource) {
-                        interactionSource.interactions.collect {
-                            if (it is PressInteraction.Release) {
-                                onClick.invoke()
-                            }
+        remember { MutableInteractionSource() }
+            .also { interactionSource ->
+                LaunchedEffect(interactionSource) {
+                    interactionSource.interactions.collect {
+                        if (it is PressInteraction.Release) {
+                            onClick.invoke()
                         }
                     }
-                },
+                }
+            },
         onValueChange = { },
         leadingIcon = leadingIcon
     )

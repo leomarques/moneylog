@@ -16,7 +16,6 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountTransferContent(
-    modifier: Modifier = Modifier,
     value: String,
     list: List<AccountTransferModel>,
     originAccountDisplay: String,
@@ -25,6 +24,7 @@ fun AccountTransferContent(
     destinationAccountColor: Color,
     onOriginAccountPicked: (Int) -> Unit,
     onDestinationAccountPicked: (Int) -> Unit,
+    modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit
 ) {
     Column(Modifier.padding(horizontal = Size.DefaultSpaceSize)) {

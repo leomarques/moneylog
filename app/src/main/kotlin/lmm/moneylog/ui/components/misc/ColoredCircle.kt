@@ -18,8 +18,8 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun MyCircle(
-    modifier: Modifier = Modifier,
     color: Color,
+    modifier: Modifier = Modifier,
     letters: String? = null,
     size: Dp = Size.DefaultCircleSize
 ) {

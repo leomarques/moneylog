@@ -13,8 +13,8 @@ import lmm.moneylog.ui.theme.darkRed
 
 @Composable
 fun CategoryIcon(
-    modifier: Modifier = Modifier,
-    tint: Color
+    tint: Color,
+    modifier: Modifier = Modifier
 ) {
     Icon(
         imageVector = ImageVector.vectorResource(id = R.drawable.outline_category_24),

@@ -17,7 +17,6 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun AccountTransferLayout(
-    modifier: Modifier = Modifier,
     value: String,
     accounts: List<AccountTransferModel>,
     originAccountDisplay: String,
@@ -28,13 +27,16 @@ fun AccountTransferLayout(
     onOriginAccountPicked: (Int) -> Unit,
     onDestinationAccountPicked: (Int) -> Unit,
     onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
     onFabClick: () -> Unit
 ) {
     Scaffold(
-        topBar = { AccountTransferTopBar(
-            modifier = modifier,
-            onArrowBackClick = onArrowBackClick
-        ) },
+        topBar = {
+            AccountTransferTopBar(
+                modifier = modifier,
+                onArrowBackClick = onArrowBackClick
+            )
+        },
         floatingActionButton = {
             HideFab(
                 onClick = onFabClick,

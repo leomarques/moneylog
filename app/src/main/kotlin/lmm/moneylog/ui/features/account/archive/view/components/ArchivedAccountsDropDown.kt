@@ -15,21 +15,21 @@ import lmm.moneylog.R
 
 @Composable
 fun MoreOptionsDropDown(
-    modifier: Modifier = Modifier,
     id: Int,
     expanded: Boolean,
     offset: Dp,
     onUnArchiveClick: (Int) -> Unit,
     onDeleteClick: (Int) -> Unit,
+    modifier: Modifier = Modifier,
     onDismissRequest: () -> Unit
 ) {
     DropdownMenu(
         expanded = expanded,
         offset =
-            DpOffset(
-                x = offset,
-                y = 0.dp
-            ),
+        DpOffset(
+            x = offset,
+            y = 0.dp
+        ),
         onDismissRequest = onDismissRequest
     ) {
         val unarchive = stringResource(R.string.unarchive)

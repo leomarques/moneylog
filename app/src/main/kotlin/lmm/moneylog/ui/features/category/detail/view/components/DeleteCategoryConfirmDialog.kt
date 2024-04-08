@@ -11,8 +11,8 @@ import lmm.moneylog.ui.components.misc.ConfirmDialog
 
 @Composable
 fun DeleteCategoryConfirmDialog(
-    modifier: Modifier = Modifier,
     onConfirm: () -> Unit,
+    modifier: Modifier = Modifier,
     onDismiss: () -> Unit
 ) {
     ConfirmDialog(

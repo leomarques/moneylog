@@ -14,22 +14,22 @@ import lmm.moneylog.ui.components.icons.DeleteIcon
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun TransactionDetailTopBar(
-    modifier: Modifier = Modifier,
     isEdit: Boolean,
     onDeleteClick: () -> Unit,
+    modifier: Modifier = Modifier,
     onArrowBackClick: () -> Unit
 ) {
     TopAppBar(
         title = {
             Text(
                 text =
-                    stringResource(
-                        if (isEdit) {
-                            R.string.detail_topbar_transaction_edit
-                        } else {
-                            R.string.detail_topbar_transaction_add
-                        }
-                    )
+                stringResource(
+                    if (isEdit) {
+                        R.string.detail_topbar_transaction_edit
+                    } else {
+                        R.string.detail_topbar_transaction_add
+                    }
+                )
             )
         },
         navigationIcon = { ArrowBackIcon(onClick = onArrowBackClick) },

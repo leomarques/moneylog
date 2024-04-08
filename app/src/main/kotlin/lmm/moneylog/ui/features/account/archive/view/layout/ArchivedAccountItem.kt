@@ -20,11 +20,11 @@ import lmm.moneylog.ui.features.account.archive.view.components.MoreOptionsDropD
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ArchivedAccountItem(
-    modifier: Modifier = Modifier,
     id: Int,
     name: String,
     showDivider: Boolean,
     onUnArchiveClick: (Int) -> Unit,
+    modifier: Modifier = Modifier,
     onDeleteClick: (Int) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -33,11 +33,11 @@ fun ArchivedAccountItem(
 
     Box(
         modifier =
-            Modifier
-                .pointerInteropFilter {
-                    offset = with(density) { it.x.toDp() }
-                    false
-                }
+        Modifier
+            .pointerInteropFilter {
+                offset = with(density) { it.x.toDp() }
+                false
+            }
     ) {
         ArchivedAccountItemCell(name) {
             expanded = true

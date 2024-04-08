@@ -8,11 +8,11 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AccountsListView(
-    viewModel: AccountsListViewModel = koinViewModel(),
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     onItemClick: (Int) -> Unit,
     onArchivedIconClick: () -> Unit,
+    viewModel: AccountsListViewModel = koinViewModel(),
     onTransferIconClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()

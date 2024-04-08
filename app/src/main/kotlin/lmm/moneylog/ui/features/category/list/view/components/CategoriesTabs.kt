@@ -14,9 +14,9 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun CategoriesTabs(
-    modifier: Modifier = Modifier,
     tabIndex: MutableState<Int>,
-    tabs: List<String>
+    tabs: List<String>,
+    modifier: Modifier = Modifier
 ) {
     TabRow(
         modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),

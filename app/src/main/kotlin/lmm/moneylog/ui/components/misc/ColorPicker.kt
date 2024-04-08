@@ -27,8 +27,8 @@ import lmm.moneylog.ui.theme.darkYellow
 
 @Composable
 fun ColorPicker(
-    modifier: Modifier = Modifier,
     onConfirm: (Color) -> Unit,
+    modifier: Modifier = Modifier,
     onDismiss: () -> Unit
 ) {
     val list =
@@ -72,8 +72,8 @@ fun ColorPicker(
 
 @Composable
 fun ColorItem(
-    modifier: Modifier = Modifier,
     color: Color,
+    modifier: Modifier = Modifier,
     onItemClick: () -> Unit
 ) {
     Box(

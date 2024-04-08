@@ -8,9 +8,9 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun CategoriesListView(
-    viewModel: CategoriesListViewModel = koinViewModel(),
     onArrowBackClick: () -> Unit,
     onItemClick: (Int) -> Unit,
+    viewModel: CategoriesListViewModel = koinViewModel(),
     onFabClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()

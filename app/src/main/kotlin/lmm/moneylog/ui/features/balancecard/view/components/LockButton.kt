@@ -15,9 +15,9 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun LockButton(
-    modifier: Modifier = Modifier,
     onHideClick: () -> Unit,
-    isHidden: Boolean
+    isHidden: Boolean,
+    modifier: Modifier = Modifier
 ) {
     IconButton(
         onClick = onHideClick,

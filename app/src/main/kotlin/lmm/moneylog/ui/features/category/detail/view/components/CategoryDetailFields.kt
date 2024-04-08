@@ -19,14 +19,14 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun CategoryDetailFields(
-    modifier: Modifier = Modifier,
     name: String,
     isEdit: Boolean,
     onNameChange: (String) -> Unit,
     isIncome: Boolean,
     onIncomeChange: (Boolean) -> Unit,
     color: Color,
-    showColorsDialog: MutableState<Boolean>
+    showColorsDialog: MutableState<Boolean>,
+    modifier: Modifier = Modifier
 ) {
     StateTextField(
         modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),

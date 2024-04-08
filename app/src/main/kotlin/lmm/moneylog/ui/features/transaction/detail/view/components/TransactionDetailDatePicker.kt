@@ -17,8 +17,8 @@ import lmm.moneylog.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionDetailDatePicker(
-    modifier: Modifier = Modifier,
     onConfirm: (Long) -> Unit,
+    modifier: Modifier = Modifier,
     onDismiss: () -> Unit
 ) {
     val datePickerState = rememberDatePickerState()

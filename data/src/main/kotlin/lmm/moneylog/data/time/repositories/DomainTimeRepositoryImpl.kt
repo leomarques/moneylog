@@ -28,7 +28,9 @@ class DomainTimeRepositoryImpl : DomainTimeRepository {
         }
     }
 
-    override fun getMonthName(number: Int): String = Month.of(number).getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())
+    override fun getMonthName(number: Int): String =
+        Month.of(number).getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())
 
-    override fun getCurrentMonthName() = getCurrentDomainTime().month.let(::getMonthName).replaceFirstChar(Char::titlecase)
+    override fun getCurrentMonthName() =
+        getCurrentDomainTime().month.let(::getMonthName).replaceFirstChar(Char::titlecase)
 }

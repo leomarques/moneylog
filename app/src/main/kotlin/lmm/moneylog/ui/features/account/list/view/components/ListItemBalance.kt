@@ -14,9 +14,9 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun ListItemBalance(
-    modifier: Modifier = Modifier,
     balance: String,
-    color: Color
+    color: Color,
+    modifier: Modifier = Modifier
 ) {
     Row {
         Text(
