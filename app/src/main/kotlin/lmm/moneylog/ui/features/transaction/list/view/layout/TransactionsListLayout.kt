@@ -105,7 +105,7 @@ fun TransactionsListLayout(
                 if (model.transactions.isNotEmpty()) {
                     TransactionsListContent(
                         list = model.transactions,
-                        filter = filter,
+                        filter = filter.value,
                         onItemClick = onItemClick
                     )
                 } else {

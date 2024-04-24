@@ -3,9 +3,6 @@ package lmm.moneylog.ui.features.account.detail.view.components
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -24,9 +21,9 @@ fun AccountDetailFields(
     name: String,
     color: Color,
     isEdit: Boolean,
-    showColorsDialog: MutableState<Boolean>,
+    onNameChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    onNameChange: (String) -> Unit
+    onColorDialogClick: () -> Unit
 ) {
     Column(modifier) {
         StateTextField(
@@ -43,9 +40,7 @@ fun AccountDetailFields(
         ColorTextField(
             color = color,
             leadingIcon = { BrushIcon() },
-            onClick = {
-                showColorsDialog.value = true
-            }
+            onClick = onColorDialogClick
         )
     }
 }
@@ -55,9 +50,9 @@ fun AccountDetailFields(
 private fun AccountDetailFieldsPreview() {
     AccountDetailFields(
         name = "Account",
+        color = outcome,
         isEdit = false,
         onNameChange = {},
-        color = outcome,
-        showColorsDialog = remember { mutableStateOf(false) }
+        onColorDialogClick = {}
     )
 }

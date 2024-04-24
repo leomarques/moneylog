@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>MutableStateParam:AccountDetailDialogs.kt$showColorsDialog</ID>
+    <ID>MutableStateParam:AccountTransferDialogs.kt$showDestinationAccountPicker</ID>
+    <ID>MutableStateParam:AccountTransferDialogs.kt$showOriginAccountPicker</ID>
+    <ID>MutableStateParam:BottomBar.kt$showNavigationBar</ID>
+    <ID>MutableStateParam:CategoriesTabs.kt$tabIndex</ID>
+    <ID>MutableStateParam:CategoryDetailDialogs.kt$showColorsDialog</ID>
+    <ID>MutableStateParam:NavHostParams.kt$showNavigationBar</ID>
+    <ID>MutableStateParam:TransactionDetailDialogs.kt$showAccountPicker</ID>
+    <ID>MutableStateParam:TransactionDetailDialogs.kt$showCategoryPicker</ID>
+    <ID>MutableStateParam:TransactionDetailDialogs.kt$showDatePicker</ID>
+  </CurrentIssues>
+</SmellBaseline>

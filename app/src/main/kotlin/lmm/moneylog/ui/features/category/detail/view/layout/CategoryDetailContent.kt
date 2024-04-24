@@ -40,12 +40,12 @@ fun CategoryDetailContent(
 
         CategoryDetailFields(
             name = name,
-            color = color,
             isEdit = isEdit,
-            isIncome = isIncome,
-            showColorsDialog = showColorsDialog,
             onNameChange = onNameChange,
-            onIncomeChange = onIncomeChange
+            isIncome = isIncome,
+            onIncomeChange = onIncomeChange,
+            color = color,
+            onColorClick = { showColorsDialog.value = true }
         )
     }
 }

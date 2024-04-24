@@ -41,7 +41,7 @@ fun AccountDetailContent(
             color = color,
             isEdit = isEdit,
             showColorsDialog = showColorsDialog,
-            onNameChange = onNameChange
+            onNameChange = onNameChange,
         )
     }
 }
