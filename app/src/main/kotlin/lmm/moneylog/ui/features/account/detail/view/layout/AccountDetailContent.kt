@@ -40,8 +40,8 @@ fun AccountDetailContent(
             name = name,
             color = color,
             isEdit = isEdit,
-            showColorsDialog = showColorsDialog,
             onNameChange = onNameChange,
+            onColorDialogClick = { showColorsDialog.value = true }
         )
     }
 }
