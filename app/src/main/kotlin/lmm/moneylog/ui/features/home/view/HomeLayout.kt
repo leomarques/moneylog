@@ -1,6 +1,9 @@
 package lmm.moneylog.ui.features.home.view
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -13,6 +16,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.fabs.HideFab
 import lmm.moneylog.ui.features.balancecard.view.layout.BalanceCardView
+import lmm.moneylog.ui.features.creditcardcard.view.layout.CreditCardCardView
 import lmm.moneylog.ui.theme.Size
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -38,11 +42,20 @@ fun HomeLayout(
         floatingActionButtonPosition = FabPosition.Center,
         content = {
             Surface(Modifier.testTag("HomeScreen")) {
-                BalanceCardView(
-                    hideValues = hideValues,
-                    onClick = onClick,
-                    onHideClick = onHideClick
-                )
+                Column {
+                    BalanceCardView(
+                        hideValues = hideValues,
+                        onClick = onClick,
+                        onHideClick = onHideClick
+                    )
+
+                    Spacer(modifier = Modifier.height(Size.DefaultSpaceSize))
+
+                    CreditCardCardView(
+                        hideValues = hideValues,
+                        onClick = onClick
+                    )
+                }
             }
         }
     )
