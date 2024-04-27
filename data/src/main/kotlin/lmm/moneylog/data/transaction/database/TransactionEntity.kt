@@ -8,6 +8,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import lmm.moneylog.data.account.database.AccountEntity
 import lmm.moneylog.data.category.database.CategoryEntity
+import lmm.moneylog.data.creditcard.database.CreditCardEntity
 
 @Entity(
     tableName = "transaction",
@@ -23,11 +24,18 @@ import lmm.moneylog.data.category.database.CategoryEntity
             childColumns = ["categoryId"],
             parentColumns = ["id"],
             onDelete = SET_NULL
+        ),
+        ForeignKey(
+            entity = CreditCardEntity::class,
+            childColumns = ["creditCardId"],
+            parentColumns = ["id"],
+            onDelete = SET_NULL
         )
     ],
     indices = [
         Index("accountId"),
-        Index("categoryId")
+        Index("categoryId"),
+        Index("creditCardId")
     ]
 )
 data class TransactionEntity(
@@ -37,7 +45,9 @@ data class TransactionEntity(
     val month: Int,
     val day: Int,
     val accountId: Int? = null,
-    val categoryId: Int? = null
+    val categoryId: Int? = null,
+    val creditCardId: Int? = null,
+    val paid: Boolean = true
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
