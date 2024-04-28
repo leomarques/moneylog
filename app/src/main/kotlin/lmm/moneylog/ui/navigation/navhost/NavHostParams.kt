@@ -14,6 +14,7 @@ import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.CREDITCARD_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.PARAM_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
@@ -30,7 +31,6 @@ fun NavHostParams(
     modifier: Modifier = Modifier
 ) {
     MyNavHost(
-        modifier = modifier.padding(paddingValues),
         navController = navController,
         startDestination = startDestination,
         onHomeFabClick = {
@@ -111,9 +111,31 @@ fun NavHostParams(
                 showNavigationBar = showNavigationBar
             )
         },
+        modifier = modifier.padding(paddingValues),
         onTransferIconClick = {
             navController.navigatePopUpTo(
                 destination = TRANSFER_SCREEN,
+                navBarSelectedIndex = navBarSelectedIndex,
+                showNavigationBar = showNavigationBar
+            )
+        },
+        onCreditCardClick = {
+            navController.navigatePopUpTo(
+                destination = CREDITCARD_LIST_SCREEN,
+                navBarSelectedIndex = navBarSelectedIndex,
+                showNavigationBar = showNavigationBar
+            )
+        },
+        onCreditCardsFabClick = {
+            navController.navigatePopUpTo(
+                destination = TRANSACTION_DETAIL_SCREEN,
+                navBarSelectedIndex = navBarSelectedIndex,
+                showNavigationBar = showNavigationBar
+            )
+        },
+        onCreditCardsItemClick = { id ->
+            navController.navigatePopUpTo(
+                destination = "$TRANSACTION_DETAIL_SCREEN?$PARAM_ID=$id",
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )

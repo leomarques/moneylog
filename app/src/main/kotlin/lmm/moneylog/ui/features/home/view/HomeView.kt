@@ -10,14 +10,16 @@ import org.koin.androidx.compose.koinViewModel
 fun HomeView(
     onFabClick: () -> Unit,
     viewModel: HomeViewModel = koinViewModel(),
-    onClick: (String) -> Unit
+    onClick: (String) -> Unit,
+    onCreditCardClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     HomeLayout(
-        onFabClick = onFabClick,
-        onClick = onClick,
         hideValues = uiState,
-        onHideClick = { viewModel.onHideToggle() }
+        onFabClick = onFabClick,
+        onBalanceClick = onClick,
+        onHideClick = { viewModel.onHideToggle() },
+        onCreditCardClick = onCreditCardClick,
     )
 }

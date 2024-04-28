@@ -24,6 +24,14 @@ import lmm.moneylog.data.category.repositories.interfaces.AddCategoryRepository
 import lmm.moneylog.data.category.repositories.interfaces.DeleteCategoryRepository
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.category.repositories.interfaces.UpdateCategoryRepository
+import lmm.moneylog.data.creditcard.repositories.impls.AddCreditCardRepositoryImpl
+import lmm.moneylog.data.creditcard.repositories.impls.DeleteCreditCardRepositoryImpl
+import lmm.moneylog.data.creditcard.repositories.impls.GetCreditCardsRepositoryImpl
+import lmm.moneylog.data.creditcard.repositories.impls.UpdateCreditCardRepositoryImpl
+import lmm.moneylog.data.creditcard.repositories.interfaces.AddCreditCardRepository
+import lmm.moneylog.data.creditcard.repositories.interfaces.DeleteCreditCardRepository
+import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
+import lmm.moneylog.data.creditcard.repositories.interfaces.UpdateCreditCardRepository
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.time.repositories.DomainTimeRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.AddTransactionRepositoryImpl
@@ -68,4 +76,9 @@ val dataModule =
         factoryOf(::GetTransactionsRepositoryImpl) { bind<GetTransactionsRepository>() }
         factoryOf(::UpdateTransactionRepositoryImpl) { bind<UpdateTransactionRepository>() }
         factoryOf(::DeleteTransactionRepositoryImpl) { bind<DeleteTransactionRepository>() }
+
+        factoryOf(::AddCreditCardRepositoryImpl) { bind<AddCreditCardRepository>() }
+        factoryOf(::GetCreditCardsRepositoryImpl) { bind<GetCreditCardsRepository>() }
+        factoryOf(::UpdateCreditCardRepositoryImpl) { bind<UpdateCreditCardRepository>() }
+        factoryOf(::DeleteCreditCardRepositoryImpl) { bind<DeleteCreditCardRepository>() }
     }

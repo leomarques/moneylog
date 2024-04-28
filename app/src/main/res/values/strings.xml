@@ -10,6 +10,7 @@
     <string name="income">Receita</string>
     <string name="outcomes">Despesas</string>
     <string name="outcome">Despesa</string>
+    <string name="creditcards">Cartões de crédito</string>
     <string name="color">Cor</string>
     <string name="value">Valor</string>
     <string name="name">Nome</string>
@@ -58,9 +59,11 @@
     <string name="empty_accounts_title">Não há contas</string>
     <string name="empty_archived_accounts_title">Não há contas arquivadas</string>
     <string name="empty_categories_title">Não há categorias</string>
+    <string name="empty_creditcards_title">Não há cartões de crédito</string>
     <string name="empty_transactions_desc">Adicione uma transação e ela irá aparecer aqui.</string>
     <string name="empty_accounts_desc">Adicione uma conta e ela irá aparecer aqui.</string>
     <string name="empty_categories_desc">Adicione uma categoria e ela irá aparecer aqui.</string>
+    <string name="empty_creditcards_desc">Adicione um cartão e ele irá aparecer aqui.</string>
     <string name="empty_archived_accounts_desc">Ao arquivar uma conta ela irá aparecer aqui.</string>
 
     <string name="transfer_from">Transferir de:</string>

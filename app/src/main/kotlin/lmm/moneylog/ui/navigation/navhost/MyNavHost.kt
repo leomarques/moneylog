@@ -17,6 +17,7 @@ import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView
 import lmm.moneylog.ui.features.account.transfer.view.layout.AccountTransferView
 import lmm.moneylog.ui.features.category.detail.view.layout.CategoryDetailView
 import lmm.moneylog.ui.features.category.list.view.layouts.CategoriesListView
+import lmm.moneylog.ui.features.creditcard.list.view.layouts.CreditCardsListView
 import lmm.moneylog.ui.features.home.view.HomeView
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
 import lmm.moneylog.ui.features.transaction.list.view.layout.TransactionsListView
@@ -25,6 +26,7 @@ import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.CREDITCARD_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
 import lmm.moneylog.ui.navigation.misc.PARAM_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_OF_VALUE
@@ -47,7 +49,10 @@ fun MyNavHost(
     onCategoriesItemClick: (Int) -> Unit,
     onArchivedIconClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onTransferIconClick: () -> Unit
+    onTransferIconClick: () -> Unit,
+    onCreditCardClick: () -> Unit,
+    onCreditCardsFabClick: () -> Unit,
+    onCreditCardsItemClick: (Int) -> Unit
 ) {
     NavHost(
         modifier = modifier.background(MaterialTheme.colorScheme.background),
@@ -65,7 +70,8 @@ fun MyNavHost(
         composable(HOME_SCREEN) {
             HomeView(
                 onFabClick = onHomeFabClick,
-                onClick = onBalanceCardClick
+                onClick = onBalanceCardClick,
+                onCreditCardClick = onCreditCardClick
             )
         }
 
@@ -143,6 +149,17 @@ fun MyNavHost(
             onArrowBackClick = onArrowBackClick
         ) {
             AccountTransferView(onArrowBackClick = onArrowBackClick)
+        }
+
+        composableExt(
+            route = CREDITCARD_LIST_SCREEN,
+            onArrowBackClick = onArrowBackClick
+        ) {
+            CreditCardsListView(
+                onArrowBackClick = onArrowBackClick,
+                onFabClick = onCreditCardsFabClick,
+                onItemClick = onCreditCardsItemClick
+            )
         }
     }
 }

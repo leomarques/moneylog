@@ -6,9 +6,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "credit_card")
 data class CreditCardEntity(
     val name: String,
-    val closeDay: Int,
-    val payDay: Int,
+    val closingDay: Int,
+    val dueDay: Int,
     val limit: Int,
+    val color: Long
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

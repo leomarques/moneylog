@@ -8,7 +8,8 @@ import lmm.moneylog.ui.features.account.transfer.viewmodel.AccountTransferViewMo
 import lmm.moneylog.ui.features.balancecard.viewmodel.BalanceCardViewModel
 import lmm.moneylog.ui.features.category.detail.viewmodel.CategoryDetailViewModel
 import lmm.moneylog.ui.features.category.list.viewmodel.CategoriesListViewModel
-import lmm.moneylog.ui.features.creditcardcard.viewmodel.CreditCardCardViewModel
+import lmm.moneylog.ui.features.creditcard.list.viewmodel.CreditCardsListViewModel
+import lmm.moneylog.ui.features.credithomecard.viewmodel.CreditHomeCardViewModel
 import lmm.moneylog.ui.features.home.viewmodel.HomeViewModel
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import lmm.moneylog.ui.features.transaction.list.viewmodel.TransactionsListViewModel
@@ -20,14 +21,17 @@ import org.koin.dsl.module
 val appModule =
     module {
         viewModelOf(::HomeViewModel)
+
+        viewModelOf(::BalanceCardViewModel)
+        viewModelOf(::CreditHomeCardViewModel)
+
         viewModelOf(::AccountsListViewModel)
         viewModelOf(::AccountDetailViewModel)
 
         viewModelOf(::CategoriesListViewModel)
         viewModelOf(::CategoryDetailViewModel)
 
-        viewModelOf(::BalanceCardViewModel)
-        viewModelOf(::CreditCardCardViewModel)
+        viewModelOf(::CreditCardsListViewModel)
 
         viewModel { parameters ->
             TransactionsListViewModel(

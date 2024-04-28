@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "aa7eaa266e007dd392640917c1f33c55",
+    "identityHash": "fd9810fc4c02452f0dc3453aef0382f2",
     "entities": [
       {
         "tableName": "transaction",
@@ -274,7 +274,7 @@
       },
       {
         "tableName": "credit_card",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `closeDay` INTEGER NOT NULL, `payDay` INTEGER NOT NULL, `limit` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `closingDay` INTEGER NOT NULL, `dueDay` INTEGER NOT NULL, `limit` INTEGER NOT NULL, `color` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
             "fieldPath": "name",
@@ -283,20 +283,26 @@
             "notNull": true
           },
           {
-            "fieldPath": "closeDay",
-            "columnName": "closeDay",
+            "fieldPath": "closingDay",
+            "columnName": "closingDay",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "payDay",
-            "columnName": "payDay",
+            "fieldPath": "dueDay",
+            "columnName": "dueDay",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "limit",
             "columnName": "limit",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "color",
+            "columnName": "color",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -320,7 +326,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'aa7eaa266e007dd392640917c1f33c55')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fd9810fc4c02452f0dc3453aef0382f2')"
     ]
   }
 }

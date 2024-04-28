@@ -1,6 +1,7 @@
-package lmm.moneylog.ui.features.creditcardcard.view.components
+package lmm.moneylog.ui.features.credithomecard.view.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,9 +16,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.theme.Size
 
 @Composable
-fun CreditCardCardContent(
+fun CreditHomeCardContent(
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
+    onClick: () -> Unit
 ) {
     Column(
         modifier =
@@ -25,7 +27,8 @@ fun CreditCardCardContent(
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(Size.DefaultSpaceSize))
                 .background(MaterialTheme.colorScheme.tertiaryContainer)
-                .padding(Size.DefaultSpaceSize),
+                .padding(Size.DefaultSpaceSize)
+                .clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         content()
@@ -34,8 +37,9 @@ fun CreditCardCardContent(
 
 @Preview
 @Composable
-private fun CreditCardCardContentPreview() {
-    CreditCardCardContent {
-        Text("CreditCardCardContent")
-    }
+private fun CreditHomeCardContentPreview() {
+    CreditHomeCardContent(
+        content = { Text("CreditHomeCardContent") },
+        onClick = {}
+    )
 }

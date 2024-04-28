@@ -1,20 +1,20 @@
-package lmm.moneylog.ui.features.creditcardcard.view.layout
+package lmm.moneylog.ui.features.credithomecard.view.layout
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import lmm.moneylog.ui.features.creditcardcard.viewmodel.CreditCardCardViewModel
+import lmm.moneylog.ui.features.credithomecard.viewmodel.CreditHomeCardViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun CreditCardCardView(
-    onClick: (String) -> Unit,
+fun CreditHomeCardView(
+    onClick: () -> Unit,
     hideValues: Boolean,
-    viewModel: CreditCardCardViewModel = koinViewModel()
+    viewModel: CreditHomeCardViewModel = koinViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    CreditCardCardLayout(
+    CreditHomeCardLayout(
         total = uiState.total,
         hideValues = hideValues,
         onClick = onClick
