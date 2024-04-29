@@ -21,6 +21,7 @@ import lmm.moneylog.ui.navigation.misc.BackPressHandler
 import lmm.moneylog.ui.navigation.misc.CATEGORIES_INDEX
 import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.HOME_INDEX
 import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_INDEX
@@ -83,6 +84,7 @@ fun MutableState<Boolean>.updateShow(destination: String) {
             ACCOUNT_DETAIL_SCREEN -> false
             CATEGORIES_LIST_SCREEN -> true
             CATEGORY_DETAIL_SCREEN -> false
+            CREDITCARD_DETAIL_SCREEN -> false
             else -> true
         }
 }

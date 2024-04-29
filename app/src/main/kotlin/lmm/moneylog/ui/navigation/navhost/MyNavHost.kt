@@ -17,6 +17,7 @@ import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView
 import lmm.moneylog.ui.features.account.transfer.view.layout.AccountTransferView
 import lmm.moneylog.ui.features.category.detail.view.layout.CategoryDetailView
 import lmm.moneylog.ui.features.category.list.view.layouts.CategoriesListView
+import lmm.moneylog.ui.features.creditcard.detail.view.layout.CreditCardDetailView
 import lmm.moneylog.ui.features.creditcard.list.view.layouts.CreditCardsListView
 import lmm.moneylog.ui.features.home.view.HomeView
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
@@ -26,6 +27,7 @@ import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
 import lmm.moneylog.ui.navigation.misc.PARAM_ID
@@ -160,6 +162,14 @@ fun MyNavHost(
                 onFabClick = onCreditCardsFabClick,
                 onItemClick = onCreditCardsItemClick
             )
+        }
+
+        composableExt(
+            route = "$CREDITCARD_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
+            onArrowBackClick = onArrowBackClick,
+            arguments = arguments
+        ) {
+            CreditCardDetailView(onArrowBackClick = onArrowBackClick)
         }
     }
 }

@@ -14,6 +14,7 @@ import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.PARAM_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
@@ -128,14 +129,14 @@ fun NavHostParams(
         },
         onCreditCardsFabClick = {
             navController.navigatePopUpTo(
-                destination = TRANSACTION_DETAIL_SCREEN,
+                destination = CREDITCARD_DETAIL_SCREEN,
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )
         },
         onCreditCardsItemClick = { id ->
             navController.navigatePopUpTo(
-                destination = "$TRANSACTION_DETAIL_SCREEN?$PARAM_ID=$id",
+                destination = "$CREDITCARD_DETAIL_SCREEN?$PARAM_ID=$id",
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )
