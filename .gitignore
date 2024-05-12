@@ -139,3 +139,4 @@ fabric.properties
 /.idea/migrations.xml
 .idea/androidTestResultsUserPreferences.xml
 .idea/studiobot.xml
+.idea/other.xml
