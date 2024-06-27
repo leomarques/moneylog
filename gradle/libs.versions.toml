@@ -1,5 +1,5 @@
 [versions]
-composeBom            = "2024.04.01"
+composeBom            = "2024.06.00"
 composeRules          = "0.3.13"
 coreTesting           = "2.2.0"
 junit                 = "4.13.2"
@@ -9,13 +9,13 @@ material3             = "1.2.1"
 mockk                 = "1.13.7"
 navigationCompose     = "2.7.7"
 room                  = "2.6.1"
-uiTest                = "1.6.6"
+uiTest                = "1.6.8"
 
-androidApplication      = "8.4.0"
-androidLibrary          = "8.4.0"
+androidApplication      = "8.5.0"
+androidLibrary          = "8.5.0"
 detekt                  = "1.23.6"
-googleDevtoolsKsp       = "1.9.22-1.0.17"
-jetbrainsKotlinAndroid  = "1.9.22"
+googleDevtoolsKsp       = "1.9.24-1.0.20"
+jetbrainsKotlinAndroid  = "1.9.24"
 jlleitschuhGradleKtlint = "12.1.0"
 
 [libraries]
