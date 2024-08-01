@@ -69,7 +69,7 @@ detekt {
 }
 
 dependencies {
-    implementation(project(mapOf("path" to ":data")))
+    implementation(project(":data"))
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
     implementation(libs.koin.androidx.compose)
