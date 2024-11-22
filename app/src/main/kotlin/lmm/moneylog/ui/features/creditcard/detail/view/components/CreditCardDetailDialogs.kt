@@ -1,14 +1,14 @@
 package lmm.moneylog.ui.features.creditcard.detail.view.components
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.graphics.Color
 import lmm.moneylog.ui.components.misc.ColorPicker
 
 @Composable
 fun CreditCardDetailDialogs(
     showDeleteConfirmDialog: Boolean,
-    showColorsDialog: MutableState<Boolean>,
+    showColorsDialog: Boolean,
+    onShowColorsDialogChange: (Boolean) -> Unit,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit,
     onColorPicked: (Color) -> Unit
@@ -20,13 +20,15 @@ fun CreditCardDetailDialogs(
         )
     }
 
-    if (showColorsDialog.value) {
+    if (showColorsDialog) {
         ColorPicker(
             onConfirm = {
-                showColorsDialog.value = false
+                onShowColorsDialogChange(false)
                 onColorPicked(it)
             },
-            onDismiss = { showColorsDialog.value = false }
+            onDismiss = {
+                onShowColorsDialogChange(false)
+            }
         )
     }
 }

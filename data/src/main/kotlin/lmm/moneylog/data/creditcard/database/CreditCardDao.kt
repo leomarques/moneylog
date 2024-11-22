@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import lmm.moneylog.data.account.database.AccountEntity
 
 @Dao
 interface CreditCardDao {

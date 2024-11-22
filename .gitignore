@@ -140,3 +140,4 @@ fabric.properties
 .idea/androidTestResultsUserPreferences.xml
 .idea/studiobot.xml
 .idea/other.xml
+.idea/runConfigurations.xml

@@ -12,7 +12,6 @@ import lmm.moneylog.R
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
-import lmm.moneylog.ui.extensions.toModel
 import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
 
 const val GET_TRANSACTIONS_INCOME = "income"

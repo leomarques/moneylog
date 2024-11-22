@@ -36,10 +36,11 @@ fun CreditCardDetailContent(
 
         CreditCardDetailDialogs(
             showDeleteConfirmDialog = showDeleteConfirmDialog,
-            showColorsDialog = showColorsDialog,
+            showColorsDialog = showColorsDialog.value,
             onColorPicked = onColorPicked,
             onDeleteConfirm = onDeleteConfirm,
-            onDeleteDismiss = onDeleteDismiss
+            onDeleteDismiss = onDeleteDismiss,
+            onShowColorsDialogChange = { showColorsDialog.value = it }
         )
 
         CreditCardDetailFields(

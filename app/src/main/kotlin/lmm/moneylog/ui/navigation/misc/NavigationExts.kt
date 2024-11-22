@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.extensions
+package lmm.moneylog.ui.navigation.misc
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
@@ -13,20 +13,6 @@ import lmm.moneylog.ui.features.balancecard.view.layout.BALANCE_CARD_OUTCOME
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_ALL
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_INCOME
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_OUTCOME
-import lmm.moneylog.ui.navigation.misc.ACCOUNTS_INDEX
-import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
-import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
-import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
-import lmm.moneylog.ui.navigation.misc.BackPressHandler
-import lmm.moneylog.ui.navigation.misc.CATEGORIES_INDEX
-import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
-import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
-import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
-import lmm.moneylog.ui.navigation.misc.HOME_INDEX
-import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
-import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_INDEX
-import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
-import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
 
 fun NavGraphBuilder.composableExt(
     route: String,

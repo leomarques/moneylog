@@ -9,8 +9,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import lmm.moneylog.ui.extensions.composableExt
-import lmm.moneylog.ui.extensions.toTransactionType
 import lmm.moneylog.ui.features.account.archive.view.layout.ArchivedAccountsListView
 import lmm.moneylog.ui.features.account.detail.view.layout.AccountDetailView
 import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView
@@ -35,6 +33,8 @@ import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_OF_VALUE
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
+import lmm.moneylog.ui.navigation.misc.composableExt
+import lmm.moneylog.ui.navigation.misc.toTransactionType
 
 @Composable
 fun MyNavHost(
@@ -50,10 +50,10 @@ fun MyNavHost(
     onCategoriesFabClick: () -> Unit,
     onCategoriesItemClick: (Int) -> Unit,
     onArchivedIconClick: () -> Unit,
-    modifier: Modifier = Modifier,
     onTransferIconClick: () -> Unit,
     onCreditCardClick: () -> Unit,
     onCreditCardsFabClick: () -> Unit,
+    modifier: Modifier = Modifier,
     onCreditCardsItemClick: (Int) -> Unit
 ) {
     NavHost(

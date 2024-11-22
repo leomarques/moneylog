@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "fd9810fc4c02452f0dc3453aef0382f2",
+    "identityHash": "8945792b1340f07930b9129bd781e450",
     "entities": [
       {
         "tableName": "transaction",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`value` REAL NOT NULL, `description` TEXT NOT NULL, `year` INTEGER NOT NULL, `month` INTEGER NOT NULL, `day` INTEGER NOT NULL, `accountId` INTEGER, `categoryId` INTEGER, `creditCardId` INTEGER, `paid` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`accountId`) REFERENCES `account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`categoryId`) REFERENCES `category`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`creditCardId`) REFERENCES `credit_card`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`value` REAL NOT NULL, `description` TEXT NOT NULL, `day` INTEGER NOT NULL, `month` INTEGER NOT NULL, `year` INTEGER NOT NULL, `paidDay` INTEGER, `paidMonth` INTEGER, `paidYear` INTEGER, `invoiceMonth` INTEGER, `invoiceYear` INTEGER, `accountId` INTEGER, `categoryId` INTEGER, `creditCardId` INTEGER, `paid` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`accountId`) REFERENCES `account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`categoryId`) REFERENCES `category`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL , FOREIGN KEY(`creditCardId`) REFERENCES `credit_card`(`id`) ON UPDATE NO ACTION ON DELETE SET NULL )",
         "fields": [
           {
             "fieldPath": "value",
@@ -21,8 +21,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "year",
-            "columnName": "year",
+            "fieldPath": "day",
+            "columnName": "day",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -33,10 +33,40 @@
             "notNull": true
           },
           {
-            "fieldPath": "day",
-            "columnName": "day",
+            "fieldPath": "year",
+            "columnName": "year",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "paidDay",
+            "columnName": "paidDay",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "paidMonth",
+            "columnName": "paidMonth",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "paidYear",
+            "columnName": "paidYear",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "invoiceMonth",
+            "columnName": "invoiceMonth",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "invoiceYear",
+            "columnName": "invoiceYear",
+            "affinity": "INTEGER",
+            "notNull": false
           },
           {
             "fieldPath": "accountId",
@@ -326,7 +356,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fd9810fc4c02452f0dc3453aef0382f2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8945792b1340f07930b9129bd781e450')"
     ]
   }
 }

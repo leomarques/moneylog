@@ -9,8 +9,8 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun HomeView(
     onFabClick: () -> Unit,
-    viewModel: HomeViewModel = koinViewModel(),
     onClick: (String) -> Unit,
+    viewModel: HomeViewModel = koinViewModel(),
     onCreditCardClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()

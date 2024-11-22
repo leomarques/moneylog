@@ -1,10 +1,10 @@
-package lmm.moneylog.ui.features.credithomecard.view.layout
+package lmm.moneylog.ui.features.creditcard.homecard.view.layout
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.features.credithomecard.view.components.CreditHomeCardContent
+import lmm.moneylog.ui.features.creditcard.homecard.view.components.CreditHomeCardContent
 import lmm.moneylog.ui.theme.MoneylogTheme
 
 @Composable

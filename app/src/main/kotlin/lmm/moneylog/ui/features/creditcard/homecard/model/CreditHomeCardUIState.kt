@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.credithomecard.model
+package lmm.moneylog.ui.features.creditcard.homecard.model
 
 data class CreditHomeCardUIState(
     val total: String = "",

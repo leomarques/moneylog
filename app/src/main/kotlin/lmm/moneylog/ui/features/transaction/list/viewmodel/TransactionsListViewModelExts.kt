@@ -1,8 +1,9 @@
-package lmm.moneylog.ui.extensions
+package lmm.moneylog.ui.features.transaction.list.viewmodel
 
 import androidx.compose.ui.graphics.Color
 import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.data.transaction.model.Transaction
+import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
 import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
 import lmm.moneylog.ui.theme.neutralColor

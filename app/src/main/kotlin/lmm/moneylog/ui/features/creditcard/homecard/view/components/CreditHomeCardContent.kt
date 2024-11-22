@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.credithomecard.view.components
+package lmm.moneylog.ui.features.creditcard.homecard.view.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,8 +17,8 @@ import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun CreditHomeCardContent(
-    modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     Column(

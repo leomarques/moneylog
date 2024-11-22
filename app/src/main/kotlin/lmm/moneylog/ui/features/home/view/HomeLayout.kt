@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.fabs.HideFab
 import lmm.moneylog.ui.features.balancecard.view.layout.BalanceCardView
-import lmm.moneylog.ui.features.credithomecard.view.layout.CreditHomeCardView
+import lmm.moneylog.ui.features.creditcard.homecard.view.layout.CreditHomeCardView
 import lmm.moneylog.ui.theme.Size
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -25,8 +25,8 @@ fun HomeLayout(
     hideValues: Boolean,
     onFabClick: () -> Unit,
     onBalanceClick: (String) -> Unit,
-    modifier: Modifier = Modifier,
     onHideClick: () -> Unit,
+    modifier: Modifier = Modifier,
     onCreditCardClick: () -> Unit
 ) {
     Scaffold(

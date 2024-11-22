@@ -12,5 +12,6 @@
     <ID>MutableStateParam:TransactionDetailDialogs.kt$showAccountPicker</ID>
     <ID>MutableStateParam:TransactionDetailDialogs.kt$showCategoryPicker</ID>
     <ID>MutableStateParam:TransactionDetailDialogs.kt$showDatePicker</ID>
+    <ID>UnusedParameter:CreditHomeCardLayout.kt$total: String</ID>
   </CurrentIssues>
 </SmellBaseline>

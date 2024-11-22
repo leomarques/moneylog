@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.credithomecard.viewmodel
+package lmm.moneylog.ui.features.creditcard.homecard.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
+import lmm.moneylog.ui.features.creditcard.homecard.model.CreditHomeCardUIState
 import lmm.moneylog.ui.features.creditcard.list.viewmodel.toCreditCardModelList
-import lmm.moneylog.ui.features.credithomecard.model.CreditHomeCardUIState
 
 class CreditHomeCardViewModel(repository: GetCreditCardsRepository) : ViewModel() {
     private val _uiState = MutableStateFlow(CreditHomeCardUIState())

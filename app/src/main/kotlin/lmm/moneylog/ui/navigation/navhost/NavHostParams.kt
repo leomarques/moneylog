@@ -7,9 +7,6 @@ import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import lmm.moneylog.ui.extensions.navigatePopUpTo
-import lmm.moneylog.ui.extensions.updateIndex
-import lmm.moneylog.ui.extensions.updateShow
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
@@ -21,6 +18,9 @@ import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
+import lmm.moneylog.ui.navigation.misc.navigatePopUpTo
+import lmm.moneylog.ui.navigation.misc.updateIndex
+import lmm.moneylog.ui.navigation.misc.updateShow
 
 @Composable
 fun NavHostParams(

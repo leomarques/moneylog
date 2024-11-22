@@ -28,12 +28,12 @@ fun CreditCardDetailLayout(
     onArrowBackClick: () -> Unit,
     onColorPicked: (Color) -> Unit,
     onNameChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    onDeleteConfirmClick: () -> Unit = {},
     onFabClick: () -> Unit,
     onClosingDayChange: (String) -> Unit,
     onDueDayDayChange: (String) -> Unit,
     onLimitChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    onDeleteConfirmClick: () -> Unit = {},
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 

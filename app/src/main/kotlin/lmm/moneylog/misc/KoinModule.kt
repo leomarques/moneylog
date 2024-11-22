@@ -9,8 +9,8 @@ import lmm.moneylog.ui.features.balancecard.viewmodel.BalanceCardViewModel
 import lmm.moneylog.ui.features.category.detail.viewmodel.CategoryDetailViewModel
 import lmm.moneylog.ui.features.category.list.viewmodel.CategoriesListViewModel
 import lmm.moneylog.ui.features.creditcard.detail.viewmodel.CreditCardDetailViewModel
+import lmm.moneylog.ui.features.creditcard.homecard.viewmodel.CreditHomeCardViewModel
 import lmm.moneylog.ui.features.creditcard.list.viewmodel.CreditCardsListViewModel
-import lmm.moneylog.ui.features.credithomecard.viewmodel.CreditHomeCardViewModel
 import lmm.moneylog.ui.features.home.viewmodel.HomeViewModel
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import lmm.moneylog.ui.features.transaction.list.viewmodel.TransactionsListViewModel

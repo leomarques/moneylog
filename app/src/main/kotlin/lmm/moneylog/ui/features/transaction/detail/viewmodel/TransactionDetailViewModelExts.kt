@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.extensions
+package lmm.moneylog.ui.features.transaction.detail.viewmodel
 
 import androidx.compose.ui.graphics.Color
 import lmm.moneylog.R
@@ -7,6 +7,8 @@ import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.model.Transaction
+import lmm.moneylog.ui.extensions.toComposeColor
+import lmm.moneylog.ui.extensions.validateValue
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 
 fun TransactionDetailUIState.toTransaction(): Transaction =

@@ -20,14 +20,9 @@ import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepos
 import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRepository
-import lmm.moneylog.ui.extensions.convertToDisplayDate
-import lmm.moneylog.ui.extensions.getAccountById
-import lmm.moneylog.ui.extensions.getCategoryById
 import lmm.moneylog.ui.extensions.getIdParam
 import lmm.moneylog.ui.extensions.orDefaultColor
 import lmm.moneylog.ui.extensions.toComposeColor
-import lmm.moneylog.ui.extensions.toDetailModel
-import lmm.moneylog.ui.extensions.toTransaction
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 import lmm.moneylog.ui.theme.neutralColor
 
