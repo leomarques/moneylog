@@ -1,7 +1,6 @@
 # Moneylog
 ![example workflow](https://github.com/leomarques/moneylog/actions/workflows/code-analysis.yml/badge.svg)
-![example workflow](https://github.com/leomarques/moneylog/actions/workflows/unit-test.yml/badge.svg)
-![example workflow](https://github.com/leomarques/moneylog/actions/workflows/ui-test.yml/badge.svg)<p>
+![example workflow](https://github.com/leomarques/moneylog/actions/workflows/unit-test.yml/badge.svg)<p>
 Moneylog is an app to log your money.<br>
 This project uses the [architecture recommended by Google](https://developer.android.com/topic/architecture#recommended-app-arch), MVVM design pattern and the UI is written in Jetpack Compose.<p>
 
