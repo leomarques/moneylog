@@ -13,9 +13,6 @@ jobs:
           java-version: '17'
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
-        
-      - name: Create empty local.properties
-        run: echo "" > local.properties
 
       - name: Execute Gradle command - testDebugUnitTest
         run: ./gradlew testDebugUnitTest
