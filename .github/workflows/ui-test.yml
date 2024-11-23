@@ -4,8 +4,20 @@ on:
 
 jobs:
   connected-tests:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
     steps:
+      - name: Delete unnecessary tools 🔧
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          android: false # Don't remove Android tools
+          tool-cache: true # Remove image tool cache - rm -rf "$AGENT_TOOLSDIRECTORY"
+          dotnet: true # rm -rf /usr/share/dotnet
+          haskell: true # rm -rf /opt/ghc...
+          swap-storage: true # rm -f /mnt/swapfile (4GiB)
+          docker-images: false # Takes 16s, enable if needed in the future
+          large-packages: false # includes google-cloud-sdk and it's slow
+          
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -15,6 +27,9 @@ jobs:
           java-version: 17
           distribution: 'adopt'
           cache: 'gradle'
+
+      - name: Build projects before running emulator
+        run: ./gradlew packageDebugAndroidTest
 
       - name: Run connected tests
         uses: ReactiveCircus/android-emulator-runner@v2
