@@ -1,9 +1,14 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.detekt)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jlleitschuh.gradle.ktlint)
 }
+
+val keystoreProperties = Properties()
+file("../local.properties").inputStream().use { keystoreProperties.load(it) }
 
 android {
     namespace = "lmm.moneylog"
@@ -22,9 +27,19 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file(keystoreProperties["key.store"] as String)
+            storePassword = keystoreProperties["key.storePassword"] as String
+            keyAlias = keystoreProperties["key.alias"] as String
+            keyPassword = keystoreProperties["key.password"] as String
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

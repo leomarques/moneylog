@@ -1,21 +1,24 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.kts.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Kotlin Coroutines
+-keep class kotlinx.coroutines.** { *; }
+-keepclassmembers class kotlinx.coroutines.** { *; }
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Compose
+-keep class androidx.compose.** { *; }
+-keep class androidx.activity.compose.** { *; }
+-keep class ** {
+    @androidx.compose.runtime.Composable <methods>;
+}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-keep class androidx.compose.ui.tooling.preview.Preview {}
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Koin (Dependency Injection)
+-keep class org.koin.** { *; }
+-keepclassmembers class * {
+    @org.koin.* <methods>;
+}
+
+# JUnit, Mockk, and Core Testing (exclude if building in release mode)
+-dontwarn junit.**
+-dontwarn io.mockk.**
+-dontwarn androidx.arch.core.executor.testing.*
+-dontwarn kotlinx.coroutines.test.*
