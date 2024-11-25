@@ -13,6 +13,13 @@ jobs:
         with:
           distribution: 'corretto'
           java-version: '17'
+      
+      - name: Create empty local.properties
+        run: |
+          echo "key.store=dummy" > local.properties
+          echo "key.storePassword=dummy" >> local.properties
+          echo "key.alias=dummy" >> local.properties
+          echo "key.password=dummy" >> local.properties
           
       - name: ktlint
         shell: bash
