@@ -69,20 +69,20 @@ fun TransactionDetailFields(
 
         ClickTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            label = stringResource(R.string.account),
-            value = uiState.displayAccount,
-            enabled = uisAccountsFieldEnabled,
-            leadingIcon = { AccountIcon(tint = uiState.displayAccountColor) },
-            onClick = onAccountClick
-        )
-
-        ClickTextField(
-            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
             label = stringResource(R.string.category),
             value = uiState.displayCategory,
             enabled = isCategoriesFieldEnabled,
             leadingIcon = { CategoryIcon(tint = uiState.displayCategoryColor) },
             onClick = onCategoryClick
+        )
+
+        ClickTextField(
+            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
+            label = stringResource(R.string.account),
+            value = uiState.displayAccount,
+            enabled = uisAccountsFieldEnabled,
+            leadingIcon = { AccountIcon(tint = uiState.displayAccountColor) },
+            onClick = onAccountClick
         )
     }
 }
