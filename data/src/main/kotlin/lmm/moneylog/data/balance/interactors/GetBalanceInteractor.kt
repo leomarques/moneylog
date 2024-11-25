@@ -9,17 +9,19 @@ class GetBalanceInteractor(private val repository: GetBalanceRepository) {
         monthNumber: Int,
         yearNumber: Int
     ) = repository.getAllTransactionsValues().map { values ->
-        val currentTransactions =
+        val currentPaidTransactions =
             values.filter {
                 it.month == monthNumber && it.year == yearNumber
+            }.filter {
+                it.paidDay != null
             }
 
         val credit =
-            currentTransactions
+            currentPaidTransactions
                 .filter { it.value > 0 }
                 .sumOf { it.value }
         val debt =
-            currentTransactions
+            currentPaidTransactions
                 .filter { it.value < 0 }
                 .sumOf { it.value }
 

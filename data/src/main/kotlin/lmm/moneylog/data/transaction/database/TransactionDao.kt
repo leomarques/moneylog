@@ -6,12 +6,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import lmm.moneylog.data.transaction.model.TransactionBalance
+import lmm.moneylog.data.balance.model.TransactionBalance
 
 @Dao
 interface TransactionDao {
     @Query(
-        "SELECT value, month, year FROM `transaction` " +
+        "SELECT value, month, year, paidDay FROM `transaction` " +
             "WHERE accountId IN " +
             "(SELECT id FROM `account` " +
             "WHERE archived = :archived) "
