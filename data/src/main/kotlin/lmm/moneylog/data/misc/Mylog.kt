@@ -1,4 +1,4 @@
-package lmm.moneylog.misc
+package lmm.moneylog.data.misc
 
 import android.util.Log
 

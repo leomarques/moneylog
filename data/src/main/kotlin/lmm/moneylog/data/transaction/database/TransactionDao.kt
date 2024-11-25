@@ -14,9 +14,9 @@ interface TransactionDao {
         "SELECT value, month, year, paidDay FROM `transaction` " +
             "WHERE accountId IN " +
             "(SELECT id FROM `account` " +
-            "WHERE archived = :archived) "
+            "WHERE archived = false)"
     )
-    fun selectValuesFromAccounts(archived: Boolean = false): Flow<List<TransactionBalance>>
+    fun selectValuesFromUnarchivedAccounts(): Flow<List<TransactionBalance>>
 
     @Query("SELECT value FROM `transaction` WHERE accountId = :accountId")
     suspend fun selectValuesByAccountId(accountId: Int): List<Double>
