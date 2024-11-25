@@ -4,8 +4,8 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
-import lmm.moneylog.data.balance.repositories.GetBalanceRepository
 import lmm.moneylog.data.balance.model.TransactionBalance
+import lmm.moneylog.data.balance.repositories.GetBalanceRepository
 import org.junit.Before
 import org.junit.Test
 
