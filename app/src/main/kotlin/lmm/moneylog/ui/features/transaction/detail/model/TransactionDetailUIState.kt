@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import lmm.moneylog.R
 import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.category.model.Category
+import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.ui.theme.neutralColor
 
@@ -18,11 +19,18 @@ data class TransactionDetailUIState(
     val displayDate: String = "",
     val displayAccount: String = "",
     val displayCategory: String = "",
+    val displayCreditCard: String = "",
+    val displayInvoice: String = "",
     val displayAccountColor: Color = neutralColor,
     val displayCategoryColor: Color = neutralColor,
+    val displayCreditCardColor: Color = neutralColor,
+    val displayInvoiceColor: Color = neutralColor,
     val accountId: Int? = null,
     val categoryId: Int? = null,
+    val creditCardId: Int? = null,
     val date: DomainTime = DomainTime(),
     val accounts: List<Account> = emptyList(),
-    val categories: List<Category> = emptyList()
+    val categories: List<Category> = emptyList(),
+    val creditCards: List<CreditCard> = emptyList(),
+    val invoices: List<String> = emptyList()
 )

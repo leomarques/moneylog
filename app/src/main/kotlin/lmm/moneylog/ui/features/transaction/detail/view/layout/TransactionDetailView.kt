@@ -32,6 +32,8 @@ fun TransactionDetailView(
         onDatePick = { date -> viewModel.onDatePick(date) },
         onAccountPick = { index -> viewModel.onAccountPick(index) },
         onCategoryPick = { index -> viewModel.onCategoryPick(index) },
+        onCreditCardPick = { index -> viewModel.onCreditCardPick(index) },
+        onInvoicePick = { index -> viewModel.onInvoicePick(index) },
         onIsIncomeSelect = { viewModel.onIsIncomeSelect(it) },
         onValueChange = { viewModel.onValueChange(it) },
         onDescriptionChange = { viewModel.onDescriptionChange(it) }

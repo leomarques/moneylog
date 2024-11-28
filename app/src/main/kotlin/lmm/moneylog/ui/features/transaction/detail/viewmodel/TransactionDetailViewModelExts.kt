@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import lmm.moneylog.R
 import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.category.model.Category
+import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.model.Transaction
@@ -18,21 +19,23 @@ fun TransactionDetailUIState.toTransaction(): Transaction =
         description = description,
         id = id,
         accountId = accountId,
-        categoryId = categoryId
+        categoryId = categoryId,
+        creditCardId = creditCardId
     )
 
 fun Transaction.toDetailModel(domainTimeRepository: DomainTimeRepository) =
     TransactionDetailUIState(
         id = id,
-        value = value.toPositiveString(),
-        isIncome = value > 0,
-        description = description,
-        date = date,
-        displayDate = date.convertToDisplayDate(domainTimeRepository),
-        isEdit = true,
         titleResourceId = R.string.detail_topbar_transaction_edit,
+        isEdit = true,
+        isIncome = value > 0,
+        value = value.toPositiveString(),
+        description = description,
+        displayDate = date.convertToDisplayDate(domainTimeRepository),
         accountId = accountId,
-        categoryId = categoryId
+        categoryId = categoryId,
+        creditCardId = creditCardId,
+        date = date,
     )
 
 private fun Double.toPositiveString(): String {
@@ -59,6 +62,14 @@ fun List<Account>.getAccountById(accountId: Int?): (Pair<String, Color>)? {
 fun List<Category>.getCategoryById(categoryId: Int?): (Pair<String, Color>)? {
     return firstOrNull {
         it.id == categoryId
+    }?.let {
+        it.name to it.color.toComposeColor()
+    }
+}
+
+fun List<CreditCard>.getCreditCardById(creditCardId: Int?): (Pair<String, Color>)? {
+    return firstOrNull {
+        it.id == creditCardId
     }?.let {
         it.name to it.color.toComposeColor()
     }

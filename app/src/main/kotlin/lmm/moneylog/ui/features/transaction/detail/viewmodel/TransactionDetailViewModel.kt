@@ -15,6 +15,8 @@ import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
+import lmm.moneylog.data.creditcard.model.CreditCard
+import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository
@@ -28,12 +30,13 @@ import lmm.moneylog.ui.theme.neutralColor
 
 class TransactionDetailViewModel(
     savedStateHandle: SavedStateHandle,
-    getTransactionsRepository: GetTransactionsRepository,
     getAccountsRepository: GetAccountsRepository,
     getCategoriesRepository: GetCategoriesRepository,
+    getCreditCardsRepository: GetCreditCardsRepository,
     private val addTransactionRepository: AddTransactionRepository,
     private val updateTransactionRepository: UpdateTransactionRepository,
     private val deleteTransactionRepository: DeleteTransactionRepository,
+    private val getTransactionsRepository: GetTransactionsRepository,
     private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(TransactionDetailUIState())
@@ -43,39 +46,43 @@ class TransactionDetailViewModel(
         viewModelScope.launch {
             val accountsAsync = async { getAccountsRepository.getAccountsSuspend() }
             val categoriesAsync = async { getCategoriesRepository.getCategoriesSuspend() }
+            val creditCardsAsync = async { getCreditCardsRepository.getCreditCardsSuspend() }
 
             val idParam = savedStateHandle.getIdParam()
             if (idParam != null) {
-                setupEdit(
-                    getTransactionsRepository = getTransactionsRepository,
-                    idParam = idParam
-                )
+                setupEdit(idParam = idParam)
             } else {
-                setupAdd(accountsAsync, categoriesAsync)
+                setupAdd(
+                    accountsAsync = accountsAsync,
+                    categoriesAsync = categoriesAsync,
+                    creditCardsAsync = creditCardsAsync
+                )
             }
 
             val accounts = accountsAsync.await()
             val categories = categoriesAsync.await()
+            val creditCards = creditCardsAsync.await()
             val account = accounts.getAccountById(_uiState.value.accountId)
             val category = categories.getCategoryById(_uiState.value.categoryId)
+            val creditCard = creditCards.getCreditCardById(_uiState.value.creditCardId)
 
             _uiState.update {
                 it.copy(
                     accounts = accounts,
                     categories = categories,
+                    creditCards = creditCards,
                     displayAccount = account?.first.orEmpty(),
                     displayCategory = category?.first.orEmpty(),
+                    displayCreditCard = creditCard?.first.orEmpty(),
                     displayAccountColor = account?.second.orDefaultColor(),
-                    displayCategoryColor = category?.second.orDefaultColor()
+                    displayCategoryColor = category?.second.orDefaultColor(),
+                    displayCreditCardColor = creditCard?.second.orDefaultColor()
                 )
             }
         }
     }
 
-    private suspend fun setupEdit(
-        getTransactionsRepository: GetTransactionsRepository,
-        idParam: Int
-    ) {
+    private suspend fun setupEdit(idParam: Int) {
         getTransactionsRepository.getTransactionById(idParam)?.let { transaction ->
             _uiState.update {
                 transaction.toDetailModel(domainTimeRepository)
@@ -85,18 +92,21 @@ class TransactionDetailViewModel(
 
     private suspend fun setupAdd(
         accountsAsync: Deferred<List<Account>>,
-        categoriesAsync: Deferred<List<Category>>
+        categoriesAsync: Deferred<List<Category>>,
+        creditCardsAsync: Deferred<List<CreditCard>>
     ) {
         _uiState.update {
             val currentDate = domainTimeRepository.getCurrentDomainTime()
             val accountId = accountsAsync.await().firstOrNull()?.id
             val categoryId = categoriesAsync.await().firstOrNull()?.id
+            val creditCardId = creditCardsAsync.await().firstOrNull()?.id
 
             TransactionDetailUIState(
+                displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
                 accountId = accountId,
                 categoryId = categoryId,
+                creditCardId = creditCardId,
                 date = currentDate,
-                displayDate = currentDate.convertToDisplayDate(domainTimeRepository)
             )
         }
     }
@@ -162,6 +172,27 @@ class TransactionDetailViewModel(
                     displayCategoryColor = color.toComposeColor()
                 )
             }
+        }
+    }
+
+    fun onCreditCardPick(index: Int) {
+        _uiState.update {
+            with(_uiState.value.creditCards[index]) {
+                it.copy(
+                    creditCardId = id,
+                    displayCreditCard = name,
+                    displayCreditCardColor = color.toComposeColor()
+                )
+            }
+        }
+    }
+
+    fun onInvoicePick(index: Int) {
+        _uiState.update {
+            it.copy(
+                displayInvoice = "invoice",
+                displayInvoiceColor = neutralColor
+            )
         }
     }
 

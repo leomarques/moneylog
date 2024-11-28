@@ -8,5 +8,6 @@ data class Transaction(
     val description: String,
     val date: DomainTime,
     val accountId: Int? = null,
-    val categoryId: Int? = null
+    val categoryId: Int? = null,
+    val creditCardId: Int? = null
 )

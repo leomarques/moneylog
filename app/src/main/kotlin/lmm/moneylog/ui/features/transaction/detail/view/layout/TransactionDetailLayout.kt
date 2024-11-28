@@ -24,6 +24,8 @@ fun TransactionDetailLayout(
     onDatePick: (Long) -> Unit,
     onAccountPick: (Int) -> Unit,
     onCategoryPick: (Int) -> Unit,
+    onCreditCardPick: (Int) -> Unit,
+    onInvoicePick: (Int) -> Unit,
     onIsIncomeSelect: (Boolean) -> Unit,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -57,6 +59,8 @@ fun TransactionDetailLayout(
                     onDatePicked = onDatePick,
                     onAccountPicked = onAccountPick,
                     onCategoryPicked = onCategoryPick,
+                    onCreditCardPicked = onCreditCardPick,
+                    onInvoicePicked = onInvoicePick,
                     onDeleteConfirm = {
                         showDeleteConfirmDialog.value = false
                         onDeleteConfirmClick()
@@ -84,6 +88,8 @@ private fun TransactionDetailLayoutPreview() {
         onCategoryPick = {},
         onIsIncomeSelect = {},
         onValueChange = {},
-        onDescriptionChange = {}
+        onDescriptionChange = {},
+        onCreditCardPick = {},
+        onInvoicePick = {}
     )
 }

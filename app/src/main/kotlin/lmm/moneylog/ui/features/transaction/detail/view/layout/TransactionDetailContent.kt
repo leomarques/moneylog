@@ -19,6 +19,8 @@ fun TransactionDetailContent(
     onDatePicked: (Long) -> Unit,
     onAccountPicked: (Int) -> Unit,
     onCategoryPicked: (Int) -> Unit,
+    onCreditCardPicked: (Int) -> Unit,
+    onInvoicePicked: (Int) -> Unit,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit,
     onIsIncomeSelect: (Boolean) -> Unit,
@@ -30,6 +32,8 @@ fun TransactionDetailContent(
         val showDatePicker = remember { mutableStateOf(false) }
         val showAccountPicker = remember { mutableStateOf(false) }
         val showCategoryPicker = remember { mutableStateOf(false) }
+        val showCreditCardPicker = remember { mutableStateOf(false) }
+        val showInvoicePicker = remember { mutableStateOf(false) }
 
         val filteredCategories =
             uiState.categories.filter { it.isIncome == uiState.isIncome }
@@ -37,27 +41,35 @@ fun TransactionDetailContent(
         TransactionDetailDialogs(
             accounts = uiState.accounts,
             categories = filteredCategories,
+            creditCards = uiState.creditCards,
+            invoices = uiState.invoices,
             showDatePicker = showDatePicker,
             showAccountPicker = showAccountPicker,
             showCategoryPicker = showCategoryPicker,
             showDeleteConfirmDialog = showDeleteConfirmDialog,
+            showCreditCardPicker = showCreditCardPicker,
+            showInvoicePicker = showInvoicePicker,
             onDatePicked = onDatePicked,
             onAccountPicked = onAccountPicked,
             onCategoryPicked = onCategoryPicked,
+            onCreditCardPicked = onCreditCardPicked,
+            onInvoicePicked = onInvoicePicked,
             onDeleteConfirm = onDeleteConfirm,
             onDeleteDismiss = onDeleteDismiss
         )
 
         TransactionDetailFields(
             uiState = uiState,
-            onValueChange = onValueChange,
-            onDescriptionChange = onDescriptionChange,
             onIsIncomeSelect = onIsIncomeSelect,
-            onDateClick = { showDatePicker.value = true },
             onAccountClick = { showAccountPicker.value = true },
             onCategoryClick = { showCategoryPicker.value = true },
-            uisAccountsFieldEnabled = uiState.accounts.isNotEmpty(),
-            isCategoriesFieldEnabled = filteredCategories.isNotEmpty()
+            onValueChange = onValueChange,
+            onDescriptionChange = onDescriptionChange,
+            isCategoriesFieldEnabled = filteredCategories.isNotEmpty(),
+            isAccountsFieldEnabled = uiState.accounts.isNotEmpty(),
+            onDateClick = { showDatePicker.value = true },
+            onCreditCardClick = { showCreditCardPicker.value = true },
+            onInvoiceClick = { showInvoicePicker.value = true }
         )
     }
 }
@@ -75,6 +87,8 @@ private fun TransactionDetailContentPreview() {
         onDeleteDismiss = {},
         onIsIncomeSelect = {},
         onValueChange = {},
-        onDescriptionChange = {}
+        onDescriptionChange = {},
+        onCreditCardPicked = {},
+        onInvoicePicked = {}
     )
 }

@@ -4,6 +4,8 @@
     <string name="transactions">Transações</string>
     <string name="accounts">Contas</string>
     <string name="account">Conta</string>
+    <string name="credit_card">Cartão de crédito</string>
+    <string name="invoice">Fatura</string>
     <string name="categories">Categorias</string>
     <string name="category">Categoria</string>
     <string name="incomes">Receitas</string>
@@ -44,6 +46,8 @@
     <string name="detail_date">Data</string>
     <string name="detail_description">Descrição (opcional)</string>
     <string name="detail_invalidvalue">Valor inválido</string>
+    <string name="detail_debt_type">Débito</string>
+    <string name="detail_credit_type">Crédito</string>
     <string name="detail_no_name">Campo Nome é obrigatório</string>
     <string name="detail_no_account">Campo Conta é obrigatório</string>
     <string name="detail_no_category">Campo Categoria é obrigatório</string>

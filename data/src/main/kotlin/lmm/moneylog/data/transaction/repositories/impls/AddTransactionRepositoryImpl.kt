@@ -21,7 +21,8 @@ class AddTransactionRepositoryImpl(
                     paidMonth = date.month,
                     paidDay = date.day,
                     accountId = accountId,
-                    categoryId = categoryId
+                    categoryId = categoryId,
+                    creditCardId = creditCardId,
                 )
             }
         )

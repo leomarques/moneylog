@@ -11,7 +11,10 @@
     <ID>MutableStateParam:NavHostParams.kt$showNavigationBar</ID>
     <ID>MutableStateParam:TransactionDetailDialogs.kt$showAccountPicker</ID>
     <ID>MutableStateParam:TransactionDetailDialogs.kt$showCategoryPicker</ID>
+    <ID>MutableStateParam:TransactionDetailDialogs.kt$showCreditCardPicker</ID>
     <ID>MutableStateParam:TransactionDetailDialogs.kt$showDatePicker</ID>
+    <ID>MutableStateParam:TransactionDetailDialogs.kt$showInvoicePicker</ID>
+    <ID>TooManyFunctions:TransactionDetailViewModel.kt$TransactionDetailViewModel : ViewModel</ID>
     <ID>UnusedParameter:CreditHomeCardLayout.kt$total: String</ID>
   </CurrentIssues>
 </SmellBaseline>

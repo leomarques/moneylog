@@ -9,21 +9,29 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.category.model.Category
+import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
 import lmm.moneylog.ui.extensions.toComposeColor
+import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun TransactionDetailDialogs(
     categories: List<Category>,
     accounts: List<Account>,
+    creditCards: List<CreditCard>,
+    invoices: List<String>,
     showDatePicker: MutableState<Boolean>,
     showAccountPicker: MutableState<Boolean>,
     showCategoryPicker: MutableState<Boolean>,
+    showCreditCardPicker: MutableState<Boolean>,
+    showInvoicePicker: MutableState<Boolean>,
     showDeleteConfirmDialog: Boolean,
     onDatePicked: (Long) -> Unit,
     onAccountPicked: (Int) -> Unit,
     onCategoryPicked: (Int) -> Unit,
+    onCreditCardPicked: (Int) -> Unit,
+    onInvoicePicked: (Int) -> Unit,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit
 ) {
@@ -58,6 +66,28 @@ fun TransactionDetailDialogs(
         }
     }
 
+    if (showCreditCardPicker.value) {
+        ModalBottomSheet(onDismissRequest = { showCreditCardPicker.value = false }) {
+            BottomSheetContent(
+                list = creditCards.map { it.name to it.color.toComposeColor() },
+                onConfirm = { index -> onCreditCardPicked(index) }
+            ) {
+                showCreditCardPicker.value = false
+            }
+        }
+    }
+
+    if (showInvoicePicker.value) {
+        ModalBottomSheet(onDismissRequest = { showInvoicePicker.value = false }) {
+            BottomSheetContent(
+                list = invoices.map { it to neutralColor },
+                onConfirm = { index -> onInvoicePicked(index) }
+            ) {
+                showInvoicePicker.value = false
+            }
+        }
+    }
+
     if (showDeleteConfirmDialog) {
         DeleteTransactionConfirmDialog(
             onConfirm = onDeleteConfirm,
@@ -70,16 +100,22 @@ fun TransactionDetailDialogs(
 @Composable
 private fun TransactionDetailDialogsPreview() {
     TransactionDetailDialogs(
-        accounts = listOf(),
         categories = listOf(),
+        accounts = listOf(),
         showDatePicker = remember { mutableStateOf(false) },
         showAccountPicker = remember { mutableStateOf(false) },
         showCategoryPicker = remember { mutableStateOf(false) },
+        showCreditCardPicker = remember { mutableStateOf(false) },
+        showInvoicePicker = remember { mutableStateOf(false) },
+        showDeleteConfirmDialog = false,
         onDatePicked = {},
         onAccountPicked = {},
         onCategoryPicked = {},
-        showDeleteConfirmDialog = false,
         onDeleteConfirm = {},
-        onDeleteDismiss = {}
+        onDeleteDismiss = {},
+        creditCards = listOf(),
+        invoices = listOf(),
+        onCreditCardPicked = {},
+        onInvoicePicked = {}
     )
 }
