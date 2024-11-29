@@ -69,6 +69,7 @@ fun TransactionDetailContent(
             onDescriptionChange = onDescriptionChange,
             isCategoriesFieldEnabled = filteredCategories.isNotEmpty(),
             isAccountsFieldEnabled = uiState.accounts.isNotEmpty(),
+            isCreditCardFieldEnabled = uiState.creditCards.isNotEmpty(),
             onDateClick = { showDatePicker.value = true },
             onCreditCardClick = { showCreditCardPicker.value = true },
             onInvoiceClick = { showInvoicePicker.value = true },

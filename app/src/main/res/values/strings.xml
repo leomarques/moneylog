@@ -51,6 +51,7 @@
     <string name="detail_no_name">Campo Nome é obrigatório</string>
     <string name="detail_no_account">Campo Conta é obrigatório</string>
     <string name="detail_no_category">Campo Categoria é obrigatório</string>
+    <string name="detail_no_cc">Campo Cartão de crédito é obrigatório</string>
 
     <string name="dialog_title_transaction_delete">Excluir transação?</string>
     <string name="dialog_title_account_archive">Arquivar conta?</string>

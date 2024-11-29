@@ -226,6 +226,11 @@ class TransactionDetailViewModel(
                     return
                 }
 
+                if (!state.isDebtSelected && creditCardId == null) {
+                    onError(R.string.detail_no_cc)
+                    return
+                }
+
                 if (categoryId == null) {
                     onError(R.string.detail_no_category)
                     return

@@ -36,6 +36,7 @@ fun TransactionDetailFields(
     onDescriptionChange: (String) -> Unit,
     isCategoriesFieldEnabled: Boolean,
     isAccountsFieldEnabled: Boolean,
+    isCreditCardFieldEnabled: Boolean,
     isDebtSelected: Boolean,
     modifier: Modifier = Modifier,
     onDateClick: () -> Unit
@@ -105,6 +106,7 @@ fun TransactionDetailFields(
                 modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
                 label = stringResource(R.string.credit_card),
                 value = uiState.displayCreditCard,
+                enabled = isCreditCardFieldEnabled,
                 leadingIcon = { CreditCardIcon(tint = uiState.displayCreditCardColor) },
                 onClick = onCreditCardClick
             )
@@ -137,6 +139,7 @@ private fun TransactionDetailFieldsPreview() {
         onInvoiceClick = {},
         onDebtSelected = {},
         onCreditSelected = {},
-        isDebtSelected = false
+        isDebtSelected = false,
+        isCreditCardFieldEnabled = true
     )
 }
