@@ -198,18 +198,27 @@ class TransactionDetailViewModel(
 
     fun onDebtSelected() {
         _uiState.update {
+            val firstOrNull = it.accounts.firstOrNull()
             it.copy(
                 isDebtSelected = true,
-                creditCardId = null
+                creditCardId = null,
+                accountId = firstOrNull?.id,
+                displayAccount = firstOrNull?.name.orEmpty(),
+                displayAccountColor = firstOrNull?.color?.toComposeColor().orDefaultColor()
             )
         }
     }
 
     fun onCreditSelected() {
         _uiState.update {
+            val firstOrNull = it.creditCards.firstOrNull()
             it.copy(
                 isDebtSelected = false,
-                accountId = null
+                accountId = null,
+                creditCardId = firstOrNull?.id,
+                displayCreditCard = firstOrNull?.name.orEmpty(),
+                displayCreditCardColor = firstOrNull?.color?.toComposeColor().orDefaultColor(),
+                isIncome = false
             )
         }
     }
