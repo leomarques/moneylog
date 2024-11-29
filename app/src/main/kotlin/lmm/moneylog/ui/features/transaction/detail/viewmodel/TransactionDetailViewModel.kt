@@ -196,6 +196,24 @@ class TransactionDetailViewModel(
         }
     }
 
+    fun onDebtSelected() {
+        _uiState.update {
+            it.copy(
+                isDebtSelected = true,
+                creditCardId = null
+            )
+        }
+    }
+
+    fun onCreditSelected() {
+        _uiState.update {
+            it.copy(
+                isDebtSelected = false,
+                accountId = null
+            )
+        }
+    }
+
     fun onFabClick(
         onSuccess: () -> Unit,
         onError: (Int) -> Unit
@@ -203,7 +221,7 @@ class TransactionDetailViewModel(
         try {
             val state = _uiState.value
             with(state.toTransaction()) {
-                if (accountId == null) {
+                if (state.isDebtSelected && accountId == null) {
                     onError(R.string.detail_no_account)
                     return
                 }

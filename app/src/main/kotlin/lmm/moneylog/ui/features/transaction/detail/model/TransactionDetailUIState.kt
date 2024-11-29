@@ -14,6 +14,7 @@ data class TransactionDetailUIState(
     val isEdit: Boolean = false,
     val showFab: Boolean = true,
     val isIncome: Boolean = true,
+    val isDebtSelected: Boolean = true,
     val value: String = "",
     val description: String = "",
     val displayDate: String = "",

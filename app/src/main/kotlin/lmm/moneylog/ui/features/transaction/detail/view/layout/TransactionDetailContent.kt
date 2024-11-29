@@ -25,8 +25,10 @@ fun TransactionDetailContent(
     onDeleteDismiss: () -> Unit,
     onIsIncomeSelect: (Boolean) -> Unit,
     onValueChange: (String) -> Unit,
+    onDescriptionChange: (String) -> Unit,
+    onDebtSelected: () -> Unit,
     modifier: Modifier = Modifier,
-    onDescriptionChange: (String) -> Unit
+    onCreditSelected: () -> Unit
 ) {
     Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         val showDatePicker = remember { mutableStateOf(false) }
@@ -69,7 +71,10 @@ fun TransactionDetailContent(
             isAccountsFieldEnabled = uiState.accounts.isNotEmpty(),
             onDateClick = { showDatePicker.value = true },
             onCreditCardClick = { showCreditCardPicker.value = true },
-            onInvoiceClick = { showInvoicePicker.value = true }
+            onInvoiceClick = { showInvoicePicker.value = true },
+            onDebtSelected = onDebtSelected,
+            onCreditSelected = onCreditSelected,
+            isDebtSelected = uiState.isDebtSelected
         )
     }
 }
@@ -83,12 +88,14 @@ private fun TransactionDetailContentPreview() {
         onDatePicked = {},
         onAccountPicked = {},
         onCategoryPicked = {},
+        onCreditCardPicked = {},
+        onInvoicePicked = {},
         onDeleteConfirm = {},
         onDeleteDismiss = {},
         onIsIncomeSelect = {},
         onValueChange = {},
         onDescriptionChange = {},
-        onCreditCardPicked = {},
-        onInvoicePicked = {}
+        onDebtSelected = {},
+        onCreditSelected = {}
     )
 }

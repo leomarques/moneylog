@@ -3,8 +3,6 @@ package lmm.moneylog.ui.features.transaction.detail.view.components
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -32,16 +30,17 @@ fun TransactionDetailFields(
     onCategoryClick: () -> Unit,
     onCreditCardClick: () -> Unit,
     onInvoiceClick: () -> Unit,
+    onDebtSelected: () -> Unit,
+    onCreditSelected: () -> Unit,
     onValueChange: (String) -> Unit,
     onDescriptionChange: (String) -> Unit,
     isCategoriesFieldEnabled: Boolean,
     isAccountsFieldEnabled: Boolean,
+    isDebtSelected: Boolean,
     modifier: Modifier = Modifier,
     onDateClick: () -> Unit
 ) {
     Column(modifier) {
-        val isDebtSelected = remember { mutableStateOf(true) }
-
         StateTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             value = uiState.value,
@@ -86,13 +85,13 @@ fun TransactionDetailFields(
         )
 
         RadioGroupType(
-            isDebtSelected = isDebtSelected.value,
+            isDebtSelected = isDebtSelected,
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            onDebtSelected = { isDebtSelected.value = true },
-            onCreditSelected = { isDebtSelected.value = false }
+            onDebtSelected = onDebtSelected,
+            onCreditSelected = onCreditSelected
         )
 
-        if (isDebtSelected.value) {
+        if (isDebtSelected) {
             ClickTextField(
                 modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
                 label = stringResource(R.string.account),
@@ -135,6 +134,9 @@ private fun TransactionDetailFieldsPreview() {
         isAccountsFieldEnabled = true,
         onDateClick = {},
         onCreditCardClick = {},
-        onInvoiceClick = {}
+        onInvoiceClick = {},
+        onDebtSelected = {},
+        onCreditSelected = {},
+        isDebtSelected = false
     )
 }

@@ -36,6 +36,8 @@ fun TransactionDetailView(
         onInvoicePick = { index -> viewModel.onInvoicePick(index) },
         onIsIncomeSelect = { viewModel.onIsIncomeSelect(it) },
         onValueChange = { viewModel.onValueChange(it) },
-        onDescriptionChange = { viewModel.onDescriptionChange(it) }
+        onDescriptionChange = { viewModel.onDescriptionChange(it) },
+        onDebtSelected = { viewModel.onDebtSelected() },
+        onCreditSelected = { viewModel.onCreditSelected() }
     )
 }

@@ -28,8 +28,10 @@ fun TransactionDetailLayout(
     onInvoicePick: (Int) -> Unit,
     onIsIncomeSelect: (Boolean) -> Unit,
     onValueChange: (String) -> Unit,
+    onDescriptionChange: (String) -> Unit,
+    onDebtSelected: () -> Unit,
     modifier: Modifier = Modifier,
-    onDescriptionChange: (String) -> Unit
+    onCreditSelected: () -> Unit
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
@@ -68,7 +70,9 @@ fun TransactionDetailLayout(
                     onDeleteDismiss = { showDeleteConfirmDialog.value = false },
                     onIsIncomeSelect = onIsIncomeSelect,
                     onValueChange = onValueChange,
-                    onDescriptionChange = onDescriptionChange
+                    onDescriptionChange = onDescriptionChange,
+                    onDebtSelected = onDebtSelected,
+                    onCreditSelected = onCreditSelected
                 )
             }
         }
@@ -86,10 +90,12 @@ private fun TransactionDetailLayoutPreview() {
         onDatePick = {},
         onAccountPick = {},
         onCategoryPick = {},
+        onCreditCardPick = {},
+        onInvoicePick = {},
         onIsIncomeSelect = {},
         onValueChange = {},
         onDescriptionChange = {},
-        onCreditCardPick = {},
-        onInvoicePick = {}
+        onDebtSelected = {},
+        onCreditSelected = {}
     )
 }

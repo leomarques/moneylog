@@ -36,6 +36,7 @@ fun Transaction.toDetailModel(domainTimeRepository: DomainTimeRepository) =
         categoryId = categoryId,
         creditCardId = creditCardId,
         date = date,
+        isDebtSelected = creditCardId == null
     )
 
 private fun Double.toPositiveString(): String {
