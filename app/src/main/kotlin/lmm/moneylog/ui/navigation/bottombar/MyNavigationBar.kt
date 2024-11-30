@@ -30,6 +30,10 @@ fun MyNavigationBar(
                     ImageVector.vectorResource(id = R.drawable.outline_account_balance_24)
                 ),
                 Pair(
+                    stringResource(R.string.cards),
+                    ImageVector.vectorResource(id = R.drawable.outline_credit_card_24)
+                ),
+                Pair(
                     stringResource(R.string.categories),
                     ImageVector.vectorResource(id = R.drawable.outline_category_24)
                 )

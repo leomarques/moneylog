@@ -19,4 +19,5 @@ const val PARAM_ID = "id"
 const val HOME_INDEX = 0
 const val TRANSACTIONS_INDEX = 1
 const val ACCOUNTS_INDEX = 2
-const val CATEGORIES_INDEX = 3
+const val CREDITCARD_INDEX = 3
+const val CATEGORIES_INDEX = 4

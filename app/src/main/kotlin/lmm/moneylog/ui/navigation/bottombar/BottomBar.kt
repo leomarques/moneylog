@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.CREDITCARD_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
@@ -51,6 +52,14 @@ fun BottomBar(
                 }
 
                 3 -> {
+                    navController.navigatePopUpTo(
+                        destination = CREDITCARD_LIST_SCREEN,
+                        navBarSelectedIndex = navBarSelectedIndex,
+                        showNavigationBar = showNavigationBar
+                    )
+                }
+
+                4 -> {
                     navController.navigatePopUpTo(
                         destination = CATEGORIES_LIST_SCREEN,
                         navBarSelectedIndex = navBarSelectedIndex,
