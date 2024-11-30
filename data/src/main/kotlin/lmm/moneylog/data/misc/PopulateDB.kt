@@ -23,7 +23,7 @@ suspend fun populateDB(
 ) {
     accountDao.insert(
         AccountEntity(
-            name = "Nubank",
+            name = "NuConta",
             color = -51457814194814976,
             archived = false
         )

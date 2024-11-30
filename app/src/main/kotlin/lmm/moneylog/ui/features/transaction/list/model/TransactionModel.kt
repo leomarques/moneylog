@@ -10,5 +10,6 @@ data class TransactionModel(
     val category: String,
     val date: String,
     val id: Int,
-    val categoryColor: Color
+    val categoryColor: Color,
+    val creditCard: String
 )

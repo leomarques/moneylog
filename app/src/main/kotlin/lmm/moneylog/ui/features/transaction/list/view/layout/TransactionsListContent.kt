@@ -16,7 +16,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
 import lmm.moneylog.ui.theme.Size
-import lmm.moneylog.ui.theme.darkRed
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -76,39 +75,7 @@ fun TransactionsListContent(
 @Composable
 private fun TransactionsListContentPreview() {
     TransactionsListContent(
-        list =
-            listOf(
-                TransactionModel(
-                    value = "Nome",
-                    isIncome = true,
-                    description = "Desc",
-                    account = "A",
-                    category = "B",
-                    date = "01/01/2001",
-                    id = 0,
-                    categoryColor = darkRed
-                ),
-                TransactionModel(
-                    value = "Nome",
-                    isIncome = true,
-                    description = "Desc",
-                    account = "A",
-                    category = "B",
-                    date = "01/01/2001",
-                    id = 0,
-                    categoryColor = darkRed
-                ),
-                TransactionModel(
-                    value = "Nome",
-                    isIncome = true,
-                    description = "Desc",
-                    account = "A",
-                    category = "B",
-                    date = "01/01/2001",
-                    id = 0,
-                    categoryColor = darkRed
-                )
-            ),
+        list = transactionModelListPreview,
         filter = "",
         onItemClick = {}
     )

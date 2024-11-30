@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import lmm.moneylog.R
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
+import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
 
@@ -22,7 +23,8 @@ class TransactionsListViewModel(
     private val typeOfValue: String?,
     private val getTransactionsRepository: GetTransactionsRepository,
     private val getAccountsRepository: GetAccountsRepository,
-    private val getCategoriesRepository: GetCategoriesRepository
+    private val getCategoriesRepository: GetCategoriesRepository,
+    private val getCreditCardsRepository: GetCreditCardsRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(TransactionsListUIState(R.string.transactions))
     val uiState: StateFlow<TransactionsListUIState> = _uiState.asStateFlow()
@@ -31,9 +33,14 @@ class TransactionsListViewModel(
         viewModelScope.launch {
             val accounts = getAccountsRepository.getAccountsSuspend()
             val categories = getCategoriesRepository.getCategoriesSuspend()
+            val creditCards = getCreditCardsRepository.getCreditCardsSuspend()
 
             val accountsMap =
                 accounts.associate {
+                    it.id to it.name
+                }
+            val creditCardMap =
+                creditCards.associate {
                     it.id to it.name
                 }
             val categoriesMap =
@@ -52,6 +59,7 @@ class TransactionsListViewModel(
                             transactions.toModel(
                                 titleResourceId = R.string.incomes,
                                 accountMap = accountsMap,
+                                creditCardMap = creditCardMap,
                                 categoriesMap = categoriesMap,
                                 categoriesColorMap = categoriesColorMap
                             )
@@ -65,6 +73,7 @@ class TransactionsListViewModel(
                             transactions.toModel(
                                 titleResourceId = R.string.outcomes,
                                 accountMap = accountsMap,
+                                creditCardMap = creditCardMap,
                                 categoriesMap = categoriesMap,
                                 categoriesColorMap = categoriesColorMap
                             )
@@ -78,6 +87,7 @@ class TransactionsListViewModel(
                             transactions.toModel(
                                 titleResourceId = R.string.transactions,
                                 accountMap = accountsMap,
+                                creditCardMap = creditCardMap,
                                 categoriesMap = categoriesMap,
                                 categoriesColorMap = categoriesColorMap
                             )

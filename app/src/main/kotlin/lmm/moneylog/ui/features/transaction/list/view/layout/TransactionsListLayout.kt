@@ -26,9 +26,7 @@ import lmm.moneylog.R
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.components.misc.EmptyState
 import lmm.moneylog.ui.components.misc.SearchTopBar
-import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
 import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
-import lmm.moneylog.ui.theme.outcome
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -128,29 +126,7 @@ private fun TransactionsListLayoutPreview() {
         model =
             TransactionsListUIState(
                 titleResourceId = R.string.transactions,
-                transactions =
-                    listOf(
-                        TransactionModel(
-                            value = "R$50,00",
-                            isIncome = true,
-                            description = "Calça",
-                            date = "1/2/2023",
-                            id = 0,
-                            account = "Nubank",
-                            category = "Roupa",
-                            categoryColor = outcome
-                        ),
-                        TransactionModel(
-                            value = "R$1,00",
-                            isIncome = false,
-                            description = "",
-                            date = "22/12/2023",
-                            id = 0,
-                            account = "Nubank",
-                            category = "Roupa",
-                            categoryColor = outcome
-                        )
-                    )
+                transactions = transactionModelListPreview
             ),
         onItemClick = {}
     )

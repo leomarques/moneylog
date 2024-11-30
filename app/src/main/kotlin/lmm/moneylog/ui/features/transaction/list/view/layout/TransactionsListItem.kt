@@ -79,12 +79,17 @@ fun TransactionsListItem(
                         category.ifEmpty {
                             stringResource(R.string.no_category)
                         }
-                    val accountString =
-                        account.ifEmpty {
-                            stringResource(R.string.no_account)
-                        }
+
+                    val sb = StringBuilder(categoryString)
+                    if (creditCard.isNotEmpty()) {
+                        sb.append(" | $creditCard")
+                    }
+                    if (account.isNotEmpty()) {
+                        sb.append(" | $account")
+                    }
+
                     Text(
-                        text = "$categoryString | $accountString",
+                        text = sb.toString(),
                         style = MaterialTheme.typography.bodyMedium,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
@@ -112,19 +117,21 @@ fun TransactionsListItem(
 @Preview(showBackground = true)
 @Composable
 private fun TransactionsListItemPreview() {
-    TransactionsListItem(
-        transaction =
-            TransactionModel(
-                value = "Nome",
-                isIncome = true,
-                description = "Desc",
-                account = "A",
-                category = "B",
-                date = "01/01/2001",
-                id = 0,
-                categoryColor = darkRed
-            ),
-        onItemClick = {},
-        color = darkRed
-    )
+    Column {
+        TransactionsListItem(
+            transaction = transactionModelPreview1,
+            onItemClick = {},
+            color = darkRed
+        )
+        TransactionsListItem(
+            transaction = transactionModelPreview2,
+            onItemClick = {},
+            color = darkRed
+        )
+        TransactionsListItem(
+            transaction = transactionModelPreview3,
+            onItemClick = {},
+            color = darkRed
+        )
+    }
 }

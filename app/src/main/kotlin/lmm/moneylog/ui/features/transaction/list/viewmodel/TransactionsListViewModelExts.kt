@@ -11,6 +11,7 @@ import lmm.moneylog.ui.theme.neutralColor
 fun List<Transaction>.toModel(
     titleResourceId: Int,
     accountMap: Map<Int, String>,
+    creditCardMap: Map<Int, String>,
     categoriesMap: Map<Int, String>,
     categoriesColorMap: Map<Int, Color>
 ): TransactionsListUIState {
@@ -30,6 +31,7 @@ fun List<Transaction>.toModel(
                         date = date.formatDate(),
                         id = id,
                         account = accountMap[accountId].orEmpty(),
+                        creditCard = creditCardMap[creditCardId].orEmpty(),
                         category = categoriesMap[categoryId].orEmpty(),
                         categoryColor = categoriesColorMap[categoryId] ?: neutralColor
                     )

@@ -40,7 +40,8 @@ val appModule =
                 typeOfValue = parameters.get(),
                 getTransactionsRepository = get(),
                 getAccountsRepository = get(),
-                getCategoriesRepository = get()
+                getCategoriesRepository = get(),
+                getCreditCardsRepository = get()
             )
         }
         viewModelOf(::TransactionDetailViewModel)
