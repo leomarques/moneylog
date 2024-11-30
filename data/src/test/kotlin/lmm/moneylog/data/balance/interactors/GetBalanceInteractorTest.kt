@@ -17,14 +17,14 @@ class GetBalanceInteractorTest {
 
     @Before
     fun setUp() {
-        every { getBalanceRepository.getAllTransactionsValues() } returns
+        every { getBalanceRepository.getAllPaidTransactionsValues() } returns
             flow {
                 emit(
                     listOf(
-                        TransactionBalance(1.0, 5, 2021, 0),
-                        TransactionBalance(9.0, 5, 2021, 0),
-                        TransactionBalance(-5.0, 5, 2021, 0),
-                        TransactionBalance(-5.0, 5, 2021, null)
+                        TransactionBalance(1.0, 5, 2021),
+                        TransactionBalance(9.0, 5, 2021),
+                        TransactionBalance(-5.0, 5, 2021),
+                        TransactionBalance(-5.0, 6, 2021)
                     )
                 )
             }.flowOn(Dispatchers.Unconfined)
@@ -38,30 +38,6 @@ class GetBalanceInteractorTest {
                     assert(it.total == 5.0)
                     assert(it.credit == 10.0)
                     assert(it.debt == -5.0)
-                }
-        }
-    }
-
-    @Test
-    fun `should not consider unpaid transactions`() {
-        runBlocking {
-            interactor.execute(5, 2021)
-                .flowOn(Dispatchers.Unconfined).collect {
-                    assert(it.total == 5.0)
-                    assert(it.credit == 10.0)
-                    assert(it.debt == -5.0)
-                }
-        }
-    }
-
-    @Test
-    fun `should return correct balance for month with no transactions`() {
-        runBlocking {
-            interactor.execute(6, 2021)
-                .flowOn(Dispatchers.Unconfined).collect {
-                    assert(it.total == 5.0)
-                    assert(it.credit == 0.0)
-                    assert(it.debt == 0.0)
                 }
         }
     }
