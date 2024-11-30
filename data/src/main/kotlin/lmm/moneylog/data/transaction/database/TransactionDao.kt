@@ -11,8 +11,8 @@ import lmm.moneylog.data.balance.model.TransactionBalance
 @Dao
 interface TransactionDao {
     @Query(
-        "SELECT value, month, year, paidDay FROM `transaction` " +
-            "WHERE accountId IN " +
+        "SELECT value, month, year FROM `transaction` " +
+            "WHERE accountId IS NOT NULL AND accountId IN " +
             "(SELECT id FROM `account` " +
             "WHERE archived = false)"
     )
