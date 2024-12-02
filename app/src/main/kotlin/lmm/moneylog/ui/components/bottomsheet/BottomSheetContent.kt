@@ -14,7 +14,7 @@ import lmm.moneylog.ui.theme.darkRed
 
 @Composable
 fun BottomSheetContent(
-    list: List<Pair<String, Color>>,
+    list: List<Pair<String, Color?>>,
     onConfirm: (Int) -> Unit,
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit

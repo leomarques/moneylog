@@ -13,7 +13,6 @@ import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.data.invoice.Invoice
 import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
 import lmm.moneylog.ui.extensions.toComposeColor
-import lmm.moneylog.ui.theme.neutralColor
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -81,7 +80,7 @@ fun TransactionDetailDialogs(
     if (showInvoicePicker.value) {
         ModalBottomSheet(onDismissRequest = { showInvoicePicker.value = false }) {
             BottomSheetContent(
-                list = invoices.map { it.name to neutralColor },
+                list = invoices.map { it.name to null },
                 onConfirm = { index -> onInvoicePicked(index) }
             ) {
                 showInvoicePicker.value = false

@@ -35,11 +35,13 @@ fun BottomSheetItem(
                 .clickable { onItemClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        MyCircle(
-            modifier = Modifier.padding(end = Size.DefaultSpaceSize),
-            color = color ?: neutralColor,
-            size = Size.SmallCircleSize
-        )
+        if (color != null) {
+            MyCircle(
+                modifier = Modifier.padding(end = Size.DefaultSpaceSize),
+                color = color,
+                size = Size.SmallCircleSize
+            )
+        }
 
         Text(
             text = text.ifEmpty { stringResource(R.string.no_name) },
@@ -61,6 +63,16 @@ fun BottomSheetItem(
 private fun BottomSheetItemPreview() {
     BottomSheetItem(
         text = "Alimentação",
+        onItemClick = {}
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun BottomSheetItemPreview2() {
+    BottomSheetItem(
+        text = "Alimentação",
+        color = Color.Red,
         onItemClick = {}
     )
 }
