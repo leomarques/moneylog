@@ -26,6 +26,8 @@ class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) 
                     accountId = accountId,
                     categoryId = categoryId,
                     creditCardId = creditCardId,
+                    invoiceMonth = invoiceMonth,
+                    invoiceYear = invoiceYear
                 )
             }
         } else {

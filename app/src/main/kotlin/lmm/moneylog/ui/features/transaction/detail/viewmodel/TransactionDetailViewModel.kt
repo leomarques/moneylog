@@ -17,6 +17,8 @@ import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
+import lmm.moneylog.data.misc.getInvoicesCodes
+import lmm.moneylog.data.misc.toDisplayInvoice
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository
@@ -47,6 +49,7 @@ class TransactionDetailViewModel(
             val accountsAsync = async { getAccountsRepository.getAccountsSuspend() }
             val categoriesAsync = async { getCategoriesRepository.getCategoriesSuspend() }
             val creditCardsAsync = async { getCreditCardsRepository.getCreditCardsSuspend() }
+            val invoices = getInvoicesCodes(domainTimeRepository.getCurrentDomainTime())
 
             val idParam = savedStateHandle.getIdParam()
             if (idParam != null) {
@@ -55,7 +58,8 @@ class TransactionDetailViewModel(
                 setupAdd(
                     accountsAsync = accountsAsync,
                     categoriesAsync = categoriesAsync,
-                    creditCardsAsync = creditCardsAsync
+                    creditCardsAsync = creditCardsAsync,
+                    invoices = invoices
                 )
             }
 
@@ -71,6 +75,7 @@ class TransactionDetailViewModel(
                     accounts = accounts,
                     categories = categories,
                     creditCards = creditCards,
+                    invoices = invoices,
                     displayAccount = account?.first.orEmpty(),
                     displayCategory = category?.first.orEmpty(),
                     displayCreditCard = creditCard?.first.orEmpty(),
@@ -93,19 +98,23 @@ class TransactionDetailViewModel(
     private suspend fun setupAdd(
         accountsAsync: Deferred<List<Account>>,
         categoriesAsync: Deferred<List<Category>>,
-        creditCardsAsync: Deferred<List<CreditCard>>
+        creditCardsAsync: Deferred<List<CreditCard>>,
+        invoices: List<String>
     ) {
         _uiState.update {
             val currentDate = domainTimeRepository.getCurrentDomainTime()
             val accountId = accountsAsync.await().firstOrNull()?.id
             val categoryId = categoriesAsync.await().firstOrNull()?.id
             val creditCardId = creditCardsAsync.await().firstOrNull()?.id
+            val invoiceCode = invoices[1]
 
             TransactionDetailUIState(
                 displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
                 accountId = accountId,
                 categoryId = categoryId,
                 creditCardId = creditCardId,
+                invoiceCode = invoiceCode,
+                displayInvoice = invoiceCode.toDisplayInvoice(domainTimeRepository),
                 date = currentDate,
             )
         }
@@ -189,9 +198,10 @@ class TransactionDetailViewModel(
 
     fun onInvoicePick(index: Int) {
         _uiState.update {
+            val invoiceCode = it.invoices[index]
             it.copy(
-                displayInvoice = "invoice",
-                displayInvoiceColor = neutralColor
+                displayInvoice = invoiceCode.toDisplayInvoice(domainTimeRepository),
+                invoiceCode = invoiceCode
             )
         }
     }
@@ -202,6 +212,7 @@ class TransactionDetailViewModel(
             it.copy(
                 isDebtSelected = true,
                 creditCardId = null,
+                invoiceCode = null,
                 accountId = firstOrNull?.id,
                 displayAccount = firstOrNull?.name.orEmpty(),
                 displayAccountColor = firstOrNull?.color?.toComposeColor().orDefaultColor()
@@ -212,12 +223,15 @@ class TransactionDetailViewModel(
     fun onCreditSelected() {
         _uiState.update {
             val firstOrNull = it.creditCards.firstOrNull()
+            val invoiceCode = it.invoices[1]
             it.copy(
                 isDebtSelected = false,
                 accountId = null,
                 creditCardId = firstOrNull?.id,
                 displayCreditCard = firstOrNull?.name.orEmpty(),
                 displayCreditCardColor = firstOrNull?.color?.toComposeColor().orDefaultColor(),
+                invoiceCode = invoiceCode,
+                displayInvoice = invoiceCode.toDisplayInvoice(domainTimeRepository),
                 isIncome = false
             )
         }

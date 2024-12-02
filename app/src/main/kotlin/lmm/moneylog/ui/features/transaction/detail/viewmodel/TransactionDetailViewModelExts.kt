@@ -5,6 +5,9 @@ import lmm.moneylog.R
 import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.creditcard.model.CreditCard
+import lmm.moneylog.data.misc.toDisplayInvoice
+import lmm.moneylog.data.misc.toInvoiceMonth
+import lmm.moneylog.data.misc.toInvoiceYear
 import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.model.Transaction
@@ -20,7 +23,9 @@ fun TransactionDetailUIState.toTransaction(): Transaction =
         id = id,
         accountId = accountId,
         categoryId = categoryId,
-        creditCardId = creditCardId
+        creditCardId = creditCardId,
+        invoiceMonth = invoiceCode.toInvoiceMonth(),
+        invoiceYear = invoiceCode.toInvoiceYear()
     )
 
 fun Transaction.toDetailModel(domainTimeRepository: DomainTimeRepository) =
@@ -35,6 +40,8 @@ fun Transaction.toDetailModel(domainTimeRepository: DomainTimeRepository) =
         accountId = accountId,
         categoryId = categoryId,
         creditCardId = creditCardId,
+        invoiceCode = "$invoiceMonth.$invoiceYear",
+        displayInvoice = "$invoiceMonth.$invoiceYear".toDisplayInvoice(domainTimeRepository),
         date = date,
         isDebtSelected = creditCardId == null
     )

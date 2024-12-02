@@ -20,7 +20,9 @@ class UpdateTransactionRepositoryImpl(
                     day = date.day,
                     accountId = accountId,
                     categoryId = categoryId,
-                    creditCardId = creditCardId
+                    creditCardId = creditCardId,
+                    invoiceMonth = invoiceMonth,
+                    invoiceYear = invoiceYear,
                 ).also {
                     it.id = id
                 }

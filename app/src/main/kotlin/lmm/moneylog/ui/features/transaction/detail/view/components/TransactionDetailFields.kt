@@ -115,7 +115,7 @@ fun TransactionDetailFields(
                 modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
                 label = stringResource(R.string.invoice),
                 value = uiState.displayInvoice,
-                leadingIcon = { InvoiceIcon(tint = uiState.displayInvoiceColor) },
+                leadingIcon = { InvoiceIcon() },
                 onClick = onInvoiceClick
             )
         }

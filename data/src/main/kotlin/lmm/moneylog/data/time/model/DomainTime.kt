@@ -14,4 +14,8 @@ data class DomainTime(
             day.compareTo(other.day)
         }
     }
+
+    fun toInvoiceCode(): String {
+        return "$month.$year"
+    }
 }
