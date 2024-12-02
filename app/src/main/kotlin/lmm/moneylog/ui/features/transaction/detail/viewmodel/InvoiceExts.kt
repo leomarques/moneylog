@@ -6,8 +6,8 @@ fun String?.toDisplayInvoice(domainTimeRepository: DomainTimeRepository): String
     if (this == null) return ""
 
     val split = split(".")
-    val monthName = domainTimeRepository.getMonthName(split[0].toInt())
-        .replaceFirstChar(Char::titlecase)
+    val monthName =
+        domainTimeRepository.getMonthName(split[0].toInt()).replaceFirstChar(Char::titlecase)
     val year = split[1].toInt()
 
     return "Fatura: $monthName $year"
