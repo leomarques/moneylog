@@ -2,6 +2,6 @@
 <SmellBaseline>
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
-    <ID>MagicNumber:InvoiceActions.kt$12</ID>
+    <ID>MagicNumber:GetInvoicesRepositoryImpl.kt$GetInvoicesRepositoryImpl$12</ID>
   </CurrentIssues>
 </SmellBaseline>

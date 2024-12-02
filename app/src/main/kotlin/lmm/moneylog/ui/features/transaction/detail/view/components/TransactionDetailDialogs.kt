@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.creditcard.model.CreditCard
+import lmm.moneylog.data.invoice.Invoice
 import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.theme.neutralColor
@@ -20,7 +21,7 @@ fun TransactionDetailDialogs(
     categories: List<Category>,
     accounts: List<Account>,
     creditCards: List<CreditCard>,
-    invoices: List<String>,
+    invoices: List<Invoice>,
     showDatePicker: MutableState<Boolean>,
     showAccountPicker: MutableState<Boolean>,
     showCategoryPicker: MutableState<Boolean>,
@@ -80,7 +81,7 @@ fun TransactionDetailDialogs(
     if (showInvoicePicker.value) {
         ModalBottomSheet(onDismissRequest = { showInvoicePicker.value = false }) {
             BottomSheetContent(
-                list = invoices.map { it to neutralColor },
+                list = invoices.map { it.name to neutralColor },
                 onConfirm = { index -> onInvoicePicked(index) }
             ) {
                 showInvoicePicker.value = false

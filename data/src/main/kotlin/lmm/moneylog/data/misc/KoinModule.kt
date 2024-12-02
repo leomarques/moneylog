@@ -32,6 +32,8 @@ import lmm.moneylog.data.creditcard.repositories.interfaces.AddCreditCardReposit
 import lmm.moneylog.data.creditcard.repositories.interfaces.DeleteCreditCardRepository
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.creditcard.repositories.interfaces.UpdateCreditCardRepository
+import lmm.moneylog.data.invoice.GetInvoicesRepository
+import lmm.moneylog.data.invoice.GetInvoicesRepositoryImpl
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.time.repositories.DomainTimeRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.AddTransactionRepositoryImpl
@@ -81,4 +83,6 @@ val dataModule =
         factoryOf(::GetCreditCardsRepositoryImpl) { bind<GetCreditCardsRepository>() }
         factoryOf(::UpdateCreditCardRepositoryImpl) { bind<UpdateCreditCardRepository>() }
         factoryOf(::DeleteCreditCardRepositoryImpl) { bind<DeleteCreditCardRepository>() }
+
+        factoryOf(::GetInvoicesRepositoryImpl) { bind<GetInvoicesRepository>() }
     }

@@ -17,8 +17,8 @@ import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
-import lmm.moneylog.data.misc.getInvoicesCodes
-import lmm.moneylog.data.misc.toDisplayInvoice
+import lmm.moneylog.data.invoice.GetInvoicesRepository
+import lmm.moneylog.data.invoice.Invoice
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository
@@ -35,6 +35,7 @@ class TransactionDetailViewModel(
     getAccountsRepository: GetAccountsRepository,
     getCategoriesRepository: GetCategoriesRepository,
     getCreditCardsRepository: GetCreditCardsRepository,
+    getInvoicesRepository: GetInvoicesRepository,
     private val addTransactionRepository: AddTransactionRepository,
     private val updateTransactionRepository: UpdateTransactionRepository,
     private val deleteTransactionRepository: DeleteTransactionRepository,
@@ -49,7 +50,7 @@ class TransactionDetailViewModel(
             val accountsAsync = async { getAccountsRepository.getAccountsSuspend() }
             val categoriesAsync = async { getCategoriesRepository.getCategoriesSuspend() }
             val creditCardsAsync = async { getCreditCardsRepository.getCreditCardsSuspend() }
-            val invoices = getInvoicesCodes(domainTimeRepository.getCurrentDomainTime())
+            val invoices = getInvoicesRepository.getInvoices()
 
             val idParam = savedStateHandle.getIdParam()
             if (idParam != null) {
@@ -99,22 +100,22 @@ class TransactionDetailViewModel(
         accountsAsync: Deferred<List<Account>>,
         categoriesAsync: Deferred<List<Category>>,
         creditCardsAsync: Deferred<List<CreditCard>>,
-        invoices: List<String>
+        invoices: List<Invoice>
     ) {
         _uiState.update {
             val currentDate = domainTimeRepository.getCurrentDomainTime()
             val accountId = accountsAsync.await().firstOrNull()?.id
             val categoryId = categoriesAsync.await().firstOrNull()?.id
             val creditCardId = creditCardsAsync.await().firstOrNull()?.id
-            val invoiceCode = invoices[1]
+            val invoice = invoices[1]
 
             TransactionDetailUIState(
                 displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
                 accountId = accountId,
                 categoryId = categoryId,
                 creditCardId = creditCardId,
-                invoiceCode = invoiceCode,
-                displayInvoice = invoiceCode.toDisplayInvoice(domainTimeRepository),
+                invoiceCode = invoice.getCode(),
+                displayInvoice = invoice.name,
                 date = currentDate,
             )
         }
@@ -198,10 +199,10 @@ class TransactionDetailViewModel(
 
     fun onInvoicePick(index: Int) {
         _uiState.update {
-            val invoiceCode = it.invoices[index]
+            val invoice = it.invoices[index]
             it.copy(
-                displayInvoice = invoiceCode.toDisplayInvoice(domainTimeRepository),
-                invoiceCode = invoiceCode
+                displayInvoice = invoice.name,
+                invoiceCode = invoice.getCode()
             )
         }
     }
@@ -223,15 +224,15 @@ class TransactionDetailViewModel(
     fun onCreditSelected() {
         _uiState.update {
             val firstOrNull = it.creditCards.firstOrNull()
-            val invoiceCode = it.invoices[1]
+            val invoice = it.invoices[1]
             it.copy(
                 isDebtSelected = false,
                 accountId = null,
                 creditCardId = firstOrNull?.id,
                 displayCreditCard = firstOrNull?.name.orEmpty(),
                 displayCreditCardColor = firstOrNull?.color?.toComposeColor().orDefaultColor(),
-                invoiceCode = invoiceCode,
-                displayInvoice = invoiceCode.toDisplayInvoice(domainTimeRepository),
+                invoiceCode = invoice.getCode(),
+                displayInvoice = invoice.name,
                 isIncome = false
             )
         }
