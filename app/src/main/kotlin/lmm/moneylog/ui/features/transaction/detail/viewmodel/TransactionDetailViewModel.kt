@@ -15,7 +15,6 @@ import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
-import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.invoice.GetInvoicesRepository
 import lmm.moneylog.data.invoice.Invoice
