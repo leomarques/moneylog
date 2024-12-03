@@ -10,13 +10,8 @@ import lmm.moneylog.data.balance.model.TransactionBalance
 
 @Dao
 interface TransactionDao {
-    @Query(
-        "SELECT value, month, year FROM `transaction` " +
-            "WHERE accountId IS NOT NULL AND accountId IN " +
-            "(SELECT id FROM `account` " +
-            "WHERE archived = false)"
-    )
-    fun selectValuesFromUnarchivedAccounts(): Flow<List<TransactionBalance>>
+    @Query("SELECT value, month, year, accountId FROM `transaction`")
+    fun selectTransactions(): Flow<List<TransactionBalance>>
 
     @Query("SELECT value FROM `transaction` WHERE accountId = :accountId")
     suspend fun selectValuesByAccountId(accountId: Int): List<Double>

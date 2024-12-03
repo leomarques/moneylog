@@ -51,8 +51,7 @@ data class TransactionEntity(
     val invoiceYear: Int? = null,
     val accountId: Int? = null,
     val categoryId: Int? = null,
-    val creditCardId: Int? = null,
-    val paid: Boolean = true
+    val creditCardId: Int? = null
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

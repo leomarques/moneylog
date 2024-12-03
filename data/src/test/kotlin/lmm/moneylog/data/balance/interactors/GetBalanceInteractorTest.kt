@@ -17,7 +17,7 @@ class GetBalanceInteractorTest {
 
     @Before
     fun setUp() {
-        every { getBalanceRepository.getAllPaidTransactionsValues() } returns
+        every { getBalanceRepository.getTransactions() } returns
             flow {
                 emit(
                     listOf(

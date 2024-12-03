@@ -8,9 +8,9 @@ class GetBalanceInteractor(private val repository: GetBalanceRepository) {
     fun execute(
         monthNumber: Int,
         yearNumber: Int
-    ) = repository.getAllPaidTransactionsValues().map { allPaidTransactions ->
+    ) = repository.getTransactions().map { allTransactions ->
         val currentTransactions =
-            allPaidTransactions.filter {
+            allTransactions.filter {
                 it.month == monthNumber && it.year == yearNumber
             }
 
@@ -23,8 +23,10 @@ class GetBalanceInteractor(private val repository: GetBalanceRepository) {
                 .filter { it.value < 0 }
                 .sumOf { it.value }
 
+        val paidTransactions = currentTransactions.filter { it.accountId != null }
+
         BalanceModel(
-            total = currentTransactions.sumOf { it.value },
+            total = paidTransactions.sumOf { it.value },
             credit = credit,
             debt = debt
         )
