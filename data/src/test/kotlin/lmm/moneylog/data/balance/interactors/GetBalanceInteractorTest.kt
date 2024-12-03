@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.runBlocking
 import lmm.moneylog.data.balance.model.TransactionBalance
 import lmm.moneylog.data.balance.repositories.GetBalanceRepository
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
