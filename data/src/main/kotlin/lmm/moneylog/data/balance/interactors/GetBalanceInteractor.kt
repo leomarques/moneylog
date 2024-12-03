@@ -28,7 +28,7 @@ class GetBalanceInteractor(private val repository: GetBalanceRepository) {
         BalanceModel(
             total = paidTransactions.sumOf { it.value },
             credit = credit,
-            debt = debt
+            debt = -debt
         )
     }
 }
