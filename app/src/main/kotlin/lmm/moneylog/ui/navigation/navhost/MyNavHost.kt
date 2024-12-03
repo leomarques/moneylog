@@ -19,7 +19,7 @@ import lmm.moneylog.ui.features.creditcard.detail.view.layout.CreditCardDetailVi
 import lmm.moneylog.ui.features.creditcard.list.view.layouts.CreditCardsListView
 import lmm.moneylog.ui.features.home.view.HomeView
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
-import lmm.moneylog.ui.features.transaction.list.view.layout.TransactionsListView
+import lmm.moneylog.ui.features.transaction.list.view.TransactionsListView
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN

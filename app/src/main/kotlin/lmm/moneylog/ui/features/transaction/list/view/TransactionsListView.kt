@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.list.view.layout
+package lmm.moneylog.ui.features.transaction.list.view
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState

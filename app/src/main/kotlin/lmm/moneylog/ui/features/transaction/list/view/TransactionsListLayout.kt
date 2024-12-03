@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.list.view.layout
+package lmm.moneylog.ui.features.transaction.list.view
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons

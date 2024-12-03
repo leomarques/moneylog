@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.transaction.list.view.layout
+package lmm.moneylog.ui.features.transaction.list.view
 
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
 import lmm.moneylog.ui.theme.outcome
