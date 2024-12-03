@@ -23,7 +23,7 @@ class GetBalanceInteractor(private val repository: GetBalanceRepository) {
                 .filter { it.value < 0 }
                 .sumOf { it.value }
 
-        val paidTransactions = currentTransactions.filter { it.accountId != null }
+        val paidTransactions = allTransactions.filter { it.accountId != null }
 
         BalanceModel(
             total = paidTransactions.sumOf { it.value },
