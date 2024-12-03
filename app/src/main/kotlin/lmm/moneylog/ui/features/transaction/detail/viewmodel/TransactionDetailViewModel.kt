@@ -59,7 +59,6 @@ class TransactionDetailViewModel(
                 setupAdd(
                     accountsAsync = accountsAsync,
                     categoriesAsync = categoriesAsync,
-                    creditCardsAsync = creditCardsAsync,
                     invoices = invoices
                 )
             }
@@ -99,22 +98,18 @@ class TransactionDetailViewModel(
     private suspend fun setupAdd(
         accountsAsync: Deferred<List<Account>>,
         categoriesAsync: Deferred<List<Category>>,
-        creditCardsAsync: Deferred<List<CreditCard>>,
         invoices: List<Invoice>
     ) {
         _uiState.update {
             val currentDate = domainTimeRepository.getCurrentDomainTime()
             val accountId = accountsAsync.await().firstOrNull()?.id
             val categoryId = categoriesAsync.await().firstOrNull()?.id
-            val creditCardId = creditCardsAsync.await().firstOrNull()?.id
             val invoice = invoices[1]
 
             TransactionDetailUIState(
                 displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
                 accountId = accountId,
                 categoryId = categoryId,
-                creditCardId = creditCardId,
-                invoiceCode = invoice.getCode(),
                 displayInvoice = invoice.name,
                 date = currentDate,
             )
