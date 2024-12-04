@@ -1,24 +1,19 @@
-package lmm.moneylog.ui.features.transaction.list.viewmodel
+package lmm.moneylog.ui.features.invoice
 
 import androidx.compose.ui.graphics.Color
 import lmm.moneylog.data.transaction.model.Transaction
 import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
-import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
 import lmm.moneylog.ui.theme.neutralColor
 
-fun List<Transaction>.toTransactionsListUiState(
+fun List<Transaction>.toInvoiceListUiState(
     titleResourceId: Int,
-    accountMap: Map<Int, String>,
-    creditCardMap: Map<Int, String>,
     categoriesMap: Map<Int, String>,
     categoriesColorMap: Map<Int, Color>
-): TransactionsListUIState {
-    return TransactionsListUIState(
+): InvoiceListUIState {
+    return InvoiceListUIState(
         transactions =
             toTransactionModels(
-                accountMap = accountMap,
-                creditCardMap = creditCardMap,
                 categoriesMap = categoriesMap,
                 categoriesColorMap = categoriesColorMap
             ),
@@ -27,8 +22,6 @@ fun List<Transaction>.toTransactionsListUiState(
 }
 
 private fun List<Transaction>.toTransactionModels(
-    accountMap: Map<Int, String>,
-    creditCardMap: Map<Int, String>,
     categoriesMap: Map<Int, String>,
     categoriesColorMap: Map<Int, Color>
 ) = sortedBy { it.date }.map { transaction ->
@@ -44,8 +37,8 @@ private fun List<Transaction>.toTransactionModels(
             description = description,
             date = date.getFormattedDate(),
             id = id,
-            account = accountMap[accountId].orEmpty(),
-            creditCard = creditCardMap[creditCardId].orEmpty(),
+            account = "",
+            creditCard = "",
             category = categoriesMap[categoryId].orEmpty(),
             categoryColor = categoriesColorMap[categoryId] ?: neutralColor
         )

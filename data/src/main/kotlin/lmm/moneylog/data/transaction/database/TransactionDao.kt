@@ -36,4 +36,16 @@ interface TransactionDao {
 
     @Update
     suspend fun update(transactionEntity: TransactionEntity)
+
+    @Query(
+        "SELECT * FROM `transaction` " +
+            "WHERE invoiceMonth = :invoiceMonth " +
+            "AND invoiceYear = :invoiceYear " +
+            "AND creditCardId = :creditCardId"
+    )
+    fun selectTransactionByInvoice(
+        invoiceMonth: Int,
+        invoiceYear: Int,
+        creditCardId: Int
+    ): Flow<List<TransactionEntity>>
 }

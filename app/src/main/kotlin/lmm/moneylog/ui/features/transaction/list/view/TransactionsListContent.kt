@@ -21,20 +21,10 @@ import lmm.moneylog.ui.theme.Size
 @Composable
 fun TransactionsListContent(
     list: List<TransactionModel>,
-    filter: String,
     modifier: Modifier = Modifier,
     onItemClick: (Int) -> Unit
 ) {
-    val grouped =
-        list
-            .filter { transaction ->
-                transaction.description.startsWith(
-                    prefix = filter,
-                    ignoreCase = true
-                )
-            }
-            .reversed()
-            .groupBy { it.date }
+    val grouped = list.reversed().groupBy { it.date }
 
     LazyColumn(
         modifier.background(
@@ -76,7 +66,6 @@ fun TransactionsListContent(
 private fun TransactionsListContentPreview() {
     TransactionsListContent(
         list = transactionModelListPreview,
-        filter = "",
         onItemClick = {}
     )
 }

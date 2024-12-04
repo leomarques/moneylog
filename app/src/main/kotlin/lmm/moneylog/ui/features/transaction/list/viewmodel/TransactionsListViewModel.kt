@@ -56,7 +56,7 @@ class TransactionsListViewModel(
                 GET_TRANSACTIONS_INCOME -> {
                     getTransactionsRepository.getIncomeTransactions().collect { transactions ->
                         _uiState.update {
-                            transactions.toModel(
+                            transactions.toTransactionsListUiState(
                                 titleResourceId = R.string.incomes,
                                 accountMap = accountsMap,
                                 creditCardMap = creditCardMap,
@@ -70,7 +70,7 @@ class TransactionsListViewModel(
                 GET_TRANSACTIONS_OUTCOME -> {
                     getTransactionsRepository.getOutcomeTransactions().collect { transactions ->
                         _uiState.update {
-                            transactions.toModel(
+                            transactions.toTransactionsListUiState(
                                 titleResourceId = R.string.outcomes,
                                 accountMap = accountsMap,
                                 creditCardMap = creditCardMap,
@@ -84,7 +84,7 @@ class TransactionsListViewModel(
                 else -> {
                     getTransactionsRepository.getAllTransactions().collect { transactions ->
                         _uiState.update {
-                            transactions.toModel(
+                            transactions.toTransactionsListUiState(
                                 titleResourceId = R.string.transactions,
                                 accountMap = accountsMap,
                                 creditCardMap = creditCardMap,

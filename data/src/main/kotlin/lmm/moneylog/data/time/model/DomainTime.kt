@@ -15,7 +15,7 @@ data class DomainTime(
         }
     }
 
-    fun toInvoiceCode(): String {
-        return "$month.$year"
+    fun getFormattedDate(): String {
+        return "$day/$month/$year"
     }
 }

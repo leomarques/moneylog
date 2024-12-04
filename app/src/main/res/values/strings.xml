@@ -70,6 +70,7 @@
     <string name="empty_categories_title">Não há categorias</string>
     <string name="empty_creditcards_title">Não há cartões de crédito</string>
     <string name="empty_transactions_desc">Adicione uma transação e ela irá aparecer aqui.</string>
+    <string name="empty_invoice_desc">Adicione uma transação à fatura e ela irá aparecer aqui.</string>
     <string name="empty_accounts_desc">Adicione uma conta e ela irá aparecer aqui.</string>
     <string name="empty_categories_desc">Adicione uma categoria e ela irá aparecer aqui.</string>
     <string name="empty_creditcards_desc">Adicione um cartão e ele irá aparecer aqui.</string>

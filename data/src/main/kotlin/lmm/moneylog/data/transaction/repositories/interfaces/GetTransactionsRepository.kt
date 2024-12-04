@@ -11,4 +11,9 @@ interface GetTransactionsRepository {
     fun getIncomeTransactions(): Flow<List<Transaction>>
 
     fun getOutcomeTransactions(): Flow<List<Transaction>>
+
+    fun getTransactionsByInvoice(
+        invoiceCode: String,
+        creditCardId: Int
+    ): Flow<List<Transaction>>
 }

@@ -12,6 +12,7 @@ import lmm.moneylog.ui.features.creditcard.detail.viewmodel.CreditCardDetailView
 import lmm.moneylog.ui.features.creditcard.homecard.viewmodel.CreditHomeCardViewModel
 import lmm.moneylog.ui.features.creditcard.list.viewmodel.CreditCardsListViewModel
 import lmm.moneylog.ui.features.home.viewmodel.HomeViewModel
+import lmm.moneylog.ui.features.invoice.InvoiceListViewModel
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import lmm.moneylog.ui.features.transaction.list.viewmodel.TransactionsListViewModel
 import org.koin.android.ext.koin.androidContext
@@ -44,9 +45,19 @@ val appModule =
                 getCreditCardsRepository = get()
             )
         }
+
         viewModelOf(::TransactionDetailViewModel)
         viewModelOf(::ArchivedAccountsViewModel)
         viewModelOf(::AccountTransferViewModel)
+
+        viewModel { parameters ->
+            InvoiceListViewModel(
+                invoiceCode = parameters.get(),
+                creditCardId = parameters.get(),
+                getTransactionsRepository = get(),
+                getCategoriesRepository = get(),
+            )
+        }
 
         factory {
             androidContext().getSharedPreferences(

@@ -1,5 +1,6 @@
 package lmm.moneylog.data.transaction.repositories.impls
 
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.data.transaction.database.TransactionDao
@@ -49,6 +50,23 @@ class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) 
         transactionDao.selectOutcomeTransactions().map { transactionsList ->
             convertEntityToTransaction(transactionsList)
         }
+
+    override fun getTransactionsByInvoice(
+        invoiceCode: String,
+        creditCardId: Int
+    ): Flow<List<Transaction>> {
+        val split = invoiceCode.split(".")
+        val invoiceMonth = split[0].toInt()
+        val invoiceYear = split[1].toInt()
+
+        return transactionDao.selectTransactionByInvoice(
+            invoiceMonth = invoiceMonth,
+            invoiceYear = invoiceYear,
+            creditCardId = creditCardId
+        ).map { transactionsList ->
+            convertEntityToTransaction(transactionsList)
+        }
+    }
 
     private fun convertEntityToTransaction(list: List<TransactionEntity>): List<Transaction> {
         return list.map { entity ->

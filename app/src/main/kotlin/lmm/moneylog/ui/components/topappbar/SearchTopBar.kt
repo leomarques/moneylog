@@ -1,12 +1,8 @@
-@file:OptIn(
-    ExperimentalAnimationApi::class,
-    ExperimentalMaterial3Api::class
-)
+@file:OptIn(ExperimentalMaterial3Api::class)
 
-package lmm.moneylog.ui.components.misc
+package lmm.moneylog.ui.components.topappbar
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxWidth

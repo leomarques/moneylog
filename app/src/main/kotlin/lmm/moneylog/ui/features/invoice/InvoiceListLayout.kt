@@ -1,9 +1,8 @@
-package lmm.moneylog.ui.features.transaction.list.view
+package lmm.moneylog.ui.features.invoice
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -20,17 +19,17 @@ import lmm.moneylog.R
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.components.misc.EmptyState
 import lmm.moneylog.ui.components.topappbar.TopAppBarWithSearch
-import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
 import lmm.moneylog.ui.features.transaction.list.model.filtered
+import lmm.moneylog.ui.features.transaction.list.view.TransactionsListContent
+import lmm.moneylog.ui.features.transaction.list.view.transactionModelListPreview
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransactionsListLayout(
-    onArrowBackClick: () -> Unit,
+fun InvoiceListLayout(
+    model: InvoiceListUIState,
+    onItemClick: (Int) -> Unit,
     onFabClick: () -> Unit,
-    model: TransactionsListUIState,
-    modifier: Modifier = Modifier,
-    onItemClick: (Int) -> Unit
+    onArrowBackClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val filter = remember { mutableStateOf("") }
     var showFab by remember { mutableStateOf(true) }
@@ -61,7 +60,7 @@ fun TransactionsListLayout(
             Surface(
                 Modifier
                     .padding(top = paddingValues.calculateTopPadding())
-                    .testTag("TransactionsListScreen")
+                    .testTag("InvoiceListScreen")
             ) {
                 if (model.transactions.isNotEmpty()) {
                     TransactionsListContent(
@@ -71,7 +70,7 @@ fun TransactionsListLayout(
                 } else {
                     EmptyState(
                         stringResource(R.string.empty_transactions_title),
-                        stringResource(R.string.empty_transactions_desc)
+                        stringResource(R.string.empty_invoice_desc)
                     )
                 }
             }
@@ -81,13 +80,13 @@ fun TransactionsListLayout(
 
 @Preview
 @Composable
-private fun TransactionsListLayoutPreview() {
-    TransactionsListLayout(
+private fun InvoiceListLayoutPreview() {
+    InvoiceListLayout(
         onArrowBackClick = {},
         onFabClick = {},
         model =
-            TransactionsListUIState(
-                titleResourceId = R.string.transactions,
+            InvoiceListUIState(
+                titleResourceId = R.string.invoice,
                 transactions = transactionModelListPreview
             ),
         onItemClick = {}
