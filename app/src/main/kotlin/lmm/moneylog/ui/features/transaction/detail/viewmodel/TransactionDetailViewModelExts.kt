@@ -37,8 +37,20 @@ fun Transaction.toDetailModel(domainTimeRepository: DomainTimeRepository) =
         accountId = accountId,
         categoryId = categoryId,
         creditCardId = creditCardId,
-        invoiceCode = "$invoiceMonth.$invoiceYear",
-        displayInvoice = "$invoiceMonth.$invoiceYear".toDisplayInvoice(domainTimeRepository),
+        invoiceCode =
+            if (invoiceMonth == null || invoiceYear == null) {
+                null
+            } else {
+                "$invoiceMonth.$invoiceYear"
+            },
+        displayInvoice =
+            if (invoiceMonth == null || invoiceYear == null) {
+                ""
+            } else {
+                "$invoiceMonth.$invoiceYear".toDisplayInvoice(
+                    domainTimeRepository
+                )
+            },
         date = date,
         isDebtSelected = creditCardId == null
     )

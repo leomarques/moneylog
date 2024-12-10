@@ -57,6 +57,7 @@ fun MutableIntState.updateIndex(destination: String) {
         CREDITCARD_DETAIL_SCREEN -> CREDITCARD_INDEX
         CATEGORIES_LIST_SCREEN -> CATEGORIES_INDEX
         CATEGORY_DETAIL_SCREEN -> CATEGORIES_INDEX
+        INVOICE_LIST_SCREEN -> TRANSACTIONS_INDEX
         else -> HOME_INDEX
     }.also { intValue = it }
 }
@@ -74,6 +75,7 @@ fun MutableState<Boolean>.updateShow(destination: String) {
             CATEGORY_DETAIL_SCREEN -> false
             CREDITCARD_LIST_SCREEN -> true
             CREDITCARD_DETAIL_SCREEN -> false
+            INVOICE_LIST_SCREEN -> true
             else -> true
         }
 }
