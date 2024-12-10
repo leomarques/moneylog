@@ -1,6 +1,7 @@
-package lmm.moneylog.ui.features.invoice
+package lmm.moneylog.ui.features.invoice.viewmodel
 
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,18 +12,25 @@ import kotlinx.coroutines.launch
 import lmm.moneylog.R
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
+import lmm.moneylog.ui.features.invoice.model.InvoiceListUIState
+import lmm.moneylog.ui.navigation.misc.PARAM_CARD_ID
+import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
 
 class InvoiceListViewModel(
-    private val invoiceCode: String,
-    private val creditCardId: Int,
-    private val getTransactionsRepository: GetTransactionsRepository,
-    private val getCategoriesRepository: GetCategoriesRepository,
+    savedStateHandle: SavedStateHandle,
+    getTransactionsRepository: GetTransactionsRepository,
+    getCategoriesRepository: GetCategoriesRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(InvoiceListUIState(titleResourceId = R.string.invoice))
     val uiState: StateFlow<InvoiceListUIState> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
+            val invoiceCode = savedStateHandle.get<String>(PARAM_INVOICE_CODE)
+            val creditCardId = savedStateHandle.get<String>(PARAM_CARD_ID)?.toInt()
+
+            if (invoiceCode == null || creditCardId == null) return@launch
+
             val categories = getCategoriesRepository.getCategoriesSuspend()
 
             val categoriesMap =
@@ -43,6 +51,9 @@ class InvoiceListViewModel(
                         titleResourceId = R.string.invoice,
                         categoriesMap = categoriesMap,
                         categoriesColorMap = categoriesColorMap
+                    ).copy(
+                        cardId = creditCardId,
+                        invoiceCode = invoiceCode
                     )
                 }
             }

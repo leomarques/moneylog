@@ -12,7 +12,7 @@ object Size {
 
     val ListRoundedCornerSize = 20.dp
     val OneLineListItemHeight = 56.dp
-    val TwoLinesListItemHeight = 72.dp
+    val TwoLinesListItemHeight = 76.dp
 
     val SmallCircleSize = 30.dp
     val DefaultCircleSize = 40.dp

@@ -1,45 +1,43 @@
 package lmm.moneylog.ui.features.creditcard.homecard.view.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.extensions.toComposeColor
+import lmm.moneylog.ui.features.creditcard.homecard.model.CreditCardHomeCardItem
+import lmm.moneylog.ui.features.creditcard.homecard.model.mockCards
+import lmm.moneylog.ui.features.creditcard.homecard.view.layout.CreditCardsHomeCardItem
 
 @Composable
 fun CreditHomeCardContent(
-    content: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: (Int) -> Unit,
+    cards: List<CreditCardHomeCardItem>,
+    hideValues: Boolean,
+    modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(Size.DefaultSpaceSize))
-                .background(MaterialTheme.colorScheme.tertiaryContainer)
-                .padding(Size.DefaultSpaceSize)
-                .clickable { onClick() },
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        content()
+    LazyColumn(modifier = modifier) {
+        itemsIndexed(cards) { index, item ->
+            CreditCardsHomeCardItem(
+                id = item.id,
+                name = item.name,
+                color = item.color.toComposeColor(),
+                showDivider = index != cards.size - 1,
+                onItemClick = onClick,
+                hideValues = hideValues,
+                value = item.value
+            )
+        }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun CreditHomeCardContentPreview() {
     CreditHomeCardContent(
-        content = { Text("CreditHomeCardContent") },
-        onClick = {}
+        onClick = {},
+        cards = mockCards,
+        hideValues = false
     )
 }

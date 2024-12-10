@@ -16,8 +16,8 @@ import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
-import lmm.moneylog.data.invoice.GetInvoicesRepository
-import lmm.moneylog.data.invoice.Invoice
+import lmm.moneylog.data.invoice.model.Invoice
+import lmm.moneylog.data.invoice.repositories.GetInvoicesRepository
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository

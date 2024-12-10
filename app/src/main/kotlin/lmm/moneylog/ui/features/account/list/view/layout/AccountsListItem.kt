@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.components.misc.MyCircle
+import lmm.moneylog.ui.components.misc.ColoredCircle
 import lmm.moneylog.ui.components.misc.MyDivider
 import lmm.moneylog.ui.features.account.list.view.components.ListItemContent
 import lmm.moneylog.ui.features.account.list.view.components.ListItemData
@@ -27,7 +27,7 @@ fun AccountsListItem(
         onItemClick = onItemClick,
         content = {
             Row {
-                MyCircle(color = color)
+                ColoredCircle(color = color)
 
                 ListItemData(name, balance)
             }

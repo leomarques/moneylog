@@ -1,4 +1,4 @@
-package lmm.moneylog.data.invoice
+package lmm.moneylog.data.invoice.model
 
 data class Invoice(
     val year: Int,

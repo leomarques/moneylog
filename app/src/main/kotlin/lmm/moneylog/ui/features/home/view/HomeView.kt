@@ -11,7 +11,7 @@ fun HomeView(
     onFabClick: () -> Unit,
     onClick: (String) -> Unit,
     viewModel: HomeViewModel = koinViewModel(),
-    onCreditCardClick: () -> Unit
+    onCreditCardClick: (Int, String) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 

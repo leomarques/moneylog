@@ -97,4 +97,5 @@
     <string name="date_desc">data</string>
     <string name="close_desc">fechar</string>
     <string name="lock_desc">esconder</string>
+    <string name="credit_cards">Cartões de crédito</string>
 </resources>

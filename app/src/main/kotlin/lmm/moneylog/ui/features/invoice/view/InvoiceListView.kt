@@ -1,21 +1,18 @@
-package lmm.moneylog.ui.features.invoice
+package lmm.moneylog.ui.features.invoice.view
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import lmm.moneylog.ui.features.invoice.viewmodel.InvoiceListViewModel
 import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
 
 @Composable
 fun InvoiceListView(
-    invoiceCode: String,
-    creditCardId: Int,
     onItemClick: (Int) -> Unit,
     onFabClick: () -> Unit,
+    viewModel: InvoiceListViewModel = koinViewModel(),
     onArrowBackClick: () -> Unit
 ) {
-    val viewModel =
-        koinViewModel<InvoiceListViewModel>(parameters = { parametersOf(invoiceCode, creditCardId) })
     val uiState by viewModel.uiState.collectAsState()
 
     InvoiceListLayout(

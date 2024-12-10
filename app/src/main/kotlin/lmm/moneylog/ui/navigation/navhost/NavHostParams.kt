@@ -12,8 +12,10 @@ import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
-import lmm.moneylog.ui.navigation.misc.CREDITCARD_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.INVOICE_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.PARAM_CARD_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_ID
+import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
@@ -120,9 +122,9 @@ fun NavHostParams(
                 showNavigationBar = showNavigationBar
             )
         },
-        onCreditCardClick = {
+        onCreditCardClick = { cardId, invoiceCode ->
             navController.navigatePopUpTo(
-                destination = CREDITCARD_LIST_SCREEN,
+                destination = "$INVOICE_LIST_SCREEN?$PARAM_CARD_ID=$cardId&$PARAM_INVOICE_CODE=$invoiceCode",
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )

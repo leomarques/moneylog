@@ -18,6 +18,7 @@ import lmm.moneylog.ui.features.category.list.view.layouts.CategoriesListView
 import lmm.moneylog.ui.features.creditcard.detail.view.layout.CreditCardDetailView
 import lmm.moneylog.ui.features.creditcard.list.view.layouts.CreditCardsListView
 import lmm.moneylog.ui.features.home.view.HomeView
+import lmm.moneylog.ui.features.invoice.view.InvoiceListView
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListView
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
@@ -28,7 +29,10 @@ import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
+import lmm.moneylog.ui.navigation.misc.INVOICE_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.PARAM_CARD_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_ID
+import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_OF_VALUE
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
@@ -51,7 +55,7 @@ fun MyNavHost(
     onCategoriesItemClick: (Int) -> Unit,
     onArchivedIconClick: () -> Unit,
     onTransferIconClick: () -> Unit,
-    onCreditCardClick: () -> Unit,
+    onCreditCardClick: (Int, String) -> Unit,
     onCreditCardsFabClick: () -> Unit,
     modifier: Modifier = Modifier,
     onCreditCardsItemClick: (Int) -> Unit
@@ -161,6 +165,26 @@ fun MyNavHost(
                 onArrowBackClick = onArrowBackClick,
                 onFabClick = onCreditCardsFabClick,
                 onItemClick = onCreditCardsItemClick
+            )
+        }
+
+        composableExt(
+            route = "$CREDITCARD_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
+            onArrowBackClick = onArrowBackClick,
+            arguments = arguments
+        ) {
+            CreditCardDetailView(onArrowBackClick = onArrowBackClick)
+        }
+
+        composableExt(
+            route = "$INVOICE_LIST_SCREEN?$PARAM_CARD_ID={$PARAM_CARD_ID}&$PARAM_INVOICE_CODE={$PARAM_INVOICE_CODE}",
+            onArrowBackClick = onArrowBackClick,
+            arguments = arguments
+        ) {
+            InvoiceListView(
+                onArrowBackClick = onArrowBackClick,
+                onFabClick = { /*TODO*/ },
+                onItemClick = { /*TODO*/ }
             )
         }
 

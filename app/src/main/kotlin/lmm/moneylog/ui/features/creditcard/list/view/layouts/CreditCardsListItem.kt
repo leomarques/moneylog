@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.components.misc.MyCircle
+import lmm.moneylog.ui.components.misc.ColoredCircle
 import lmm.moneylog.ui.components.misc.MyDivider
 import lmm.moneylog.ui.features.account.list.view.components.ListItemContent
 import lmm.moneylog.ui.features.account.list.view.components.ListItemName
@@ -30,7 +30,7 @@ fun CreditCardsListItem(
         onItemClick = onItemClick,
         content = {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                MyCircle(
+                ColoredCircle(
                     color = color,
                     letters = name
                 )

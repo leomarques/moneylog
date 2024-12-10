@@ -38,4 +38,9 @@ class DomainTimeRepositoryImpl : DomainTimeRepository {
         getCurrentDomainTime().month
             .let(::getMonthName)
             .replaceFirstChar(Char::titlecase)
+
+    override fun getCurrentInvoice(): String {
+        val time = getCurrentDomainTime()
+        return "${time.month}.${time.year}"
+    }
 }

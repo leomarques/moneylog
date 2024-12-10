@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.misc.MyCircle
+import lmm.moneylog.ui.components.misc.ColoredCircle
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.darkRed
@@ -53,7 +53,7 @@ fun TransactionsListItem(
                     .padding(end = Size.SmallSpaceSize),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                MyCircle(
+                ColoredCircle(
                     color = color,
                     letters = category
                 )

@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.misc.MyCircle
+import lmm.moneylog.ui.components.misc.ColoredCircle
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.neutralColor
 
@@ -36,7 +36,7 @@ fun BottomSheetItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (color != null) {
-            MyCircle(
+            ColoredCircle(
                 modifier = Modifier.padding(end = Size.DefaultSpaceSize),
                 color = color,
                 size = Size.SmallCircleSize

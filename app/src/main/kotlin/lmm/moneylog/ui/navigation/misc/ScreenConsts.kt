@@ -10,11 +10,14 @@ const val TRANSACTION_DETAIL_SCREEN = "transaction_detail"
 const val ACCOUNT_DETAIL_SCREEN = "account_detail"
 const val CATEGORY_DETAIL_SCREEN = "category_detail"
 const val CREDITCARD_DETAIL_SCREEN = "creditcard_detail"
+const val INVOICE_LIST_SCREEN = "invoice_list"
 const val TRANSFER_SCREEN = "transfer"
 
 const val PARAM_TYPE_OF_VALUE = "typeOfValue"
 const val PARAM_TYPE_ALL = "all"
 const val PARAM_ID = "id"
+const val PARAM_CARD_ID = "card_id"
+const val PARAM_INVOICE_CODE = "invoiceCode"
 
 const val HOME_INDEX = 0
 const val TRANSACTIONS_INDEX = 1

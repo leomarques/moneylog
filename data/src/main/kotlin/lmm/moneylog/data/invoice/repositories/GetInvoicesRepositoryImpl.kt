@@ -1,5 +1,6 @@
-package lmm.moneylog.data.invoice
+package lmm.moneylog.data.invoice.repositories
 
+import lmm.moneylog.data.invoice.model.Invoice
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 
 class GetInvoicesRepositoryImpl(private val domainTimeRepository: DomainTimeRepository) :

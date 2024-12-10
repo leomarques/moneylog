@@ -27,13 +27,10 @@ fun HomeLayout(
     onBalanceClick: (String) -> Unit,
     onHideClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onCreditCardClick: () -> Unit
+    onCreditCardClick: (Int, String) -> Unit
 ) {
     Scaffold(
-        modifier =
-            modifier
-                .padding(horizontal = Size.DefaultSpaceSize)
-                .padding(top = Size.DefaultSpaceSize),
+        modifier = modifier,
         floatingActionButton = {
             HideFab(
                 icon = Icons.Default.Add,
@@ -53,6 +50,7 @@ fun HomeLayout(
                     Spacer(modifier = Modifier.height(Size.DefaultSpaceSize))
 
                     CreditHomeCardView(
+                        modifier = Modifier.padding(horizontal = Size.SmallSpaceSize),
                         hideValues = hideValues,
                         onClick = onCreditCardClick
                     )
@@ -70,6 +68,6 @@ private fun HomeLayoutPreview() {
         onFabClick = {},
         onBalanceClick = {},
         onHideClick = {},
-        onCreditCardClick = {}
+        onCreditCardClick = { _, _ -> }
     )
 }

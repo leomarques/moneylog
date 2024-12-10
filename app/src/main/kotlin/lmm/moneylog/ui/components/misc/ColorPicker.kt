@@ -83,7 +83,7 @@ fun ColorItem(
                 .clickable { onItemClick() },
         contentAlignment = Alignment.Center
     ) {
-        MyCircle(color = color)
+        ColoredCircle(color = color)
     }
 }
 

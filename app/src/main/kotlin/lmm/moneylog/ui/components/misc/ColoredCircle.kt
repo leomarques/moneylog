@@ -17,7 +17,7 @@ import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.outcome
 
 @Composable
-fun MyCircle(
+fun ColoredCircle(
     color: Color,
     modifier: Modifier = Modifier,
     letters: String? = null,
@@ -55,7 +55,7 @@ fun MyCircle(
 @Preview
 @Composable
 private fun MyCirclePreview() {
-    MyCircle(
+    ColoredCircle(
         color = outcome,
         letters = "AL"
     )

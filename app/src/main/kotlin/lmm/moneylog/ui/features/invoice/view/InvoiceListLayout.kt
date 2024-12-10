@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.features.invoice
+package lmm.moneylog.ui.features.invoice.view
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -19,6 +19,7 @@ import lmm.moneylog.R
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.components.misc.EmptyState
 import lmm.moneylog.ui.components.topappbar.TopAppBarWithSearch
+import lmm.moneylog.ui.features.invoice.model.InvoiceListUIState
 import lmm.moneylog.ui.features.transaction.list.model.filtered
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListContent
 import lmm.moneylog.ui.features.transaction.list.view.transactionModelListPreview
