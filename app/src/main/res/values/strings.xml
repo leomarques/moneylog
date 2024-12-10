@@ -75,6 +75,7 @@
     <string name="empty_categories_desc">Adicione uma categoria e ela irá aparecer aqui.</string>
     <string name="empty_creditcards_desc">Adicione um cartão e ele irá aparecer aqui.</string>
     <string name="empty_archived_accounts_desc">Ao arquivar uma conta ela irá aparecer aqui.</string>
+    <string name="empty_credit_cards_home">Não há cartões cadastrados. Adicione um novo!</string>
 
     <string name="transfer_from">Transferir de:</string>
     <string name="transfer_to">Para:</string>

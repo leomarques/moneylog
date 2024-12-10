@@ -57,7 +57,7 @@ fun MyNavHost(
     onTransferIconClick: () -> Unit,
     onCreditCardClick: (Int, String) -> Unit,
     onCreditCardsFabClick: () -> Unit,
-    onInvoiceListFabClick: (Int, String) -> Unit,
+    onInvoiceListFabClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     onCreditCardsItemClick: (Int) -> Unit
 ) {
@@ -78,7 +78,8 @@ fun MyNavHost(
             HomeView(
                 onFabClick = onHomeFabClick,
                 onClick = onBalanceCardClick,
-                onCreditCardClick = onCreditCardClick
+                onCreditCardClick = onCreditCardClick,
+                onEmptyCardsClick = onCreditCardsFabClick
             )
         }
 

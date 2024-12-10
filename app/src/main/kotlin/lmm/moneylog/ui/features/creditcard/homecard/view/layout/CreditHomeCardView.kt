@@ -10,6 +10,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun CreditHomeCardView(
     onClick: (Int, String) -> Unit,
+    onEmptyCardsClick: () -> Unit,
     hideValues: Boolean,
     modifier: Modifier = Modifier,
     viewModel: CreditHomeCardViewModel = koinViewModel()
@@ -22,6 +23,7 @@ fun CreditHomeCardView(
         onClick = { id ->
             onClick(id, uiState.invoiceCode)
         },
-        cards = uiState.cards
+        cards = uiState.cards,
+        onEmptyCardsClick = onEmptyCardsClick
     )
 }

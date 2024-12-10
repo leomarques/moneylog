@@ -24,10 +24,11 @@ import lmm.moneylog.ui.theme.Size
 fun HomeLayout(
     hideValues: Boolean,
     onFabClick: () -> Unit,
+    onEmptyCardsClick: () -> Unit,
     onBalanceClick: (String) -> Unit,
     onHideClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    onCreditCardClick: (Int, String) -> Unit
+    onCreditCardClick: (Int, String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier,
@@ -52,7 +53,8 @@ fun HomeLayout(
                     CreditHomeCardView(
                         modifier = Modifier.padding(horizontal = Size.SmallSpaceSize),
                         hideValues = hideValues,
-                        onClick = onCreditCardClick
+                        onClick = onCreditCardClick,
+                        onEmptyCardsClick = onEmptyCardsClick
                     )
                 }
             }
@@ -68,6 +70,7 @@ private fun HomeLayoutPreview() {
         onFabClick = {},
         onBalanceClick = {},
         onHideClick = {},
-        onCreditCardClick = { _, _ -> }
+        onCreditCardClick = { _, _ -> },
+        onEmptyCardsClick = {}
     )
 }

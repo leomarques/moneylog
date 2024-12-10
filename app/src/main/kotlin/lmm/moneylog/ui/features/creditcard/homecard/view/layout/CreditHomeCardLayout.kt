@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.features.creditcard.homecard.view.layout
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,6 +26,7 @@ import lmm.moneylog.ui.theme.Size
 fun CreditHomeCardLayout(
     hideValues: Boolean,
     onClick: (Int) -> Unit,
+    onEmptyCardsClick: () -> Unit,
     cards: List<CreditCardHomeCardItem>,
     modifier: Modifier = Modifier
 ) {
@@ -44,11 +46,18 @@ fun CreditHomeCardLayout(
                     .background(MaterialTheme.colorScheme.tertiaryContainer),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CreditHomeCardContent(
-                onClick = onClick,
-                hideValues = hideValues,
-                cards = cards
-            )
+            if (cards.isNotEmpty()) {
+                CreditHomeCardContent(
+                    onClick = onClick,
+                    hideValues = hideValues,
+                    cards = cards
+                )
+            } else {
+                Text(
+                    text = stringResource(R.string.empty_credit_cards_home),
+                    modifier = Modifier.padding(Size.MediumSpaceSize).clickable { onEmptyCardsClick() }
+                )
+            }
         }
     }
 }
@@ -60,7 +69,21 @@ private fun CreditHomeCardLayoutPreview() {
         CreditHomeCardLayout(
             hideValues = false,
             onClick = {},
-            cards = mockCards
+            cards = mockCards,
+            onEmptyCardsClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun CreditHomeCardLayoutPreview2() {
+    MoneylogTheme {
+        CreditHomeCardLayout(
+            hideValues = false,
+            onClick = {},
+            cards = emptyList(),
+            onEmptyCardsClick = {}
         )
     }
 }

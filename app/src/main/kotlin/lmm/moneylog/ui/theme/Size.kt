@@ -6,8 +6,8 @@ object Size {
     val XXSmallSpaceSize = 2.dp
     val XSmallSpaceSize = 4.dp
     val SmallSpaceSize = 8.dp
-    val MediumSpaceSize = 24.dp
     val DefaultSpaceSize = 16.dp
+    val MediumSpaceSize = 24.dp
     val XLargeSpaceSize = 64.dp
 
     val ListRoundedCornerSize = 20.dp

@@ -143,7 +143,7 @@ fun NavHostParams(
                 showNavigationBar = showNavigationBar
             )
         },
-        onInvoiceListFabClick = { cardId, invoiceCode ->
+        onInvoiceListFabClick = { cardId ->
             navController.navigatePopUpTo(
                 destination = "$TRANSACTION_DETAIL_SCREEN?$PARAM_CARD_ID=$cardId",
                 navBarSelectedIndex = navBarSelectedIndex,

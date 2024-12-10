@@ -9,6 +9,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun HomeView(
     onFabClick: () -> Unit,
+    onEmptyCardsClick: () -> Unit,
     onClick: (String) -> Unit,
     viewModel: HomeViewModel = koinViewModel(),
     onCreditCardClick: (Int, String) -> Unit
@@ -21,5 +22,6 @@ fun HomeView(
         onBalanceClick = onClick,
         onHideClick = { viewModel.onHideToggle() },
         onCreditCardClick = onCreditCardClick,
+        onEmptyCardsClick = onEmptyCardsClick
     )
 }
