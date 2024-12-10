@@ -57,6 +57,7 @@ fun MyNavHost(
     onTransferIconClick: () -> Unit,
     onCreditCardClick: (Int, String) -> Unit,
     onCreditCardsFabClick: () -> Unit,
+    onInvoiceListFabClick: (Int, String) -> Unit,
     modifier: Modifier = Modifier,
     onCreditCardsItemClick: (Int) -> Unit
 ) {
@@ -96,7 +97,7 @@ fun MyNavHost(
         }
 
         composableExt(
-            route = "$TRANSACTION_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
+            route = "$TRANSACTION_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}&$PARAM_CARD_ID={$PARAM_CARD_ID}",
             onArrowBackClick = onArrowBackClick,
             arguments = arguments
         ) {
@@ -183,8 +184,8 @@ fun MyNavHost(
         ) {
             InvoiceListView(
                 onArrowBackClick = onArrowBackClick,
-                onFabClick = { /*TODO*/ },
-                onItemClick = { /*TODO*/ }
+                onFabClick = onInvoiceListFabClick,
+                onItemClick = onTransactionsItemClick
             )
         }
 

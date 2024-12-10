@@ -9,7 +9,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun InvoiceListView(
     onItemClick: (Int) -> Unit,
-    onFabClick: () -> Unit,
+    onFabClick: (Int) -> Unit,
     viewModel: InvoiceListViewModel = koinViewModel(),
     onArrowBackClick: () -> Unit
 ) {
@@ -18,7 +18,9 @@ fun InvoiceListView(
     InvoiceListLayout(
         model = uiState,
         onItemClick = onItemClick,
-        onFabClick = onFabClick,
+        onFabClick = {
+            onFabClick(uiState.cardId)
+        },
         onArrowBackClick = onArrowBackClick
     )
 }

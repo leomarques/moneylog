@@ -15,6 +15,7 @@ import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
+import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.invoice.model.Invoice
 import lmm.moneylog.data.invoice.repositories.GetInvoicesRepository
@@ -27,6 +28,7 @@ import lmm.moneylog.ui.extensions.getIdParam
 import lmm.moneylog.ui.extensions.orDefaultColor
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
+import lmm.moneylog.ui.navigation.misc.PARAM_CARD_ID
 import lmm.moneylog.ui.theme.neutralColor
 
 class TransactionDetailViewModel(
@@ -55,10 +57,14 @@ class TransactionDetailViewModel(
             if (idParam != null) {
                 setupEdit(idParam = idParam)
             } else {
+                val cardId = savedStateHandle.get<String>(PARAM_CARD_ID)
+
                 setupAdd(
                     accountsAsync = accountsAsync,
                     categoriesAsync = categoriesAsync,
-                    invoices = invoices
+                    creditCardsAsync = creditCardsAsync,
+                    invoices = invoices,
+                    cardId = cardId
                 )
             }
 
@@ -97,21 +103,43 @@ class TransactionDetailViewModel(
     private suspend fun setupAdd(
         accountsAsync: Deferred<List<Account>>,
         categoriesAsync: Deferred<List<Category>>,
-        invoices: List<Invoice>
+        creditCardsAsync: Deferred<List<CreditCard>>,
+        invoices: List<Invoice>,
+        cardId: String?
     ) {
         _uiState.update {
             val currentDate = domainTimeRepository.getCurrentDomainTime()
-            val accountId = accountsAsync.await().firstOrNull()?.id
             val categoryId = categoriesAsync.await().firstOrNull()?.id
             val invoice = invoices[1]
 
-            TransactionDetailUIState(
-                displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
-                accountId = accountId,
-                categoryId = categoryId,
-                displayInvoice = invoice.name,
-                date = currentDate,
-            )
+            if (cardId == null) {
+                val accountId = accountsAsync.await().firstOrNull()?.id
+
+                TransactionDetailUIState(
+                    displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
+                    accountId = accountId,
+                    categoryId = categoryId,
+                    displayInvoice = invoice.name,
+                    date = currentDate
+                )
+            } else {
+                val displayCreditCard =
+                    creditCardsAsync.await().firstOrNull {
+                        it.id == cardId.toInt()
+                    }?.name ?: ""
+
+                TransactionDetailUIState(
+                    displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
+                    categoryId = categoryId,
+                    creditCardId = cardId.toIntOrNull(),
+                    displayCreditCard = displayCreditCard,
+                    displayInvoice = invoice.name,
+                    invoiceCode = invoice.getCode(),
+                    date = currentDate,
+                    isIncome = false,
+                    isDebtSelected = false,
+                )
+            }
         }
     }
 
