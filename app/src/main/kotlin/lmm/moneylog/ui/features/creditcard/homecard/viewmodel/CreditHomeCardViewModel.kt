@@ -2,6 +2,7 @@ package lmm.moneylog.ui.features.creditcard.homecard.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,6 +18,7 @@ import lmm.moneylog.ui.features.creditcard.homecard.model.CreditCardHomeCardItem
 import lmm.moneylog.ui.features.creditcard.homecard.model.CreditHomeCardUIState
 import kotlin.math.abs
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class CreditHomeCardViewModel(
     getCreditCardsRepository: GetCreditCardsRepository,
     getTransactionsRepository: GetTransactionsRepository,
