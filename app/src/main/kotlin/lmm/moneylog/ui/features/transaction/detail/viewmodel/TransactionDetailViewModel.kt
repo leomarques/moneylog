@@ -29,7 +29,6 @@ import lmm.moneylog.ui.extensions.orDefaultColor
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 import lmm.moneylog.ui.navigation.misc.PARAM_CARD_ID
-import lmm.moneylog.ui.theme.neutralColor
 
 class TransactionDetailViewModel(
     savedStateHandle: SavedStateHandle,
@@ -150,12 +149,16 @@ class TransactionDetailViewModel(
     }
 
     fun onIsIncomeSelect(isIncome: Boolean) {
+        val category = _uiState.value.categories.firstOrNull { it.isIncome == isIncome }
+        val displayCategory = category?.name ?: ""
+        val displayCategoryColor = category?.color?.toComposeColor().orDefaultColor()
+
         _uiState.update {
             it.copy(
                 isIncome = isIncome,
-                categoryId = null,
-                displayCategory = "",
-                displayCategoryColor = neutralColor
+                categoryId = category?.id,
+                displayCategory = displayCategory,
+                displayCategoryColor = displayCategoryColor
             )
         }
     }
@@ -244,18 +247,29 @@ class TransactionDetailViewModel(
     }
 
     fun onCreditSelected() {
+        val category = _uiState.value.categories.firstOrNull { !it.isIncome }
+        val displayCategory = category?.name ?: ""
+        val displayCategoryColor = category?.color?.toComposeColor().orDefaultColor()
+
+        val creditCard = _uiState.value.creditCards.firstOrNull()
+        val displayCreditCard = creditCard?.name.orEmpty()
+        val displayCreditCardColor = creditCard?.color?.toComposeColor().orDefaultColor()
+
+        val invoice = _uiState.value.invoices[1]
+
         _uiState.update {
-            val firstOrNull = it.creditCards.firstOrNull()
-            val invoice = it.invoices[1]
             it.copy(
                 isDebtSelected = false,
                 accountId = null,
-                creditCardId = firstOrNull?.id,
-                displayCreditCard = firstOrNull?.name.orEmpty(),
-                displayCreditCardColor = firstOrNull?.color?.toComposeColor().orDefaultColor(),
+                creditCardId = creditCard?.id,
+                displayCreditCard = displayCreditCard,
+                displayCreditCardColor = displayCreditCardColor,
                 invoiceCode = invoice.getCode(),
                 displayInvoice = invoice.name,
-                isIncome = false
+                isIncome = false,
+                categoryId = category?.id,
+                displayCategory = displayCategory,
+                displayCategoryColor = displayCategoryColor
             )
         }
     }
