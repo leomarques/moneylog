@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.components.radiogroup
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -16,7 +17,7 @@ fun RadioOption(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         RadioButton(
