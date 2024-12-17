@@ -23,7 +23,10 @@ fun BalanceCardContent(
         modifier =
             modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(Size.DefaultSpaceSize))
+                .clip(RoundedCornerShape(
+                    bottomStart = Size.DefaultSpaceSize,
+                    bottomEnd = Size.DefaultSpaceSize
+                ))
                 .background(MaterialTheme.colorScheme.tertiaryContainer)
                 .padding(Size.DefaultSpaceSize),
         horizontalAlignment = Alignment.CenterHorizontally
