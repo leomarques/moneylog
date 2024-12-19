@@ -88,6 +88,10 @@
     <string name="creditcard_dueday">Dia de vencimento da fatura</string>
     <string name="creditcard_limit">Limite</string>
 
+    <string name="pay">PAGAR</string>
+    <string name="invoice_paid">FATURA PAGA</string>
+    <string name="invoice_total">Total da fatura</string>
+
     <string name="arrowback_desc">voltar</string>
     <string name="archive_desc">arquivar</string>
     <string name="delete_desc">apagar</string>

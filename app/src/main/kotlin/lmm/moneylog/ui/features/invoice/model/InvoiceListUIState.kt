@@ -6,5 +6,8 @@ data class InvoiceListUIState(
     val titleResourceId: Int,
     val cardId: Int = -1,
     val invoiceCode: String = "",
-    val transactions: List<TransactionModel> = emptyList()
+    val transactions: List<TransactionModel> = emptyList(),
+    val totalValue: String = "",
+    val isInvoicePaid: Boolean = false,
+    val cardName: String = ""
 )

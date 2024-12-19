@@ -13,12 +13,12 @@ fun List<Transaction>.toInvoiceListUiState(
     categoriesColorMap: Map<Int, Color>
 ): InvoiceListUIState {
     return InvoiceListUIState(
+        titleResourceId = titleResourceId,
         transactions =
             toTransactionModels(
                 categoriesMap = categoriesMap,
                 categoriesColorMap = categoriesColorMap
             ),
-        titleResourceId = titleResourceId
     )
 }
 

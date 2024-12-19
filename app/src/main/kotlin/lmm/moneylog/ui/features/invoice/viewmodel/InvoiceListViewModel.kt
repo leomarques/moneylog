@@ -11,7 +11,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
+import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
+import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.features.invoice.model.InvoiceListUIState
 import lmm.moneylog.ui.navigation.misc.PARAM_CARD_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
@@ -19,6 +21,7 @@ import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
 class InvoiceListViewModel(
     savedStateHandle: SavedStateHandle,
     getTransactionsRepository: GetTransactionsRepository,
+    getCreditCardsRepository: GetCreditCardsRepository,
     getCategoriesRepository: GetCategoriesRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(InvoiceListUIState(titleResourceId = R.string.invoice))
@@ -32,6 +35,7 @@ class InvoiceListViewModel(
             if (invoiceCode == null || creditCardId == null) return@launch
 
             val categories = getCategoriesRepository.getCategoriesSuspend()
+            val card = getCreditCardsRepository.getCreditCardById(creditCardId)
 
             val categoriesMap =
                 categories.associate {
@@ -46,6 +50,8 @@ class InvoiceListViewModel(
                 invoiceCode = invoiceCode,
                 creditCardId = creditCardId
             ).collect { transactions ->
+                val totalValue = transactions.sumOf { it.value }
+
                 _uiState.update {
                     transactions.toInvoiceListUiState(
                         titleResourceId = R.string.invoice,
@@ -53,10 +59,16 @@ class InvoiceListViewModel(
                         categoriesColorMap = categoriesColorMap
                     ).copy(
                         cardId = creditCardId,
-                        invoiceCode = invoiceCode
+                        invoiceCode = invoiceCode,
+                        cardName = card?.name.orEmpty(),
+                        totalValue = totalValue.formatForRs(),
+                        isInvoicePaid = transactions.all { it.accountId != null }
                     )
                 }
             }
         }
+    }
+
+    fun onPayClick() {
     }
 }
