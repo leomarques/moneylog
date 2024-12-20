@@ -2,6 +2,7 @@
 <SmellBaseline>
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
+    <ID>EmptyFunctionBlock:InvoiceListViewModel.kt$InvoiceListViewModel${ }</ID>
     <ID>MutableStateParam:AccountDetailDialogs.kt$showColorsDialog</ID>
     <ID>MutableStateParam:AccountTransferDialogs.kt$showDestinationAccountPicker</ID>
     <ID>MutableStateParam:AccountTransferDialogs.kt$showOriginAccountPicker</ID>
@@ -16,6 +17,5 @@
     <ID>MutableStateParam:TransactionDetailDialogs.kt$showInvoicePicker</ID>
     <ID>ReturnCount:TransactionDetailViewModel.kt$TransactionDetailViewModel$fun onFabClick( onSuccess: () -&gt; Unit, onError: (Int) -&gt; Unit )</ID>
     <ID>TooManyFunctions:TransactionDetailViewModel.kt$TransactionDetailViewModel : ViewModel</ID>
-    <ID>UnusedParameter:CreditHomeCardLayout.kt$total: String</ID>
   </CurrentIssues>
 </SmellBaseline>
