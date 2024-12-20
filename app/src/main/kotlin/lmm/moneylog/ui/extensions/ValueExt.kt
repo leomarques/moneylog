@@ -15,12 +15,12 @@ fun String.validateValue(isIncome: Boolean = true): Double {
     }
 }
 
-fun Double.formatForRs(): String {
+fun Double.formatForRs(allowNegative: Boolean = true): String {
     val absValue = kotlin.math.abs(this)
     val formattedNumber = String.format(getDefault(), "%.2f", absValue).replace('.', ',')
     val parts = formattedNumber.split(',')
     val reversed = parts[0].reversed()
     val withDots = reversed.chunked(3).joinToString(".")
     val result = withDots.reversed() + "," + parts[1]
-    return if (this < 0) "R$-$result" else "R$$result"
+    return if (this < 0 && allowNegative) "R$-$result" else "R$$result"
 }

@@ -61,7 +61,7 @@ class InvoiceListViewModel(
                         cardId = creditCardId,
                         invoiceCode = invoiceCode,
                         cardName = card?.name.orEmpty(),
-                        totalValue = totalValue.formatForRs(),
+                        totalValue = totalValue.formatForRs(false),
                         isInvoicePaid = transactions.all { it.accountId != null }
                     )
                 }

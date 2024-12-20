@@ -28,12 +28,7 @@ private fun List<Transaction>.toTransactionModels(
 ) = sortedBy { it.date }.map { transaction ->
     with(transaction) {
         TransactionModel(
-            value =
-                if (value < 0.0) {
-                    (-value).formatForRs()
-                } else {
-                    value.formatForRs()
-                },
+            value = value.formatForRs(false),
             isIncome = value > 0,
             description = description,
             date = date.getFormattedDate(),
