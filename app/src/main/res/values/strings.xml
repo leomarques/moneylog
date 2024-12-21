@@ -103,4 +103,5 @@
     <string name="close_desc">fechar</string>
     <string name="lock_desc">esconder</string>
     <string name="credit_cards">Cartões de crédito</string>
+    <string name="select_account">Selecione a conta para pagar a fatura</string>
 </resources>

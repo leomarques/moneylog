@@ -22,8 +22,8 @@ fun InvoiceListView(
             onFabClick(uiState.cardId)
         },
         onArrowBackClick = onArrowBackClick,
-        onPayClick = {
-            viewModel.onPayClick()
+        onPayClick = { index ->
+            viewModel.onPayClick(index)
         }
     )
 }

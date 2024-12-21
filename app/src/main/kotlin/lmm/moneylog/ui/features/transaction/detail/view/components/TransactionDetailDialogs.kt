@@ -48,10 +48,11 @@ fun TransactionDetailDialogs(
         ) {
             BottomSheetContent(
                 list = accounts.map { it.name to it.color.toComposeColor() },
-                onConfirm = { index -> onAccountPicked(index) }
-            ) {
-                showAccountPicker.value = false
-            }
+                onConfirm = { index -> onAccountPicked(index) },
+                onDismiss = {
+                    showAccountPicker.value = false
+                },
+            )
         }
     }
 
@@ -59,10 +60,11 @@ fun TransactionDetailDialogs(
         ModalBottomSheet(onDismissRequest = { showCategoryPicker.value = false }) {
             BottomSheetContent(
                 list = categories.map { it.name to it.color.toComposeColor() },
-                onConfirm = { index -> onCategoryPicked(index) }
-            ) {
-                showCategoryPicker.value = false
-            }
+                onConfirm = { index -> onCategoryPicked(index) },
+                onDismiss = {
+                    showCategoryPicker.value = false
+                },
+            )
         }
     }
 
@@ -70,10 +72,11 @@ fun TransactionDetailDialogs(
         ModalBottomSheet(onDismissRequest = { showCreditCardPicker.value = false }) {
             BottomSheetContent(
                 list = creditCards.map { it.name to it.color.toComposeColor() },
-                onConfirm = { index -> onCreditCardPicked(index) }
-            ) {
-                showCreditCardPicker.value = false
-            }
+                onConfirm = { index -> onCreditCardPicked(index) },
+                onDismiss = {
+                    showCreditCardPicker.value = false
+                },
+            )
         }
     }
 
@@ -81,10 +84,11 @@ fun TransactionDetailDialogs(
         ModalBottomSheet(onDismissRequest = { showInvoicePicker.value = false }) {
             BottomSheetContent(
                 list = invoices.map { it.name to null },
-                onConfirm = { index -> onInvoicePicked(index) }
-            ) {
-                showInvoicePicker.value = false
-            }
+                onConfirm = { index -> onInvoicePicked(index) },
+                onDismiss = {
+                    showInvoicePicker.value = false
+                },
+            )
         }
     }
 

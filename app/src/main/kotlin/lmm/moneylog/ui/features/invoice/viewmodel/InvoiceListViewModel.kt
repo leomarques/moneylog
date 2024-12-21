@@ -10,8 +10,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
+import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
+import lmm.moneylog.data.misc.mylog
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.features.invoice.model.InvoiceListUIState
@@ -23,6 +25,7 @@ class InvoiceListViewModel(
     getTransactionsRepository: GetTransactionsRepository,
     getCreditCardsRepository: GetCreditCardsRepository,
     getCategoriesRepository: GetCategoriesRepository,
+    getAccountsRepository: GetAccountsRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(InvoiceListUIState(titleResourceId = R.string.invoice))
     val uiState: StateFlow<InvoiceListUIState> = _uiState.asStateFlow()
@@ -35,6 +38,7 @@ class InvoiceListViewModel(
             if (invoiceCode == null || creditCardId == null) return@launch
 
             val categories = getCategoriesRepository.getCategoriesSuspend()
+            val accounts = getAccountsRepository.getAccountsSuspend()
             val card = getCreditCardsRepository.getCreditCardById(creditCardId)
 
             val categoriesMap =
@@ -55,6 +59,7 @@ class InvoiceListViewModel(
                 _uiState.update {
                     transactions.toInvoiceListUiState(
                         titleResourceId = R.string.invoice,
+                        accounts = accounts,
                         categoriesMap = categoriesMap,
                         categoriesColorMap = categoriesColorMap
                     ).copy(
@@ -69,6 +74,9 @@ class InvoiceListViewModel(
         }
     }
 
-    fun onPayClick() {
+    fun onPayClick(index: Int) {
+        viewModelScope.launch {
+            mylog("$index")
+        }
     }
 }

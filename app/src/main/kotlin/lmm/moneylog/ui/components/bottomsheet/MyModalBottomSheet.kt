@@ -21,7 +21,7 @@ fun MyModalBottomSheet(
         BottomSheetContent(
             list = list,
             onConfirm = onConfirm,
-            onDismiss = onDismissRequest
+            onDismiss = onDismissRequest,
         )
     }
 }
