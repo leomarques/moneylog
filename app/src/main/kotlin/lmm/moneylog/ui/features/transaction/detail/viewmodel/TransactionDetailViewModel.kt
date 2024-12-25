@@ -3,8 +3,6 @@ package lmm.moneylog.ui.features.transaction.detail.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,6 +18,7 @@ import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsReposi
 import lmm.moneylog.data.invoice.model.Invoice
 import lmm.moneylog.data.invoice.repositories.GetInvoicesRepository
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
+import lmm.moneylog.data.transaction.model.Transaction
 import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
@@ -47,10 +46,11 @@ class TransactionDetailViewModel(
 
     init {
         viewModelScope.launch {
-            val accountsAsync = async { getAccountsRepository.getAccountsSuspend() }
-            val categoriesAsync = async { getCategoriesRepository.getCategoriesSuspend() }
-            val creditCardsAsync = async { getCreditCardsRepository.getCreditCardsSuspend() }
             val invoices = getInvoicesRepository.getInvoices()
+
+            val accounts = getAccountsRepository.getAccountsSuspend()
+            val categories = getCategoriesRepository.getCategoriesSuspend()
+            val creditCards = getCreditCardsRepository.getCreditCardsSuspend()
 
             val idParam = savedStateHandle.getIdParam()
             if (idParam != null) {
@@ -59,17 +59,14 @@ class TransactionDetailViewModel(
                 val cardId = savedStateHandle.get<String>(PARAM_CARD_ID)
 
                 setupAdd(
-                    accountsAsync = accountsAsync,
-                    categoriesAsync = categoriesAsync,
-                    creditCardsAsync = creditCardsAsync,
+                    accounts = accounts,
+                    categories = categories,
+                    creditCards = creditCards,
                     invoices = invoices,
                     cardId = cardId
                 )
             }
 
-            val accounts = accountsAsync.await()
-            val categories = categoriesAsync.await()
-            val creditCards = creditCardsAsync.await()
             val account = accounts.getAccountById(_uiState.value.accountId)
             val category = categories.getCategoryById(_uiState.value.categoryId)
             val creditCard = creditCards.getCreditCardById(_uiState.value.creditCardId)
@@ -99,20 +96,20 @@ class TransactionDetailViewModel(
         }
     }
 
-    private suspend fun setupAdd(
-        accountsAsync: Deferred<List<Account>>,
-        categoriesAsync: Deferred<List<Category>>,
-        creditCardsAsync: Deferred<List<CreditCard>>,
+    private fun setupAdd(
+        accounts: List<Account>,
+        categories: List<Category>,
+        creditCards: List<CreditCard>,
         invoices: List<Invoice>,
         cardId: String?
     ) {
         _uiState.update {
             val currentDate = domainTimeRepository.getCurrentDomainTime()
-            val categoryId = categoriesAsync.await().firstOrNull()?.id
+            val categoryId = categories.firstOrNull()?.id
             val invoice = invoices[1]
 
             if (cardId == null) {
-                val accountId = accountsAsync.await().firstOrNull()?.id
+                val accountId = accounts.firstOrNull()?.id
 
                 TransactionDetailUIState(
                     displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
@@ -123,7 +120,7 @@ class TransactionDetailViewModel(
                 )
             } else {
                 val displayCreditCard =
-                    creditCardsAsync.await().firstOrNull {
+                    creditCards.firstOrNull {
                         it.id == cardId.toInt()
                     }?.name ?: ""
 
@@ -281,18 +278,11 @@ class TransactionDetailViewModel(
         try {
             val state = _uiState.value
             with(state.toTransaction()) {
-                if (state.isDebtSelected && accountId == null) {
-                    onError(R.string.detail_no_account)
-                    return
-                }
-
-                if (!state.isDebtSelected && creditCardId == null) {
-                    onError(R.string.detail_no_cc)
-                    return
-                }
-
-                if (categoryId == null) {
-                    onError(R.string.detail_no_category)
+                if (checkForNulls(
+                        state = state,
+                        onError = onError
+                    )
+                ) {
                     return
                 }
 
@@ -310,5 +300,26 @@ class TransactionDetailViewModel(
         } catch (e: NumberFormatException) {
             onError(R.string.detail_invalidvalue)
         }
+    }
+
+    private fun Transaction.checkForNulls(
+        state: TransactionDetailUIState,
+        onError: (Int) -> Unit
+    ): Boolean {
+        if (state.isDebtSelected && accountId == null) {
+            onError(R.string.detail_no_account)
+            return true
+        }
+
+        if (!state.isDebtSelected && creditCardId == null) {
+            onError(R.string.detail_no_cc)
+            return true
+        }
+
+        if (categoryId == null) {
+            onError(R.string.detail_no_category)
+            return true
+        }
+        return false
     }
 }
