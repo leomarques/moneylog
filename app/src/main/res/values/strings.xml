@@ -102,6 +102,11 @@
     <string name="date_desc">data</string>
     <string name="close_desc">fechar</string>
     <string name="lock_desc">esconder</string>
+
     <string name="credit_cards">Cartões de crédito</string>
     <string name="select_account">Selecione a conta para pagar a fatura</string>
+    <string name="pay_invoice_dialog_title">Confirmar pagamento</string>
+    <string name="pay_invoice_dialog_desc">Você irá pagar a fatura no valor de %1$s com a conta %2$s</string>
+    <string name="error_pay_invoice">Erro ao pagar fatura</string>
+    <string name="success_pay_invoice">Fatura paga com sucesso</string>
 </resources>

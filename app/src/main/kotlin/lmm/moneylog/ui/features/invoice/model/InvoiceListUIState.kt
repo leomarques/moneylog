@@ -11,5 +11,6 @@ data class InvoiceListUIState(
     val totalValue: String = "",
     val isInvoicePaid: Boolean = false,
     val cardName: String = "",
-    val accounts: List<Account> = emptyList()
+    val accounts: List<Account> = emptyList(),
+    val isLoadingWhilePay: Boolean = false,
 )

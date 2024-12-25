@@ -27,7 +27,7 @@ fun InvoiceListLayout(
     onFabClick: () -> Unit,
     onArrowBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onPayClick: (Int) -> Unit
+    onPay: (Int) -> Unit
 ) {
     val filter = remember { mutableStateOf("") }
     var showFab by remember { mutableStateOf(true) }
@@ -62,7 +62,7 @@ fun InvoiceListLayout(
             ) {
                 InvoiceListContent(
                     model = model,
-                    onPayClick = onPayClick,
+                    onPay = onPay,
                     filter = filter.value,
                     onItemClick = onItemClick
                 )
@@ -86,6 +86,6 @@ private fun InvoiceListLayoutPreview() {
         onItemClick = {},
         onFabClick = {},
         onArrowBackClick = {},
-        onPayClick = {}
+        onPay = {}
     )
 }

@@ -12,11 +12,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
+import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.ui.components.bottomsheet.BottomSheetContent
 import lmm.moneylog.ui.components.misc.EmptyState
+import lmm.moneylog.ui.components.misc.LoadingDialog
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.invoice.model.InvoiceListUIState
 import lmm.moneylog.ui.features.invoice.view.components.CardInfo
+import lmm.moneylog.ui.features.transaction.detail.view.components.PayInvoiceConfirmDialog
 import lmm.moneylog.ui.features.transaction.list.model.filtered
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListContent
 
@@ -25,12 +28,14 @@ import lmm.moneylog.ui.features.transaction.list.view.TransactionsListContent
 fun InvoiceListContent(
     model: InvoiceListUIState,
     filter: String,
-    onPayClick: (Int) -> Unit,
+    onPay: (Int) -> Unit,
     onItemClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
         val showAccountPicker = remember { mutableStateOf(false) }
+        val showPayConfirmDialog = remember { mutableStateOf(false) }
+        val accountToPay = remember { mutableStateOf<Account?>(null) }
 
         if (showAccountPicker.value) {
             ModalBottomSheet(
@@ -40,13 +45,33 @@ fun InvoiceListContent(
                     list = model.accounts.map { it.name to it.color.toComposeColor() },
                     text = stringResource(R.string.select_account),
                     onConfirm = { index ->
-                        onPayClick(index)
+                        accountToPay.value = model.accounts[index]
+                        showAccountPicker.value = false
+                        showPayConfirmDialog.value = true
                     },
                     onDismiss = {
                         showAccountPicker.value = false
                     },
                 )
             }
+        }
+
+        if (model.isLoadingWhilePay) {
+            LoadingDialog()
+        }
+
+        if (showPayConfirmDialog.value) {
+            PayInvoiceConfirmDialog(
+                value = model.totalValue,
+                account = accountToPay.value?.name ?: "",
+                onConfirm = {
+                    accountToPay.value?.let { onPay(it.id) }
+                    showPayConfirmDialog.value = false
+                },
+                onDismiss = {
+                    showPayConfirmDialog.value = false
+                }
+            )
         }
 
         if (model.transactions.isNotEmpty()) {
@@ -87,7 +112,7 @@ private fun InvoiceListContentPreview() {
                 isInvoicePaid = false,
                 cardName = "Card",
             ),
-        onPayClick = {},
+        onPay = {},
         filter = "",
         onItemClick = {}
     )

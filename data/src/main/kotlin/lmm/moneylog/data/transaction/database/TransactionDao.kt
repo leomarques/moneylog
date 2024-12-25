@@ -37,6 +37,9 @@ interface TransactionDao {
     @Update
     suspend fun update(transactionEntity: TransactionEntity)
 
+    @Update
+    suspend fun update(transactionEntityList: List<TransactionEntity>)
+
     @Query(
         "SELECT * FROM `transaction` " +
             "WHERE invoiceMonth = :invoiceMonth " +

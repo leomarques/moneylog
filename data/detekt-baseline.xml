@@ -3,5 +3,6 @@
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
     <ID>MagicNumber:GetInvoicesRepositoryImpl.kt$GetInvoicesRepositoryImpl$12</ID>
+    <ID>TooManyFunctions:TransactionDao.kt$TransactionDao</ID>
   </CurrentIssues>
 </SmellBaseline>
