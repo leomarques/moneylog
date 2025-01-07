@@ -77,19 +77,17 @@ fun InvoiceListContent(
             )
         }
 
-        if (model.transactions.isNotEmpty()) {
-            CardInfo(
-                cardName = model.cardName,
-                isInvoicePaid = model.isInvoicePaid,
-                totalValue = model.totalValue,
-                monthName = model.monthName,
-                onPayClick = {
-                    showAccountPicker.value = true
-                },
-                onPreviousMonthClick = onPreviousMonthClick,
-                onNextMonthClick = onNextMonthClick
-            )
-        }
+        CardInfo(
+            cardName = model.cardName,
+            isInvoicePaid = model.isInvoicePaid,
+            totalValue = model.totalValue,
+            monthName = model.monthName,
+            onPayClick = {
+                showAccountPicker.value = true
+            },
+            onPreviousMonthClick = onPreviousMonthClick,
+            onNextMonthClick = onNextMonthClick
+        )
 
         if (model.transactions.isNotEmpty()) {
             TransactionsListContent(
