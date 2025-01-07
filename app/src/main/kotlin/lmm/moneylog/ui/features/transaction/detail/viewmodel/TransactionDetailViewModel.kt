@@ -105,11 +105,11 @@ class TransactionDetailViewModel(
     ) {
         _uiState.update {
             val currentDate = domainTimeRepository.getCurrentDomainTime()
-            val categoryId = categories.firstOrNull()?.id
             val invoice = invoices[1]
 
             if (cardId == null) {
                 val accountId = accounts.firstOrNull()?.id
+                val categoryId = categories.firstOrNull()?.id
 
                 TransactionDetailUIState(
                     displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
@@ -123,6 +123,8 @@ class TransactionDetailViewModel(
                     creditCards.firstOrNull {
                         it.id == cardId.toInt()
                     }?.name ?: ""
+
+                val categoryId = categories.firstOrNull { !it.isIncome }?.id
 
                 TransactionDetailUIState(
                     displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
