@@ -143,14 +143,14 @@ class InvoiceListViewModel(
     }
 
     fun onPreviousMonthClick() {
-        invoiceCode = invoiceCode.previousCode()
+        invoiceCode = invoiceCode.previousCode(domainTimeRepository)
         viewModelScope.launch {
             updateTransactions()
         }
     }
 
     fun onNextMonthClick() {
-        invoiceCode = invoiceCode.nextCode()
+        invoiceCode = invoiceCode.nextCode(domainTimeRepository)
         viewModelScope.launch {
             updateTransactions()
         }

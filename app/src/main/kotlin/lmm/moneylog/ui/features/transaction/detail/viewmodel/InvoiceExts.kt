@@ -26,10 +26,10 @@ fun String?.toInvoiceYear(): Int? {
     return split(".")[1].toInt()
 }
 
-fun String.previousCode(): String {
-    return toInvoice().previousCode()
+fun String.previousCode(domainTimeRepository: DomainTimeRepository): String {
+    return toInvoice(domainTimeRepository).previousCode()
 }
 
-fun String.nextCode(): String {
-    return toInvoice().nextCode()
+fun String.nextCode(domainTimeRepository: DomainTimeRepository): String {
+    return toInvoice(domainTimeRepository).nextCode()
 }
