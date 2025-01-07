@@ -13,4 +13,5 @@ data class InvoiceListUIState(
     val cardName: String = "",
     val accounts: List<Account> = emptyList(),
     val isLoadingWhilePay: Boolean = false,
+    val monthName: String = "",
 )

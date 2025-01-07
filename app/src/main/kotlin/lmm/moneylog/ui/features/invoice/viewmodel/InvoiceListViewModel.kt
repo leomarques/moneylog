@@ -31,7 +31,7 @@ class InvoiceListViewModel(
     getAccountsRepository: GetAccountsRepository,
     private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(InvoiceListUIState(titleResourceId = R.string.invoice))
+    private val _uiState = MutableStateFlow(InvoiceListUIState(titleResourceId = R.string.invoice,))
     val uiState: StateFlow<InvoiceListUIState> = _uiState.asStateFlow()
 
     private lateinit var savedTransactions: List<Transaction>
@@ -58,11 +58,12 @@ class InvoiceListViewModel(
                         titleResourceId = R.string.invoice,
                         accounts = accounts,
                         categoriesMap = categoriesMap,
-                        categoriesColorMap = categoriesColorMap
+                        categoriesColorMap = categoriesColorMap,
                     ).copy(
                         cardId = creditCardId,
                         invoiceCode = invoiceCode,
                         cardName = card?.name.orEmpty(),
+                        monthName = domainTimeRepository.getMonthNameFromInvoiceCode(invoiceCode),
                         totalValue = totalValue.formatForRs(false),
                         isInvoicePaid = transactions.all { it.accountId != null }
                     )
@@ -133,5 +134,13 @@ class InvoiceListViewModel(
                 isLoadingWhilePay = false
             )
         }
+    }
+
+    fun onPreviousMonthClick() {
+
+    }
+
+    fun onNextMonthClick() {
+        
     }
 }

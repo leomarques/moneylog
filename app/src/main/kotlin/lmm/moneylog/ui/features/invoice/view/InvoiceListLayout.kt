@@ -26,8 +26,10 @@ fun InvoiceListLayout(
     onItemClick: (Int) -> Unit,
     onFabClick: () -> Unit,
     onArrowBackClick: () -> Unit,
+    onPay: (Int) -> Unit,
+    onPreviousMonthClick: () -> Unit,
+    onNextMonthClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onPay: (Int) -> Unit
 ) {
     val filter = remember { mutableStateOf("") }
     var showFab by remember { mutableStateOf(true) }
@@ -62,9 +64,11 @@ fun InvoiceListLayout(
             ) {
                 InvoiceListContent(
                     model = model,
-                    onPay = onPay,
                     filter = filter.value,
-                    onItemClick = onItemClick
+                    onPay = onPay,
+                    onItemClick = onItemClick,
+                    onPreviousMonthClick = onPreviousMonthClick,
+                    onNextMonthClick = onNextMonthClick
                 )
             }
         }
@@ -86,6 +90,8 @@ private fun InvoiceListLayoutPreview() {
         onItemClick = {},
         onFabClick = {},
         onArrowBackClick = {},
-        onPay = {}
+        onPay = {},
+        onPreviousMonthClick = {},
+        onNextMonthClick = {}
     )
 }

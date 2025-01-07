@@ -14,4 +14,6 @@ interface DomainTimeRepository {
     fun getCurrentMonthName(): String
 
     fun getCurrentInvoice(): String
+
+    fun getMonthNameFromInvoiceCode(invoiceCode: String): String
 }

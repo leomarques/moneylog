@@ -320,6 +320,7 @@ class TransactionDetailViewModel(
             onError(R.string.detail_no_category)
             return true
         }
+
         return false
     }
 }

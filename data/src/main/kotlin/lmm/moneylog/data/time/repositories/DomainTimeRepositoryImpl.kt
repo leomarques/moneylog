@@ -43,4 +43,11 @@ class DomainTimeRepositoryImpl : DomainTimeRepository {
         val time = getCurrentDomainTime()
         return "${time.month}.${time.year}"
     }
+
+    override fun getMonthNameFromInvoiceCode(invoiceCode: String): String {
+        val monthNumber = invoiceCode.substringBefore(".").toInt()
+        return Month.of(monthNumber)
+            .getDisplayName(TextStyle.FULL_STANDALONE, Locale.getDefault())
+            .replaceFirstChar(Char::titlecase)
+    }
 }

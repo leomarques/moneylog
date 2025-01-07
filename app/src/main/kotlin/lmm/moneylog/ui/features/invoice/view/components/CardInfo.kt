@@ -24,8 +24,11 @@ fun CardInfo(
     cardName: String,
     isInvoicePaid: Boolean,
     totalValue: String,
-    modifier: Modifier = Modifier,
-    onPayClick: () -> Unit
+    monthName: String,
+    onPayClick: () -> Unit,
+    onPreviousMonthClick: () -> Unit,
+    onNextMonthClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier,
@@ -35,6 +38,13 @@ fun CardInfo(
             text = cardName,
             fontSize = 16.sp,
             modifier = Modifier.padding(bottom = Size.SmallSpaceSize)
+        )
+
+        MonthSelector(
+            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
+            onPreviousMonthClick = onPreviousMonthClick,
+            onNextMonthClick = onNextMonthClick,
+            monthName = monthName
         )
 
         Row(
@@ -84,6 +94,9 @@ private fun CardInfoPreview() {
         cardName = "Visa",
         isInvoicePaid = true,
         totalValue = "R$153,50",
-        onPayClick = {}
+        monthName = "Janeiro",
+        onPayClick = {},
+        onPreviousMonthClick = {},
+        onNextMonthClick = {}
     )
 }

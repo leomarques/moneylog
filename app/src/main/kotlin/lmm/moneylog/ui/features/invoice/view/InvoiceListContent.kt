@@ -22,6 +22,7 @@ import lmm.moneylog.ui.features.invoice.view.components.CardInfo
 import lmm.moneylog.ui.features.transaction.detail.view.components.PayInvoiceConfirmDialog
 import lmm.moneylog.ui.features.transaction.list.model.filtered
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListContent
+import lmm.moneylog.ui.features.transaction.list.view.transactionModelListPreview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +31,9 @@ fun InvoiceListContent(
     filter: String,
     onPay: (Int) -> Unit,
     onItemClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    onPreviousMonthClick: () -> Unit,
+    onNextMonthClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
         val showAccountPicker = remember { mutableStateOf(false) }
@@ -79,9 +82,12 @@ fun InvoiceListContent(
                 cardName = model.cardName,
                 isInvoicePaid = model.isInvoicePaid,
                 totalValue = model.totalValue,
+                monthName = model.monthName,
                 onPayClick = {
                     showAccountPicker.value = true
-                }
+                },
+                onPreviousMonthClick = onPreviousMonthClick,
+                onNextMonthClick = onNextMonthClick
             )
         }
 
@@ -107,13 +113,15 @@ private fun InvoiceListContentPreview() {
         model =
             InvoiceListUIState(
                 titleResourceId = 0,
-                transactions = emptyList(),
+                transactions = transactionModelListPreview,
                 totalValue = "R$100.00",
                 isInvoicePaid = false,
                 cardName = "Card",
             ),
-        onPay = {},
         filter = "",
-        onItemClick = {}
+        onPay = {},
+        onItemClick = {},
+        onPreviousMonthClick = {},
+        onNextMonthClick = {}
     )
 }

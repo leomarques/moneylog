@@ -16,12 +16,12 @@ fun List<Transaction>.toInvoiceListUiState(
 ): InvoiceListUIState {
     return InvoiceListUIState(
         titleResourceId = titleResourceId,
-        accounts = accounts,
         transactions =
             toTransactionModels(
                 categoriesMap = categoriesMap,
                 categoriesColorMap = categoriesColorMap
-            )
+            ),
+        accounts = accounts,
     )
 }
 
