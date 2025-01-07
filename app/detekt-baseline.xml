@@ -2,7 +2,6 @@
 <SmellBaseline>
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
-    <ID>MaxLineLength:InvoiceListViewModel.kt$InvoiceListViewModel$private suspend</ID>
     <ID>MutableStateParam:AccountDetailDialogs.kt$showColorsDialog</ID>
     <ID>MutableStateParam:AccountTransferDialogs.kt$showDestinationAccountPicker</ID>
     <ID>MutableStateParam:AccountTransferDialogs.kt$showOriginAccountPicker</ID>

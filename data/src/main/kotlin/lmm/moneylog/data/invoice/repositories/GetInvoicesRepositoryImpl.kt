@@ -19,33 +19,21 @@ class GetInvoicesRepositoryImpl(private val domainTimeRepository: DomainTimeRepo
             )
 
         return listOf(
-            previousInvoice(currentInvoice),
+            currentInvoice.previousCode().toInvoice(),
             currentInvoice,
-            nextInvoice(currentInvoice)
+            currentInvoice.nextCode().toInvoice()
         )
     }
+}
 
-    private fun previousInvoice(invoice: Invoice): Invoice {
-        val year = if (invoice.month == 1) invoice.year - 1 else invoice.year
-        val month = if (invoice.month == 1) 12 else invoice.month - 1
-        val monthName = domainTimeRepository.getMonthName(month).replaceFirstChar(Char::titlecase)
+fun String.toInvoice(): Invoice {
+    val split = split(".")
+    val month = split[0].toInt()
+    val year = split[1].toInt()
 
-        return Invoice(
-            year = year,
-            month = month,
-            name = "$monthName $year"
-        )
-    }
-
-    private fun nextInvoice(invoice: Invoice): Invoice {
-        val year = if (invoice.month == 12) invoice.year + 1 else invoice.year
-        val month = if (invoice.month == 12) 1 else invoice.month + 1
-        val monthName = domainTimeRepository.getMonthName(month).replaceFirstChar(Char::titlecase)
-
-        return Invoice(
-            year = year,
-            month = month,
-            name = "$monthName $year"
-        )
-    }
+    return Invoice(
+        month = month,
+        year = year,
+        name = "$month/$year"
+    )
 }

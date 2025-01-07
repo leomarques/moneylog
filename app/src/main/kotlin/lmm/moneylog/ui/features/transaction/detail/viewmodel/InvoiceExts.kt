@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.transaction.detail.viewmodel
 
+import lmm.moneylog.data.invoice.repositories.toInvoice
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 
 fun String?.toDisplayInvoice(domainTimeRepository: DomainTimeRepository): String {
@@ -23,4 +24,12 @@ fun String?.toInvoiceYear(): Int? {
     if (this == null) return null
 
     return split(".")[1].toInt()
+}
+
+fun String.previousCode(): String {
+    return toInvoice().previousCode()
+}
+
+fun String.nextCode(): String {
+    return toInvoice().nextCode()
 }

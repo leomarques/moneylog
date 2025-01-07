@@ -24,7 +24,7 @@ fun InvoiceListView(
         model = uiState,
         onItemClick = onItemClick,
         onFabClick = {
-            onFabClick(uiState.cardId)
+            onFabClick(viewModel.creditCardId)
         },
         onArrowBackClick = onArrowBackClick,
         onPay = { id ->
