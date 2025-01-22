@@ -90,7 +90,7 @@ class InvoiceListViewModel(
                     categoriesColorMap = categoriesColorMap,
                 ).copy(
                     cardName = cardName,
-                    monthName = domainTimeRepository.getMonthNameFromInvoiceCode(invoiceCode),
+                    name = domainTimeRepository.getInvoiceNameFromCode(invoiceCode),
                     totalValue = totalValue.formatForRs(false),
                     isInvoicePaid = transactions.all { it.accountId != null }
                 )

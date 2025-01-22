@@ -81,7 +81,7 @@ fun InvoiceListContent(
             cardName = model.cardName,
             isInvoicePaid = model.isInvoicePaid,
             totalValue = model.totalValue,
-            monthName = model.monthName,
+            monthName = model.name,
             onPayClick = {
                 showAccountPicker.value = true
             },
