@@ -34,6 +34,7 @@ fun NavHostParams(
     modifier: Modifier = Modifier
 ) {
     MyNavHost(
+        modifier = modifier.padding(paddingValues),
         navController = navController,
         startDestination = startDestination,
         onHomeFabClick = {
@@ -114,7 +115,6 @@ fun NavHostParams(
                 showNavigationBar = showNavigationBar
             )
         },
-        modifier = modifier.padding(paddingValues),
         onTransferIconClick = {
             navController.navigatePopUpTo(
                 destination = TRANSFER_SCREEN,

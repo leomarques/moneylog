@@ -39,9 +39,9 @@ class CreditCardDetailViewModel(
                                 id = id,
                                 name = name,
                                 color = color.toComposeColor(),
-                                closingDay = closingDay,
-                                dueDay = dueDay,
-                                limit = limit,
+                                closingDay = closingDay.toString(),
+                                dueDay = dueDay.toString(),
+                                limit = limit.toString(),
                                 isEdit = true
                             )
                         }
@@ -60,15 +60,15 @@ class CreditCardDetailViewModel(
     }
 
     fun onClosingDayChange(closingDay: String) {
-        _uiState.update { it.copy(closingDay = closingDay.toInt()) }
+        _uiState.update { it.copy(closingDay = closingDay) }
     }
 
     fun onDueDayDayChange(dueDay: String) {
-        _uiState.update { it.copy(dueDay = dueDay.toInt()) }
+        _uiState.update { it.copy(dueDay = dueDay) }
     }
 
     fun onLimitChange(limit: String) {
-        _uiState.update { it.copy(limit = limit.toInt()) }
+        _uiState.update { it.copy(limit = limit) }
     }
 
     fun deleteCreditCard() {
@@ -86,17 +86,31 @@ class CreditCardDetailViewModel(
             onError(R.string.detail_no_name)
             return
         }
-
-        _uiState.update { it.copy(showFab = false) }
+        if (state.closingDay.isEmpty()) {
+            onError(R.string.detail_no_closingday)
+            return
+        }
+        if (state.dueDay.isEmpty()) {
+            onError(R.string.detail_no_dueday)
+            return
+        }
+        if (state.limit.isEmpty()) {
+            onError(R.string.detail_no_limit)
+            return
+        }
 
         viewModelScope.launch {
-            if (state.isEdit) {
-                updateCreditCardRepository.update(state.toCreditCard())
-            } else {
-                addCreditCardRepository.save(state.toCreditCard())
+            try {
+                if (state.isEdit) {
+                    updateCreditCardRepository.update(state.toCreditCard())
+                } else {
+                    addCreditCardRepository.save(state.toCreditCard())
+                }
+                _uiState.update { it.copy(showFab = false) }
+                onSuccess()
+            } catch (e: NumberFormatException) {
+                onError(R.string.detail_invalid_data)
             }
-
-            onSuccess()
         }
     }
 }
@@ -106,7 +120,7 @@ fun CreditCardDetailUIState.toCreditCard() =
         id = id,
         name = name,
         color = color.value.toLong(),
-        closingDay = closingDay,
-        dueDay = dueDay,
-        limit = limit
+        closingDay = closingDay.toInt(),
+        dueDay = dueDay.toInt(),
+        limit = limit.toInt()
     )

@@ -16,9 +16,9 @@ import lmm.moneylog.ui.theme.outcome
 @Composable
 fun CreditCardDetailContent(
     name: String,
-    closingDay: Int,
-    dueDay: Int,
-    limit: Int,
+    closingDay: String,
+    dueDay: String,
+    limit: String,
     color: Color,
     isEdit: Boolean,
     showDeleteConfirmDialog: Boolean,
@@ -74,8 +74,8 @@ private fun CreditCardDetailContentPreview() {
         onClosingDayChange = {},
         onDueDayDayChange = {},
         onLimitChange = {},
-        closingDay = 1,
-        dueDay = 1,
-        limit = 100
+        closingDay = "1",
+        dueDay = "1",
+        limit = "100"
     )
 }

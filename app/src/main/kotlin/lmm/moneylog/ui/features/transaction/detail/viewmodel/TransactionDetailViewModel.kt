@@ -17,6 +17,7 @@ import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.invoice.model.Invoice
 import lmm.moneylog.data.invoice.repositories.GetInvoicesRepository
+import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.model.Transaction
 import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
@@ -105,7 +106,6 @@ class TransactionDetailViewModel(
     ) {
         _uiState.update {
             val currentDate = domainTimeRepository.getCurrentDomainTime()
-            val invoice = invoices[1]
 
             if (cardId == null) {
                 val accountId = accounts.firstOrNull()?.id
@@ -115,22 +115,28 @@ class TransactionDetailViewModel(
                     displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
                     accountId = accountId,
                     categoryId = categoryId,
-                    displayInvoice = invoice.name,
+                    displayInvoice = invoices[1].name,
                     date = currentDate
                 )
             } else {
-                val displayCreditCard =
+                val card =
                     creditCards.firstOrNull {
                         it.id == cardId.toInt()
-                    }?.name ?: ""
+                    }
 
                 val categoryId = categories.firstOrNull { !it.isIncome }?.id
+                val invoice =
+                    getInvoice(
+                        card = card,
+                        currentDate = currentDate,
+                        invoices = invoices
+                    )
 
                 TransactionDetailUIState(
                     displayDate = currentDate.convertToDisplayDate(domainTimeRepository),
                     categoryId = categoryId,
                     creditCardId = cardId.toIntOrNull(),
-                    displayCreditCard = displayCreditCard,
+                    displayCreditCard = card?.name ?: "",
                     displayInvoice = invoice.name,
                     invoiceCode = invoice.getCode(),
                     date = currentDate,
@@ -138,6 +144,18 @@ class TransactionDetailViewModel(
                     isDebtSelected = false,
                 )
             }
+        }
+    }
+
+    private fun getInvoice(
+        card: CreditCard?,
+        currentDate: DomainTime,
+        invoices: List<Invoice>
+    ): Invoice {
+        return if (card != null && currentDate.day >= card.closingDay) {
+            invoices[2]
+        } else {
+            invoices[1]
         }
     }
 
@@ -300,7 +318,7 @@ class TransactionDetailViewModel(
                 }
             }
         } catch (e: NumberFormatException) {
-            onError(R.string.detail_invalidvalue)
+            onError(R.string.detail_invalid_data)
         }
     }
 

@@ -21,9 +21,9 @@ import lmm.moneylog.ui.theme.income
 @Composable
 fun CreditCardDetailFields(
     name: String,
-    closingDay: Int,
-    dueDay: Int,
-    limit: Int,
+    closingDay: String,
+    dueDay: String,
+    limit: String,
     isEdit: Boolean,
     color: Color,
     onNameChange: (String) -> Unit,
@@ -85,9 +85,9 @@ fun CreditCardDetailFields(
 private fun CreditCardDetailFieldsPreview() {
     CreditCardDetailFields(
         name = "Food",
-        closingDay = 1,
-        dueDay = 1,
-        limit = 1000,
+        closingDay = "1",
+        dueDay = "1",
+        limit = "1000",
         isEdit = true,
         color = Color.Red,
         onNameChange = {},
