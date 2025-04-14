@@ -58,8 +58,8 @@ fun MyNavHost(
     onCreditCardClick: (Int, String) -> Unit,
     onCreditCardsFabClick: () -> Unit,
     onInvoiceListFabClick: (Int) -> Unit,
-    modifier: Modifier = Modifier,
-    onCreditCardsItemClick: (Int) -> Unit
+    onCreditCardsItemClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     NavHost(
         modifier = modifier.background(MaterialTheme.colorScheme.background),

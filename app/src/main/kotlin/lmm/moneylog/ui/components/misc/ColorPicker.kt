@@ -69,8 +69,8 @@ fun ColorPicker(
 @Composable
 fun ColorItem(
     color: Color,
-    modifier: Modifier = Modifier,
-    onItemClick: () -> Unit
+    onItemClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Box(
         modifier =

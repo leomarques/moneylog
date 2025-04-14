@@ -28,8 +28,8 @@ fun AccountDetailLayout(
     onFabClick: () -> Unit,
     onArchiveConfirm: () -> Unit,
     onColorPick: (Color) -> Unit,
-    modifier: Modifier = Modifier,
-    onNameChange: (String) -> Unit
+    onNameChange: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var showArchiveConfirmDialog by remember { mutableStateOf(false) }
 

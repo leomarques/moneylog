@@ -14,8 +14,8 @@ import lmm.moneylog.R
 @Composable
 fun IncomeRadioGroup(
     isIncome: Boolean,
-    modifier: Modifier = Modifier,
-    onClick: (Boolean) -> Unit
+    onClick: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(modifier) {
         IncomeRadioButton(
@@ -40,8 +40,8 @@ fun IncomeRadioGroup(
 private fun IncomeRadioButton(
     isSelected: Boolean,
     text: String,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier.clickable { onClick() },

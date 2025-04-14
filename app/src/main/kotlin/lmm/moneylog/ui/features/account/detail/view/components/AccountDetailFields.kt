@@ -22,8 +22,8 @@ fun AccountDetailFields(
     color: Color,
     isEdit: Boolean,
     onNameChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    onColorDialogClick: () -> Unit
+    onColorDialogClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(modifier) {
         StateTextField(

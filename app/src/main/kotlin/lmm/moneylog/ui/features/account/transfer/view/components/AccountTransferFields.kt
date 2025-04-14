@@ -27,9 +27,9 @@ fun AccountTransferFields(
     destinationAccountDisplay: String,
     destinationAccountColor: Color,
     onValueChange: (String) -> Unit,
-    onOriginAccountPicked: () -> Unit,
-    modifier: Modifier = Modifier,
-    onDestinationAccountPicked: () -> Unit
+    onOriginAccountPick: () -> Unit,
+    onDestinationAccountPick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(modifier) {
         StateTextField(
@@ -53,7 +53,7 @@ fun AccountTransferFields(
             label = stringResource(R.string.transfer_origin),
             leadingIcon = { AccountIcon(tint = originAccountColor) },
             enabled = list.isNotEmpty(),
-            onClick = onOriginAccountPicked
+            onClick = onOriginAccountPick
         )
 
         Text(
@@ -67,7 +67,7 @@ fun AccountTransferFields(
             label = stringResource(R.string.transfer_destination),
             leadingIcon = { AccountIcon(tint = destinationAccountColor) },
             enabled = list.isNotEmpty(),
-            onClick = onDestinationAccountPicked
+            onClick = onDestinationAccountPick
         )
     }
 }
@@ -83,7 +83,7 @@ private fun TransferFieldsPreview() {
         destinationAccountDisplay = "Conta 2",
         destinationAccountColor = Color.Blue,
         onValueChange = {},
-        onOriginAccountPicked = {},
-        onDestinationAccountPicked = {}
+        onOriginAccountPick = {},
+        onDestinationAccountPick = {}
     )
 }

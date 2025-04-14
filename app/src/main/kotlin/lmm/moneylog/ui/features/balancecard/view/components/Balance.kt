@@ -21,8 +21,8 @@ fun Balance(
     value: String,
     month: String,
     hideValues: Boolean,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier.clickable { onClick() },

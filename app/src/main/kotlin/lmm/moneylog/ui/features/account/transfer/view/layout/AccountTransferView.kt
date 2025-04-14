@@ -24,8 +24,8 @@ fun AccountTransferView(
         originAccountColor = uiState.originAccountColor,
         destinationAccountColor = uiState.destinationAccountColor,
         onArrowBackClick = onArrowBackClick,
-        onOriginAccountPicked = { viewModel.onOriginAccountPicked(it) },
-        onDestinationAccountPicked = { viewModel.onDestinationAccountPicked(it) },
+        onOriginAccountPick = { viewModel.onOriginAccountPicked(it) },
+        onDestinationAccountPick = { viewModel.onDestinationAccountPicked(it) },
         onValueChange = { viewModel.onValueChange(it) },
         onFabClick = {
             viewModel.onFabClick(

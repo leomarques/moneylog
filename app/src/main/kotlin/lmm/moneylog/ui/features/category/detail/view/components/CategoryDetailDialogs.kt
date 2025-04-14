@@ -11,7 +11,7 @@ fun CategoryDetailDialogs(
     showColorsDialog: MutableState<Boolean>,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit,
-    onColorPicked: (Color) -> Unit
+    onColorPick: (Color) -> Unit
 ) {
     if (showDeleteConfirmDialog) {
         DeleteCategoryConfirmDialog(
@@ -24,7 +24,7 @@ fun CategoryDetailDialogs(
         ColorPicker(
             onConfirm = {
                 showColorsDialog.value = false
-                onColorPicked(it)
+                onColorPick(it)
             },
             onDismiss = { showColorsDialog.value = false }
         )

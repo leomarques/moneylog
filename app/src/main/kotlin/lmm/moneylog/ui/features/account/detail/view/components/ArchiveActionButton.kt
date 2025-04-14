@@ -11,8 +11,8 @@ import lmm.moneylog.R
 
 @Composable
 fun ArchiveActionButton(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     IconButton(
         modifier = modifier,

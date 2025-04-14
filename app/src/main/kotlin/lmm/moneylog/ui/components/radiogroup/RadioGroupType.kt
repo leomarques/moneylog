@@ -12,9 +12,9 @@ import lmm.moneylog.R
 
 @Composable
 fun RadioGroupType(
-    isDebtSelected: Boolean,
-    onDebtSelected: () -> Unit,
-    onCreditSelected: () -> Unit,
+    isDebtSelect: Boolean,
+    onDebtSelect: () -> Unit,
+    onCreditSelect: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -24,14 +24,14 @@ fun RadioGroupType(
     ) {
         RadioOption(
             text = stringResource(R.string.detail_debt_type),
-            selected = isDebtSelected,
-            onClick = onDebtSelected
+            selected = isDebtSelect,
+            onClick = onDebtSelect
         )
 
         RadioOption(
             text = stringResource(R.string.detail_credit_type),
-            selected = !isDebtSelected,
-            onClick = onCreditSelected
+            selected = !isDebtSelect,
+            onClick = onCreditSelect
         )
     }
 }
@@ -40,8 +40,8 @@ fun RadioGroupType(
 @Composable
 private fun RadioGroupTypePreview() {
     RadioGroupType(
-        isDebtSelected = true,
-        onDebtSelected = {},
-        onCreditSelected = {}
+        isDebtSelect = true,
+        onDebtSelect = {},
+        onCreditSelect = {}
     )
 }

@@ -9,7 +9,7 @@ import lmm.moneylog.R
 
 @Composable
 fun TopAppBarWithSearch(
-    onSearchTextChanged: (String) -> Unit,
+    onSearchTextChange: (String) -> Unit,
     onArrowBackClick: () -> Unit,
     filter: String,
     titleResourceId: Int
@@ -26,9 +26,9 @@ fun TopAppBarWithSearch(
         SearchTopBar(
             searchText = filter,
             placeholderText = stringResource(R.string.search_placeholder),
-            onSearchTextChanged = onSearchTextChanged,
+            onSearchTextChange = onSearchTextChange,
             onClearClick = {
-                onSearchTextChanged("")
+                onSearchTextChange("")
                 showTopBar.value = true
             },
             onArrowBackClick = onArrowBackClick
@@ -40,7 +40,7 @@ fun TopAppBarWithSearch(
 @Composable
 private fun TopAppBarWithSearchPreview() {
     TopAppBarWithSearch(
-        onSearchTextChanged = {},
+        onSearchTextChange = {},
         onArrowBackClick = {},
         filter = "",
         titleResourceId = R.string.app_name

@@ -24,11 +24,11 @@ fun AccountTransferLayout(
     originAccountColor: Color,
     destinationAccountColor: Color,
     onArrowBackClick: () -> Unit,
-    onOriginAccountPicked: (Int) -> Unit,
-    onDestinationAccountPicked: (Int) -> Unit,
+    onOriginAccountPick: (Int) -> Unit,
+    onDestinationAccountPick: (Int) -> Unit,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    onFabClick: () -> Unit
+    onFabClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier,
@@ -49,8 +49,8 @@ fun AccountTransferLayout(
                     destinationAccountDisplay = destinationAccountDisplay,
                     originAccountColor = originAccountColor,
                     destinationAccountColor = destinationAccountColor,
-                    onOriginAccountPicked = onOriginAccountPicked,
-                    onDestinationAccountPicked = onDestinationAccountPicked,
+                    onOriginAccountPick = onOriginAccountPick,
+                    onDestinationAccountPick = onDestinationAccountPick,
                     onValueChange = onValueChange
                 )
             }
@@ -69,8 +69,8 @@ private fun AccountTransferLayoutPreview() {
         originAccountColor = outcome,
         destinationAccountColor = Color.Blue,
         onArrowBackClick = {},
-        onOriginAccountPicked = {},
-        onDestinationAccountPicked = {},
+        onOriginAccountPick = {},
+        onDestinationAccountPick = {},
         onValueChange = {},
         onFabClick = {}
     )

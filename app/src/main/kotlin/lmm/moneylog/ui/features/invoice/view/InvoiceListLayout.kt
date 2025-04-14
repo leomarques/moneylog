@@ -38,7 +38,7 @@ fun InvoiceListLayout(
         modifier = modifier,
         topBar = {
             TopAppBarWithSearch(
-                onSearchTextChanged = { filter.value = it },
+                onSearchTextChange = { filter.value = it },
                 onArrowBackClick = onArrowBackClick,
                 filter = filter.value,
                 titleResourceId = model.titleResourceId

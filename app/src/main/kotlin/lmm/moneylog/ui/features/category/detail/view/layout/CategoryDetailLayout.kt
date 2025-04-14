@@ -24,12 +24,12 @@ fun CategoryDetailLayout(
     isIncome: Boolean,
     showFab: Boolean,
     onArrowBackClick: () -> Unit,
-    onColorPicked: (Color) -> Unit,
+    onColorPick: (Color) -> Unit,
     onNameChange: (String) -> Unit,
     onIncomeChange: (Boolean) -> Unit,
+    onFabClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onDeleteConfirmClick: () -> Unit = {},
-    onFabClick: () -> Unit
+    onDeleteConfirmClick: () -> Unit = {}
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
@@ -59,7 +59,7 @@ fun CategoryDetailLayout(
                     isEdit = isEdit,
                     isIncome = isIncome,
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
-                    onColorPicked = onColorPicked,
+                    onColorPick = onColorPick,
                     onNameChange = onNameChange,
                     onIncomeChange = onIncomeChange,
                     onDeleteDismiss = { showDeleteConfirmDialog.value = false },
@@ -83,7 +83,7 @@ private fun CategoryDetailLayoutPreview() {
         isIncome = true,
         showFab = true,
         onArrowBackClick = {},
-        onColorPicked = {},
+        onColorPick = {},
         onDeleteConfirmClick = {},
         onFabClick = {},
         onNameChange = {},

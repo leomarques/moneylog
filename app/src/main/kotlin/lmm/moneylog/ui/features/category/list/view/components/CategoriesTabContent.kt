@@ -15,8 +15,8 @@ import lmm.moneylog.ui.theme.neutralColor
 @Composable
 fun CategoriesTabContent(
     list: List<CategoryModel>,
-    modifier: Modifier = Modifier,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     if (list.isNotEmpty()) {
         LazyList(modifier) {

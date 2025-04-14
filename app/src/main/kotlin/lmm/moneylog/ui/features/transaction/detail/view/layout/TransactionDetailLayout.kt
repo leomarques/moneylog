@@ -29,9 +29,9 @@ fun TransactionDetailLayout(
     onIsIncomeSelect: (Boolean) -> Unit,
     onValueChange: (String) -> Unit,
     onDescriptionChange: (String) -> Unit,
-    onDebtSelected: () -> Unit,
-    modifier: Modifier = Modifier,
-    onCreditSelected: () -> Unit
+    onDebtSelect: () -> Unit,
+    onCreditSelect: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
 
@@ -58,11 +58,11 @@ fun TransactionDetailLayout(
                 TransactionDetailContent(
                     uiState = uiState,
                     showDeleteConfirmDialog = showDeleteConfirmDialog.value,
-                    onDatePicked = onDatePick,
-                    onAccountPicked = onAccountPick,
-                    onCategoryPicked = onCategoryPick,
-                    onCreditCardPicked = onCreditCardPick,
-                    onInvoicePicked = onInvoicePick,
+                    onDatePick = onDatePick,
+                    onAccountPick = onAccountPick,
+                    onCategoryPick = onCategoryPick,
+                    onCreditCardPick = onCreditCardPick,
+                    onInvoicePick = onInvoicePick,
                     onDeleteConfirm = {
                         showDeleteConfirmDialog.value = false
                         onDeleteConfirmClick()
@@ -71,8 +71,8 @@ fun TransactionDetailLayout(
                     onIsIncomeSelect = onIsIncomeSelect,
                     onValueChange = onValueChange,
                     onDescriptionChange = onDescriptionChange,
-                    onDebtSelected = onDebtSelected,
-                    onCreditSelected = onCreditSelected
+                    onDebtSelect = onDebtSelect,
+                    onCreditSelect = onCreditSelect
                 )
             }
         }
@@ -95,7 +95,7 @@ private fun TransactionDetailLayoutPreview() {
         onIsIncomeSelect = {},
         onValueChange = {},
         onDescriptionChange = {},
-        onDebtSelected = {},
-        onCreditSelected = {}
+        onDebtSelect = {},
+        onCreditSelect = {}
     )
 }

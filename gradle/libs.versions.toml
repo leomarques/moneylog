@@ -1,6 +1,6 @@
 [versions]
 composeBom            = "2025.03.01"
-composeRules          = "0.3.13"
+composeRules          = "0.4.22"
 coreTesting           = "2.2.0"
 junit                 = "4.13.2"
 koin                  = "3.5.3"

@@ -27,17 +27,17 @@ fun TransactionDetailDialogs(
     showCreditCardPicker: MutableState<Boolean>,
     showInvoicePicker: MutableState<Boolean>,
     showDeleteConfirmDialog: Boolean,
-    onDatePicked: (Long) -> Unit,
-    onAccountPicked: (Int) -> Unit,
-    onCategoryPicked: (Int) -> Unit,
-    onCreditCardPicked: (Int) -> Unit,
-    onInvoicePicked: (Int) -> Unit,
+    onDatePick: (Long) -> Unit,
+    onAccountPick: (Int) -> Unit,
+    onCategoryPick: (Int) -> Unit,
+    onCreditCardPick: (Int) -> Unit,
+    onInvoicePick: (Int) -> Unit,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit
 ) {
     if (showDatePicker.value) {
         TransactionDetailDatePicker(
-            onConfirm = { onDatePicked(it) },
+            onConfirm = { onDatePick(it) },
             onDismiss = { showDatePicker.value = false }
         )
     }
@@ -48,7 +48,7 @@ fun TransactionDetailDialogs(
         ) {
             BottomSheetContent(
                 list = accounts.map { it.name to it.color.toComposeColor() },
-                onConfirm = { index -> onAccountPicked(index) },
+                onConfirm = { index -> onAccountPick(index) },
                 onDismiss = {
                     showAccountPicker.value = false
                 },
@@ -60,7 +60,7 @@ fun TransactionDetailDialogs(
         ModalBottomSheet(onDismissRequest = { showCategoryPicker.value = false }) {
             BottomSheetContent(
                 list = categories.map { it.name to it.color.toComposeColor() },
-                onConfirm = { index -> onCategoryPicked(index) },
+                onConfirm = { index -> onCategoryPick(index) },
                 onDismiss = {
                     showCategoryPicker.value = false
                 },
@@ -72,7 +72,7 @@ fun TransactionDetailDialogs(
         ModalBottomSheet(onDismissRequest = { showCreditCardPicker.value = false }) {
             BottomSheetContent(
                 list = creditCards.map { it.name to it.color.toComposeColor() },
-                onConfirm = { index -> onCreditCardPicked(index) },
+                onConfirm = { index -> onCreditCardPick(index) },
                 onDismiss = {
                     showCreditCardPicker.value = false
                 },
@@ -84,7 +84,7 @@ fun TransactionDetailDialogs(
         ModalBottomSheet(onDismissRequest = { showInvoicePicker.value = false }) {
             BottomSheetContent(
                 list = invoices.map { it.name to null },
-                onConfirm = { index -> onInvoicePicked(index) },
+                onConfirm = { index -> onInvoicePick(index) },
                 onDismiss = {
                     showInvoicePicker.value = false
                 },
@@ -112,14 +112,14 @@ private fun TransactionDetailDialogsPreview() {
         showCreditCardPicker = remember { mutableStateOf(false) },
         showInvoicePicker = remember { mutableStateOf(false) },
         showDeleteConfirmDialog = false,
-        onDatePicked = {},
-        onAccountPicked = {},
-        onCategoryPicked = {},
+        onDatePick = {},
+        onAccountPick = {},
+        onCategoryPick = {},
         onDeleteConfirm = {},
         onDeleteDismiss = {},
         creditCards = listOf(),
         invoices = listOf(),
-        onCreditCardPicked = {},
-        onInvoicePicked = {}
+        onCreditCardPick = {},
+        onInvoicePick = {}
     )
 }

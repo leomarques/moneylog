@@ -20,8 +20,8 @@ fun CreditCardsListLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     list: List<CreditCardModel>,
-    modifier: Modifier = Modifier,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier,

@@ -3,7 +3,6 @@ package lmm.moneylog.ui.features.transaction.list.view
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -23,14 +22,13 @@ import lmm.moneylog.ui.components.topappbar.TopAppBarWithSearch
 import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
 import lmm.moneylog.ui.features.transaction.list.model.filtered
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionsListLayout(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
+    onItemClick: (Int) -> Unit,
     model: TransactionsListUIState,
-    modifier: Modifier = Modifier,
-    onItemClick: (Int) -> Unit
+    modifier: Modifier = Modifier
 ) {
     val filter = remember { mutableStateOf("") }
     var showFab by remember { mutableStateOf(true) }
@@ -39,7 +37,7 @@ fun TransactionsListLayout(
         modifier = modifier,
         topBar = {
             TopAppBarWithSearch(
-                onSearchTextChanged = { filter.value = it },
+                onSearchTextChange = { filter.value = it },
                 onArrowBackClick = onArrowBackClick,
                 filter = filter.value,
                 titleResourceId = model.titleResourceId

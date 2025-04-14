@@ -12,8 +12,8 @@ import lmm.moneylog.R
 
 @Composable
 fun MoreOptionsIcon(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     IconButton(
         modifier = modifier,

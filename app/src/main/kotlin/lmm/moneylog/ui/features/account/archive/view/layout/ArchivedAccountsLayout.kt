@@ -17,8 +17,8 @@ fun ArchivedAccountsLayout(
     list: List<ArchivedAccountModel>,
     onArrowBackClick: () -> Unit,
     onUnArchive: (Int) -> Unit,
-    modifier: Modifier = Modifier,
-    onDeleteConfirm: (Int) -> Unit
+    onDeleteConfirm: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier,

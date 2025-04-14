@@ -30,8 +30,8 @@ fun CreditCardDetailFields(
     onClosingDayChange: (String) -> Unit,
     onDueDayDayChange: (String) -> Unit,
     onLimitChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    onColorClick: () -> Unit
+    onColorClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(modifier) {
         StateTextField(

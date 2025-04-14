@@ -11,14 +11,14 @@ fun AccountTransferDialogs(
     showDestinationAccountPicker: MutableState<Boolean>,
     originFilterName: String,
     destinationFilterName: String,
-    onOriginAccountPicked: (Int) -> Unit,
-    onDestinationAccountPicked: (Int) -> Unit
+    onOriginAccountPick: (Int) -> Unit,
+    onDestinationAccountPick: (Int) -> Unit
 ) {
     if (showOriginAccountPicker.value) {
         AccountModalSheet(
             list = list,
             filterName = originFilterName,
-            onConfirm = onOriginAccountPicked,
+            onConfirm = onOriginAccountPick,
             onDismissRequest = { showOriginAccountPicker.value = false }
         )
     }
@@ -27,7 +27,7 @@ fun AccountTransferDialogs(
         AccountModalSheet(
             list = list,
             filterName = destinationFilterName,
-            onConfirm = onDestinationAccountPicked,
+            onConfirm = onDestinationAccountPick,
             onDismissRequest = { showDestinationAccountPicker.value = false }
         )
     }

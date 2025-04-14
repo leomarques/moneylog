@@ -12,8 +12,8 @@ import lmm.moneylog.R
 
 @Composable
 fun DeleteIcon(
-    modifier: Modifier = Modifier,
-    onDeleteClick: () -> Unit
+    onDeleteClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     IconButton(
         modifier = modifier,

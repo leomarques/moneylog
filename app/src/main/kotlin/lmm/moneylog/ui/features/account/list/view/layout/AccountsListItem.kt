@@ -18,8 +18,8 @@ fun AccountsListItem(
     balance: String,
     color: Color,
     showDivider: Boolean,
-    modifier: Modifier = Modifier,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     ListItemContent(
         modifier = modifier,

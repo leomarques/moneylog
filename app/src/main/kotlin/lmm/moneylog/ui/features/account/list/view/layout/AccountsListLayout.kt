@@ -25,8 +25,8 @@ fun AccountsListLayout(
     onFabClick: () -> Unit,
     onItemClick: (Int) -> Unit,
     onArchivedIconClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    onTransferIconClick: () -> Unit
+    onTransferIconClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Scaffold(
         modifier = modifier,

@@ -15,8 +15,8 @@ import lmm.moneylog.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CategoriesListTopBar(
-    modifier: Modifier = Modifier,
-    onArrowBackClick: () -> Unit
+    onArrowBackClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     TopAppBar(
         modifier = modifier,

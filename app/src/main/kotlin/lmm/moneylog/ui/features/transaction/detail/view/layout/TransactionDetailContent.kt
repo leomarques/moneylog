@@ -16,19 +16,19 @@ import lmm.moneylog.ui.theme.Size
 fun TransactionDetailContent(
     uiState: TransactionDetailUIState,
     showDeleteConfirmDialog: Boolean,
-    onDatePicked: (Long) -> Unit,
-    onAccountPicked: (Int) -> Unit,
-    onCategoryPicked: (Int) -> Unit,
-    onCreditCardPicked: (Int) -> Unit,
-    onInvoicePicked: (Int) -> Unit,
+    onDatePick: (Long) -> Unit,
+    onAccountPick: (Int) -> Unit,
+    onCategoryPick: (Int) -> Unit,
+    onCreditCardPick: (Int) -> Unit,
+    onInvoicePick: (Int) -> Unit,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit,
     onIsIncomeSelect: (Boolean) -> Unit,
     onValueChange: (String) -> Unit,
     onDescriptionChange: (String) -> Unit,
-    onDebtSelected: () -> Unit,
-    modifier: Modifier = Modifier,
-    onCreditSelected: () -> Unit
+    onDebtSelect: () -> Unit,
+    onCreditSelect: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         val showDatePicker = remember { mutableStateOf(false) }
@@ -51,11 +51,11 @@ fun TransactionDetailContent(
             showDeleteConfirmDialog = showDeleteConfirmDialog,
             showCreditCardPicker = showCreditCardPicker,
             showInvoicePicker = showInvoicePicker,
-            onDatePicked = onDatePicked,
-            onAccountPicked = onAccountPicked,
-            onCategoryPicked = onCategoryPicked,
-            onCreditCardPicked = onCreditCardPicked,
-            onInvoicePicked = onInvoicePicked,
+            onDatePick = onDatePick,
+            onAccountPick = onAccountPick,
+            onCategoryPick = onCategoryPick,
+            onCreditCardPick = onCreditCardPick,
+            onInvoicePick = onInvoicePick,
             onDeleteConfirm = onDeleteConfirm,
             onDeleteDismiss = onDeleteDismiss
         )
@@ -73,8 +73,8 @@ fun TransactionDetailContent(
             onDateClick = { showDatePicker.value = true },
             onCreditCardClick = { showCreditCardPicker.value = true },
             onInvoiceClick = { showInvoicePicker.value = true },
-            onDebtSelected = onDebtSelected,
-            onCreditSelected = onCreditSelected,
+            onDebtSelect = onDebtSelect,
+            onCreditSelect = onCreditSelect,
             isDebtSelected = uiState.isDebtSelected
         )
     }
@@ -86,17 +86,17 @@ private fun TransactionDetailContentPreview() {
     TransactionDetailContent(
         uiState = TransactionDetailUIState(),
         showDeleteConfirmDialog = false,
-        onDatePicked = {},
-        onAccountPicked = {},
-        onCategoryPicked = {},
-        onCreditCardPicked = {},
-        onInvoicePicked = {},
+        onDatePick = {},
+        onAccountPick = {},
+        onCategoryPick = {},
+        onCreditCardPick = {},
+        onInvoicePick = {},
         onDeleteConfirm = {},
         onDeleteDismiss = {},
         onIsIncomeSelect = {},
         onValueChange = {},
         onDescriptionChange = {},
-        onDebtSelected = {},
-        onCreditSelected = {}
+        onDebtSelect = {},
+        onCreditSelect = {}
     )
 }

@@ -15,8 +15,8 @@ import lmm.moneylog.ui.components.misc.DeleteActionButton
 fun CreditCardDetailTopBar(
     isEdit: Boolean,
     onArrowBackClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    onDeleteIconClick: () -> Unit
+    onDeleteIconClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     TopAppBar(
         modifier = modifier,

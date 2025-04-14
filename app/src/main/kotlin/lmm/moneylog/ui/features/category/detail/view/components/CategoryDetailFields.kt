@@ -23,8 +23,8 @@ fun CategoryDetailFields(
     isIncome: Boolean,
     onIncomeChange: (Boolean) -> Unit,
     color: Color,
-    modifier: Modifier = Modifier,
-    onColorClick: () -> Unit
+    onColorClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(modifier) {
         StateTextField(

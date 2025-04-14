@@ -27,8 +27,8 @@ fun BalanceCardLayout(
     month: String,
     hideValues: Boolean,
     onHideClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    onClick: (String) -> Unit
+    onClick: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     BalanceCardContent(modifier) {
         Balance(

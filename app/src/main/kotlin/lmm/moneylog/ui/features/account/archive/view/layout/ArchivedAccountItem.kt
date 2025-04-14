@@ -24,8 +24,8 @@ fun ArchivedAccountItem(
     name: String,
     showDivider: Boolean,
     onUnArchiveClick: (Int) -> Unit,
-    modifier: Modifier = Modifier,
-    onDeleteClick: (Int) -> Unit
+    onDeleteClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
     var offset by remember { mutableStateOf(0.dp) }

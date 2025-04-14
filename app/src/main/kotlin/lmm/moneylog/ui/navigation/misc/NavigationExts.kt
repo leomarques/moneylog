@@ -24,7 +24,7 @@ fun NavGraphBuilder.composableExt(
         route = route,
         arguments = arguments ?: emptyList()
     ) {
-        BackPressHandler(onBackPressed = onArrowBackClick)
+        BackPressHandler(onBackPress = onArrowBackClick)
         content(it)
     }
 }

@@ -42,10 +42,10 @@ import lmm.moneylog.ui.theme.Size
 fun SearchTopBar(
     searchText: String,
     placeholderText: String,
-    onSearchTextChanged: (String) -> Unit,
+    onSearchTextChange: (String) -> Unit,
     onClearClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    onArrowBackClick: () -> Unit
+    onArrowBackClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     var showClearButton by remember { mutableStateOf(false) }
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -75,7 +75,7 @@ fun SearchTopBar(
                         }
                         .focusRequester(focusRequester),
                 value = searchText,
-                onValueChange = onSearchTextChanged,
+                onValueChange = onSearchTextChange,
                 placeholder = {
                     Text(text = placeholderText)
                 },
@@ -121,7 +121,7 @@ private fun SearchTopBarPreview() {
     SearchTopBar(
         searchText = "",
         placeholderText = "Search",
-        onSearchTextChanged = {},
+        onSearchTextChange = {},
         onClearClick = {},
         onArrowBackClick = {}
     )

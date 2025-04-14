@@ -20,12 +20,12 @@ fun CategoryDetailContent(
     isEdit: Boolean,
     isIncome: Boolean,
     showDeleteConfirmDialog: Boolean,
-    onColorPicked: (Color) -> Unit,
+    onColorPick: (Color) -> Unit,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit,
     onNameChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    onIncomeChange: (Boolean) -> Unit
+    onIncomeChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         val showColorsDialog = remember { mutableStateOf(false) }
@@ -33,7 +33,7 @@ fun CategoryDetailContent(
         CategoryDetailDialogs(
             showDeleteConfirmDialog = showDeleteConfirmDialog,
             showColorsDialog = showColorsDialog,
-            onColorPicked = onColorPicked,
+            onColorPick = onColorPick,
             onDeleteConfirm = onDeleteConfirm,
             onDeleteDismiss = onDeleteDismiss
         )
@@ -59,7 +59,7 @@ private fun CategoryDetailContentPreview() {
         isEdit = true,
         isIncome = false,
         showDeleteConfirmDialog = false,
-        onColorPicked = {},
+        onColorPick = {},
         onDeleteConfirm = {},
         onDeleteDismiss = {},
         onNameChange = {},

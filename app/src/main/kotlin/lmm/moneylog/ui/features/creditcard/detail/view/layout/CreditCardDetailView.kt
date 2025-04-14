@@ -23,7 +23,7 @@ fun CreditCardDetailView(
         isEdit = uiState.isEdit,
         showFab = uiState.showFab,
         onArrowBackClick = onArrowBackClick,
-        onColorPicked = { viewModel.onColorPick(it) },
+        onColorPick = { viewModel.onColorPick(it) },
         onNameChange = { viewModel.onNameChange(it) },
         onDeleteConfirmClick = {
             viewModel.deleteCreditCard()

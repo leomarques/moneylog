@@ -24,7 +24,7 @@ fun CategoryDetailView(
         isIncome = uiState.isIncome,
         showFab = uiState.showFab,
         onArrowBackClick = onArrowBackClick,
-        onColorPicked = { viewModel.onColorPick(it) },
+        onColorPick = { viewModel.onColorPick(it) },
         onNameChange = { viewModel.onNameChange(it) },
         onIncomeChange = { viewModel.onIncomeChange(it) },
         onDeleteConfirmClick = {

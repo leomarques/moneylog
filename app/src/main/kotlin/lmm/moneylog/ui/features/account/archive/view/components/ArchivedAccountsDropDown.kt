@@ -20,8 +20,8 @@ fun MoreOptionsDropDown(
     offset: Dp,
     onUnArchiveClick: (Int) -> Unit,
     onDeleteClick: (Int) -> Unit,
-    modifier: Modifier = Modifier,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     DropdownMenu(
         modifier = modifier,

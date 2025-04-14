@@ -21,8 +21,8 @@ import lmm.moneylog.ui.theme.Size
 @Composable
 fun TransactionsListContent(
     list: List<TransactionModel>,
-    modifier: Modifier = Modifier,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val grouped = list.reversed().groupBy { it.date }
 

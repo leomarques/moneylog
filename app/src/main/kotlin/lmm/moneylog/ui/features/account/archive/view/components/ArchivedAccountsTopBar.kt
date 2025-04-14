@@ -16,8 +16,8 @@ import lmm.moneylog.R
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun ArchivedAccountsTopBar(
-    modifier: Modifier = Modifier,
-    onArrowBackClick: () -> Unit
+    onArrowBackClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     TopAppBar(
         modifier = modifier,

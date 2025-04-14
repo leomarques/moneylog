@@ -11,7 +11,7 @@ fun CreditCardDetailDialogs(
     onShowColorsDialogChange: (Boolean) -> Unit,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit,
-    onColorPicked: (Color) -> Unit
+    onColorPick: (Color) -> Unit
 ) {
     if (showDeleteConfirmDialog) {
         DeleteCreditCardConfirmDialog(
@@ -24,7 +24,7 @@ fun CreditCardDetailDialogs(
         ColorPicker(
             onConfirm = {
                 onShowColorsDialogChange(false)
-                onColorPicked(it)
+                onColorPick(it)
             },
             onDismiss = {
                 onShowColorsDialogChange(false)

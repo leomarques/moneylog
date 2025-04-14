@@ -18,8 +18,8 @@ import lmm.moneylog.ui.components.icons.ArrowBackIcon
 fun AccountsListTopBar(
     onArrowBackClick: () -> Unit,
     onArchivedIconClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    onTransferIconClick: () -> Unit
+    onTransferIconClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     TopAppBar(
         modifier = modifier,

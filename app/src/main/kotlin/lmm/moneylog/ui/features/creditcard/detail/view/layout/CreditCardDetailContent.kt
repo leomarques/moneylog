@@ -22,7 +22,7 @@ fun CreditCardDetailContent(
     color: Color,
     isEdit: Boolean,
     showDeleteConfirmDialog: Boolean,
-    onColorPicked: (Color) -> Unit,
+    onColorPick: (Color) -> Unit,
     onDeleteConfirm: () -> Unit,
     onDeleteDismiss: () -> Unit,
     onNameChange: (String) -> Unit,
@@ -37,7 +37,7 @@ fun CreditCardDetailContent(
         CreditCardDetailDialogs(
             showDeleteConfirmDialog = showDeleteConfirmDialog,
             showColorsDialog = showColorsDialog.value,
-            onColorPicked = onColorPicked,
+            onColorPick = onColorPick,
             onDeleteConfirm = onDeleteConfirm,
             onDeleteDismiss = onDeleteDismiss,
             onShowColorsDialogChange = { showColorsDialog.value = it }
@@ -67,7 +67,7 @@ private fun CreditCardDetailContentPreview() {
         color = outcome,
         isEdit = true,
         showDeleteConfirmDialog = false,
-        onColorPicked = {},
+        onColorPick = {},
         onDeleteConfirm = {},
         onDeleteDismiss = {},
         onNameChange = {},

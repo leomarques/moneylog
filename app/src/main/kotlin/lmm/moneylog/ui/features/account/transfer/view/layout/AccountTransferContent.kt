@@ -22,10 +22,10 @@ fun AccountTransferContent(
     destinationAccountDisplay: String,
     originAccountColor: Color,
     destinationAccountColor: Color,
-    onOriginAccountPicked: (Int) -> Unit,
-    onDestinationAccountPicked: (Int) -> Unit,
-    modifier: Modifier = Modifier,
-    onValueChange: (String) -> Unit
+    onOriginAccountPick: (Int) -> Unit,
+    onDestinationAccountPick: (Int) -> Unit,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
         val showOriginAccountPicker = remember { mutableStateOf(false) }
@@ -37,8 +37,8 @@ fun AccountTransferContent(
             showDestinationAccountPicker = showDestinationAccountPicker,
             originFilterName = destinationAccountDisplay,
             destinationFilterName = originAccountDisplay,
-            onOriginAccountPicked = onOriginAccountPicked,
-            onDestinationAccountPicked = onDestinationAccountPicked
+            onOriginAccountPick = onOriginAccountPick,
+            onDestinationAccountPick = onDestinationAccountPick
         )
 
         AccountTransferFields(
@@ -49,8 +49,8 @@ fun AccountTransferContent(
             destinationAccountDisplay = destinationAccountDisplay,
             destinationAccountColor = destinationAccountColor,
             onValueChange = onValueChange,
-            onOriginAccountPicked = { showOriginAccountPicker.value = true },
-            onDestinationAccountPicked = { showDestinationAccountPicker.value = true }
+            onOriginAccountPick = { showOriginAccountPicker.value = true },
+            onDestinationAccountPick = { showDestinationAccountPicker.value = true }
         )
     }
 }
@@ -65,8 +65,8 @@ private fun AccountTransferContentPreview() {
         destinationAccountDisplay = "Itaú",
         originAccountColor = outcome,
         destinationAccountColor = Color.Blue,
-        onOriginAccountPicked = {},
-        onDestinationAccountPicked = {},
+        onOriginAccountPick = {},
+        onDestinationAccountPick = {},
         onValueChange = {}
     )
 }

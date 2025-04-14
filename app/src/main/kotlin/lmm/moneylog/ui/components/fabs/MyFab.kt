@@ -15,8 +15,8 @@ import lmm.moneylog.R
 @Composable
 fun MyFab(
     icon: ImageVector,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     FloatingActionButton(
         modifier = modifier.testTag("Fab"),

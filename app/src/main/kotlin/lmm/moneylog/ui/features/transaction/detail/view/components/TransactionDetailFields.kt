@@ -30,16 +30,16 @@ fun TransactionDetailFields(
     onCategoryClick: () -> Unit,
     onCreditCardClick: () -> Unit,
     onInvoiceClick: () -> Unit,
-    onDebtSelected: () -> Unit,
-    onCreditSelected: () -> Unit,
+    onDebtSelect: () -> Unit,
+    onCreditSelect: () -> Unit,
     onValueChange: (String) -> Unit,
     onDescriptionChange: (String) -> Unit,
     isCategoriesFieldEnabled: Boolean,
     isAccountsFieldEnabled: Boolean,
     isCreditCardFieldEnabled: Boolean,
     isDebtSelected: Boolean,
-    modifier: Modifier = Modifier,
-    onDateClick: () -> Unit
+    onDateClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(modifier) {
         StateTextField(
@@ -86,10 +86,10 @@ fun TransactionDetailFields(
         )
 
         RadioGroupType(
-            isDebtSelected = isDebtSelected,
+            isDebtSelect = isDebtSelected,
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            onDebtSelected = onDebtSelected,
-            onCreditSelected = onCreditSelected
+            onDebtSelect = onDebtSelect,
+            onCreditSelect = onCreditSelect
         )
 
         if (isDebtSelected) {
@@ -137,8 +137,8 @@ private fun TransactionDetailFieldsPreview() {
         onDateClick = {},
         onCreditCardClick = {},
         onInvoiceClick = {},
-        onDebtSelected = {},
-        onCreditSelected = {},
+        onDebtSelect = {},
+        onCreditSelect = {},
         isDebtSelected = false,
         isCreditCardFieldEnabled = true
     )

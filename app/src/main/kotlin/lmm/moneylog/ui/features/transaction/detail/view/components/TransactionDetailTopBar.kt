@@ -16,8 +16,8 @@ import lmm.moneylog.ui.components.icons.DeleteIcon
 fun TransactionDetailTopBar(
     isEdit: Boolean,
     onDeleteClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    onArrowBackClick: () -> Unit
+    onArrowBackClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     TopAppBar(
         modifier = modifier,

@@ -13,8 +13,8 @@ import lmm.moneylog.R
 
 @Composable
 fun ArrowBackIcon(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val focusManager = LocalFocusManager.current
 
