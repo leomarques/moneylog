@@ -30,5 +30,5 @@ fun DeleteIcon(
 @Preview(showBackground = true)
 @Composable
 private fun DeleteIconPreview() {
-    DeleteIcon {}
+    DeleteIcon(onDeleteClick = {})
 }

@@ -39,9 +39,12 @@ fun ArchivedAccountItem(
                     false
                 }
     ) {
-        ArchivedAccountItemCell(name) {
-            expanded = true
-        }
+        ArchivedAccountItemCell(
+            name = name,
+            onClick = {
+                expanded = true
+            }
+        )
 
         MoreOptionsDropDown(
             id = id,

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.detekt)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jlleitschuh.gradle.ktlint)
+    alias(libs.plugins.kotlin.compose)
 }
 
 val keystoreProperties = Properties()
@@ -12,6 +13,7 @@ file("../local.properties").inputStream().use { keystoreProperties.load(it) }
 
 android {
     namespace = "lmm.moneylog"
+    //noinspection GradleDependency
     compileSdk = 34
 
     defaultConfig {
@@ -20,7 +22,7 @@ android {
         //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1
-        versionName = "0.2.4a"
+        versionName = "0.2.4b"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

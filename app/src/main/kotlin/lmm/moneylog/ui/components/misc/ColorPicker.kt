@@ -55,11 +55,12 @@ fun ColorPicker(
             ) {
                 items(list) { item ->
                     ColorItem(
-                        color = item
-                    ) {
-                        onDismiss()
-                        onConfirm(item)
-                    }
+                        color = item,
+                        onItemClick = {
+                            onDismiss()
+                            onConfirm(item)
+                        }
+                    )
                 }
             }
         }
