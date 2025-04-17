@@ -15,7 +15,7 @@ fun AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>.nav
 }
 
 fun AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>.navigateToCategories() {
-    onNodeWithTag("BaseNavigationBarItem3").performClick()
+    onNodeWithTag("BaseNavigationBarItem4").performClick()
 }
 
 fun AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>.clickFab() {
