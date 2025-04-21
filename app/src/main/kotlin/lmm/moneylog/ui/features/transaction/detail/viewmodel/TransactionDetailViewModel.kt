@@ -153,9 +153,9 @@ class TransactionDetailViewModel(
         invoices: List<Invoice>
     ): Invoice {
         return if (card != null && currentDate.day >= card.closingDay) {
-            invoices[2]
-        } else {
             invoices[1]
+        } else {
+            invoices[0]
         }
     }
 
