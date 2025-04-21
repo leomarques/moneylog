@@ -19,7 +19,7 @@ import androidx.core.view.WindowCompat
 @Composable
 fun MoneylogTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false,
+    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme =
