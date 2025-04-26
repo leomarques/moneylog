@@ -8,8 +8,11 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+val localPropertiesFile = file("../local.properties")
 val keystoreProperties = Properties()
-file("../local.properties").inputStream().use { keystoreProperties.load(it) }
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use { keystoreProperties.load(it) }
+}
 
 android {
     namespace = "lmm.moneylog"
@@ -31,18 +34,22 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            storeFile = file(keystoreProperties["key.store"] as String)
-            storePassword = keystoreProperties["key.storePassword"] as String
-            keyAlias = keystoreProperties["key.alias"] as String
-            keyPassword = keystoreProperties["key.password"] as String
+        if (keystoreProperties["key.store"] != null) {
+            create("release") {
+                storeFile = file(keystoreProperties["key.store"] as String)
+                storePassword = keystoreProperties["key.storePassword"] as String
+                keyAlias = keystoreProperties["key.alias"] as String
+                keyPassword = keystoreProperties["key.password"] as String
+            }
         }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = true
-            signingConfig = signingConfigs.getByName("release")
+            if (signingConfigs.names.contains("release")) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
