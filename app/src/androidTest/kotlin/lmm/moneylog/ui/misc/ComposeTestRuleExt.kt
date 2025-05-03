@@ -14,6 +14,10 @@ fun AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>.nav
     onNodeWithTag("BaseNavigationBarItem2").performClick()
 }
 
+fun AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>.navigateToCreditCards() {
+    onNodeWithTag("BaseNavigationBarItem3").performClick()
+}
+
 fun AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>.navigateToCategories() {
     onNodeWithTag("BaseNavigationBarItem4").performClick()
 }
