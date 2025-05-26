@@ -20,7 +20,7 @@ class GetCreditCardHomeInfoInteractor(
 ) {
     fun execute(): Flow<CreditCardHomeInfoResult> {
         val invoiceCode = domainTimeRepository.getCurrentInvoice()
-        
+
         return getCreditCardsRepository.getCreditCards().flatMapLatest { creditCards ->
             combine(
                 creditCards.map { creditCard ->
@@ -31,14 +31,15 @@ class GetCreditCardHomeInfoInteractor(
                 }
             ) { creditCardWithTransactions ->
                 CreditCardHomeInfoResult(
-                    cards = creditCardWithTransactions.map { (creditCard, valueSum) ->
-                        CreditCardHomeInfo(
-                            id = creditCard.id,
-                            name = creditCard.name,
-                            value = abs(valueSum),
-                            color = creditCard.color
-                        )
-                    },
+                    cards =
+                        creditCardWithTransactions.map { (creditCard, valueSum) ->
+                            CreditCardHomeInfo(
+                                id = creditCard.id,
+                                name = creditCard.name,
+                                value = abs(valueSum),
+                                color = creditCard.color
+                            )
+                        },
                     invoiceCode = invoiceCode
                 )
             }

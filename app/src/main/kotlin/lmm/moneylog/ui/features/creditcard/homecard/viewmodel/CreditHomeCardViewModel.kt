@@ -22,14 +22,15 @@ class CreditHomeCardViewModel(
             getCreditCardHomeInfoInteractor.execute().collect { result ->
                 _uiState.update {
                     CreditHomeCardUIState(
-                        cards = result.cards.map { card ->
-                            CreditCardHomeCardItem(
-                                id = card.id,
-                                name = card.name,
-                                value = card.value,
-                                color = card.color
-                            )
-                        },
+                        cards =
+                            result.cards.map { card ->
+                                CreditCardHomeCardItem(
+                                    id = card.id,
+                                    name = card.name,
+                                    value = card.value,
+                                    color = card.color
+                                )
+                            },
                         invoiceCode = result.invoiceCode
                     )
                 }
