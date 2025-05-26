@@ -24,6 +24,7 @@ import lmm.moneylog.data.category.repositories.interfaces.AddCategoryRepository
 import lmm.moneylog.data.category.repositories.interfaces.DeleteCategoryRepository
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.category.repositories.interfaces.UpdateCategoryRepository
+import lmm.moneylog.data.creditcard.interactors.GetCreditCardHomeInfoInteractor
 import lmm.moneylog.data.creditcard.repositories.impls.AddCreditCardRepositoryImpl
 import lmm.moneylog.data.creditcard.repositories.impls.DeleteCreditCardRepositoryImpl
 import lmm.moneylog.data.creditcard.repositories.impls.GetCreditCardsRepositoryImpl
@@ -61,6 +62,8 @@ val dataModule =
         factoryOf(::GetBalanceInteractor)
         factoryOf(::GetBalanceByAccountInteractor)
         factoryOf(::GetBalanceRepositoryImpl) { bind<GetBalanceRepository>() }
+
+        factoryOf(::GetCreditCardHomeInfoInteractor)
 
         factoryOf(::AddAccountRepositoryImpl) { bind<AddAccountRepository>() }
         factoryOf(::GetAccountsRepositoryImpl) { bind<GetAccountsRepository>() }
