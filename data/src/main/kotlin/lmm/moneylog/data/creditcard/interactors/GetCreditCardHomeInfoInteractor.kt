@@ -19,20 +19,26 @@ class GetCreditCardHomeInfoInteractor(
     private val domainTimeRepository: DomainTimeRepository
 ) {
     fun execute(): Flow<CreditCardHomeInfoResult> {
-        val invoiceCode = domainTimeRepository.getCurrentInvoice()
-
         return getCreditCardsRepository.getCreditCards().flatMapLatest { creditCards ->
             combine(
                 creditCards.map { creditCard ->
+                    val invoiceCode = calculateInvoiceForCard(creditCard.closingDay)
+
                     getTransactionsRepository.getTransactionsByInvoice(
                         invoiceCode = invoiceCode,
                         creditCardId = creditCard.id
-                    ).map { transactions -> creditCard to transactions.sumOf { it.value } }
+                    ).map { transactions ->
+                        Triple(creditCard, transactions.sumOf { it.value }, invoiceCode)
+                    }
                 }
             ) { creditCardWithTransactions ->
+                val firstInvoiceCode =
+                    creditCardWithTransactions.firstOrNull()?.third
+                        ?: domainTimeRepository.getCurrentInvoice()
+
                 CreditCardHomeInfoResult(
                     cards =
-                        creditCardWithTransactions.map { (creditCard, valueSum) ->
+                        creditCardWithTransactions.map { (creditCard, valueSum, _) ->
                             CreditCardHomeInfo(
                                 id = creditCard.id,
                                 name = creditCard.name,
@@ -40,9 +46,22 @@ class GetCreditCardHomeInfoInteractor(
                                 color = creditCard.color
                             )
                         },
-                    invoiceCode = invoiceCode
+                    invoiceCode = firstInvoiceCode
                 )
             }
+        }
+    }
+
+    private fun calculateInvoiceForCard(closingDay: Int): String {
+        val currentTime = domainTimeRepository.getCurrentDomainTime()
+        val currentDay = currentTime.day
+
+        return if (currentDay < closingDay) {
+            val month = if (currentTime.month == 1) 12 else currentTime.month - 1
+            val year = if (currentTime.month == 1) currentTime.year - 1 else currentTime.year
+            "$month.$year"
+        } else {
+            "${currentTime.month}.${currentTime.year}"
         }
     }
 }

@@ -228,12 +228,23 @@ class TransactionDetailViewModel(
     }
 
     fun onCreditCardPick(index: Int) {
+        val selectedCard = _uiState.value.creditCards[index]
+        val currentDate = _uiState.value.date
+        val invoice =
+            getInvoice(
+                card = selectedCard,
+                currentDate = currentDate,
+                invoices = _uiState.value.invoices
+            )
+
         _uiState.update {
-            with(_uiState.value.creditCards[index]) {
+            with(selectedCard) {
                 it.copy(
                     creditCardId = id,
                     displayCreditCard = name,
-                    displayCreditCardColor = color.toComposeColor()
+                    displayCreditCardColor = color.toComposeColor(),
+                    displayInvoice = invoice.name,
+                    invoiceCode = invoice.getCode()
                 )
             }
         }
@@ -303,7 +314,7 @@ class TransactionDetailViewModel(
                         onError = onError
                     )
                 ) {
-                    return
+                    return@onFabClick
                 }
 
                 _uiState.update { it.copy(showFab = false) }
@@ -317,7 +328,7 @@ class TransactionDetailViewModel(
                     onSuccess()
                 }
             }
-        } catch (e: NumberFormatException) {
+        } catch (_: NumberFormatException) {
             onError(R.string.detail_invalid_data)
         }
     }

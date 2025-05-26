@@ -19,7 +19,6 @@ class GetInvoicesRepositoryImpl(private val domainTimeRepository: DomainTimeRepo
             )
 
         return listOf(
-            currentInvoice.previousCode().toInvoice(domainTimeRepository),
             currentInvoice,
             currentInvoice.nextCode().toInvoice(domainTimeRepository)
         )
