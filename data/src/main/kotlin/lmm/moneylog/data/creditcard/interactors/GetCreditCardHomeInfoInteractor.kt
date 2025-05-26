@@ -57,11 +57,11 @@ class GetCreditCardHomeInfoInteractor(
         val currentDay = currentTime.day
 
         return if (currentDay < closingDay) {
-            val month = if (currentTime.month == 1) 12 else currentTime.month - 1
-            val year = if (currentTime.month == 1) currentTime.year - 1 else currentTime.year
-            "$month.$year"
-        } else {
             "${currentTime.month}.${currentTime.year}"
+        } else {
+            val month = if (currentTime.month == 12) 1 else currentTime.month + 1
+            val year = if (currentTime.month == 12) currentTime.year + 1 else currentTime.year
+            "$month.$year"
         }
     }
 }
