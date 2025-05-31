@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         applicationId = "lmm.moneylog"
-        minSdk = 28
+        minSdk = 30
         //noinspection OldTargetApi
         targetSdk = 34
         versionCode = 1

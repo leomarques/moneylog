@@ -32,7 +32,7 @@ interface TransactionDao {
     suspend fun delete(id: Int)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(transactionEntity: TransactionEntity)
+    suspend fun insertAndReturnId(transactionEntity: TransactionEntity): Long
 
     @Update
     suspend fun update(transactionEntity: TransactionEntity)

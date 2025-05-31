@@ -9,6 +9,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import lmm.moneylog.notification.settings.NotificationSettingsScreen
 import lmm.moneylog.ui.features.account.archive.view.layout.ArchivedAccountsListView
 import lmm.moneylog.ui.features.account.detail.view.layout.AccountDetailView
 import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView
@@ -30,6 +31,7 @@ import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
 import lmm.moneylog.ui.navigation.misc.INVOICE_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.NOTIFICATION_SETTINGS_SCREEN
 import lmm.moneylog.ui.navigation.misc.PARAM_CARD_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
@@ -59,6 +61,7 @@ fun MyNavHost(
     onCreditCardsFabClick: () -> Unit,
     onInvoiceListFabClick: (Int) -> Unit,
     onCreditCardsItemClick: (Int) -> Unit,
+    onSettingsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -77,9 +80,10 @@ fun MyNavHost(
         composable(HOME_SCREEN) {
             HomeView(
                 onFabClick = onHomeFabClick,
+                onEmptyCardsClick = onCreditCardsFabClick,
                 onClick = onBalanceCardClick,
                 onCreditCardClick = onCreditCardClick,
-                onEmptyCardsClick = onCreditCardsFabClick
+                onSettingsClick = onSettingsClick
             )
         }
 
@@ -196,6 +200,13 @@ fun MyNavHost(
             arguments = arguments
         ) {
             CreditCardDetailView(onArrowBackClick = onArrowBackClick)
+        }
+
+        composableExt(
+            route = NOTIFICATION_SETTINGS_SCREEN,
+            onArrowBackClick = onArrowBackClick
+        ) {
+            NotificationSettingsScreen(onArrowBackClick = onArrowBackClick)
         }
     }
 }

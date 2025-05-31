@@ -13,6 +13,7 @@ import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.INVOICE_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.NOTIFICATION_SETTINGS_SCREEN
 import lmm.moneylog.ui.navigation.misc.PARAM_CARD_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
@@ -34,7 +35,6 @@ fun NavHostParams(
     modifier: Modifier = Modifier
 ) {
     MyNavHost(
-        modifier = modifier.padding(paddingValues),
         navController = navController,
         startDestination = startDestination,
         onHomeFabClick = {
@@ -136,6 +136,13 @@ fun NavHostParams(
                 showNavigationBar = showNavigationBar
             )
         },
+        onInvoiceListFabClick = { cardId ->
+            navController.navigatePopUpTo(
+                destination = "$TRANSACTION_DETAIL_SCREEN?$PARAM_CARD_ID=$cardId",
+                navBarSelectedIndex = navBarSelectedIndex,
+                showNavigationBar = showNavigationBar
+            )
+        },
         onCreditCardsItemClick = { id ->
             navController.navigatePopUpTo(
                 destination = "$CREDITCARD_DETAIL_SCREEN?$PARAM_ID=$id",
@@ -143,12 +150,13 @@ fun NavHostParams(
                 showNavigationBar = showNavigationBar
             )
         },
-        onInvoiceListFabClick = { cardId ->
+        modifier = modifier.padding(paddingValues),
+        onSettingsClick = {
             navController.navigatePopUpTo(
-                destination = "$TRANSACTION_DETAIL_SCREEN?$PARAM_CARD_ID=$cardId",
+                destination = NOTIFICATION_SETTINGS_SCREEN,
                 navBarSelectedIndex = navBarSelectedIndex,
                 showNavigationBar = showNavigationBar
             )
-        }
+        },
     )
 }
