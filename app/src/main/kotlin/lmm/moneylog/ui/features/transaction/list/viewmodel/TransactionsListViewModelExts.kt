@@ -15,14 +15,14 @@ fun List<Transaction>.toTransactionsListUiState(
     categoriesColorMap: Map<Int, Color>
 ): TransactionsListUIState {
     return TransactionsListUIState(
+        titleResourceId = titleResourceId,
         transactions =
             toTransactionModels(
                 accountMap = accountMap,
                 creditCardMap = creditCardMap,
                 categoriesMap = categoriesMap,
                 categoriesColorMap = categoriesColorMap
-            ),
-        titleResourceId = titleResourceId
+            )
     )
 }
 

@@ -123,9 +123,12 @@ fun NotificationSettingsScreen(
                         Icon(
                             imageVector = Icons.Default.Notifications,
                             contentDescription = null,
-                            tint = if (hasListenerPermission)
-                                MaterialTheme.colorScheme.primary else
-                                MaterialTheme.colorScheme.error
+                            tint =
+                                if (hasListenerPermission) {
+                                    MaterialTheme.colorScheme.primary
+                                } else {
+                                    MaterialTheme.colorScheme.error
+                                }
                         )
 
                         Column(modifier = Modifier.weight(1f)) {
@@ -136,15 +139,19 @@ fun NotificationSettingsScreen(
                             Text(
                                 text = if (hasListenerPermission) "Enabled" else "Disabled",
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = if (hasListenerPermission)
-                                    MaterialTheme.colorScheme.primary else
-                                    MaterialTheme.colorScheme.error
+                                color =
+                                    if (hasListenerPermission) {
+                                        MaterialTheme.colorScheme.primary
+                                    } else {
+                                        MaterialTheme.colorScheme.error
+                                    }
                             )
                         }
                     }
 
                     Text(
-                        text = "Allow MoneyLog to intercept Nubank notifications " +
+                        text =
+                            "Allow MoneyLog to intercept Nubank notifications " +
                                 "to automatically track your transactions.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -163,7 +170,8 @@ fun NotificationSettingsScreen(
                         }
 
                         Text(
-                            text = "Steps:\n1. Find 'MoneyLog' in the list" +
+                            text =
+                                "Steps:\n1. Find 'MoneyLog' in the list" +
                                     "\n2. Toggle the switch to enable" +
                                     "\n3. Return to this screen",
                             style = MaterialTheme.typography.bodySmall,
@@ -210,13 +218,19 @@ fun NotificationSettingsScreen(
                             horizontalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Icon(
-                                imageVector = if (hasBasicPermission)
-                                    Icons.Default.CheckCircle else
-                                    Icons.Default.Warning,
+                                imageVector =
+                                    if (hasBasicPermission) {
+                                        Icons.Default.CheckCircle
+                                    } else {
+                                        Icons.Default.Warning
+                                    },
                                 contentDescription = null,
-                                tint = if (hasBasicPermission)
-                                    MaterialTheme.colorScheme.primary else
-                                    MaterialTheme.colorScheme.error
+                                tint =
+                                    if (hasBasicPermission) {
+                                        MaterialTheme.colorScheme.primary
+                                    } else {
+                                        MaterialTheme.colorScheme.error
+                                    }
                             )
 
                             Column(modifier = Modifier.weight(1f)) {
@@ -227,9 +241,12 @@ fun NotificationSettingsScreen(
                                 Text(
                                     text = if (hasBasicPermission) "Enabled" else "Disabled",
                                     style = MaterialTheme.typography.bodyMedium,
-                                    color = if (hasBasicPermission)
-                                        MaterialTheme.colorScheme.primary else
-                                        MaterialTheme.colorScheme.error
+                                    color =
+                                        if (hasBasicPermission) {
+                                            MaterialTheme.colorScheme.primary
+                                        } else {
+                                            MaterialTheme.colorScheme.error
+                                        }
                                 )
                             }
                         }
@@ -237,8 +254,8 @@ fun NotificationSettingsScreen(
                         Text(
                             text =
                                 "Allow MoneyLog to show notifications. " +
-                                        "This is required for the app to display notifications " +
-                                        "about intercepted transactions.",
+                                    "This is required for the app to display notifications " +
+                                    "about intercepted transactions.",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

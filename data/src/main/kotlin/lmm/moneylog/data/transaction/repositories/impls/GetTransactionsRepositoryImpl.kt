@@ -36,20 +36,35 @@ class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) 
         }
     }
 
-    override fun getAllTransactions() =
-        transactionDao.selectAllTransactions().map { transactionsList ->
-            convertEntityToTransaction(transactionsList)
-        }
+    override fun getAllTransactions(
+        month: Int,
+        year: Int
+    ) = transactionDao.selectAllTransactions(
+        month = month,
+        year = year
+    ).map { transactionsList ->
+        convertEntityToTransaction(transactionsList)
+    }
 
-    override fun getIncomeTransactions() =
-        transactionDao.selectIncomeTransactions().map { transactionsList ->
-            convertEntityToTransaction(transactionsList)
-        }
+    override fun getIncomeTransactions(
+        month: Int,
+        year: Int
+    ) = transactionDao.selectIncomeTransactions(
+        month = month,
+        year = year
+    ).map { transactionsList ->
+        convertEntityToTransaction(transactionsList)
+    }
 
-    override fun getOutcomeTransactions() =
-        transactionDao.selectOutcomeTransactions().map { transactionsList ->
-            convertEntityToTransaction(transactionsList)
-        }
+    override fun getOutcomeTransactions(
+        month: Int,
+        year: Int
+    ) = transactionDao.selectOutcomeTransactions(
+        month = month,
+        year = year
+    ).map { transactionsList ->
+        convertEntityToTransaction(transactionsList)
+    }
 
     override fun getTransactionsByInvoice(
         invoiceCode: String,

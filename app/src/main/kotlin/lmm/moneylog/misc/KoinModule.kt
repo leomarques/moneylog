@@ -53,7 +53,8 @@ val appModule =
                 getTransactionsRepository = get(),
                 getAccountsRepository = get(),
                 getCategoriesRepository = get(),
-                getCreditCardsRepository = get()
+                getCreditCardsRepository = get(),
+                timeRepository = get()
             )
         }
 
