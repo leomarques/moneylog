@@ -77,7 +77,7 @@ fun TransactionsListLayout(
                 MonthSelector(
                     onPreviousMonthClick = onPreviousMonthClick,
                     onNextMonthClick = onNextMonthClick,
-                    monthName = model.monthName,
+                    monthName = model.monthName.replaceFirstChar { it.uppercase() },
                     modifier = Modifier.fillMaxWidth()
                 )
 
