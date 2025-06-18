@@ -50,7 +50,7 @@ class NotificationHelper(private val context: NotificationListenerService) : Not
 
         val builder =
             NotificationCompat.Builder(context, NotificationConfig.Channel.ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.outline_attach_money_24)
                 .setContentTitle(sanitizeTitle(title))
                 .setContentText(notificationText)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
