@@ -1,7 +1,7 @@
 package lmm.moneylog.notification.config
 
 object NotificationConfig {
-    const val NUBANK_PACKAGE = "com.nu.production"
+    private const val NUBANK_PACKAGE = "com.nu.production"
 
     val SUPPORTED_PACKAGES =
         setOf(

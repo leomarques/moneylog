@@ -86,9 +86,7 @@ class NotificationHelper(private val context: NotificationListenerService) : Not
     }
 
     private fun formatNotificationText(transactionInfo: NotificationTransactionInfo): String {
-        return "value = ${transactionInfo.value}, " +
-            "place = ${transactionInfo.place}, " +
-            "categoryId = ${transactionInfo.categoryId}"
+        return "R$ ${transactionInfo.value} em ${transactionInfo.place}"
     }
 
     private fun sanitizeTitle(title: String?): String {
