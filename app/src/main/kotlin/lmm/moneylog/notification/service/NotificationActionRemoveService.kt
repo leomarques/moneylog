@@ -1,6 +1,8 @@
 package lmm.moneylog.notification.service
 
 import android.app.IntentService
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -43,6 +45,11 @@ class NotificationActionRemoveService : IntentService("NotificationActionService
                     deleteTransactionRepository.delete(id.toInt())
                     notificationTransactionRepository.removeTransactionId(notificationId)
                 }
+
+                // Dismiss the notification
+                val notificationManager =
+                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.cancel(notificationId)
             } catch (e: Exception) {
             }
         }
