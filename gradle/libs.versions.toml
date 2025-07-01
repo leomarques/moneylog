@@ -14,7 +14,7 @@ uiTest                = "1.8.3"
 androidApplication      = "8.11.0"
 androidLibrary          = "8.11.0"
 detekt                  = "1.23.8"
-googleDevtoolsKsp       = "2.1.20-2.0.0"
+googleDevtoolsKsp       = "2.2.0-2.0.2"
 jetbrainsKotlinAndroid  = "2.2.0"
 jlleitschuhGradleKtlint = "12.3.0"
 

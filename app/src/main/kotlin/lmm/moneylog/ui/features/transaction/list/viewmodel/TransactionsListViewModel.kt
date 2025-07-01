@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.features.transaction.list.viewmodel
 
-import android.util.Log
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -68,9 +67,6 @@ class TransactionsListViewModel(
                 }
 
             val monthName = timeRepository.getMonthName(month)
-            Log.d("TransactionsListViewModel", "Month: $monthName")
-            Log.d("TransactionsListViewModel", "month: $month")
-            Log.d("TransactionsListViewModel", "year: $year")
 
             when (typeOfValue) {
                 GET_TRANSACTIONS_INCOME -> {

@@ -35,13 +35,13 @@ import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun TransactionsListLayout(
+    model: TransactionsListUIState,
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     onItemClick: (Int) -> Unit,
-    model: TransactionsListUIState,
-    modifier: Modifier = Modifier,
     onPreviousMonthClick: () -> Unit,
-    onNextMonthClick: () -> Unit
+    onNextMonthClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val filter = remember { mutableStateOf("") }
     var showFab by remember { mutableStateOf(true) }
@@ -81,7 +81,7 @@ fun TransactionsListLayout(
                     modifier = Modifier.fillMaxWidth()
                 )
 
-                TotalValue(model, modifier)
+                TotalValue(model)
 
                 List(
                     model = model,
@@ -94,13 +94,10 @@ fun TransactionsListLayout(
 }
 
 @Composable
-fun TotalValue(
-    model: TransactionsListUIState,
-    modifier: Modifier
-) {
+private fun TotalValue(model: TransactionsListUIState) {
     Box(
         modifier =
-            modifier
+            Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
         contentAlignment = Alignment.Center
