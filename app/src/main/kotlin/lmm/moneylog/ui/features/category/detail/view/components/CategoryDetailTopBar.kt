@@ -1,11 +1,13 @@
 package lmm.moneylog.ui.features.category.detail.view.components
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.icons.ArrowBackIcon
 import lmm.moneylog.ui.components.misc.DeleteActionButton
@@ -20,6 +22,7 @@ fun CategoryDetailTopBar(
 ) {
     TopAppBar(
         modifier = modifier,
+        windowInsets = WindowInsets(0.dp),
         title = {
             Text(
                 text =
