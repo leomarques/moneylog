@@ -20,7 +20,6 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class NotificationHelper(private val context: NotificationListenerService) : NotificationDisplayer, KoinComponent {
-    private val notificationTransactionRepository: NotificationTransactionRepository by inject()
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     private fun createNotificationChannel() {
@@ -54,19 +53,14 @@ class NotificationHelper(private val context: NotificationListenerService) : Not
                 .setContentTitle(sanitizeTitle(title))
                 .setContentText(notificationText)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
 
-        transactionId?.let { id ->
-            scope.launch {
-                notificationTransactionRepository.storeTransactionId(
-                    notificationId = notificationId,
-                    transactionId = id
-                )
-            }
-
+        transactionId?.let { transactionId ->
             val removeIntent =
                 Intent(context, NotificationActionRemoveService::class.java).apply {
                     action = NotificationActionRemoveService.ACTION_REMOVE_TRANSACTION
                     putExtra(NotificationActionRemoveService.EXTRA_NOTIFICATION_ID, notificationId)
+                    putExtra(NotificationActionRemoveService.EXTRA_NOTIFICATION_ID, transactionId)
                 }
             val removePendingIntent =
                 PendingIntent.getService(

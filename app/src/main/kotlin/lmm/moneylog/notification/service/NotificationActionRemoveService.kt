@@ -2,7 +2,6 @@ package lmm.moneylog.notification.service
 
 import android.app.IntentService
 import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,9 +16,9 @@ class NotificationActionRemoveService : IntentService("NotificationActionService
     companion object {
         const val ACTION_REMOVE_TRANSACTION = "ACTION_REMOVE_TRANSACTION"
         const val EXTRA_NOTIFICATION_ID = "EXTRA_NOTIFICATION_ID"
+        const val EXTRA_TRANSACTION_ID = "EXTRA_TRANSACTION_ID"
     }
 
-    private val notificationTransactionRepository: NotificationTransactionRepository by inject()
     private val deleteTransactionRepository: DeleteTransactionRepository by inject()
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
@@ -28,27 +27,29 @@ class NotificationActionRemoveService : IntentService("NotificationActionService
         intent?.let {
             when (it.action) {
                 ACTION_REMOVE_TRANSACTION -> {
+                    val transactionId = it.getIntExtra(EXTRA_TRANSACTION_ID, -1)
                     val notificationId = it.getIntExtra(EXTRA_NOTIFICATION_ID, -1)
-                    if (notificationId != -1) {
-                        handleRemoveTransaction(notificationId)
+                    if (transactionId != -1) {
+                        handleRemoveTransaction(
+                            transactionId = transactionId,
+                            notificationId = notificationId
+                        )
                     }
                 }
             }
         }
     }
 
-    private fun handleRemoveTransaction(notificationId: Int) {
+    private fun handleRemoveTransaction(
+        transactionId: Int,
+        notificationId: Int
+    ) {
         scope.launch {
             try {
-                val transactionId = notificationTransactionRepository.getTransactionId(notificationId)
-                transactionId?.let { id ->
-                    deleteTransactionRepository.delete(id.toInt())
-                    notificationTransactionRepository.removeTransactionId(notificationId)
-                }
+                deleteTransactionRepository.delete(transactionId)
 
-                // Dismiss the notification
                 val notificationManager =
-                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    getSystemService(NOTIFICATION_SERVICE) as NotificationManager
                 notificationManager.cancel(notificationId)
             } catch (e: Exception) {
             }
