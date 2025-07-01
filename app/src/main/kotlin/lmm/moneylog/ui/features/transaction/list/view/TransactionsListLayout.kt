@@ -99,18 +99,20 @@ fun TotalValue(
     modifier: Modifier
 ) {
     Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(8.dp),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(8.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = "Total: ${model.total.formatForRs()}",
-            color = when {
-                model.total == 0.0 -> White
-                model.total < 0.0 -> outcome
-                else -> income
-            }
+            color =
+                when {
+                    model.total == 0.0 -> White
+                    model.total < 0.0 -> outcome
+                    else -> income
+                }
         )
     }
 }

@@ -29,11 +29,12 @@ class TransactionsListViewModel(
     private val getCreditCardsRepository: GetCreditCardsRepository,
     private val timeRepository: DomainTimeRepository,
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(
-        TransactionsListUIState(
-            titleResourceId = R.string.transactions
+    private val _uiState =
+        MutableStateFlow(
+            TransactionsListUIState(
+                titleResourceId = R.string.transactions
+            )
         )
-    )
     val uiState: StateFlow<TransactionsListUIState> = _uiState.asStateFlow()
 
     private var month = timeRepository.getCurrentDomainTime().month
