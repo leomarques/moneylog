@@ -17,13 +17,12 @@ if (localPropertiesFile.exists()) {
 android {
     namespace = "lmm.moneylog"
     //noinspection GradleDependency
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "lmm.moneylog"
         minSdk = 30
-        //noinspection OldTargetApi
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "0.3.0"
 
