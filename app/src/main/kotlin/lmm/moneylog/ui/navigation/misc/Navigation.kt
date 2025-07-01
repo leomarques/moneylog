@@ -20,7 +20,7 @@ fun Navigation(
     val showNavigationBar = remember { mutableStateOf(true) }
     val navBarSelectedIndex = remember { mutableIntStateOf(0) }
 
-    val startDestination = if (transactionId != -1) {
+    val startDestination = if (transactionId == -1) {
         HOME_SCREEN
     } else {
         "$TRANSACTION_DETAIL_SCREEN?$PARAM_ID=$transactionId"
