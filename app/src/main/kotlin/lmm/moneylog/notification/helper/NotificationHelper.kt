@@ -16,6 +16,7 @@ import lmm.moneylog.data.notification.repositories.NotificationTransactionReposi
 import lmm.moneylog.notification.config.NotificationConfig
 import lmm.moneylog.notification.model.NotificationTransactionInfo
 import lmm.moneylog.notification.service.NotificationActionRemoveService
+import lmm.moneylog.ui.navigation.misc.MainActivity
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -55,13 +56,14 @@ class NotificationHelper(private val context: NotificationListenerService) : Not
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true)
 
-        transactionId?.let { transactionId ->
+        if (transactionId != null) {
             val removeIntent =
                 Intent(context, NotificationActionRemoveService::class.java).apply {
                     action = NotificationActionRemoveService.ACTION_REMOVE_TRANSACTION
                     putExtra(NotificationActionRemoveService.EXTRA_NOTIFICATION_ID, notificationId)
                     putExtra(NotificationActionRemoveService.EXTRA_NOTIFICATION_ID, transactionId)
                 }
+
             val removePendingIntent =
                 PendingIntent.getService(
                     context,
@@ -69,11 +71,26 @@ class NotificationHelper(private val context: NotificationListenerService) : Not
                     removeIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                 )
+
             builder.addAction(
                 android.R.drawable.ic_menu_delete,
                 "Remover",
                 removePendingIntent
             )
+
+            val openAppIntent = Intent(context, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra(NotificationActionRemoveService.EXTRA_TRANSACTION_ID, transactionId)
+            }
+
+            val openAppPendingIntent = PendingIntent.getActivity(
+                context,
+                0,
+                openAppIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+
+            builder.setContentIntent(openAppPendingIntent)
         }
 
         notificationManager.notify(notificationId, builder.build())
