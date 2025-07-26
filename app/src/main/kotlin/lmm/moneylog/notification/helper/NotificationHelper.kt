@@ -10,17 +10,17 @@ import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
 import lmm.moneylog.R
-import lmm.moneylog.data.notification.repositories.NotificationTransactionRepository
 import lmm.moneylog.notification.config.NotificationConfig
 import lmm.moneylog.notification.model.NotificationTransactionInfo
 import lmm.moneylog.notification.service.NotificationActionRemoveService
 import lmm.moneylog.ui.navigation.misc.MainActivity
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
-class NotificationHelper(private val context: NotificationListenerService) : NotificationDisplayer, KoinComponent {
+class NotificationHelper(
+    private val context: NotificationListenerService
+) : NotificationDisplayer,
+    KoinComponent {
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     private fun createNotificationChannel() {
@@ -49,7 +49,8 @@ class NotificationHelper(private val context: NotificationListenerService) : Not
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val builder =
-            NotificationCompat.Builder(context, NotificationConfig.Channel.ID)
+            NotificationCompat
+                .Builder(context, NotificationConfig.Channel.ID)
                 .setSmallIcon(R.drawable.outline_attach_money_24)
                 .setContentTitle(sanitizeTitle(title))
                 .setContentText(notificationText)
@@ -61,7 +62,7 @@ class NotificationHelper(private val context: NotificationListenerService) : Not
                 Intent(context, NotificationActionRemoveService::class.java).apply {
                     action = NotificationActionRemoveService.ACTION_REMOVE_TRANSACTION
                     putExtra(NotificationActionRemoveService.EXTRA_NOTIFICATION_ID, notificationId)
-                    putExtra(NotificationActionRemoveService.EXTRA_NOTIFICATION_ID, transactionId)
+                    putExtra(NotificationActionRemoveService.EXTRA_TRANSACTION_ID, transactionId)
                 }
 
             val removePendingIntent =
@@ -78,17 +79,18 @@ class NotificationHelper(private val context: NotificationListenerService) : Not
                 removePendingIntent
             )
 
-            val openAppIntent = Intent(context, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                putExtra(NotificationActionRemoveService.EXTRA_TRANSACTION_ID, transactionId)
-            }
+            val openAppIntent =
+                Intent(context, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                }
 
-            val openAppPendingIntent = PendingIntent.getActivity(
-                context,
-                0,
-                openAppIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
+            val openAppPendingIntent =
+                PendingIntent.getActivity(
+                    context,
+                    0,
+                    openAppIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
 
             builder.setContentIntent(openAppPendingIntent)
         }
@@ -96,13 +98,12 @@ class NotificationHelper(private val context: NotificationListenerService) : Not
         notificationManager.notify(notificationId, builder.build())
     }
 
-    private fun formatNotificationText(transactionInfo: NotificationTransactionInfo): String {
-        return "R$ ${transactionInfo.value} em ${transactionInfo.place}"
-    }
+    private fun formatNotificationText(transactionInfo: NotificationTransactionInfo): String =
+        "R$ ${transactionInfo.value} em ${transactionInfo.place}"
 
-    private fun sanitizeTitle(title: String?): String {
-        return title?.trim()
+    private fun sanitizeTitle(title: String?): String =
+        title
+            ?.trim()
             ?.take(100)
             ?.takeIf { it.isNotBlank() } ?: "MoneyLog Transaction"
-    }
 }

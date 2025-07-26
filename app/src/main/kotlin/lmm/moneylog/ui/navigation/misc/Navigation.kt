@@ -14,17 +14,10 @@ import lmm.moneylog.ui.navigation.navhost.NavHostParams
 @Composable
 fun Navigation(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
-    transactionId: Int
+    navController: NavHostController = rememberNavController()
 ) {
     val showNavigationBar = remember { mutableStateOf(true) }
     val navBarSelectedIndex = remember { mutableIntStateOf(0) }
-
-    val startDestination = if (transactionId == -1) {
-        HOME_SCREEN
-    } else {
-        "$TRANSACTION_DETAIL_SCREEN?$PARAM_ID=$transactionId"
-    }
 
     Scaffold(
         modifier = modifier,
@@ -42,7 +35,7 @@ fun Navigation(
             paddingValues = paddingValues,
             navController = navController,
             navBarSelectedIndex = navBarSelectedIndex,
-            startDestination = startDestination,
+            startDestination = HOME_SCREEN,
             showNavigationBar = showNavigationBar
         )
     }
