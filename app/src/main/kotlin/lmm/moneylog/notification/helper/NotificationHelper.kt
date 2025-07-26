@@ -7,9 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.service.notification.NotificationListenerService
 import androidx.core.app.NotificationCompat
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import lmm.moneylog.R
 import lmm.moneylog.notification.config.NotificationConfig
 import lmm.moneylog.notification.model.NotificationTransactionInfo
@@ -21,8 +18,6 @@ class NotificationHelper(
     private val context: NotificationListenerService
 ) : NotificationDisplayer,
     KoinComponent {
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
-
     private fun createNotificationChannel() {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
