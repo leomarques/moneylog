@@ -52,7 +52,7 @@ class CreditCardDetailViewModel(
     }
 
     fun onNameChange(name: String) {
-        _uiState.update { it.copy(name = name.trim()) }
+        _uiState.update { it.copy(name = name) }
     }
 
     fun onColorPick(color: Color) {
@@ -82,7 +82,7 @@ class CreditCardDetailViewModel(
         onError: (Int) -> Unit
     ) {
         val state = _uiState.value
-        if (state.name.isEmpty()) {
+        if (state.name.trim().isEmpty()) {
             onError(R.string.detail_no_name)
             return
         }
@@ -108,7 +108,7 @@ class CreditCardDetailViewModel(
                 }
                 _uiState.update { it.copy(showFab = false) }
                 onSuccess()
-            } catch (e: NumberFormatException) {
+            } catch (_: NumberFormatException) {
                 onError(R.string.detail_invalid_data)
             }
         }
@@ -118,7 +118,7 @@ class CreditCardDetailViewModel(
 fun CreditCardDetailUIState.toCreditCard() =
     CreditCard(
         id = id,
-        name = name,
+        name = name.trim(),
         color = color.value.toLong(),
         closingDay = closingDay.toInt(),
         dueDay = dueDay.toInt(),
