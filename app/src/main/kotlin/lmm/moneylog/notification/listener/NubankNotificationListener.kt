@@ -49,9 +49,7 @@ class NubankNotificationListener(
         super.onDestroy()
     }
 
-    private fun isSupportedPackage(packageName: String): Boolean {
-        return NotificationConfig.SUPPORTED_PACKAGES.contains(packageName)
-    }
+    private fun isSupportedPackage(packageName: String): Boolean = NotificationConfig.SUPPORTED_PACKAGES.contains(packageName)
 
     private fun extractNotificationData(notification: StatusBarNotification): Pair<String?, String?> {
         val extras = notification.notification.extras
@@ -60,10 +58,10 @@ class NubankNotificationListener(
         return title to text
     }
 
-    private fun sanitizeText(text: String?): String? {
-        return text?.trim()
+    private fun sanitizeText(text: String?): String? =
+        text
+            ?.trim()
             ?.takeIf { it.isNotBlank() && it.length <= NotificationConfig.Notification.MAX_TEXT_LENGTH }
-    }
 
     private fun processNotificationAsync(
         title: String?,

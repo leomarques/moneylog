@@ -5,6 +5,4 @@ import lmm.moneylog.ui.theme.neutralColor
 
 fun Long.toComposeColor() = Color(this.toULong())
 
-fun Color?.orDefaultColor(): Color {
-    return this ?: neutralColor
-}
+fun Color?.orDefaultColor(): Color = this ?: neutralColor

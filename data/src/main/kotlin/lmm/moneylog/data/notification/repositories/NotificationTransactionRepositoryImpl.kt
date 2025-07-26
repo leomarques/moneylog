@@ -13,7 +13,8 @@ class NotificationTransactionRepositoryImpl(
         notificationId: Int,
         transactionId: Long
     ) {
-        sharedPreferences.edit()
+        sharedPreferences
+            .edit()
             .putLong("$NOTIFICATION_TRANSACTION_PREFIX$notificationId", transactionId)
             .apply()
     }
@@ -24,7 +25,8 @@ class NotificationTransactionRepositoryImpl(
     }
 
     override suspend fun removeTransactionId(notificationId: Int) {
-        sharedPreferences.edit()
+        sharedPreferences
+            .edit()
             .remove("$NOTIFICATION_TRANSACTION_PREFIX$notificationId")
             .apply()
     }

@@ -9,8 +9,8 @@ class TransactionConverterImpl(
     private val domainTimeRepository: DomainTimeRepository,
     private val invoiceCalculator: InvoiceCalculator
 ) : TransactionConverter {
-    override suspend fun convert(transactionInfo: NotificationTransactionInfo): Transaction? {
-        return try {
+    override suspend fun convert(transactionInfo: NotificationTransactionInfo): Transaction? =
+        try {
             val value =
                 parseValue(
                     valueString = transactionInfo.value,
@@ -41,7 +41,6 @@ class TransactionConverterImpl(
         } catch (e: Exception) {
             null
         }
-    }
 
     private fun parseValue(
         valueString: String,

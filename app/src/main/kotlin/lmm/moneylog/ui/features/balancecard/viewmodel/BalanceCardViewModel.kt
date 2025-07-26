@@ -22,20 +22,21 @@ class BalanceCardViewModel(
         val currentDomainTime = domainTimeRepository.getCurrentDomainTime()
 
         viewModelScope.launch {
-            interactor.execute(
-                monthNumber = currentDomainTime.month,
-                yearNumber = currentDomainTime.year
-            ).collect {
-                with(it) {
-                    _uiState.value =
-                        BalanceCardUIState(
-                            total = total.formatForRs(),
-                            credit = credit.formatForRs(),
-                            debt = debt.formatForRs(),
-                            month = domainTimeRepository.getCurrentMonthName()
-                        )
+            interactor
+                .execute(
+                    monthNumber = currentDomainTime.month,
+                    yearNumber = currentDomainTime.year
+                ).collect {
+                    with(it) {
+                        _uiState.value =
+                            BalanceCardUIState(
+                                total = total.formatForRs(),
+                                credit = credit.formatForRs(),
+                                debt = debt.formatForRs(),
+                                month = domainTimeRepository.getCurrentMonthName()
+                            )
+                    }
                 }
-            }
         }
     }
 }

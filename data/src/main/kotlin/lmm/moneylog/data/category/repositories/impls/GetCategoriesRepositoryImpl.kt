@@ -6,8 +6,9 @@ import lmm.moneylog.data.category.database.CategoryDao
 import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 
-class GetCategoriesRepositoryImpl(private val categoryDao: CategoryDao) :
-    GetCategoriesRepository {
+class GetCategoriesRepositoryImpl(
+    private val categoryDao: CategoryDao
+) : GetCategoriesRepository {
     override suspend fun getCategoryById(id: Int): Category? {
         val category = categoryDao.selectCategory(id)
         return if (category != null) {
@@ -24,8 +25,8 @@ class GetCategoriesRepositoryImpl(private val categoryDao: CategoryDao) :
         }
     }
 
-    override fun getCategories(): Flow<List<Category>> {
-        return categoryDao.selectCategories().map { categories ->
+    override fun getCategories(): Flow<List<Category>> =
+        categoryDao.selectCategories().map { categories ->
             categories.map { category ->
                 with(category) {
                     Category(
@@ -37,10 +38,9 @@ class GetCategoriesRepositoryImpl(private val categoryDao: CategoryDao) :
                 }
             }
         }
-    }
 
-    override suspend fun getCategoriesSuspend(): List<Category> {
-        return categoryDao.selectCategoriesSuspend().map { categories ->
+    override suspend fun getCategoriesSuspend(): List<Category> =
+        categoryDao.selectCategoriesSuspend().map { categories ->
             with(categories) {
                 Category(
                     id = id,
@@ -50,5 +50,4 @@ class GetCategoriesRepositoryImpl(private val categoryDao: CategoryDao) :
                 )
             }
         }
-    }
 }

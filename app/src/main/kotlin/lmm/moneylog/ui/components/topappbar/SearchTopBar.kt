@@ -74,8 +74,7 @@ fun SearchTopBar(
                         .padding(start = 40.dp)
                         .onFocusChanged { focusState ->
                             showClearButton = (focusState.isFocused)
-                        }
-                        .focusRequester(focusRequester),
+                        }.focusRequester(focusRequester),
                 value = searchText,
                 onValueChange = onSearchTextChange,
                 placeholder = {

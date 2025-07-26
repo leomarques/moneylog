@@ -9,8 +9,9 @@ object CategoryPredictor {
     fun predictCategory(place: String): Int? {
         val normalizedPlace = place.lowercase().trim()
 
-        return merchantCategories.entries.find { (merchant, _) ->
-            normalizedPlace.contains(merchant.lowercase())
-        }?.value
+        return merchantCategories.entries
+            .find { (merchant, _) ->
+                normalizedPlace.contains(merchant.lowercase())
+            }?.value
     }
 }

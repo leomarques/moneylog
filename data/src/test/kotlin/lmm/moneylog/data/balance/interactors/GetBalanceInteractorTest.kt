@@ -34,8 +34,10 @@ class GetBalanceInteractorTest {
     @Test
     fun `should calculate correct balance for given month and year`() {
         runBlocking {
-            interactor.execute(5, 2021)
-                .flowOn(Dispatchers.Unconfined).collect {
+            interactor
+                .execute(5, 2021)
+                .flowOn(Dispatchers.Unconfined)
+                .collect {
                     assertEquals(0.0, it.total, 0.0)
                     assertEquals(10.0, it.credit, 0.0)
                     assertEquals(5.0, it.debt, 0.0)

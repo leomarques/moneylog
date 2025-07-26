@@ -7,7 +7,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import lmm.moneylog.data.notification.repositories.NotificationTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository
 import org.koin.android.ext.android.inject
 

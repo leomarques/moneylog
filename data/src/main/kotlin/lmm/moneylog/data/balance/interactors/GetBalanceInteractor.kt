@@ -4,7 +4,9 @@ import kotlinx.coroutines.flow.map
 import lmm.moneylog.data.balance.model.BalanceModel
 import lmm.moneylog.data.balance.repositories.GetBalanceRepository
 
-class GetBalanceInteractor(private val repository: GetBalanceRepository) {
+class GetBalanceInteractor(
+    private val repository: GetBalanceRepository
+) {
     fun execute(
         monthNumber: Int,
         yearNumber: Int

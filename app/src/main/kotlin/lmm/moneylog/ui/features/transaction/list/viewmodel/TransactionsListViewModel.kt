@@ -70,63 +70,69 @@ class TransactionsListViewModel(
 
             when (typeOfValue) {
                 GET_TRANSACTIONS_INCOME -> {
-                    getTransactionsRepository.getIncomeTransactions(
-                        month = month,
-                        year = year
-                    ).collect { transactions ->
-                        _uiState.update {
-                            transactions.toTransactionsListUiState(
-                                titleResourceId = R.string.incomes,
-                                accountMap = accountsMap,
-                                creditCardMap = creditCardMap,
-                                categoriesMap = categoriesMap,
-                                categoriesColorMap = categoriesColorMap
-                            ).copy(
-                                monthName = monthName,
-                                total = transactions.sumOf { it.value }
-                            )
+                    getTransactionsRepository
+                        .getIncomeTransactions(
+                            month = month,
+                            year = year
+                        ).collect { transactions ->
+                            _uiState.update {
+                                transactions
+                                    .toTransactionsListUiState(
+                                        titleResourceId = R.string.incomes,
+                                        accountMap = accountsMap,
+                                        creditCardMap = creditCardMap,
+                                        categoriesMap = categoriesMap,
+                                        categoriesColorMap = categoriesColorMap
+                                    ).copy(
+                                        monthName = monthName,
+                                        total = transactions.sumOf { it.value }
+                                    )
+                            }
                         }
-                    }
                 }
 
                 GET_TRANSACTIONS_OUTCOME -> {
-                    getTransactionsRepository.getOutcomeTransactions(
-                        month = month,
-                        year = year
-                    ).collect { transactions ->
-                        _uiState.update {
-                            transactions.toTransactionsListUiState(
-                                titleResourceId = R.string.outcomes,
-                                accountMap = accountsMap,
-                                creditCardMap = creditCardMap,
-                                categoriesMap = categoriesMap,
-                                categoriesColorMap = categoriesColorMap
-                            ).copy(
-                                monthName = monthName,
-                                total = transactions.sumOf { it.value }
-                            )
+                    getTransactionsRepository
+                        .getOutcomeTransactions(
+                            month = month,
+                            year = year
+                        ).collect { transactions ->
+                            _uiState.update {
+                                transactions
+                                    .toTransactionsListUiState(
+                                        titleResourceId = R.string.outcomes,
+                                        accountMap = accountsMap,
+                                        creditCardMap = creditCardMap,
+                                        categoriesMap = categoriesMap,
+                                        categoriesColorMap = categoriesColorMap
+                                    ).copy(
+                                        monthName = monthName,
+                                        total = transactions.sumOf { it.value }
+                                    )
+                            }
                         }
-                    }
                 }
 
                 else -> {
-                    getTransactionsRepository.getAllTransactions(
-                        month = month,
-                        year = year
-                    ).collect { transactions ->
-                        _uiState.update {
-                            transactions.toTransactionsListUiState(
-                                titleResourceId = R.string.transactions,
-                                accountMap = accountsMap,
-                                creditCardMap = creditCardMap,
-                                categoriesMap = categoriesMap,
-                                categoriesColorMap = categoriesColorMap
-                            ).copy(
-                                monthName = monthName,
-                                total = transactions.sumOf { it.value }
-                            )
+                    getTransactionsRepository
+                        .getAllTransactions(
+                            month = month,
+                            year = year
+                        ).collect { transactions ->
+                            _uiState.update {
+                                transactions
+                                    .toTransactionsListUiState(
+                                        titleResourceId = R.string.transactions,
+                                        accountMap = accountsMap,
+                                        creditCardMap = creditCardMap,
+                                        categoriesMap = categoriesMap,
+                                        categoriesColorMap = categoriesColorMap
+                                    ).copy(
+                                        monthName = monthName,
+                                        total = transactions.sumOf { it.value }
+                                    )
+                            }
                         }
-                    }
                 }
             }
         }

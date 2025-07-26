@@ -75,8 +75,8 @@ suspend fun populateDB(
 }
 
 @OptIn(DelicateCoroutinesApi::class)
-fun onCreateCallback(context: Context): RoomDatabase.Callback {
-    return object : RoomDatabase.Callback() {
+fun onCreateCallback(context: Context): RoomDatabase.Callback =
+    object : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
 
@@ -97,4 +97,3 @@ fun onCreateCallback(context: Context): RoomDatabase.Callback {
             }
         }
     }
-}

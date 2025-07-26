@@ -7,9 +7,10 @@ fun showToast(
     current: Context,
     stringId: Int
 ) {
-    Toast.makeText(
-        current,
-        current.getString(stringId),
-        Toast.LENGTH_LONG
-    ).show()
+    Toast
+        .makeText(
+            current,
+            current.getString(stringId),
+            Toast.LENGTH_LONG
+        ).show()
 }

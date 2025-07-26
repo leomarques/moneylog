@@ -20,18 +20,19 @@ class GetCreditCardHomeInfoInteractor(
     private val domainTimeRepository: DomainTimeRepository,
     private val invoiceCalculator: InvoiceCalculator
 ) {
-    fun execute(): Flow<CreditCardHomeInfoResult> {
-        return getCreditCardsRepository.getCreditCards().flatMapLatest { creditCards ->
+    fun execute(): Flow<CreditCardHomeInfoResult> =
+        getCreditCardsRepository.getCreditCards().flatMapLatest { creditCards ->
             combine(
                 creditCards.map { creditCard ->
                     val invoiceCode = invoiceCalculator.calculateInvoiceForCard(creditCard.closingDay)
 
-                    getTransactionsRepository.getTransactionsByInvoice(
-                        invoiceCode = invoiceCode,
-                        creditCardId = creditCard.id
-                    ).map { transactions ->
-                        Triple(creditCard, transactions.sumOf { it.value }, invoiceCode)
-                    }
+                    getTransactionsRepository
+                        .getTransactionsByInvoice(
+                            invoiceCode = invoiceCode,
+                            creditCardId = creditCard.id
+                        ).map { transactions ->
+                            Triple(creditCard, transactions.sumOf { it.value }, invoiceCode)
+                        }
                 }
             ) { creditCardWithTransactions ->
                 val firstInvoiceCode =
@@ -52,5 +53,4 @@ class GetCreditCardHomeInfoInteractor(
                 )
             }
         }
-    }
 }

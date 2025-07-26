@@ -8,8 +8,9 @@ import lmm.moneylog.data.transaction.database.TransactionEntity
 import lmm.moneylog.data.transaction.model.Transaction
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 
-class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) :
-    GetTransactionsRepository {
+class GetTransactionsRepositoryImpl(
+    private val transactionDao: TransactionDao
+) : GetTransactionsRepository {
     override suspend fun getTransactionById(id: Int): Transaction? {
         val transaction = transactionDao.selectTransactionById(id)
         return if (transaction != null) {
@@ -39,32 +40,35 @@ class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) 
     override fun getAllTransactions(
         month: Int,
         year: Int
-    ) = transactionDao.selectAllTransactions(
-        month = month,
-        year = year
-    ).map { transactionsList ->
-        convertEntityToTransaction(transactionsList)
-    }
+    ) = transactionDao
+        .selectAllTransactions(
+            month = month,
+            year = year
+        ).map { transactionsList ->
+            convertEntityToTransaction(transactionsList)
+        }
 
     override fun getIncomeTransactions(
         month: Int,
         year: Int
-    ) = transactionDao.selectIncomeTransactions(
-        month = month,
-        year = year
-    ).map { transactionsList ->
-        convertEntityToTransaction(transactionsList)
-    }
+    ) = transactionDao
+        .selectIncomeTransactions(
+            month = month,
+            year = year
+        ).map { transactionsList ->
+            convertEntityToTransaction(transactionsList)
+        }
 
     override fun getOutcomeTransactions(
         month: Int,
         year: Int
-    ) = transactionDao.selectOutcomeTransactions(
-        month = month,
-        year = year
-    ).map { transactionsList ->
-        convertEntityToTransaction(transactionsList)
-    }
+    ) = transactionDao
+        .selectOutcomeTransactions(
+            month = month,
+            year = year
+        ).map { transactionsList ->
+            convertEntityToTransaction(transactionsList)
+        }
 
     override fun getTransactionsByInvoice(
         invoiceCode: String,
@@ -74,17 +78,18 @@ class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) 
         val invoiceMonth = split[0].toInt()
         val invoiceYear = split[1].toInt()
 
-        return transactionDao.selectTransactionByInvoice(
-            invoiceMonth = invoiceMonth,
-            invoiceYear = invoiceYear,
-            creditCardId = creditCardId
-        ).map { transactionsList ->
-            convertEntityToTransaction(transactionsList)
-        }
+        return transactionDao
+            .selectTransactionByInvoice(
+                invoiceMonth = invoiceMonth,
+                invoiceYear = invoiceYear,
+                creditCardId = creditCardId
+            ).map { transactionsList ->
+                convertEntityToTransaction(transactionsList)
+            }
     }
 
-    private fun convertEntityToTransaction(list: List<TransactionEntity>): List<Transaction> {
-        return list.map { entity ->
+    private fun convertEntityToTransaction(list: List<TransactionEntity>): List<Transaction> =
+        list.map { entity ->
             with(entity) {
                 Transaction(
                     id = id,
@@ -104,5 +109,4 @@ class GetTransactionsRepositoryImpl(private val transactionDao: TransactionDao) 
                 )
             }
         }
-    }
 }

@@ -80,8 +80,7 @@ fun ColorItem(
                 .padding(
                     vertical = Size.SmallSpaceSize,
                     horizontal = Size.DefaultSpaceSize
-                )
-                .clickable { onItemClick() },
+                ).clickable { onItemClick() },
         contentAlignment = Alignment.Center
     ) {
         ColoredCircle(color = color)

@@ -28,8 +28,7 @@ fun ListItemContent(
                 .padding(
                     vertical = Size.DefaultSpaceSize,
                     horizontal = Size.DefaultSpaceSize
-                )
-                .clickable { onItemClick(id) },
+                ).clickable { onItemClick(id) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         content()

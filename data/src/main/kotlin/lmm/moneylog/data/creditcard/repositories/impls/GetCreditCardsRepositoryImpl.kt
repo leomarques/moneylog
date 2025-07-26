@@ -6,8 +6,9 @@ import lmm.moneylog.data.creditcard.database.CreditCardDao
 import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 
-class GetCreditCardsRepositoryImpl(private val creditCardDao: CreditCardDao) :
-    GetCreditCardsRepository {
+class GetCreditCardsRepositoryImpl(
+    private val creditCardDao: CreditCardDao
+) : GetCreditCardsRepository {
     override suspend fun getCreditCardById(id: Int): CreditCard? {
         val creditCard = creditCardDao.selectCreditCardById(id)
         return if (creditCard != null) {
@@ -26,8 +27,8 @@ class GetCreditCardsRepositoryImpl(private val creditCardDao: CreditCardDao) :
         }
     }
 
-    override fun getCreditCards(): Flow<List<CreditCard>> {
-        return creditCardDao.selectCreditCards().map { creditCards ->
+    override fun getCreditCards(): Flow<List<CreditCard>> =
+        creditCardDao.selectCreditCards().map { creditCards ->
             creditCards.map { creditCard ->
                 with(creditCard) {
                     CreditCard(
@@ -41,10 +42,9 @@ class GetCreditCardsRepositoryImpl(private val creditCardDao: CreditCardDao) :
                 }
             }
         }
-    }
 
-    override suspend fun getCreditCardsSuspend(): List<CreditCard> {
-        return creditCardDao.selectCreditCardsSuspend().map { creditCards ->
+    override suspend fun getCreditCardsSuspend(): List<CreditCard> =
+        creditCardDao.selectCreditCardsSuspend().map { creditCards ->
             with(creditCards) {
                 CreditCard(
                     id = id,
@@ -56,5 +56,4 @@ class GetCreditCardsRepositoryImpl(private val creditCardDao: CreditCardDao) :
                 )
             }
         }
-    }
 }

@@ -9,7 +9,9 @@ import kotlinx.coroutines.flow.update
 
 const val HIDE_VALUES = "hide_values"
 
-class HomeViewModel(private val sharedPreferences: SharedPreferences) : ViewModel() {
+class HomeViewModel(
+    private val sharedPreferences: SharedPreferences
+) : ViewModel() {
     private val _uiState = MutableStateFlow(false)
     val uiState: StateFlow<Boolean> = _uiState.asStateFlow()
 

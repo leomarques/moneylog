@@ -6,9 +6,7 @@ import androidx.core.content.edit
 class CreditCardPredictor(
     private val sharedPreferences: SharedPreferences
 ) {
-    fun getCreditCardId(): Int? {
-        return sharedPreferences.getInt(CREDIT_CARD_ID_KEY, -1).takeIf { it != -1 }
-    }
+    fun getCreditCardId(): Int? = sharedPreferences.getInt(CREDIT_CARD_ID_KEY, -1).takeIf { it != -1 }
 
     fun saveCreditCardId(creditCardId: Int) {
         sharedPreferences.edit {

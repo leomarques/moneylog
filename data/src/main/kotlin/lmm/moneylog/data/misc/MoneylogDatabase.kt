@@ -48,12 +48,12 @@ abstract class MoneylogDatabase : RoomDatabase() {
             }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(
-                context.applicationContext,
-                MoneylogDatabase::class.java,
-                "moneylog.db"
-            )
-                .fallbackToDestructiveMigration()
+            Room
+                .databaseBuilder(
+                    context.applicationContext,
+                    MoneylogDatabase::class.java,
+                    "moneylog.db"
+                ).fallbackToDestructiveMigration()
                 .addCallback(onCreateCallback(context))
                 .build()
     }
