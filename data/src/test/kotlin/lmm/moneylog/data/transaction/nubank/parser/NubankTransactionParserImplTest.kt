@@ -21,11 +21,12 @@ class NubankTransactionParserImplTest {
     fun setup() {
         // By default, return null from keyword repository (no match)
         coEvery { categoryKeywordRepository.predictCategory(any()) } returns null
-        parser = NubankTransactionParserImpl(
-            notificationSettingsRepository,
-            getCreditCardsRepository,
-            categoryKeywordRepository
-        )
+        parser =
+            NubankTransactionParserImpl(
+                notificationSettingsRepository,
+                getCreditCardsRepository,
+                categoryKeywordRepository
+            )
     }
 
     @Test
@@ -203,14 +204,15 @@ class NubankTransactionParserImplTest {
     @Test
     fun `should get credit card id from shared preferences`() {
         every { notificationSettingsRepository.getDefaultCreditCardId() } returns 5
-        coEvery { getCreditCardsRepository.getCreditCardById(5) } returns CreditCard(
-            id = 5,
-            name = "Test Card",
-            closingDay = 15,
-            dueDay = 25,
-            limit = 10000,
-            color = 0xFF0000FF
-        )
+        coEvery { getCreditCardsRepository.getCreditCardById(5) } returns
+            CreditCard(
+                id = 5,
+                name = "Test Card",
+                closingDay = 15,
+                dueDay = 25,
+                limit = 10000,
+                color = 0xFF0000FF
+            )
 
         val text = "Compra de R$ 60,89 APROVADA em RESTAURANTE ABC para o cartão com final 5794"
 
@@ -236,14 +238,15 @@ class NubankTransactionParserImplTest {
     @Test
     fun `should work without card ending in notification text`() {
         every { notificationSettingsRepository.getDefaultCreditCardId() } returns 3
-        coEvery { getCreditCardsRepository.getCreditCardById(3) } returns CreditCard(
-            id = 3,
-            name = "Test Card 2",
-            closingDay = 10,
-            dueDay = 20,
-            limit = 5000,
-            color = 0xFF00FF00
-        )
+        coEvery { getCreditCardsRepository.getCreditCardById(3) } returns
+            CreditCard(
+                id = 3,
+                name = "Test Card 2",
+                closingDay = 10,
+                dueDay = 20,
+                limit = 5000,
+                color = 0xFF00FF00
+            )
         coEvery { categoryKeywordRepository.predictCategory("IFD*RESTAURANTE BAKO S") } returns 1
 
         val text = "Compra de R$ 60,89 APROVADA em IFD*RESTAURANTE BAKO S para o cartão"

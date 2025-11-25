@@ -43,11 +43,11 @@ import lmm.moneylog.data.notification.repositories.NotificationSettingsRepositor
 import lmm.moneylog.data.notification.repositories.NotificationTransactionRepository
 import lmm.moneylog.data.notification.repositories.NotificationTransactionRepositoryImpl
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
+import lmm.moneylog.data.time.repositories.DomainTimeRepositoryImpl
 import lmm.moneylog.data.transaction.nubank.converter.NubankTransactionConverter
 import lmm.moneylog.data.transaction.nubank.converter.NubankTransactionConverterImpl
 import lmm.moneylog.data.transaction.nubank.parser.NubankTransactionParser
 import lmm.moneylog.data.transaction.nubank.parser.NubankTransactionParserImpl
-import lmm.moneylog.data.time.repositories.DomainTimeRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.AddTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.DeleteTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.GetTransactionsRepositoryImpl

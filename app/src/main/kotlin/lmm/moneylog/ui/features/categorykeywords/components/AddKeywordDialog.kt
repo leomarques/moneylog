@@ -37,9 +37,10 @@ fun AddKeywordDialog(
             shape = RoundedCornerShape(16.dp)
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
@@ -80,10 +81,11 @@ fun AddKeywordDialog(
                             if (keywordText.isNotBlank()) {
                                 // Check if contains comma - if yes, split into multiple
                                 if (keywordText.contains(",")) {
-                                    val keywords = keywordText
-                                        .split(",")
-                                        .map { it.trim() }
-                                        .filter { it.isNotBlank() }
+                                    val keywords =
+                                        keywordText
+                                            .split(",")
+                                            .map { it.trim() }
+                                            .filter { it.isNotBlank() }
                                     if (keywords.isNotEmpty()) {
                                         onAddMultipleKeywords(keywords)
                                     }

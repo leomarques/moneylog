@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.notification.repositories.NotificationSettingsRepository
+import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.notification.settings.model.CreditCardItem
 import lmm.moneylog.ui.features.notification.settings.model.NotificationSettingsUIState
-import lmm.moneylog.ui.extensions.toComposeColor
 
 class NotificationSettingsViewModel(
     private val getCreditCardsRepository: GetCreditCardsRepository,
@@ -24,13 +24,14 @@ class NotificationSettingsViewModel(
         viewModelScope.launch {
             getCreditCardsRepository.getCreditCards().collect { creditCards ->
                 val savedCreditCardId = notificationSettingsRepository.getDefaultCreditCardId()
-                val creditCardItems = creditCards.map {
-                    CreditCardItem(
-                        id = it.id,
-                        name = it.name,
-                        color = it.color.toComposeColor()
-                    )
-                }
+                val creditCardItems =
+                    creditCards.map {
+                        CreditCardItem(
+                            id = it.id,
+                            name = it.name,
+                            color = it.color.toComposeColor()
+                        )
+                    }
                 val selectedCard = creditCardItems.firstOrNull { it.id == savedCreditCardId }
 
                 _uiState.update { currentState ->
@@ -43,7 +44,10 @@ class NotificationSettingsViewModel(
         }
     }
 
-    fun updatePermissions(hasListenerPermission: Boolean, hasBasicPermission: Boolean) {
+    fun updatePermissions(
+        hasListenerPermission: Boolean,
+        hasBasicPermission: Boolean
+    ) {
         _uiState.update {
             it.copy(
                 hasListenerPermission = hasListenerPermission,

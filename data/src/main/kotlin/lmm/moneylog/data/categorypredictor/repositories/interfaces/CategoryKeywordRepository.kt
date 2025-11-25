@@ -10,9 +10,15 @@ interface CategoryKeywordRepository {
 
     suspend fun getKeywordById(id: Int): CategoryKeyword?
 
-    suspend fun addKeyword(categoryId: Int, keyword: String): Long
+    suspend fun addKeyword(
+        categoryId: Int,
+        keyword: String
+    ): Long
 
-    suspend fun addKeywords(categoryId: Int, keywords: List<String>)
+    suspend fun addKeywords(
+        categoryId: Int,
+        keywords: List<String>
+    )
 
     suspend fun deleteKeyword(id: Int)
 

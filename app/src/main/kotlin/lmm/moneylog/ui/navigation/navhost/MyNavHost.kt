@@ -9,7 +9,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import lmm.moneylog.ui.features.notification.settings.view.NotificationSettingsScreen
 import lmm.moneylog.ui.features.account.archive.view.layout.ArchivedAccountsListView
 import lmm.moneylog.ui.features.account.detail.view.layout.AccountDetailView
 import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView
@@ -21,6 +20,7 @@ import lmm.moneylog.ui.features.creditcard.detail.view.layout.CreditCardDetailVi
 import lmm.moneylog.ui.features.creditcard.list.view.layouts.CreditCardsListView
 import lmm.moneylog.ui.features.home.view.HomeView
 import lmm.moneylog.ui.features.invoice.view.InvoiceListView
+import lmm.moneylog.ui.features.notification.settings.view.NotificationSettingsScreen
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListView
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN

@@ -48,10 +48,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import lmm.moneylog.ui.features.notification.NotificationPermissionHelper
-import lmm.moneylog.ui.features.notification.settings.viewmodel.NotificationSettingsViewModel
 import lmm.moneylog.ui.components.icons.CreditCardIcon
 import lmm.moneylog.ui.components.textfields.ClickTextField
+import lmm.moneylog.ui.features.notification.NotificationPermissionHelper
+import lmm.moneylog.ui.features.notification.settings.viewmodel.NotificationSettingsViewModel
 import lmm.moneylog.ui.theme.MoneylogTheme
 import org.koin.androidx.compose.koinViewModel
 
@@ -172,7 +172,7 @@ fun NotificationSettingsScreen(
                     Text(
                         text =
                             "Allow MoneyLog to intercept Nubank notifications " +
-                                    "to automatically track your transactions.",
+                                "to automatically track your transactions.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -192,8 +192,8 @@ fun NotificationSettingsScreen(
                         Text(
                             text =
                                 "Steps:\n1. Find 'MoneyLog' in the list" +
-                                        "\n2. Toggle the switch to enable" +
-                                        "\n3. Return to this screen",
+                                    "\n2. Toggle the switch to enable" +
+                                    "\n3. Return to this screen",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             textAlign = TextAlign.Start,
@@ -274,8 +274,8 @@ fun NotificationSettingsScreen(
                         Text(
                             text =
                                 "Allow MoneyLog to show notifications. " +
-                                        "This is required for the app to display notifications " +
-                                        "about intercepted transactions.",
+                                    "This is required for the app to display notifications " +
+                                    "about intercepted transactions.",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -336,7 +336,7 @@ fun NotificationSettingsScreen(
                     Text(
                         text =
                             "Select the credit card that will be automatically assigned " +
-                                    "to transactions created from Nubank notifications.",
+                                "to transactions created from Nubank notifications.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -375,7 +375,7 @@ fun NotificationSettingsScreen(
                     Text(
                         text =
                             "Manage keywords that automatically predict categories " +
-                                    "for transactions based on merchant names.",
+                                "for transactions based on merchant names.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

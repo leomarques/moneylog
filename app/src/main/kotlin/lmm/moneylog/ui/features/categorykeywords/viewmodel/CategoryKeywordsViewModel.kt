@@ -19,7 +19,6 @@ class CategoryKeywordsViewModel(
     private val getCategoriesRepository: GetCategoriesRepository,
     private val categoryKeywordRepository: CategoryKeywordRepository
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow(CategoryKeywordsUIState())
     val uiState: StateFlow<CategoryKeywordsUIState> = _uiState.asStateFlow()
 
@@ -35,23 +34,24 @@ class CategoryKeywordsViewModel(
                 getCategoriesRepository.getCategories(),
                 categoryKeywordRepository.getAllKeywords()
             ) { categories, keywords ->
-                categories.map { category ->
-                    CategoryWithKeywords(
-                        id = category.id,
-                        name = category.name,
-                        color = category.color.toComposeColor(),
-                        keywords = keywords
-                            .filter { it.categoryId == category.id }
-                            .map { keyword ->
-                                KeywordItem(
-                                    id = keyword.id,
-                                    keyword = keyword.keyword,
-                                    categoryId = keyword.categoryId
-                                )
-                            }
-                            .sortedBy { it.keyword }
-                    )
-                }.sortedBy { it.name }
+                categories
+                    .map { category ->
+                        CategoryWithKeywords(
+                            id = category.id,
+                            name = category.name,
+                            color = category.color.toComposeColor(),
+                            keywords =
+                                keywords
+                                    .filter { it.categoryId == category.id }
+                                    .map { keyword ->
+                                        KeywordItem(
+                                            id = keyword.id,
+                                            keyword = keyword.keyword,
+                                            categoryId = keyword.categoryId
+                                        )
+                                    }.sortedBy { it.keyword }
+                        )
+                    }.sortedBy { it.name }
             }.collect { categoriesWithKeywords ->
                 _uiState.update {
                     it.copy(
@@ -75,7 +75,10 @@ class CategoryKeywordsViewModel(
         _uiState.update { it.copy(showAddKeywordDialog = false) }
     }
 
-    fun addKeyword(categoryId: Int, keyword: String) {
+    fun addKeyword(
+        categoryId: Int,
+        keyword: String
+    ) {
         viewModelScope.launch {
             try {
                 categoryKeywordRepository.addKeyword(categoryId, keyword)
@@ -86,7 +89,10 @@ class CategoryKeywordsViewModel(
         }
     }
 
-    fun addKeywords(categoryId: Int, keywords: List<String>) {
+    fun addKeywords(
+        categoryId: Int,
+        keywords: List<String>
+    ) {
         viewModelScope.launch {
             try {
                 categoryKeywordRepository.addKeywords(categoryId, keywords)

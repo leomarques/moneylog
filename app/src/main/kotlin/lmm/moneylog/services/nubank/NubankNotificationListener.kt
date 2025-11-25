@@ -48,8 +48,7 @@ class NubankNotificationListener(
         super.onDestroy()
     }
 
-    private fun isSupportedPackage(packageName: String): Boolean =
-        SUPPORTED_PACKAGES.contains(packageName)
+    private fun isSupportedPackage(packageName: String): Boolean = SUPPORTED_PACKAGES.contains(packageName)
 
     private fun extractNotificationData(notification: StatusBarNotification): Pair<String?, String?> {
         val extras = notification.notification.extras

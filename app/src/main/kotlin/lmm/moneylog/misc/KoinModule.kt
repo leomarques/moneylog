@@ -14,9 +14,9 @@ import lmm.moneylog.ui.features.creditcard.homecard.viewmodel.CreditHomeCardView
 import lmm.moneylog.ui.features.creditcard.list.viewmodel.CreditCardsListViewModel
 import lmm.moneylog.ui.features.home.viewmodel.HomeViewModel
 import lmm.moneylog.ui.features.invoice.viewmodel.InvoiceListViewModel
+import lmm.moneylog.ui.features.notification.settings.viewmodel.NotificationSettingsViewModel
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import lmm.moneylog.ui.features.transaction.list.viewmodel.TransactionsListViewModel
-import lmm.moneylog.ui.features.notification.settings.viewmodel.NotificationSettingsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf

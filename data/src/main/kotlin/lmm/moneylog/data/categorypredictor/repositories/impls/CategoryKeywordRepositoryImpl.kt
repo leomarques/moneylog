@@ -11,7 +11,6 @@ import lmm.moneylog.data.categorypredictor.repositories.interfaces.CategoryKeywo
 class CategoryKeywordRepositoryImpl(
     private val categoryKeywordDao: CategoryKeywordDao
 ) : CategoryKeywordRepository {
-
     override fun getAllKeywords(): Flow<List<CategoryKeyword>> =
         categoryKeywordDao.getAllKeywords().map { entities ->
             entities.map { it.toCategoryKeyword() }
@@ -22,33 +21,40 @@ class CategoryKeywordRepositoryImpl(
             entities.map { it.toCategoryKeyword() }
         }
 
-    override suspend fun getKeywordById(id: Int): CategoryKeyword? =
-        categoryKeywordDao.getKeywordById(id)?.toCategoryKeyword()
+    override suspend fun getKeywordById(id: Int): CategoryKeyword? = categoryKeywordDao.getKeywordById(id)?.toCategoryKeyword()
 
-    override suspend fun addKeyword(categoryId: Int, keyword: String): Long {
+    override suspend fun addKeyword(
+        categoryId: Int,
+        keyword: String
+    ): Long {
         val normalizedKeyword = keyword.trim().lowercase()
         if (normalizedKeyword.isBlank()) {
             throw IllegalArgumentException("Keyword cannot be empty")
         }
 
-        val entity = CategoryKeywordEntity(
-            categoryId = categoryId,
-            keyword = normalizedKeyword
-        )
+        val entity =
+            CategoryKeywordEntity(
+                categoryId = categoryId,
+                keyword = normalizedKeyword
+            )
         return categoryKeywordDao.insert(entity)
     }
 
-    override suspend fun addKeywords(categoryId: Int, keywords: List<String>) {
-        val entities = keywords
-            .map { it.trim().lowercase() }
-            .filter { it.isNotBlank() }
-            .distinct()
-            .map { keyword ->
-                CategoryKeywordEntity(
-                    categoryId = categoryId,
-                    keyword = keyword
-                )
-            }
+    override suspend fun addKeywords(
+        categoryId: Int,
+        keywords: List<String>
+    ) {
+        val entities =
+            keywords
+                .map { it.trim().lowercase() }
+                .filter { it.isNotBlank() }
+                .distinct()
+                .map { keyword ->
+                    CategoryKeywordEntity(
+                        categoryId = categoryId,
+                        keyword = keyword
+                    )
+                }
 
         if (entities.isNotEmpty()) {
             categoryKeywordDao.insertAll(entities)
@@ -70,19 +76,20 @@ class CategoryKeywordRepositoryImpl(
         val allKeywords = categoryKeywordDao.getAllKeywords().first()
 
         // Find keywords that match the text, prioritizing longer matches
-        val matches = allKeywords
-            .filter { keyword ->
-                normalizedText.contains(keyword.keyword)
-            }
-            .sortedByDescending { it.keyword.length }
+        val matches =
+            allKeywords
+                .filter { keyword ->
+                    normalizedText.contains(keyword.keyword)
+                }.sortedByDescending { it.keyword.length }
 
         // Return the category of the first (longest) match
         return matches.firstOrNull()?.categoryId
     }
 
-    private fun CategoryKeywordEntity.toCategoryKeyword() = CategoryKeyword(
-        id = id,
-        categoryId = categoryId,
-        keyword = keyword
-    )
+    private fun CategoryKeywordEntity.toCategoryKeyword() =
+        CategoryKeyword(
+            id = id,
+            categoryId = categoryId,
+            keyword = keyword
+        )
 }
