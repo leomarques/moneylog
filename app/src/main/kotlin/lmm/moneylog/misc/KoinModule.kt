@@ -35,7 +35,8 @@ val appModule =
         factory<TransactionParser> {
             NubankTransactionParser(
                 creditCardPredictor = get(),
-                getCreditCardsRepository = get()
+                getCreditCardsRepository = get(),
+                categoryKeywordRepository = get()
             )
         }
 

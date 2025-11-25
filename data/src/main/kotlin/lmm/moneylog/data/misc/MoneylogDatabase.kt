@@ -10,6 +10,8 @@ import lmm.moneylog.data.accounttransfer.database.AccountTransferDao
 import lmm.moneylog.data.accounttransfer.database.AccountTransferEntity
 import lmm.moneylog.data.category.database.CategoryDao
 import lmm.moneylog.data.category.database.CategoryEntity
+import lmm.moneylog.data.categorypredictor.database.CategoryKeywordDao
+import lmm.moneylog.data.categorypredictor.database.CategoryKeywordEntity
 import lmm.moneylog.data.creditcard.database.CreditCardDao
 import lmm.moneylog.data.creditcard.database.CreditCardEntity
 import lmm.moneylog.data.transaction.database.TransactionDao
@@ -21,7 +23,8 @@ import lmm.moneylog.data.transaction.database.TransactionEntity
         AccountEntity::class,
         CategoryEntity::class,
         AccountTransferEntity::class,
-        CreditCardEntity::class
+        CreditCardEntity::class,
+        CategoryKeywordEntity::class
     ],
     version = 1,
     exportSchema = true
@@ -36,6 +39,8 @@ abstract class MoneylogDatabase : RoomDatabase() {
     abstract fun accountTransferDao(): AccountTransferDao
 
     abstract fun creditCardDao(): CreditCardDao
+
+    abstract fun categoryKeywordDao(): CategoryKeywordDao
 
     companion object {
         @Volatile

@@ -4,6 +4,7 @@ import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase
+import lmm.moneylog.data.categorypredictor.repositories.interfaces.CategoryKeywordRepository
 import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.notification.predictor.CreditCardPredictor
@@ -13,11 +14,18 @@ import org.junit.Test
 class NubankTransactionParserTest {
     private val creditCardPredictor = mockk<CreditCardPredictor>()
     private val getCreditCardsRepository = mockk<GetCreditCardsRepository>()
+    private val categoryKeywordRepository = mockk<CategoryKeywordRepository>()
     private lateinit var parser: NubankTransactionParser
 
     @Before
     fun setup() {
-        parser = NubankTransactionParser(creditCardPredictor, getCreditCardsRepository)
+        // By default, return null from keyword repository (no match)
+        coEvery { categoryKeywordRepository.predictCategory(any()) } returns null
+        parser = NubankTransactionParser(
+            creditCardPredictor,
+            getCreditCardsRepository,
+            categoryKeywordRepository
+        )
     }
 
     @Test
@@ -128,27 +136,30 @@ class NubankTransactionParserTest {
     }
 
     @Test
-    fun `should predict category for IFD merchant`() {
+    fun `should predict category from keyword repository`() {
         every { creditCardPredictor.getCreditCardId() } returns null
+        coEvery { categoryKeywordRepository.predictCategory("IFD*RESTAURANTE BAKO S") } returns 1
 
-        val text = "Compra de R$ 60,89 APROVADA em IFD*RESTAURANTE BAKO S para o cartão com final 5794"
+        val text =
+            "Compra de R$ 60,89 APROVADA em IFD*RESTAURANTE BAKO S para o cartão com final 5794"
 
         val result = parser.parseTransactionInfo(text)
 
         TestCase.assertNotNull(result)
-        TestCase.assertEquals(0, result!!.categoryId)
+        TestCase.assertEquals(1, result!!.categoryId)
     }
 
     @Test
-    fun `should predict category for IFD merchant case insensitive`() {
+    fun `should predict category case insensitive from keyword repository`() {
         every { creditCardPredictor.getCreditCardId() } returns null
+        coEvery { categoryKeywordRepository.predictCategory("ifd*lanchonete xyz") } returns 1
 
         val text = "Compra de R$ 25,30 APROVADA em ifd*lanchonete xyz para o cartão com final 1234"
 
         val result = parser.parseTransactionInfo(text)
 
         TestCase.assertNotNull(result)
-        TestCase.assertEquals(0, result!!.categoryId)
+        TestCase.assertEquals(1, result!!.categoryId)
     }
 
     @Test
@@ -173,15 +184,17 @@ class NubankTransactionParserTest {
     }
 
     @Test
-    fun `should predict category when IFD is part of longer merchant name`() {
+    fun `should predict category when keyword is part of longer merchant name`() {
         every { creditCardPredictor.getCreditCardId() } returns null
+        coEvery { categoryKeywordRepository.predictCategory("SOME_IFD*COMPLEX_MERCHANT_NAME") } returns 1
 
-        val text = "Compra de R$ 75,50 APROVADA em SOME_IFD*COMPLEX_MERCHANT_NAME para o cartão com final 7777"
+        val text =
+            "Compra de R$ 75,50 APROVADA em SOME_IFD*COMPLEX_MERCHANT_NAME para o cartão com final 7777"
 
         val result = parser.parseTransactionInfo(text)
 
         TestCase.assertNotNull(result)
-        TestCase.assertEquals(0, result!!.categoryId)
+        TestCase.assertEquals(1, result!!.categoryId)
     }
 
     @Test
@@ -228,6 +241,7 @@ class NubankTransactionParserTest {
             limit = 5000,
             color = 0xFF00FF00
         )
+        coEvery { categoryKeywordRepository.predictCategory("IFD*RESTAURANTE BAKO S") } returns 1
 
         val text = "Compra de R$ 60,89 APROVADA em IFD*RESTAURANTE BAKO S para o cartão"
 
@@ -236,7 +250,33 @@ class NubankTransactionParserTest {
         TestCase.assertNotNull(result)
         TestCase.assertEquals(3, result!!.creditCardId)
         TestCase.assertEquals(10, result.creditCardClosingDay)
-        TestCase.assertEquals(0, result.categoryId)
+        TestCase.assertEquals(1, result.categoryId)
         TestCase.assertEquals("IFD*RESTAURANTE BAKO S", result.place)
+    }
+
+    @Test
+    fun `should use keyword-based category prediction when available`() {
+        every { creditCardPredictor.getCreditCardId() } returns null
+        coEvery { categoryKeywordRepository.predictCategory("UBER EATS") } returns 5
+
+        val text = "Compra de R$ 35,50 APROVADA em UBER EATS para o cartão com final 1234"
+
+        val result = parser.parseTransactionInfo(text)
+
+        TestCase.assertNotNull(result)
+        TestCase.assertEquals(5, result!!.categoryId)
+    }
+
+    @Test
+    fun `should return null when keyword repository returns null`() {
+        every { creditCardPredictor.getCreditCardId() } returns null
+        coEvery { categoryKeywordRepository.predictCategory("UNKNOWN MERCHANT") } returns null
+
+        val text = "Compra de R$ 25,00 APROVADA em UNKNOWN MERCHANT para o cartão com final 5555"
+
+        val result = parser.parseTransactionInfo(text)
+
+        TestCase.assertNotNull(result)
+        TestCase.assertNull(result!!.categoryId)
     }
 }

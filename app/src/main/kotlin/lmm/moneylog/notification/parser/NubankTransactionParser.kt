@@ -1,16 +1,17 @@
 package lmm.moneylog.notification.parser
 
 import kotlinx.coroutines.runBlocking
+import lmm.moneylog.data.categorypredictor.repositories.interfaces.CategoryKeywordRepository
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.notification.config.NotificationConfig
 import lmm.moneylog.notification.model.NotificationTransactionInfo
-import lmm.moneylog.notification.predictor.CategoryPredictor
 import lmm.moneylog.notification.predictor.CreditCardPredictor
 import kotlin.text.get
 
 class NubankTransactionParser(
     private val creditCardPredictor: CreditCardPredictor,
-    private val getCreditCardsRepository: GetCreditCardsRepository
+    private val getCreditCardsRepository: GetCreditCardsRepository,
+    private val categoryKeywordRepository: CategoryKeywordRepository
 ) : TransactionParser {
     override fun parseTransactionInfo(text: String): NotificationTransactionInfo? {
         val sanitizedText = sanitizeInput(text)
@@ -26,11 +27,16 @@ class NubankTransactionParser(
                     }
                 }
 
+                // Use keyword-based prediction
+                val categoryId = runBlocking {
+                    categoryKeywordRepository.predictCategory(place)
+                }
+
                 NotificationTransactionInfo(
                     value = sanitizeValue(match.groups["valor"]?.value),
                     place = place,
                     currency = match.groups["moeda"]?.value ?: "R$",
-                    categoryId = CategoryPredictor.predictCategory(place),
+                    categoryId = categoryId,
                     creditCardId = savedCreditCardId,
                     creditCardClosingDay = creditCardClosingDay
                 )
