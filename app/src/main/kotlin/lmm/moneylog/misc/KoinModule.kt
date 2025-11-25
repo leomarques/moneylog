@@ -13,6 +13,7 @@ import lmm.moneylog.ui.features.account.transfer.viewmodel.AccountTransferViewMo
 import lmm.moneylog.ui.features.balancecard.viewmodel.BalanceCardViewModel
 import lmm.moneylog.ui.features.category.detail.viewmodel.CategoryDetailViewModel
 import lmm.moneylog.ui.features.category.list.viewmodel.CategoriesListViewModel
+import lmm.moneylog.ui.features.categorykeywords.viewmodel.CategoryKeywordsViewModel
 import lmm.moneylog.ui.features.creditcard.detail.viewmodel.CreditCardDetailViewModel
 import lmm.moneylog.ui.features.creditcard.homecard.viewmodel.CreditHomeCardViewModel
 import lmm.moneylog.ui.features.creditcard.list.viewmodel.CreditCardsListViewModel
@@ -50,6 +51,7 @@ val appModule =
 
         viewModelOf(::CategoriesListViewModel)
         viewModelOf(::CategoryDetailViewModel)
+        viewModelOf(::CategoryKeywordsViewModel)
 
         viewModelOf(::CreditCardsListViewModel)
         viewModelOf(::CreditCardDetailViewModel)
