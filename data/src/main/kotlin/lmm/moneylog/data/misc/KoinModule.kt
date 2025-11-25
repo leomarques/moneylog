@@ -38,9 +38,15 @@ import lmm.moneylog.data.creditcard.repositories.interfaces.UpdateCreditCardRepo
 import lmm.moneylog.data.creditcard.utils.InvoiceCalculator
 import lmm.moneylog.data.invoice.repositories.GetInvoicesRepository
 import lmm.moneylog.data.invoice.repositories.GetInvoicesRepositoryImpl
+import lmm.moneylog.data.notification.repositories.NotificationSettingsRepository
+import lmm.moneylog.data.notification.repositories.NotificationSettingsRepositoryImpl
 import lmm.moneylog.data.notification.repositories.NotificationTransactionRepository
 import lmm.moneylog.data.notification.repositories.NotificationTransactionRepositoryImpl
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
+import lmm.moneylog.data.transaction.nubank.converter.NubankTransactionConverter
+import lmm.moneylog.data.transaction.nubank.converter.NubankTransactionConverterImpl
+import lmm.moneylog.data.transaction.nubank.parser.NubankTransactionParser
+import lmm.moneylog.data.transaction.nubank.parser.NubankTransactionParserImpl
 import lmm.moneylog.data.time.repositories.DomainTimeRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.AddTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.DeleteTransactionRepositoryImpl
@@ -96,7 +102,11 @@ val dataModule =
         factoryOf(::UpdateCreditCardRepositoryImpl) { bind<UpdateCreditCardRepository>() }
         factoryOf(::DeleteCreditCardRepositoryImpl) { bind<DeleteCreditCardRepository>() }
 
+        factoryOf(::NotificationSettingsRepositoryImpl) { bind<NotificationSettingsRepository>() }
         factoryOf(::NotificationTransactionRepositoryImpl) { bind<NotificationTransactionRepository>() }
+
+        factoryOf(::NubankTransactionConverterImpl) { bind<NubankTransactionConverter>() }
+        factoryOf(::NubankTransactionParserImpl) { bind<NubankTransactionParser>() }
 
         factoryOf(::GetInvoicesRepositoryImpl) { bind<GetInvoicesRepository>() }
     }

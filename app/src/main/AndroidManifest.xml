@@ -22,7 +22,7 @@
         </activity>
 
         <service
-            android:name="lmm.moneylog.notification.listener.NubankNotificationListener"
+            android:name="lmm.moneylog.services.nubank.NubankNotificationListener"
             android:exported="true"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
@@ -31,7 +31,7 @@
         </service>
 
         <service
-            android:name="lmm.moneylog.notification.service.NotificationActionRemoveService"
+            android:name="lmm.moneylog.services.nubank.NubankNotificationActionService"
             android:exported="false" />
     </application>
 

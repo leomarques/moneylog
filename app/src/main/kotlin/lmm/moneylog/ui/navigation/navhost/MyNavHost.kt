@@ -9,7 +9,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import lmm.moneylog.notification.settings.NotificationSettingsScreen
+import lmm.moneylog.ui.features.notification.settings.view.NotificationSettingsScreen
 import lmm.moneylog.ui.features.account.archive.view.layout.ArchivedAccountsListView
 import lmm.moneylog.ui.features.account.detail.view.layout.AccountDetailView
 import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView

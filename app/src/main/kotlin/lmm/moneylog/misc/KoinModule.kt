@@ -1,11 +1,6 @@
 package lmm.moneylog.misc
 
 import android.content.Context
-import lmm.moneylog.notification.converter.TransactionConverter
-import lmm.moneylog.notification.converter.TransactionConverterImpl
-import lmm.moneylog.notification.parser.NubankTransactionParser
-import lmm.moneylog.notification.parser.TransactionParser
-import lmm.moneylog.notification.predictor.CreditCardPredictor
 import lmm.moneylog.ui.features.account.archive.viewmodel.ArchivedAccountsViewModel
 import lmm.moneylog.ui.features.account.detail.viewmodel.AccountDetailViewModel
 import lmm.moneylog.ui.features.account.list.viewmodel.AccountsListViewModel
@@ -21,26 +16,14 @@ import lmm.moneylog.ui.features.home.viewmodel.HomeViewModel
 import lmm.moneylog.ui.features.invoice.viewmodel.InvoiceListViewModel
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import lmm.moneylog.ui.features.transaction.list.viewmodel.TransactionsListViewModel
-import lmm.moneylog.notification.settings.viewmodel.NotificationSettingsViewModel
+import lmm.moneylog.ui.features.notification.settings.viewmodel.NotificationSettingsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
-import org.koin.core.module.dsl.bind
-import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
 val appModule =
     module {
-        factoryOf(::TransactionConverterImpl) { bind<TransactionConverter>() }
-        factoryOf(::CreditCardPredictor)
-        factory<TransactionParser> {
-            NubankTransactionParser(
-                creditCardPredictor = get(),
-                getCreditCardsRepository = get(),
-                categoryKeywordRepository = get()
-            )
-        }
-
         viewModelOf(::HomeViewModel)
 
         viewModelOf(::BalanceCardViewModel)
