@@ -1,19 +1,23 @@
 package lmm.moneylog.notification.parser
 
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase
+import lmm.moneylog.data.creditcard.model.CreditCard
+import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.notification.predictor.CreditCardPredictor
 import org.junit.Before
 import org.junit.Test
 
 class NubankTransactionParserTest {
     private val creditCardPredictor = mockk<CreditCardPredictor>()
+    private val getCreditCardsRepository = mockk<GetCreditCardsRepository>()
     private lateinit var parser: NubankTransactionParser
 
     @Before
     fun setup() {
-        parser = NubankTransactionParser(creditCardPredictor)
+        parser = NubankTransactionParser(creditCardPredictor, getCreditCardsRepository)
     }
 
     @Test
@@ -183,6 +187,14 @@ class NubankTransactionParserTest {
     @Test
     fun `should get credit card id from shared preferences`() {
         every { creditCardPredictor.getCreditCardId() } returns 5
+        coEvery { getCreditCardsRepository.getCreditCardById(5) } returns CreditCard(
+            id = 5,
+            name = "Test Card",
+            closingDay = 15,
+            dueDay = 25,
+            limit = 10000,
+            color = 0xFF0000FF
+        )
 
         val text = "Compra de R$ 60,89 APROVADA em RESTAURANTE ABC para o cartão com final 5794"
 
@@ -190,6 +202,7 @@ class NubankTransactionParserTest {
 
         TestCase.assertNotNull(result)
         TestCase.assertEquals(5, result!!.creditCardId)
+        TestCase.assertEquals(15, result.creditCardClosingDay)
     }
 
     @Test
@@ -207,6 +220,14 @@ class NubankTransactionParserTest {
     @Test
     fun `should work without card ending in notification text`() {
         every { creditCardPredictor.getCreditCardId() } returns 3
+        coEvery { getCreditCardsRepository.getCreditCardById(3) } returns CreditCard(
+            id = 3,
+            name = "Test Card 2",
+            closingDay = 10,
+            dueDay = 20,
+            limit = 5000,
+            color = 0xFF00FF00
+        )
 
         val text = "Compra de R$ 60,89 APROVADA em IFD*RESTAURANTE BAKO S para o cartão"
 
@@ -214,6 +235,7 @@ class NubankTransactionParserTest {
 
         TestCase.assertNotNull(result)
         TestCase.assertEquals(3, result!!.creditCardId)
+        TestCase.assertEquals(10, result.creditCardClosingDay)
         TestCase.assertEquals(0, result.categoryId)
         TestCase.assertEquals("IFD*RESTAURANTE BAKO S", result.place)
     }

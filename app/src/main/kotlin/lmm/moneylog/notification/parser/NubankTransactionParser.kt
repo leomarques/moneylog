@@ -1,25 +1,40 @@
 package lmm.moneylog.notification.parser
 
+import kotlinx.coroutines.runBlocking
+import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.notification.config.NotificationConfig
 import lmm.moneylog.notification.model.NotificationTransactionInfo
+import lmm.moneylog.notification.predictor.CategoryPredictor
+import lmm.moneylog.notification.predictor.CreditCardPredictor
 import kotlin.text.get
 
-class NubankTransactionParser : TransactionParser {
+class NubankTransactionParser(
+    private val creditCardPredictor: CreditCardPredictor,
+    private val getCreditCardsRepository: GetCreditCardsRepository
+) : TransactionParser {
     override fun parseTransactionInfo(text: String): NotificationTransactionInfo? {
         val sanitizedText = sanitizeInput(text)
         if (sanitizedText.isBlank()) return null
 
-        return NotificationConfig.Patterns.NUBANK_TRANSACTION_REGEX.find(sanitizedText)?.let { match ->
-            val place = sanitizePlace(match.groups["estabelecimento"]?.value)
+        return NotificationConfig.Patterns.NUBANK_TRANSACTION_REGEX.find(sanitizedText)
+            ?.let { match ->
+                val place = sanitizePlace(match.groups["estabelecimento"]?.value)
+                val savedCreditCardId = creditCardPredictor.getCreditCardId()
+                val creditCardClosingDay = savedCreditCardId?.let { id ->
+                    runBlocking {
+                        getCreditCardsRepository.getCreditCardById(id)?.closingDay
+                    }
+                }
 
-            NotificationTransactionInfo(
-                value = sanitizeValue(match.groups["valor"]?.value),
-                place = place,
-                currency = match.groups["moeda"]?.value ?: "R$",
-                categoryId = null,
-                creditCardId = null
-            )
-        }
+                NotificationTransactionInfo(
+                    value = sanitizeValue(match.groups["valor"]?.value),
+                    place = place,
+                    currency = match.groups["moeda"]?.value ?: "R$",
+                    categoryId = CategoryPredictor.predictCategory(place),
+                    creditCardId = savedCreditCardId,
+                    creditCardClosingDay = creditCardClosingDay
+                )
+            }
     }
 
     private fun sanitizeInput(text: String): String {

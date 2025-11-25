@@ -32,7 +32,12 @@ val appModule =
     module {
         factoryOf(::TransactionConverterImpl) { bind<TransactionConverter>() }
         factoryOf(::CreditCardPredictor)
-        factoryOf(::NubankTransactionParser) { bind<TransactionParser>() }
+        factory<TransactionParser> {
+            NubankTransactionParser(
+                creditCardPredictor = get(),
+                getCreditCardsRepository = get()
+            )
+        }
 
         viewModelOf(::HomeViewModel)
 
