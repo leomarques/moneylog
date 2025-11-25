@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
@@ -31,6 +33,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,15 +49,24 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import lmm.moneylog.notification.helper.NotificationPermissionHelper
+import lmm.moneylog.notification.settings.components.CreditCardSelectorDialog
+import lmm.moneylog.notification.settings.viewmodel.NotificationSettingsViewModel
+import lmm.moneylog.ui.components.icons.CreditCardIcon
+import lmm.moneylog.ui.components.textfields.ClickTextField
 import lmm.moneylog.ui.theme.MoneylogTheme
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotificationSettingsScreen(
     onArrowBackClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: NotificationSettingsViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
+    val uiState by viewModel.uiState.collectAsState()
+    var showCreditCardDialog by remember { mutableStateOf(false) }
+
     var hasListenerPermission by remember {
         mutableStateOf(NotificationPermissionHelper.hasNotificationListenerPermission(context))
     }
@@ -85,6 +98,10 @@ fun NotificationSettingsScreen(
         }
     }
 
+    LaunchedEffect(hasListenerPermission, hasBasicPermission) {
+        viewModel.updatePermissions(hasListenerPermission, hasBasicPermission)
+    }
+
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -108,6 +125,7 @@ fun NotificationSettingsScreen(
                     .fillMaxSize()
                     .background(MaterialTheme.colorScheme.background)
                     .padding(innerPadding)
+                    .verticalScroll(rememberScrollState())
                     .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -302,7 +320,58 @@ fun NotificationSettingsScreen(
                     }
                 }
             }
+
+            Card(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Text(
+                        text = "Default Credit Card",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+
+                    Text(
+                        text =
+                            "Select the credit card that will be automatically assigned " +
+                                    "to transactions created from Nubank notifications.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    ClickTextField(
+                        value = uiState.selectedCreditCard?.name ?: "No card selected",
+                        label = "Credit Card",
+                        onClick = { showCreditCardDialog = true },
+                        leadingIcon = {
+                            CreditCardIcon(tint = uiState.selectedCreditCard?.color)
+                        }
+                    )
+
+                    if (uiState.selectedCreditCard != null) {
+                        TextButton(
+                            onClick = { viewModel.selectCreditCard(null) }
+                        ) {
+                            Text("Clear Selection")
+                        }
+                    }
+                }
+            }
         }
+    }
+
+    if (showCreditCardDialog) {
+        CreditCardSelectorDialog(
+            creditCards = uiState.creditCards,
+            selectedCreditCard = uiState.selectedCreditCard,
+            onDismiss = { showCreditCardDialog = false },
+            onCreditCardSelect = { creditCard ->
+                viewModel.selectCreditCard(creditCard)
+                showCreditCardDialog = false
+            }
+        )
     }
 }
 

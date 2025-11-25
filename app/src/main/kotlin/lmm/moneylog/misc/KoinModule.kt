@@ -20,6 +20,7 @@ import lmm.moneylog.ui.features.home.viewmodel.HomeViewModel
 import lmm.moneylog.ui.features.invoice.viewmodel.InvoiceListViewModel
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import lmm.moneylog.ui.features.transaction.list.viewmodel.TransactionsListViewModel
+import lmm.moneylog.notification.settings.viewmodel.NotificationSettingsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -62,6 +63,7 @@ val appModule =
         viewModelOf(::ArchivedAccountsViewModel)
         viewModelOf(::AccountTransferViewModel)
         viewModelOf(::InvoiceListViewModel)
+        viewModelOf(::NotificationSettingsViewModel)
 
         factory {
             androidContext().getSharedPreferences(
