@@ -16,6 +16,7 @@ import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView
 import lmm.moneylog.ui.features.account.transfer.view.layout.AccountTransferView
 import lmm.moneylog.ui.features.category.detail.view.layout.CategoryDetailView
 import lmm.moneylog.ui.features.category.list.view.layouts.CategoriesListView
+import lmm.moneylog.ui.features.categorykeywords.CategoryKeywordsScreen
 import lmm.moneylog.ui.features.creditcard.detail.view.layout.CreditCardDetailView
 import lmm.moneylog.ui.features.creditcard.list.view.layouts.CreditCardsListView
 import lmm.moneylog.ui.features.home.view.HomeView
@@ -27,6 +28,7 @@ import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.CATEGORY_KEYWORDS_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
@@ -62,6 +64,7 @@ fun MyNavHost(
     onInvoiceListFabClick: (Int) -> Unit,
     onCreditCardsItemClick: (Int) -> Unit,
     onSettingsClick: () -> Unit,
+    onCategoryKeywordsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -206,7 +209,17 @@ fun MyNavHost(
             route = NOTIFICATION_SETTINGS_SCREEN,
             onArrowBackClick = onArrowBackClick
         ) {
-            NotificationSettingsScreen(onArrowBackClick = onArrowBackClick)
+            NotificationSettingsScreen(
+                onArrowBackClick = onArrowBackClick,
+                onCategoryKeywordsClick = onCategoryKeywordsClick
+            )
+        }
+
+        composableExt(
+            route = CATEGORY_KEYWORDS_SCREEN,
+            onArrowBackClick = onArrowBackClick
+        ) {
+            CategoryKeywordsScreen(onArrowBackClick = onArrowBackClick)
         }
     }
 }

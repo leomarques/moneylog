@@ -13,6 +13,7 @@ const val CREDITCARD_DETAIL_SCREEN = "creditcard_detail"
 const val INVOICE_LIST_SCREEN = "invoice_list"
 const val TRANSFER_SCREEN = "transfer"
 const val NOTIFICATION_SETTINGS_SCREEN = "notification_settings"
+const val CATEGORY_KEYWORDS_SCREEN = "category_keywords"
 
 const val PARAM_TYPE_OF_VALUE = "typeOfValue"
 const val PARAM_TYPE_ALL = "all"

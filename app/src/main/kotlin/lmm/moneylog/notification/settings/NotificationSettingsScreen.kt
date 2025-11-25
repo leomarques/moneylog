@@ -60,6 +60,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun NotificationSettingsScreen(
     onArrowBackClick: () -> Unit,
+    onCategoryKeywordsClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: NotificationSettingsViewModel = koinViewModel()
 ) {
@@ -359,6 +360,35 @@ fun NotificationSettingsScreen(
                     }
                 }
             }
+
+            Card(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    Text(
+                        text = "Category Keywords",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+
+                    Text(
+                        text =
+                            "Manage keywords that automatically predict categories " +
+                                    "for transactions based on merchant names.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+
+                    Button(
+                        onClick = onCategoryKeywordsClick,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Manage Keywords")
+                    }
+                }
+            }
         }
     }
 
@@ -378,5 +408,10 @@ fun NotificationSettingsScreen(
 @Preview
 @Composable
 private fun PreviewNotificationSettingsScreen() {
-    MoneylogTheme { NotificationSettingsScreen(onArrowBackClick = {}) }
+    MoneylogTheme {
+        NotificationSettingsScreen(
+            onArrowBackClick = {},
+            onCategoryKeywordsClick = {}
+        )
+    }
 }

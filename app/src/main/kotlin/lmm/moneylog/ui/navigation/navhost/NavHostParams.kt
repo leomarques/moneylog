@@ -11,6 +11,7 @@ import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.CATEGORY_KEYWORDS_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.INVOICE_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.NOTIFICATION_SETTINGS_SCREEN
@@ -158,5 +159,12 @@ fun NavHostParams(
                 showNavigationBar = showNavigationBar
             )
         },
+        onCategoryKeywordsClick = {
+            navController.navigatePopUpTo(
+                destination = CATEGORY_KEYWORDS_SCREEN,
+                navBarSelectedIndex = navBarSelectedIndex,
+                showNavigationBar = showNavigationBar
+            )
+        }
     )
 }
