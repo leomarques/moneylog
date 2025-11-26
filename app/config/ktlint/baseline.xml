@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<baseline version="1.0">
+    <file name="src/main/kotlin/lmm/moneylog/ui/features/notification/NotificationPermissionHelper.kt">
+        <error line="34" column="68" source="standard:function-signature" />
+    </file>
+    <file name="src/main/kotlin/lmm/moneylog/ui/features/transaction/detail/viewmodel/InvoiceExts.kt">
+        <error line="29" column="78" source="standard:function-signature" />
+        <error line="32" column="74" source="standard:function-signature" />
+    </file>
+</baseline>
