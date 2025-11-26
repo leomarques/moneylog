@@ -20,9 +20,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -103,7 +103,6 @@ fun CategoryKeywordsScreen(
                 uiState.selectedCategory != null -> {
                     CategoryKeywordsDetail(
                         category = uiState.selectedCategory!!,
-                        onBack = { viewModel.selectCategory(null) },
                         onDeleteKeyword = { viewModel.showDeleteConfirmDialog(it) }
                     )
                 }
@@ -234,7 +233,7 @@ private fun CategoryListItem(
             }
 
             Icon(
-                imageVector = Icons.Default.KeyboardArrowRight,
+                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = "View keywords",
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -246,7 +245,6 @@ private fun CategoryListItem(
 @Composable
 private fun CategoryKeywordsDetail(
     category: CategoryWithKeywords,
-    onBack: () -> Unit,
     onDeleteKeyword: (KeywordItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -351,7 +349,8 @@ private fun CategoryKeywordsDetail(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Keywords are matched case-insensitively and can appear anywhere in the transaction description.",
+                text = "Keywords are matched case-insensitively and can appear anywhere in the " +
+                        "transaction description.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

@@ -31,7 +31,8 @@ object NotificationPermissionHelper {
         context.startActivity(intent)
     }
 
-    fun hasBasicNotificationPermission(context: Context): Boolean = NotificationManagerCompat.from(context).areNotificationsEnabled()
+    fun hasBasicNotificationPermission(context: Context): Boolean =
+        NotificationManagerCompat.from(context).areNotificationsEnabled()
 
     fun requestBasicNotificationPermission(launcher: ActivityResultLauncher<String>) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

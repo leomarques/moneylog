@@ -21,7 +21,8 @@ class CategoryKeywordRepositoryImpl(
             entities.map { it.toCategoryKeyword() }
         }
 
-    override suspend fun getKeywordById(id: Int): CategoryKeyword? = categoryKeywordDao.getKeywordById(id)?.toCategoryKeyword()
+    override suspend fun getKeywordById(id: Int): CategoryKeyword? =
+        categoryKeywordDao.getKeywordById(id)?.toCategoryKeyword()
 
     override suspend fun addKeyword(
         categoryId: Int,

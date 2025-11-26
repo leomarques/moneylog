@@ -10,7 +10,6 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,16 +42,16 @@ fun TransactionsListLayout(
     onNextMonthClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val filter = remember { mutableStateOf("") }
+    var filter by remember { mutableStateOf("") }
     var showFab by remember { mutableStateOf(true) }
 
     Scaffold(
         modifier = modifier,
         topBar = {
             TopAppBarWithSearch(
-                onSearchTextChange = { filter.value = it },
+                onSearchTextChange = { filter = it },
                 onArrowBackClick = onArrowBackClick,
-                filter = filter.value,
+                filter = filter,
                 titleResourceId = model.titleResourceId
             )
         },
@@ -117,12 +116,12 @@ private fun TotalValue(model: TransactionsListUIState) {
 @Composable
 private fun List(
     model: TransactionsListUIState,
-    filter: MutableState<String>,
+    filter: String,
     onItemClick: (Int) -> Unit
 ) {
     if (model.transactions.isNotEmpty()) {
         TransactionsListContent(
-            list = model.transactions.filtered(filter.value),
+            list = model.transactions.filtered(filter),
             onItemClick = onItemClick
         )
     } else {
