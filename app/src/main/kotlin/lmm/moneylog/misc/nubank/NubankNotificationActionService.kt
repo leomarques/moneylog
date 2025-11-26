@@ -50,7 +50,7 @@ class NubankNotificationActionService : IntentService("NubankNotificationActionS
                 val notificationManager =
                     getSystemService(NOTIFICATION_SERVICE) as NotificationManager
                 notificationManager.cancel(notificationId)
-            } catch (e: Exception) {
+            } catch (_: Exception) {
             }
         }
     }

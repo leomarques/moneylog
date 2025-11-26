@@ -87,7 +87,7 @@ class NubankNotificationListener(
                         }
                     }
                 }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
             }
         }
     }
