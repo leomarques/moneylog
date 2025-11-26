@@ -142,14 +142,4 @@ class CategoryKeywordsViewModel(
             }
         }
     }
-
-    fun clearCategoryKeywords(categoryId: Int) {
-        viewModelScope.launch {
-            try {
-                categoryKeywordRepository.deleteKeywordsByCategory(categoryId)
-            } catch (e: SQLiteException) {
-                Log.e(TAG, "Database error clearing category keywords", e)
-            }
-        }
-    }
 }
