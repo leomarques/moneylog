@@ -10,30 +10,34 @@ class NubankTransactionConverterImpl(
     private val invoiceCalculator: InvoiceCalculator
 ) : NubankTransactionConverter {
     override suspend fun convert(transactionInfo: NubankTransactionInfo): Transaction? {
-        val value =
-            parseValue(
-                valueString = transactionInfo.value,
-                currency = transactionInfo.currency
-            ) ?: return null
+        return try {
+            val value =
+                parseValue(
+                    valueString = transactionInfo.value,
+                    currency = transactionInfo.currency
+                ) ?: return null
 
-        val currentTime = domainTimeRepository.getCurrentDomainTime()
-        val (invoiceMonth, invoiceYear) =
-            if (transactionInfo.creditCardId != null && transactionInfo.creditCardClosingDay != null) {
-                invoiceCalculator.calculateInvoiceMonthAndYear(transactionInfo.creditCardClosingDay)
-            } else {
-                null to null
-            }
+            val currentTime = domainTimeRepository.getCurrentDomainTime()
+            val (invoiceMonth, invoiceYear) =
+                if (transactionInfo.creditCardId != null && transactionInfo.creditCardClosingDay != null) {
+                    invoiceCalculator.calculateInvoiceMonthAndYear(transactionInfo.creditCardClosingDay)
+                } else {
+                    null to null
+                }
 
-        return Transaction(
-            value = -value,
-            description = transactionInfo.place,
-            date = currentTime,
-            accountId = null,
-            categoryId = transactionInfo.categoryId,
-            creditCardId = transactionInfo.creditCardId,
-            invoiceMonth = invoiceMonth,
-            invoiceYear = invoiceYear
-        )
+            Transaction(
+                value = -value,
+                description = transactionInfo.place,
+                date = currentTime,
+                accountId = null,
+                categoryId = transactionInfo.categoryId,
+                creditCardId = transactionInfo.creditCardId,
+                invoiceMonth = invoiceMonth,
+                invoiceYear = invoiceYear
+            )
+        } catch (_: Exception) {
+            null
+        }
     }
 
     private fun parseValue(

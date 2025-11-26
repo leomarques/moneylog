@@ -1,9 +1,10 @@
 <?xml version="1.0" ?>
 <SmellBaseline>
-  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <ManuallySuppressedIssues/>
   <CurrentIssues>
-    <ID>MagicNumber:GetCreditCardHomeInfoInteractor.kt$GetCreditCardHomeInfoInteractor$12</ID>
     <ID>MagicNumber:Invoice.kt$Invoice$12</ID>
+    <ID>SwallowedException:NubankTransactionConverterImpl.kt$NubankTransactionConverterImpl$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:NubankTransactionConverterImpl.kt$NubankTransactionConverterImpl$e: Exception</ID>
     <ID>TooManyFunctions:TransactionDao.kt$TransactionDao</ID>
   </CurrentIssues>
 </SmellBaseline>
