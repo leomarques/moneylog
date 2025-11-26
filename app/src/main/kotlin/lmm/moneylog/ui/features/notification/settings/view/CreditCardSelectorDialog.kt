@@ -106,8 +106,7 @@ private fun CreditCardSelectorItem(
                             MaterialTheme.colorScheme.surface
                         },
                     shape = RoundedCornerShape(8.dp)
-                )
-                .padding(12.dp)
+                ).padding(12.dp)
                 .clickable(onClick = onClick),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)

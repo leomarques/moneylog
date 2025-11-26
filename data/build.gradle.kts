@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "lmm.moneylog.data"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 28

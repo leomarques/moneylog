@@ -349,7 +349,8 @@ private fun CategoryKeywordsDetail(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Keywords are matched case-insensitively and can appear anywhere in the " +
+                text =
+                    "Keywords are matched case-insensitively and can appear anywhere in the " +
                         "transaction description.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant

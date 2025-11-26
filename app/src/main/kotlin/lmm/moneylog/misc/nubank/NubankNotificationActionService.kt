@@ -1,4 +1,4 @@
-package lmm.moneylog.services.nubank
+package lmm.moneylog.misc.nubank
 
 import android.app.IntentService
 import android.app.NotificationManager

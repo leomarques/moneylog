@@ -9,7 +9,7 @@ import android.service.notification.NotificationListenerService
 import androidx.core.app.NotificationCompat
 import lmm.moneylog.R
 import lmm.moneylog.data.transaction.nubank.model.NubankTransactionInfo
-import lmm.moneylog.services.nubank.NubankNotificationActionService
+import lmm.moneylog.misc.nubank.NubankNotificationActionService
 import lmm.moneylog.ui.navigation.misc.MainActivity
 import org.koin.core.component.KoinComponent
 

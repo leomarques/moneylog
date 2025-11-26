@@ -8,7 +8,7 @@ import android.os.Build
 import android.provider.Settings
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.NotificationManagerCompat
-import lmm.moneylog.services.nubank.NubankNotificationListener
+import lmm.moneylog.misc.nubank.NubankNotificationListener
 
 object NotificationPermissionHelper {
     fun hasNotificationListenerPermission(context: Context): Boolean {

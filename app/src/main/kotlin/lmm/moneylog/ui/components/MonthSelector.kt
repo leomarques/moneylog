@@ -30,14 +30,14 @@ fun MonthSelector(
     ) {
         MonthButton(
             onClick = onPreviousMonthClick,
-            imageVector = Icons.AutoMirrored.Default.ArrowBack
+            imageVector = Icons.AutoMirrored.Filled.ArrowBack
         )
 
         MonthName(monthName, modifier = Modifier.weight(1f))
 
         MonthButton(
             onClick = onNextMonthClick,
-            imageVector = Icons.AutoMirrored.Default.ArrowForward
+            imageVector = Icons.AutoMirrored.Filled.ArrowForward
         )
     }
 }
