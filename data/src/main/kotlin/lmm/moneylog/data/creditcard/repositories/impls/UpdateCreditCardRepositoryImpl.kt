@@ -7,8 +7,7 @@ import lmm.moneylog.data.creditcard.repositories.interfaces.UpdateCreditCardRepo
 
 class UpdateCreditCardRepositoryImpl(
     private val creditCardDao: CreditCardDao
-) :
-    UpdateCreditCardRepository {
+) : UpdateCreditCardRepository {
     override suspend fun update(creditCard: CreditCard) {
         creditCardDao.update(
             with(creditCard) {

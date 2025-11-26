@@ -14,8 +14,7 @@ import lmm.moneylog.ui.navigation.navhost.NavHostParams
 @Composable
 fun Navigation(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
-    startDestination: String = HOME_SCREEN
+    navController: NavHostController = rememberNavController()
 ) {
     val showNavigationBar = remember { mutableStateOf(true) }
     val navBarSelectedIndex = remember { mutableIntStateOf(0) }
@@ -36,7 +35,7 @@ fun Navigation(
             paddingValues = paddingValues,
             navController = navController,
             navBarSelectedIndex = navBarSelectedIndex,
-            startDestination = startDestination,
+            startDestination = HOME_SCREEN,
             showNavigationBar = showNavigationBar
         )
     }

@@ -28,8 +28,7 @@ fun BalanceCardContent(
                         bottomStart = Size.DefaultSpaceSize,
                         bottomEnd = Size.DefaultSpaceSize
                     )
-                )
-                .background(MaterialTheme.colorScheme.tertiaryContainer)
+                ).background(MaterialTheme.colorScheme.tertiaryContainer)
                 .padding(Size.DefaultSpaceSize),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

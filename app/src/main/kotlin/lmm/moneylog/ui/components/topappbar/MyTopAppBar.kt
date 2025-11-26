@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.components.topappbar
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 
 @Composable
@@ -45,7 +47,8 @@ fun MyTopAppBar(
                     )
                 }
             )
-        }
+        },
+        windowInsets = WindowInsets(0.dp)
     )
 }
 

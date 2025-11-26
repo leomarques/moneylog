@@ -28,8 +28,8 @@ class AccountTransferRepositoryImpl(
         )
     }
 
-    override fun getTransfers(): Flow<List<AccountTransfer>> {
-        return accountTransferDao.selectAll().map { list ->
+    override fun getTransfers(): Flow<List<AccountTransfer>> =
+        accountTransferDao.selectAll().map { list ->
             list.map { entity ->
                 AccountTransfer(
                     value = entity.value,
@@ -38,5 +38,4 @@ class AccountTransferRepositoryImpl(
                 )
             }
         }
-    }
 }

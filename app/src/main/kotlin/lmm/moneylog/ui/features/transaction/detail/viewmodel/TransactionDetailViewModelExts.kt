@@ -64,30 +64,26 @@ private fun Double.isWhole() = this % 1.0 == 0.0
 
 private fun String.removeDecimal() = substring(0, length - 2)
 
-fun DomainTime.convertToDisplayDate(domainTimeRepository: DomainTimeRepository): String {
-    return "$day ${domainTimeRepository.getMonthName(month)}, $year"
-}
+fun DomainTime.convertToDisplayDate(domainTimeRepository: DomainTimeRepository): String =
+    "$day ${domainTimeRepository.getMonthName(month)}, $year"
 
-fun List<Account>.getAccountById(accountId: Int?): (Pair<String, Color>)? {
-    return firstOrNull {
+fun List<Account>.getAccountById(accountId: Int?): (Pair<String, Color>)? =
+    firstOrNull {
         it.id == accountId
     }?.let {
         it.name to it.color.toComposeColor()
     }
-}
 
-fun List<Category>.getCategoryById(categoryId: Int?): (Pair<String, Color>)? {
-    return firstOrNull {
+fun List<Category>.getCategoryById(categoryId: Int?): (Pair<String, Color>)? =
+    firstOrNull {
         it.id == categoryId
     }?.let {
         it.name to it.color.toComposeColor()
     }
-}
 
-fun List<CreditCard>.getCreditCardById(creditCardId: Int?): (Pair<String, Color>)? {
-    return firstOrNull {
+fun List<CreditCard>.getCreditCardById(creditCardId: Int?): (Pair<String, Color>)? =
+    firstOrNull {
         it.id == creditCardId
     }?.let {
         it.name to it.color.toComposeColor()
     }
-}

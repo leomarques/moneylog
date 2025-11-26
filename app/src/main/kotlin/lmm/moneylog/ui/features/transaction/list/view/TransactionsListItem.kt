@@ -41,8 +41,7 @@ fun TransactionsListItem(
                 .padding(
                     vertical = Size.SmallSpaceSize,
                     horizontal = Size.DefaultSpaceSize
-                )
-                .clickable { onItemClick(transaction.id) },
+                ).clickable { onItemClick(transaction.id) },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

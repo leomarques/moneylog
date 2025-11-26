@@ -7,8 +7,9 @@ import lmm.moneylog.data.account.database.AccountEntity
 import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 
-class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
-    GetAccountsRepository {
+class GetAccountsRepositoryImpl(
+    private val accountDao: AccountDao
+) : GetAccountsRepository {
     override suspend fun getAccountById(id: Int): Account? {
         val account = accountDao.selectAccountById(id)
         return if (account != null) {
@@ -25,8 +26,9 @@ class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
         }
     }
 
-    override fun getAccounts(archived: Boolean): Flow<List<Account>> {
-        return accountDao.selectAccounts()
+    override fun getAccounts(archived: Boolean): Flow<List<Account>> =
+        accountDao
+            .selectAccounts()
             .map { accountsList ->
                 convertEntity(
                     accountsList.filter {
@@ -34,10 +36,10 @@ class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
                     }
                 )
             }
-    }
 
-    override suspend fun getAccountsSuspend(archived: Boolean): List<Account> {
-        return accountDao.selectAccountsSuspend()
+    override suspend fun getAccountsSuspend(archived: Boolean): List<Account> =
+        accountDao
+            .selectAccountsSuspend()
             .filter { it.archived == archived }
             .map { account ->
                 with(account) {
@@ -49,10 +51,9 @@ class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
                     )
                 }
             }
-    }
 
-    private fun convertEntity(list: List<AccountEntity>): List<Account> {
-        return list.map { account ->
+    private fun convertEntity(list: List<AccountEntity>): List<Account> =
+        list.map { account ->
             with(account) {
                 Account(
                     id = id,
@@ -62,5 +63,4 @@ class GetAccountsRepositoryImpl(private val accountDao: AccountDao) :
                 )
             }
         }
-    }
 }

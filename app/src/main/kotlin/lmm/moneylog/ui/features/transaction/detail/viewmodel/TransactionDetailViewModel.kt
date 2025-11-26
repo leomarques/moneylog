@@ -151,13 +151,12 @@ class TransactionDetailViewModel(
         card: CreditCard?,
         currentDate: DomainTime,
         invoices: List<Invoice>
-    ): Invoice {
-        return if (card != null && currentDate.day >= card.closingDay) {
+    ): Invoice =
+        if (card != null && currentDate.day >= card.closingDay) {
             invoices[1]
         } else {
             invoices[0]
         }
-    }
 
     fun deleteTransaction() {
         viewModelScope.launch {

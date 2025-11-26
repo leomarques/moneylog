@@ -8,8 +8,7 @@ import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRe
 
 class UpdateTransactionRepositoryImpl(
     private val transactionDao: TransactionDao
-) :
-    UpdateTransactionRepository {
+) : UpdateTransactionRepository {
     override suspend fun update(transaction: Transaction) {
         transactionDao.update(
             with(transaction) {

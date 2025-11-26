@@ -54,7 +54,7 @@ class CategoryDetailViewModel(
     }
 
     fun onNameChange(name: String) {
-        _uiState.update { it.copy(name = name.trim()) }
+        _uiState.update { it.copy(name = name) }
     }
 
     fun onIncomeChange(isIncome: Boolean) {
@@ -70,7 +70,7 @@ class CategoryDetailViewModel(
         onError: (Int) -> Unit
     ) {
         val state = _uiState.value
-        if (state.name.isEmpty()) {
+        if (state.name.trim().isEmpty()) {
             onError(R.string.detail_no_name)
             return
         }
@@ -92,7 +92,7 @@ class CategoryDetailViewModel(
 fun CategoryDetailUIState.toCategory() =
     Category(
         id = id,
-        name = name,
+        name = name.trim(),
         color = color.value.toLong(),
         isIncome = isIncome
     )

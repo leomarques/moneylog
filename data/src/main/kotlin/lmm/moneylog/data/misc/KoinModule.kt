@@ -24,6 +24,8 @@ import lmm.moneylog.data.category.repositories.interfaces.AddCategoryRepository
 import lmm.moneylog.data.category.repositories.interfaces.DeleteCategoryRepository
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.category.repositories.interfaces.UpdateCategoryRepository
+import lmm.moneylog.data.categorypredictor.repositories.impls.CategoryKeywordRepositoryImpl
+import lmm.moneylog.data.categorypredictor.repositories.interfaces.CategoryKeywordRepository
 import lmm.moneylog.data.creditcard.interactors.GetCreditCardHomeInfoInteractor
 import lmm.moneylog.data.creditcard.repositories.impls.AddCreditCardRepositoryImpl
 import lmm.moneylog.data.creditcard.repositories.impls.DeleteCreditCardRepositoryImpl
@@ -33,10 +35,19 @@ import lmm.moneylog.data.creditcard.repositories.interfaces.AddCreditCardReposit
 import lmm.moneylog.data.creditcard.repositories.interfaces.DeleteCreditCardRepository
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.creditcard.repositories.interfaces.UpdateCreditCardRepository
+import lmm.moneylog.data.creditcard.utils.InvoiceCalculator
 import lmm.moneylog.data.invoice.repositories.GetInvoicesRepository
 import lmm.moneylog.data.invoice.repositories.GetInvoicesRepositoryImpl
+import lmm.moneylog.data.notification.repositories.NotificationSettingsRepository
+import lmm.moneylog.data.notification.repositories.NotificationSettingsRepositoryImpl
+import lmm.moneylog.data.notification.repositories.NotificationTransactionRepository
+import lmm.moneylog.data.notification.repositories.NotificationTransactionRepositoryImpl
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.time.repositories.DomainTimeRepositoryImpl
+import lmm.moneylog.data.transaction.nubank.converter.NubankTransactionConverter
+import lmm.moneylog.data.transaction.nubank.converter.NubankTransactionConverterImpl
+import lmm.moneylog.data.transaction.nubank.parser.NubankTransactionParser
+import lmm.moneylog.data.transaction.nubank.parser.NubankTransactionParserImpl
 import lmm.moneylog.data.transaction.repositories.impls.AddTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.DeleteTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.GetTransactionsRepositoryImpl
@@ -56,9 +67,11 @@ val dataModule =
         single { MoneylogDatabase.getInstance(get()).categoryDao() }
         single { MoneylogDatabase.getInstance(get()).accountTransferDao() }
         single { MoneylogDatabase.getInstance(get()).creditCardDao() }
+        single { MoneylogDatabase.getInstance(get()).categoryKeywordDao() }
 
         factoryOf(::DomainTimeRepositoryImpl) { bind<DomainTimeRepository>() }
 
+        factoryOf(::InvoiceCalculator)
         factoryOf(::GetBalanceInteractor)
         factoryOf(::GetBalanceByAccountInteractor)
         factoryOf(::GetBalanceRepositoryImpl) { bind<GetBalanceRepository>() }
@@ -77,6 +90,8 @@ val dataModule =
         factoryOf(::UpdateCategoryRepositoryImpl) { bind<UpdateCategoryRepository>() }
         factoryOf(::DeleteCategoryRepositoryImpl) { bind<DeleteCategoryRepository>() }
 
+        factoryOf(::CategoryKeywordRepositoryImpl) { bind<CategoryKeywordRepository>() }
+
         factoryOf(::AddTransactionRepositoryImpl) { bind<AddTransactionRepository>() }
         factoryOf(::GetTransactionsRepositoryImpl) { bind<GetTransactionsRepository>() }
         factoryOf(::UpdateTransactionRepositoryImpl) { bind<UpdateTransactionRepository>() }
@@ -86,6 +101,12 @@ val dataModule =
         factoryOf(::GetCreditCardsRepositoryImpl) { bind<GetCreditCardsRepository>() }
         factoryOf(::UpdateCreditCardRepositoryImpl) { bind<UpdateCreditCardRepository>() }
         factoryOf(::DeleteCreditCardRepositoryImpl) { bind<DeleteCreditCardRepository>() }
+
+        factoryOf(::NotificationSettingsRepositoryImpl) { bind<NotificationSettingsRepository>() }
+        factoryOf(::NotificationTransactionRepositoryImpl) { bind<NotificationTransactionRepository>() }
+
+        factoryOf(::NubankTransactionConverterImpl) { bind<NubankTransactionConverter>() }
+        factoryOf(::NubankTransactionParserImpl) { bind<NubankTransactionParser>() }
 
         factoryOf(::GetInvoicesRepositoryImpl) { bind<GetInvoicesRepository>() }
     }

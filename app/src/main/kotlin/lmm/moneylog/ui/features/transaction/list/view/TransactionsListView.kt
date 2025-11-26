@@ -21,7 +21,9 @@ fun TransactionsListView(
     TransactionsListLayout(
         onArrowBackClick = onArrowBackClick,
         onFabClick = onFabClick,
+        onItemClick = onItemClick,
         model = transactionsModel,
-        onItemClick = onItemClick
+        onPreviousMonthClick = viewModel::onPreviousMonthClick,
+        onNextMonthClick = viewModel::onNextMonthClick
     )
 }

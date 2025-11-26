@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.map
 import lmm.moneylog.data.creditcard.model.CreditCardHomeInfo
 import lmm.moneylog.data.creditcard.model.CreditCardHomeInfoResult
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
+import lmm.moneylog.data.creditcard.utils.InvoiceCalculator
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import kotlin.math.abs
@@ -16,20 +17,22 @@ import kotlin.math.abs
 class GetCreditCardHomeInfoInteractor(
     private val getCreditCardsRepository: GetCreditCardsRepository,
     private val getTransactionsRepository: GetTransactionsRepository,
-    private val domainTimeRepository: DomainTimeRepository
+    private val domainTimeRepository: DomainTimeRepository,
+    private val invoiceCalculator: InvoiceCalculator
 ) {
-    fun execute(): Flow<CreditCardHomeInfoResult> {
-        return getCreditCardsRepository.getCreditCards().flatMapLatest { creditCards ->
+    fun execute(): Flow<CreditCardHomeInfoResult> =
+        getCreditCardsRepository.getCreditCards().flatMapLatest { creditCards ->
             combine(
                 creditCards.map { creditCard ->
-                    val invoiceCode = calculateInvoiceForCard(creditCard.closingDay)
+                    val invoiceCode = invoiceCalculator.calculateInvoiceForCard(creditCard.closingDay)
 
-                    getTransactionsRepository.getTransactionsByInvoice(
-                        invoiceCode = invoiceCode,
-                        creditCardId = creditCard.id
-                    ).map { transactions ->
-                        Triple(creditCard, transactions.sumOf { it.value }, invoiceCode)
-                    }
+                    getTransactionsRepository
+                        .getTransactionsByInvoice(
+                            invoiceCode = invoiceCode,
+                            creditCardId = creditCard.id
+                        ).map { transactions ->
+                            Triple(creditCard, transactions.sumOf { it.value }, invoiceCode)
+                        }
                 }
             ) { creditCardWithTransactions ->
                 val firstInvoiceCode =
@@ -50,18 +53,4 @@ class GetCreditCardHomeInfoInteractor(
                 )
             }
         }
-    }
-
-    private fun calculateInvoiceForCard(closingDay: Int): String {
-        val currentTime = domainTimeRepository.getCurrentDomainTime()
-        val currentDay = currentTime.day
-
-        return if (currentDay < closingDay) {
-            "${currentTime.month}.${currentTime.year}"
-        } else {
-            val month = if (currentTime.month == 12) 1 else currentTime.month + 1
-            val year = if (currentTime.month == 12) currentTime.year + 1 else currentTime.year
-            "$month.$year"
-        }
-    }
 }

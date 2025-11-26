@@ -13,8 +13,9 @@ import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.creditcard.list.model.CreditCardModel
 import lmm.moneylog.ui.features.creditcard.list.model.CreditCardsListUIState
 
-class CreditCardsListViewModel(private val getCreditCardsRepository: GetCreditCardsRepository) :
-    ViewModel() {
+class CreditCardsListViewModel(
+    private val getCreditCardsRepository: GetCreditCardsRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow(CreditCardsListUIState())
     val uiState: StateFlow<CreditCardsListUIState> = _uiState.asStateFlow()
 
@@ -33,12 +34,11 @@ class CreditCardsListViewModel(private val getCreditCardsRepository: GetCreditCa
     }
 }
 
-fun List<CreditCard>.toCreditCardModelList(): List<CreditCardModel> {
-    return this.map {
+fun List<CreditCard>.toCreditCardModelList(): List<CreditCardModel> =
+    this.map {
         CreditCardModel(
             id = it.id,
             name = it.name,
             color = it.color.toComposeColor()
         )
     }
-}

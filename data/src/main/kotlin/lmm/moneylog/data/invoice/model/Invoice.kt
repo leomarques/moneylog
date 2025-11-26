@@ -5,9 +5,7 @@ data class Invoice(
     val month: Int,
     val name: String
 ) {
-    fun getCode(): String {
-        return "$month.$year"
-    }
+    fun getCode(): String = "$month.$year"
 
     fun previousCode(): String {
         val year = if (month == 1) year - 1 else year

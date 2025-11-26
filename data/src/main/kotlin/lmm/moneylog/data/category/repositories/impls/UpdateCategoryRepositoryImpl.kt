@@ -7,8 +7,7 @@ import lmm.moneylog.data.category.repositories.interfaces.UpdateCategoryReposito
 
 class UpdateCategoryRepositoryImpl(
     private val categoryDao: CategoryDao
-) :
-    UpdateCategoryRepository {
+) : UpdateCategoryRepository {
     override suspend fun update(category: Category) {
         categoryDao.update(
             with(category) {

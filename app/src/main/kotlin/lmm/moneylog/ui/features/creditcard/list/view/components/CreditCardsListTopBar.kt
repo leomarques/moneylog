@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.creditcard.list.view.components
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -10,6 +11,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -20,6 +22,7 @@ fun CreditCardsListTopBar(
 ) {
     TopAppBar(
         modifier = modifier,
+        windowInsets = WindowInsets(0.dp),
         title = {
             Text(text = stringResource(id = R.string.creditcards))
         },

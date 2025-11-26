@@ -8,8 +8,8 @@ import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepos
 class AddTransactionRepositoryImpl(
     private val transactionDao: TransactionDao
 ) : AddTransactionRepository {
-    override suspend fun save(transaction: Transaction) {
-        transactionDao.insert(
+    override suspend fun save(transaction: Transaction): Long =
+        transactionDao.insertAndReturnId(
             with(transaction) {
                 TransactionEntity(
                     value = value,
@@ -25,5 +25,4 @@ class AddTransactionRepositoryImpl(
                 )
             }
         )
-    }
 }

@@ -13,8 +13,8 @@ fun List<Transaction>.toInvoiceListUiState(
     categoriesMap: Map<Int, String>,
     categoriesColorMap: Map<Int, Color>,
     accounts: List<Account>
-): InvoiceListUIState {
-    return InvoiceListUIState(
+): InvoiceListUIState =
+    InvoiceListUIState(
         titleResourceId = titleResourceId,
         transactions =
             toTransactionModels(
@@ -23,7 +23,6 @@ fun List<Transaction>.toInvoiceListUiState(
             ),
         accounts = accounts,
     )
-}
 
 private fun List<Transaction>.toTransactionModels(
     categoriesMap: Map<Int, String>,

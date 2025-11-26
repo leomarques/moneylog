@@ -18,14 +18,12 @@ class AddCreditCardTest {
     @Test
     fun shouldAddCreditCard() {
         with(composeTestRule) {
-            navigateToCreditCards() // Assuming this navigation function exists
+            navigateToCreditCards()
             clickFab()
 
-            // Assuming the tag for the name input field is "CreditCardNameTextField"
             onNodeWithTag("CreditCardNameTextField").performTextInput("My New Card")
             clickFab()
 
-            // Assuming the added card's name is displayed as text
             onNodeWithText("My New Card").assertIsDisplayed()
         }
     }

@@ -3,8 +3,9 @@ package lmm.moneylog.data.invoice.repositories
 import lmm.moneylog.data.invoice.model.Invoice
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 
-class GetInvoicesRepositoryImpl(private val domainTimeRepository: DomainTimeRepository) :
-    GetInvoicesRepository {
+class GetInvoicesRepositoryImpl(
+    private val domainTimeRepository: DomainTimeRepository
+) : GetInvoicesRepository {
     override fun getInvoices(): List<Invoice> {
         val currentDomainTime = domainTimeRepository.getCurrentDomainTime()
         val month = currentDomainTime.month

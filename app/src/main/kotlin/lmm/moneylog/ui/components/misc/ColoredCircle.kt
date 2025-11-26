@@ -42,8 +42,7 @@ fun ColoredCircle(
                                     it.length,
                                     2
                                 )
-                        )
-                        .uppercase(),
+                        ).uppercase(),
                 style = MaterialTheme.typography.titleMedium,
                 color = Color.White,
                 modifier = Modifier.offset(y = (-1).dp)

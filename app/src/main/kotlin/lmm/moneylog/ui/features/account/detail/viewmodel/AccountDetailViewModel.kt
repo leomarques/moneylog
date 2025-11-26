@@ -56,7 +56,7 @@ class AccountDetailViewModel(
     }
 
     fun onNameChange(name: String) {
-        _uiState.update { it.copy(name = name.trim()) }
+        _uiState.update { it.copy(name = name) }
     }
 
     fun onColorPick(color: Color) {
@@ -68,7 +68,7 @@ class AccountDetailViewModel(
         onError: (Int) -> Unit
     ) {
         val state = _uiState.value
-        if (state.name.isEmpty()) {
+        if (state.name.trim().isEmpty()) {
             onError(R.string.detail_no_name)
             return
         }
@@ -90,7 +90,7 @@ class AccountDetailViewModel(
 private fun AccountDetailUIState.toAccount() =
     Account(
         id = id,
-        name = name,
+        name = name.trim(),
         color = color.value.toLong(),
         archived = false
     )

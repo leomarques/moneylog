@@ -10,6 +10,8 @@ import lmm.moneylog.data.accounttransfer.database.AccountTransferDao
 import lmm.moneylog.data.accounttransfer.database.AccountTransferEntity
 import lmm.moneylog.data.category.database.CategoryDao
 import lmm.moneylog.data.category.database.CategoryEntity
+import lmm.moneylog.data.categorypredictor.database.CategoryKeywordDao
+import lmm.moneylog.data.categorypredictor.database.CategoryKeywordEntity
 import lmm.moneylog.data.creditcard.database.CreditCardDao
 import lmm.moneylog.data.creditcard.database.CreditCardEntity
 import lmm.moneylog.data.transaction.database.TransactionDao
@@ -21,9 +23,10 @@ import lmm.moneylog.data.transaction.database.TransactionEntity
         AccountEntity::class,
         CategoryEntity::class,
         AccountTransferEntity::class,
-        CreditCardEntity::class
+        CreditCardEntity::class,
+        CategoryKeywordEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class MoneylogDatabase : RoomDatabase() {
@@ -37,6 +40,8 @@ abstract class MoneylogDatabase : RoomDatabase() {
 
     abstract fun creditCardDao(): CreditCardDao
 
+    abstract fun categoryKeywordDao(): CategoryKeywordDao
+
     companion object {
         @Volatile
         private var instance: MoneylogDatabase? = null
@@ -48,12 +53,12 @@ abstract class MoneylogDatabase : RoomDatabase() {
             }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(
-                context.applicationContext,
-                MoneylogDatabase::class.java,
-                "moneylog.db"
-            )
-                .fallbackToDestructiveMigration()
+            Room
+                .databaseBuilder(
+                    context.applicationContext,
+                    MoneylogDatabase::class.java,
+                    "moneylog.db"
+                ).fallbackToDestructiveMigration()
                 .addCallback(onCreateCallback(context))
                 .build()
     }

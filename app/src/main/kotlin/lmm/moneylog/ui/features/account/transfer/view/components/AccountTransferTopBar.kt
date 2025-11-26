@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.account.transfer.view.components
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -11,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -21,6 +23,7 @@ fun AccountTransferTopBar(
 ) {
     TopAppBar(
         modifier = modifier,
+        windowInsets = WindowInsets(0.dp),
         title = { Text(text = stringResource(R.string.topbar_transfer_add)) },
         navigationIcon = {
             IconButton(onClick = onArrowBackClick) {

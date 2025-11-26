@@ -6,11 +6,20 @@ import lmm.moneylog.data.transaction.model.Transaction
 interface GetTransactionsRepository {
     suspend fun getTransactionById(id: Int): Transaction?
 
-    fun getAllTransactions(): Flow<List<Transaction>>
+    fun getAllTransactions(
+        month: Int,
+        year: Int
+    ): Flow<List<Transaction>>
 
-    fun getIncomeTransactions(): Flow<List<Transaction>>
+    fun getIncomeTransactions(
+        month: Int,
+        year: Int
+    ): Flow<List<Transaction>>
 
-    fun getOutcomeTransactions(): Flow<List<Transaction>>
+    fun getOutcomeTransactions(
+        month: Int,
+        year: Int
+    ): Flow<List<Transaction>>
 
     fun getTransactionsByInvoice(
         invoiceCode: String,

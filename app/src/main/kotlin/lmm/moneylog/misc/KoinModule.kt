@@ -8,11 +8,13 @@ import lmm.moneylog.ui.features.account.transfer.viewmodel.AccountTransferViewMo
 import lmm.moneylog.ui.features.balancecard.viewmodel.BalanceCardViewModel
 import lmm.moneylog.ui.features.category.detail.viewmodel.CategoryDetailViewModel
 import lmm.moneylog.ui.features.category.list.viewmodel.CategoriesListViewModel
+import lmm.moneylog.ui.features.categorykeywords.viewmodel.CategoryKeywordsViewModel
 import lmm.moneylog.ui.features.creditcard.detail.viewmodel.CreditCardDetailViewModel
 import lmm.moneylog.ui.features.creditcard.homecard.viewmodel.CreditHomeCardViewModel
 import lmm.moneylog.ui.features.creditcard.list.viewmodel.CreditCardsListViewModel
 import lmm.moneylog.ui.features.home.viewmodel.HomeViewModel
 import lmm.moneylog.ui.features.invoice.viewmodel.InvoiceListViewModel
+import lmm.moneylog.ui.features.notification.settings.viewmodel.NotificationSettingsViewModel
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import lmm.moneylog.ui.features.transaction.list.viewmodel.TransactionsListViewModel
 import org.koin.android.ext.koin.androidContext
@@ -32,6 +34,7 @@ val appModule =
 
         viewModelOf(::CategoriesListViewModel)
         viewModelOf(::CategoryDetailViewModel)
+        viewModelOf(::CategoryKeywordsViewModel)
 
         viewModelOf(::CreditCardsListViewModel)
         viewModelOf(::CreditCardDetailViewModel)
@@ -42,7 +45,8 @@ val appModule =
                 getTransactionsRepository = get(),
                 getAccountsRepository = get(),
                 getCategoriesRepository = get(),
-                getCreditCardsRepository = get()
+                getCreditCardsRepository = get(),
+                timeRepository = get()
             )
         }
 
@@ -50,6 +54,7 @@ val appModule =
         viewModelOf(::ArchivedAccountsViewModel)
         viewModelOf(::AccountTransferViewModel)
         viewModelOf(::InvoiceListViewModel)
+        viewModelOf(::NotificationSettingsViewModel)
 
         factory {
             androidContext().getSharedPreferences(

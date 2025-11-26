@@ -74,28 +74,30 @@ class InvoiceListViewModel(
     }
 
     private suspend fun updateTransactions() {
-        getTransactionsRepository.getTransactionsByInvoice(
-            invoiceCode = invoiceCode,
-            creditCardId = creditCardId
-        ).collect { transactions ->
-            savedTransactions = transactions
+        getTransactionsRepository
+            .getTransactionsByInvoice(
+                invoiceCode = invoiceCode,
+                creditCardId = creditCardId
+            ).collect { transactions ->
+                savedTransactions = transactions
 
-            val totalValue = transactions.sumOf { it.value }
+                val totalValue = transactions.sumOf { it.value }
 
-            _uiState.update {
-                transactions.toInvoiceListUiState(
-                    titleResourceId = R.string.invoice,
-                    accounts = accounts,
-                    categoriesMap = categoriesMap,
-                    categoriesColorMap = categoriesColorMap,
-                ).copy(
-                    cardName = cardName,
-                    name = domainTimeRepository.getInvoiceNameFromCode(invoiceCode),
-                    totalValue = totalValue.formatForRs(false),
-                    isInvoicePaid = transactions.all { it.accountId != null }
-                )
+                _uiState.update {
+                    transactions
+                        .toInvoiceListUiState(
+                            titleResourceId = R.string.invoice,
+                            accounts = accounts,
+                            categoriesMap = categoriesMap,
+                            categoriesColorMap = categoriesColorMap,
+                        ).copy(
+                            cardName = cardName,
+                            name = domainTimeRepository.getInvoiceNameFromCode(invoiceCode),
+                            totalValue = totalValue.formatForRs(false),
+                            isInvoicePaid = transactions.all { it.accountId != null }
+                        )
+                }
             }
-        }
     }
 
     fun onPay(

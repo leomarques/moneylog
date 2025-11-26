@@ -111,3 +111,5 @@ fabric.properties
 
 /.idea
 /.kotlin/sessions
+/.kotlin
+*.stackdump

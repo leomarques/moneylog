@@ -7,8 +7,7 @@ import lmm.moneylog.data.account.repositories.interfaces.UpdateAccountRepository
 
 class UpdateAccountRepositoryImpl(
     private val accountDao: AccountDao
-) :
-    UpdateAccountRepository {
+) : UpdateAccountRepository {
     override suspend fun update(account: Account) {
         accountDao.update(
             with(account) {
