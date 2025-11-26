@@ -129,265 +129,26 @@ fun NotificationSettingsScreen(
                     .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Notifications,
-                            contentDescription = null,
-                            tint =
-                                if (hasListenerPermission) {
-                                    MaterialTheme.colorScheme.primary
-                                } else {
-                                    MaterialTheme.colorScheme.error
-                                }
-                        )
-
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = "Nubank Notification Access",
-                                style = MaterialTheme.typography.titleMedium
-                            )
-                            Text(
-                                text = if (hasListenerPermission) "Enabled" else "Disabled",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color =
-                                    if (hasListenerPermission) {
-                                        MaterialTheme.colorScheme.primary
-                                    } else {
-                                        MaterialTheme.colorScheme.error
-                                    }
-                            )
-                        }
-                    }
-
-                    Text(
-                        text =
-                            "Allow MoneyLog to intercept Nubank notifications " +
-                                "to automatically track your transactions.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-
-                    if (!hasListenerPermission) {
-                        Button(
-                            onClick = {
-                                NotificationPermissionHelper.openNotificationListenerSettings(
-                                    context
-                                )
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text("Grant Listener Permission")
-                        }
-
-                        Text(
-                            text =
-                                "Steps:\n1. Find 'MoneyLog' in the list" +
-                                    "\n2. Toggle the switch to enable" +
-                                    "\n3. Return to this screen",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            textAlign = TextAlign.Start,
-                            modifier = Modifier.padding(top = 8.dp)
-                        )
-                    } else {
-                        Surface(
-                            color = MaterialTheme.colorScheme.primaryContainer,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = "✓ Listener permission granted!",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                modifier = Modifier.padding(12.dp)
-                            )
-                        }
-
-                        TextButton(
-                            onClick = {
-                                NotificationPermissionHelper.openNotificationListenerSettings(
-                                    context
-                                )
-                            }
-                        ) {
-                            Text("Manage Listener Permissions")
-                        }
-                    }
-                }
-            }
+            NotificationListenerPermissionCard(
+                hasListenerPermission = hasListenerPermission
+            )
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                Card(
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Column(
-                        modifier = Modifier.padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-                            Icon(
-                                imageVector =
-                                    if (hasBasicPermission) {
-                                        Icons.Default.CheckCircle
-                                    } else {
-                                        Icons.Default.Warning
-                                    },
-                                contentDescription = null,
-                                tint =
-                                    if (hasBasicPermission) {
-                                        MaterialTheme.colorScheme.primary
-                                    } else {
-                                        MaterialTheme.colorScheme.error
-                                    }
-                            )
-
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = "Notification Permission",
-                                    style = MaterialTheme.typography.titleMedium
-                                )
-                                Text(
-                                    text = if (hasBasicPermission) "Enabled" else "Disabled",
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color =
-                                        if (hasBasicPermission) {
-                                            MaterialTheme.colorScheme.primary
-                                        } else {
-                                            MaterialTheme.colorScheme.error
-                                        }
-                                )
-                            }
-                        }
-
-                        Text(
-                            text =
-                                "Allow MoneyLog to show notifications. " +
-                                    "This is required for the app to display notifications " +
-                                    "about intercepted transactions.",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-
-                        if (!hasBasicPermission) {
-                            Button(
-                                onClick = {
-                                    NotificationPermissionHelper.requestBasicNotificationPermission(
-                                        requestPermissionLauncher
-                                    )
-                                },
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Text("Grant Notification Permission")
-                            }
-                        } else {
-                            Surface(
-                                color = MaterialTheme.colorScheme.primaryContainer,
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Text(
-                                    text = "✓ Notification permission granted!",
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                    modifier = Modifier.padding(12.dp)
-                                )
-                            }
-                            TextButton(
-                                onClick = {
-                                    val intent =
-                                        Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-                                    intent.putExtra(
-                                        Settings.EXTRA_APP_PACKAGE,
-                                        context.packageName
-                                    )
-                                    context.startActivity(intent)
-                                }
-                            ) {
-                                Text("Manage Notification Settings")
-                            }
-                        }
-                    }
-                }
+                BasicNotificationPermissionCard(
+                    hasBasicPermission = hasBasicPermission,
+                    requestPermissionLauncher = requestPermissionLauncher
+                )
             }
 
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Text(
-                        text = "Default Credit Card",
-                        style = MaterialTheme.typography.titleMedium
-                    )
+            DefaultCreditCardCard(
+                selectedCreditCard = uiState.selectedCreditCard,
+                onCardClick = { showCreditCardDialog = true },
+                onClearSelection = { viewModel.selectCreditCard(null) }
+            )
 
-                    Text(
-                        text =
-                            "Select the credit card that will be automatically assigned " +
-                                "to transactions created from Nubank notifications.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-
-                    ClickTextField(
-                        value = uiState.selectedCreditCard?.name ?: "No card selected",
-                        label = "Credit Card",
-                        onClick = { showCreditCardDialog = true },
-                        leadingIcon = {
-                            CreditCardIcon(tint = uiState.selectedCreditCard?.color)
-                        }
-                    )
-
-                    if (uiState.selectedCreditCard != null) {
-                        TextButton(
-                            onClick = { viewModel.selectCreditCard(null) }
-                        ) {
-                            Text("Clear Selection")
-                        }
-                    }
-                }
-            }
-
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Text(
-                        text = "Category Keywords",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-
-                    Text(
-                        text =
-                            "Manage keywords that automatically predict categories " +
-                                "for transactions based on merchant names.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-
-                    Button(
-                        onClick = onCategoryKeywordsClick,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text("Manage Keywords")
-                    }
-                }
-            }
+            CategoryKeywordsCard(
+                onManageClick = onCategoryKeywordsClick
+            )
         }
     }
 
@@ -401,6 +162,295 @@ fun NotificationSettingsScreen(
                 showCreditCardDialog = false
             }
         )
+    }
+}
+
+@Composable
+private fun NotificationListenerPermissionCard(
+    hasListenerPermission: Boolean,
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+
+    Card(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Notifications,
+                    contentDescription = null,
+                    tint =
+                        if (hasListenerPermission) {
+                            MaterialTheme.colorScheme.primary
+                        } else {
+                            MaterialTheme.colorScheme.error
+                        }
+                )
+
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Nubank Notification Access",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Text(
+                        text = if (hasListenerPermission) "Enabled" else "Disabled",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color =
+                            if (hasListenerPermission) {
+                                MaterialTheme.colorScheme.primary
+                            } else {
+                                MaterialTheme.colorScheme.error
+                            }
+                    )
+                }
+            }
+
+            Text(
+                text =
+                    "Allow MoneyLog to intercept Nubank notifications " +
+                            "to automatically track your transactions.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            if (!hasListenerPermission) {
+                Button(
+                    onClick = {
+                        NotificationPermissionHelper.openNotificationListenerSettings(
+                            context
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Grant Listener Permission")
+                }
+
+                Text(
+                    text =
+                        "Steps:\n1. Find 'MoneyLog' in the list" +
+                                "\n2. Toggle the switch to enable" +
+                                "\n3. Return to this screen",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Start,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            } else {
+                Surface(
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "✓ Listener permission granted!",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
+
+                TextButton(
+                    onClick = {
+                        NotificationPermissionHelper.openNotificationListenerSettings(
+                            context
+                        )
+                    }
+                ) {
+                    Text("Manage Listener Permissions")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BasicNotificationPermissionCard(
+    hasBasicPermission: Boolean,
+    requestPermissionLauncher: androidx.activity.result.ActivityResultLauncher<String>,
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+
+    Card(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Icon(
+                    imageVector =
+                        if (hasBasicPermission) {
+                            Icons.Default.CheckCircle
+                        } else {
+                            Icons.Default.Warning
+                        },
+                    contentDescription = null,
+                    tint =
+                        if (hasBasicPermission) {
+                            MaterialTheme.colorScheme.primary
+                        } else {
+                            MaterialTheme.colorScheme.error
+                        }
+                )
+
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Notification Permission",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Text(
+                        text = if (hasBasicPermission) "Enabled" else "Disabled",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color =
+                            if (hasBasicPermission) {
+                                MaterialTheme.colorScheme.primary
+                            } else {
+                                MaterialTheme.colorScheme.error
+                            }
+                    )
+                }
+            }
+
+            Text(
+                text =
+                    "Allow MoneyLog to show notifications. " +
+                            "This is required for the app to display notifications " +
+                            "about intercepted transactions.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            if (!hasBasicPermission) {
+                Button(
+                    onClick = {
+                        NotificationPermissionHelper.requestBasicNotificationPermission(
+                            requestPermissionLauncher
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Grant Notification Permission")
+                }
+            } else {
+                Surface(
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "✓ Notification permission granted!",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
+                TextButton(
+                    onClick = {
+                        val intent =
+                            Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                        intent.putExtra(
+                            Settings.EXTRA_APP_PACKAGE,
+                            context.packageName
+                        )
+                        context.startActivity(intent)
+                    }
+                ) {
+                    Text("Manage Notification Settings")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun DefaultCreditCardCard(
+    selectedCreditCard: lmm.moneylog.ui.features.notification.settings.model.CreditCardItem?,
+    onCardClick: () -> Unit,
+    onClearSelection: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = "Default Credit Card",
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Text(
+                text =
+                    "Select the credit card that will be automatically assigned " +
+                            "to transactions created from Nubank notifications.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            ClickTextField(
+                value = selectedCreditCard?.name ?: "No card selected",
+                label = "Credit Card",
+                onClick = onCardClick,
+                leadingIcon = {
+                    CreditCardIcon(tint = selectedCreditCard?.color)
+                }
+            )
+
+            if (selectedCreditCard != null) {
+                TextButton(
+                    onClick = onClearSelection
+                ) {
+                    Text("Clear Selection")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun CategoryKeywordsCard(
+    onManageClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = "Category Keywords",
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Text(
+                text =
+                    "Manage keywords that automatically predict categories " +
+                            "for transactions based on merchant names.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            Button(
+                onClick = onManageClick,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Manage Keywords")
+            }
+        }
     }
 }
 
