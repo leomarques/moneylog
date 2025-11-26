@@ -9,38 +9,32 @@ class NubankTransactionConverterImpl(
     private val domainTimeRepository: DomainTimeRepository,
     private val invoiceCalculator: InvoiceCalculator
 ) : NubankTransactionConverter {
-    override suspend fun convert(transactionInfo: NubankTransactionInfo): Transaction? =
-        try {
-            val value =
-                parseValue(
-                    valueString = transactionInfo.value,
-                    currency = transactionInfo.currency
-                )
-            if (value != null) {
-                val currentTime = domainTimeRepository.getCurrentDomainTime()
-                val (invoiceMonth, invoiceYear) =
-                    if (transactionInfo.creditCardId != null && transactionInfo.creditCardClosingDay != null) {
-                        invoiceCalculator.calculateInvoiceMonthAndYear(transactionInfo.creditCardClosingDay)
-                    } else {
-                        null to null
-                    }
+    override suspend fun convert(transactionInfo: NubankTransactionInfo): Transaction? {
+        val value =
+            parseValue(
+                valueString = transactionInfo.value,
+                currency = transactionInfo.currency
+            ) ?: return null
 
-                Transaction(
-                    value = -value,
-                    description = transactionInfo.place,
-                    date = currentTime,
-                    accountId = null,
-                    categoryId = transactionInfo.categoryId,
-                    creditCardId = transactionInfo.creditCardId,
-                    invoiceMonth = invoiceMonth,
-                    invoiceYear = invoiceYear
-                )
+        val currentTime = domainTimeRepository.getCurrentDomainTime()
+        val (invoiceMonth, invoiceYear) =
+            if (transactionInfo.creditCardId != null && transactionInfo.creditCardClosingDay != null) {
+                invoiceCalculator.calculateInvoiceMonthAndYear(transactionInfo.creditCardClosingDay)
             } else {
-                null
+                null to null
             }
-        } catch (e: Exception) {
-            null
-        }
+
+        return Transaction(
+            value = -value,
+            description = transactionInfo.place,
+            date = currentTime,
+            accountId = null,
+            categoryId = transactionInfo.categoryId,
+            creditCardId = transactionInfo.creditCardId,
+            invoiceMonth = invoiceMonth,
+            invoiceYear = invoiceYear
+        )
+    }
 
     private fun parseValue(
         valueString: String,
