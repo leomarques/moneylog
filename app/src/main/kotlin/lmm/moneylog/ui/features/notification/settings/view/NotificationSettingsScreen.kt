@@ -215,7 +215,7 @@ private fun NotificationListenerPermissionCard(
             Text(
                 text =
                     "Allow MoneyLog to intercept Nubank notifications " +
-                            "to automatically track your transactions.",
+                        "to automatically track your transactions.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -235,8 +235,8 @@ private fun NotificationListenerPermissionCard(
                 Text(
                     text =
                         "Steps:\n1. Find 'MoneyLog' in the list" +
-                                "\n2. Toggle the switch to enable" +
-                                "\n3. Return to this screen",
+                            "\n2. Toggle the switch to enable" +
+                            "\n3. Return to this screen",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Start,
@@ -325,8 +325,8 @@ private fun BasicNotificationPermissionCard(
             Text(
                 text =
                     "Allow MoneyLog to show notifications. " +
-                            "This is required for the app to display notifications " +
-                            "about intercepted transactions.",
+                        "This is required for the app to display notifications " +
+                        "about intercepted transactions.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -394,7 +394,7 @@ private fun DefaultCreditCardCard(
             Text(
                 text =
                     "Select the credit card that will be automatically assigned " +
-                            "to transactions created from Nubank notifications.",
+                        "to transactions created from Nubank notifications.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -439,7 +439,7 @@ private fun CategoryKeywordsCard(
             Text(
                 text =
                     "Manage keywords that automatically predict categories " +
-                            "for transactions based on merchant names.",
+                        "for transactions based on merchant names.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

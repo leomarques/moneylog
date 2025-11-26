@@ -48,98 +48,119 @@ class TransactionsListViewModel(
 
     private fun refreshTransactions() {
         viewModelScope.launch {
-            val accounts = getAccountsRepository.getAccountsSuspend()
-            val categories = getCategoriesRepository.getCategoriesSuspend()
-            val creditCards = getCreditCardsRepository.getCreditCardsSuspend()
-
-            val accountsMap =
-                accounts.associate {
-                    it.id to it.name
-                }
-            val creditCardMap =
-                creditCards.associate {
-                    it.id to it.name
-                }
-            val categoriesMap =
-                categories.associate {
-                    it.id to it.name
-                }
-            val categoriesColorMap =
-                categories.associate {
-                    it.id to Color(it.color.toULong())
-                }
-
+            val lookupMaps = buildLookupMaps()
             val monthName = timeRepository.getMonthName(month)
+            collectTransactionsByType(lookupMaps, monthName)
+        }
+    }
 
-            when (typeOfValue) {
-                GET_TRANSACTIONS_INCOME -> {
-                    getTransactionsRepository
-                        .getIncomeTransactions(
-                            month = month,
-                            year = year
-                        ).collect { transactions ->
-                            _uiState.update {
-                                transactions
-                                    .toTransactionsListUiState(
-                                        titleResourceId = R.string.incomes,
-                                        accountMap = accountsMap,
-                                        creditCardMap = creditCardMap,
-                                        categoriesMap = categoriesMap,
-                                        categoriesColorMap = categoriesColorMap
-                                    ).copy(
-                                        monthName = monthName,
-                                        total = transactions.sumOf { it.value }
-                                    )
-                            }
-                        }
-                }
+    private suspend fun buildLookupMaps(): LookupMaps {
+        val accounts = getAccountsRepository.getAccountsSuspend()
+        val categories = getCategoriesRepository.getCategoriesSuspend()
+        val creditCards = getCreditCardsRepository.getCreditCardsSuspend()
 
-                GET_TRANSACTIONS_OUTCOME -> {
-                    getTransactionsRepository
-                        .getOutcomeTransactions(
-                            month = month,
-                            year = year
-                        ).collect { transactions ->
-                            _uiState.update {
-                                transactions
-                                    .toTransactionsListUiState(
-                                        titleResourceId = R.string.outcomes,
-                                        accountMap = accountsMap,
-                                        creditCardMap = creditCardMap,
-                                        categoriesMap = categoriesMap,
-                                        categoriesColorMap = categoriesColorMap
-                                    ).copy(
-                                        monthName = monthName,
-                                        total = transactions.sumOf { it.value }
-                                    )
-                            }
-                        }
-                }
+        return LookupMaps(
+            accountsMap = accounts.associate { it.id to it.name },
+            creditCardMap = creditCards.associate { it.id to it.name },
+            categoriesMap = categories.associate { it.id to it.name },
+            categoriesColorMap = categories.associate { it.id to Color(it.color.toULong()) }
+        )
+    }
 
-                else -> {
-                    getTransactionsRepository
-                        .getAllTransactions(
-                            month = month,
-                            year = year
-                        ).collect { transactions ->
-                            _uiState.update {
-                                transactions
-                                    .toTransactionsListUiState(
-                                        titleResourceId = R.string.transactions,
-                                        accountMap = accountsMap,
-                                        creditCardMap = creditCardMap,
-                                        categoriesMap = categoriesMap,
-                                        categoriesColorMap = categoriesColorMap
-                                    ).copy(
-                                        monthName = monthName,
-                                        total = transactions.sumOf { it.value }
-                                    )
-                            }
-                        }
-                }
+    private suspend fun collectTransactionsByType(
+        lookupMaps: LookupMaps,
+        monthName: String
+    ) {
+        when (typeOfValue) {
+            GET_TRANSACTIONS_INCOME -> {
+                collectIncomeTransactions(lookupMaps, monthName)
+            }
+
+            GET_TRANSACTIONS_OUTCOME -> {
+                collectOutcomeTransactions(lookupMaps, monthName)
+            }
+
+            else -> {
+                collectAllTransactions(lookupMaps, monthName)
             }
         }
     }
+
+    private suspend fun collectIncomeTransactions(
+        lookupMaps: LookupMaps,
+        monthName: String
+    ) {
+        getTransactionsRepository
+            .getIncomeTransactions(month = month, year = year)
+            .collect { transactions ->
+                updateUiState(
+                    transactions = transactions,
+                    titleResourceId = R.string.incomes,
+                    lookupMaps = lookupMaps,
+                    monthName = monthName
+                )
+            }
+    }
+
+    private suspend fun collectOutcomeTransactions(
+        lookupMaps: LookupMaps,
+        monthName: String
+    ) {
+        getTransactionsRepository
+            .getOutcomeTransactions(month = month, year = year)
+            .collect { transactions ->
+                updateUiState(
+                    transactions = transactions,
+                    titleResourceId = R.string.outcomes,
+                    lookupMaps = lookupMaps,
+                    monthName = monthName
+                )
+            }
+    }
+
+    private suspend fun collectAllTransactions(
+        lookupMaps: LookupMaps,
+        monthName: String
+    ) {
+        getTransactionsRepository
+            .getAllTransactions(month = month, year = year)
+            .collect { transactions ->
+                updateUiState(
+                    transactions = transactions,
+                    titleResourceId = R.string.transactions,
+                    lookupMaps = lookupMaps,
+                    monthName = monthName
+                )
+            }
+    }
+
+    private fun updateUiState(
+        transactions: List<lmm.moneylog.data.transaction.model.Transaction>,
+        titleResourceId: Int,
+        lookupMaps: LookupMaps,
+        monthName: String
+    ) {
+        _uiState.update {
+            transactions
+                .toTransactionsListUiState(
+                    titleResourceId = titleResourceId,
+                    accountMap = lookupMaps.accountsMap,
+                    creditCardMap = lookupMaps.creditCardMap,
+                    categoriesMap = lookupMaps.categoriesMap,
+                    categoriesColorMap = lookupMaps.categoriesColorMap
+                ).copy(
+                    monthName = monthName,
+                    total = transactions.sumOf { it.value }
+                )
+        }
+    }
+
+    private data class LookupMaps(
+        val accountsMap: Map<Int, String>,
+        val creditCardMap: Map<Int, String>,
+        val categoriesMap: Map<Int, String>,
+        val categoriesColorMap: Map<Int, Color>
+    )
 
     fun onPreviousMonthClick() {
         if (month == MONTH_JANUARY) {
