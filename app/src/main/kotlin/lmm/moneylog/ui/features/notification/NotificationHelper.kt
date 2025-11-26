@@ -98,11 +98,12 @@ class NotificationHelper(
     private fun sanitizeTitle(title: String?): String =
         title
             ?.trim()
-            ?.take(100)
+            ?.take(MAX_TITLE_LENGTH)
             ?.takeIf { it.isNotBlank() } ?: "MoneyLog Transaction"
 
     companion object {
         private const val CHANNEL_ID = "moneylog_channel"
         private const val CHANNEL_NAME = "MoneyLog Notifications"
+        private const val MAX_TITLE_LENGTH = 100
     }
 }

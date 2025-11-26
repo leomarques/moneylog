@@ -2,6 +2,9 @@ package lmm.moneylog.data.creditcard.utils
 
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 
+private const val MONTH_JANUARY = 1
+private const val MONTH_DECEMBER = 12
+
 class InvoiceCalculator(
     private val domainTimeRepository: DomainTimeRepository
 ) {
@@ -12,8 +15,8 @@ class InvoiceCalculator(
         return if (currentDay < closingDay) {
             "${currentTime.month}.${currentTime.year}"
         } else {
-            val month = if (currentTime.month == 12) 1 else currentTime.month + 1
-            val year = if (currentTime.month == 12) currentTime.year + 1 else currentTime.year
+            val month = if (currentTime.month == MONTH_DECEMBER) MONTH_JANUARY else currentTime.month + 1
+            val year = if (currentTime.month == MONTH_DECEMBER) currentTime.year + 1 else currentTime.year
             "$month.$year"
         }
     }
@@ -25,8 +28,8 @@ class InvoiceCalculator(
         return if (currentDay < closingDay) {
             currentTime.month to currentTime.year
         } else {
-            val month = if (currentTime.month == 12) 1 else currentTime.month + 1
-            val year = if (currentTime.month == 12) currentTime.year + 1 else currentTime.year
+            val month = if (currentTime.month == MONTH_DECEMBER) MONTH_JANUARY else currentTime.month + 1
+            val year = if (currentTime.month == MONTH_DECEMBER) currentTime.year + 1 else currentTime.year
             month to year
         }
     }

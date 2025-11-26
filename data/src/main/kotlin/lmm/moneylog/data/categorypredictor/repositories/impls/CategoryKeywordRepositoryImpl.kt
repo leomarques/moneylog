@@ -29,9 +29,7 @@ class CategoryKeywordRepositoryImpl(
         keyword: String
     ): Long {
         val normalizedKeyword = keyword.trim().lowercase()
-        if (normalizedKeyword.isBlank()) {
-            throw IllegalArgumentException("Keyword cannot be empty")
-        }
+        require(normalizedKeyword.isNotBlank()) { "Keyword cannot be empty" }
 
         val entity =
             CategoryKeywordEntity(

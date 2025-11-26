@@ -1,5 +1,7 @@
 package lmm.moneylog.ui.features.categorykeywords.viewmodel
 
+import android.database.sqlite.SQLiteException
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,6 +26,10 @@ class CategoryKeywordsViewModel(
 
     init {
         loadData()
+    }
+
+    companion object {
+        private const val TAG = "CategoryKeywordsViewModel"
     }
 
     private fun loadData() {
@@ -83,8 +89,10 @@ class CategoryKeywordsViewModel(
             try {
                 categoryKeywordRepository.addKeyword(categoryId, keyword)
                 hideAddKeywordDialog()
-            } catch (e: Exception) {
-                // Handle error - could add error state to UI
+            } catch (e: IllegalArgumentException) {
+                Log.e(TAG, "Invalid keyword: ${e.message}", e)
+            } catch (e: SQLiteException) {
+                Log.e(TAG, "Database error adding keyword", e)
             }
         }
     }
@@ -97,8 +105,8 @@ class CategoryKeywordsViewModel(
             try {
                 categoryKeywordRepository.addKeywords(categoryId, keywords)
                 hideAddKeywordDialog()
-            } catch (e: Exception) {
-                // Handle error
+            } catch (e: SQLiteException) {
+                Log.e(TAG, "Database error adding keywords", e)
             }
         }
     }
@@ -128,8 +136,8 @@ class CategoryKeywordsViewModel(
                 try {
                     categoryKeywordRepository.deleteKeyword(keyword.id)
                     hideDeleteConfirmDialog()
-                } catch (e: Exception) {
-                    // Handle error
+                } catch (e: SQLiteException) {
+                    Log.e(TAG, "Database error deleting keyword", e)
                 }
             }
         }
@@ -139,8 +147,8 @@ class CategoryKeywordsViewModel(
         viewModelScope.launch {
             try {
                 categoryKeywordRepository.deleteKeywordsByCategory(categoryId)
-            } catch (e: Exception) {
-                // Handle error
+            } catch (e: SQLiteException) {
+                Log.e(TAG, "Database error clearing category keywords", e)
             }
         }
     }

@@ -20,6 +20,9 @@ const val GET_TRANSACTIONS_INCOME = "income"
 const val GET_TRANSACTIONS_OUTCOME = "outcome"
 const val GET_TRANSACTIONS_ALL = "all"
 
+private const val MONTH_JANUARY = 1
+private const val MONTH_DECEMBER = 12
+
 class TransactionsListViewModel(
     private val typeOfValue: String?,
     private val getTransactionsRepository: GetTransactionsRepository,
@@ -139,8 +142,8 @@ class TransactionsListViewModel(
     }
 
     fun onPreviousMonthClick() {
-        if (month == 1) {
-            month = 12
+        if (month == MONTH_JANUARY) {
+            month = MONTH_DECEMBER
             year--
         } else {
             month--
@@ -150,8 +153,8 @@ class TransactionsListViewModel(
     }
 
     fun onNextMonthClick() {
-        if (month == 12) {
-            month = 1
+        if (month == MONTH_DECEMBER) {
+            month = MONTH_JANUARY
             year++
         } else {
             month++

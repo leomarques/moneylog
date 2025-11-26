@@ -3,8 +3,6 @@ package lmm.moneylog.ui.navigation.navhost
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableIntState
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
@@ -22,149 +20,72 @@ import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
-import lmm.moneylog.ui.navigation.misc.navigatePopUpTo
-import lmm.moneylog.ui.navigation.misc.updateIndex
-import lmm.moneylog.ui.navigation.misc.updateShow
 
 @Composable
 fun NavHostParams(
     navController: NavHostController,
     startDestination: String,
     paddingValues: PaddingValues,
-    navBarSelectedIndex: MutableIntState,
-    showNavigationBar: MutableState<Boolean>,
+    onNavigate: (destination: String) -> Unit,
+    onBackNavigation: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     MyNavHost(
         navController = navController,
         startDestination = startDestination,
         onHomeFabClick = {
-            navController.navigatePopUpTo(
-                destination = TRANSACTION_DETAIL_SCREEN,
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate(TRANSACTION_DETAIL_SCREEN)
         },
         onBalanceCardClick = { typeOfValue ->
             if (typeOfValue == PARAM_TYPE_ALL) {
-                navController.navigatePopUpTo(
-                    destination = ACCOUNTS_LIST_SCREEN,
-                    navBarSelectedIndex = navBarSelectedIndex,
-                    showNavigationBar = showNavigationBar
-                )
+                onNavigate(ACCOUNTS_LIST_SCREEN)
             } else {
-                navController.navigatePopUpTo(
-                    destination = "$TRANSACTIONS_LIST_SCREEN/$typeOfValue",
-                    navBarSelectedIndex = navBarSelectedIndex,
-                    showNavigationBar = showNavigationBar
-                )
+                onNavigate("$TRANSACTIONS_LIST_SCREEN/$typeOfValue")
             }
         },
-        onArrowBackClick = {
-            navController.popBackStack()
-            navController.currentBackStackEntry?.destination?.route?.let {
-                navBarSelectedIndex.updateIndex(it)
-                showNavigationBar.updateShow(it)
-            }
-        },
+        onArrowBackClick = onBackNavigation,
         onTransactionsFabClick = {
-            navController.navigatePopUpTo(
-                destination = TRANSACTION_DETAIL_SCREEN,
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate(TRANSACTION_DETAIL_SCREEN)
         },
         onTransactionsItemClick = { id ->
-            navController.navigatePopUpTo(
-                destination = "$TRANSACTION_DETAIL_SCREEN?$PARAM_ID=$id",
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate("$TRANSACTION_DETAIL_SCREEN?$PARAM_ID=$id")
         },
         onAccountsFabClick = {
-            navController.navigatePopUpTo(
-                destination = ACCOUNT_DETAIL_SCREEN,
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate(ACCOUNT_DETAIL_SCREEN)
         },
         onAccountsItemClick = { id ->
-            navController.navigatePopUpTo(
-                destination = "$ACCOUNT_DETAIL_SCREEN?$PARAM_ID=$id",
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate("$ACCOUNT_DETAIL_SCREEN?$PARAM_ID=$id")
         },
         onCategoriesFabClick = {
-            navController.navigatePopUpTo(
-                destination = CATEGORY_DETAIL_SCREEN,
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate(CATEGORY_DETAIL_SCREEN)
         },
         onCategoriesItemClick = { id ->
-            navController.navigatePopUpTo(
-                destination = "$CATEGORY_DETAIL_SCREEN?$PARAM_ID=$id",
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate("$CATEGORY_DETAIL_SCREEN?$PARAM_ID=$id")
         },
         onArchivedIconClick = {
-            navController.navigatePopUpTo(
-                destination = ARCHIVED_ACCOUNTS_LIST_SCREEN,
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate(ARCHIVED_ACCOUNTS_LIST_SCREEN)
         },
         onTransferIconClick = {
-            navController.navigatePopUpTo(
-                destination = TRANSFER_SCREEN,
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate(TRANSFER_SCREEN)
         },
         onCreditCardClick = { cardId, invoiceCode ->
-            navController.navigatePopUpTo(
-                destination = "$INVOICE_LIST_SCREEN?$PARAM_CARD_ID=$cardId&$PARAM_INVOICE_CODE=$invoiceCode",
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate("$INVOICE_LIST_SCREEN?$PARAM_CARD_ID=$cardId&$PARAM_INVOICE_CODE=$invoiceCode")
         },
         onCreditCardsFabClick = {
-            navController.navigatePopUpTo(
-                destination = CREDITCARD_DETAIL_SCREEN,
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate(CREDITCARD_DETAIL_SCREEN)
         },
         onInvoiceListFabClick = { cardId ->
-            navController.navigatePopUpTo(
-                destination = "$TRANSACTION_DETAIL_SCREEN?$PARAM_CARD_ID=$cardId",
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate("$TRANSACTION_DETAIL_SCREEN?$PARAM_CARD_ID=$cardId")
         },
         onCreditCardsItemClick = { id ->
-            navController.navigatePopUpTo(
-                destination = "$CREDITCARD_DETAIL_SCREEN?$PARAM_ID=$id",
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate("$CREDITCARD_DETAIL_SCREEN?$PARAM_ID=$id")
         },
         modifier = modifier.padding(paddingValues),
         onSettingsClick = {
-            navController.navigatePopUpTo(
-                destination = NOTIFICATION_SETTINGS_SCREEN,
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate(NOTIFICATION_SETTINGS_SCREEN)
         },
         onCategoryKeywordsClick = {
-            navController.navigatePopUpTo(
-                destination = CATEGORY_KEYWORDS_SCREEN,
-                navBarSelectedIndex = navBarSelectedIndex,
-                showNavigationBar = showNavigationBar
-            )
+            onNavigate(CATEGORY_KEYWORDS_SCREEN)
         }
     )
 }

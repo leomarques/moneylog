@@ -24,9 +24,14 @@ fun Navigation(
         bottomBar = {
             if (showNavigationBar.value) {
                 BottomBar(
-                    navBarSelectedIndex = navBarSelectedIndex,
-                    navController = navController,
-                    showNavigationBar = showNavigationBar
+                    selectedIndex = navBarSelectedIndex.intValue,
+                    onNavigate = { destination ->
+                        navController.navigatePopUpTo(
+                            destination = destination,
+                            navBarSelectedIndex = navBarSelectedIndex,
+                            showNavigationBar = showNavigationBar
+                        )
+                    }
                 )
             }
         }
@@ -34,9 +39,21 @@ fun Navigation(
         NavHostParams(
             paddingValues = paddingValues,
             navController = navController,
-            navBarSelectedIndex = navBarSelectedIndex,
             startDestination = HOME_SCREEN,
-            showNavigationBar = showNavigationBar
+            onNavigate = { destination ->
+                navController.navigatePopUpTo(
+                    destination = destination,
+                    navBarSelectedIndex = navBarSelectedIndex,
+                    showNavigationBar = showNavigationBar
+                )
+            },
+            onBackNavigation = {
+                navController.popBackStack()
+                navController.currentBackStackEntry?.destination?.route?.let { route ->
+                    navBarSelectedIndex.updateIndex(route)
+                    showNavigationBar.updateShow(route)
+                }
+            }
         )
     }
 }
