@@ -26,7 +26,7 @@ import lmm.moneylog.data.transaction.database.TransactionEntity
         CreditCardEntity::class,
         CategoryKeywordEntity::class
     ],
-    version = 2,
+    version = 1,
     exportSchema = true
 )
 abstract class MoneylogDatabase : RoomDatabase() {
