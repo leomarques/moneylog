@@ -18,7 +18,10 @@ import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.Size
 
 /**
- * Displays a centered header text for the home screen
+ * Displays a centered header text for the home screen within a card
+ *
+ * @param text The text to display in the header (e.g., period title)
+ * @param modifier Modifier for the card container
  */
 @Composable
 fun HomeHeader(
@@ -37,9 +40,10 @@ fun HomeHeader(
             )
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(Size.DefaultSpaceSize),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(Size.DefaultSpaceSize),
             contentAlignment = Alignment.Center
         ) {
             Text(

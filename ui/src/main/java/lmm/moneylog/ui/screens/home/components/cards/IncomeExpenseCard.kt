@@ -1,38 +1,39 @@
 package lmm.moneylog.ui.screens.home.components.cards
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import lmm.moneylog.ui.components.common.CircularIconBox
 import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
 import lmm.moneylog.ui.theme.AppTheme
+import lmm.moneylog.ui.theme.IncomeColor
 import lmm.moneylog.ui.theme.Size
-import lmm.moneylog.ui.theme.income
 
 /**
- * Displays income or expense summary card
+ * Displays income or expense summary in a compact card with an icon and amount
+ *
+ * @param title The title/label for this card (e.g., "Income", "Expenses")
+ * @param amount The monetary amount to display
+ * @param icon The icon to display representing the type of transaction
+ * @param iconColor The color for the icon and its background
+ * @param modifier Modifier for the card container
+ * @param onClick Callback invoked when the card is clicked
  */
 @Composable
 fun IncomeExpenseCard(
@@ -89,21 +90,14 @@ private fun CardIcon(
     iconColor: Color,
     contentDescription: String
 ) {
-    Box(
-        modifier =
-            Modifier
-                .size(IncomeExpenseCardDefaults.ICON_SIZE)
-                .clip(CircleShape)
-                .background(iconColor.copy(alpha = IncomeExpenseCardDefaults.ICON_BACKGROUND_ALPHA)),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = contentDescription,
-            tint = iconColor,
-            modifier = Modifier.size(IncomeExpenseCardDefaults.ICON_INNER_SIZE)
-        )
-    }
+    CircularIconBox(
+        icon = icon,
+        contentDescription = contentDescription,
+        backgroundColor = iconColor.copy(alpha = IncomeExpenseCardDefaults.ICON_BACKGROUND_ALPHA),
+        iconTint = iconColor,
+        boxSize = IncomeExpenseCardDefaults.ICON_SIZE,
+        iconSize = IncomeExpenseCardDefaults.ICON_INNER_SIZE
+    )
 }
 
 @Composable
@@ -140,7 +134,7 @@ private fun IncomeExpenseCardPreview() {
             title = HomePreviewData.sampleIncome().title,
             amount = HomePreviewData.sampleIncome().amount,
             icon = Icons.Default.ArrowDownward,
-            iconColor = income,
+            iconColor = IncomeColor,
             modifier = Modifier.padding(Size.DefaultSpaceSize)
         )
     }

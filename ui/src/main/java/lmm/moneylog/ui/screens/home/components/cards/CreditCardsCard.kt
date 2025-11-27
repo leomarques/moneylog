@@ -16,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CreditCard
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import lmm.moneylog.ui.components.common.CircularIconBox
 import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
 import lmm.moneylog.ui.screens.home.models.CreditCardInfo
 import lmm.moneylog.ui.theme.AppTheme
@@ -35,13 +35,19 @@ import lmm.moneylog.ui.theme.Size
 
 /**
  * Callbacks for CreditCardsCard interactions
+ *
+ * @property onCardClick Callback invoked when a credit card item is clicked, providing the card info
  */
 data class CreditCardsCardCallbacks(
     val onCardClick: (CreditCardInfo) -> Unit = {}
 )
 
 /**
- * Displays a list of credit cards with their invoice amounts
+ * Displays a list of credit cards with their invoice amounts in a single card container
+ *
+ * @param creditCards List of credit card information to display
+ * @param modifier Modifier for the card container
+ * @param callbacks Callbacks for user interactions with credit card items
  */
 @Composable
 fun CreditCardsCard(
@@ -99,25 +105,17 @@ private fun CreditCardsHeader() {
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Box(
-            modifier =
-                Modifier
-                    .size(CreditCardsCardDefaults.IconSize)
-                    .clip(CircleShape)
-                    .background(
-                        MaterialTheme.colorScheme.tertiary.copy(
-                            alpha = CreditCardsCardDefaults.ICON_ALPHA
-                        )
-                    ),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                imageVector = Icons.Default.CreditCard,
-                contentDescription = "Credit Cards",
-                tint = MaterialTheme.colorScheme.onTertiary,
-                modifier = Modifier.size(CreditCardsCardDefaults.IconInnerSize)
-            )
-        }
+        CircularIconBox(
+            icon = Icons.Default.CreditCard,
+            contentDescription = "Credit Cards",
+            backgroundColor =
+                MaterialTheme.colorScheme.tertiary.copy(
+                    alpha = CreditCardsCardDefaults.ICON_ALPHA
+                ),
+            iconTint = MaterialTheme.colorScheme.onTertiary,
+            boxSize = CreditCardsCardDefaults.IconSize,
+            iconSize = CreditCardsCardDefaults.IconInnerSize
+        )
         Text(
             text = "Credit Cards",
             style = MaterialTheme.typography.titleSmall,

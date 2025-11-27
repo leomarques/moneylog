@@ -11,12 +11,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.components.bottombar.MyNavigationBar
+import lmm.moneylog.ui.components.bottombar.AppNavigationBar
 import lmm.moneylog.ui.components.bottombar.mocks.BottomBarPreviewData
 import lmm.moneylog.ui.screens.home.layout.HomeLayout
 import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
 import lmm.moneylog.ui.theme.AppTheme
 
+/**
+ * Main UI entry point for the application
+ * Contains the app theme, scaffold with bottom navigation, and home screen content
+ *
+ * @param modifier Modifier for the main container
+ */
 @Composable
 fun MainUI(modifier: Modifier = Modifier) {
     AppTheme {
@@ -26,7 +32,7 @@ fun MainUI(modifier: Modifier = Modifier) {
         ) {
             Scaffold(
                 bottomBar = {
-                    MyNavigationBar(
+                    AppNavigationBar(
                         items =
                             BottomBarPreviewData.sampleBottomBarItemsWithSelection(
                                 iconOne =

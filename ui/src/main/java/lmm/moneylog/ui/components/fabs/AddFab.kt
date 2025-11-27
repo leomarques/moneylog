@@ -4,17 +4,26 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import lmm.moneylog.ui.R
 
+/**
+ * A specialized floating action button with an Add icon
+ *
+ * @param onClick Callback when the FAB is clicked
+ * @param modifier Modifier for the FAB
+ */
 @Composable
 fun AddFab(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    MyFab(
+    IconFab(
         icon = Icons.Default.Add,
         onClick = onClick,
-        modifier = modifier
+        modifier = modifier,
+        contentDescription = stringResource(R.string.fab_desc)
     )
 }
 
@@ -22,6 +31,6 @@ fun AddFab(
 @Composable
 private fun AddFabPreview() {
     AddFab(
-        onClick = {},
+        onClick = {}
     )
 }

@@ -8,8 +8,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import lmm.moneylog.ui.components.bottombar.models.BottomBarItem
 
+/**
+ * A Material 3 navigation bar with customizable items
+ *
+ * @param items List of navigation bar items to display
+ * @param modifier Modifier for the navigation bar
+ * @param onClick Callback invoked when an item is clicked, receiving the item's index
+ */
 @Composable
-fun MyNavigationBar(
+fun AppNavigationBar(
     items: List<BottomBarItem>,
     modifier: Modifier = Modifier,
     onClick: (Int) -> Unit = {}

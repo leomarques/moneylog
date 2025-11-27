@@ -9,46 +9,51 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import lmm.moneylog.ui.components.common.CircularIconBox
 import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
 import lmm.moneylog.ui.screens.home.models.BalanceInfo
 import lmm.moneylog.ui.theme.AppTheme
+import lmm.moneylog.ui.theme.IncomeColor
 import lmm.moneylog.ui.theme.Size
-import lmm.moneylog.ui.theme.income
 
 /**
  * Callbacks for TotalBalanceCard interactions
+ *
+ * @property onCardClick Callback invoked when the balance card is clicked
+ * @property onChangeIndicatorClick Callback invoked when the change indicator is clicked
  */
 data class TotalBalanceCardCallbacks(
     val onCardClick: () -> Unit = {},
-    val onChangeIndicatorClick: () -> Unit = {},
+    val onChangeIndicatorClick: () -> Unit = {}
 )
 
 /**
- * Displays the total balance with change percentage and amount
+ * Displays the total balance with change percentage and amount in a visually prominent card
+ * with a gradient background
+ *
+ * @param balanceInfo The balance information to display
+ * @param modifier Modifier for the card container
+ * @param callbacks Callbacks for user interactions with the card
  */
 @Composable
 fun TotalBalanceCard(
     balanceInfo: BalanceInfo,
     modifier: Modifier = Modifier,
-    callbacks: TotalBalanceCardCallbacks = TotalBalanceCardCallbacks(),
+    callbacks: TotalBalanceCardCallbacks = TotalBalanceCardCallbacks()
 ) {
     Card(
         modifier = modifier.clickable { callbacks.onCardClick() },
@@ -125,25 +130,17 @@ private fun BalanceCardHeader(
 
 @Composable
 private fun WalletIcon() {
-    Box(
-        modifier =
-            Modifier
-                .size(TotalBalanceCardDefaults.IconSize)
-                .clip(CircleShape)
-                .background(
-                    MaterialTheme.colorScheme.primary.copy(
-                        alpha = TotalBalanceCardDefaults.ICON_ALPHA
-                    )
-                ),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            imageVector = Icons.Default.AccountBalanceWallet,
-            contentDescription = "Wallet",
-            tint = MaterialTheme.colorScheme.onPrimary,
-            modifier = Modifier.size(TotalBalanceCardDefaults.IconInnerSize)
-        )
-    }
+    CircularIconBox(
+        icon = Icons.Default.AccountBalanceWallet,
+        contentDescription = "Wallet",
+        backgroundColor =
+            MaterialTheme.colorScheme.primary.copy(
+                alpha = TotalBalanceCardDefaults.ICON_ALPHA
+            ),
+        iconTint = MaterialTheme.colorScheme.onPrimary,
+        boxSize = TotalBalanceCardDefaults.IconSize,
+        iconSize = TotalBalanceCardDefaults.IconInnerSize
+    )
 }
 
 @Composable
@@ -159,7 +156,7 @@ private fun ChangeIndicator(
         Text(
             text = changePercentage,
             style = MaterialTheme.typography.labelLarge,
-            color = income,
+            color = IncomeColor,
             fontWeight = FontWeight.SemiBold
         )
         Text(

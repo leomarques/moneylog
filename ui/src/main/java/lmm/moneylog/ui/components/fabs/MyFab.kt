@@ -11,27 +11,36 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.R
 
+/**
+ * A customizable floating action button with an icon
+ *
+ * @param icon The icon to display in the FAB
+ * @param onClick Callback when the FAB is clicked
+ * @param modifier Modifier for the FAB
+ * @param contentDescription Optional accessibility description for the icon
+ */
 @Composable
-fun MyFab(
+fun IconFab(
     icon: ImageVector,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentDescription: String? = stringResource(R.string.fab_desc)
 ) {
     FloatingActionButton(
         modifier = modifier,
         onClick = onClick
     ) {
         Icon(
-            icon,
-            contentDescription = stringResource(R.string.fab_desc)
+            imageVector = icon,
+            contentDescription = contentDescription
         )
     }
 }
 
 @Preview
 @Composable
-private fun MyFabPreview() {
-    MyFab(
+private fun IconFabPreview() {
+    IconFab(
         onClick = {},
         icon = Icons.Default.Add
     )

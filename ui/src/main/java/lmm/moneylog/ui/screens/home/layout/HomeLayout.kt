@@ -23,12 +23,17 @@ import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
 import lmm.moneylog.ui.screens.home.models.FinancialSummary
 import lmm.moneylog.ui.screens.home.models.HomeScreenData
 import lmm.moneylog.ui.theme.AppTheme
+import lmm.moneylog.ui.theme.ExpenseColor
+import lmm.moneylog.ui.theme.IncomeColor
 import lmm.moneylog.ui.theme.Size
-import lmm.moneylog.ui.theme.income
-import lmm.moneylog.ui.theme.outcome
 
 /**
- * Main layout for the home screen displaying financial summary
+ * Main layout for the home screen displaying financial summary including balance,
+ * income, expenses, and credit cards
+ *
+ * @param data The home screen data to display
+ * @param modifier Modifier for the layout container
+ * @param callbacks Callbacks for user interactions within the home screen
  */
 @Composable
 fun HomeLayout(
@@ -103,7 +108,7 @@ private fun IncomeExpenseRow(
             title = incomeData.title,
             amount = incomeData.amount,
             icon = Icons.Default.ArrowDownward,
-            iconColor = income,
+            iconColor = IncomeColor,
             modifier = Modifier.weight(1f),
             onClick = onIncomeClick
         )
@@ -111,7 +116,7 @@ private fun IncomeExpenseRow(
             title = expensesData.title,
             amount = expensesData.amount,
             icon = Icons.Default.ArrowUpward,
-            iconColor = outcome,
+            iconColor = ExpenseColor,
             modifier = Modifier.weight(1f),
             onClick = onExpensesClick
         )
