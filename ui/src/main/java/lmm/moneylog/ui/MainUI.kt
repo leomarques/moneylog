@@ -8,8 +8,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.components.bottombar.BottomBar
+import lmm.moneylog.ui.components.bottombar.MyNavigationBar
+import lmm.moneylog.ui.components.bottombar.mocks.BottomBarPreviewData
 import lmm.moneylog.ui.screens.home.layout.HomeLayout
 import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
 import lmm.moneylog.ui.theme.AppTheme
@@ -23,9 +26,13 @@ fun MainUI(modifier: Modifier = Modifier) {
         ) {
             Scaffold(
                 bottomBar = {
-                    BottomBar(
-                        selectedIndex = 0,
-                        onNavigate = { }
+                    MyNavigationBar(
+                        items =
+                            BottomBarPreviewData.sampleBottomBarItemsWithSelection(
+                                iconOne = ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24),
+                                iconTwo = ImageVector.vectorResource(id = R.drawable.outline_category_24)
+                            ),
+                        onClick = BottomBarPreviewData.sampleOnClick
                     )
                 },
                 content = { paddingValues ->

@@ -1,45 +1,34 @@
 package lmm.moneylog.ui.components.bottombar
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.R
+import lmm.moneylog.ui.components.bottombar.models.BottomBarItem
 
 @Composable
 fun MyNavigationBar(
-    selectedIndex: Int,
+    items: List<BottomBarItem>,
     modifier: Modifier = Modifier,
     onClick: (Int) -> Unit = {}
 ) {
-    BaseNavigationBar(
-        items =
-            listOf(
-                Pair(
-                    stringResource(R.string.navbar_home),
-                    Icons.Default.Home
-                ),
-                Pair(
-                    stringResource(R.string.transactions),
-                    ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24)
-                ),
-                Pair(
-                    stringResource(R.string.accounts),
-                    ImageVector.vectorResource(id = R.drawable.outline_category_24)
-                ),
-            ),
-        selectedIndex = selectedIndex,
-        modifier = modifier,
-        onClick = onClick
-    )
-}
-
-@Preview
-@Composable
-private fun MyNavigationBarPreview() {
-    MyNavigationBar(selectedIndex = 0) {}
+    NavigationBar(modifier = modifier) {
+        items.forEachIndexed { index, item ->
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        imageVector = item.icon,
+                        contentDescription = item.label
+                    )
+                },
+                label = { Text(item.label) },
+                selected = item.isSelected,
+                onClick = {
+                    onClick(index)
+                }
+            )
+        }
+    }
 }
