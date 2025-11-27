@@ -9,11 +9,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import lmm.moneylog.ui.screens.Home
-import lmm.moneylog.ui.theme.MoneylogTheme
+import lmm.moneylog.ui.theme.AppTheme
 
 @Composable
 fun MainUI(modifier: Modifier = Modifier) {
-    MoneylogTheme {
+    AppTheme {
         Surface(
             modifier = modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background

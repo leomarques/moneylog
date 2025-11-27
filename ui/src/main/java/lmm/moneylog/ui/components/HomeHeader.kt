@@ -5,9 +5,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.theme.MoneylogTheme
+import lmm.moneylog.ui.theme.AppTheme
 
 @Composable
 fun HomeHeader(
@@ -17,15 +18,17 @@ fun HomeHeader(
     Text(
         text = text,
         modifier = modifier,
-        style = MaterialTheme.typography.headlineSmall,
-        textAlign = TextAlign.Center
+        style = MaterialTheme.typography.headlineMedium,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center,
+        color = MaterialTheme.colorScheme.onBackground
     )
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun HomeHeaderPreview() {
-    MoneylogTheme {
+    AppTheme() {
         HomeHeader(
             text = "October 2023",
             modifier = Modifier.fillMaxWidth()
