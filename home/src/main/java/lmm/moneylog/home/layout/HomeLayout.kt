@@ -18,7 +18,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.components.fabs.AddFab
 import lmm.moneylog.home.components.HomeHeader
 import lmm.moneylog.home.components.cards.CreditCardsCard
 import lmm.moneylog.home.components.cards.IncomeExpenseCard
@@ -26,6 +25,7 @@ import lmm.moneylog.home.components.cards.TotalBalanceCard
 import lmm.moneylog.home.mocks.HomePreviewData
 import lmm.moneylog.home.models.FinancialSummary
 import lmm.moneylog.home.models.HomeScreenData
+import lmm.moneylog.ui.components.fabs.AddFab
 import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.ExpenseColor
 import lmm.moneylog.ui.theme.IncomeColor
@@ -42,8 +42,8 @@ import lmm.moneylog.ui.theme.Size
 @Composable
 fun HomeLayout(
     data: HomeScreenData,
-    modifier: Modifier = Modifier,
-    callbacks: HomeLayoutCallbacks
+    callbacks: HomeLayoutCallbacks,
+    modifier: Modifier = Modifier
 ) {
     var valuesMasked by remember { mutableStateOf(false) }
 

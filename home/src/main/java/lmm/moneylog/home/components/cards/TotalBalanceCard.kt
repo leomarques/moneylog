@@ -23,9 +23,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import lmm.moneylog.ui.components.misc.CircularIconBox
 import lmm.moneylog.home.mocks.HomePreviewData
 import lmm.moneylog.home.models.BalanceInfo
+import lmm.moneylog.ui.components.misc.CircularIconBox
 import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.IncomeColor
 import lmm.moneylog.ui.theme.Size
