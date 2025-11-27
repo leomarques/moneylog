@@ -10,5 +10,6 @@ data class HomeLayoutCallbacks(
     val balanceCardCallbacks: TotalBalanceCardCallbacks = TotalBalanceCardCallbacks(),
     val onIncomeClick: () -> Unit = {},
     val onExpensesClick: () -> Unit = {},
-    val creditCardsCallbacks: CreditCardsCardCallbacks = CreditCardsCardCallbacks()
+    val creditCardsCallbacks: CreditCardsCardCallbacks = CreditCardsCardCallbacks(),
+    val onFabClick: () -> Unit = {}
 )

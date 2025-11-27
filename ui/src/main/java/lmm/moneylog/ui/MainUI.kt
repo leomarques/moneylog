@@ -29,8 +29,10 @@ fun MainUI(modifier: Modifier = Modifier) {
                     MyNavigationBar(
                         items =
                             BottomBarPreviewData.sampleBottomBarItemsWithSelection(
-                                iconOne = ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24),
-                                iconTwo = ImageVector.vectorResource(id = R.drawable.outline_category_24)
+                                iconOne =
+                                    ImageVector.vectorResource(
+                                        id = R.drawable.outline_receipt_long_24
+                                    )
                             ),
                         onClick = BottomBarPreviewData.sampleOnClick
                     )

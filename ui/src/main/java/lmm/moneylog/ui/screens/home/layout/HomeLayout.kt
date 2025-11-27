@@ -3,15 +3,18 @@ package lmm.moneylog.ui.screens.home.layout
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.ArrowUpward
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import lmm.moneylog.ui.components.fabs.AddFab
 import lmm.moneylog.ui.screens.home.components.HomeHeader
 import lmm.moneylog.ui.screens.home.components.cards.CreditCardsCard
 import lmm.moneylog.ui.screens.home.components.cards.IncomeExpenseCard
@@ -33,45 +36,54 @@ fun HomeLayout(
     modifier: Modifier = Modifier,
     callbacks: HomeLayoutCallbacks = HomeLayoutCallbacks()
 ) {
-    Column(
-        modifier =
-            modifier
-                .fillMaxSize()
-                .padding(Size.DefaultSpaceSize)
-    ) {
-        HomeHeader(
-            text = data.periodTitle,
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+        floatingActionButton = {
+            AddFab(onClick = callbacks.onFabClick)
+        }
+    ) { paddingValues ->
+        Column(
             modifier =
                 Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = Size.MediumSpaceSize)
-        )
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(Size.DefaultSpaceSize)
+        ) {
+            HomeHeader(
+                text = data.periodTitle,
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = Size.MediumSpaceSize)
+            )
 
-        TotalBalanceCard(
-            balanceInfo = data.balanceInfo,
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = Size.MediumSpaceSize),
-            callbacks = callbacks.balanceCardCallbacks
-        )
+            TotalBalanceCard(
+                balanceInfo = data.balanceInfo,
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = Size.MediumSpaceSize),
+                callbacks = callbacks.balanceCardCallbacks
+            )
 
-        IncomeExpenseRow(
-            incomeData = data.income,
-            expensesData = data.expenses,
-            onIncomeClick = callbacks.onIncomeClick,
-            onExpensesClick = callbacks.onExpensesClick,
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = Size.MediumSpaceSize)
-        )
+            IncomeExpenseRow(
+                incomeData = data.income,
+                expensesData = data.expenses,
+                onIncomeClick = callbacks.onIncomeClick,
+                onExpensesClick = callbacks.onExpensesClick,
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = Size.MediumSpaceSize)
+            )
 
-        CreditCardsCard(
-            creditCards = data.creditCards,
-            modifier = Modifier.fillMaxWidth(),
-            callbacks = callbacks.creditCardsCallbacks
-        )
+            CreditCardsCard(
+                creditCards = data.creditCards,
+                modifier = Modifier.fillMaxWidth(),
+                callbacks = callbacks.creditCardsCallbacks
+            )
+        }
     }
 }
 

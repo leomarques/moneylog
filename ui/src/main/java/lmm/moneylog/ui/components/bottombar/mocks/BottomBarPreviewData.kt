@@ -2,6 +2,7 @@ package lmm.moneylog.ui.components.bottombar.mocks
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 import lmm.moneylog.ui.components.bottombar.models.BottomBarItem
 
@@ -23,10 +24,7 @@ object BottomBarPreviewData {
      * Creates sample bottom bar items for preview/testing
      * Note: Icons requiring resources are loaded lazily through a factory function
      */
-    fun sampleBottomBarItems(
-        receiptIcon: ImageVector,
-        categoryIcon: ImageVector
-    ): List<BottomBarItem> =
+    fun sampleBottomBarItems(receiptIcon: ImageVector): List<BottomBarItem> =
         listOf(
             BottomBarItem(
                 label = "Home",
@@ -38,7 +36,7 @@ object BottomBarPreviewData {
             ),
             BottomBarItem(
                 label = "Options",
-                icon = categoryIcon,
+                icon = Icons.Default.Settings,
             )
         )
 
@@ -50,10 +48,9 @@ object BottomBarPreviewData {
      */
     fun sampleBottomBarItemsWithSelection(
         iconOne: ImageVector,
-        iconTwo: ImageVector,
         selectedIndex: Int = DEFAULT_SELECTED_INDEX
     ): List<BottomBarItem> =
-        sampleBottomBarItems(iconOne, iconTwo)
+        sampleBottomBarItems(iconOne)
             .mapIndexed { index, item ->
                 item.copy(isSelected = index == selectedIndex)
             }
