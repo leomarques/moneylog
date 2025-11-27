@@ -48,12 +48,14 @@ data class CreditCardsCardCallbacks(
  * @param creditCards List of credit card information to display
  * @param modifier Modifier for the card container
  * @param callbacks Callbacks for user interactions with credit card items
+ * @param valuesMasked Whether to mask the monetary values
  */
 @Composable
 fun CreditCardsCard(
     creditCards: List<CreditCardInfo>,
     modifier: Modifier = Modifier,
-    callbacks: CreditCardsCardCallbacks = CreditCardsCardCallbacks()
+    callbacks: CreditCardsCardCallbacks = CreditCardsCardCallbacks(),
+    valuesMasked: Boolean = false
 ) {
     Card(
         modifier = modifier,
@@ -82,7 +84,8 @@ fun CreditCardsCard(
                 }
                 CreditCardItem(
                     cardInfo = card,
-                    onClick = { callbacks.onCardClick(card) }
+                    onClick = { callbacks.onCardClick(card) },
+                    valuesMasked = valuesMasked
                 )
             }
         }
@@ -130,7 +133,8 @@ private fun CreditCardsHeader() {
 private fun CreditCardItem(
     cardInfo: CreditCardInfo,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    valuesMasked: Boolean = false
 ) {
     Row(
         modifier =
@@ -147,7 +151,10 @@ private fun CreditCardItem(
             cardColor = cardInfo.cardColor
         )
 
-        CreditCardAmount(amount = cardInfo.invoiceAmount)
+        CreditCardAmount(
+            amount = cardInfo.invoiceAmount,
+            valuesMasked = valuesMasked
+        )
     }
 }
 
@@ -186,9 +193,12 @@ private fun CreditCardDetails(
 }
 
 @Composable
-private fun CreditCardAmount(amount: String) {
+private fun CreditCardAmount(
+    amount: String,
+    valuesMasked: Boolean
+) {
     Text(
-        text = amount,
+        text = if (valuesMasked) "••••••" else amount,
         style =
             MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.SemiBold,
@@ -207,7 +217,8 @@ private fun CreditCardsCardPreview() {
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(Size.DefaultSpaceSize)
+                    .padding(Size.DefaultSpaceSize),
+            valuesMasked = false
         )
     }
 }

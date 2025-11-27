@@ -12,6 +12,10 @@ import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.fabs.AddFab
@@ -41,6 +45,8 @@ fun HomeLayout(
     modifier: Modifier = Modifier,
     callbacks: HomeLayoutCallbacks = HomeLayoutCallbacks()
 ) {
+    var valuesMasked by remember { mutableStateOf(false) }
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
@@ -60,7 +66,12 @@ fun HomeLayout(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .padding(bottom = Size.MediumSpaceSize)
+                        .padding(bottom = Size.MediumSpaceSize),
+                valuesMasked = valuesMasked,
+                onMaskToggle = {
+                    valuesMasked = !valuesMasked
+                    callbacks.onMaskToggle()
+                }
             )
 
             TotalBalanceCard(
@@ -69,7 +80,8 @@ fun HomeLayout(
                     Modifier
                         .fillMaxWidth()
                         .padding(bottom = Size.MediumSpaceSize),
-                callbacks = callbacks.balanceCardCallbacks
+                callbacks = callbacks.balanceCardCallbacks,
+                valuesMasked = valuesMasked
             )
 
             IncomeExpenseRow(
@@ -80,13 +92,15 @@ fun HomeLayout(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .padding(bottom = Size.MediumSpaceSize)
+                        .padding(bottom = Size.MediumSpaceSize),
+                valuesMasked = valuesMasked
             )
 
             CreditCardsCard(
                 creditCards = data.creditCards,
                 modifier = Modifier.fillMaxWidth(),
-                callbacks = callbacks.creditCardsCallbacks
+                callbacks = callbacks.creditCardsCallbacks,
+                valuesMasked = valuesMasked
             )
         }
     }
@@ -98,7 +112,8 @@ private fun IncomeExpenseRow(
     expensesData: FinancialSummary,
     modifier: Modifier = Modifier,
     onIncomeClick: () -> Unit = {},
-    onExpensesClick: () -> Unit = {}
+    onExpensesClick: () -> Unit = {},
+    valuesMasked: Boolean = false
 ) {
     Row(
         modifier = modifier,
@@ -110,7 +125,8 @@ private fun IncomeExpenseRow(
             icon = Icons.Default.ArrowDownward,
             iconColor = IncomeColor,
             modifier = Modifier.weight(1f),
-            onClick = onIncomeClick
+            onClick = onIncomeClick,
+            valuesMasked = valuesMasked
         )
         IncomeExpenseCard(
             title = expensesData.title,
@@ -118,7 +134,8 @@ private fun IncomeExpenseRow(
             icon = Icons.Default.ArrowUpward,
             iconColor = ExpenseColor,
             modifier = Modifier.weight(1f),
-            onClick = onExpensesClick
+            onClick = onExpensesClick,
+            valuesMasked = valuesMasked
         )
     }
 }

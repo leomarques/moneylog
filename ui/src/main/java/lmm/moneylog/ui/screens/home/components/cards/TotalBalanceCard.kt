@@ -48,12 +48,14 @@ data class TotalBalanceCardCallbacks(
  * @param balanceInfo The balance information to display
  * @param modifier Modifier for the card container
  * @param callbacks Callbacks for user interactions with the card
+ * @param valuesMasked Whether to mask the monetary values
  */
 @Composable
 fun TotalBalanceCard(
     balanceInfo: BalanceInfo,
     modifier: Modifier = Modifier,
-    callbacks: TotalBalanceCardCallbacks = TotalBalanceCardCallbacks()
+    callbacks: TotalBalanceCardCallbacks = TotalBalanceCardCallbacks(),
+    valuesMasked: Boolean = false
 ) {
     Card(
         modifier = modifier.clickable { callbacks.onCardClick() },
@@ -85,12 +87,16 @@ fun TotalBalanceCard(
                 BalanceCardHeader(
                     changePercentage = balanceInfo.changePercentage,
                     changeAmount = balanceInfo.changeAmount,
-                    onChangeIndicatorClick = callbacks.onChangeIndicatorClick
+                    onChangeIndicatorClick = callbacks.onChangeIndicatorClick,
+                    valuesMasked = valuesMasked
                 )
 
                 Spacer(modifier = Modifier.height(Size.DefaultSpaceSize))
 
-                BalanceCardContent(balance = balanceInfo.balance)
+                BalanceCardContent(
+                    balance = balanceInfo.balance,
+                    valuesMasked = valuesMasked
+                )
             }
         }
     }
@@ -110,7 +116,8 @@ object TotalBalanceCardDefaults {
 private fun BalanceCardHeader(
     changePercentage: String,
     changeAmount: String,
-    onChangeIndicatorClick: () -> Unit
+    onChangeIndicatorClick: () -> Unit,
+    valuesMasked: Boolean
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -123,7 +130,8 @@ private fun BalanceCardHeader(
         ChangeIndicator(
             changePercentage = changePercentage,
             changeAmount = changeAmount,
-            onClick = onChangeIndicatorClick
+            onClick = onChangeIndicatorClick,
+            valuesMasked = valuesMasked
         )
     }
 }
@@ -147,20 +155,21 @@ private fun WalletIcon() {
 private fun ChangeIndicator(
     changePercentage: String,
     changeAmount: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    valuesMasked: Boolean
 ) {
     Column(
         modifier = Modifier.clickable { onClick() },
         horizontalAlignment = Alignment.End
     ) {
         Text(
-            text = changePercentage,
+            text = if (valuesMasked) "••••" else changePercentage,
             style = MaterialTheme.typography.labelLarge,
             color = IncomeColor,
             fontWeight = FontWeight.SemiBold
         )
         Text(
-            text = changeAmount,
+            text = if (valuesMasked) "••••" else changeAmount,
             style = MaterialTheme.typography.labelSmall,
             color =
                 MaterialTheme.colorScheme.onPrimaryContainer.copy(
@@ -171,7 +180,10 @@ private fun ChangeIndicator(
 }
 
 @Composable
-private fun BalanceCardContent(balance: String) {
+private fun BalanceCardContent(
+    balance: String,
+    valuesMasked: Boolean
+) {
     Column {
         Text(
             text = "Total Balance",
@@ -184,7 +196,7 @@ private fun BalanceCardContent(balance: String) {
         )
         Spacer(modifier = Modifier.height(Size.XXSmallSpaceSize))
         Text(
-            text = balance,
+            text = if (valuesMasked) "••••••••" else balance,
             style =
                 MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.Bold,
@@ -204,7 +216,8 @@ private fun TotalBalanceCardPreview() {
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(Size.DefaultSpaceSize)
+                    .padding(Size.DefaultSpaceSize),
+            valuesMasked = false
         )
     }
 }

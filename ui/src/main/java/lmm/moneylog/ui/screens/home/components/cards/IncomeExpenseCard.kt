@@ -34,6 +34,7 @@ import lmm.moneylog.ui.theme.Size
  * @param iconColor The color for the icon and its background
  * @param modifier Modifier for the card container
  * @param onClick Callback invoked when the card is clicked
+ * @param valuesMasked Whether to mask the monetary value
  */
 @Composable
 fun IncomeExpenseCard(
@@ -42,7 +43,8 @@ fun IncomeExpenseCard(
     icon: ImageVector,
     iconColor: Color,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    valuesMasked: Boolean = false
 ) {
     Card(
         modifier = modifier.clickable { onClick() },
@@ -70,7 +72,7 @@ fun IncomeExpenseCard(
 
             Spacer(modifier = Modifier.height(Size.XXSmallSpaceSize))
 
-            CardAmount(amount = amount)
+            CardAmount(amount = amount, valuesMasked = valuesMasked)
         }
     }
 }
@@ -114,9 +116,12 @@ private fun CardLabel(title: String) {
 }
 
 @Composable
-private fun CardAmount(amount: String) {
+private fun CardAmount(
+    amount: String,
+    valuesMasked: Boolean
+) {
     Text(
-        text = amount,
+        text = if (valuesMasked) "••••••" else amount,
         style =
             MaterialTheme.typography.titleMedium.copy(
                 fontWeight = FontWeight.Bold,
@@ -135,7 +140,8 @@ private fun IncomeExpenseCardPreview() {
             amount = HomePreviewData.sampleIncome().amount,
             icon = Icons.Default.ArrowDownward,
             iconColor = IncomeColor,
-            modifier = Modifier.padding(Size.DefaultSpaceSize)
+            modifier = Modifier.padding(Size.DefaultSpaceSize),
+            valuesMasked = false
         )
     }
 }
