@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import lmm.moneylog.home.layout.HomeLayout
 import lmm.moneylog.home.mocks.HomePreviewData
+import lmm.moneylog.home.ui.HomeLayout
 import lmm.moneylog.ui.components.misc.MainUI
 
 class MainActivity : ComponentActivity() {
@@ -15,7 +15,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             MainUI {
                 HomeLayout(
-                    data = HomePreviewData.sampleHomeScreenData(),
                     callbacks = HomePreviewData.sampleHomeLayoutCallbacks()
                 )
             }

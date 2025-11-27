@@ -1,4 +1,4 @@
-package lmm.moneylog.home.components
+package lmm.moneylog.home.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,28 +15,33 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import lmm.moneylog.home.R
 import lmm.moneylog.home.mocks.HomePreviewData
+import lmm.moneylog.home.viewmodels.PeriodInfo
 import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.Size
 
 /**
  * Displays a centered header text for the home screen within a card
  *
- * @param text The text to display in the header (e.g., period title)
+ * @param periodInfo The period information (month name and year) to display
  * @param modifier Modifier for the card container
  * @param valuesMasked Whether values are currently masked
  * @param onMaskToggle Callback invoked when the mask toggle icon is clicked
  */
 @Composable
 fun HomeHeader(
-    text: String,
+    periodInfo: PeriodInfo?,
     modifier: Modifier = Modifier,
     valuesMasked: Boolean = false,
     onMaskToggle: () -> Unit = {}
 ) {
+    val text = periodInfo?.let { "${it.monthName} ${it.year}" } ?: ""
+
     Card(
         modifier = modifier,
         colors =
@@ -68,7 +73,10 @@ fun HomeHeader(
             ) {
                 Icon(
                     imageVector = if (valuesMasked) Icons.Default.Lock else Icons.Default.LockOpen,
-                    contentDescription = if (valuesMasked) "Unlock values" else "Lock values",
+                    contentDescription =
+                        stringResource(
+                            if (valuesMasked) R.string.unlock_values else R.string.lock_values
+                        ),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
@@ -85,7 +93,7 @@ object HomeHeaderDefaults {
 private fun HomeHeaderPreview() {
     AppTheme {
         HomeHeader(
-            text = HomePreviewData.SAMPLE_PERIOD_TITLE,
+            periodInfo = HomePreviewData.SAMPLE_PERIOD_INFO,
             modifier = Modifier.fillMaxWidth(),
             valuesMasked = false
         )

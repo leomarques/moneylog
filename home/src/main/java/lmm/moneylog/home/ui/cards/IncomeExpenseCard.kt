@@ -1,4 +1,4 @@
-package lmm.moneylog.home.components.cards
+package lmm.moneylog.home.ui.cards
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -136,7 +136,7 @@ private fun CardAmount(
 private fun IncomeExpenseCardPreview() {
     AppTheme {
         IncomeExpenseCard(
-            title = HomePreviewData.sampleIncome().title,
+            title = "Income",
             amount = HomePreviewData.sampleIncome().amount,
             icon = Icons.Default.ArrowDownward,
             iconColor = IncomeColor,

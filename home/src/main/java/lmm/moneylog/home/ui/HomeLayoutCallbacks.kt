@@ -1,7 +1,7 @@
-package lmm.moneylog.home.layout
+package lmm.moneylog.home.ui
 
-import lmm.moneylog.home.components.cards.CreditCardsCardCallbacks
-import lmm.moneylog.home.components.cards.TotalBalanceCardCallbacks
+import lmm.moneylog.home.ui.cards.CreditCardsCardCallbacks
+import lmm.moneylog.home.ui.cards.TotalBalanceCardCallbacks
 
 /**
  * Callbacks for HomeLayout interactions

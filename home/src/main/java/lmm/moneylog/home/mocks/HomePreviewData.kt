@@ -1,32 +1,27 @@
 package lmm.moneylog.home.mocks
 
 import androidx.compose.ui.graphics.Color
-import lmm.moneylog.home.components.cards.CreditCardsCardCallbacks
-import lmm.moneylog.home.components.cards.TotalBalanceCardCallbacks
-import lmm.moneylog.home.layout.HomeLayoutCallbacks
 import lmm.moneylog.home.models.BalanceInfo
 import lmm.moneylog.home.models.CreditCardInfo
 import lmm.moneylog.home.models.FinancialSummary
-import lmm.moneylog.home.models.HomeScreenData
+import lmm.moneylog.home.ui.HomeLayoutCallbacks
+import lmm.moneylog.home.ui.cards.CreditCardsCardCallbacks
+import lmm.moneylog.home.ui.cards.TotalBalanceCardCallbacks
+import lmm.moneylog.home.viewmodels.PeriodInfo
 
 /**
  * Provides preview/sample data for the home screen components
  */
 object HomePreviewData {
-    const val SAMPLE_PERIOD_TITLE = "October 2023"
+    val SAMPLE_PERIOD_INFO =
+        PeriodInfo(
+            monthName = "October",
+            year = 2023
+        )
 
     private const val VISA_PLATINUM_COLOR = 0xFF1A1F71
     private const val MASTERCARD_GOLD_COLOR = 0xFFEB8C00
     private const val AMEX_BLUE_COLOR = 0xFF006FCF
-
-    fun sampleHomeScreenData() =
-        HomeScreenData(
-            periodTitle = SAMPLE_PERIOD_TITLE,
-            balanceInfo = sampleBalanceInfo(),
-            income = sampleIncome(),
-            expenses = sampleExpenses(),
-            creditCards = sampleCreditCards()
-        )
 
     fun sampleBalanceInfo() =
         BalanceInfo(
@@ -56,13 +51,11 @@ object HomePreviewData {
 
     fun sampleIncome() =
         FinancialSummary(
-            title = "Income",
             amount = "$8,420.00"
         )
 
     fun sampleExpenses() =
         FinancialSummary(
-            title = "Expenses",
             amount = "$5,687.55"
         )
 

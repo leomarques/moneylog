@@ -18,11 +18,9 @@ data class BalanceInfo(
 /**
  * Data model for income or expense summary
  *
- * @property title The title/label for the summary (e.g., "Income", "Expenses")
  * @property amount The monetary amount formatted as a string (e.g., "$8,420.00")
  */
 data class FinancialSummary(
-    val title: String,
     val amount: String
 )
 

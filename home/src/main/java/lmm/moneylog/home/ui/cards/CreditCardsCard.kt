@@ -1,4 +1,4 @@
-package lmm.moneylog.home.components.cards
+package lmm.moneylog.home.ui.cards
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

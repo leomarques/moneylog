@@ -1,0 +1,6 @@
+<resources>
+    <string name="income">Receita</string>
+    <string name="expenses">Despesas</string>
+    <string name="unlock_values">Unlock values</string>
+    <string name="lock_values">Lock values</string>
+</resources>
