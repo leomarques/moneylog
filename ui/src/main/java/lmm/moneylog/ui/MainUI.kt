@@ -8,7 +8,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import lmm.moneylog.ui.screens.Home
+import androidx.compose.ui.tooling.preview.Preview
+import lmm.moneylog.ui.components.bottombar.BottomBar
+import lmm.moneylog.ui.screens.home.layout.HomeLayout
+import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
 import lmm.moneylog.ui.theme.AppTheme
 
 @Composable
@@ -19,6 +22,12 @@ fun MainUI(modifier: Modifier = Modifier) {
             color = MaterialTheme.colorScheme.background
         ) {
             Scaffold(
+                bottomBar = {
+                    BottomBar(
+                        selectedIndex = 0,
+                        onNavigate = { }
+                    )
+                },
                 content = { paddingValues ->
                     Box(
                         modifier =
@@ -26,10 +35,16 @@ fun MainUI(modifier: Modifier = Modifier) {
                                 .fillMaxSize()
                                 .padding(paddingValues)
                     ) {
-                        Home()
+                        HomeLayout(data = HomePreviewData.sampleHomeScreenData())
                     }
                 }
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun MainUIPreview() {
+    MainUI()
 }
