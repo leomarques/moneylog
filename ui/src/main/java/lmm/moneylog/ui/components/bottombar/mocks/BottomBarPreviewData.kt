@@ -43,7 +43,6 @@ object BottomBarPreviewData {
     /**
      * Creates sample bottom bar items with a selected index
      * @param iconOne Icon for transactions
-     * @param iconTwo Icon for accounts/categories
      * @param selectedIndex The index of the item to mark as selected (uses DEFAULT_SELECTED_INDEX if not specified)
      */
     fun sampleBottomBarItemsWithSelection(
