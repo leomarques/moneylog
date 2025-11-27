@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import lmm.moneylog.home.layout.HomeLayout
 import lmm.moneylog.home.mocks.HomePreviewData
-import lmm.moneylog.ui.components.MainUI
+import lmm.moneylog.ui.components.misc.MainUI
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
