@@ -1,6 +1,9 @@
 package lmm.moneylog.ui.screens.home.mocks
 
 import androidx.compose.ui.graphics.Color
+import lmm.moneylog.ui.screens.home.components.cards.CreditCardsCardCallbacks
+import lmm.moneylog.ui.screens.home.components.cards.TotalBalanceCardCallbacks
+import lmm.moneylog.ui.screens.home.layout.HomeLayoutCallbacks
 import lmm.moneylog.ui.screens.home.models.BalanceInfo
 import lmm.moneylog.ui.screens.home.models.CreditCardInfo
 import lmm.moneylog.ui.screens.home.models.FinancialSummary
@@ -30,6 +33,25 @@ object HomePreviewData {
             balance = "$12,345.67",
             changePercentage = "+8.2%",
             changeAmount = "+$932.45"
+        )
+
+    fun sampleBalanceCardCallbacks() =
+        TotalBalanceCardCallbacks(
+            onCardClick = { /* Mock: Card clicked */ },
+            onChangeIndicatorClick = { /* Mock: Change indicator clicked */ }
+        )
+
+    fun sampleCreditCardsCallbacks() =
+        CreditCardsCardCallbacks(
+            onCardClick = { /* Mock: Credit card clicked */ }
+        )
+
+    fun sampleHomeLayoutCallbacks() =
+        HomeLayoutCallbacks(
+            balanceCardCallbacks = sampleBalanceCardCallbacks(),
+            onIncomeClick = { /* Mock: Income clicked */ },
+            onExpensesClick = { /* Mock: Expenses clicked */ },
+            creditCardsCallbacks = sampleCreditCardsCallbacks()
         )
 
     fun sampleIncome() =

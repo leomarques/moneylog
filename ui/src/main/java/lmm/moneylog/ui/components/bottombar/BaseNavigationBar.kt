@@ -13,10 +13,10 @@ import androidx.compose.ui.platform.testTag
 fun BaseNavigationBar(
     items: List<Pair<String, ImageVector>>,
     selectedIndex: Int,
-    onClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (Int) -> Unit = {}
 ) {
-    NavigationBar(modifier) {
+    NavigationBar(modifier = modifier) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 modifier = Modifier.testTag("BaseNavigationBarItem$index"),

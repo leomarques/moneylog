@@ -35,7 +35,10 @@ fun MainUI(modifier: Modifier = Modifier) {
                                 .fillMaxSize()
                                 .padding(paddingValues)
                     ) {
-                        HomeLayout(data = HomePreviewData.sampleHomeScreenData())
+                        HomeLayout(
+                            data = HomePreviewData.sampleHomeScreenData(),
+                            callbacks = HomePreviewData.sampleHomeLayoutCallbacks()
+                        )
                     }
                 }
             )

@@ -11,6 +11,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
 import lmm.moneylog.ui.theme.AppTheme
 
+/**
+ * Displays a centered header text for the home screen
+ */
 @Composable
 fun HomeHeader(
     text: String,

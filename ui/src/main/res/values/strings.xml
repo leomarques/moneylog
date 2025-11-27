@@ -2,7 +2,7 @@
     <string name="app_name">Lemony</string>
 
     <string name="transactions">Transações</string>
-    <string name="accounts">Contas</string>
+    <string name="accounts">Menu</string>
     <string name="account">Conta</string>
     <string name="credit_card">Cartão de crédito</string>
     <string name="invoice">Fatura</string>

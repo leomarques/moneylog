@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.screens.home.components.cards
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -39,10 +40,11 @@ fun IncomeExpenseCard(
     amount: String,
     icon: ImageVector,
     iconColor: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier.clickable { onClick() },
         colors =
             CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surface

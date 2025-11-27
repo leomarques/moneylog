@@ -24,10 +24,14 @@ import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income
 import lmm.moneylog.ui.theme.outcome
 
+/**
+ * Main layout for the home screen displaying financial summary
+ */
 @Composable
 fun HomeLayout(
     data: HomeScreenData,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    callbacks: HomeLayoutCallbacks = HomeLayoutCallbacks()
 ) {
     Column(
         modifier =
@@ -48,12 +52,15 @@ fun HomeLayout(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(bottom = Size.MediumSpaceSize)
+                    .padding(bottom = Size.MediumSpaceSize),
+            callbacks = callbacks.balanceCardCallbacks
         )
 
         IncomeExpenseRow(
             incomeData = data.income,
             expensesData = data.expenses,
+            onIncomeClick = callbacks.onIncomeClick,
+            onExpensesClick = callbacks.onExpensesClick,
             modifier =
                 Modifier
                     .fillMaxWidth()
@@ -62,7 +69,8 @@ fun HomeLayout(
 
         CreditCardsCard(
             creditCards = data.creditCards,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            callbacks = callbacks.creditCardsCallbacks
         )
     }
 }
@@ -71,7 +79,9 @@ fun HomeLayout(
 private fun IncomeExpenseRow(
     incomeData: FinancialSummary,
     expensesData: FinancialSummary,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onIncomeClick: () -> Unit = {},
+    onExpensesClick: () -> Unit = {}
 ) {
     Row(
         modifier = modifier,
@@ -82,14 +92,16 @@ private fun IncomeExpenseRow(
             amount = incomeData.amount,
             icon = Icons.Default.ArrowDownward,
             iconColor = income,
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
+            onClick = onIncomeClick
         )
         IncomeExpenseCard(
             title = expensesData.title,
             amount = expensesData.amount,
             icon = Icons.Default.ArrowUpward,
             iconColor = outcome,
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
+            onClick = onExpensesClick
         )
     }
 }

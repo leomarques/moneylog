@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.screens.home.components.cards
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,12 +34,20 @@ import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.Size
 
 /**
+ * Callbacks for CreditCardsCard interactions
+ */
+data class CreditCardsCardCallbacks(
+    val onCardClick: (CreditCardInfo) -> Unit = {}
+)
+
+/**
  * Displays a list of credit cards with their invoice amounts
  */
 @Composable
 fun CreditCardsCard(
     creditCards: List<CreditCardInfo>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    callbacks: CreditCardsCardCallbacks = CreditCardsCardCallbacks()
 ) {
     Card(
         modifier = modifier,
@@ -65,7 +74,10 @@ fun CreditCardsCard(
                 if (index > 0) {
                     Spacer(modifier = Modifier.height(Size.SmallSpaceSize))
                 }
-                CreditCardItem(cardInfo = card)
+                CreditCardItem(
+                    cardInfo = card,
+                    onClick = { callbacks.onCardClick(card) }
+                )
             }
         }
     }
@@ -119,12 +131,14 @@ private fun CreditCardsHeader() {
 @Composable
 private fun CreditCardItem(
     cardInfo: CreditCardInfo,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ) {
     Row(
         modifier =
             modifier
                 .fillMaxWidth()
+                .clickable { onClick() }
                 .padding(vertical = Size.SmallSpaceSize),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically

@@ -3,6 +3,7 @@ package lmm.moneylog.ui.components.bottombar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -12,7 +13,8 @@ import lmm.moneylog.ui.R
 @Composable
 fun MyNavigationBar(
     selectedIndex: Int,
-    onClick: (Int) -> Unit
+    modifier: Modifier = Modifier,
+    onClick: (Int) -> Unit = {}
 ) {
     BaseNavigationBar(
         items =
@@ -27,18 +29,11 @@ fun MyNavigationBar(
                 ),
                 Pair(
                     stringResource(R.string.accounts),
-                    ImageVector.vectorResource(id = R.drawable.outline_account_balance_24)
-                ),
-                Pair(
-                    stringResource(R.string.cards),
-                    ImageVector.vectorResource(id = R.drawable.outline_credit_card_24)
-                ),
-                Pair(
-                    stringResource(R.string.categories),
                     ImageVector.vectorResource(id = R.drawable.outline_category_24)
-                )
+                ),
             ),
         selectedIndex = selectedIndex,
+        modifier = modifier,
         onClick = onClick
     )
 }

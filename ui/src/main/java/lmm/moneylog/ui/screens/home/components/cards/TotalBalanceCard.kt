@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.screens.home.components.cards
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,15 +34,24 @@ import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income
 
 /**
+ * Callbacks for TotalBalanceCard interactions
+ */
+data class TotalBalanceCardCallbacks(
+    val onCardClick: () -> Unit = {},
+    val onChangeIndicatorClick: () -> Unit = {},
+)
+
+/**
  * Displays the total balance with change percentage and amount
  */
 @Composable
 fun TotalBalanceCard(
     balanceInfo: BalanceInfo,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    callbacks: TotalBalanceCardCallbacks = TotalBalanceCardCallbacks(),
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier.clickable { callbacks.onCardClick() },
         colors =
             CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer
@@ -69,7 +79,8 @@ fun TotalBalanceCard(
             Column {
                 BalanceCardHeader(
                     changePercentage = balanceInfo.changePercentage,
-                    changeAmount = balanceInfo.changeAmount
+                    changeAmount = balanceInfo.changeAmount,
+                    onChangeIndicatorClick = callbacks.onChangeIndicatorClick
                 )
 
                 Spacer(modifier = Modifier.height(Size.DefaultSpaceSize))
@@ -93,7 +104,8 @@ object TotalBalanceCardDefaults {
 @Composable
 private fun BalanceCardHeader(
     changePercentage: String,
-    changeAmount: String
+    changeAmount: String,
+    onChangeIndicatorClick: () -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -105,7 +117,8 @@ private fun BalanceCardHeader(
 
         ChangeIndicator(
             changePercentage = changePercentage,
-            changeAmount = changeAmount
+            changeAmount = changeAmount,
+            onClick = onChangeIndicatorClick
         )
     }
 }
@@ -136,9 +149,13 @@ private fun WalletIcon() {
 @Composable
 private fun ChangeIndicator(
     changePercentage: String,
-    changeAmount: String
+    changeAmount: String,
+    onClick: () -> Unit
 ) {
-    Column(horizontalAlignment = Alignment.End) {
+    Column(
+        modifier = Modifier.clickable { onClick() },
+        horizontalAlignment = Alignment.End
+    ) {
         Text(
             text = changePercentage,
             style = MaterialTheme.typography.labelLarge,
