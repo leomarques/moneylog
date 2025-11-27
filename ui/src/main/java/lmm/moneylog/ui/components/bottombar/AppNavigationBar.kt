@@ -1,41 +1,43 @@
 package lmm.moneylog.ui.components.bottombar
 
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import lmm.moneylog.ui.components.bottombar.models.BottomBarItem
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
+import lmm.moneylog.ui.R
 
-/**
- * A Material 3 navigation bar with customizable items
- *
- * @param items List of navigation bar items to display
- * @param modifier Modifier for the navigation bar
- * @param onClick Callback invoked when an item is clicked, receiving the item's index
- */
 @Composable
 fun AppNavigationBar(
-    items: List<BottomBarItem>,
-    modifier: Modifier = Modifier,
-    onClick: (Int) -> Unit = {}
+    selectedIndex: Int,
+    onClick: (Int) -> Unit
 ) {
-    NavigationBar(modifier = modifier) {
-        items.forEachIndexed { index, item ->
-            NavigationBarItem(
-                icon = {
-                    Icon(
-                        imageVector = item.icon,
-                        contentDescription = item.label
-                    )
-                },
-                label = { Text(item.label) },
-                selected = item.isSelected,
-                onClick = {
-                    onClick(index)
-                }
-            )
-        }
-    }
+    BaseNavigationBar(
+        items =
+            listOf(
+                Pair(
+                    stringResource(R.string.navbar_home),
+                    Icons.Default.Home
+                ),
+                Pair(
+                    stringResource(R.string.transactions),
+                    ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24)
+                ),
+                Pair(
+                    stringResource(R.string.options),
+                    Icons.Default.Settings
+                ),
+            ),
+        selectedIndex = selectedIndex,
+        onClick = onClick
+    )
+}
+
+@Preview
+@Composable
+private fun AppNavigationBarPreview() {
+    AppNavigationBar(selectedIndex = 0) {}
 }

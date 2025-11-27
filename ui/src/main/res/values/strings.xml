@@ -113,4 +113,6 @@
     <string name="pay_invoice_dialog_desc">Você irá pagar a fatura no valor de %1$s com a conta %2$s</string>
     <string name="error_pay_invoice">Erro ao pagar fatura</string>
     <string name="success_pay_invoice">Fatura paga com sucesso</string>
+
+    <string name="options">Opções</string>
 </resources>

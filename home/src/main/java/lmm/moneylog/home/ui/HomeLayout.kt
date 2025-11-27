@@ -67,7 +67,6 @@ private fun HomeContent(
             valuesMasked = valuesMasked,
             onMaskToggle = {
                 valuesMasked = !valuesMasked
-                callbacks.onMaskToggle()
             },
             modifier =
                 Modifier
