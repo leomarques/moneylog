@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.screens.home.layout
+package lmm.moneylog.home.layout
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,13 +19,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.ui.components.fabs.AddFab
-import lmm.moneylog.ui.screens.home.components.HomeHeader
-import lmm.moneylog.ui.screens.home.components.cards.CreditCardsCard
-import lmm.moneylog.ui.screens.home.components.cards.IncomeExpenseCard
-import lmm.moneylog.ui.screens.home.components.cards.TotalBalanceCard
-import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
-import lmm.moneylog.ui.screens.home.models.FinancialSummary
-import lmm.moneylog.ui.screens.home.models.HomeScreenData
+import lmm.moneylog.home.components.HomeHeader
+import lmm.moneylog.home.components.cards.CreditCardsCard
+import lmm.moneylog.home.components.cards.IncomeExpenseCard
+import lmm.moneylog.home.components.cards.TotalBalanceCard
+import lmm.moneylog.home.mocks.HomePreviewData
+import lmm.moneylog.home.models.FinancialSummary
+import lmm.moneylog.home.models.HomeScreenData
 import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.ExpenseColor
 import lmm.moneylog.ui.theme.IncomeColor
@@ -43,7 +43,7 @@ import lmm.moneylog.ui.theme.Size
 fun HomeLayout(
     data: HomeScreenData,
     modifier: Modifier = Modifier,
-    callbacks: HomeLayoutCallbacks = HomeLayoutCallbacks()
+    callbacks: HomeLayoutCallbacks
 ) {
     var valuesMasked by remember { mutableStateOf(false) }
 
@@ -144,6 +144,9 @@ private fun IncomeExpenseRow(
 @Composable
 private fun HomeLayoutPreview() {
     AppTheme {
-        HomeLayout(data = HomePreviewData.sampleHomeScreenData())
+        HomeLayout(
+            data = HomePreviewData.sampleHomeScreenData(),
+            callbacks = HomePreviewData.sampleHomeLayoutCallbacks()
+        )
     }
 }

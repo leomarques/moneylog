@@ -1,4 +1,4 @@
-package lmm.moneylog.ui
+package lmm.moneylog.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -6,15 +6,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import lmm.moneylog.ui.R
 import lmm.moneylog.ui.components.bottombar.AppNavigationBar
 import lmm.moneylog.ui.components.bottombar.mocks.BottomBarPreviewData
-import lmm.moneylog.ui.screens.home.layout.HomeLayout
-import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
 import lmm.moneylog.ui.theme.AppTheme
 
 /**
@@ -24,7 +24,10 @@ import lmm.moneylog.ui.theme.AppTheme
  * @param modifier Modifier for the main container
  */
 @Composable
-fun MainUI(modifier: Modifier = Modifier) {
+fun MainUI(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
     AppTheme {
         Surface(
             modifier = modifier.fillMaxSize(),
@@ -50,10 +53,7 @@ fun MainUI(modifier: Modifier = Modifier) {
                                 .fillMaxSize()
                                 .padding(paddingValues)
                     ) {
-                        HomeLayout(
-                            data = HomePreviewData.sampleHomeScreenData(),
-                            callbacks = HomePreviewData.sampleHomeLayoutCallbacks()
-                        )
+                        content()
                     }
                 }
             )
@@ -64,5 +64,5 @@ fun MainUI(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun MainUIPreview() {
-    MainUI()
+    MainUI(content = { Text("Hello, World!") })
 }

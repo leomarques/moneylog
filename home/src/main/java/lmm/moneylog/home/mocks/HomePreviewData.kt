@@ -1,13 +1,13 @@
-package lmm.moneylog.ui.screens.home.mocks
+package lmm.moneylog.home.mocks
 
 import androidx.compose.ui.graphics.Color
-import lmm.moneylog.ui.screens.home.components.cards.CreditCardsCardCallbacks
-import lmm.moneylog.ui.screens.home.components.cards.TotalBalanceCardCallbacks
-import lmm.moneylog.ui.screens.home.layout.HomeLayoutCallbacks
-import lmm.moneylog.ui.screens.home.models.BalanceInfo
-import lmm.moneylog.ui.screens.home.models.CreditCardInfo
-import lmm.moneylog.ui.screens.home.models.FinancialSummary
-import lmm.moneylog.ui.screens.home.models.HomeScreenData
+import lmm.moneylog.home.components.cards.CreditCardsCardCallbacks
+import lmm.moneylog.home.components.cards.TotalBalanceCardCallbacks
+import lmm.moneylog.home.layout.HomeLayoutCallbacks
+import lmm.moneylog.home.models.BalanceInfo
+import lmm.moneylog.home.models.CreditCardInfo
+import lmm.moneylog.home.models.FinancialSummary
+import lmm.moneylog.home.models.HomeScreenData
 
 /**
  * Provides preview/sample data for the home screen components

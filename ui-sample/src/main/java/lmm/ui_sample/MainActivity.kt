@@ -4,14 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import lmm.moneylog.ui.MainUI
+import lmm.moneylog.home.layout.HomeLayout
+import lmm.moneylog.home.mocks.HomePreviewData
+import lmm.moneylog.ui.components.MainUI
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MainUI()
+            MainUI {
+                HomeLayout(
+                    data = HomePreviewData.sampleHomeScreenData(),
+                    callbacks = HomePreviewData.sampleHomeLayoutCallbacks()
+                )
+            }
         }
     }
 }

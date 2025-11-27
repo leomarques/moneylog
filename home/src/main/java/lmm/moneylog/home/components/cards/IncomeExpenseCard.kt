@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.screens.home.components.cards
+package lmm.moneylog.home.components.cards
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -19,8 +19,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import lmm.moneylog.ui.components.common.CircularIconBox
-import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
+import lmm.moneylog.ui.components.misc.CircularIconBox
+import lmm.moneylog.home.mocks.HomePreviewData
 import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.IncomeColor
 import lmm.moneylog.ui.theme.Size

@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.screens.home.models
+package lmm.moneylog.home.models
 
 import androidx.compose.ui.graphics.Color
 

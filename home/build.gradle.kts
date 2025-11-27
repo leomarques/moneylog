@@ -1,23 +1,22 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.jlleitschuh.gradle.ktlint)
     alias(libs.plugins.kotlin.compose)
 }
 
 android {
-    namespace = "lmm.ui_sample"
+    namespace = "lmm.moneylog.home"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "lmm.ui_sample"
         minSdk = 30
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -53,10 +52,21 @@ android {
     }
 }
 
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config.setFrom(
+        files(
+            "$rootDir/gradle/detekt.yml",
+            "$rootDir/gradle/detekt-compose.yml"
+        )
+    )
+}
+
 dependencies {
-    implementation(project(":home"))
     implementation(project(":ui"))
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
     implementation(libs.koin.androidx.compose)
+    detektPlugins(libs.compose.rules)
 }

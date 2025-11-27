@@ -1,4 +1,4 @@
-package lmm.moneylog.ui.screens.home.components
+package lmm.moneylog.home.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import lmm.moneylog.ui.screens.home.mocks.HomePreviewData
+import lmm.moneylog.home.mocks.HomePreviewData
 import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.Size
 
