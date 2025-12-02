@@ -96,7 +96,7 @@ fun GraphsScreen(
 @Preview
 @Composable
 private fun PreviewGraphsScreen() {
-    AppTheme() {
+    AppTheme {
         GraphsScreen(onArrowBackClick = {})
     }
 }
