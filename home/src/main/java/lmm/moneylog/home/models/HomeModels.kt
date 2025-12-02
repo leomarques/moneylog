@@ -27,31 +27,18 @@ data class FinancialSummary(
 /**
  * Data model representing a credit card with invoice information
  *
+ * @property cardId The unique identifier for the credit card
  * @property cardName The display name of the credit card (e.g., "Visa Platinum")
  * @property cardLastDigits The last 4 digits of the card number (e.g., "•••• 4532")
  * @property invoiceAmount The current invoice amount formatted as a string (e.g., "$1,234.56")
+ * @property invoiceCode The invoice code identifier for the current invoice period
  * @property cardColor The brand/theme color associated with this card
  */
 data class CreditCardInfo(
+    val cardId: Int,
     val cardName: String,
     val cardLastDigits: String,
     val invoiceAmount: String,
+    val invoiceCode: String,
     val cardColor: Color
-)
-
-/**
- * Data model containing all home screen data
- *
- * @property periodTitle The title for the current period (e.g., "October 2023")
- * @property balanceInfo Balance information with change metrics
- * @property income Income summary for the period
- * @property expenses Expense summary for the period
- * @property creditCards List of credit cards with their invoice information
- */
-data class HomeScreenData(
-    val periodTitle: String,
-    val balanceInfo: BalanceInfo,
-    val income: FinancialSummary,
-    val expenses: FinancialSummary,
-    val creditCards: List<CreditCardInfo>
 )

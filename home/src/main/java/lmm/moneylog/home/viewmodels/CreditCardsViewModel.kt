@@ -33,9 +33,11 @@ class CreditCardsViewModel(
                 _creditCards.value =
                     creditCardResult.cards.map { card ->
                         CreditCardInfo(
+                            cardId = card.id,
                             cardName = card.name,
                             cardLastDigits = formatCardDigits(card.id),
                             invoiceAmount = card.value.formatToBRL(),
+                            invoiceCode = creditCardResult.invoiceCode,
                             cardColor = Color(card.color)
                         )
                     }

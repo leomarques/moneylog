@@ -54,29 +54,30 @@ object HomePreviewData {
             amount = "$8,420.00"
         )
 
-    fun sampleExpenses() =
-        FinancialSummary(
-            amount = "$5,687.55"
-        )
-
     fun sampleCreditCards() =
         listOf(
             CreditCardInfo(
+                cardId = 1,
                 cardName = "Visa Platinum",
                 cardLastDigits = "•••• 4532",
                 invoiceAmount = "$1,234.56",
+                invoiceCode = "202310",
                 cardColor = Color(VISA_PLATINUM_COLOR)
             ),
             CreditCardInfo(
+                cardId = 2,
                 cardName = "Mastercard Gold",
                 cardLastDigits = "•••• 8901",
                 invoiceAmount = "$892.30",
+                invoiceCode = "202310",
                 cardColor = Color(MASTERCARD_GOLD_COLOR)
             ),
             CreditCardInfo(
+                cardId = 3,
                 cardName = "American Express",
                 cardLastDigits = "•••• 1234",
                 invoiceAmount = "$2,156.78",
+                invoiceCode = "202310",
                 cardColor = Color(AMEX_BLUE_COLOR)
             )
         )
