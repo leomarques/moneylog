@@ -16,6 +16,5 @@ rootProject.name = "moneylog"
 include ':app'
 include ':data'
 include ':ui'
-include ':ui-sample'
 include ':home'
 include ':graphs'

@@ -91,10 +91,10 @@ detekt {
 }
 
 dependencies {
-    implementation(project(":data"))
-    implementation(project(":ui"))
-    implementation(project(":graphs"))
     implementation(project(":home"))
+    implementation(project(":graphs"))
+    implementation(project(":ui"))
+    implementation(project(":data"))
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
     implementation(libs.koin.androidx.compose)
