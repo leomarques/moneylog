@@ -12,7 +12,14 @@ fun AccountDetailDialogs(
     onColorPick: (Color) -> Unit,
     showArchiveConfirmDialog: Boolean,
     onArchiveConfirm: () -> Unit,
-    onArchiveDismiss: () -> Unit
+    onArchiveDismiss: () -> Unit,
+    showAdjustBalanceDialog: Boolean,
+    onAdjustBalanceInputConfirm: (String) -> Unit,
+    onAdjustBalanceDismiss: () -> Unit,
+    showAdjustBalanceConfirmDialog: Boolean,
+    adjustmentValue: String,
+    onAdjustBalanceFinalConfirm: () -> Unit,
+    onAdjustBalanceConfirmDismiss: () -> Unit
 ) {
     if (showColorsDialog.value) {
         ColorPicker(
@@ -28,6 +35,21 @@ fun AccountDetailDialogs(
         ArchiveAccountConfirmDialog(
             onConfirm = onArchiveConfirm,
             onDismiss = onArchiveDismiss
+        )
+    }
+
+    if (showAdjustBalanceDialog) {
+        AdjustBalanceDialog(
+            onConfirm = onAdjustBalanceInputConfirm,
+            onDismiss = onAdjustBalanceDismiss
+        )
+    }
+
+    if (showAdjustBalanceConfirmDialog) {
+        AdjustBalanceConfirmDialog(
+            adjustmentValue = adjustmentValue,
+            onConfirm = onAdjustBalanceFinalConfirm,
+            onDismiss = onAdjustBalanceConfirmDismiss
         )
     }
 }

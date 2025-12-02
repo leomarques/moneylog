@@ -23,6 +23,14 @@ fun AccountDetailContent(
     onArchiveDismiss: () -> Unit,
     onColorPick: (Color) -> Unit,
     onNameChange: (String) -> Unit,
+    showAdjustBalanceDialog: Boolean,
+    onAdjustBalanceInputConfirm: (String) -> Unit,
+    onAdjustBalanceDismiss: () -> Unit,
+    onAdjustBalanceClick: () -> Unit,
+    showAdjustBalanceConfirmDialog: Boolean,
+    adjustmentValue: String,
+    onAdjustBalanceFinalConfirm: () -> Unit,
+    onAdjustBalanceConfirmDismiss: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
@@ -33,7 +41,14 @@ fun AccountDetailContent(
             showColorsDialog = showColorsDialog,
             onColorPick = onColorPick,
             onArchiveConfirm = onArchiveConfirm,
-            onArchiveDismiss = onArchiveDismiss
+            onArchiveDismiss = onArchiveDismiss,
+            showAdjustBalanceDialog = showAdjustBalanceDialog,
+            onAdjustBalanceInputConfirm = onAdjustBalanceInputConfirm,
+            onAdjustBalanceDismiss = onAdjustBalanceDismiss,
+            showAdjustBalanceConfirmDialog = showAdjustBalanceConfirmDialog,
+            adjustmentValue = adjustmentValue,
+            onAdjustBalanceFinalConfirm = onAdjustBalanceFinalConfirm,
+            onAdjustBalanceConfirmDismiss = onAdjustBalanceConfirmDismiss
         )
 
         AccountDetailFields(
@@ -41,7 +56,8 @@ fun AccountDetailContent(
             color = color,
             isEdit = isEdit,
             onNameChange = onNameChange,
-            onColorDialogClick = { showColorsDialog.value = true }
+            onColorDialogClick = { showColorsDialog.value = true },
+            onAdjustBalanceClick = onAdjustBalanceClick
         )
     }
 }
@@ -57,6 +73,14 @@ private fun AccountDetailContentPreview() {
         onArchiveConfirm = {},
         onArchiveDismiss = {},
         onColorPick = {},
-        onNameChange = {}
+        onNameChange = {},
+        showAdjustBalanceDialog = false,
+        onAdjustBalanceInputConfirm = {},
+        onAdjustBalanceDismiss = {},
+        onAdjustBalanceClick = {},
+        showAdjustBalanceConfirmDialog = false,
+        adjustmentValue = "",
+        onAdjustBalanceFinalConfirm = {},
+        onAdjustBalanceConfirmDismiss = {}
     )
 }

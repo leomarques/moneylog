@@ -15,6 +15,10 @@ import lmm.moneylog.data.account.repositories.interfaces.AddAccountRepository
 import lmm.moneylog.data.account.repositories.interfaces.ArchiveAccountRepository
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.account.repositories.interfaces.UpdateAccountRepository
+import lmm.moneylog.data.balance.interactors.GetBalanceByAccountInteractor
+import lmm.moneylog.data.time.repositories.DomainTimeRepository
+import lmm.moneylog.data.transaction.model.Transaction
+import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.ui.extensions.getIdParam
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.account.detail.model.AccountDetailUIState
@@ -24,7 +28,10 @@ class AccountDetailViewModel(
     private val getAccountsRepository: GetAccountsRepository,
     private val addAccountRepository: AddAccountRepository,
     private val updateAccountRepository: UpdateAccountRepository,
-    private val archiveAccountRepository: ArchiveAccountRepository
+    private val archiveAccountRepository: ArchiveAccountRepository,
+    private val getBalanceByAccountInteractor: GetBalanceByAccountInteractor,
+    private val addTransactionRepository: AddTransactionRepository,
+    private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(AccountDetailUIState())
     val uiState: StateFlow<AccountDetailUIState> = _uiState.asStateFlow()
@@ -83,6 +90,57 @@ class AccountDetailViewModel(
             }
 
             onSuccess()
+        }
+    }
+
+    suspend fun calculateAdjustment(newBalance: String): Pair<String, Double>? {
+        val state = _uiState.value
+        if (!state.isEdit) return null
+
+        return try {
+            val newBalanceValue = newBalance.toDoubleOrNull() ?: return null
+            val currentBalance = getBalanceByAccountInteractor.execute(state.id)
+            val adjustmentValue = newBalanceValue - currentBalance
+
+            if (adjustmentValue == 0.0) return null
+
+            // Format the adjustment value for display
+            val formattedValue = if (adjustmentValue > 0) {
+                "+R$ %.2f".format(adjustmentValue)
+            } else {
+                "R$ %.2f".format(adjustmentValue)
+            }
+
+            Pair(formattedValue, adjustmentValue)
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    fun onAdjustBalanceConfirm(
+        adjustmentValue: Double,
+        onSuccess: () -> Unit,
+        onError: (Int) -> Unit
+    ) {
+        val state = _uiState.value
+        if (!state.isEdit) {
+            onError(R.string.detail_invalid_data)
+            return
+        }
+
+        viewModelScope.launch {
+            try {
+                val adjustmentTransaction = Transaction(
+                    value = adjustmentValue,
+                    description = "Balance adjustment",
+                    date = domainTimeRepository.getCurrentDomainTime(),
+                    accountId = state.id
+                )
+                addTransactionRepository.save(adjustmentTransaction)
+                onSuccess()
+            } catch (e: Exception) {
+                onError(R.string.detail_invalid_data)
+            }
         }
     }
 }

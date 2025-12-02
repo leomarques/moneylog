@@ -44,6 +44,12 @@
     <string name="detail_topbar_creditcard_edit">Editar Cartão</string>
     <string name="detail_topbar_account_add">Nova Conta</string>
     <string name="detail_topbar_account_edit">Editar Conta</string>
+    <string name="detail_adjust_balance">Ajustar Saldo</string>
+    <string name="detail_adjust_balance_title">Ajustar Saldo da Conta</string>
+    <string name="detail_adjust_balance_description">Digite o novo saldo da conta</string>
+    <string name="detail_new_balance">Novo Saldo</string>
+    <string name="detail_adjust_balance_success">Saldo ajustado com sucesso</string>
+    <string name="detail_adjust_balance_transaction_desc">Ajuste de saldo</string>
 
     <string name="detail_date">Data</string>
     <string name="detail_description">Descrição (opcional)</string>
@@ -62,11 +68,13 @@
     <string name="dialog_title_transaction_delete">Excluir transação?</string>
     <string name="dialog_title_account_archive">Arquivar conta?</string>
     <string name="dialog_title_account_delete">Excluir conta?</string>
+    <string name="dialog_title_adjust_balance">Ajustar saldo?</string>
     <string name="dialog_title_category_delete">Excluir categoria?</string>
     <string name="dialog_title_creditcard_delete">Excluir cartão?</string>
     <string name="dialog_description_transaction_delete">Isso vai apagar essa transação do seu histórico.</string>
     <string name="dialog_description_account_delete">Isso vai apagar essa conta e todas as transações associadas.</string>
     <string name="dialog_description_account_archive">Isso vai arquivar essa conta. Nenhuma transação será apagada.</string>
+    <string name="dialog_description_adjust_balance">Lemony criará uma transação de valor %1$s para ajustar o saldo. Tem certeza?</string>
     <string name="dialog_description_category_delete">Isso vai apagar essa categoria. Nenhuma transação será apagada.</string>
     <string name="dialog_description_creditcard_delete">Isso vai apagar esse cartão. Nenhuma transação será apagada.</string>
 
