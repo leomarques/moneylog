@@ -2,6 +2,7 @@ package lmm.moneylog.misc
 
 import android.app.Application
 import lmm.moneylog.data.misc.dataModule
+import lmm.moneylog.graphs.di.graphsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -15,7 +16,8 @@ class MyApplication : Application() {
             androidContext(this@MyApplication)
             modules(
                 appModule,
-                dataModule
+                dataModule,
+                graphsModule
             )
         }
     }

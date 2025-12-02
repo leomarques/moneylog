@@ -46,7 +46,8 @@ object HomePreviewData {
             balanceCardCallbacks = sampleBalanceCardCallbacks(),
             onIncomeClick = { /* Mock: Income clicked */ },
             onExpensesClick = { /* Mock: Expenses clicked */ },
-            creditCardsCallbacks = sampleCreditCardsCallbacks()
+            creditCardsCallbacks = sampleCreditCardsCallbacks(),
+            onExpensesCardClick = { /* Mock: Expenses card clicked */ }
         )
 
     fun sampleIncome() =

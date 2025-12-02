@@ -36,6 +36,9 @@ import lmm.moneylog.data.creditcard.repositories.interfaces.DeleteCreditCardRepo
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.creditcard.repositories.interfaces.UpdateCreditCardRepository
 import lmm.moneylog.data.creditcard.utils.InvoiceCalculator
+import lmm.moneylog.data.graphs.interactors.GetMonthlyTotalsInteractor
+import lmm.moneylog.data.graphs.interactors.GetNetWorthHistoryInteractor
+import lmm.moneylog.data.graphs.interactors.GetTransactionsByCategoryInteractor
 import lmm.moneylog.data.invoice.repositories.GetInvoicesRepository
 import lmm.moneylog.data.invoice.repositories.GetInvoicesRepositoryImpl
 import lmm.moneylog.data.notification.repositories.NotificationSettingsRepository
@@ -77,6 +80,10 @@ val dataModule =
         factoryOf(::GetBalanceRepositoryImpl) { bind<GetBalanceRepository>() }
 
         factoryOf(::GetCreditCardHomeInfoInteractor)
+
+        factoryOf(::GetTransactionsByCategoryInteractor)
+        factoryOf(::GetMonthlyTotalsInteractor)
+        factoryOf(::GetNetWorthHistoryInteractor)
 
         factoryOf(::AddAccountRepositoryImpl) { bind<AddAccountRepository>() }
         factoryOf(::GetAccountsRepositoryImpl) { bind<GetAccountsRepository>() }

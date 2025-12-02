@@ -42,3 +42,31 @@ data class CreditCardInfo(
     val invoiceCode: String,
     val cardColor: Color
 )
+
+/**
+ * Data model representing expenses by category
+ *
+ * @property categoryName The name of the category
+ * @property categoryColor The color associated with this category
+ * @property amount The total amount for this category
+ * @property percentage The percentage this category represents of total expenses
+ */
+data class CategoryExpense(
+    val categoryName: String,
+    val categoryColor: Color,
+    val amount: Double,
+    val percentage: Float
+)
+
+/**
+ * Data model for expenses summary with category breakdown
+ *
+ * @property totalExpenses The total expenses for current month formatted as a string
+ * @property totalAmount The raw total amount value
+ * @property categoryExpenses List of expenses grouped by category (top 5)
+ */
+data class ExpensesSummary(
+    val totalExpenses: String,
+    val totalAmount: Double,
+    val categoryExpenses: List<CategoryExpense>
+)
