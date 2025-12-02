@@ -112,10 +112,9 @@ fun SettingsScreen(
                 Column {
                     SettingsItem(
                         title = "Gráficos",
-                        description = "Visualize seus gastos (em breve)",
+                        description = "Visualize seus gastos",
                         icon = ImageVector.vectorResource(id = R.drawable.outline_bar_chart_24),
-                        onClick = onGraphsClick,
-                        enabled = false
+                        onClick = onGraphsClick
                     )
 
                     HorizontalDivider()
