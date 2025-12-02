@@ -110,6 +110,7 @@ fun MyNavHost(
                                     onCreditCardClick(creditCard.cardId, creditCard.invoiceCode)
                                 }
                             ),
+                        onExpensesCardClick = onGraphsClick,
                         onFabClick = onHomeFabClick
                     )
             )

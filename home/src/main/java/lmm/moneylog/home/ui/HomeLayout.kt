@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,6 +21,7 @@ import lmm.moneylog.home.ui.views.BalanceCardView
 import lmm.moneylog.home.ui.views.CreditCardsView
 import lmm.moneylog.home.ui.views.FinancialSummaryView
 import lmm.moneylog.home.ui.views.HeaderView
+import lmm.moneylog.home.ui.views.RecentExpensesView
 import lmm.moneylog.ui.components.fabs.AddFab
 import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.Size
@@ -59,6 +62,7 @@ private fun HomeContent(
             Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
                 .padding(Size.DefaultSpaceSize)
     ) {
         var valuesMasked by remember { mutableStateOf(false) }
@@ -96,7 +100,18 @@ private fun HomeContent(
         CreditCardsView(
             callbacks = callbacks.creditCardsCallbacks,
             valuesMasked = valuesMasked,
-            modifier = Modifier.fillMaxWidth()
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = Size.MediumSpaceSize)
+        )
+
+        RecentExpensesView(
+            onClick = callbacks.onExpensesCardClick,
+            valuesMasked = valuesMasked,
+            modifier =
+                Modifier
+                    .fillMaxWidth()
         )
     }
 }

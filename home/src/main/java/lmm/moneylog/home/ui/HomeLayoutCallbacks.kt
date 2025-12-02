@@ -10,6 +10,7 @@ import lmm.moneylog.home.ui.cards.TotalBalanceCardCallbacks
  * @property onIncomeClick Callback invoked when the income card is clicked
  * @property onExpensesClick Callback invoked when the expenses card is clicked
  * @property creditCardsCallbacks Callbacks for credit card interactions
+ * @property onExpensesCardClick Callback invoked when expenses card is clicked
  * @property onFabClick Callback invoked when the floating action button is clicked
  */
 data class HomeLayoutCallbacks(
@@ -17,5 +18,6 @@ data class HomeLayoutCallbacks(
     val onIncomeClick: () -> Unit = {},
     val onExpensesClick: () -> Unit = {},
     val creditCardsCallbacks: CreditCardsCardCallbacks = CreditCardsCardCallbacks(),
+    val onExpensesCardClick: () -> Unit = {},
     val onFabClick: () -> Unit = {}
 )

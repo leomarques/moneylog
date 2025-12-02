@@ -1,6 +1,8 @@
 package lmm.moneylog.graphs.di
 
 import lmm.moneylog.data.misc.dataModule
+import lmm.moneylog.graphs.viewmodel.GraphsViewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
@@ -12,5 +14,5 @@ val graphsModule =
     module {
         loadKoinModules(dataModule)
 
-        // ViewModels will be added here as we develop the graphs feature
+        viewModelOf(::GraphsViewModel)
     }
