@@ -14,6 +14,8 @@ const val INVOICE_LIST_SCREEN = "invoice_list"
 const val TRANSFER_SCREEN = "transfer"
 const val NOTIFICATION_SETTINGS_SCREEN = "notification_settings"
 const val CATEGORY_KEYWORDS_SCREEN = "category_keywords"
+const val SETTINGS_SCREEN = "settings"
+const val GRAPHS_SCREEN = "graphs"
 
 const val PARAM_TYPE_OF_VALUE = "typeOfValue"
 const val PARAM_TYPE_ALL = "all"
@@ -23,6 +25,4 @@ const val PARAM_INVOICE_CODE = "invoiceCode"
 
 const val HOME_INDEX = 0
 const val TRANSACTIONS_INDEX = 1
-const val ACCOUNTS_INDEX = 2
-const val CREDITCARD_INDEX = 3
-const val CATEGORIES_INDEX = 4
+const val SETTINGS_INDEX = 2

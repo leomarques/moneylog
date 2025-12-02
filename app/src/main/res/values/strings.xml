@@ -115,4 +115,8 @@
     <string name="pay_invoice_dialog_desc">Você irá pagar a fatura no valor de %1$s com a conta %2$s</string>
     <string name="error_pay_invoice">Erro ao pagar fatura</string>
     <string name="success_pay_invoice">Fatura paga com sucesso</string>
+
+    <string name="graphs">Gráficos</string>
+    <string name="graphs_coming_soon">Este recurso estará disponível em breve!</string>
+    <string name="graphs_description">Aqui você poderá visualizar seus gastos e receitas através de gráficos interativos.</string>
 </resources>
