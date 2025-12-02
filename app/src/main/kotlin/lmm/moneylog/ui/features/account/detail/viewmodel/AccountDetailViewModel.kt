@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.account.detail.viewmodel
 
+import android.util.Log
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -35,6 +36,10 @@ class AccountDetailViewModel(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(AccountDetailUIState())
     val uiState: StateFlow<AccountDetailUIState> = _uiState.asStateFlow()
+
+    companion object {
+        private const val TAG = "AccountDetailViewModel"
+    }
 
     init {
         viewModelScope.launch {
@@ -93,28 +98,36 @@ class AccountDetailViewModel(
         }
     }
 
+    @Suppress("ReturnCount")
     suspend fun calculateAdjustment(newBalance: String): Pair<String, Double>? {
         val state = _uiState.value
         if (!state.isEdit) return null
 
-        return try {
-            val newBalanceValue = newBalance.toDoubleOrNull() ?: return null
-            val currentBalance = getBalanceByAccountInteractor.execute(state.id)
-            val adjustmentValue = newBalanceValue - currentBalance
+        val newBalanceValue = newBalance.toDoubleOrNull() ?: return null
 
-            if (adjustmentValue == 0.0) return null
+        val currentBalance =
+            try {
+                getBalanceByAccountInteractor.execute(state.id)
+            } catch (e: IllegalStateException) {
+                Log.e(TAG, "Error getting balance for account ${state.id}", e)
+                return null
+            } catch (e: NumberFormatException) {
+                Log.e(TAG, "Number format error calculating balance for account ${state.id}", e)
+                return null
+            }
 
-            // Format the adjustment value for display
-            val formattedValue = if (adjustmentValue > 0) {
+        val adjustmentValue = newBalanceValue - currentBalance
+        if (adjustmentValue == 0.0) return null
+
+        // Format the adjustment value for display
+        val formattedValue =
+            if (adjustmentValue > 0) {
                 "+R$ %.2f".format(adjustmentValue)
             } else {
                 "R$ %.2f".format(adjustmentValue)
             }
 
-            Pair(formattedValue, adjustmentValue)
-        } catch (e: Exception) {
-            null
-        }
+        return Pair(formattedValue, adjustmentValue)
     }
 
     fun onAdjustBalanceConfirm(
@@ -130,15 +143,20 @@ class AccountDetailViewModel(
 
         viewModelScope.launch {
             try {
-                val adjustmentTransaction = Transaction(
-                    value = adjustmentValue,
-                    description = "Balance adjustment",
-                    date = domainTimeRepository.getCurrentDomainTime(),
-                    accountId = state.id
-                )
+                val adjustmentTransaction =
+                    Transaction(
+                        value = adjustmentValue,
+                        description = "Balance adjustment",
+                        date = domainTimeRepository.getCurrentDomainTime(),
+                        accountId = state.id
+                    )
                 addTransactionRepository.save(adjustmentTransaction)
                 onSuccess()
-            } catch (e: Exception) {
+            } catch (e: IllegalStateException) {
+                Log.e(TAG, "Error saving balance adjustment transaction", e)
+                onError(R.string.detail_invalid_data)
+            } catch (e: IllegalArgumentException) {
+                Log.e(TAG, "Invalid argument for balance adjustment transaction", e)
                 onError(R.string.detail_invalid_data)
             }
         }

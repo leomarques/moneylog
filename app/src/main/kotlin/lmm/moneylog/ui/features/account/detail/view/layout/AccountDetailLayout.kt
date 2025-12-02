@@ -8,6 +8,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -38,7 +39,7 @@ fun AccountDetailLayout(
     var showAdjustBalanceDialog by remember { mutableStateOf(false) }
     var showAdjustBalanceConfirmDialog by remember { mutableStateOf(false) }
     var adjustmentValueDisplay by remember { mutableStateOf("") }
-    var adjustmentValue by remember { mutableStateOf(0.0) }
+    var adjustmentValue by remember { mutableDoubleStateOf(0.0) }
 
     Scaffold(
         modifier = modifier,
