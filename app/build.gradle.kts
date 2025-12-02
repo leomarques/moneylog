@@ -94,6 +94,7 @@ detekt {
 
 dependencies {
     implementation(project(":data"))
+    implementation(project(":ui"))
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
     implementation(libs.koin.androidx.compose)

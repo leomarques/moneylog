@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import lmm.moneylog.home.R
 import lmm.moneylog.home.ui.cards.IncomeExpenseCard
 import lmm.moneylog.home.viewmodels.FinancialSummaryViewModel
-import lmm.moneylog.ui.theme.ExpenseColor
-import lmm.moneylog.ui.theme.IncomeColor
+import lmm.moneylog.ui.theme.income as incomeColor
+import lmm.moneylog.ui.theme.outcome as outcomeColor
 import lmm.moneylog.ui.theme.Size
 import org.koin.androidx.compose.koinViewModel
 
@@ -64,7 +64,7 @@ fun FinancialSummaryView(
                 title = stringResource(R.string.income),
                 amount = income!!.amount,
                 icon = Icons.Default.ArrowDownward,
-                iconColor = IncomeColor,
+                iconColor = incomeColor,
                 modifier = Modifier.weight(1f),
                 onClick = onIncomeClick,
                 valuesMasked = valuesMasked
@@ -73,7 +73,7 @@ fun FinancialSummaryView(
                 title = stringResource(R.string.expenses),
                 amount = expenses!!.amount,
                 icon = Icons.Default.ArrowUpward,
-                iconColor = ExpenseColor,
+                iconColor = outcomeColor,
                 modifier = Modifier.weight(1f),
                 onClick = onExpensesClick,
                 valuesMasked = valuesMasked

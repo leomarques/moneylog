@@ -24,6 +24,7 @@
     <string name="delete">Apagar</string>
 
     <string name="navbar_home">Início</string>
+    <string name="settings">Configurações</string>
     <string name="balancecard_total">Saldo em contas</string>
     <string name="search_placeholder">Procure pela descrição</string>
     <string name="list_account_balance">"Saldo atual: "</string>

@@ -19,7 +19,7 @@ import lmm.moneylog.R
 import lmm.moneylog.ui.features.creditcard.homecard.model.CreditCardHomeCardItem
 import lmm.moneylog.ui.features.creditcard.homecard.model.mockCards
 import lmm.moneylog.ui.features.creditcard.homecard.view.components.CreditHomeCardContent
-import lmm.moneylog.ui.theme.MoneylogTheme
+import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.Size
 
 @Composable
@@ -55,7 +55,9 @@ fun CreditHomeCardLayout(
             } else {
                 Text(
                     text = stringResource(R.string.empty_credit_cards_home),
-                    modifier = Modifier.padding(Size.MediumSpaceSize).clickable { onEmptyCardsClick() }
+                    modifier = Modifier
+                        .padding(Size.MediumSpaceSize)
+                        .clickable { onEmptyCardsClick() }
                 )
             }
         }
@@ -65,7 +67,7 @@ fun CreditHomeCardLayout(
 @Preview
 @Composable
 private fun CreditHomeCardLayoutPreview() {
-    MoneylogTheme {
+    AppTheme {
         CreditHomeCardLayout(
             hideValues = false,
             onClick = {},
@@ -78,7 +80,7 @@ private fun CreditHomeCardLayoutPreview() {
 @Preview
 @Composable
 private fun CreditHomeCardLayoutPreview2() {
-    MoneylogTheme {
+    AppTheme {
         CreditHomeCardLayout(
             hideValues = false,
             onClick = {},

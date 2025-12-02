@@ -3,9 +3,19 @@ package lmm.moneylog.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // Semantic colors for financial operations
-val IncomeColor = Color(0xFF009f23)
-val ExpenseColor = Color(0xFFD1282C)
-val NeutralColor = Color.Gray
+val income = Color(0xFF009f23)
+val outcome = Color(0xFFD1282C)
+val neutralColor = Color.Gray
+
+// Category/Custom colors
+val darkRed = Color(0xFF693738)
+val darkBlue = Color(0xFF28456c)
+val darkGreen = Color(0xFF2c5b3c)
+val darkYellow = Color(0xFF89632a)
+val darkOrange = Color(0xFF854c1d)
+val darkPurple = Color(0xFF492f64)
+val darkPink = Color(0xFF69314c)
+val darkBrow = Color(0xFF603b2c)
 
 val primaryLight = Color(0xFF266A49)
 val onPrimaryLight = Color(0xFFFFFFFF)

@@ -27,7 +27,7 @@ import lmm.moneylog.home.mocks.HomePreviewData
 import lmm.moneylog.home.models.BalanceInfo
 import lmm.moneylog.ui.components.misc.CircularIconBox
 import lmm.moneylog.ui.theme.AppTheme
-import lmm.moneylog.ui.theme.IncomeColor
+import lmm.moneylog.ui.theme.income
 import lmm.moneylog.ui.theme.Size
 
 /**
@@ -81,7 +81,8 @@ fun TotalBalanceCard(
                                         MaterialTheme.colorScheme.secondaryContainer
                                     )
                             )
-                    ).padding(Size.MediumSpaceSize)
+                    )
+                    .padding(Size.MediumSpaceSize)
         ) {
             Column {
                 BalanceCardHeader(
@@ -165,7 +166,7 @@ private fun ChangeIndicator(
         Text(
             text = if (valuesMasked) "••••" else changePercentage,
             style = MaterialTheme.typography.labelLarge,
-            color = IncomeColor,
+            color = income,
             fontWeight = FontWeight.SemiBold
         )
         Text(

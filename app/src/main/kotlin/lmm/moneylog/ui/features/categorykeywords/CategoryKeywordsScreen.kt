@@ -48,7 +48,7 @@ import lmm.moneylog.ui.features.categorykeywords.components.DeleteKeywordDialog
 import lmm.moneylog.ui.features.categorykeywords.model.CategoryWithKeywords
 import lmm.moneylog.ui.features.categorykeywords.model.KeywordItem
 import lmm.moneylog.ui.features.categorykeywords.viewmodel.CategoryKeywordsViewModel
-import lmm.moneylog.ui.theme.MoneylogTheme
+import lmm.moneylog.ui.theme.AppTheme
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -401,7 +401,7 @@ private fun KeywordChip(
 @Preview
 @Composable
 private fun PreviewCategoryKeywordsScreen() {
-    MoneylogTheme {
+    AppTheme {
         CategoryKeywordsScreen(onArrowBackClick = {})
     }
 }

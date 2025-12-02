@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import lmm.moneylog.home.mocks.HomePreviewData
 import lmm.moneylog.ui.components.misc.CircularIconBox
 import lmm.moneylog.ui.theme.AppTheme
-import lmm.moneylog.ui.theme.IncomeColor
+import lmm.moneylog.ui.theme.income
 import lmm.moneylog.ui.theme.Size
 
 /**
@@ -139,7 +139,7 @@ private fun IncomeExpenseCardPreview() {
             title = "Income",
             amount = HomePreviewData.sampleIncome().amount,
             icon = Icons.Default.ArrowDownward,
-            iconColor = IncomeColor,
+            iconColor = income,
             modifier = Modifier.padding(Size.DefaultSpaceSize),
             valuesMasked = false
         )
