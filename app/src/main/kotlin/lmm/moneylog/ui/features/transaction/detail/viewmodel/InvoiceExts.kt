@@ -29,5 +29,4 @@ fun String?.toInvoiceYear(): Int? {
 fun String.previousCode(domainTimeRepository: DomainTimeRepository): String =
     toInvoice(domainTimeRepository).previousCode()
 
-fun String.nextCode(domainTimeRepository: DomainTimeRepository): String =
-    toInvoice(domainTimeRepository).nextCode()
+fun String.nextCode(domainTimeRepository: DomainTimeRepository): String = toInvoice(domainTimeRepository).nextCode()

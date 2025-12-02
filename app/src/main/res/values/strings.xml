@@ -14,6 +14,7 @@
     <string name="outcomes">Despesas</string>
     <string name="outcome">Despesa</string>
     <string name="creditcards">Cartões de crédito</string>
+    <string name="expenses">Despesas</string>
     <string name="color">Cor</string>
     <string name="value">Valor</string>
     <string name="name">Nome</string>
@@ -23,6 +24,7 @@
     <string name="delete">Apagar</string>
 
     <string name="navbar_home">Início</string>
+    <string name="settings">Configurações</string>
     <string name="balancecard_total">Saldo em contas</string>
     <string name="search_placeholder">Procure pela descrição</string>
     <string name="list_account_balance">"Saldo atual: "</string>

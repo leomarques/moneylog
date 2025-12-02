@@ -52,7 +52,7 @@ import lmm.moneylog.ui.components.icons.CreditCardIcon
 import lmm.moneylog.ui.components.textfields.ClickTextField
 import lmm.moneylog.ui.features.notification.NotificationPermissionHelper
 import lmm.moneylog.ui.features.notification.settings.viewmodel.NotificationSettingsViewModel
-import lmm.moneylog.ui.theme.MoneylogTheme
+import lmm.moneylog.ui.theme.AppTheme
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -457,7 +457,7 @@ private fun CategoryKeywordsCard(
 @Preview
 @Composable
 private fun PreviewNotificationSettingsScreen() {
-    MoneylogTheme {
+    AppTheme {
         NotificationSettingsScreen(
             onArrowBackClick = {},
             onCategoryKeywordsClick = {}

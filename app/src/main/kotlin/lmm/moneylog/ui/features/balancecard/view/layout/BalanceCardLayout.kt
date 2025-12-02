@@ -11,7 +11,7 @@ import lmm.moneylog.ui.features.balancecard.view.components.Amount
 import lmm.moneylog.ui.features.balancecard.view.components.Balance
 import lmm.moneylog.ui.features.balancecard.view.components.BalanceCardContent
 import lmm.moneylog.ui.features.balancecard.view.components.LockButton
-import lmm.moneylog.ui.theme.MoneylogTheme
+import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.income
 import lmm.moneylog.ui.theme.outcome
 
@@ -68,7 +68,7 @@ fun BalanceCardLayout(
 @Preview
 @Composable
 private fun BalanceCardPreview() {
-    MoneylogTheme {
+    AppTheme {
         BalanceCardLayout(
             total = "R$9999999999999999999999999999999999999999999999999999999999999999999,00,00",
             credit = "R$999999999999999999999999999999999999999999999999999999999999999,00,00,00",

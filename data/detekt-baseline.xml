@@ -3,8 +3,6 @@
   <ManuallySuppressedIssues/>
   <CurrentIssues>
     <ID>MagicNumber:Invoice.kt$Invoice$12</ID>
-    <ID>SwallowedException:NubankTransactionConverterImpl.kt$NubankTransactionConverterImpl$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:NubankTransactionConverterImpl.kt$NubankTransactionConverterImpl$e: Exception</ID>
     <ID>TooManyFunctions:TransactionDao.kt$TransactionDao</ID>
   </CurrentIssues>
 </SmellBaseline>
