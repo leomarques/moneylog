@@ -19,10 +19,10 @@ import androidx.compose.ui.unit.dp
 import lmm.moneylog.home.R
 import lmm.moneylog.home.ui.cards.IncomeExpenseCard
 import lmm.moneylog.home.viewmodels.FinancialSummaryViewModel
-import lmm.moneylog.ui.theme.income as incomeColor
-import lmm.moneylog.ui.theme.outcome as outcomeColor
 import lmm.moneylog.ui.theme.Size
 import org.koin.androidx.compose.koinViewModel
+import lmm.moneylog.ui.theme.income as incomeColor
+import lmm.moneylog.ui.theme.outcome as outcomeColor
 
 /**
  * Self-contained view for income and expense cards

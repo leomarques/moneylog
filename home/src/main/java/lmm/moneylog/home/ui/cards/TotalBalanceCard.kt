@@ -27,8 +27,8 @@ import lmm.moneylog.home.mocks.HomePreviewData
 import lmm.moneylog.home.models.BalanceInfo
 import lmm.moneylog.ui.components.misc.CircularIconBox
 import lmm.moneylog.ui.theme.AppTheme
-import lmm.moneylog.ui.theme.income
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.income
 
 /**
  * Callbacks for TotalBalanceCard interactions
@@ -81,8 +81,7 @@ fun TotalBalanceCard(
                                         MaterialTheme.colorScheme.secondaryContainer
                                     )
                             )
-                    )
-                    .padding(Size.MediumSpaceSize)
+                    ).padding(Size.MediumSpaceSize)
         ) {
             Column {
                 BalanceCardHeader(

@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.sp
 import lmm.moneylog.home.mocks.HomePreviewData
 import lmm.moneylog.ui.components.misc.CircularIconBox
 import lmm.moneylog.ui.theme.AppTheme
-import lmm.moneylog.ui.theme.income
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.income
 
 /**
  * Displays income or expense summary in a compact card with an icon and amount

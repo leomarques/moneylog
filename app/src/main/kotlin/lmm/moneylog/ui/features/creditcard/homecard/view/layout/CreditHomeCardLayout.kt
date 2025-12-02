@@ -55,9 +55,10 @@ fun CreditHomeCardLayout(
             } else {
                 Text(
                     text = stringResource(R.string.empty_credit_cards_home),
-                    modifier = Modifier
-                        .padding(Size.MediumSpaceSize)
-                        .clickable { onEmptyCardsClick() }
+                    modifier =
+                        Modifier
+                            .padding(Size.MediumSpaceSize)
+                            .clickable { onEmptyCardsClick() }
                 )
             }
         }

@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
-import lmm.moneylog.ui.theme.MoneylogTheme
+import lmm.moneylog.ui.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -96,7 +96,7 @@ fun GraphsScreen(
 @Preview
 @Composable
 private fun PreviewGraphsScreen() {
-    MoneylogTheme {
+    AppTheme() {
         GraphsScreen(onArrowBackClick = {})
     }
 }
