@@ -7,8 +7,7 @@ import lmm.moneylog.data.transaction.database.TransactionDao
 class GetBalanceRepositoryImpl(
     private val transactionDao: TransactionDao
 ) : GetBalanceRepository {
-    override fun getTransactions(): Flow<List<TransactionBalance>> =
-        transactionDao.selectTransactions()
+    override fun getTransactions(): Flow<List<TransactionBalance>> = transactionDao.selectTransactions()
 
     override suspend fun getAllValuesByAccount(accountId: Int): List<Double> =
         transactionDao.selectValuesByAccountId(accountId)

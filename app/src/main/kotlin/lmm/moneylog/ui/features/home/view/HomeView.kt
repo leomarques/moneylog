@@ -13,7 +13,6 @@ fun HomeView(
     onClick: (String) -> Unit,
     onCreditCardClick: (Int, String) -> Unit,
     viewModel: HomeViewModel = koinViewModel(),
-    onSettingsClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -24,6 +23,5 @@ fun HomeView(
         onHideClick = { viewModel.onHideToggle() },
         onCreditCardClick = onCreditCardClick,
         onEmptyCardsClick = onEmptyCardsClick,
-        onSettingsClick = onSettingsClick
     )
 }

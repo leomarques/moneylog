@@ -46,39 +46,54 @@ fun NavHostController.navigatePopUpTo(
 }
 
 fun MutableIntState.updateIndex(destination: String) {
-    when (destination.split("/", "?")[0]) {
-        HOME_SCREEN -> HOME_INDEX
-        TRANSACTIONS_LIST_SCREEN -> TRANSACTIONS_INDEX
-        TRANSACTION_DETAIL_SCREEN -> TRANSACTIONS_INDEX
-        ACCOUNTS_LIST_SCREEN -> ACCOUNTS_INDEX
-        ACCOUNT_DETAIL_SCREEN -> ACCOUNTS_INDEX
-        ARCHIVED_ACCOUNTS_LIST_SCREEN -> ACCOUNTS_INDEX
-        CREDITCARD_LIST_SCREEN -> CREDITCARD_INDEX
-        CREDITCARD_DETAIL_SCREEN -> CREDITCARD_INDEX
-        CATEGORIES_LIST_SCREEN -> CATEGORIES_INDEX
-        CATEGORY_DETAIL_SCREEN -> CATEGORIES_INDEX
-        INVOICE_LIST_SCREEN -> TRANSACTIONS_INDEX
-        else -> HOME_INDEX
-    }.also { intValue = it }
-}
-
-fun MutableState<Boolean>.updateShow(destination: String) {
-    value =
-        when (destination.split("/", "?")[0]) {
-            HOME_SCREEN -> true
-            TRANSACTIONS_LIST_SCREEN -> true
-            TRANSACTION_DETAIL_SCREEN -> false
-            ACCOUNTS_LIST_SCREEN -> true
-            ACCOUNT_DETAIL_SCREEN -> false
-            ARCHIVED_ACCOUNTS_LIST_SCREEN -> true
-            CATEGORIES_LIST_SCREEN -> true
-            CATEGORY_DETAIL_SCREEN -> false
-            CREDITCARD_LIST_SCREEN -> true
-            CREDITCARD_DETAIL_SCREEN -> false
-            INVOICE_LIST_SCREEN -> true
-            else -> true
+    val route = destination.split("/", "?")[0]
+    intValue =
+        when (route) {
+            HOME_SCREEN -> HOME_INDEX
+            in transactionScreens() -> TRANSACTIONS_INDEX
+            in settingsScreens() -> SETTINGS_INDEX
+            else -> HOME_INDEX
         }
 }
+
+private fun transactionScreens() =
+    setOf(
+        TRANSACTIONS_LIST_SCREEN,
+        TRANSACTION_DETAIL_SCREEN,
+        INVOICE_LIST_SCREEN
+    )
+
+private fun settingsScreens() =
+    setOf(
+        SETTINGS_SCREEN,
+        ACCOUNTS_LIST_SCREEN,
+        ACCOUNT_DETAIL_SCREEN,
+        ARCHIVED_ACCOUNTS_LIST_SCREEN,
+        CREDITCARD_LIST_SCREEN,
+        CREDITCARD_DETAIL_SCREEN,
+        CATEGORIES_LIST_SCREEN,
+        CATEGORY_DETAIL_SCREEN,
+        NOTIFICATION_SETTINGS_SCREEN,
+        CATEGORY_KEYWORDS_SCREEN,
+        GRAPHS_SCREEN,
+        TRANSFER_SCREEN
+    )
+
+fun MutableState<Boolean>.updateShow(destination: String) {
+    val route = destination.split("/", "?")[0]
+    value =
+        when {
+            route in screensWithBottomNav() -> true
+            else -> false
+        }
+}
+
+private fun screensWithBottomNav() =
+    setOf(
+        HOME_SCREEN,
+        TRANSACTIONS_LIST_SCREEN,
+        SETTINGS_SCREEN
+    )
 
 fun String?.toTransactionType() =
     when (this) {

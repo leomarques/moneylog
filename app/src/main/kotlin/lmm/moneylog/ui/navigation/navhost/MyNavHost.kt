@@ -18,9 +18,11 @@ import lmm.moneylog.ui.features.category.list.view.layouts.CategoriesListView
 import lmm.moneylog.ui.features.categorykeywords.CategoryKeywordsScreen
 import lmm.moneylog.ui.features.creditcard.detail.view.layout.CreditCardDetailView
 import lmm.moneylog.ui.features.creditcard.list.view.layouts.CreditCardsListView
+import lmm.moneylog.ui.features.graphs.GraphsScreen
 import lmm.moneylog.ui.features.home.view.HomeView
 import lmm.moneylog.ui.features.invoice.view.InvoiceListView
 import lmm.moneylog.ui.features.notification.settings.view.NotificationSettingsScreen
+import lmm.moneylog.ui.features.settings.SettingsScreen
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListView
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
@@ -31,6 +33,7 @@ import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_KEYWORDS_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_LIST_SCREEN
+import lmm.moneylog.ui.navigation.misc.GRAPHS_SCREEN
 import lmm.moneylog.ui.navigation.misc.HOME_SCREEN
 import lmm.moneylog.ui.navigation.misc.INVOICE_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.NOTIFICATION_SETTINGS_SCREEN
@@ -38,6 +41,7 @@ import lmm.moneylog.ui.navigation.misc.PARAM_CARD_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_OF_VALUE
+import lmm.moneylog.ui.navigation.misc.SETTINGS_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
@@ -63,8 +67,12 @@ fun MyNavHost(
     onCreditCardsFabClick: () -> Unit,
     onInvoiceListFabClick: (Int) -> Unit,
     onCreditCardsItemClick: (Int) -> Unit,
-    onSettingsClick: () -> Unit,
+    onNotificationSettingsClick: () -> Unit,
     onCategoryKeywordsClick: () -> Unit,
+    onAccountsClick: () -> Unit,
+    onCategoriesClick: () -> Unit,
+    onCreditCardsClick: () -> Unit,
+    onGraphsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -86,7 +94,6 @@ fun MyNavHost(
                 onEmptyCardsClick = onCreditCardsFabClick,
                 onClick = onBalanceCardClick,
                 onCreditCardClick = onCreditCardClick,
-                onSettingsClick = onSettingsClick
             )
         }
 
@@ -220,6 +227,23 @@ fun MyNavHost(
             onArrowBackClick = onArrowBackClick
         ) {
             CategoryKeywordsScreen(onArrowBackClick = onArrowBackClick)
+        }
+
+        composable(SETTINGS_SCREEN) {
+            SettingsScreen(
+                onAccountsClick = onAccountsClick,
+                onCategoriesClick = onCategoriesClick,
+                onCreditCardsClick = onCreditCardsClick,
+                onNotificationSettingsClick = onNotificationSettingsClick,
+                onGraphsClick = onGraphsClick
+            )
+        }
+
+        composableExt(
+            route = GRAPHS_SCREEN,
+            onArrowBackClick = onArrowBackClick
+        ) {
+            GraphsScreen(onArrowBackClick = onArrowBackClick)
         }
     }
 }
