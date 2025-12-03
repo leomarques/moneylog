@@ -5,7 +5,6 @@ import android.service.notification.StatusBarNotification
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import lmm.moneylog.data.transaction.nubank.converter.NubankTransactionConverter
@@ -15,18 +14,19 @@ import lmm.moneylog.ui.features.notification.NotificationDisplayer
 import lmm.moneylog.ui.features.notification.NotificationHelper
 import org.koin.android.ext.android.inject
 
-class NubankNotificationListener(
-    private val transactionParser: NubankTransactionParser? = null,
-    private val notificationDisplayer: NotificationDisplayer? = null
-) : NotificationListenerService() {
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+class NubankNotificationListener : NotificationListenerService() {
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(Dispatchers.IO + job)
     private val notificationHelper: NotificationDisplayer by lazy {
-        notificationDisplayer ?: NotificationHelper(this)
+        NotificationHelper(this)
     }
 
     private val addTransactionRepository: AddTransactionRepository by inject()
     private val transactionConverter: NubankTransactionConverter by inject()
-    private val injectedTransactionParser: NubankTransactionParser by inject()
+    private val transactionParser: NubankTransactionParser by inject()
+
+    @Volatile
+    private var isServiceActive = true
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)
@@ -44,7 +44,8 @@ class NubankNotificationListener(
     }
 
     override fun onDestroy() {
-        scope.cancel()
+        isServiceActive = false
+        job.cancel()
         super.onDestroy()
     }
 
@@ -69,8 +70,7 @@ class NubankNotificationListener(
         scope.launch {
             try {
                 text?.let { originalText ->
-                    val parser = transactionParser ?: injectedTransactionParser
-                    val transactionInfo = parser.parseTransactionInfo(originalText)
+                    val transactionInfo = transactionParser.parseTransactionInfo(originalText)
                     transactionInfo?.let { info ->
                         val transaction = transactionConverter.convert(info)
                         val transactionId: Long? =
@@ -78,12 +78,17 @@ class NubankNotificationListener(
                                 addTransactionRepository.save(t)
                             }
 
-                        withContext(Dispatchers.Main) {
-                            notificationHelper.showNotification(
-                                title = title,
-                                transactionInfo = info,
-                                transactionId = transactionId
-                            )
+                        // Only show notification if service is still active
+                        if (isServiceActive) {
+                            withContext(Dispatchers.Main) {
+                                if (isServiceActive) {
+                                    notificationHelper.showNotification(
+                                        title = title,
+                                        transactionInfo = info,
+                                        transactionId = transactionId
+                                    )
+                                }
+                            }
                         }
                     }
                 }
