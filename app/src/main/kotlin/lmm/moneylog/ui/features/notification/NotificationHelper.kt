@@ -9,7 +9,7 @@ import android.service.notification.NotificationListenerService
 import androidx.core.app.NotificationCompat
 import lmm.moneylog.R
 import lmm.moneylog.data.transaction.nubank.model.NubankTransactionInfo
-import lmm.moneylog.misc.nubank.NubankNotificationActionService
+import lmm.moneylog.misc.nubank.NubankNotificationActionReceiver
 import lmm.moneylog.ui.navigation.misc.MainActivity
 import org.koin.core.component.KoinComponent
 
@@ -53,14 +53,14 @@ class NotificationHelper(
 
         if (transactionId != null) {
             val removeIntent =
-                Intent(context, NubankNotificationActionService::class.java).apply {
-                    action = NubankNotificationActionService.ACTION_REMOVE_TRANSACTION
-                    putExtra(NubankNotificationActionService.EXTRA_NOTIFICATION_ID, notificationId)
-                    putExtra(NubankNotificationActionService.EXTRA_TRANSACTION_ID, transactionId)
+                Intent(context, NubankNotificationActionReceiver::class.java).apply {
+                    action = NubankNotificationActionReceiver.ACTION_REMOVE_TRANSACTION
+                    putExtra(NubankNotificationActionReceiver.EXTRA_NOTIFICATION_ID, notificationId)
+                    putExtra(NubankNotificationActionReceiver.EXTRA_TRANSACTION_ID, transactionId)
                 }
 
             val removePendingIntent =
-                PendingIntent.getService(
+                PendingIntent.getBroadcast(
                     context,
                     notificationId,
                     removeIntent,

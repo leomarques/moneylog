@@ -30,8 +30,8 @@
             </intent-filter>
         </service>
 
-        <service
-            android:name="lmm.moneylog.misc.nubank.NubankNotificationActionService"
+        <receiver
+            android:name="lmm.moneylog.misc.nubank.NubankNotificationActionReceiver"
             android:exported="false" />
     </application>
 
