@@ -54,10 +54,12 @@ import lmm.moneylog.data.transaction.nubank.parser.NubankTransactionParserImpl
 import lmm.moneylog.data.transaction.repositories.impls.AddTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.DeleteTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.GetTransactionsRepositoryImpl
+import lmm.moneylog.data.transaction.repositories.impls.SearchTransactionsRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.impls.UpdateTransactionRepositoryImpl
 import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
+import lmm.moneylog.data.transaction.repositories.interfaces.SearchTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRepository
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
@@ -103,6 +105,7 @@ val dataModule =
         factoryOf(::GetTransactionsRepositoryImpl) { bind<GetTransactionsRepository>() }
         factoryOf(::UpdateTransactionRepositoryImpl) { bind<UpdateTransactionRepository>() }
         factoryOf(::DeleteTransactionRepositoryImpl) { bind<DeleteTransactionRepository>() }
+        factoryOf(::SearchTransactionsRepositoryImpl) { bind<SearchTransactionsRepository>() }
 
         factoryOf(::AddCreditCardRepositoryImpl) { bind<AddCreditCardRepository>() }
         factoryOf(::GetCreditCardsRepositoryImpl) { bind<GetCreditCardsRepository>() }

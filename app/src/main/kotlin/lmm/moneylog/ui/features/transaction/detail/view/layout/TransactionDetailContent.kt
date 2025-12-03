@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import lmm.moneylog.data.transaction.model.TransactionSuggestion
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 import lmm.moneylog.ui.features.transaction.detail.view.components.TransactionDetailDialogs
 import lmm.moneylog.ui.features.transaction.detail.view.components.TransactionDetailFields
@@ -26,6 +27,7 @@ fun TransactionDetailContent(
     onIsIncomeSelect: (Boolean) -> Unit,
     onValueChange: (String) -> Unit,
     onDescriptionChange: (String) -> Unit,
+    onSuggestionClick: (TransactionSuggestion) -> Unit,
     onDebtSelect: () -> Unit,
     onCreditSelect: () -> Unit,
     modifier: Modifier = Modifier
@@ -67,6 +69,7 @@ fun TransactionDetailContent(
             onCategoryClick = { showCategoryPicker.value = true },
             onValueChange = onValueChange,
             onDescriptionChange = onDescriptionChange,
+            onSuggestionClick = onSuggestionClick,
             isCategoriesFieldEnabled = filteredCategories.isNotEmpty(),
             isAccountsFieldEnabled = uiState.accounts.isNotEmpty(),
             isCreditCardFieldEnabled = uiState.creditCards.isNotEmpty(),
@@ -96,6 +99,7 @@ private fun TransactionDetailContentPreview() {
         onIsIncomeSelect = {},
         onValueChange = {},
         onDescriptionChange = {},
+        onSuggestionClick = {},
         onDebtSelect = {},
         onCreditSelect = {}
     )

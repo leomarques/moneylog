@@ -60,4 +60,13 @@ interface TransactionDao {
         invoiceYear: Int,
         creditCardId: Int
     ): Flow<List<TransactionEntity>>
+
+    @Query(
+        "SELECT * FROM `transaction` " +
+                "WHERE LOWER(description) LIKE LOWER(:query) || '%' " +
+                "AND description != '' " +
+                "ORDER BY id DESC " +
+                "LIMIT 10"
+    )
+    suspend fun searchTransactionsByDescription(query: String): List<TransactionEntity>
 }

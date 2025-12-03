@@ -37,6 +37,17 @@ fun TransactionDetailView(
         onIsIncomeSelect = { viewModel.onIsIncomeSelect(it) },
         onValueChange = { viewModel.onValueChange(it) },
         onDescriptionChange = { viewModel.onDescriptionChange(it) },
+        onSuggestionClick = { suggestion ->
+            viewModel.onSuggestionClick(
+                description = suggestion.description,
+                value = suggestion.value,
+                categoryId = suggestion.categoryId,
+                accountId = suggestion.accountId,
+                creditCardId = suggestion.creditCardId,
+                invoiceMonth = suggestion.invoiceMonth,
+                invoiceYear = suggestion.invoiceYear
+            )
+        },
         onDebtSelect = { viewModel.onDebtSelected() },
         onCreditSelect = { viewModel.onCreditSelected() }
     )

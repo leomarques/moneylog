@@ -7,6 +7,7 @@ import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.creditcard.model.CreditCard
 import lmm.moneylog.data.invoice.model.Invoice
 import lmm.moneylog.data.time.model.DomainTime
+import lmm.moneylog.data.transaction.model.TransactionSuggestion
 import lmm.moneylog.ui.theme.neutralColor
 
 data class TransactionDetailUIState(
@@ -34,5 +35,6 @@ data class TransactionDetailUIState(
     val accounts: List<Account> = emptyList(),
     val categories: List<Category> = emptyList(),
     val creditCards: List<CreditCard> = emptyList(),
-    val invoices: List<Invoice> = emptyList()
+    val invoices: List<Invoice> = emptyList(),
+    val descriptionSuggestions: List<TransactionSuggestion> = emptyList()
 )

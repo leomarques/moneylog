@@ -23,6 +23,7 @@ import lmm.moneylog.data.transaction.model.Transaction
 import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
+import lmm.moneylog.data.transaction.repositories.interfaces.SearchTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRepository
 import lmm.moneylog.ui.extensions.getIdParam
 import lmm.moneylog.ui.extensions.orDefaultColor
@@ -40,6 +41,7 @@ class TransactionDetailViewModel(
     private val updateTransactionRepository: UpdateTransactionRepository,
     private val deleteTransactionRepository: DeleteTransactionRepository,
     private val getTransactionsRepository: GetTransactionsRepository,
+    private val searchTransactionsRepository: SearchTransactionsRepository,
     private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(TransactionDetailUIState())
@@ -185,6 +187,72 @@ class TransactionDetailViewModel(
 
     fun onDescriptionChange(description: String) {
         _uiState.update { it.copy(description = description) }
+
+        viewModelScope.launch {
+            if (description.length >= 2) {
+                val suggestions = searchTransactionsRepository.searchByDescription(description)
+                _uiState.update { it.copy(descriptionSuggestions = suggestions) }
+            } else {
+                _uiState.update { it.copy(descriptionSuggestions = emptyList()) }
+            }
+        }
+    }
+
+    fun onSuggestionClick(
+        description: String,
+        value: Double,
+        categoryId: Int?,
+        accountId: Int?,
+        creditCardId: Int?,
+        invoiceMonth: Int?,
+        invoiceYear: Int?
+    ) {
+        val category = categoryId?.let { id ->
+            _uiState.value.categories.firstOrNull { it.id == id }
+        }
+
+        val account = accountId?.let { id ->
+            _uiState.value.accounts.firstOrNull { it.id == id }
+        }
+
+        val creditCard = creditCardId?.let { id ->
+            _uiState.value.creditCards.firstOrNull { it.id == id }
+        }
+
+        val isDebtSelected = accountId != null
+        val isIncome = category?.isIncome ?: _uiState.value.isIncome
+
+        // Determine invoice display based on invoiceMonth/invoiceYear
+        val invoice = if (invoiceMonth != null && invoiceYear != null) {
+            _uiState.value.invoices.firstOrNull {
+                it.getCode() == "$invoiceMonth.$invoiceYear"
+            } ?: _uiState.value.invoices[0]
+        } else {
+            _uiState.value.invoices[0]
+        }
+
+        _uiState.update {
+            it.copy(
+                description = description,
+                value = if (value < 0) (-value).toString() else value.toString(),
+                descriptionSuggestions = emptyList(),
+                categoryId = categoryId,
+                displayCategory = category?.name.orEmpty(),
+                displayCategoryColor = category?.color?.toComposeColor().orDefaultColor(),
+                accountId = accountId,
+                displayAccount = account?.name.orEmpty(),
+                displayAccountColor = account?.color?.toComposeColor().orDefaultColor(),
+                creditCardId = creditCardId,
+                displayCreditCard = creditCard?.name.orEmpty(),
+                displayCreditCardColor = creditCard?.color?.toComposeColor().orDefaultColor(),
+                invoiceCode = if (invoiceMonth != null && invoiceYear != null) {
+                    "$invoiceMonth.$invoiceYear"
+                } else null,
+                displayInvoice = invoice.name,
+                isDebtSelected = isDebtSelected,
+                isIncome = isIncome
+            )
+        }
     }
 
     fun onDatePick(timeStamp: Long) {

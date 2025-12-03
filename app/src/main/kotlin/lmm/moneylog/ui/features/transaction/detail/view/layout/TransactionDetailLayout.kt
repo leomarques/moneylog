@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import lmm.moneylog.data.transaction.model.TransactionSuggestion
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 import lmm.moneylog.ui.features.transaction.detail.view.components.TransactionDetailTopBar
@@ -29,6 +30,7 @@ fun TransactionDetailLayout(
     onIsIncomeSelect: (Boolean) -> Unit,
     onValueChange: (String) -> Unit,
     onDescriptionChange: (String) -> Unit,
+    onSuggestionClick: (TransactionSuggestion) -> Unit,
     onDebtSelect: () -> Unit,
     onCreditSelect: () -> Unit,
     modifier: Modifier = Modifier
@@ -71,6 +73,7 @@ fun TransactionDetailLayout(
                     onIsIncomeSelect = onIsIncomeSelect,
                     onValueChange = onValueChange,
                     onDescriptionChange = onDescriptionChange,
+                    onSuggestionClick = onSuggestionClick,
                     onDebtSelect = onDebtSelect,
                     onCreditSelect = onCreditSelect
                 )
@@ -95,6 +98,7 @@ private fun TransactionDetailLayoutPreview() {
         onIsIncomeSelect = {},
         onValueChange = {},
         onDescriptionChange = {},
+        onSuggestionClick = {},
         onDebtSelect = {},
         onCreditSelect = {}
     )

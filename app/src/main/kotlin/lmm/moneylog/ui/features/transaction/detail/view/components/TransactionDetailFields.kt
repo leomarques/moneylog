@@ -8,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.R
+import lmm.moneylog.data.transaction.model.TransactionSuggestion
 import lmm.moneylog.ui.components.icons.AccountIcon
 import lmm.moneylog.ui.components.icons.CategoryIcon
 import lmm.moneylog.ui.components.icons.CreditCardIcon
@@ -34,6 +35,7 @@ fun TransactionDetailFields(
     onCreditSelect: () -> Unit,
     onValueChange: (String) -> Unit,
     onDescriptionChange: (String) -> Unit,
+    onSuggestionClick: (TransactionSuggestion) -> Unit,
     isCategoriesFieldEnabled: Boolean,
     isAccountsFieldEnabled: Boolean,
     isCreditCardFieldEnabled: Boolean,
@@ -67,14 +69,30 @@ fun TransactionDetailFields(
             onClick = onDateClick
         )
 
-        StateTextField(
-            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            value = uiState.description,
-            title = stringResource(R.string.detail_description),
-            keyboardType = KeyboardType.Text,
-            leadingIcon = { DescriptionIcon() },
-            onValueChange = onDescriptionChange
-        )
+        Column {
+            StateTextField(
+                modifier = Modifier.padding(
+                    bottom = if (uiState.descriptionSuggestions.isEmpty()) {
+                        Size.DefaultSpaceSize
+                    } else {
+                        Size.SmallSpaceSize
+                    }
+                ),
+                value = uiState.description,
+                title = stringResource(R.string.detail_description),
+                keyboardType = KeyboardType.Text,
+                leadingIcon = { DescriptionIcon() },
+                onValueChange = onDescriptionChange
+            )
+
+            if (uiState.descriptionSuggestions.isNotEmpty()) {
+                DescriptionAutocomplete(
+                    suggestions = uiState.descriptionSuggestions,
+                    onSuggestionClick = onSuggestionClick,
+                    modifier = Modifier.padding(bottom = Size.DefaultSpaceSize)
+                )
+            }
+        }
 
         ClickTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
@@ -132,6 +150,7 @@ private fun TransactionDetailFieldsPreview() {
         onCategoryClick = {},
         onValueChange = {},
         onDescriptionChange = {},
+        onSuggestionClick = {},
         isCategoriesFieldEnabled = true,
         isAccountsFieldEnabled = true,
         onDateClick = {},
