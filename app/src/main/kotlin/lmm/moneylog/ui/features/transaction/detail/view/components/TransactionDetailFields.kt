@@ -71,13 +71,15 @@ fun TransactionDetailFields(
 
         Column {
             StateTextField(
-                modifier = Modifier.padding(
-                    bottom = if (uiState.descriptionSuggestions.isEmpty()) {
-                        Size.DefaultSpaceSize
-                    } else {
-                        Size.SmallSpaceSize
-                    }
-                ),
+                modifier =
+                    Modifier.padding(
+                        bottom =
+                            if (uiState.descriptionSuggestions.isEmpty()) {
+                                Size.DefaultSpaceSize
+                            } else {
+                                Size.SmallSpaceSize
+                            }
+                    ),
                 value = uiState.description,
                 title = stringResource(R.string.detail_description),
                 keyboardType = KeyboardType.Text,

@@ -17,10 +17,11 @@ class SearchTransactionsRepositoryImpl(
         val transactions = transactionDao.searchTransactionsByDescription(query)
 
         // Group by description to get unique descriptions with their most recent transaction
-        val uniqueTransactions = transactions
-            .groupBy { it.description.lowercase() }
-            .mapValues { it.value.first() }
-            .values
+        val uniqueTransactions =
+            transactions
+                .groupBy { it.description.lowercase() }
+                .mapValues { it.value.first() }
+                .values
 
         return uniqueTransactions.map { transaction ->
             val category = transaction.categoryId?.let { categoryDao.selectCategory(it) }

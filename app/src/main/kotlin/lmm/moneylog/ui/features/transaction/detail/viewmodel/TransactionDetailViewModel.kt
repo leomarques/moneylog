@@ -207,29 +207,33 @@ class TransactionDetailViewModel(
         invoiceMonth: Int?,
         invoiceYear: Int?
     ) {
-        val category = categoryId?.let { id ->
-            _uiState.value.categories.firstOrNull { it.id == id }
-        }
+        val category =
+            categoryId?.let { id ->
+                _uiState.value.categories.firstOrNull { it.id == id }
+            }
 
-        val account = accountId?.let { id ->
-            _uiState.value.accounts.firstOrNull { it.id == id }
-        }
+        val account =
+            accountId?.let { id ->
+                _uiState.value.accounts.firstOrNull { it.id == id }
+            }
 
-        val creditCard = creditCardId?.let { id ->
-            _uiState.value.creditCards.firstOrNull { it.id == id }
-        }
+        val creditCard =
+            creditCardId?.let { id ->
+                _uiState.value.creditCards.firstOrNull { it.id == id }
+            }
 
         val isDebtSelected = accountId != null
         val isIncome = category?.isIncome ?: _uiState.value.isIncome
 
         // Determine invoice display based on invoiceMonth/invoiceYear
-        val invoice = if (invoiceMonth != null && invoiceYear != null) {
-            _uiState.value.invoices.firstOrNull {
-                it.getCode() == "$invoiceMonth.$invoiceYear"
-            } ?: _uiState.value.invoices[0]
-        } else {
-            _uiState.value.invoices[0]
-        }
+        val invoice =
+            if (invoiceMonth != null && invoiceYear != null) {
+                _uiState.value.invoices.firstOrNull {
+                    it.getCode() == "$invoiceMonth.$invoiceYear"
+                } ?: _uiState.value.invoices[0]
+            } else {
+                _uiState.value.invoices[0]
+            }
 
         _uiState.update {
             it.copy(
@@ -245,9 +249,12 @@ class TransactionDetailViewModel(
                 creditCardId = creditCardId,
                 displayCreditCard = creditCard?.name.orEmpty(),
                 displayCreditCardColor = creditCard?.color?.toComposeColor().orDefaultColor(),
-                invoiceCode = if (invoiceMonth != null && invoiceYear != null) {
-                    "$invoiceMonth.$invoiceYear"
-                } else null,
+                invoiceCode =
+                    if (invoiceMonth != null && invoiceYear != null) {
+                        "$invoiceMonth.$invoiceYear"
+                    } else {
+                        null
+                    },
                 displayInvoice = invoice.name,
                 isDebtSelected = isDebtSelected,
                 isIncome = isIncome

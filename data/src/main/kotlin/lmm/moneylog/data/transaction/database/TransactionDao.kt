@@ -63,10 +63,10 @@ interface TransactionDao {
 
     @Query(
         "SELECT * FROM `transaction` " +
-                "WHERE LOWER(description) LIKE LOWER(:query) || '%' " +
-                "AND description != '' " +
-                "ORDER BY id DESC " +
-                "LIMIT 10"
+            "WHERE LOWER(description) LIKE LOWER(:query) || '%' " +
+            "AND description != '' " +
+            "ORDER BY id DESC " +
+            "LIMIT 10"
     )
     suspend fun searchTransactionsByDescription(query: String): List<TransactionEntity>
 }

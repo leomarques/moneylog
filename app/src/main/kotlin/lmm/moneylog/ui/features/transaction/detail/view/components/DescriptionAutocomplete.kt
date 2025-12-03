@@ -36,19 +36,21 @@ fun DescriptionAutocomplete(
         LazyColumn {
             items(suggestions) { suggestion ->
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { onSuggestionClick(suggestion) }
-                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .clickable { onSuggestionClick(suggestion) }
+                            .padding(horizontal = 16.dp, vertical = 12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Box(
-                        modifier = Modifier
-                            .size(24.dp)
-                            .background(
-                                color = suggestion.categoryColor.toComposeColor(),
-                                shape = CircleShape
-                            )
+                        modifier =
+                            Modifier
+                                .size(24.dp)
+                                .background(
+                                    color = suggestion.categoryColor.toComposeColor(),
+                                    shape = CircleShape
+                                )
                     )
 
                     Text(
