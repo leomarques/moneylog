@@ -22,9 +22,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.MonthSelector
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.components.misc.EmptyState
+import lmm.moneylog.ui.components.misc.MonthSelector
 import lmm.moneylog.ui.components.topappbar.TopAppBarWithSearch
 import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState

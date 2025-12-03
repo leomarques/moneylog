@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.data.graphs.model.MonthlyTotal
 import lmm.moneylog.graphs.R
-import java.util.Locale
+import lmm.moneylog.ui.extensions.formatForRs
 import kotlin.math.max
 import lmm.moneylog.ui.theme.Size as ThemeSize
 
@@ -164,7 +164,7 @@ fun BarChart(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    text = String.format(Locale.getDefault(), "R$ %.2f", totalIncome),
+                    text = totalIncome.formatForRs(),
                     style = MaterialTheme.typography.titleMedium,
                     color = incomeColor
                 )
@@ -176,7 +176,7 @@ fun BarChart(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    text = String.format(Locale.getDefault(), "R$ %.2f", totalExpenses),
+                    text = totalExpenses.formatForRs(),
                     style = MaterialTheme.typography.titleMedium,
                     color = expenseColor
                 )

@@ -11,7 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import lmm.moneylog.ui.components.bottombar.AppNavigationBar
+import lmm.moneylog.ui.components.bottombar.MyNavigationBar
 
 @Composable
 fun ContentNavBar(
@@ -24,7 +24,7 @@ fun ContentNavBar(
     Scaffold(
         modifier = modifier,
         bottomBar = {
-            AppNavigationBar(
+            MyNavigationBar(
                 selectedIndex = selectedIndex,
                 onClick = { index ->
                     selectedIndex = index

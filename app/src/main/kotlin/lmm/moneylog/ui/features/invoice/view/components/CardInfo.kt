@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import lmm.moneylog.R
-import lmm.moneylog.ui.components.MonthSelector
+import lmm.moneylog.ui.components.misc.MonthSelector
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.outcome
 

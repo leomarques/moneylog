@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.data.graphs.model.NetWorthPoint
+import lmm.moneylog.ui.extensions.formatForRs
 import java.util.Locale
 import lmm.moneylog.ui.theme.Size as ThemeSize
 
@@ -259,7 +260,7 @@ fun LineChart(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Text(
-                text = String.format(Locale.getDefault(), "R$ %.2f", currentNetWorth),
+                text = currentNetWorth.formatForRs(),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 color = if (currentNetWorth >= 0) positiveColor else negativeColor

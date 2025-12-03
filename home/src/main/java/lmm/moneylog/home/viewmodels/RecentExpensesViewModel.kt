@@ -12,7 +12,7 @@ import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.home.models.CategoryExpense
 import lmm.moneylog.home.models.ExpensesSummary
-import lmm.moneylog.home.utils.formatToBRL
+import lmm.moneylog.ui.extensions.formatForRs
 import kotlin.math.absoluteValue
 
 private const val TOP_CATEGORIES_LIMIT = 5
@@ -82,7 +82,7 @@ class RecentExpensesViewModel(
 
                     _expensesSummary.value =
                         ExpensesSummary(
-                            totalExpenses = totalAmount.formatToBRL(),
+                            totalExpenses = totalAmount.formatForRs(),
                             totalAmount = totalAmount,
                             categoryExpenses = categoryExpenses
                         )

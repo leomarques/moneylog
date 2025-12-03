@@ -12,7 +12,9 @@ import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRe
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class NubankNotificationActionReceiver : BroadcastReceiver(), KoinComponent {
+class NubankNotificationActionReceiver :
+    BroadcastReceiver(),
+    KoinComponent {
     companion object {
         const val ACTION_REMOVE_TRANSACTION =
             "lmm.moneylog.ACTION_REMOVE_TRANSACTION"

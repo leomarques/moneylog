@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material3.Card
@@ -29,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import lmm.moneylog.home.models.CategoryExpense
 import lmm.moneylog.home.models.ExpensesSummary
 import lmm.moneylog.ui.components.misc.CircularIconBox
+import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.outcome
@@ -220,7 +220,7 @@ private fun CategoryLegendItem(
                 if (valuesMasked) {
                     "•••• (${String.format(Locale.getDefault(), "%.0f%%", category.percentage)})"
                 } else {
-                    "${String.format(Locale.getDefault(), "R$ %.0f", category.amount)} (${
+                    "${category.amount.formatForRs()} (${
                         String.format(
                             Locale.getDefault(),
                             "%.0f%%",

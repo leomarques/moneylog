@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import lmm.moneylog.data.balance.interactors.GetBalanceInteractor
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.home.models.BalanceInfo
-import lmm.moneylog.home.utils.formatToBRL
+import lmm.moneylog.ui.extensions.formatForRs
 
 /**
  * ViewModel for the balance card component
@@ -40,7 +40,7 @@ class BalanceCardViewModel(
                 ).collect { balanceModel ->
                     _balanceInfo.value =
                         BalanceInfo(
-                            balance = balanceModel.total.formatToBRL(),
+                            balance = balanceModel.total.formatForRs(),
                             changePercentage = calculateChangePercentage(balanceModel.total),
                             changeAmount = calculateChangeAmount(balanceModel.total)
                         )
@@ -63,6 +63,6 @@ class BalanceCardViewModel(
      */
     private fun calculateChangeAmount(currentBalance: Double): String {
         // Placeholder: This should compare with previous period
-        return "+${kotlin.math.abs(currentBalance * 0.082).formatToBRL()}"
+        return "+${kotlin.math.abs(currentBalance * 0.082).formatForRs()}"
     }
 }

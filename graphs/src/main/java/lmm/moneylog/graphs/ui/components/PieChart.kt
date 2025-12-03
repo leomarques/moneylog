@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.data.graphs.model.CategoryAmount
 import lmm.moneylog.graphs.R
+import lmm.moneylog.ui.extensions.formatForRs
 import java.util.Locale
 import lmm.moneylog.ui.theme.Size as ThemeSize
 
@@ -138,7 +139,7 @@ private fun LegendItem(
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = String.format(Locale.getDefault(), "R$ %.2f", categoryAmount.totalAmount),
+                text = categoryAmount.totalAmount.formatForRs(),
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold
             )

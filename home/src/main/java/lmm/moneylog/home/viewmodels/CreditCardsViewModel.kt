@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.creditcard.interactors.GetCreditCardHomeInfoInteractor
 import lmm.moneylog.home.models.CreditCardInfo
-import lmm.moneylog.home.utils.formatToBRL
+import lmm.moneylog.ui.extensions.formatForRs
 
 /**
  * ViewModel for the credit cards section
@@ -36,7 +36,7 @@ class CreditCardsViewModel(
                             cardId = card.id,
                             cardName = card.name,
                             cardLastDigits = formatCardDigits(card.id),
-                            invoiceAmount = card.value.formatToBRL(),
+                            invoiceAmount = card.value.formatForRs(),
                             invoiceCode = creditCardResult.invoiceCode,
                             cardColor = Color(card.color)
                         )

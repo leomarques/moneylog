@@ -8,7 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import lmm.moneylog.ui.navigation.bottombar.BottomBar
+import lmm.moneylog.ui.components.bottombar.BottomBar
 import lmm.moneylog.ui.navigation.navhost.NavHostParams
 
 @Composable

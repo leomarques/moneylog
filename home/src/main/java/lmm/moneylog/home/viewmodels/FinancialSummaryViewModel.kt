@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import lmm.moneylog.data.balance.interactors.GetBalanceInteractor
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.home.models.FinancialSummary
-import lmm.moneylog.home.utils.formatToBRL
+import lmm.moneylog.ui.extensions.formatForRs
 
 /**
  * ViewModel for the financial summary cards (Income and Expenses)
@@ -43,12 +43,12 @@ class FinancialSummaryViewModel(
                 ).collect { balanceModel ->
                     _income.value =
                         FinancialSummary(
-                            amount = balanceModel.credit.formatToBRL()
+                            amount = balanceModel.credit.formatForRs()
                         )
 
                     _expenses.value =
                         FinancialSummary(
-                            amount = balanceModel.debt.formatToBRL()
+                            amount = balanceModel.debt.formatForRs()
                         )
                 }
         }
