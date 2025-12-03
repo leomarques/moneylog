@@ -30,7 +30,7 @@ fun BottomSheetContent(
     ) {
         if (text.isNullOrEmpty().not()) {
             Text(
-                text = text ?: "",
+                text = text,
                 modifier = Modifier.padding(vertical = Size.SmallSpaceSize)
             )
         }
