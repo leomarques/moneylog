@@ -7,13 +7,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
+import lmm.moneylog.data.graphs.interactors.GetTransactionsByCategoryInteractor
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
-import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.home.models.CategoryExpense
 import lmm.moneylog.home.models.ExpensesSummary
 import lmm.moneylog.ui.extensions.formatForRs
-import kotlin.math.absoluteValue
 
 private const val TOP_CATEGORIES_LIMIT = 5
 
@@ -21,13 +19,11 @@ private const val TOP_CATEGORIES_LIMIT = 5
  * ViewModel for the recent expenses card
  * Provides current month's total expenses and list of recent transactions
  *
- * @property getTransactionsRepository Repository for fetching transactions
- * @property getCategoriesRepository Repository for fetching categories
+ * @property getTransactionsByCategoryInteractor Interactor for fetching transactions grouped by category
  * @property domainTimeRepository Repository for time-related operations
  */
 class RecentExpensesViewModel(
-    private val getTransactionsRepository: GetTransactionsRepository,
-    private val getCategoriesRepository: GetCategoriesRepository,
+    private val getTransactionsByCategoryInteractor: GetTransactionsByCategoryInteractor,
     private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
     private val _expensesSummary = MutableStateFlow<ExpensesSummary?>(null)
@@ -41,44 +37,27 @@ class RecentExpensesViewModel(
         viewModelScope.launch {
             val currentDomainTime = domainTimeRepository.getCurrentDomainTime()
 
-            // Get both transactions and categories
-            getTransactionsRepository
-                .getOutcomeTransactions(
+            // Use interactor to get expenses grouped by category
+            getTransactionsByCategoryInteractor
+                .getExpensesByCategory(
                     month = currentDomainTime.month,
                     year = currentDomainTime.year
-                ).collect { transactions ->
-                    val categories = getCategoriesRepository.getCategoriesSuspend()
-                    val categoryMap = categories.filter { !it.isIncome }.associateBy { it.id }
+                ).collect { categoryAmounts ->
+                    // Calculate total amount
+                    val totalAmount = categoryAmounts.sumOf { it.totalAmount }
 
-                    // Calculate total expenses
-                    val totalAmount = transactions.sumOf { it.value.absoluteValue }
-
-                    // Group by category and calculate percentages
+                    // Convert CategoryAmount to CategoryExpense and take top 5
                     val categoryExpenses =
-                        transactions
-                            .filter { it.categoryId != null && categoryMap.containsKey(it.categoryId) }
-                            .groupBy { it.categoryId!! }
-                            .mapNotNull { (categoryId, trans) ->
-                                val category = categoryMap[categoryId]
-                                val amount = trans.sumOf { it.value.absoluteValue }
-
-                                if (category != null && amount > 0) {
-                                    CategoryExpense(
-                                        categoryName = category.name,
-                                        categoryColor = Color(category.color.toULong()),
-                                        amount = amount,
-                                        percentage =
-                                            if (totalAmount > 0) {
-                                                (amount / totalAmount * 100).toFloat()
-                                            } else {
-                                                0f
-                                            }
-                                    )
-                                } else {
-                                    null
-                                }
-                            }.sortedByDescending { it.amount }
+                        categoryAmounts
                             .take(TOP_CATEGORIES_LIMIT)
+                            .map { categoryAmount ->
+                                CategoryExpense(
+                                    categoryName = categoryAmount.categoryName,
+                                    categoryColor = Color(categoryAmount.categoryColor.toULong()),
+                                    amount = categoryAmount.totalAmount,
+                                    percentage = categoryAmount.percentage
+                                )
+                            }
 
                     _expensesSummary.value =
                         ExpensesSummary(
