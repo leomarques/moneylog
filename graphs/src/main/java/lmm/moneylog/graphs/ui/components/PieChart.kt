@@ -22,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import lmm.moneylog.data.graphs.model.CategoryAmount
 import lmm.moneylog.graphs.R
 import lmm.moneylog.ui.extensions.formatForRs
+import lmm.moneylog.ui.extensions.toComposeColor
+import lmm.moneylog.ui.theme.neutralColor
 import java.util.Locale
 import lmm.moneylog.ui.theme.Size as ThemeSize
 
@@ -74,7 +76,9 @@ fun PieChart(
 
             data.forEach { categoryAmount ->
                 val sweepAngle = (categoryAmount.percentage / 100f) * 360f
-                val color = Color(categoryAmount.categoryColor.toULong())
+                val color =
+                    categoryAmount.categoryColor?.toComposeColor()
+                        ?: neutralColor
 
                 // Draw filled arc (pie slice)
                 drawArc(
@@ -123,7 +127,9 @@ private fun LegendItem(
         // Color indicator
         Canvas(modifier = Modifier.size(16.dp)) {
             drawCircle(
-                color = Color(categoryAmount.categoryColor.toULong())
+                color =
+                    categoryAmount.categoryColor?.let { Color(it.toULong()) }
+                        ?: neutralColor
             )
         }
 

@@ -1,6 +1,5 @@
 package lmm.moneylog.home.viewmodels
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,6 +11,7 @@ import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.home.models.CategoryExpense
 import lmm.moneylog.home.models.ExpensesSummary
 import lmm.moneylog.ui.extensions.formatForRs
+import lmm.moneylog.ui.extensions.toComposeColor
 
 private const val TOP_CATEGORIES_LIMIT = 5
 
@@ -53,7 +53,7 @@ class RecentExpensesViewModel(
                             .map { categoryAmount ->
                                 CategoryExpense(
                                     categoryName = categoryAmount.categoryName,
-                                    categoryColor = Color(categoryAmount.categoryColor.toULong()),
+                                    categoryColor = categoryAmount.categoryColor?.toComposeColor(),
                                     amount = categoryAmount.totalAmount,
                                     percentage = categoryAmount.percentage
                                 )

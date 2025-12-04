@@ -31,6 +31,7 @@ import lmm.moneylog.ui.components.misc.CircularIconBox
 import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.neutralColor
 import lmm.moneylog.ui.theme.outcome
 import java.util.Locale
 import androidx.compose.ui.geometry.Size as CanvasSize
@@ -167,7 +168,7 @@ private fun CategoryPieChart(
 
             // Draw filled arc (pie slice)
             drawArc(
-                color = category.categoryColor,
+                color = category.categoryColor ?: neutralColor,
                 startAngle = startAngle,
                 sweepAngle = sweepAngle,
                 useCenter = true,
@@ -203,7 +204,7 @@ private fun CategoryLegendItem(
         ) {
             // Category color indicator
             Canvas(modifier = Modifier.size(10.dp)) {
-                drawCircle(color = category.categoryColor)
+                drawCircle(color = category.categoryColor ?: neutralColor)
             }
 
             Text(

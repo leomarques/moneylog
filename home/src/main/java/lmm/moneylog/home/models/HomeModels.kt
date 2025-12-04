@@ -47,13 +47,13 @@ data class CreditCardInfo(
  * Data model representing expenses by category
  *
  * @property categoryName The name of the category
- * @property categoryColor The color associated with this category
+ * @property categoryColor The color associated with this category (null for uncategorized)
  * @property amount The total amount for this category
  * @property percentage The percentage this category represents of total expenses
  */
 data class CategoryExpense(
     val categoryName: String,
-    val categoryColor: Color,
+    val categoryColor: Color?,
     val amount: Double,
     val percentage: Float
 )

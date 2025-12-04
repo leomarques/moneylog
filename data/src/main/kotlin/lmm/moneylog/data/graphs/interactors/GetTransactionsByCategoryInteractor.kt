@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.graphs.model.CategoryAmount
+import lmm.moneylog.data.transaction.model.Transaction
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import kotlin.math.absoluteValue
 
@@ -20,6 +21,7 @@ class GetTransactionsByCategoryInteractor(
 ) {
     /**
      * Get income transactions grouped by category for a specific month
+     * Includes uncategorized transactions as a separate entry
      *
      * @param month The month number (1-12)
      * @param year The year
@@ -29,44 +31,14 @@ class GetTransactionsByCategoryInteractor(
         month: Int,
         year: Int
     ): Flow<List<CategoryAmount>> =
-        combine(
-            getTransactionsRepository.getIncomeTransactions(month, year),
-            getCategoriesRepository.getCategories()
-        ) { transactions, categories ->
-            // Filter only income categories
-            val categoryMap = categories.filter { it.isIncome }.associateBy { it.id }
-
-            // Group transactions by category and sum amounts
-            val categoryTotals =
-                transactions
-                    .filter { it.categoryId != null && categoryMap.containsKey(it.categoryId) }
-                    .groupBy { it.categoryId!! }
-                    .mapValues { (_, trans) ->
-                        trans.sumOf { it.value.absoluteValue }
-                    }
-
-            val totalAmount = categoryTotals.values.sum()
-
-            // Convert to CategoryAmount with percentages
-            categoryTotals
-                .mapNotNull { (categoryId, amount) ->
-                    val category = categoryMap[categoryId]
-                    if (category != null && amount > 0) {
-                        CategoryAmount(
-                            categoryId = categoryId,
-                            categoryName = category.name,
-                            categoryColor = category.color,
-                            totalAmount = amount,
-                            percentage = if (totalAmount > 0) (amount / totalAmount * 100).toFloat() else 0f
-                        )
-                    } else {
-                        null
-                    }
-                }.sortedByDescending { it.totalAmount }
-        }
+        getTransactionsByCategory(
+            transactionsFlow = getTransactionsRepository.getIncomeTransactions(month, year),
+            isIncome = true
+        )
 
     /**
      * Get expense transactions grouped by category for a specific month
+     * Includes uncategorized transactions as a separate entry
      *
      * @param month The month number (1-12)
      * @param year The year
@@ -76,39 +48,81 @@ class GetTransactionsByCategoryInteractor(
         month: Int,
         year: Int
     ): Flow<List<CategoryAmount>> =
+        getTransactionsByCategory(
+            transactionsFlow = getTransactionsRepository.getOutcomeTransactions(month, year),
+            isIncome = false
+        )
+
+    /**
+     * Get transactions grouped by category
+     * Includes uncategorized transactions as a separate entry
+     *
+     * @param transactionsFlow Flow of transactions to group
+     * @param isIncome Whether to filter for income or expense categories
+     * @return Flow of list of CategoryAmount
+     */
+    private fun getTransactionsByCategory(
+        transactionsFlow: Flow<List<Transaction>>,
+        isIncome: Boolean
+    ): Flow<List<CategoryAmount>> =
         combine(
-            getTransactionsRepository.getOutcomeTransactions(month, year),
+            transactionsFlow,
             getCategoriesRepository.getCategories()
         ) { transactions, categories ->
-            // Filter only expense categories
-            val categoryMap = categories.filter { !it.isIncome }.associateBy { it.id }
+            // Filter categories based on type (income or expense)
+            val categoryMap = categories.filter { it.isIncome == isIncome }.associateBy { it.id }
 
-            // Group transactions by category and sum amounts
+            // Separate categorized and uncategorized transactions
+            val (categorizedTransactions, uncategorizedTransactions) = transactions.partition { it.categoryId != null }
+
+            // Group categorized transactions by category and sum amounts
             val categoryTotals =
-                transactions
-                    .filter { it.categoryId != null && categoryMap.containsKey(it.categoryId) }
+                categorizedTransactions
+                    .filter { categoryMap.containsKey(it.categoryId) }
                     .groupBy { it.categoryId!! }
                     .mapValues { (_, trans) ->
                         trans.sumOf { it.value.absoluteValue }
                     }
 
-            val totalAmount = categoryTotals.values.sum()
+            // Calculate uncategorized total
+            val uncategorizedTotal = uncategorizedTransactions.sumOf { it.value.absoluteValue }
 
-            // Convert to CategoryAmount with percentages
-            categoryTotals
-                .mapNotNull { (categoryId, amount) ->
-                    val category = categoryMap[categoryId]
-                    if (category != null && amount > 0) {
-                        CategoryAmount(
-                            categoryId = categoryId,
-                            categoryName = category.name,
-                            categoryColor = category.color,
-                            totalAmount = amount,
-                            percentage = if (totalAmount > 0) (amount / totalAmount * 100).toFloat() else 0f
-                        )
-                    } else {
-                        null
+            // Calculate grand total for percentage calculation
+            val totalAmount = categoryTotals.values.sum() + uncategorizedTotal
+
+            // Convert categorized transactions to CategoryAmount
+            val categorizedAmounts =
+                categoryTotals
+                    .mapNotNull { (categoryId, amount) ->
+                        val category = categoryMap[categoryId]
+                        if (category != null && amount > 0) {
+                            CategoryAmount(
+                                categoryId = categoryId,
+                                categoryName = category.name,
+                                categoryColor = category.color,
+                                totalAmount = amount,
+                                percentage = if (totalAmount > 0) (amount / totalAmount * 100).toFloat() else 0f
+                            )
+                        } else {
+                            null
+                        }
                     }
-                }.sortedByDescending { it.totalAmount }
+
+            // Add uncategorized entry if there are any uncategorized transactions
+            val result =
+                if (uncategorizedTotal > 0) {
+                    categorizedAmounts +
+                        CategoryAmount(
+                            categoryId = null,
+                            categoryName = "Uncategorized",
+                            categoryColor = null,
+                            totalAmount = uncategorizedTotal,
+                            percentage = if (totalAmount > 0) (uncategorizedTotal / totalAmount * 100).toFloat() else 0f
+                        )
+                } else {
+                    categorizedAmounts
+                }
+
+            result.sortedByDescending { it.totalAmount }
         }
 }
