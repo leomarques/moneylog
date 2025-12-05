@@ -7,4 +7,6 @@ interface GetBalanceRepository {
     fun getTransactions(): Flow<List<TransactionBalance>>
 
     suspend fun getAllValuesByAccount(accountId: Int): List<Double>
+
+    fun getAllValuesByAccountFlow(accountId: Int): Flow<List<Double>>
 }

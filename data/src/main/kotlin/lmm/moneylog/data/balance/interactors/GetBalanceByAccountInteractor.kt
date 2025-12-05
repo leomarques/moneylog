@@ -5,5 +5,6 @@ import lmm.moneylog.data.balance.repositories.GetBalanceRepository
 class GetBalanceByAccountInteractor(
     private val getBalanceRepository: GetBalanceRepository
 ) {
-    suspend fun execute(accountId: Int): Double = getBalanceRepository.getAllValuesByAccount(accountId).sum()
+    suspend fun execute(accountId: Int): Double =
+        getBalanceRepository.getAllValuesByAccount(accountId).sum()
 }

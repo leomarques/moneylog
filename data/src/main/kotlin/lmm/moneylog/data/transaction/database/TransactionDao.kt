@@ -16,6 +16,9 @@ interface TransactionDao {
     @Query("SELECT value FROM `transaction` WHERE accountId = :accountId")
     suspend fun selectValuesByAccountId(accountId: Int): List<Double>
 
+    @Query("SELECT value FROM `transaction` WHERE accountId = :accountId")
+    fun selectValuesByAccountIdFlow(accountId: Int): Flow<List<Double>>
+
     @Query("SELECT * FROM `transaction` WHERE month = :month AND year = :year")
     fun selectAllTransactions(
         month: Int,
