@@ -74,7 +74,7 @@
     <string name="dialog_description_transaction_delete">Isso vai apagar essa transação do seu histórico.</string>
     <string name="dialog_description_account_delete">Isso vai apagar essa conta e todas as transações associadas.</string>
     <string name="dialog_description_account_archive">Isso vai arquivar essa conta. Nenhuma transação será apagada.</string>
-    <string name="dialog_description_adjust_balance">Lemony criará uma transação de valor %1$s para ajustar o saldo. Tem certeza?</string>
+    <string name="dialog_description_adjust_balance">Uma transação de %1$s será criada para ajustar o saldo. Tem certeza?</string>
     <string name="dialog_description_category_delete">Isso vai apagar essa categoria. Nenhuma transação será apagada.</string>
     <string name="dialog_description_creditcard_delete">Isso vai apagar esse cartão. Nenhuma transação será apagada.</string>
 
