@@ -75,7 +75,7 @@ private fun HomeContent(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(bottom = Size.MediumSpaceSize)
+                    .padding(bottom = Size.DefaultSpaceSize)
         )
 
         BalanceCardView(
@@ -84,7 +84,7 @@ private fun HomeContent(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(bottom = Size.MediumSpaceSize)
+                    .padding(bottom = Size.DefaultSpaceSize)
         )
 
         FinancialSummaryView(
@@ -94,7 +94,7 @@ private fun HomeContent(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(bottom = Size.MediumSpaceSize)
+                    .padding(bottom = Size.DefaultSpaceSize)
         )
 
         CreditCardsView(
@@ -103,7 +103,7 @@ private fun HomeContent(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(bottom = Size.MediumSpaceSize)
+                    .padding(bottom = Size.DefaultSpaceSize)
         )
 
         RecentExpensesView(

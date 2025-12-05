@@ -57,7 +57,7 @@ fun HomeHeader(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(Size.DefaultSpaceSize)
+                    .padding(Size.SmallSpaceSize2)
         ) {
             Text(
                 text = text,

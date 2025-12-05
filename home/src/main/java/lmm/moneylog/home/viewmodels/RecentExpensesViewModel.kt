@@ -13,7 +13,7 @@ import lmm.moneylog.home.models.ExpensesSummary
 import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.extensions.toComposeColor
 
-private const val TOP_CATEGORIES_LIMIT = 5
+private const val TOP_CATEGORIES_LIMIT = 4
 
 /**
  * ViewModel for the recent expenses card
