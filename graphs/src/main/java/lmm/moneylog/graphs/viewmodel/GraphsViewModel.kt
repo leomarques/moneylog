@@ -53,7 +53,7 @@ class GraphsViewModel(
     private val _monthName = MutableStateFlow("")
     val monthName: StateFlow<String> = _monthName.asStateFlow()
 
-    private val _isIncome = MutableStateFlow(false)
+    private val _isIncome = MutableStateFlow(true)
     val isIncome: StateFlow<Boolean> = _isIncome.asStateFlow()
 
     init {
