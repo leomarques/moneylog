@@ -219,7 +219,7 @@ private fun CategoryLegendItem(
         Text(
             text =
                 if (valuesMasked) {
-                    "•••• (${String.format(Locale.getDefault(), "%.0f%%", category.percentage)})"
+                    "••••"
                 } else {
                     "${category.amount.formatForRs()} (${
                         String.format(
