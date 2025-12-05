@@ -115,7 +115,7 @@ class AccountsListViewModel(
                 val adjustmentTransaction =
                     Transaction(
                         value = adjustmentValue,
-                        description = "Balance adjustment",
+                        description = "Adjustment",
                         date = domainTimeRepository.getCurrentDomainTime(),
                         accountId = accountId
                     )
