@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CreditCard
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -98,6 +99,7 @@ object CreditCardsCardDefaults {
     val IconInnerSize = 18.dp
     const val ICON_ALPHA = 0.9f
     val ColorIndicatorSize = 10.dp
+    val CardItemIconSize = 16.dp
     const val LABEL_ALPHA = 0.7f
     val AmountLetterSpacing = (-0.2).sp
 }
@@ -147,7 +149,6 @@ private fun CreditCardItem(
     ) {
         CreditCardDetails(
             cardName = cardInfo.cardName,
-            cardLastDigits = cardInfo.cardLastDigits,
             cardColor = cardInfo.cardColor
         )
 
@@ -161,7 +162,6 @@ private fun CreditCardItem(
 @Composable
 private fun CreditCardDetails(
     cardName: String,
-    cardLastDigits: String,
     cardColor: Color
 ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -173,22 +173,13 @@ private fun CreditCardDetails(
                     .background(cardColor)
         )
 
-        Column(modifier = Modifier.padding(start = Size.SmallSpaceSize)) {
-            Text(
-                text = cardName,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface,
-                fontWeight = FontWeight.Medium
-            )
-            Text(
-                text = cardLastDigits,
-                style = MaterialTheme.typography.labelSmall,
-                color =
-                    MaterialTheme.colorScheme.onSurfaceVariant.copy(
-                        alpha = CreditCardsCardDefaults.LABEL_ALPHA
-                    )
-            )
-        }
+        Text(
+            text = cardName,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurface,
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier.padding(start = Size.SmallSpaceSize)
+        )
     }
 }
 

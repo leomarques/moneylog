@@ -29,7 +29,6 @@ data class FinancialSummary(
  *
  * @property cardId The unique identifier for the credit card
  * @property cardName The display name of the credit card (e.g., "Visa Platinum")
- * @property cardLastDigits The last 4 digits of the card number (e.g., "•••• 4532")
  * @property invoiceAmount The current invoice amount formatted as a string (e.g., "$1,234.56")
  * @property invoiceCode The invoice code identifier for the current invoice period
  * @property cardColor The brand/theme color associated with this card
@@ -37,7 +36,6 @@ data class FinancialSummary(
 data class CreditCardInfo(
     val cardId: Int,
     val cardName: String,
-    val cardLastDigits: String,
     val invoiceAmount: String,
     val invoiceCode: String,
     val cardColor: Color

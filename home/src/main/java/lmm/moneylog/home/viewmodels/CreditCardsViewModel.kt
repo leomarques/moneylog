@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import lmm.moneylog.data.creditcard.interactors.GetCreditCardHomeInfoInteractor
 import lmm.moneylog.home.models.CreditCardInfo
 import lmm.moneylog.ui.extensions.formatForRs
+import lmm.moneylog.ui.extensions.toComposeColor
 
 /**
  * ViewModel for the credit cards section
@@ -35,19 +36,13 @@ class CreditCardsViewModel(
                         CreditCardInfo(
                             cardId = card.id,
                             cardName = card.name,
-                            cardLastDigits = formatCardDigits(card.id),
                             invoiceAmount = card.value.formatForRs(),
                             invoiceCode = creditCardResult.invoiceCode,
-                            cardColor = Color(card.color)
+                            cardColor = card.color.toComposeColor()
                         )
                     }
             }
         }
     }
 
-    /**
-     * Formats card ID to display as last 4 digits
-     * TODO: Get actual card number from database if stored
-     */
-    private fun formatCardDigits(cardId: Int): String = "•••• ${cardId.toString().takeLast(4).padStart(4, '0')}"
 }
