@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.transaction.detail.view.components
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -41,6 +42,7 @@ fun TransactionDetailFields(
     isCreditCardFieldEnabled: Boolean,
     isDebtSelected: Boolean,
     onDateClick: () -> Unit,
+    onClearSuggestions: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
@@ -51,14 +53,20 @@ fun TransactionDetailFields(
             keyboardType = KeyboardType.Number,
             getFocus = !uiState.isEdit,
             leadingIcon = { ValueIcon(tint = if (uiState.isIncome) income else outcome) },
-            onValueChange = onValueChange,
+            onValueChange = {
+                onClearSuggestions()
+                onValueChange(it)
+            },
             testTag = "ValueTextField"
         )
 
         IncomeRadioGroup(
             modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
             isIncome = uiState.isIncome,
-            onClick = { onIsIncomeSelect(it) }
+            onClick = {
+                onClearSuggestions()
+                onIsIncomeSelect(it)
+            }
         )
 
         ClickTextField(
@@ -66,33 +74,38 @@ fun TransactionDetailFields(
             value = uiState.displayDate,
             label = stringResource(R.string.detail_date),
             leadingIcon = { DateIcon() },
-            onClick = onDateClick
+            onClick = {
+                onClearSuggestions()
+                onDateClick()
+            }
         )
 
-        Column {
-            StateTextField(
-                modifier =
-                    Modifier.padding(
-                        bottom =
-                            if (uiState.descriptionSuggestions.isEmpty()) {
-                                Size.DefaultSpaceSize
-                            } else {
-                                Size.SmallSpaceSize
-                            }
-                    ),
-                value = uiState.description,
-                title = stringResource(R.string.detail_description),
-                keyboardType = KeyboardType.Text,
-                leadingIcon = { DescriptionIcon() },
-                onValueChange = onDescriptionChange
-            )
-
-            if (uiState.descriptionSuggestions.isNotEmpty()) {
-                DescriptionAutocomplete(
-                    suggestions = uiState.descriptionSuggestions,
-                    onSuggestionClick = onSuggestionClick,
-                    modifier = Modifier.padding(bottom = Size.DefaultSpaceSize)
+        Box {
+            Column {
+                StateTextField(
+                    modifier =
+                        Modifier.padding(
+                            bottom =
+                                if (uiState.descriptionSuggestions.isEmpty()) {
+                                    Size.DefaultSpaceSize
+                                } else {
+                                    Size.SmallSpaceSize
+                                }
+                        ),
+                    value = uiState.description,
+                    title = stringResource(R.string.detail_description),
+                    keyboardType = KeyboardType.Text,
+                    leadingIcon = { DescriptionIcon() },
+                    onValueChange = onDescriptionChange
                 )
+
+                if (uiState.descriptionSuggestions.isNotEmpty()) {
+                    DescriptionAutocomplete(
+                        suggestions = uiState.descriptionSuggestions,
+                        onSuggestionClick = onSuggestionClick,
+                        modifier = Modifier.padding(bottom = Size.DefaultSpaceSize)
+                    )
+                }
             }
         }
 
@@ -102,14 +115,23 @@ fun TransactionDetailFields(
             value = uiState.displayCategory,
             enabled = isCategoriesFieldEnabled,
             leadingIcon = { CategoryIcon(tint = uiState.displayCategoryColor) },
-            onClick = onCategoryClick
+            onClick = {
+                onClearSuggestions()
+                onCategoryClick()
+            }
         )
 
         RadioGroupType(
             isDebtSelect = isDebtSelected,
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            onDebtSelect = onDebtSelect,
-            onCreditSelect = onCreditSelect
+            onDebtSelect = {
+                onClearSuggestions()
+                onDebtSelect()
+            },
+            onCreditSelect = {
+                onClearSuggestions()
+                onCreditSelect()
+            }
         )
 
         if (isDebtSelected) {
@@ -119,7 +141,10 @@ fun TransactionDetailFields(
                 value = uiState.displayAccount,
                 enabled = isAccountsFieldEnabled,
                 leadingIcon = { AccountIcon(tint = uiState.displayAccountColor) },
-                onClick = onAccountClick
+                onClick = {
+                    onClearSuggestions()
+                    onAccountClick()
+                }
             )
         } else {
             ClickTextField(
@@ -128,7 +153,10 @@ fun TransactionDetailFields(
                 value = uiState.displayCreditCard,
                 enabled = isCreditCardFieldEnabled,
                 leadingIcon = { CreditCardIcon(tint = uiState.displayCreditCardColor) },
-                onClick = onCreditCardClick
+                onClick = {
+                    onClearSuggestions()
+                    onCreditCardClick()
+                }
             )
 
             ClickTextField(
@@ -136,7 +164,10 @@ fun TransactionDetailFields(
                 label = stringResource(R.string.invoice),
                 value = uiState.displayInvoice,
                 leadingIcon = { InvoiceIcon() },
-                onClick = onInvoiceClick
+                onClick = {
+                    onClearSuggestions()
+                    onInvoiceClick()
+                }
             )
         }
     }
@@ -161,6 +192,7 @@ private fun TransactionDetailFieldsPreview() {
         onDebtSelect = {},
         onCreditSelect = {},
         isDebtSelected = false,
-        isCreditCardFieldEnabled = true
+        isCreditCardFieldEnabled = true,
+        onClearSuggestions = {}
     )
 }

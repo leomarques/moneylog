@@ -33,6 +33,7 @@ fun TransactionDetailLayout(
     onSuggestionClick: (TransactionSuggestion) -> Unit,
     onDebtSelect: () -> Unit,
     onCreditSelect: () -> Unit,
+    onClearSuggestions: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
@@ -75,7 +76,8 @@ fun TransactionDetailLayout(
                     onDescriptionChange = onDescriptionChange,
                     onSuggestionClick = onSuggestionClick,
                     onDebtSelect = onDebtSelect,
-                    onCreditSelect = onCreditSelect
+                    onCreditSelect = onCreditSelect,
+                    onClearSuggestions = onClearSuggestions
                 )
             }
         }
@@ -100,6 +102,7 @@ private fun TransactionDetailLayoutPreview() {
         onDescriptionChange = {},
         onSuggestionClick = {},
         onDebtSelect = {},
-        onCreditSelect = {}
+        onCreditSelect = {},
+        onClearSuggestions = {}
     )
 }

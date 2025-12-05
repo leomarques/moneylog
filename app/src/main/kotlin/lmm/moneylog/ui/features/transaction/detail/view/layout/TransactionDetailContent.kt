@@ -30,6 +30,7 @@ fun TransactionDetailContent(
     onSuggestionClick: (TransactionSuggestion) -> Unit,
     onDebtSelect: () -> Unit,
     onCreditSelect: () -> Unit,
+    onClearSuggestions: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
@@ -78,7 +79,8 @@ fun TransactionDetailContent(
             onInvoiceClick = { showInvoicePicker.value = true },
             onDebtSelect = onDebtSelect,
             onCreditSelect = onCreditSelect,
-            isDebtSelected = uiState.isDebtSelected
+            isDebtSelected = uiState.isDebtSelected,
+            onClearSuggestions = onClearSuggestions
         )
     }
 }
@@ -101,6 +103,7 @@ private fun TransactionDetailContentPreview() {
         onDescriptionChange = {},
         onSuggestionClick = {},
         onDebtSelect = {},
-        onCreditSelect = {}
+        onCreditSelect = {},
+        onClearSuggestions = {}
     )
 }

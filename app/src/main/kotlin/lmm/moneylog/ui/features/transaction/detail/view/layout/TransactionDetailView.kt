@@ -49,6 +49,7 @@ fun TransactionDetailView(
             )
         },
         onDebtSelect = { viewModel.onDebtSelected() },
-        onCreditSelect = { viewModel.onCreditSelected() }
+        onCreditSelect = { viewModel.onCreditSelected() },
+        onClearSuggestions = { viewModel.clearSuggestions() }
     )
 }

@@ -198,6 +198,10 @@ class TransactionDetailViewModel(
         }
     }
 
+    fun clearSuggestions() {
+        _uiState.update { it.copy(descriptionSuggestions = emptyList()) }
+    }
+
     fun onSuggestionClick(
         description: String,
         value: Double,

@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import lmm.moneylog.data.transaction.model.TransactionSuggestion
 import lmm.moneylog.ui.extensions.toComposeColor
 
@@ -30,7 +31,10 @@ fun DescriptionAutocomplete(
     if (suggestions.isEmpty()) return
 
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .zIndex(1f),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         LazyColumn {
