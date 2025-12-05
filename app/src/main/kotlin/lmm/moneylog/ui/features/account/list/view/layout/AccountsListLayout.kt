@@ -26,6 +26,7 @@ fun AccountsListLayout(
     onItemClick: (Int) -> Unit,
     onArchivedIconClick: () -> Unit,
     onTransferIconClick: () -> Unit,
+    onAdjustBalanceClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -53,7 +54,8 @@ fun AccountsListLayout(
                 if (list.isNotEmpty()) {
                     AccountsListContent(
                         list = list,
-                        onItemClick = onItemClick
+                        onItemClick = onItemClick,
+                        onAdjustBalanceClick = onAdjustBalanceClick
                     )
                 } else {
                     EmptyState(
@@ -95,6 +97,7 @@ private fun AccountsListLayoutPreview() {
         onFabClick = { },
         onItemClick = {},
         onArchivedIconClick = {},
-        onTransferIconClick = {}
+        onTransferIconClick = {},
+        onAdjustBalanceClick = {}
     )
 }

@@ -10,7 +10,8 @@ import lmm.moneylog.ui.theme.neutralColor
 @Composable
 fun AccountsListContent(
     list: List<AccountModel>,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
+    onAdjustBalanceClick: (Int) -> Unit
 ) {
     LazyList {
         itemsIndexed(list) { index, accountModel ->
@@ -21,7 +22,8 @@ fun AccountsListContent(
                     balance = balance,
                     color = color,
                     showDivider = index != list.size - 1,
-                    onItemClick = onItemClick
+                    onItemClick = onItemClick,
+                    onAdjustBalanceClick = onAdjustBalanceClick
                 )
             }
         }
@@ -47,6 +49,7 @@ private fun AccountsListContentPreview() {
                     color = neutralColor
                 )
             ),
-        onItemClick = {}
+        onItemClick = {},
+        onAdjustBalanceClick = {}
     )
 }

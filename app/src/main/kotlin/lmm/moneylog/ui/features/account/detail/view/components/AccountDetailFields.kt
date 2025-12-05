@@ -1,10 +1,7 @@
 package lmm.moneylog.ui.features.account.detail.view.components
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,7 +23,6 @@ fun AccountDetailFields(
     isEdit: Boolean,
     onNameChange: (String) -> Unit,
     onColorDialogClick: () -> Unit,
-    onAdjustBalanceClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
@@ -47,15 +43,6 @@ fun AccountDetailFields(
             leadingIcon = { BrushIcon() },
             onClick = onColorDialogClick
         )
-
-        if (isEdit) {
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = onAdjustBalanceClick
-            ) {
-                Text(text = stringResource(R.string.detail_adjust_balance))
-            }
-        }
     }
 }
 
@@ -67,7 +54,6 @@ private fun AccountDetailFieldsPreview() {
         color = outcome,
         isEdit = false,
         onNameChange = {},
-        onColorDialogClick = {},
-        onAdjustBalanceClick = {}
+        onColorDialogClick = {}
     )
 }
