@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Graphs Screen Tab Titles -->
-    <string name="graphs_tab_pie_chart">Gráfico de Pizza</string>
-    <string name="graphs_tab_bar_chart">Gráfico de Barras</string>
-    <string name="graphs_tab_net_worth">Patrimônio Líquido</string>
+    <string name="graphs_tab_pie_chart">Mensal</string>
+    <string name="graphs_tab_bar_chart">Anual</string>
+    <string name="graphs_tab_net_worth">Patrimônio</string>
 
     <!-- Pie Chart Tab -->
     <string name="graphs_pie_income">Receitas</string>
