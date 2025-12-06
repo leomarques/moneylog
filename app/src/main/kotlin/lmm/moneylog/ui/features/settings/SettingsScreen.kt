@@ -12,11 +12,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -35,6 +37,7 @@ import lmm.moneylog.ui.theme.AppTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
+    onArrowBackClick: () -> Unit,
     onAccountsClick: () -> Unit,
     onCategoriesClick: () -> Unit,
     onCreditCardsClick: () -> Unit,
@@ -47,7 +50,15 @@ fun SettingsScreen(
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(R.string.nav_settings)) },
-                windowInsets = WindowInsets(0.dp)
+                windowInsets = WindowInsets(0.dp),
+                navigationIcon = {
+                    IconButton(onClick = onArrowBackClick) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.action_back)
+                        )
+                    }
+                }
             )
         }
     ) { innerPadding ->
@@ -199,6 +210,7 @@ private fun SettingsItem(
 private fun PreviewSettingsScreen() {
     AppTheme {
         SettingsScreen(
+            onArrowBackClick = {},
             onAccountsClick = {},
             onCategoriesClick = {},
             onCreditCardsClick = {},

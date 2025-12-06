@@ -248,8 +248,12 @@ fun MyNavHost(
             CategoryKeywordsScreen(onArrowBackClick = onArrowBackClick)
         }
 
-        composable(SETTINGS_SCREEN) {
+        composableExt(
+            route = SETTINGS_SCREEN,
+            onArrowBackClick = onArrowBackClick
+        ) {
             SettingsScreen(
+                onArrowBackClick = onArrowBackClick,
                 onAccountsClick = onAccountsClick,
                 onCategoriesClick = onCategoriesClick,
                 onCreditCardsClick = onCreditCardsClick,
