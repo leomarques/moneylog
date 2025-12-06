@@ -12,10 +12,12 @@ fun AccountDetailDialogs(
     onColorPick: (Color) -> Unit,
     showArchiveConfirmDialog: Boolean,
     onArchiveConfirm: () -> Unit,
-    onArchiveDismiss: () -> Unit
+    onArchiveDismiss: () -> Unit,
+    currentColor: Color
 ) {
     if (showColorsDialog.value) {
         ColorPicker(
+            selectedColor = currentColor,
             onConfirm = {
                 showColorsDialog.value = false
                 onColorPick(it)

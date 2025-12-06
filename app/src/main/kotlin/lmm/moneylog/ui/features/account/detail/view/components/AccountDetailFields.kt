@@ -1,7 +1,7 @@
 package lmm.moneylog.ui.features.account.detail.view.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,9 +25,11 @@ fun AccountDetailFields(
     onColorDialogClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(Size.DefaultSpaceSize)
+    ) {
         StateTextField(
-            modifier = Modifier.padding(bottom = Size.MediumSpaceSize),
             value = name,
             title = stringResource(R.string.common_name),
             keyboardType = KeyboardType.Text,
@@ -38,7 +40,6 @@ fun AccountDetailFields(
         )
 
         ColorTextField(
-            modifier = Modifier.padding(bottom = Size.MediumSpaceSize),
             color = color,
             leadingIcon = { BrushIcon() },
             onClick = onColorDialogClick

@@ -2,8 +2,10 @@ package lmm.moneylog.ui.features.account.detail.view.components
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -42,7 +44,12 @@ fun AccountDetailTopAppBar(
             if (isEdit) {
                 ArchiveActionButton(onClick = onArchiveIconClick)
             }
-        }
+        },
+        colors =
+            TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.surface,
+                titleContentColor = MaterialTheme.colorScheme.onSurface
+            )
     )
 }
 

@@ -61,6 +61,8 @@
     <string name="account_topbar_add">Nova Conta</string>
     <string name="account_topbar_edit">Editar Conta</string>
     <string name="account_topbar_archived">Contas Arquivadas</string>
+    <string name="account_preview_label">Pré-visualização</string>
+    <string name="account_name_placeholder">Nome da Conta</string>
     <string name="account_adjust_balance">Ajustar Saldo</string>
     <string name="account_adjust_balance_title">Ajustar Saldo da Conta</string>
     <string name="account_adjust_balance_description">Digite o novo saldo da conta</string>

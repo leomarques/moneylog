@@ -25,17 +25,18 @@ fun AccountDetailContent(
     onNameChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val showColorsDialog = remember { mutableStateOf(false) }
+
+    AccountDetailDialogs(
+        showArchiveConfirmDialog = showArchiveConfirmDialog,
+        showColorsDialog = showColorsDialog,
+        onColorPick = onColorPick,
+        onArchiveConfirm = onArchiveConfirm,
+        onArchiveDismiss = onArchiveDismiss,
+        currentColor = color
+    )
+
     Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
-        val showColorsDialog = remember { mutableStateOf(false) }
-
-        AccountDetailDialogs(
-            showArchiveConfirmDialog = showArchiveConfirmDialog,
-            showColorsDialog = showColorsDialog,
-            onColorPick = onColorPick,
-            onArchiveConfirm = onArchiveConfirm,
-            onArchiveDismiss = onArchiveDismiss
-        )
-
         AccountDetailFields(
             name = name,
             color = color,

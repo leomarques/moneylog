@@ -61,6 +61,8 @@
     <string name="account_topbar_add">New Account</string>
     <string name="account_topbar_edit">Edit Account</string>
     <string name="account_topbar_archived">Archived Accounts</string>
+    <string name="account_preview_label">Preview</string>
+    <string name="account_name_placeholder">Account Name</string>
     <string name="account_adjust_balance">Adjust Balance</string>
     <string name="account_adjust_balance_title">Adjust Account Balance</string>
     <string name="account_adjust_balance_description">Enter the new account balance</string>
