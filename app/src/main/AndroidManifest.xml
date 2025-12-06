@@ -12,7 +12,8 @@
         android:theme="@style/Theme.Moneylog" >
         <activity
             android:name="lmm.moneylog.ui.navigation.misc.MainActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
