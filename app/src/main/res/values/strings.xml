@@ -117,6 +117,9 @@
     <string name="transfer_to">To:</string>
     <string name="transfer_origin">Origin account</string>
     <string name="transfer_destination">Destination account</string>
+    <string name="transfer_section_amount">Transfer Amount</string>
+    <string name="transfer_section_from">From Account</string>
+    <string name="transfer_section_to">To Account</string>
 
     <!-- Validation Errors -->
     <string name="validation_invalid_value">Invalid value</string>

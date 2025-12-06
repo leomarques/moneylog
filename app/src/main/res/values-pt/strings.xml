@@ -117,6 +117,9 @@
     <string name="transfer_to">Para:</string>
     <string name="transfer_origin">Conta origem</string>
     <string name="transfer_destination">Conta destino</string>
+    <string name="transfer_section_amount">Valor da Transferência</string>
+    <string name="transfer_section_from">Da Conta</string>
+    <string name="transfer_section_to">Para a Conta</string>
 
     <!-- Validation Errors -->
     <string name="validation_invalid_value">Valor inválido</string>

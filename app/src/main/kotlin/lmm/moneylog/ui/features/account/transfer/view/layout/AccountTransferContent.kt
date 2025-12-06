@@ -1,7 +1,10 @@
 package lmm.moneylog.ui.features.account.transfer.view.layout
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,20 +30,26 @@ fun AccountTransferContent(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
-        val showOriginAccountPicker = remember { mutableStateOf(false) }
-        val showDestinationAccountPicker = remember { mutableStateOf(false) }
+    val showOriginAccountPicker = remember { mutableStateOf(false) }
+    val showDestinationAccountPicker = remember { mutableStateOf(false) }
 
-        AccountTransferDialogs(
-            list = list,
-            showOriginAccountPicker = showOriginAccountPicker,
-            showDestinationAccountPicker = showDestinationAccountPicker,
-            originFilterName = destinationAccountDisplay,
-            destinationFilterName = originAccountDisplay,
-            onOriginAccountPick = onOriginAccountPick,
-            onDestinationAccountPick = onDestinationAccountPick
-        )
+    AccountTransferDialogs(
+        list = list,
+        showOriginAccountPicker = showOriginAccountPicker,
+        showDestinationAccountPicker = showDestinationAccountPicker,
+        originFilterName = destinationAccountDisplay,
+        destinationFilterName = originAccountDisplay,
+        onOriginAccountPick = onOriginAccountPick,
+        onDestinationAccountPick = onDestinationAccountPick
+    )
 
+    Column(
+        modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = Size.DefaultSpaceSize)
+            .padding(top = Size.DefaultSpaceSize, bottom = Size.XLargeSpaceSize)
+    ) {
         AccountTransferFields(
             value = value,
             list = list,
