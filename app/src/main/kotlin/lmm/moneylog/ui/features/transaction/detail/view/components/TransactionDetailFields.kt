@@ -1,13 +1,23 @@
 package lmm.moneylog.ui.features.transaction.detail.view.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 import lmm.moneylog.data.transaction.model.TransactionSuggestion
 import lmm.moneylog.ui.components.icons.AccountIcon
@@ -20,7 +30,6 @@ import lmm.moneylog.ui.components.radiogroup.RadioGroupType
 import lmm.moneylog.ui.components.textfields.ClickTextField
 import lmm.moneylog.ui.components.textfields.StateTextField
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
-import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.income
 import lmm.moneylog.ui.theme.outcome
 
@@ -45,130 +54,237 @@ fun TransactionDetailFields(
     onClearSuggestions: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier) {
-        StateTextField(
-            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            value = uiState.value,
-            title = stringResource(R.string.common_value),
-            keyboardType = KeyboardType.Number,
-            getFocus = !uiState.isEdit,
-            leadingIcon = { ValueIcon(tint = if (uiState.isIncome) income else outcome) },
-            onValueChange = {
-                onClearSuggestions()
-                onValueChange(it)
-            },
-            testTag = "ValueTextField"
-        )
-
-        IncomeRadioGroup(
-            modifier = Modifier.padding(bottom = Size.SmallSpaceSize),
-            isIncome = uiState.isIncome,
-            onClick = {
-                onClearSuggestions()
-                onIsIncomeSelect(it)
-            }
-        )
-
-        ClickTextField(
-            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            value = uiState.displayDate,
-            label = stringResource(R.string.common_date),
-            leadingIcon = { DateIcon() },
-            onClick = {
-                onClearSuggestions()
-                onDateClick()
-            }
-        )
-
-        Box {
-            Column {
-                StateTextField(
-                    modifier =
-                        Modifier.padding(
-                            bottom =
-                                if (uiState.descriptionSuggestions.isEmpty()) {
-                                    Size.DefaultSpaceSize
-                                } else {
-                                    Size.SmallSpaceSize
-                                }
-                        ),
-                    value = uiState.description,
-                    title = stringResource(R.string.common_description),
-                    keyboardType = KeyboardType.Text,
-                    leadingIcon = { DescriptionIcon() },
-                    onValueChange = onDescriptionChange
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        // Amount and Type Card
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+            colors =
+                CardDefaults.cardColors(
+                    containerColor =
+                        if (uiState.isIncome) {
+                            MaterialTheme.colorScheme.primaryContainer
+                        } else {
+                            MaterialTheme.colorScheme.errorContainer
+                        }
+                )
+        ) {
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp)
+            ) {
+                // Section Header
+                Text(
+                    text = "Amount",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 12.dp)
                 )
 
-                if (uiState.descriptionSuggestions.isNotEmpty()) {
-                    DescriptionAutocomplete(
-                        suggestions = uiState.descriptionSuggestions,
-                        onSuggestionClick = onSuggestionClick,
-                        modifier = Modifier.padding(bottom = Size.DefaultSpaceSize)
-                    )
+                StateTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = uiState.value,
+                    title = stringResource(R.string.common_value),
+                    keyboardType = KeyboardType.Number,
+                    getFocus = !uiState.isEdit,
+                    leadingIcon = { ValueIcon(tint = if (uiState.isIncome) income else outcome) },
+                    onValueChange = {
+                        onClearSuggestions()
+                        onValueChange(it)
+                    },
+                    testTag = "ValueTextField"
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                IncomeRadioGroup(
+                    isIncome = uiState.isIncome,
+                    onClick = {
+                        onClearSuggestions()
+                        onIsIncomeSelect(it)
+                    }
+                )
+            }
+        }
+
+        // Date and Description Card
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+            colors =
+                CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                )
+        ) {
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp)
+            ) {
+                Text(
+                    text = "Details",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+                ClickTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = uiState.displayDate,
+                    label = stringResource(R.string.common_date),
+                    leadingIcon = { DateIcon() },
+                    onClick = {
+                        onClearSuggestions()
+                        onDateClick()
+                    }
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Box {
+                    Column {
+                        StateTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = uiState.description,
+                            title = stringResource(R.string.common_description),
+                            keyboardType = KeyboardType.Text,
+                            leadingIcon = { DescriptionIcon() },
+                            onValueChange = onDescriptionChange
+                        )
+
+                        if (uiState.descriptionSuggestions.isNotEmpty()) {
+                            Spacer(modifier = Modifier.height(8.dp))
+                            DescriptionAutocomplete(
+                                suggestions = uiState.descriptionSuggestions,
+                                onSuggestionClick = onSuggestionClick
+                            )
+                        }
+                    }
                 }
             }
         }
 
-        ClickTextField(
-            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            label = stringResource(R.string.common_category),
-            value = uiState.displayCategory,
-            enabled = isCategoriesFieldEnabled,
-            leadingIcon = { CategoryIcon(tint = uiState.displayCategoryColor) },
-            onClick = {
-                onClearSuggestions()
-                onCategoryClick()
+        // Category Card
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+            colors =
+                CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                )
+        ) {
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp)
+            ) {
+                Text(
+                    text = "Category",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+                ClickTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    label = stringResource(R.string.common_category),
+                    value = uiState.displayCategory,
+                    enabled = isCategoriesFieldEnabled,
+                    leadingIcon = { CategoryIcon(tint = uiState.displayCategoryColor) },
+                    onClick = {
+                        onClearSuggestions()
+                        onCategoryClick()
+                    }
+                )
             }
-        )
+        }
 
-        RadioGroupType(
-            isDebtSelect = isDebtSelected,
-            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            onDebtSelect = {
-                onClearSuggestions()
-                onDebtSelect()
-            },
-            onCreditSelect = {
-                onClearSuggestions()
-                onCreditSelect()
+        // Payment Method Card
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+            colors =
+                CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                )
+        ) {
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp)
+            ) {
+                Text(
+                    text = "Payment Method",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+                RadioGroupType(
+                    isDebtSelect = isDebtSelected,
+                    onDebtSelect = {
+                        onClearSuggestions()
+                        onDebtSelect()
+                    },
+                    onCreditSelect = {
+                        onClearSuggestions()
+                        onCreditSelect()
+                    }
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                if (isDebtSelected) {
+                    ClickTextField(
+                        modifier = Modifier.fillMaxWidth(),
+                        label = stringResource(R.string.common_account),
+                        value = uiState.displayAccount,
+                        enabled = isAccountsFieldEnabled,
+                        leadingIcon = { AccountIcon(tint = uiState.displayAccountColor) },
+                        onClick = {
+                            onClearSuggestions()
+                            onAccountClick()
+                        }
+                    )
+                } else {
+                    ClickTextField(
+                        modifier = Modifier.fillMaxWidth(),
+                        label = stringResource(R.string.common_credit_card),
+                        value = uiState.displayCreditCard,
+                        enabled = isCreditCardFieldEnabled,
+                        leadingIcon = { CreditCardIcon(tint = uiState.displayCreditCardColor) },
+                        onClick = {
+                            onClearSuggestions()
+                            onCreditCardClick()
+                        }
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    ClickTextField(
+                        modifier = Modifier.fillMaxWidth(),
+                        label = stringResource(R.string.common_invoice),
+                        value = uiState.displayInvoice,
+                        leadingIcon = { InvoiceIcon() },
+                        onClick = {
+                            onClearSuggestions()
+                            onInvoiceClick()
+                        }
+                    )
+                }
             }
-        )
-
-        if (isDebtSelected) {
-            ClickTextField(
-                modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-                label = stringResource(R.string.common_account),
-                value = uiState.displayAccount,
-                enabled = isAccountsFieldEnabled,
-                leadingIcon = { AccountIcon(tint = uiState.displayAccountColor) },
-                onClick = {
-                    onClearSuggestions()
-                    onAccountClick()
-                }
-            )
-        } else {
-            ClickTextField(
-                modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-                label = stringResource(R.string.common_credit_card),
-                value = uiState.displayCreditCard,
-                enabled = isCreditCardFieldEnabled,
-                leadingIcon = { CreditCardIcon(tint = uiState.displayCreditCardColor) },
-                onClick = {
-                    onClearSuggestions()
-                    onCreditCardClick()
-                }
-            )
-
-            ClickTextField(
-                modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-                label = stringResource(R.string.common_invoice),
-                value = uiState.displayInvoice,
-                leadingIcon = { InvoiceIcon() },
-                onClick = {
-                    onClearSuggestions()
-                    onInvoiceClick()
-                }
-            )
         }
     }
 }

@@ -1,17 +1,20 @@
 package lmm.moneylog.ui.features.transaction.detail.view.layout
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.data.transaction.model.TransactionSuggestion
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 import lmm.moneylog.ui.features.transaction.detail.view.components.TransactionDetailDialogs
 import lmm.moneylog.ui.features.transaction.detail.view.components.TransactionDetailFields
-import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun TransactionDetailContent(
@@ -33,7 +36,13 @@ fun TransactionDetailContent(
     onClearSuggestions: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
+    Column(
+        modifier =
+            modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp, vertical = 16.dp)
+    ) {
         val showDatePicker = remember { mutableStateOf(false) }
         val showAccountPicker = remember { mutableStateOf(false) }
         val showCategoryPicker = remember { mutableStateOf(false) }
