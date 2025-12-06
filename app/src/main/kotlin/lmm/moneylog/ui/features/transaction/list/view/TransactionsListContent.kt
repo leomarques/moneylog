@@ -6,7 +6,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.ui.features.transaction.list.model.TransactionModel
 import lmm.moneylog.ui.theme.Size
 
@@ -26,39 +28,46 @@ fun TransactionsListContent(
 ) {
     val grouped = list.reversed().groupBy { it.date }
 
-    LazyColumn(
-        modifier.background(
-            color = MaterialTheme.colorScheme.inverseOnSurface,
-            shape = RoundedCornerShape(Size.ListRoundedCornerSize)
-        )
+    Card(
+        modifier =
+            modifier
+                .padding(horizontal = Size.DefaultSpaceSize),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        grouped.forEach { (date, transactions) ->
-            stickyHeader {
-                Surface(
-                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = date,
-                        modifier =
-                            Modifier
-                                .padding(
-                                    vertical = Size.SmallSpaceSize2,
-                                    horizontal = Size.DefaultSpaceSize
-                                ),
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onSurface
+        LazyColumn(
+            Modifier
+                .background(
+                    color = MaterialTheme.colorScheme.inverseOnSurface,
+                )
+        ) {
+            grouped.forEach { (date, transactions) ->
+                stickyHeader {
+                    Surface(
+                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = date,
+                            modifier =
+                                Modifier
+                                    .padding(
+                                        vertical = Size.SmallSpaceSize2,
+                                        horizontal = Size.DefaultSpaceSize
+                                    ),
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.SemiBold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+
+                items(transactions) { transaction ->
+                    TransactionsListItem(
+                        transaction = transaction,
+                        onItemClick = onItemClick,
+                        color = transaction.categoryColor
                     )
                 }
-            }
-
-            items(transactions) { transaction ->
-                TransactionsListItem(
-                    transaction = transaction,
-                    onItemClick = onItemClick,
-                    color = transaction.categoryColor
-                )
             }
         }
     }

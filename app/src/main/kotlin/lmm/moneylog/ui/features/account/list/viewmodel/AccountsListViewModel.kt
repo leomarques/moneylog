@@ -15,7 +15,6 @@ import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.balance.interactors.GetBalanceByAccountInteractor
 import lmm.moneylog.data.balance.repositories.GetBalanceRepository
-import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.model.Transaction

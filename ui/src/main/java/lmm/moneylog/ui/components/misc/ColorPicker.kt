@@ -2,7 +2,6 @@ package lmm.moneylog.ui.components.misc
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -51,8 +50,8 @@ import lmm.moneylog.ui.theme.darkYellow
 @Composable
 fun ColorPicker(
     onConfirm: (Color) -> Unit,
-    modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
+    modifier: Modifier = Modifier,
     selectedColor: Color? = null
 ) {
     val list =
@@ -75,9 +74,10 @@ fun ColorPicker(
             Card(
                 modifier = modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(24.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                ),
+                colors =
+                    CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface
+                    ),
                 elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
             ) {
                 Column(
@@ -172,8 +172,8 @@ fun ColorItem(
 @Composable
 private fun ColorPickerPreview() {
     ColorPicker(
-        onDismiss = {},
-        onConfirm = {}
+        onConfirm = {},
+        onDismiss = {}
     )
 }
 

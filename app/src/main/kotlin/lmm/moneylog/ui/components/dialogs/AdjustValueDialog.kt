@@ -42,9 +42,9 @@ fun AdjustValueDialog(
     title: String,
     description: String,
     inputLabel: String,
+    modifier: Modifier = Modifier,
     categories: List<CategoryModel> = emptyList(),
-    showCategorySelector: Boolean = false,
-    modifier: Modifier = Modifier
+    showCategorySelector: Boolean = false
 ) {
     var valueText by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf<CategoryModel?>(null) }

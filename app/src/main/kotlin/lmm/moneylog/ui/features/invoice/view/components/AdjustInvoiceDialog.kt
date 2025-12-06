@@ -12,8 +12,8 @@ import lmm.moneylog.ui.features.category.list.model.CategoryModel
 fun AdjustInvoiceDialog(
     onDismiss: () -> Unit,
     onConfirm: (String, Int?) -> Unit,
-    categories: List<CategoryModel> = emptyList(),
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    categories: List<CategoryModel> = emptyList()
 ) {
     AdjustValueDialog(
         onDismiss = onDismiss,
