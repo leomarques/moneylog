@@ -70,6 +70,7 @@
     <string name="account_adjust_balance_success">Balance adjusted successfully</string>
     <string name="account_adjust_balance_transaction_desc">Balance adjustment</string>
     <string name="account_select_for_invoice">Select the account to pay the invoice</string>
+    <string name="account_section_info">Account Information</string>
 
     <!-- Category Screen -->
     <string name="category_topbar_add">New Category</string>
@@ -79,6 +80,8 @@
     <string name="category_default">Default Category</string>
     <string name="category_default_description">Select the category that will be automatically assigned to transactions created from Nubank notifications when no keywords match.</string>
     <string name="state_no_category_selected">No category selected</string>
+    <string name="category_section_info">Category Information</string>
+    <string name="category_section_type">Category Type</string>
 
     <!-- Credit Card Screen -->
     <string name="creditcard_topbar_add">New Card</string>
@@ -90,6 +93,9 @@
     <string name="creditcard_select">Select Credit Card</string>
     <string name="creditcard_default">Default Credit Card</string>
     <string name="creditcard_default_description">Select the credit card that will be automatically assigned to transactions created from Nubank notifications.</string>
+    <string name="creditcard_section_info">Card Information</string>
+    <string name="creditcard_section_billing">Billing Cycle</string>
+    <string name="creditcard_section_limit">Credit Limit</string>
 
     <!-- Invoice Screen -->
     <string name="invoice_paid">Invoice Paid</string>

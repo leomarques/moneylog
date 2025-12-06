@@ -1,19 +1,28 @@
 package lmm.moneylog.ui.features.category.detail.view.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.icons.BrushIcon
 import lmm.moneylog.ui.components.misc.IncomeRadioGroup
 import lmm.moneylog.ui.components.textfields.ColorTextField
 import lmm.moneylog.ui.components.textfields.StateTextField
-import lmm.moneylog.ui.theme.Size
 
 @Composable
 fun CategoryDetailFields(
@@ -26,28 +35,83 @@ fun CategoryDetailFields(
     onColorClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier) {
-        StateTextField(
-            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            value = name,
-            title = stringResource(R.string.common_name),
-            keyboardType = KeyboardType.Text,
-            getFocus = !isEdit,
-            onValueChange = onNameChange,
-            testTag = "CategoryNameTextField"
-        )
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        // Category Information Card
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+            colors =
+                CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                )
+        ) {
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.category_section_info),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
 
-        IncomeRadioGroup(
-            modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            isIncome = isIncome,
-            onClick = onIncomeChange
-        )
+                StateTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = name,
+                    title = stringResource(R.string.common_name),
+                    keyboardType = KeyboardType.Text,
+                    getFocus = !isEdit,
+                    onValueChange = onNameChange,
+                    testTag = "CategoryNameTextField"
+                )
 
-        ColorTextField(
-            color = color,
-            leadingIcon = { BrushIcon() },
-            onClick = onColorClick
-        )
+                Spacer(modifier = Modifier.height(12.dp))
+
+                ColorTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    color = color,
+                    leadingIcon = { BrushIcon() },
+                    onClick = onColorClick
+                )
+            }
+        }
+
+        // Category Type Card
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+            colors =
+                CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                )
+        ) {
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.category_section_type),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 12.dp)
+                )
+
+                IncomeRadioGroup(
+                    isIncome = isIncome,
+                    onClick = onIncomeChange
+                )
+            }
+        }
     }
 }
 

@@ -70,6 +70,7 @@
     <string name="account_adjust_balance_success">Saldo ajustado con éxito</string>
     <string name="account_adjust_balance_transaction_desc">Ajuste de saldo</string>
     <string name="account_select_for_invoice">Seleccione la cuenta para pagar la factura</string>
+    <string name="account_section_info">Información de la Cuenta</string>
 
     <!-- Category Screen -->
     <string name="category_topbar_add">Nueva Categoría</string>
@@ -79,6 +80,8 @@
     <string name="category_default">Categoría Predeterminada</string>
     <string name="category_default_description">Seleccione la categoría que se asignará automáticamente a las transacciones creadas desde notificaciones de Nubank cuando ninguna palabra clave coincida.</string>
     <string name="state_no_category_selected">Ninguna categoría seleccionada</string>
+    <string name="category_section_info">Información de la Categoría</string>
+    <string name="category_section_type">Tipo de Categoría</string>
 
     <!-- Credit Card Screen -->
     <string name="creditcard_topbar_add">Nueva Tarjeta</string>
@@ -90,6 +93,9 @@
     <string name="creditcard_select">Seleccionar Tarjeta de Crédito</string>
     <string name="creditcard_default">Tarjeta de Crédito Predeterminada</string>
     <string name="creditcard_default_description">Seleccione la tarjeta de crédito que se asignará automáticamente a las transacciones creadas desde notificaciones de Nubank.</string>
+    <string name="creditcard_section_info">Información de la Tarjeta</string>
+    <string name="creditcard_section_billing">Ciclo de Facturación</string>
+    <string name="creditcard_section_limit">Límite de Crédito</string>
 
     <!-- Invoice Screen -->
     <string name="invoice_paid">Factura Pagada</string>

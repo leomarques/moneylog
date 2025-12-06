@@ -1,7 +1,10 @@
 package lmm.moneylog.ui.features.creditcard.detail.view.layout
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,7 +34,13 @@ fun CreditCardDetailContent(
     onLimitChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier.padding(horizontal = Size.DefaultSpaceSize)) {
+    Column(
+        modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = Size.DefaultSpaceSize)
+            .padding(top = Size.DefaultSpaceSize, bottom = Size.XLargeSpaceSize)
+    ) {
         val showColorsDialog = remember { mutableStateOf(false) }
 
         CreditCardDetailDialogs(
