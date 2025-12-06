@@ -53,7 +53,7 @@ class GraphsViewModel(
     private val _monthName = MutableStateFlow("")
     val monthName: StateFlow<String> = _monthName.asStateFlow()
 
-    private val _isIncome = MutableStateFlow(true)
+    private val _isIncome = MutableStateFlow(false)
     val isIncome: StateFlow<Boolean> = _isIncome.asStateFlow()
 
     init {
@@ -152,12 +152,5 @@ class GraphsViewModel(
      */
     fun toggleIncomeExpense() {
         _isIncome.value = !_isIncome.value
-    }
-
-    /**
-     * Set whether to show income or expenses
-     */
-    fun setIsIncome(value: Boolean) {
-        _isIncome.value = value
     }
 }

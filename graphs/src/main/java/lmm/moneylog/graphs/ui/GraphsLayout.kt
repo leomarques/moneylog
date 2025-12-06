@@ -145,18 +145,18 @@ private fun PieChartTab(
 
         // Toggle between Income and Expenses
         SecondaryTabRow(
-            selectedTabIndex = if (isIncome) 0 else 1,
+            selectedTabIndex = if (isIncome) 1 else 0,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Tab(
-                selected = isIncome,
-                onClick = { if (!isIncome) onToggleIncomeExpense() },
-                text = { Text(stringResource(R.string.graphs_pie_income)) }
-            )
             Tab(
                 selected = !isIncome,
                 onClick = { if (isIncome) onToggleIncomeExpense() },
                 text = { Text(stringResource(R.string.graphs_pie_expenses)) }
+            )
+            Tab(
+                selected = isIncome,
+                onClick = { if (!isIncome) onToggleIncomeExpense() },
+                text = { Text(stringResource(R.string.graphs_pie_income)) }
             )
         }
 
