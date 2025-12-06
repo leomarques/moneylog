@@ -21,6 +21,8 @@ import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepos
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRepository
 import lmm.moneylog.ui.extensions.formatForRs
+import lmm.moneylog.ui.features.category.list.model.CategoriesListUIState
+import lmm.moneylog.ui.features.category.list.viewmodel.toCategoryModelList
 import lmm.moneylog.ui.features.invoice.model.InvoiceListUIState
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.nextCode
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.previousCode
@@ -33,7 +35,7 @@ class InvoiceListViewModel(
     private val getTransactionsRepository: GetTransactionsRepository,
     private val addTransactionRepository: AddTransactionRepository,
     getCreditCardsRepository: GetCreditCardsRepository,
-    getCategoriesRepository: GetCategoriesRepository,
+    private val getCategoriesRepository: GetCategoriesRepository,
     getAccountsRepository: GetAccountsRepository,
     private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
@@ -41,8 +43,12 @@ class InvoiceListViewModel(
         private const val TAG = "InvoiceListViewModel"
     }
 
-    private val _uiState = MutableStateFlow(InvoiceListUIState(titleResourceId = R.string.common_invoice))
+    private val _uiState =
+        MutableStateFlow(InvoiceListUIState(titleResourceId = R.string.common_invoice))
     val uiState: StateFlow<InvoiceListUIState> = _uiState.asStateFlow()
+
+    private val _categoriesState = MutableStateFlow(CategoriesListUIState())
+    val categoriesState: StateFlow<CategoriesListUIState> = _categoriesState.asStateFlow()
 
     private lateinit var savedTransactions: List<Transaction>
     private lateinit var accounts: List<Account>
@@ -70,6 +76,15 @@ class InvoiceListViewModel(
                     it.id to Color(it.color.toULong())
                 }
 
+            // Update categories state for UI
+            _categoriesState.update {
+                CategoriesListUIState(
+                    categories
+                        .toCategoryModelList()
+                        .reversed()
+                )
+            }
+
             accounts = getAccountsRepository.getAccountsSuspend()
 
             getCreditCardsRepository.getCreditCardById(creditCardId)?.let {
@@ -77,6 +92,19 @@ class InvoiceListViewModel(
             } ?: return@launch
 
             updateTransactions()
+        }
+
+        // Also listen for category updates
+        viewModelScope.launch {
+            getCategoriesRepository.getCategories().collect { categories ->
+                _categoriesState.update {
+                    CategoriesListUIState(
+                        categories
+                            .toCategoryModelList()
+                            .reversed()
+                    )
+                }
+            }
         }
     }
 
@@ -187,6 +215,7 @@ class InvoiceListViewModel(
 
     fun onAdjustInvoiceConfirm(
         adjustmentValue: Double,
+        categoryId: Int?,
         onSuccess: () -> Unit,
         onError: (Int) -> Unit
     ) {
@@ -203,7 +232,8 @@ class InvoiceListViewModel(
                         date = domainTimeRepository.getCurrentDomainTime(),
                         creditCardId = creditCardId,
                         invoiceMonth = invoiceMonth,
-                        invoiceYear = invoiceYear
+                        invoiceYear = invoiceYear,
+                        categoryId = if (categoryId != null && categoryId > 0) categoryId else null
                     )
                 addTransactionRepository.save(adjustmentTransaction)
                 onSuccess()

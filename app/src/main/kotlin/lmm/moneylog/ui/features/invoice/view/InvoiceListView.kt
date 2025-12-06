@@ -25,6 +25,7 @@ fun InvoiceListView(
     onArrowBackClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val categoriesState by viewModel.categoriesState.collectAsState()
 
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -33,23 +34,26 @@ fun InvoiceListView(
     var showAdjustInvoiceConfirmDialog by remember { mutableStateOf(false) }
     var adjustmentValue by remember { mutableStateOf("") }
     var adjustmentAmount by remember { mutableDoubleStateOf(0.0) }
+    var selectedCategoryId by remember { mutableStateOf<Int?>(null) }
 
     if (showAdjustInvoiceDialog) {
         AdjustInvoiceDialog(
             onDismiss = { showAdjustInvoiceDialog = false },
-            onConfirm = { newValue ->
+            onConfirm = { newValue, categoryId ->
                 coroutineScope.launch {
                     val result = viewModel.calculateInvoiceAdjustment(newValue)
                     if (result != null) {
                         adjustmentValue = result.first
                         adjustmentAmount = result.second
+                        selectedCategoryId = categoryId
                         showAdjustInvoiceDialog = false
                         showAdjustInvoiceConfirmDialog = true
                     } else {
                         showToast(context, R.string.validation_invalid_value)
                     }
                 }
-            }
+            },
+            categories = categoriesState.list
         )
     }
 
@@ -59,12 +63,15 @@ fun InvoiceListView(
             onConfirm = {
                 viewModel.onAdjustInvoiceConfirm(
                     adjustmentValue = adjustmentAmount,
+                    categoryId = selectedCategoryId,
                     onSuccess = {
                         showToast(context, R.string.invoice_adjust_value_success)
                         showAdjustInvoiceConfirmDialog = false
+                        selectedCategoryId = null
                     },
                     onError = { errorResId ->
                         showToast(context, errorResId)
+                        selectedCategoryId = null
                     }
                 )
             },

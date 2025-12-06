@@ -28,6 +28,7 @@ fun AccountsListView(
     onTransferIconClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val categoriesState by viewModel.categoriesState.collectAsState()
     val context = LocalContext.current
 
     var showAdjustBalanceDialog by remember { mutableStateOf(false) }
@@ -35,15 +36,17 @@ fun AccountsListView(
     var selectedAccountId by remember { mutableIntStateOf(-1) }
     var adjustmentValueDisplay by remember { mutableStateOf("") }
     var adjustmentValue by remember { mutableDoubleStateOf(0.0) }
+    var selectedCategoryId by remember { mutableIntStateOf(-1) }
 
     if (showAdjustBalanceDialog) {
         AdjustBalanceDialog(
-            onConfirm = { newBalance ->
+            onConfirm = { newBalance, categoryId ->
                 MainScope().launch {
                     val result = viewModel.calculateAdjustment(selectedAccountId, newBalance)
                     if (result != null) {
                         adjustmentValueDisplay = result.first
                         adjustmentValue = result.second
+                        selectedCategoryId = categoryId ?: -1
                         showAdjustBalanceDialog = false
                         showAdjustBalanceConfirmDialog = true
                     } else {
@@ -54,7 +57,8 @@ fun AccountsListView(
             onDismiss = {
                 showAdjustBalanceDialog = false
                 selectedAccountId = -1
-            }
+            },
+            categories = categoriesState.list
         )
     }
 
@@ -65,15 +69,18 @@ fun AccountsListView(
                 viewModel.onAdjustBalanceConfirm(
                     accountId = selectedAccountId,
                     adjustmentValue = adjustmentValue,
+                    categoryId = if (selectedCategoryId > 0) selectedCategoryId else null,
                     onSuccess = {
                         showToast(context, R.string.account_adjust_balance_success)
                         showAdjustBalanceConfirmDialog = false
                         selectedAccountId = -1
+                        selectedCategoryId = -1
                     },
                     onError = {
                         showToast(context, it)
                         showAdjustBalanceConfirmDialog = false
                         selectedAccountId = -1
+                        selectedCategoryId = -1
                     }
                 )
             },
