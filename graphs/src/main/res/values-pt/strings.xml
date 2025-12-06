@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================ -->
+    <!-- GRAPHS SCREEN - Tab Titles -->
+    <!-- ============================================ -->
+    <string name="graphs_tab_pie_chart">Mensal</string>
+    <string name="graphs_tab_bar_chart">Anual</string>
+    <string name="graphs_tab_net_worth">Patrimônio</string>
+
+    <!-- ============================================ -->
+    <!-- GRAPHS SCREEN - Pie Chart -->
+    <!-- ============================================ -->
+    <string name="graphs_pie_income">Receitas</string>
+    <string name="graphs_pie_expenses">Despesas</string>
+
+    <!-- ============================================ -->
+    <!-- GRAPHS SCREEN - Bar Chart -->
+    <!-- ============================================ -->
+    <string name="graphs_bar_last_12_months">Últimos 12 Meses</string>
+    <string name="graphs_bar_legend_income">Receitas</string>
+    <string name="graphs_bar_legend_expenses">Despesas</string>
+    <string name="graphs_bar_total_income">Total Receitas</string>
+    <string name="graphs_bar_total_expenses">Total Despesas</string>
+    <string name="graphs_no_data">Sem dados para exibir</string>
+
+    <!-- ============================================ -->
+    <!-- GRAPHS SCREEN - Line Chart (Net Worth) -->
+    <!-- ============================================ -->
+    <string name="graphs_line_chart_title">Patrimônio Líquido - Últimos 2 Anos</string>
+    <string name="graphs_line_chart_current_net_worth">Patrimônio Atual</string>
+    <string name="graphs_line_chart_variation">Variação</string>
+    <string name="graphs_line_chart_percentage">Percentual</string>
+
+    <!-- ============================================ -->
+    <!-- GRAPHS SCREEN - Month Selector -->
+    <!-- ============================================ -->
+    <string name="graphs_month_selector_previous">Mês anterior</string>
+    <string name="graphs_month_selector_next">Próximo mês</string>
+</resources>

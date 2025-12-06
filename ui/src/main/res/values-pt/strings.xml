@@ -7,68 +7,68 @@
     <!-- ============================================ -->
     <!-- NAVIGATION - Bottom Nav -->
     <!-- ============================================ -->
-    <string name="ui_nav_bottom_home">Home</string>
-    <string name="ui_nav_bottom_transactions">Transactions</string>
-    <string name="ui_nav_bottom_settings">Settings</string>
+    <string name="ui_nav_bottom_home">Início</string>
+    <string name="ui_nav_bottom_transactions">Transações</string>
+    <string name="ui_nav_bottom_settings">Opções</string>
 
     <!-- ============================================ -->
     <!-- LABELS - Common Entities -->
     <!-- ============================================ -->
-    <string name="ui_label_account">Account</string>
-    <string name="ui_label_category">Category</string>
-    <string name="ui_label_income">Income</string>
-    <string name="ui_label_outcome">Expense</string>
-    <string name="ui_label_color">Color</string>
-    <string name="ui_label_value">Value</string>
-    <string name="ui_label_name">Name</string>
+    <string name="ui_label_account">Conta</string>
+    <string name="ui_label_category">Categoria</string>
+    <string name="ui_label_income">Receita</string>
+    <string name="ui_label_outcome">Despesa</string>
+    <string name="ui_label_color">Cor</string>
+    <string name="ui_label_value">Valor</string>
+    <string name="ui_label_name">Nome</string>
 
     <!-- ============================================ -->
     <!-- ACTIONS - Common Buttons -->
     <!-- ============================================ -->
-    <string name="ui_action_cancel">Cancel</string>
+    <string name="ui_action_cancel">Cancelar</string>
     <string name="ui_action_ok">OK</string>
-    <string name="ui_action_delete">Delete</string>
+    <string name="ui_action_delete">Apagar</string>
 
     <!-- ============================================ -->
     <!-- SEARCH - Search Components -->
     <!-- ============================================ -->
-    <string name="ui_search_placeholder">Search by description</string>
-    <string name="ui_search_label">Search</string>
+    <string name="ui_search_placeholder">Procure pela descrição</string>
+    <string name="ui_search_label">Buscar</string>
 
     <!-- ============================================ -->
     <!-- PLACEHOLDERS - Empty/Missing Values -->
     <!-- ============================================ -->
-    <string name="ui_placeholder_no_name">(no name)</string>
+    <string name="ui_placeholder_no_name">(sem nome)</string>
 
     <!-- ============================================ -->
     <!-- FORM - Field Types -->
     <!-- ============================================ -->
-    <string name="ui_form_type_debit">Debit</string>
-    <string name="ui_form_type_credit">Credit</string>
+    <string name="ui_form_type_debit">Débito</string>
+    <string name="ui_form_type_credit">Crédito</string>
 
     <!-- ============================================ -->
     <!-- DIALOG - Transaction Delete -->
     <!-- ============================================ -->
-    <string name="ui_dialog_transaction_delete_title">Delete transaction?</string>
-    <string name="ui_dialog_transaction_delete_desc">This will delete this transaction from your history.</string>
+    <string name="ui_dialog_transaction_delete_title">Excluir transação?</string>
+    <string name="ui_dialog_transaction_delete_desc">Isso vai apagar essa transação do seu histórico.</string>
 
     <!-- ============================================ -->
     <!-- EMPTY STATE - Transactions -->
     <!-- ============================================ -->
-    <string name="ui_empty_transactions_title">No transactions</string>
-    <string name="ui_empty_transactions_desc">Add a transaction and it will appear here.</string>
+    <string name="ui_empty_transactions_title">Não há transações</string>
+    <string name="ui_empty_transactions_desc">Adicione uma transação e ela irá aparecer aqui.</string>
 
     <!-- ============================================ -->
     <!-- CONTENT DESCRIPTIONS - Accessibility -->
     <!-- ============================================ -->
-    <string name="ui_cd_arrow_back">back</string>
-    <string name="ui_cd_close">close</string>
-    <string name="ui_cd_delete">delete</string>
+    <string name="ui_cd_arrow_back">voltar</string>
+    <string name="ui_cd_close">fechar</string>
+    <string name="ui_cd_delete">apagar</string>
     <string name="ui_cd_fab">fab</string>
     <string name="ui_cd_dialog">dialog</string>
 
     <!-- ============================================ -->
     <!-- BOTTOM SHEET - Bottom Sheet Components -->
     <!-- ============================================ -->
-    <string name="ui_bottomsheet_select_account">Select account</string>
+    <string name="ui_bottomsheet_select_account">Selecionar conta</string>
 </resources>

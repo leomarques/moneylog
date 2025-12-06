@@ -3,215 +3,215 @@
     <string name="app_name">Lemony</string>
 
     <!-- Common / General -->
-    <string name="common_transactions">Transações</string>
-    <string name="common_accounts">Contas</string>
-    <string name="common_account">Conta</string>
-    <string name="common_categories">Categorias</string>
-    <string name="common_category">Categoria</string>
-    <string name="common_credit_card">Cartão de crédito</string>
-    <string name="common_credit_cards">Cartões de crédito</string>
-    <string name="common_cards">Cartões</string>
-    <string name="common_invoice">Fatura</string>
-    <string name="common_incomes">Receitas</string>
-    <string name="common_income">Receita</string>
-    <string name="common_outcomes">Despesas</string>
-    <string name="common_outcome">Despesa</string>
-    <string name="common_color">Cor</string>
-    <string name="common_value">Valor</string>
-    <string name="common_name">Nome</string>
-    <string name="common_date">Data</string>
-    <string name="common_description">Descrição (opcional)</string>
+    <string name="common_transactions">Transactions</string>
+    <string name="common_accounts">Accounts</string>
+    <string name="common_account">Account</string>
+    <string name="common_categories">Categories</string>
+    <string name="common_category">Category</string>
+    <string name="common_credit_card">Credit card</string>
+    <string name="common_credit_cards">Credit cards</string>
+    <string name="common_cards">Cards</string>
+    <string name="common_invoice">Invoice</string>
+    <string name="common_incomes">Incomes</string>
+    <string name="common_income">Income</string>
+    <string name="common_outcomes">Expenses</string>
+    <string name="common_outcome">Expense</string>
+    <string name="common_color">Color</string>
+    <string name="common_value">Value</string>
+    <string name="common_name">Name</string>
+    <string name="common_date">Date</string>
+    <string name="common_description">Description (optional)</string>
     <string name="common_total">Total: %1$s</string>
 
     <!-- Common Actions -->
-    <string name="action_cancel">Cancelar</string>
+    <string name="action_cancel">Cancel</string>
     <string name="action_ok">OK</string>
-    <string name="action_delete">Apagar</string>
-    <string name="action_unarchive">Desarquivar</string>
-    <string name="action_add">Adicionar</string>
-    <string name="action_pay">Pagar</string>
-    <string name="action_back">Voltar</string>
-    <string name="action_clear_selection">Limpar Seleção</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_unarchive">Unarchive</string>
+    <string name="action_add">Add</string>
+    <string name="action_pay">Pay</string>
+    <string name="action_back">Back</string>
+    <string name="action_clear_selection">Clear Selection</string>
 
     <!-- Common States -->
-    <string name="state_enabled">Habilitado</string>
-    <string name="state_disabled">Desabilitado</string>
-    <string name="state_selected">Selecionado</string>
-    <string name="state_no_description">(sem descrição)</string>
-    <string name="state_no_name">(sem nome)</string>
-    <string name="state_no_category">(sem categoria)</string>
-    <string name="state_no_card_selected">Nenhum cartão selecionado</string>
+    <string name="state_enabled">Enabled</string>
+    <string name="state_disabled">Disabled</string>
+    <string name="state_selected">Selected</string>
+    <string name="state_no_description">(no description)</string>
+    <string name="state_no_name">(no name)</string>
+    <string name="state_no_category">(no category)</string>
+    <string name="state_no_card_selected">No card selected</string>
 
     <!-- Navigation -->
-    <string name="nav_home">Início</string>
-    <string name="nav_settings">Configurações</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_settings">Settings</string>
 
     <!-- Home Screen -->
-    <string name="home_balance_total">Saldo em contas</string>
-    <string name="home_search_placeholder">Procure pela descrição</string>
-    <string name="home_account_balance">"Saldo atual: "</string>
+    <string name="home_balance_total">Account balance</string>
+    <string name="home_search_placeholder">Search by description</string>
+    <string name="home_account_balance">"Current balance: "</string>
 
     <!-- Transaction Screen -->
-    <string name="transaction_topbar_add">Nova Transação</string>
-    <string name="transaction_topbar_edit">Editar Transação</string>
-    <string name="transaction_type_debt">Débito</string>
-    <string name="transaction_type_credit">Crédito</string>
+    <string name="transaction_topbar_add">New Transaction</string>
+    <string name="transaction_topbar_edit">Edit Transaction</string>
+    <string name="transaction_type_debt">Debit</string>
+    <string name="transaction_type_credit">Credit</string>
 
     <!-- Account Screen -->
-    <string name="account_topbar_add">Nova Conta</string>
-    <string name="account_topbar_edit">Editar Conta</string>
-    <string name="account_topbar_archived">Contas Arquivadas</string>
-    <string name="account_adjust_balance">Ajustar Saldo</string>
-    <string name="account_adjust_balance_title">Ajustar Saldo da Conta</string>
-    <string name="account_adjust_balance_description">Digite o novo saldo da conta</string>
-    <string name="account_adjust_balance_new">Novo Saldo</string>
-    <string name="account_adjust_balance_success">Saldo ajustado com sucesso</string>
-    <string name="account_adjust_balance_transaction_desc">Ajuste de saldo</string>
-    <string name="account_select_for_invoice">Selecione a conta para pagar a fatura</string>
+    <string name="account_topbar_add">New Account</string>
+    <string name="account_topbar_edit">Edit Account</string>
+    <string name="account_topbar_archived">Archived Accounts</string>
+    <string name="account_adjust_balance">Adjust Balance</string>
+    <string name="account_adjust_balance_title">Adjust Account Balance</string>
+    <string name="account_adjust_balance_description">Enter the new account balance</string>
+    <string name="account_adjust_balance_new">New Balance</string>
+    <string name="account_adjust_balance_success">Balance adjusted successfully</string>
+    <string name="account_adjust_balance_transaction_desc">Balance adjustment</string>
+    <string name="account_select_for_invoice">Select the account to pay the invoice</string>
 
     <!-- Category Screen -->
-    <string name="category_topbar_add">Nova Categoria</string>
-    <string name="category_topbar_edit">Editar Categoria</string>
-    <string name="category_label">Categoria: %1$s</string>
-    <string name="category_select">Selecionar Categoria</string>
-    <string name="category_default">Categoria Padrão</string>
-    <string name="category_default_description">Selecione a categoria que será atribuída automaticamente às transações criadas a partir de notificações do Nubank quando nenhuma palavra-chave corresponder.</string>
-    <string name="state_no_category_selected">Nenhuma categoria selecionada</string>
+    <string name="category_topbar_add">New Category</string>
+    <string name="category_topbar_edit">Edit Category</string>
+    <string name="category_label">Category: %1$s</string>
+    <string name="category_select">Select Category</string>
+    <string name="category_default">Default Category</string>
+    <string name="category_default_description">Select the category that will be automatically assigned to transactions created from Nubank notifications when no keywords match.</string>
+    <string name="state_no_category_selected">No category selected</string>
 
     <!-- Credit Card Screen -->
-    <string name="creditcard_topbar_add">Novo Cartão</string>
-    <string name="creditcard_topbar_edit">Editar Cartão</string>
-    <string name="creditcard_closing_day">Dia de fechamento da fatura</string>
-    <string name="creditcard_due_day">Dia de vencimento da fatura</string>
-    <string name="creditcard_limit">Limite</string>
-    <string name="creditcard_label">Cartão de Crédito</string>
-    <string name="creditcard_select">Selecionar Cartão de Crédito</string>
-    <string name="creditcard_default">Cartão de Crédito Padrão</string>
-    <string name="creditcard_default_description">Selecione o cartão de crédito que será atribuído automaticamente às transações criadas a partir de notificações do Nubank.</string>
+    <string name="creditcard_topbar_add">New Card</string>
+    <string name="creditcard_topbar_edit">Edit Card</string>
+    <string name="creditcard_closing_day">Invoice closing day</string>
+    <string name="creditcard_due_day">Invoice due day</string>
+    <string name="creditcard_limit">Limit</string>
+    <string name="creditcard_label">Credit Card</string>
+    <string name="creditcard_select">Select Credit Card</string>
+    <string name="creditcard_default">Default Credit Card</string>
+    <string name="creditcard_default_description">Select the credit card that will be automatically assigned to transactions created from Nubank notifications.</string>
 
     <!-- Invoice Screen -->
-    <string name="invoice_paid">Fatura Paga</string>
-    <string name="invoice_total">Total da fatura</string>
-    <string name="invoice_pay_dialog_title">Confirmar pagamento</string>
-    <string name="invoice_pay_dialog_description">Você irá pagar a fatura no valor de %1$s com a conta %2$s</string>
+    <string name="invoice_paid">Invoice Paid</string>
+    <string name="invoice_total">Invoice total</string>
+    <string name="invoice_pay_dialog_title">Confirm payment</string>
+    <string name="invoice_pay_dialog_description">You will pay the invoice of %1$s with account %2$s</string>
 
     <!-- Transfer Screen -->
-    <string name="transfer_topbar_add">Fazer Transferência</string>
-    <string name="transfer_from">Transferir de:</string>
-    <string name="transfer_to">Para:</string>
-    <string name="transfer_origin">Conta origem</string>
-    <string name="transfer_destination">Conta destino</string>
+    <string name="transfer_topbar_add">Make Transfer</string>
+    <string name="transfer_from">Transfer from:</string>
+    <string name="transfer_to">To:</string>
+    <string name="transfer_origin">Origin account</string>
+    <string name="transfer_destination">Destination account</string>
 
     <!-- Validation Errors -->
-    <string name="validation_invalid_value">Valor inválido</string>
-    <string name="validation_invalid_data">Dados inválidos</string>
-    <string name="validation_no_name">Campo Nome é obrigatório</string>
-    <string name="validation_no_account">Campo Conta é obrigatório</string>
-    <string name="validation_no_category">Campo Categoria é obrigatório</string>
-    <string name="validation_no_creditcard">Campo Cartão de crédito é obrigatório</string>
-    <string name="validation_no_closing_day">Campo Dia de fechamento é obrigatório</string>">
-    <string name="validation_no_due_day">Campo Dia de vencimento é obrigatório</string>">
-    <string name="validation_no_limit">Campo Limite é obrigatório</string>
-    <string name="validation_transfer_no_origin">Preencha a conta de origem</string>
-    <string name="validation_transfer_no_destination">Preencha a conta de destino</string>
+    <string name="validation_invalid_value">Invalid value</string>
+    <string name="validation_invalid_data">Invalid data</string>
+    <string name="validation_no_name">Name field is required</string>
+    <string name="validation_no_account">Account field is required</string>
+    <string name="validation_no_category">Category field is required</string>
+    <string name="validation_no_creditcard">Credit card field is required</string>
+    <string name="validation_no_closing_day">Closing day field is required</string>">
+    <string name="validation_no_due_day">Due day field is required</string>">
+    <string name="validation_no_limit">Limit field is required</string>
+    <string name="validation_transfer_no_origin">Fill in the origin account</string>
+    <string name="validation_transfer_no_destination">Fill in the destination account</string>
 
     <!-- Dialog Titles -->
-    <string name="dialog_title_transaction_delete">Excluir transação?</string>
-    <string name="dialog_title_account_archive">Arquivar conta?</string>
-    <string name="dialog_title_account_delete">Excluir conta?</string>
-    <string name="dialog_title_account_adjust_balance">Ajustar saldo?</string>
-    <string name="dialog_title_category_delete">Excluir categoria?</string>
-    <string name="dialog_title_creditcard_delete">Excluir cartão?</string>
-    <string name="dialog_title_keyword_delete">Excluir Palavra-chave</string>
+    <string name="dialog_title_transaction_delete">Delete transaction?</string>
+    <string name="dialog_title_account_archive">Archive account?</string>
+    <string name="dialog_title_account_delete">Delete account?</string>
+    <string name="dialog_title_account_adjust_balance">Adjust balance?</string>
+    <string name="dialog_title_category_delete">Delete category?</string>
+    <string name="dialog_title_creditcard_delete">Delete card?</string>
+    <string name="dialog_title_keyword_delete">Delete Keyword</string>
 
     <!-- Dialog Descriptions -->
-    <string name="dialog_desc_transaction_delete">Isso vai apagar essa transação do seu histórico.</string>
-    <string name="dialog_desc_account_delete">Isso vai apagar essa conta e todas as transações associadas.</string>
-    <string name="dialog_desc_account_archive">Isso vai arquivar essa conta. Nenhuma transação será apagada.</string>
-    <string name="dialog_desc_account_adjust_balance">Uma transação de %1$s será criada para ajustar o saldo. Tem certeza?</string>
-    <string name="dialog_desc_category_delete">Isso vai apagar essa categoria. Nenhuma transação será apagada.</string>
-    <string name="dialog_desc_creditcard_delete">Isso vai apagar esse cartão. Nenhuma transação será apagada.</string>
-    <string name="dialog_desc_keyword_delete">Tem certeza que deseja excluir a palavra-chave \"%1$s\"?</string>
+    <string name="dialog_desc_transaction_delete">This will delete this transaction from your history.</string>
+    <string name="dialog_desc_account_delete">This will delete this account and all associated transactions.</string>
+    <string name="dialog_desc_account_archive">This will archive this account. No transactions will be deleted.</string>
+    <string name="dialog_desc_account_adjust_balance">A transaction of %1$s will be created to adjust the balance. Are you sure?</string>
+    <string name="dialog_desc_category_delete">This will delete this category. No transactions will be deleted.</string>
+    <string name="dialog_desc_creditcard_delete">This will delete this card. No transactions will be deleted.</string>
+    <string name="dialog_desc_keyword_delete">Are you sure you want to delete the keyword \"%1$s\"?</string>
 
     <!-- Empty States -->
-    <string name="empty_transactions_title">Não há transações</string>
-    <string name="empty_transactions_description">Adicione uma transação e ela irá aparecer aqui.</string>
-    <string name="empty_accounts_title">Não há contas</string>
-    <string name="empty_accounts_description">Adicione uma conta e ela irá aparecer aqui.</string>
-    <string name="empty_accounts_archived_title">Não há contas arquivadas</string>
-    <string name="empty_accounts_archived_description">Ao arquivar uma conta ela irá aparecer aqui.</string>
-    <string name="empty_categories_title">Não há categorias</string>
-    <string name="empty_categories_description">Adicione uma categoria e ela irá aparecer aqui.</string>
-    <string name="empty_categories_not_found">Nenhuma categoria encontrada</string>
-    <string name="empty_creditcards_title">Não há cartões de crédito</string>
-    <string name="empty_creditcards_description">Adicione um cartão e ele irá aparecer aqui.</string>
-    <string name="empty_creditcards_home">Não há cartões cadastrados. Adicione um novo!</string>
-    <string name="empty_creditcards_unavailable">Nenhum cartão de crédito disponível. Por favor, crie um cartão de crédito primeiro.</string>
-    <string name="empty_invoice_description">Adicione uma transação à fatura e ela irá aparecer aqui.</string>
-    <string name="empty_keywords_title">Nenhuma palavra-chave ainda</string>
-    <string name="empty_keywords_description">Toque em + para adicionar palavras-chave</string>
+    <string name="empty_transactions_title">No transactions</string>
+    <string name="empty_transactions_description">Add a transaction and it will appear here.</string>
+    <string name="empty_accounts_title">No accounts</string>
+    <string name="empty_accounts_description">Add an account and it will appear here.</string>
+    <string name="empty_accounts_archived_title">No archived accounts</string>
+    <string name="empty_accounts_archived_description">When you archive an account it will appear here.</string>
+    <string name="empty_categories_title">No categories</string>
+    <string name="empty_categories_description">Add a category and it will appear here.</string>
+    <string name="empty_categories_not_found">No categories found</string>
+    <string name="empty_creditcards_title">No credit cards</string>
+    <string name="empty_creditcards_description">Add a card and it will appear here.</string>
+    <string name="empty_creditcards_home">No cards registered. Add a new one!</string>
+    <string name="empty_creditcards_unavailable">No credit cards available. Please create a credit card first.</string>
+    <string name="empty_invoice_description">Add a transaction to the invoice and it will appear here.</string>
+    <string name="empty_keywords_title">No keywords yet</string>
+    <string name="empty_keywords_description">Tap + to add keywords</string>
 
     <!-- Error Messages -->
-    <string name="error_invoice_pay">Erro ao pagar fatura</string>
+    <string name="error_invoice_pay">Error paying invoice</string>
 
     <!-- Success Messages -->
-    <string name="success_invoice_pay">Fatura paga com sucesso</string>
+    <string name="success_invoice_pay">Invoice paid successfully</string>
 
     <!-- Accessibility Descriptions -->
-    <string name="accessibility_arrow_back">voltar</string>
-    <string name="accessibility_archive">arquivar</string>
-    <string name="accessibility_delete">apagar</string>
-    <string name="accessibility_transfer">transferir</string>
+    <string name="accessibility_arrow_back">back</string>
+    <string name="accessibility_archive">archive</string>
+    <string name="accessibility_delete">delete</string>
+    <string name="accessibility_transfer">transfer</string>
     <string name="accessibility_fab">fab</string>
     <string name="accessibility_dialog">dialog</string>
-    <string name="accessibility_more_options">mais opções</string>
-    <string name="accessibility_date">data</string>
-    <string name="accessibility_close">fechar</string>
-    <string name="accessibility_lock">esconder</string>
-    <string name="accessibility_preview_icon">Ícone de pré-visualização</string>
+    <string name="accessibility_more_options">more options</string>
+    <string name="accessibility_date">date</string>
+    <string name="accessibility_close">close</string>
+    <string name="accessibility_lock">hide</string>
+    <string name="accessibility_preview_icon">Preview icon</string>
 
     <!-- Settings Screen -->
-    <string name="settings_title">Configurações</string>
-    <string name="settings_management">Gerenciamento</string>
-    <string name="settings_features">Recursos</string>
-    <string name="settings_manage_accounts">Gerencie suas contas bancárias</string>
-    <string name="settings_manage_categories">Gerencie suas categorias de gastos</string>
-    <string name="settings_manage_creditcards">Gerencie seus cartões de crédito</string>
-    <string name="settings_view_graphs">Visualize seus gastos</string>
-    <string name="settings_configure_nubank">Configure captura de transações do Nubank</string>
-    <string name="settings_notifications">Notificações</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_management">Management</string>
+    <string name="settings_features">Features</string>
+    <string name="settings_manage_accounts">Manage your bank accounts</string>
+    <string name="settings_manage_categories">Manage your expense categories</string>
+    <string name="settings_manage_creditcards">Manage your credit cards</string>
+    <string name="settings_view_graphs">View your expenses</string>
+    <string name="settings_configure_nubank">Configure Nubank transaction capture</string>
+    <string name="settings_notifications">Notifications</string>
 
     <!-- Keywords Feature -->
-    <string name="keywords_title">Palavras-chave de Categoria</string>
-    <string name="keywords_label">Palavras-chave</string>
-    <string name="keywords_add">Adicionar Palavras-chave</string>
-    <string name="keywords_add_single">Adicionar Palavra-chave</string>
-    <string name="keywords_manage">Gerenciar Palavras-chave</string>
-    <string name="keywords_tip">Dica: Digite várias palavras-chave separadas por vírgulas</string>
-    <string name="keywords_count_single">%1$d palavra-chave</string>
-    <string name="keywords_count_plural">%1$d palavras-chave</string>
-    <string name="keywords_match_info">As palavras-chave são comparadas sem diferenciar maiúsculas de minúsculas e podem aparecer em qualquer lugar na descrição da transação.</string>
-    <string name="keywords_description">Gerencie palavras-chave que preveem automaticamente categorias para transações com base nos nomes dos estabelecimentos.</string>
-    <string name="keywords_select_category">Selecione uma categoria para gerenciar suas palavras-chave</string>
+    <string name="keywords_title">Category Keywords</string>
+    <string name="keywords_label">Keywords</string>
+    <string name="keywords_add">Add Keywords</string>
+    <string name="keywords_add_single">Add Keyword</string>
+    <string name="keywords_manage">Manage Keywords</string>
+    <string name="keywords_tip">Tip: Enter multiple keywords separated by commas</string>
+    <string name="keywords_count_single">%1$d keyword</string>
+    <string name="keywords_count_plural">%1$d keywords</string>
+    <string name="keywords_match_info">Keywords are matched case-insensitively and can appear anywhere in the transaction description.</string>
+    <string name="keywords_description">Manage keywords that automatically predict categories for transactions based on merchant names.</string>
+    <string name="keywords_select_category">Select a category to manage its keywords</string>
 
     <!-- Notifications Feature -->
-    <string name="notifications_title">Configurações de Notificações</string>
-    <string name="notifications_nubank_access">Acesso a Notificações do Nubank</string>
-    <string name="notifications_listener_description">Permitir que o MoneyLog intercepte notificações do Nubank para rastrear automaticamente suas transações.</string>
-    <string name="notifications_listener_grant">Conceder Permissão de Escuta</string>
-    <string name="notifications_listener_steps">Passos:\n1. Encontre \'MoneyLog\' na lista\n2. Ative o botão para habilitar\n3. Retorne para esta tela</string>
-    <string name="notifications_listener_granted">✓ Permissão de escuta concedida!</string>
-    <string name="notifications_listener_manage">Gerenciar Permissões de Escuta</string>
-    <string name="notifications_permission">Permissão de Notificação</string>
-    <string name="notifications_permission_description">Permitir que o MoneyLog exiba notificações. Isso é necessário para o aplicativo exibir notificações sobre transações interceptadas.</string>
-    <string name="notifications_permission_grant">Conceder Permissão de Notificação</string>
-    <string name="notifications_permission_granted">✓ Permissão de notificação concedida!</string>
-    <string name="notifications_settings_manage">Gerenciar Configurações de Notificações</string>
+    <string name="notifications_title">Notification Settings</string>
+    <string name="notifications_nubank_access">Nubank Notification Access</string>
+    <string name="notifications_listener_description">Allow MoneyLog to intercept Nubank notifications to automatically track your transactions.</string>
+    <string name="notifications_listener_grant">Grant Listener Permission</string>
+    <string name="notifications_listener_steps">Steps:\n1. Find \'MoneyLog\' in the list\n2. Toggle the switch to enable\n3. Return to this screen</string>
+    <string name="notifications_listener_granted">✓ Listener permission granted!</string>
+    <string name="notifications_listener_manage">Manage Listener Permissions</string>
+    <string name="notifications_permission">Notification Permission</string>
+    <string name="notifications_permission_description">Allow MoneyLog to display notifications. This is required for the app to display notifications about intercepted transactions.</string>
+    <string name="notifications_permission_grant">Grant Notification Permission</string>
+    <string name="notifications_permission_granted">✓ Notification permission granted!</string>
+    <string name="notifications_settings_manage">Manage Notification Settings</string>
 
     <!-- Graphs Feature -->
-    <string name="graphs_title">Gráficos</string>
-    <string name="graphs_coming_soon">Este recurso estará disponível em breve!</string>
-    <string name="graphs_description">Aqui você poderá visualizar seus gastos e receitas através de gráficos interativos.</string>
-    <string name="graphs_label_creditcards">Cartões de Crédito</string>
-    <string name="graphs_label_expenses">Despesas</string>
+    <string name="graphs_title">Graphs</string>
+    <string name="graphs_coming_soon">This feature will be available soon!</string>
+    <string name="graphs_description">Here you will be able to view your expenses and income through interactive graphs.</string>
+    <string name="graphs_label_creditcards">Credit Cards</string>
+    <string name="graphs_label_expenses">Expenses</string>
 </resources>
