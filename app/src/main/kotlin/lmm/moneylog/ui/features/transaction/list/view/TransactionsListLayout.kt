@@ -98,11 +98,12 @@ private fun TotalValue(model: TransactionsListUIState) {
         modifier =
             Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(vertical = 12.dp, horizontal = 8.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = stringResource(R.string.common_total, model.total.formatForRs()),
+            style = androidx.compose.material3.MaterialTheme.typography.titleMedium,
             color =
                 when {
                     model.total == 0.0 -> White

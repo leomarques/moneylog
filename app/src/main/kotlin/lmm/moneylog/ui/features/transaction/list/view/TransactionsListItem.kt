@@ -41,7 +41,8 @@ fun TransactionsListItem(
                 .padding(
                     vertical = Size.SmallSpaceSize,
                     horizontal = Size.DefaultSpaceSize
-                ).clickable { onItemClick(transaction.id) },
+                )
+                .clickable { onItemClick(transaction.id) },
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -64,7 +65,7 @@ fun TransactionsListItem(
                                 stringResource(R.string.state_no_description)
                             },
                         overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.bodyLarge,
+                        style = MaterialTheme.typography.titleMedium,
                         maxLines = 1,
                         color =
                             if (description.isEmpty()) {
@@ -81,15 +82,15 @@ fun TransactionsListItem(
 
                     val sb = StringBuilder(categoryString)
                     if (creditCard.isNotEmpty()) {
-                        sb.append(" | $creditCard")
+                        sb.append(" • $creditCard")
                     }
                     if (account.isNotEmpty()) {
-                        sb.append(" | $account")
+                        sb.append(" • $account")
                     }
 
                     Text(
                         text = sb.toString(),
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.bodySmall,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -105,7 +106,7 @@ fun TransactionsListItem(
                 text = value,
                 color = if (isIncome) income else outcome,
                 textAlign = TextAlign.End,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.titleSmall,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
             )

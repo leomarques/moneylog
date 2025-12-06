@@ -35,17 +35,20 @@ fun TransactionsListContent(
         grouped.forEach { (date, transactions) ->
             stickyHeader {
                 Surface(
-                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f),
+                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
                         text = date,
                         modifier =
                             Modifier
-                                .padding(vertical = Size.SmallSpaceSize)
-                                .padding(start = Size.DefaultSpaceSize),
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Bold
+                                .padding(
+                                    vertical = Size.SmallSpaceSize2,
+                                    horizontal = Size.DefaultSpaceSize
+                                ),
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
