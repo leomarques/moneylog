@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ============================================ -->
+    <!-- GRAPHS SCREEN - Tab Titles -->
+    <!-- ============================================ -->
+    <string name="graphs_tab_pie_chart">Monthly</string>
+    <string name="graphs_tab_bar_chart">Annual</string>
+    <string name="graphs_tab_net_worth">Net Worth</string>
+
+    <!-- ============================================ -->
+    <!-- GRAPHS SCREEN - Pie Chart -->
+    <!-- ============================================ -->
+    <string name="graphs_pie_income">Income</string>
+    <string name="graphs_pie_expenses">Expenses</string>
+
+    <!-- ============================================ -->
+    <!-- GRAPHS SCREEN - Bar Chart -->
+    <!-- ============================================ -->
+    <string name="graphs_bar_last_12_months">Last 12 Months</string>
+    <string name="graphs_bar_legend_income">Income</string>
+    <string name="graphs_bar_legend_expenses">Expenses</string>
+    <string name="graphs_bar_total_income">Total Income</string>
+    <string name="graphs_bar_total_expenses">Total Expenses</string>
+    <string name="graphs_no_data">No data to display</string>
+
+    <!-- ============================================ -->
+    <!-- GRAPHS SCREEN - Line Chart (Net Worth) -->
+    <!-- ============================================ -->
+    <string name="graphs_line_chart_title">Net Worth - Last 2 Years</string>
+    <string name="graphs_line_chart_current_net_worth">Current Net Worth</string>
+    <string name="graphs_line_chart_variation">Variation</string>
+    <string name="graphs_line_chart_percentage">Percentage</string>
+
+    <!-- ============================================ -->
+    <!-- GRAPHS SCREEN - Month Selector -->
+    <!-- ============================================ -->
+    <string name="graphs_month_selector_previous">Previous month</string>
+    <string name="graphs_month_selector_next">Next month</string>
+</resources>

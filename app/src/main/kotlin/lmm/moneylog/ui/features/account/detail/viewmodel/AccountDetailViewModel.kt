@@ -1,6 +1,5 @@
 package lmm.moneylog.ui.features.account.detail.viewmodel
 
-import android.util.Log
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -16,10 +15,6 @@ import lmm.moneylog.data.account.repositories.interfaces.AddAccountRepository
 import lmm.moneylog.data.account.repositories.interfaces.ArchiveAccountRepository
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.account.repositories.interfaces.UpdateAccountRepository
-import lmm.moneylog.data.balance.interactors.GetBalanceByAccountInteractor
-import lmm.moneylog.data.time.repositories.DomainTimeRepository
-import lmm.moneylog.data.transaction.model.Transaction
-import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.ui.extensions.getIdParam
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.account.detail.model.AccountDetailUIState
@@ -30,16 +25,9 @@ class AccountDetailViewModel(
     private val addAccountRepository: AddAccountRepository,
     private val updateAccountRepository: UpdateAccountRepository,
     private val archiveAccountRepository: ArchiveAccountRepository,
-    private val getBalanceByAccountInteractor: GetBalanceByAccountInteractor,
-    private val addTransactionRepository: AddTransactionRepository,
-    private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(AccountDetailUIState())
     val uiState: StateFlow<AccountDetailUIState> = _uiState.asStateFlow()
-
-    companion object {
-        private const val TAG = "AccountDetailViewModel"
-    }
 
     init {
         viewModelScope.launch {

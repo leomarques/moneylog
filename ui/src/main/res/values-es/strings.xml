@@ -1,0 +1,74 @@
+<resources>
+    <!-- ============================================ -->
+    <!-- APP - General -->
+    <!-- ============================================ -->
+    <string name="ui_app_name">Lemony</string>
+
+    <!-- ============================================ -->
+    <!-- NAVIGATION - Bottom Nav -->
+    <!-- ============================================ -->
+    <string name="ui_nav_bottom_home">Inicio</string>
+    <string name="ui_nav_bottom_transactions">Transacciones</string>
+    <string name="ui_nav_bottom_settings">Opciones</string>
+
+    <!-- ============================================ -->
+    <!-- LABELS - Common Entities -->
+    <!-- ============================================ -->
+    <string name="ui_label_account">Cuenta</string>
+    <string name="ui_label_category">Categoría</string>
+    <string name="ui_label_income">Ingreso</string>
+    <string name="ui_label_outcome">Gasto</string>
+    <string name="ui_label_color">Color</string>
+    <string name="ui_label_value">Valor</string>
+    <string name="ui_label_name">Nombre</string>
+
+    <!-- ============================================ -->
+    <!-- ACTIONS - Common Buttons -->
+    <!-- ============================================ -->
+    <string name="ui_action_cancel">Cancelar</string>
+    <string name="ui_action_ok">OK</string>
+    <string name="ui_action_delete">Eliminar</string>
+
+    <!-- ============================================ -->
+    <!-- SEARCH - Search Components -->
+    <!-- ============================================ -->
+    <string name="ui_search_placeholder">Buscar por descripción</string>
+    <string name="ui_search_label">Buscar</string>
+
+    <!-- ============================================ -->
+    <!-- PLACEHOLDERS - Empty/Missing Values -->
+    <!-- ============================================ -->
+    <string name="ui_placeholder_no_name">(sin nombre)</string>
+
+    <!-- ============================================ -->
+    <!-- FORM - Field Types -->
+    <!-- ============================================ -->
+    <string name="ui_form_type_debit">Débito</string>
+    <string name="ui_form_type_credit">Crédito</string>
+
+    <!-- ============================================ -->
+    <!-- DIALOG - Transaction Delete -->
+    <!-- ============================================ -->
+    <string name="ui_dialog_transaction_delete_title">¿Eliminar transacción?</string>
+    <string name="ui_dialog_transaction_delete_desc">Esto eliminará esta transacción de su historial.</string>
+
+    <!-- ============================================ -->
+    <!-- EMPTY STATE - Transactions -->
+    <!-- ============================================ -->
+    <string name="ui_empty_transactions_title">No hay transacciones</string>
+    <string name="ui_empty_transactions_desc">Agregue una transacción y aparecerá aquí.</string>
+
+    <!-- ============================================ -->
+    <!-- CONTENT DESCRIPTIONS - Accessibility -->
+    <!-- ============================================ -->
+    <string name="ui_cd_arrow_back">volver</string>
+    <string name="ui_cd_close">cerrar</string>
+    <string name="ui_cd_delete">eliminar</string>
+    <string name="ui_cd_fab">fab</string>
+    <string name="ui_cd_dialog">diálogo</string>
+
+    <!-- ============================================ -->
+    <!-- BOTTOM SHEET - Bottom Sheet Components -->
+    <!-- ============================================ -->
+    <string name="ui_bottomsheet_select_account">Seleccionar cuenta</string>
+</resources>

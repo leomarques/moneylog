@@ -1,0 +1,28 @@
+<resources>
+    <!-- ============================================ -->
+    <!-- HOME SCREEN - General Labels -->
+    <!-- ============================================ -->
+    <string name="income">Income</string>
+    <string name="expenses">Expenses</string>
+    <string name="unlock_values">Unlock values</string>
+    <string name="lock_values">Lock values</string>
+
+    <!-- ============================================ -->
+    <!-- HOME SCREEN - Total Balance Card -->
+    <!-- ============================================ -->
+    <string name="home_balance_card_title">Total Balance</string>
+    <string name="home_balance_card_cd_wallet">Wallet</string>
+
+    <!-- ============================================ -->
+    <!-- HOME SCREEN - Credit Cards Card -->
+    <!-- ============================================ -->
+    <string name="home_credit_cards_title">Credit Cards</string>
+    <string name="home_credit_cards_cd">Credit Cards</string>
+
+    <!-- ============================================ -->
+    <!-- HOME SCREEN - Recent Expenses Card -->
+    <!-- ============================================ -->
+    <string name="home_expenses_card_title">Monthly Expenses</string>
+    <string name="home_expenses_card_empty">No expenses this month</string>
+    <string name="home_expenses_card_cd">Expenses</string>
+</resources>
