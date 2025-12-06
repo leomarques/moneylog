@@ -17,7 +17,7 @@ fun DeleteTransactionConfirmDialog(
         onConfirm = onConfirm,
         onDismiss = onDismiss,
         title = stringResource(R.string.dialog_title_transaction_delete),
-        description = stringResource(R.string.dialog_description_transaction_delete),
+        description = stringResource(R.string.dialog_desc_transaction_delete),
         icon = Icons.Default.Delete
     )
 }

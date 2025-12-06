@@ -19,7 +19,7 @@ fun AccountIcon(
     Icon(
         modifier = modifier,
         imageVector = ImageVector.vectorResource(R.drawable.outline_account_balance_24),
-        contentDescription = stringResource(R.string.account),
+        contentDescription = stringResource(R.string.ui_label_account),
         tint = tint ?: LocalContentColor.current
     )
 }

@@ -33,7 +33,7 @@ fun CreditCardsListContent(
         EmptyState(
             modifier = modifier,
             title = stringResource(R.string.empty_creditcards_title),
-            description = stringResource(R.string.empty_creditcards_desc)
+            description = stringResource(R.string.empty_creditcards_description)
         )
     }
 }

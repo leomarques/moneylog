@@ -1,6 +1,5 @@
 package lmm.moneylog.home.viewmodels
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,5 +43,4 @@ class CreditCardsViewModel(
             }
         }
     }
-
 }

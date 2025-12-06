@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -163,7 +164,7 @@ fun LineChart(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "Sem dados para exibir",
+                text = stringResource(lmm.moneylog.graphs.R.string.graphs_no_data),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -181,7 +182,7 @@ fun LineChart(
     ) {
         // Chart title
         Text(
-            text = "Patrimônio Líquido - Últimos 2 Anos",
+            text = stringResource(lmm.moneylog.graphs.R.string.graphs_line_chart_title),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
@@ -255,7 +256,7 @@ fun LineChart(
             verticalArrangement = Arrangement.spacedBy(ThemeSize.SmallSpaceSize)
         ) {
             Text(
-                text = "Patrimônio Atual",
+                text = stringResource(lmm.moneylog.graphs.R.string.graphs_line_chart_current_net_worth),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -272,7 +273,7 @@ fun LineChart(
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
-                        text = "Variação",
+                        text = stringResource(lmm.moneylog.graphs.R.string.graphs_line_chart_variation),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -292,7 +293,7 @@ fun LineChart(
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
-                        text = "Percentual",
+                        text = stringResource(lmm.moneylog.graphs.R.string.graphs_line_chart_percentage),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

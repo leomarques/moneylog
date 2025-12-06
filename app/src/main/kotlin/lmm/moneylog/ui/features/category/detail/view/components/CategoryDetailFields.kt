@@ -30,7 +30,7 @@ fun CategoryDetailFields(
         StateTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             value = name,
-            title = stringResource(R.string.name),
+            title = stringResource(R.string.common_name),
             keyboardType = KeyboardType.Text,
             getFocus = !isEdit,
             onValueChange = onNameChange,

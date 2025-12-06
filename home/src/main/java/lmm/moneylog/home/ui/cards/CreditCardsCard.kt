@@ -16,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CreditCard
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -99,8 +99,6 @@ object CreditCardsCardDefaults {
     val IconInnerSize = 18.dp
     const val ICON_ALPHA = 0.9f
     val ColorIndicatorSize = 10.dp
-    val CardItemIconSize = 16.dp
-    const val LABEL_ALPHA = 0.7f
     val AmountLetterSpacing = (-0.2).sp
 }
 
@@ -112,7 +110,7 @@ private fun CreditCardsHeader() {
     ) {
         CircularIconBox(
             icon = Icons.Default.CreditCard,
-            contentDescription = "Credit Cards",
+            contentDescription = stringResource(lmm.moneylog.home.R.string.home_credit_cards_cd),
             backgroundColor =
                 MaterialTheme.colorScheme.tertiary.copy(
                     alpha = CreditCardsCardDefaults.ICON_ALPHA
@@ -122,7 +120,7 @@ private fun CreditCardsHeader() {
             iconSize = CreditCardsCardDefaults.IconInnerSize
         )
         Text(
-            text = "Credit Cards",
+            text = stringResource(lmm.moneylog.home.R.string.home_credit_cards_title),
             style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontWeight = FontWeight.SemiBold,

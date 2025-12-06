@@ -49,7 +49,7 @@ fun TransactionDetailFields(
         StateTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             value = uiState.value,
-            title = stringResource(R.string.value),
+            title = stringResource(R.string.common_value),
             keyboardType = KeyboardType.Number,
             getFocus = !uiState.isEdit,
             leadingIcon = { ValueIcon(tint = if (uiState.isIncome) income else outcome) },
@@ -72,7 +72,7 @@ fun TransactionDetailFields(
         ClickTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             value = uiState.displayDate,
-            label = stringResource(R.string.detail_date),
+            label = stringResource(R.string.common_date),
             leadingIcon = { DateIcon() },
             onClick = {
                 onClearSuggestions()
@@ -93,7 +93,7 @@ fun TransactionDetailFields(
                                 }
                         ),
                     value = uiState.description,
-                    title = stringResource(R.string.detail_description),
+                    title = stringResource(R.string.common_description),
                     keyboardType = KeyboardType.Text,
                     leadingIcon = { DescriptionIcon() },
                     onValueChange = onDescriptionChange
@@ -111,7 +111,7 @@ fun TransactionDetailFields(
 
         ClickTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            label = stringResource(R.string.category),
+            label = stringResource(R.string.common_category),
             value = uiState.displayCategory,
             enabled = isCategoriesFieldEnabled,
             leadingIcon = { CategoryIcon(tint = uiState.displayCategoryColor) },
@@ -137,7 +137,7 @@ fun TransactionDetailFields(
         if (isDebtSelected) {
             ClickTextField(
                 modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-                label = stringResource(R.string.account),
+                label = stringResource(R.string.common_account),
                 value = uiState.displayAccount,
                 enabled = isAccountsFieldEnabled,
                 leadingIcon = { AccountIcon(tint = uiState.displayAccountColor) },
@@ -149,7 +149,7 @@ fun TransactionDetailFields(
         } else {
             ClickTextField(
                 modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-                label = stringResource(R.string.credit_card),
+                label = stringResource(R.string.common_credit_card),
                 value = uiState.displayCreditCard,
                 enabled = isCreditCardFieldEnabled,
                 leadingIcon = { CreditCardIcon(tint = uiState.displayCreditCardColor) },
@@ -161,7 +161,7 @@ fun TransactionDetailFields(
 
             ClickTextField(
                 modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-                label = stringResource(R.string.invoice),
+                label = stringResource(R.string.common_invoice),
                 value = uiState.displayInvoice,
                 leadingIcon = { InvoiceIcon() },
                 onClick = {

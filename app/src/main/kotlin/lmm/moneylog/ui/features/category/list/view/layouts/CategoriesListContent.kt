@@ -24,8 +24,8 @@ fun CategoriesListContent(
     val tabIndex = remember { mutableIntStateOf(0) }
     val tabs =
         listOf(
-            stringResource(id = R.string.incomes),
-            stringResource(id = R.string.outcomes)
+            stringResource(id = R.string.common_incomes),
+            stringResource(id = R.string.common_outcomes)
         )
 
     Column(

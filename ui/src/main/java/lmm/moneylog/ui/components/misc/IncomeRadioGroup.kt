@@ -20,7 +20,7 @@ fun IncomeRadioGroup(
     Row(modifier) {
         IncomeRadioButton(
             isSelected = isIncome,
-            text = stringResource(R.string.income),
+            text = stringResource(R.string.ui_label_income),
             onClick = {
                 onClick(true)
             }
@@ -28,7 +28,7 @@ fun IncomeRadioGroup(
 
         IncomeRadioButton(
             isSelected = !isIncome,
-            text = stringResource(R.string.outcome),
+            text = stringResource(R.string.ui_label_outcome),
             onClick = {
                 onClick(false)
             }
@@ -69,7 +69,7 @@ private fun IncomeRadioGroupPreview() {
 private fun IncomeRadioButtonPreview() {
     IncomeRadioButton(
         isSelected = true,
-        text = stringResource(R.string.income),
+        text = stringResource(R.string.ui_label_income),
         onClick = {}
     )
 }

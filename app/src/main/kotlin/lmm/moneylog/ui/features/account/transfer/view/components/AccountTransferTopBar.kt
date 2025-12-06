@@ -24,12 +24,12 @@ fun AccountTransferTopBar(
     TopAppBar(
         modifier = modifier,
         windowInsets = WindowInsets(0.dp),
-        title = { Text(text = stringResource(R.string.topbar_transfer_add)) },
+        title = { Text(text = stringResource(R.string.transfer_topbar_add)) },
         navigationIcon = {
             IconButton(onClick = onArrowBackClick) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.arrowback_desc)
+                    contentDescription = stringResource(R.string.accessibility_arrow_back)
                 )
             }
         }

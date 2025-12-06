@@ -24,13 +24,13 @@ fun CategoriesListTopBar(
         modifier = modifier,
         windowInsets = WindowInsets(0.dp),
         title = {
-            Text(text = stringResource(id = R.string.categories))
+            Text(text = stringResource(id = R.string.common_categories))
         },
         navigationIcon = {
             IconButton(onClick = onArrowBackClick) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.arrowback_desc)
+                    contentDescription = stringResource(R.string.accessibility_arrow_back)
                 )
             }
         }

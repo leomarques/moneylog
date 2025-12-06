@@ -12,7 +12,7 @@ import lmm.moneylog.ui.theme.neutralColor
 
 data class TransactionDetailUIState(
     val id: Int = -1,
-    val titleResourceId: Int = R.string.detail_topbar_transaction_add,
+    val titleResourceId: Int = R.string.transaction_topbar_add,
     val isEdit: Boolean = false,
     val showFab: Boolean = true,
     val isIncome: Boolean = true,

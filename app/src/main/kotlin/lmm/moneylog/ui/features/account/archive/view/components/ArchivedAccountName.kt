@@ -18,7 +18,7 @@ fun ArchivedAccountName(
 ) {
     Text(
         modifier = modifier,
-        text = name.ifEmpty { stringResource(R.string.no_description) },
+        text = name.ifEmpty { stringResource(R.string.state_no_description) },
         overflow = TextOverflow.Ellipsis,
         maxLines = 1,
         style = MaterialTheme.typography.bodyLarge,

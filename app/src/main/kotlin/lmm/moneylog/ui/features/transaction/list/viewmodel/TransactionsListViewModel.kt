@@ -34,7 +34,7 @@ class TransactionsListViewModel(
     private val _uiState =
         MutableStateFlow(
             TransactionsListUIState(
-                titleResourceId = R.string.transactions
+                titleResourceId = R.string.common_transactions
             )
         )
     val uiState: StateFlow<TransactionsListUIState> = _uiState.asStateFlow()
@@ -95,7 +95,7 @@ class TransactionsListViewModel(
             .collect { transactions ->
                 updateUiState(
                     transactions = transactions,
-                    titleResourceId = R.string.incomes,
+                    titleResourceId = R.string.common_incomes,
                     lookupMaps = lookupMaps,
                     monthName = monthName
                 )
@@ -111,7 +111,7 @@ class TransactionsListViewModel(
             .collect { transactions ->
                 updateUiState(
                     transactions = transactions,
-                    titleResourceId = R.string.outcomes,
+                    titleResourceId = R.string.common_outcomes,
                     lookupMaps = lookupMaps,
                     monthName = monthName
                 )
@@ -127,7 +127,7 @@ class TransactionsListViewModel(
             .collect { transactions ->
                 updateUiState(
                     transactions = transactions,
-                    titleResourceId = R.string.transactions,
+                    titleResourceId = R.string.common_transactions,
                     lookupMaps = lookupMaps,
                     monthName = monthName
                 )

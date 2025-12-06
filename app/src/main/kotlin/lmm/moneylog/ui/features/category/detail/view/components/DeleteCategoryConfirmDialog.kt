@@ -17,7 +17,7 @@ fun DeleteCategoryConfirmDialog(
         onConfirm = onConfirm,
         onDismiss = onDismiss,
         title = stringResource(R.string.dialog_title_category_delete),
-        description = stringResource(R.string.dialog_description_category_delete),
+        description = stringResource(R.string.dialog_desc_category_delete),
         icon = Icons.Default.Delete
     )
 }

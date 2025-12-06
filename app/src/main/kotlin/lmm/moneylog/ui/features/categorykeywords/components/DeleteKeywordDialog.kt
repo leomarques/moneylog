@@ -12,8 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import lmm.moneylog.R
 
 @Composable
 fun DeleteKeywordDialog(
@@ -35,12 +37,12 @@ fun DeleteKeywordDialog(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
-                    text = "Delete Keyword",
+                    text = stringResource(R.string.dialog_title_keyword_delete),
                     style = MaterialTheme.typography.titleLarge
                 )
 
                 Text(
-                    text = "Are you sure you want to delete the keyword \"$keyword\"?",
+                    text = stringResource(R.string.dialog_desc_keyword_delete, keyword),
                     style = MaterialTheme.typography.bodyMedium
                 )
 
@@ -49,12 +51,12 @@ fun DeleteKeywordDialog(
                     horizontalArrangement = Arrangement.End
                 ) {
                     TextButton(onClick = onDismiss) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.action_cancel))
                     }
 
                     TextButton(onClick = onConfirm) {
                         Text(
-                            "Delete",
+                            stringResource(R.string.action_delete),
                             color = MaterialTheme.colorScheme.error
                         )
                     }

@@ -83,19 +83,19 @@ class CreditCardDetailViewModel(
     ) {
         val state = _uiState.value
         if (state.name.trim().isEmpty()) {
-            onError(R.string.detail_no_name)
+            onError(R.string.validation_no_name)
             return
         }
         if (state.closingDay.isEmpty()) {
-            onError(R.string.detail_no_closingday)
+            onError(R.string.validation_no_closing_day)
             return
         }
         if (state.dueDay.isEmpty()) {
-            onError(R.string.detail_no_dueday)
+            onError(R.string.validation_no_due_day)
             return
         }
         if (state.limit.isEmpty()) {
-            onError(R.string.detail_no_limit)
+            onError(R.string.validation_no_limit)
             return
         }
 
@@ -109,7 +109,7 @@ class CreditCardDetailViewModel(
                 _uiState.update { it.copy(showFab = false) }
                 onSuccess()
             } catch (_: NumberFormatException) {
-                onError(R.string.detail_invalid_data)
+                onError(R.string.validation_invalid_data)
             }
         }
     }

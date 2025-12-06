@@ -24,13 +24,13 @@ fun CreditCardsListTopBar(
         modifier = modifier,
         windowInsets = WindowInsets(0.dp),
         title = {
-            Text(text = stringResource(id = R.string.creditcards))
+            Text(text = stringResource(id = R.string.common_credit_cards))
         },
         navigationIcon = {
             IconButton(onClick = onArrowBackClick) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.arrowback_desc)
+                    contentDescription = stringResource(R.string.accessibility_arrow_back)
                 )
             }
         }

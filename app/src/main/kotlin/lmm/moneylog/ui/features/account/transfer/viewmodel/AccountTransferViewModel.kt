@@ -74,11 +74,11 @@ class AccountTransferViewModel(
     ) {
         with(_uiState.value) {
             if (originAccountId == -1) {
-                onError(R.string.transfer_error_no_origin)
+                onError(R.string.validation_transfer_no_origin)
                 return
             }
             if (destinationAccountId == -1) {
-                onError(R.string.transfer_error_no_destination)
+                onError(R.string.validation_transfer_no_destination)
                 return
             }
 
@@ -95,8 +95,8 @@ class AccountTransferViewModel(
 
                     onSuccess()
                 }
-            } catch (e: NumberFormatException) {
-                onError(R.string.detail_invalidvalue)
+            } catch (_: NumberFormatException) {
+                onError(R.string.validation_invalid_value)
             }
         }
     }

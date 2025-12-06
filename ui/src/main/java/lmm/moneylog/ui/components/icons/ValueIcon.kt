@@ -19,7 +19,7 @@ fun ValueIcon(
     Icon(
         modifier = modifier,
         imageVector = ImageVector.vectorResource(id = R.drawable.outline_attach_money_24),
-        contentDescription = stringResource(R.string.value),
+        contentDescription = stringResource(R.string.ui_label_value),
         tint = tint ?: LocalContentColor.current
     )
 }

@@ -46,19 +46,19 @@ fun AdjustBalanceDialog(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
-                    text = stringResource(R.string.detail_adjust_balance_title),
+                    text = stringResource(R.string.account_adjust_balance_title),
                     style = MaterialTheme.typography.titleLarge
                 )
 
                 Text(
-                    text = stringResource(R.string.detail_adjust_balance_description),
+                    text = stringResource(R.string.account_adjust_balance_description),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
                 StateTextField(
                     value = balanceText,
-                    title = stringResource(R.string.detail_new_balance),
+                    title = stringResource(R.string.account_adjust_balance_new),
                     keyboardType = KeyboardType.Decimal,
                     leadingIcon = { ValueIcon() },
                     onValueChange = { balanceText = it },
@@ -70,7 +70,7 @@ fun AdjustBalanceDialog(
                     horizontalArrangement = Arrangement.End
                 ) {
                     TextButton(onClick = onDismiss) {
-                        Text(stringResource(R.string.cancel))
+                        Text(stringResource(R.string.action_cancel))
                     }
 
                     TextButton(
@@ -81,7 +81,7 @@ fun AdjustBalanceDialog(
                         },
                         enabled = balanceText.isNotBlank()
                     ) {
-                        Text(stringResource(R.string.ok))
+                        Text(stringResource(R.string.action_ok))
                     }
                 }
             }

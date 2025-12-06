@@ -23,7 +23,7 @@ fun AddFab(
         icon = Icons.Default.Add,
         onClick = onClick,
         modifier = modifier,
-        contentDescription = stringResource(R.string.fab_desc)
+        contentDescription = stringResource(R.string.ui_cd_fab)
     )
 }
 

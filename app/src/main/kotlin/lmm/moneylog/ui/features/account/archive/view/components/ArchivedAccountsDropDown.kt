@@ -33,8 +33,8 @@ fun MoreOptionsDropDown(
             ),
         onDismissRequest = onDismissRequest
     ) {
-        val unarchive = stringResource(R.string.unarchive)
-        val delete = stringResource(R.string.delete)
+        val unarchive = stringResource(R.string.action_unarchive)
+        val delete = stringResource(R.string.action_delete)
 
         listOf(unarchive, delete)
             .forEachIndexed { index, it ->

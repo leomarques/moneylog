@@ -27,8 +27,8 @@ fun ArchivedAccountsLayout(
             Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {
                 if (list.isEmpty()) {
                     EmptyState(
-                        title = stringResource(R.string.empty_archived_accounts_title),
-                        description = stringResource(R.string.empty_archived_accounts_desc)
+                        title = stringResource(R.string.empty_accounts_archived_title),
+                        description = stringResource(R.string.empty_accounts_archived_description)
                     )
                 } else {
                     ArchivedAccountsContent(

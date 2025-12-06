@@ -21,7 +21,7 @@ fun DeleteActionButton(
         content = {
             Icon(
                 imageVector = Icons.Default.Delete,
-                contentDescription = stringResource(R.string.delete_desc)
+                contentDescription = stringResource(R.string.ui_cd_delete)
             )
         }
     )

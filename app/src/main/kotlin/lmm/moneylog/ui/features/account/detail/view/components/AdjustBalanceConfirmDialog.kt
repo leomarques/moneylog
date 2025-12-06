@@ -17,8 +17,8 @@ fun AdjustBalanceConfirmDialog(
     ConfirmDialog(
         onConfirm = onConfirm,
         onDismiss = onDismiss,
-        title = stringResource(R.string.dialog_title_adjust_balance),
-        description = stringResource(R.string.dialog_description_adjust_balance, adjustmentValue),
+        title = stringResource(R.string.dialog_title_account_adjust_balance),
+        description = stringResource(R.string.dialog_desc_account_adjust_balance, adjustmentValue),
         icon = ImageVector.vectorResource(id = R.drawable.outline_attach_money_24)
     )
 }

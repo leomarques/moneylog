@@ -81,7 +81,7 @@ class AccountDetailViewModel(
     ) {
         val state = _uiState.value
         if (state.name.trim().isEmpty()) {
-            onError(R.string.detail_no_name)
+            onError(R.string.validation_no_name)
             return
         }
 
@@ -95,70 +95,6 @@ class AccountDetailViewModel(
             }
 
             onSuccess()
-        }
-    }
-
-    @Suppress("ReturnCount")
-    suspend fun calculateAdjustment(newBalance: String): Pair<String, Double>? {
-        val state = _uiState.value
-        if (!state.isEdit) return null
-
-        val newBalanceValue = newBalance.toDoubleOrNull() ?: return null
-
-        val currentBalance =
-            try {
-                getBalanceByAccountInteractor.execute(state.id)
-            } catch (e: IllegalStateException) {
-                Log.e(TAG, "Error getting balance for account ${state.id}", e)
-                return null
-            } catch (e: NumberFormatException) {
-                Log.e(TAG, "Number format error calculating balance for account ${state.id}", e)
-                return null
-            }
-
-        val adjustmentValue = newBalanceValue - currentBalance
-        if (adjustmentValue == 0.0) return null
-
-        // Format the adjustment value for display
-        val formattedValue =
-            if (adjustmentValue > 0) {
-                "+R$ %.2f".format(adjustmentValue)
-            } else {
-                "R$ %.2f".format(adjustmentValue)
-            }
-
-        return Pair(formattedValue, adjustmentValue)
-    }
-
-    fun onAdjustBalanceConfirm(
-        adjustmentValue: Double,
-        onSuccess: () -> Unit,
-        onError: (Int) -> Unit
-    ) {
-        val state = _uiState.value
-        if (!state.isEdit) {
-            onError(R.string.detail_invalid_data)
-            return
-        }
-
-        viewModelScope.launch {
-            try {
-                val adjustmentTransaction =
-                    Transaction(
-                        value = adjustmentValue,
-                        description = "Balance adjustment",
-                        date = domainTimeRepository.getCurrentDomainTime(),
-                        accountId = state.id
-                    )
-                addTransactionRepository.save(adjustmentTransaction)
-                onSuccess()
-            } catch (e: IllegalStateException) {
-                Log.e(TAG, "Error saving balance adjustment transaction", e)
-                onError(R.string.detail_invalid_data)
-            } catch (e: IllegalArgumentException) {
-                Log.e(TAG, "Invalid argument for balance adjustment transaction", e)
-                onError(R.string.detail_invalid_data)
-            }
         }
     }
 }

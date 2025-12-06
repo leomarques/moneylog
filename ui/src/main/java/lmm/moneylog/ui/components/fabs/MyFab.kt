@@ -24,7 +24,7 @@ fun MyFab(
     ) {
         Icon(
             icon,
-            contentDescription = stringResource(R.string.fab_desc)
+            contentDescription = stringResource(R.string.ui_cd_fab)
         )
     }
 }

@@ -23,13 +23,13 @@ fun RadioGroupType(
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         RadioOption(
-            text = stringResource(R.string.detail_debt_type),
+            text = stringResource(R.string.ui_form_type_debit),
             selected = isDebtSelect,
             onClick = onDebtSelect
         )
 
         RadioOption(
-            text = stringResource(R.string.detail_credit_type),
+            text = stringResource(R.string.ui_form_type_credit),
             selected = !isDebtSelect,
             onClick = onCreditSelect
         )

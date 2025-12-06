@@ -29,7 +29,7 @@ fun ColorTextField(
     Box(modifier = modifier, contentAlignment = Alignment.CenterStart) {
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = stringResource(R.string.color),
+            value = stringResource(R.string.ui_label_color),
             readOnly = true,
             interactionSource =
                 remember { MutableInteractionSource() }

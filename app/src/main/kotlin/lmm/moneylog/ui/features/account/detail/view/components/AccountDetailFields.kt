@@ -29,7 +29,7 @@ fun AccountDetailFields(
         StateTextField(
             modifier = Modifier.padding(bottom = Size.MediumSpaceSize),
             value = name,
-            title = stringResource(R.string.name),
+            title = stringResource(R.string.common_name),
             keyboardType = KeyboardType.Text,
             getFocus = !isEdit,
             leadingIcon = { AccountIcon() },

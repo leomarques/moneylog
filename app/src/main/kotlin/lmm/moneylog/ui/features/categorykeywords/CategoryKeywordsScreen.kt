@@ -40,9 +40,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import lmm.moneylog.R
 import lmm.moneylog.ui.features.categorykeywords.components.AddKeywordDialog
 import lmm.moneylog.ui.features.categorykeywords.components.DeleteKeywordDialog
 import lmm.moneylog.ui.features.categorykeywords.model.CategoryWithKeywords
@@ -64,13 +66,13 @@ fun CategoryKeywordsScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text("Category Keywords") },
+                title = { Text(stringResource(R.string.keywords_title)) },
                 windowInsets = WindowInsets(0.dp),
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.action_back)
                         )
                     }
                 }
@@ -81,7 +83,10 @@ fun CategoryKeywordsScreen(
                 FloatingActionButton(
                     onClick = { viewModel.showAddKeywordDialog() }
                 ) {
-                    Icon(Icons.Default.Add, contentDescription = "Add Keyword")
+                    Icon(
+                        Icons.Default.Add,
+                        contentDescription = stringResource(R.string.keywords_add_single)
+                    )
                 }
             }
         }
@@ -117,7 +122,7 @@ fun CategoryKeywordsScreen(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = "No categories found",
+                            text = stringResource(R.string.empty_categories_not_found),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -172,7 +177,7 @@ private fun CategoriesList(
     ) {
         item {
             Text(
-                text = "Select a category to manage its keywords",
+                text = stringResource(R.string.keywords_select_category),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(bottom = 8.dp)
@@ -226,7 +231,12 @@ private fun CategoryListItem(
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = "${category.keywords.size} keyword${if (category.keywords.size != 1) "s" else ""}",
+                    text =
+                        if (category.keywords.size != 1) {
+                            stringResource(R.string.keywords_count_plural, category.keywords.size)
+                        } else {
+                            stringResource(R.string.keywords_count_single, category.keywords.size)
+                        },
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -234,7 +244,7 @@ private fun CategoryListItem(
 
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = "View keywords",
+                contentDescription = stringResource(R.string.keywords_label),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
@@ -284,7 +294,12 @@ private fun CategoryKeywordsDetail(
                         style = MaterialTheme.typography.titleLarge
                     )
                     Text(
-                        text = "${category.keywords.size} keyword${if (category.keywords.size != 1) "s" else ""}",
+                        text =
+                            if (category.keywords.size != 1) {
+                                stringResource(R.string.keywords_count_plural, category.keywords.size)
+                            } else {
+                                stringResource(R.string.keywords_count_single, category.keywords.size)
+                            },
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -296,7 +311,7 @@ private fun CategoryKeywordsDetail(
 
         // Keywords section
         Text(
-            text = "Keywords",
+            text = stringResource(R.string.keywords_label),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(bottom = 8.dp)
         )
@@ -313,12 +328,12 @@ private fun CategoryKeywordsDetail(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "No keywords yet",
+                        text = stringResource(R.string.empty_keywords_title),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Text(
-                        text = "Tap + to add keywords",
+                        text = stringResource(R.string.empty_keywords_description),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(top = 4.dp)
@@ -349,9 +364,7 @@ private fun CategoryKeywordsDetail(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text =
-                    "Keywords are matched case-insensitively and can appear anywhere in the " +
-                        "transaction description.",
+                text = stringResource(R.string.keywords_match_info),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -389,7 +402,7 @@ private fun KeywordChip(
             ) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = "Delete",
+                    contentDescription = stringResource(R.string.action_delete),
                     tint = MaterialTheme.colorScheme.onSecondaryContainer,
                     modifier = Modifier.size(16.dp)
                 )

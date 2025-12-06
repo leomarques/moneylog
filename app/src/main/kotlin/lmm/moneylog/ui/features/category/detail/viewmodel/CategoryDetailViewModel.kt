@@ -71,7 +71,7 @@ class CategoryDetailViewModel(
     ) {
         val state = _uiState.value
         if (state.name.trim().isEmpty()) {
-            onError(R.string.detail_no_name)
+            onError(R.string.validation_no_name)
             return
         }
 

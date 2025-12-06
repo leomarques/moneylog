@@ -102,7 +102,7 @@ private fun TotalValue(model: TransactionsListUIState) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Total: ${model.total.formatForRs()}",
+            text = stringResource(R.string.common_total, model.total.formatForRs()),
             color =
                 when {
                     model.total == 0.0 -> White
@@ -127,7 +127,7 @@ private fun List(
     } else {
         EmptyState(
             stringResource(R.string.empty_transactions_title),
-            stringResource(R.string.empty_transactions_desc)
+            stringResource(R.string.empty_transactions_description)
         )
     }
 }
@@ -141,7 +141,7 @@ private fun TransactionsListLayoutPreview() {
         onItemClick = {},
         model =
             TransactionsListUIState(
-                titleResourceId = R.string.transactions,
+                titleResourceId = R.string.common_transactions,
                 monthName = "January",
                 transactions = transactionModelListPreview,
                 total = 500.0

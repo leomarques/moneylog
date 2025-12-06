@@ -20,7 +20,7 @@ fun ArchiveActionButton(
         content = {
             Icon(
                 painter = painterResource(id = R.drawable.outline_archive_24),
-                contentDescription = stringResource(R.string.archive_desc)
+                contentDescription = stringResource(R.string.accessibility_archive)
             )
         }
     )

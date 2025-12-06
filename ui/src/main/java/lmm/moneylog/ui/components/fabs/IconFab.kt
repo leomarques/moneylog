@@ -24,7 +24,7 @@ fun IconFab(
     icon: ImageVector,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    contentDescription: String? = stringResource(R.string.fab_desc)
+    contentDescription: String? = stringResource(R.string.ui_cd_fab)
 ) {
     FloatingActionButton(
         modifier = modifier,

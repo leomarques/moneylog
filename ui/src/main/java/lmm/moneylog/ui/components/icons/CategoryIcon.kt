@@ -19,7 +19,7 @@ fun CategoryIcon(
     Icon(
         modifier = modifier,
         imageVector = ImageVector.vectorResource(id = R.drawable.outline_category_24),
-        contentDescription = stringResource(R.string.category),
+        contentDescription = stringResource(R.string.ui_label_category),
         tint = tint
     )
 }

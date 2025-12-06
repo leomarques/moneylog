@@ -16,9 +16,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import lmm.moneylog.R
 import lmm.moneylog.ui.components.textfields.StateTextField
 
 @Composable
@@ -44,26 +46,26 @@ fun AddKeywordDialog(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
-                    text = "Add Keywords",
+                    text = stringResource(R.string.keywords_add),
                     style = MaterialTheme.typography.titleLarge
                 )
 
                 Text(
-                    text = "Category: $categoryName",
+                    text = stringResource(R.string.category_label, categoryName),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
                 StateTextField(
                     value = keywordText,
-                    title = "Keywords",
+                    title = stringResource(R.string.keywords_label),
                     keyboardType = KeyboardType.Text,
                     onValueChange = { keywordText = it },
                     getFocus = true
                 )
 
                 Text(
-                    text = "Tip: Enter multiple keywords separated by commas",
+                    text = stringResource(R.string.keywords_tip),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -73,7 +75,7 @@ fun AddKeywordDialog(
                     horizontalArrangement = Arrangement.End
                 ) {
                     TextButton(onClick = onDismiss) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.action_cancel))
                     }
 
                     TextButton(
@@ -96,7 +98,7 @@ fun AddKeywordDialog(
                         },
                         enabled = keywordText.isNotBlank()
                     ) {
-                        Text("Add")
+                        Text(stringResource(R.string.action_add))
                     }
                 }
             }

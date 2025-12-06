@@ -21,7 +21,7 @@ fun MoreOptionsIcon(
     ) {
         Icon(
             imageVector = Icons.Default.MoreVert,
-            contentDescription = stringResource(R.string.more_options_desc)
+            contentDescription = stringResource(R.string.accessibility_more_options)
         )
     }
 }

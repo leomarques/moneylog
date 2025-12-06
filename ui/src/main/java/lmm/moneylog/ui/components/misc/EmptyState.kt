@@ -50,7 +50,7 @@ fun EmptyState(
 @Composable
 private fun EmptyStatePreview() {
     EmptyState(
-        stringResource(R.string.empty_transactions_title),
-        stringResource(R.string.empty_transactions_desc)
+        stringResource(R.string.ui_empty_transactions_title),
+        stringResource(R.string.ui_empty_transactions_desc)
     )
 }

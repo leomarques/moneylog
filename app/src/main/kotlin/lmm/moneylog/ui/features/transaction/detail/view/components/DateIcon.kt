@@ -14,7 +14,7 @@ fun DateIcon(modifier: Modifier = Modifier) {
     Icon(
         modifier = modifier,
         imageVector = Icons.Default.DateRange,
-        contentDescription = stringResource(R.string.date_desc)
+        contentDescription = stringResource(R.string.accessibility_date)
     )
 }
 

@@ -19,7 +19,7 @@ fun InvoiceIcon(
     Icon(
         modifier = modifier,
         imageVector = ImageVector.vectorResource(id = R.drawable.receipt_24px),
-        contentDescription = stringResource(R.string.name),
+        contentDescription = stringResource(R.string.ui_label_name),
         tint = tint ?: LocalContentColor.current
     )
 }

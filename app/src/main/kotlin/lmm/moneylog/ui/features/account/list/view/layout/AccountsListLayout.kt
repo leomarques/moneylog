@@ -60,7 +60,7 @@ fun AccountsListLayout(
                 } else {
                     EmptyState(
                         title = stringResource(R.string.empty_accounts_title),
-                        description = stringResource(R.string.empty_accounts_desc)
+                        description = stringResource(R.string.empty_accounts_description)
                     )
                 }
             }

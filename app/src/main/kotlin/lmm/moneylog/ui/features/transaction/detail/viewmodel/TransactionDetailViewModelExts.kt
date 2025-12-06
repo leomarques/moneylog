@@ -28,7 +28,7 @@ fun TransactionDetailUIState.toTransaction(): Transaction =
 fun Transaction.toDetailModel(domainTimeRepository: DomainTimeRepository) =
     TransactionDetailUIState(
         id = id,
-        titleResourceId = R.string.detail_topbar_transaction_edit,
+        titleResourceId = R.string.transaction_topbar_edit,
         isEdit = true,
         isIncome = value > 0,
         value = value.toPositiveString(),

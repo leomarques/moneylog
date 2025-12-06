@@ -34,7 +34,7 @@ fun CategoriesTabContent(
         EmptyState(
             modifier = modifier,
             title = stringResource(R.string.empty_categories_title),
-            description = stringResource(R.string.empty_categories_desc)
+            description = stringResource(R.string.empty_categories_description)
         )
     }
 }

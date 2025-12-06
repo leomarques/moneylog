@@ -47,7 +47,7 @@ fun AccountsListView(
                         showAdjustBalanceDialog = false
                         showAdjustBalanceConfirmDialog = true
                     } else {
-                        showToast(context, R.string.detail_invalidvalue)
+                        showToast(context, R.string.validation_invalid_value)
                     }
                 }
             },
@@ -66,7 +66,7 @@ fun AccountsListView(
                     accountId = selectedAccountId,
                     adjustmentValue = adjustmentValue,
                     onSuccess = {
-                        showToast(context, R.string.detail_adjust_balance_success)
+                        showToast(context, R.string.account_adjust_balance_success)
                         showAdjustBalanceConfirmDialog = false
                         selectedAccountId = -1
                     },

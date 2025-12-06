@@ -27,7 +27,7 @@ fun ArrowBackIcon(
     ) {
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = stringResource(R.string.arrowback_desc)
+            contentDescription = stringResource(R.string.ui_cd_arrow_back)
         )
     }
 }

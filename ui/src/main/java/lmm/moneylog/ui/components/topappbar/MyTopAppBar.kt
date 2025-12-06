@@ -33,7 +33,7 @@ fun MyTopAppBar(
             IconButton(onClick = onArrowBackClick) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.arrowback_desc)
+                    contentDescription = stringResource(R.string.ui_cd_arrow_back)
                 )
             }
         },
@@ -56,7 +56,7 @@ fun MyTopAppBar(
 @Composable
 private fun MyTopAppBarPreview() {
     MyTopAppBar(
-        titleResourceId = R.string.app_name,
+        titleResourceId = R.string.ui_app_name,
         onArrowBackClick = {},
         onSearchClick = {}
     )

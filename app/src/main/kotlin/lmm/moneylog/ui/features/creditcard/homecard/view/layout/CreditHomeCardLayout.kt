@@ -32,7 +32,7 @@ fun CreditHomeCardLayout(
 ) {
     Column(modifier = modifier) {
         Text(
-            text = stringResource(R.string.credit_cards),
+            text = stringResource(R.string.common_credit_cards),
             style = MaterialTheme.typography.titleMedium,
             color = Color.Gray,
             modifier = Modifier.padding(bottom = Size.XSmallSpaceSize)
@@ -54,7 +54,7 @@ fun CreditHomeCardLayout(
                 )
             } else {
                 Text(
-                    text = stringResource(R.string.empty_credit_cards_home),
+                    text = stringResource(R.string.empty_creditcards_home),
                     modifier =
                         Modifier
                             .padding(Size.MediumSpaceSize)

@@ -17,7 +17,7 @@ fun DeleteCreditCardConfirmDialog(
         onConfirm = onConfirm,
         onDismiss = onDismiss,
         title = stringResource(R.string.dialog_title_creditcard_delete),
-        description = stringResource(R.string.dialog_description_creditcard_delete),
+        description = stringResource(R.string.dialog_desc_creditcard_delete),
         icon = Icons.Default.Delete
     )
 }

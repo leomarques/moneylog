@@ -37,7 +37,7 @@ fun Balance(
         )
 
         Text(
-            text = stringResource(R.string.balancecard_total),
+            text = stringResource(R.string.home_balance_total),
             color = MaterialTheme.colorScheme.onTertiaryContainer,
             style = MaterialTheme.typography.titleSmall
         )

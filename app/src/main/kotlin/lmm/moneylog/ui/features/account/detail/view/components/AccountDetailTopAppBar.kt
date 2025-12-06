@@ -28,9 +28,9 @@ fun AccountDetailTopAppBar(
                 text =
                     stringResource(
                         if (isEdit) {
-                            R.string.detail_topbar_account_edit
+                            R.string.account_topbar_edit
                         } else {
-                            R.string.detail_topbar_account_add
+                            R.string.account_topbar_add
                         }
                     )
             )

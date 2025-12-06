@@ -20,7 +20,7 @@ fun ListItemBalance(
 ) {
     Row(modifier) {
         Text(
-            text = stringResource(R.string.list_account_balance),
+            text = stringResource(R.string.home_account_balance),
             style = MaterialTheme.typography.bodyMedium,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,

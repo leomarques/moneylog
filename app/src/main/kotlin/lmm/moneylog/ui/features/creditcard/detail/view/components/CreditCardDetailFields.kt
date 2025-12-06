@@ -37,7 +37,7 @@ fun CreditCardDetailFields(
         StateTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
             value = name,
-            title = stringResource(R.string.name),
+            title = stringResource(R.string.common_name),
             keyboardType = KeyboardType.Text,
             leadingIcon = { CreditCardIcon() },
             getFocus = !isEdit,
@@ -46,8 +46,8 @@ fun CreditCardDetailFields(
         )
         StateTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            value = closingDay.toString(),
-            title = stringResource(R.string.creditcard_closingday),
+            value = closingDay,
+            title = stringResource(R.string.creditcard_closing_day),
             keyboardType = KeyboardType.Number,
             onValueChange = onClosingDayChange,
             leadingIcon = { DateIcon() },
@@ -55,8 +55,8 @@ fun CreditCardDetailFields(
         )
         StateTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            value = dueDay.toString(),
-            title = stringResource(R.string.creditcard_dueday),
+            value = dueDay,
+            title = stringResource(R.string.creditcard_due_day),
             keyboardType = KeyboardType.Number,
             onValueChange = onDueDayDayChange,
             leadingIcon = { DateIcon() },
@@ -64,7 +64,7 @@ fun CreditCardDetailFields(
         )
         StateTextField(
             modifier = Modifier.padding(bottom = Size.DefaultSpaceSize),
-            value = limit.toString(),
+            value = limit,
             title = stringResource(R.string.creditcard_limit),
             keyboardType = KeyboardType.Number,
             onValueChange = onLimitChange,

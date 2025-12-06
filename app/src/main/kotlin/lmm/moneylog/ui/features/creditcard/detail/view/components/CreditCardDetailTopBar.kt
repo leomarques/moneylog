@@ -28,9 +28,9 @@ fun CreditCardDetailTopBar(
                 text =
                     stringResource(
                         if (isEdit) {
-                            R.string.detail_topbar_creditcard_edit
+                            R.string.creditcard_topbar_edit
                         } else {
-                            R.string.detail_topbar_creditcard_add
+                            R.string.creditcard_topbar_add
                         }
                     )
             )

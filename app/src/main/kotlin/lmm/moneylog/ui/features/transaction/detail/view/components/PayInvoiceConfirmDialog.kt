@@ -18,8 +18,8 @@ fun PayInvoiceConfirmDialog(
     ConfirmDialog(
         onConfirm = onConfirm,
         onDismiss = onDismiss,
-        title = stringResource(R.string.pay_invoice_dialog_title),
-        description = stringResource(R.string.pay_invoice_dialog_desc, value, account),
+        title = stringResource(R.string.invoice_pay_dialog_title),
+        description = stringResource(R.string.invoice_pay_dialog_description, value, account),
         icon = Icons.Default.Done
     )
 }

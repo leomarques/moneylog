@@ -18,15 +18,15 @@ fun MyNavigationBar(
         items =
             listOf(
                 Pair(
-                    stringResource(R.string.navbar_home),
+                    stringResource(R.string.ui_nav_bottom_home),
                     Icons.Default.Home
                 ),
                 Pair(
-                    stringResource(R.string.transactions),
+                    stringResource(R.string.ui_nav_bottom_transactions),
                     ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24)
                 ),
                 Pair(
-                    stringResource(R.string.settings),
+                    stringResource(R.string.ui_nav_bottom_settings),
                     ImageVector.vectorResource(id = R.drawable.outline_settings_24)
                 )
             ),

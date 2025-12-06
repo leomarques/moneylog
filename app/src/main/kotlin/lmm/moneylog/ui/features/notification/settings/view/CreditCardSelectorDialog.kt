@@ -20,8 +20,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import lmm.moneylog.R
 import lmm.moneylog.ui.components.icons.CreditCardIcon
 import lmm.moneylog.ui.features.notification.settings.model.CreditCardItem
 
@@ -45,14 +47,14 @@ fun CreditCardSelectorDialog(
                         .padding(16.dp)
             ) {
                 Text(
-                    text = "Select Credit Card",
+                    text = stringResource(R.string.creditcard_select),
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
                 if (creditCards.isEmpty()) {
                     Text(
-                        text = "No credit cards available. Please create a credit card first.",
+                        text = stringResource(R.string.empty_creditcards_unavailable),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(vertical = 16.dp)
@@ -79,7 +81,7 @@ fun CreditCardSelectorDialog(
                     horizontalArrangement = Arrangement.End
                 ) {
                     TextButton(onClick = onDismiss) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.action_cancel))
                     }
                 }
             }
@@ -128,7 +130,7 @@ private fun CreditCardSelectorItem(
         if (isSelected) {
             Icon(
                 imageVector = Icons.Default.Check,
-                contentDescription = "Selected",
+                contentDescription = stringResource(R.string.state_selected),
                 tint = MaterialTheme.colorScheme.primary
             )
         }

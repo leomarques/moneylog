@@ -34,12 +34,12 @@ fun TransactionDetailDatePicker(
                 },
                 enabled = confirmEnabled.value
             ) {
-                Text(stringResource(R.string.ok))
+                Text(stringResource(R.string.action_ok))
             }
         },
         dismissButton = {
             TextButton(onDismiss) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(R.string.action_cancel))
             }
         },
         onDismissRequest = onDismiss

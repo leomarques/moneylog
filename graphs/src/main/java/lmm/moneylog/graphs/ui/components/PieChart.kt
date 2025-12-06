@@ -44,7 +44,7 @@ fun PieChart(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = stringResource(R.string.no_data),
+                text = stringResource(R.string.graphs_no_data),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

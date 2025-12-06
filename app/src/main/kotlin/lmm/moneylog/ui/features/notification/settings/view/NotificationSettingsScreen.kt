@@ -42,12 +42,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import lmm.moneylog.R
 import lmm.moneylog.ui.components.icons.CreditCardIcon
 import lmm.moneylog.ui.components.textfields.ClickTextField
 import lmm.moneylog.ui.features.notification.NotificationPermissionHelper
@@ -106,13 +108,13 @@ fun NotificationSettingsScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text("Notification Settings") },
+                title = { Text(stringResource(R.string.notifications_title)) },
                 windowInsets = WindowInsets(0.dp),
                 navigationIcon = {
                     IconButton(onClick = onArrowBackClick) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.action_back)
                         )
                     }
                 }
@@ -196,11 +198,16 @@ private fun NotificationListenerPermissionCard(
 
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = "Nubank Notification Access",
+                        text = stringResource(R.string.notifications_nubank_access),
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
-                        text = if (hasListenerPermission) "Enabled" else "Disabled",
+                        text =
+                            if (hasListenerPermission) {
+                                stringResource(R.string.state_enabled)
+                            } else {
+                                stringResource(R.string.state_disabled)
+                            },
                         style = MaterialTheme.typography.bodyMedium,
                         color =
                             if (hasListenerPermission) {
@@ -213,9 +220,7 @@ private fun NotificationListenerPermissionCard(
             }
 
             Text(
-                text =
-                    "Allow MoneyLog to intercept Nubank notifications " +
-                        "to automatically track your transactions.",
+                text = stringResource(R.string.notifications_listener_description),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -229,14 +234,11 @@ private fun NotificationListenerPermissionCard(
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Grant Listener Permission")
+                    Text(stringResource(R.string.notifications_listener_grant))
                 }
 
                 Text(
-                    text =
-                        "Steps:\n1. Find 'MoneyLog' in the list" +
-                            "\n2. Toggle the switch to enable" +
-                            "\n3. Return to this screen",
+                    text = stringResource(R.string.notifications_listener_steps),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Start,
@@ -248,7 +250,7 @@ private fun NotificationListenerPermissionCard(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "✓ Listener permission granted!",
+                        text = stringResource(R.string.notifications_listener_granted),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                         modifier = Modifier.padding(12.dp)
@@ -262,7 +264,7 @@ private fun NotificationListenerPermissionCard(
                         )
                     }
                 ) {
-                    Text("Manage Listener Permissions")
+                    Text(stringResource(R.string.notifications_listener_manage))
                 }
             }
         }
@@ -306,11 +308,16 @@ private fun BasicNotificationPermissionCard(
 
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = "Notification Permission",
+                        text = stringResource(R.string.notifications_permission),
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
-                        text = if (hasBasicPermission) "Enabled" else "Disabled",
+                        text =
+                            if (hasBasicPermission) {
+                                stringResource(R.string.state_enabled)
+                            } else {
+                                stringResource(R.string.state_disabled)
+                            },
                         style = MaterialTheme.typography.bodyMedium,
                         color =
                             if (hasBasicPermission) {
@@ -323,10 +330,7 @@ private fun BasicNotificationPermissionCard(
             }
 
             Text(
-                text =
-                    "Allow MoneyLog to show notifications. " +
-                        "This is required for the app to display notifications " +
-                        "about intercepted transactions.",
+                text = stringResource(R.string.notifications_permission_description),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -340,7 +344,7 @@ private fun BasicNotificationPermissionCard(
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Grant Notification Permission")
+                    Text(stringResource(R.string.notifications_permission_grant))
                 }
             } else {
                 Surface(
@@ -348,7 +352,7 @@ private fun BasicNotificationPermissionCard(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "✓ Notification permission granted!",
+                        text = stringResource(R.string.notifications_permission_granted),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                         modifier = Modifier.padding(12.dp)
@@ -365,7 +369,7 @@ private fun BasicNotificationPermissionCard(
                         context.startActivity(intent)
                     }
                 ) {
-                    Text("Manage Notification Settings")
+                    Text(stringResource(R.string.notifications_settings_manage))
                 }
             }
         }
@@ -387,21 +391,19 @@ private fun DefaultCreditCardCard(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = "Default Credit Card",
+                text = stringResource(R.string.creditcard_default),
                 style = MaterialTheme.typography.titleMedium
             )
 
             Text(
-                text =
-                    "Select the credit card that will be automatically assigned " +
-                        "to transactions created from Nubank notifications.",
+                text = stringResource(R.string.creditcard_default_description),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             ClickTextField(
-                value = selectedCreditCard?.name ?: "No card selected",
-                label = "Credit Card",
+                value = selectedCreditCard?.name ?: stringResource(R.string.state_no_card_selected),
+                label = stringResource(R.string.creditcard_label),
                 onClick = onCardClick,
                 leadingIcon = {
                     CreditCardIcon(tint = selectedCreditCard?.color)
@@ -412,7 +414,7 @@ private fun DefaultCreditCardCard(
                 TextButton(
                     onClick = onClearSelection
                 ) {
-                    Text("Clear Selection")
+                    Text(stringResource(R.string.action_clear_selection))
                 }
             }
         }
@@ -432,14 +434,12 @@ private fun CategoryKeywordsCard(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = "Category Keywords",
+                text = stringResource(R.string.keywords_title),
                 style = MaterialTheme.typography.titleMedium
             )
 
             Text(
-                text =
-                    "Manage keywords that automatically predict categories " +
-                        "for transactions based on merchant names.",
+                text = stringResource(R.string.keywords_description),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -448,7 +448,7 @@ private fun CategoryKeywordsCard(
                 onClick = onManageClick,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Manage Keywords")
+                Text(stringResource(R.string.keywords_manage))
             }
         }
     }

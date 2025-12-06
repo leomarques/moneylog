@@ -29,9 +29,9 @@ fun TransactionDetailTopBar(
                 text =
                     stringResource(
                         if (isEdit) {
-                            R.string.detail_topbar_transaction_edit
+                            R.string.transaction_topbar_edit
                         } else {
-                            R.string.detail_topbar_transaction_add
+                            R.string.transaction_topbar_add
                         }
                     )
             )

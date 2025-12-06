@@ -21,7 +21,7 @@ fun DeleteIcon(
         content = {
             Icon(
                 imageVector = Icons.Default.Delete,
-                contentDescription = stringResource(R.string.delete)
+                contentDescription = stringResource(R.string.ui_action_delete)
             )
         }
     )

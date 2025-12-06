@@ -61,7 +61,7 @@ fun SearchTopBar(
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     modifier = Modifier,
-                    contentDescription = stringResource(id = R.string.arrowback_desc)
+                    contentDescription = stringResource(id = R.string.ui_cd_arrow_back)
                 )
             }
         },
@@ -96,7 +96,7 @@ fun SearchTopBar(
                         IconButton(onClick = onClearClick) {
                             Icon(
                                 imageVector = Icons.Filled.Close,
-                                contentDescription = stringResource(R.string.close_desc)
+                                contentDescription = stringResource(R.string.ui_cd_close)
                             )
                         }
                     }
@@ -121,7 +121,7 @@ fun SearchTopBar(
 private fun SearchTopBarPreview() {
     SearchTopBar(
         searchText = "",
-        placeholderText = "Search",
+        placeholderText = stringResource(R.string.ui_search_label),
         onSearchTextChange = {},
         onClearClick = {},
         onArrowBackClick = {}

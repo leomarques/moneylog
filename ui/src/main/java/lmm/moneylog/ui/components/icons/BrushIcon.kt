@@ -14,7 +14,7 @@ fun BrushIcon(modifier: Modifier = Modifier) {
     Icon(
         modifier = modifier,
         imageVector = ImageVector.vectorResource(R.drawable.outline_brush_24),
-        contentDescription = stringResource(R.string.color)
+        contentDescription = stringResource(R.string.ui_label_color)
     )
 }
 

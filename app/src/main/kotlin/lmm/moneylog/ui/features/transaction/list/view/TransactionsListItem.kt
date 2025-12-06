@@ -61,7 +61,7 @@ fun TransactionsListItem(
                     Text(
                         text =
                             description.ifEmpty {
-                                stringResource(R.string.no_description)
+                                stringResource(R.string.state_no_description)
                             },
                         overflow = TextOverflow.Ellipsis,
                         style = MaterialTheme.typography.bodyLarge,
@@ -76,7 +76,7 @@ fun TransactionsListItem(
 
                     val categoryString =
                         category.ifEmpty {
-                            stringResource(R.string.no_category)
+                            stringResource(R.string.state_no_category)
                         }
 
                     val sb = StringBuilder(categoryString)

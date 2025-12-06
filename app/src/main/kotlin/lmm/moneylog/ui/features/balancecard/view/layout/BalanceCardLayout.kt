@@ -46,7 +46,7 @@ fun BalanceCardLayout(
         Row(modifier = Modifier.fillMaxWidth()) {
             Amount(
                 modifier = Modifier.weight(0.5f),
-                title = stringResource(R.string.incomes),
+                title = stringResource(R.string.common_incomes),
                 value = credit,
                 color = income,
                 hideValue = hideValues,
@@ -55,7 +55,7 @@ fun BalanceCardLayout(
 
             Amount(
                 modifier = Modifier.weight(0.5f),
-                title = stringResource(R.string.outcome),
+                title = stringResource(R.string.common_outcome),
                 value = debt,
                 color = outcome,
                 hideValue = hideValues,

@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import lmm.moneylog.ui.R
 import lmm.moneylog.ui.theme.Size
 import lmm.moneylog.ui.theme.darkPurple
 import lmm.moneylog.ui.theme.darkRed
@@ -73,6 +75,6 @@ private fun BottomSheetContentPreview() {
             ),
         onConfirm = {},
         onDismiss = {},
-        text = "Select account"
+        text = stringResource(R.string.ui_bottomsheet_select_account)
     )
 }

@@ -46,7 +46,7 @@ fun SettingsScreen(
         modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.settings)) },
+                title = { Text(stringResource(R.string.nav_settings)) },
                 windowInsets = WindowInsets(0.dp)
             )
         }
@@ -62,7 +62,7 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = "Gerenciamento",
+                text = stringResource(R.string.settings_management),
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
@@ -73,8 +73,8 @@ fun SettingsScreen(
             ) {
                 Column {
                     SettingsItem(
-                        title = stringResource(R.string.accounts),
-                        description = "Gerencie suas contas bancárias",
+                        title = stringResource(R.string.common_accounts),
+                        description = stringResource(R.string.settings_manage_accounts),
                         icon = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
                         onClick = onAccountsClick
                     )
@@ -82,8 +82,8 @@ fun SettingsScreen(
                     HorizontalDivider()
 
                     SettingsItem(
-                        title = stringResource(R.string.categories),
-                        description = "Gerencie suas categorias de gastos",
+                        title = stringResource(R.string.common_categories),
+                        description = stringResource(R.string.settings_manage_categories),
                         icon = ImageVector.vectorResource(id = R.drawable.outline_category_24),
                         onClick = onCategoriesClick
                     )
@@ -91,8 +91,8 @@ fun SettingsScreen(
                     HorizontalDivider()
 
                     SettingsItem(
-                        title = stringResource(R.string.cards),
-                        description = "Gerencie seus cartões de crédito",
+                        title = stringResource(R.string.common_cards),
+                        description = stringResource(R.string.settings_manage_creditcards),
                         icon = ImageVector.vectorResource(id = R.drawable.outline_credit_card_24),
                         onClick = onCreditCardsClick
                     )
@@ -100,7 +100,7 @@ fun SettingsScreen(
             }
 
             Text(
-                text = "Recursos",
+                text = stringResource(R.string.settings_features),
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
@@ -111,8 +111,8 @@ fun SettingsScreen(
             ) {
                 Column {
                     SettingsItem(
-                        title = "Gráficos",
-                        description = "Visualize seus gastos",
+                        title = stringResource(R.string.graphs_title),
+                        description = stringResource(R.string.settings_view_graphs),
                         icon = ImageVector.vectorResource(id = R.drawable.outline_bar_chart_24),
                         onClick = onGraphsClick
                     )
@@ -120,8 +120,8 @@ fun SettingsScreen(
                     HorizontalDivider()
 
                     SettingsItem(
-                        title = "Notificações",
-                        description = "Configure captura de transações do Nubank",
+                        title = stringResource(R.string.settings_notifications),
+                        description = stringResource(R.string.settings_configure_nubank),
                         icon = ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24),
                         onClick = onNotificationSettingsClick
                     )

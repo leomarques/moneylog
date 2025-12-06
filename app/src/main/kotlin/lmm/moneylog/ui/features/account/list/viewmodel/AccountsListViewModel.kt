@@ -123,10 +123,10 @@ class AccountsListViewModel(
                 onSuccess()
             } catch (e: IllegalStateException) {
                 Log.e(TAG, "Error saving balance adjustment transaction", e)
-                onError(lmm.moneylog.R.string.detail_invalid_data)
+                onError(lmm.moneylog.R.string.validation_invalid_data)
             } catch (e: IllegalArgumentException) {
                 Log.e(TAG, "Invalid argument for balance adjustment transaction", e)
-                onError(lmm.moneylog.R.string.detail_invalid_data)
+                onError(lmm.moneylog.R.string.validation_invalid_data)
             }
         }
     }

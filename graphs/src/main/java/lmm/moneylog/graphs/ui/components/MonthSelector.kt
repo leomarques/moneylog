@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import lmm.moneylog.ui.theme.Size
@@ -47,7 +48,7 @@ fun MonthSelector(
         IconButton(onClick = onPreviousMonth) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                contentDescription = "Mês anterior"
+                contentDescription = stringResource(lmm.moneylog.graphs.R.string.graphs_month_selector_previous)
             )
         }
 
@@ -64,7 +65,7 @@ fun MonthSelector(
         IconButton(onClick = onNextMonth) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = "Próximo mês"
+                contentDescription = stringResource(lmm.moneylog.graphs.R.string.graphs_month_selector_next)
             )
         }
     }

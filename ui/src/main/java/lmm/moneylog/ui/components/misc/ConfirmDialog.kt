@@ -23,19 +23,19 @@ fun ConfirmDialog(
     AlertDialog(
         confirmButton = {
             TextButton(onClick = onConfirm) {
-                Text(text = stringResource(R.string.ok))
+                Text(text = stringResource(R.string.ui_action_ok))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(text = stringResource(R.string.cancel))
+                Text(text = stringResource(R.string.ui_action_cancel))
             }
         },
         onDismissRequest = onDismiss,
         icon = {
             Icon(
                 imageVector = icon,
-                contentDescription = stringResource(R.string.dialog_desc)
+                contentDescription = stringResource(R.string.ui_cd_dialog)
             )
         },
         title = { Text(text = title) },
@@ -49,8 +49,8 @@ private fun ConfirmDialogPreview() {
     ConfirmDialog(
         onConfirm = {},
         onDismiss = {},
-        title = stringResource(R.string.dialog_title_transaction_delete),
-        description = stringResource(R.string.dialog_description_transaction_delete),
+        title = stringResource(R.string.ui_dialog_transaction_delete_title),
+        description = stringResource(R.string.ui_dialog_transaction_delete_desc),
         icon = Icons.Default.Delete
     )
 }

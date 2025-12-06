@@ -407,7 +407,7 @@ class TransactionDetailViewModel(
                 }
             }
         } catch (_: NumberFormatException) {
-            onError(R.string.detail_invalid_data)
+            onError(R.string.validation_invalid_data)
         }
     }
 
@@ -416,17 +416,17 @@ class TransactionDetailViewModel(
         onError: (Int) -> Unit
     ): Boolean {
         if (state.isDebtSelected && accountId == null) {
-            onError(R.string.detail_no_account)
+            onError(R.string.validation_no_account)
             return true
         }
 
         if (!state.isDebtSelected && creditCardId == null) {
-            onError(R.string.detail_no_cc)
+            onError(R.string.validation_no_creditcard)
             return true
         }
 
         if (categoryId == null) {
-            onError(R.string.detail_no_category)
+            onError(R.string.validation_no_category)
             return true
         }
 

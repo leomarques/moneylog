@@ -44,7 +44,7 @@ fun BottomSheetItem(
         }
 
         Text(
-            text = text.ifEmpty { stringResource(R.string.no_name) },
+            text = text.ifEmpty { stringResource(R.string.ui_placeholder_no_name) },
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
             style = MaterialTheme.typography.bodyLarge,

@@ -19,7 +19,7 @@ fun CreditCardIcon(
     Icon(
         modifier = modifier,
         imageVector = ImageVector.vectorResource(id = R.drawable.outline_credit_card_24),
-        contentDescription = stringResource(R.string.name),
+        contentDescription = stringResource(R.string.ui_label_name),
         tint = tint ?: LocalContentColor.current
     )
 }

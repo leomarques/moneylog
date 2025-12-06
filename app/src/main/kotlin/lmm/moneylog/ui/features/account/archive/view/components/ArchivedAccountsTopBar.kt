@@ -25,13 +25,13 @@ fun ArchivedAccountsTopBar(
         modifier = modifier,
         windowInsets = WindowInsets(0.dp),
         title = {
-            Text(text = stringResource(id = R.string.topbar_archived_accounts))
+            Text(text = stringResource(id = R.string.account_topbar_archived))
         },
         navigationIcon = {
             IconButton(onClick = onArrowBackClick) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = stringResource(R.string.arrowback_desc)
+                    contentDescription = stringResource(R.string.accessibility_arrow_back)
                 )
             }
         }

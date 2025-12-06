@@ -14,7 +14,7 @@ fun DescriptionIcon(modifier: Modifier = Modifier) {
     Icon(
         modifier = modifier,
         imageVector = Icons.Default.Create,
-        contentDescription = stringResource(R.string.detail_description)
+        contentDescription = stringResource(R.string.common_description)
     )
 }
 

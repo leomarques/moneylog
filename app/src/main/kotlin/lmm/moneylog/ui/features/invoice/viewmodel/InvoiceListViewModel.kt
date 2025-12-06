@@ -34,7 +34,7 @@ class InvoiceListViewModel(
     getAccountsRepository: GetAccountsRepository,
     private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(InvoiceListUIState(titleResourceId = R.string.invoice))
+    private val _uiState = MutableStateFlow(InvoiceListUIState(titleResourceId = R.string.common_invoice))
     val uiState: StateFlow<InvoiceListUIState> = _uiState.asStateFlow()
 
     private lateinit var savedTransactions: List<Transaction>
@@ -86,7 +86,7 @@ class InvoiceListViewModel(
                 _uiState.update {
                     transactions
                         .toInvoiceListUiState(
-                            titleResourceId = R.string.invoice,
+                            titleResourceId = R.string.common_invoice,
                             accounts = accounts,
                             categoriesMap = categoriesMap,
                             categoriesColorMap = categoriesColorMap,
@@ -112,7 +112,7 @@ class InvoiceListViewModel(
                 hideLoading()
 
                 onSuccess()
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 hideLoading()
 
                 onError()

@@ -25,7 +25,7 @@ fun TopAppBarWithSearch(
     } else {
         SearchTopBar(
             searchText = filter,
-            placeholderText = stringResource(R.string.search_placeholder),
+            placeholderText = stringResource(R.string.ui_search_placeholder),
             onSearchTextChange = onSearchTextChange,
             onClearClick = {
                 onSearchTextChange("")
@@ -43,6 +43,6 @@ private fun TopAppBarWithSearchPreview() {
         onSearchTextChange = {},
         onArrowBackClick = {},
         filter = "",
-        titleResourceId = R.string.app_name
+        titleResourceId = R.string.ui_app_name
     )
 }

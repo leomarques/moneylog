@@ -46,7 +46,7 @@ fun InvoiceListContent(
             ) {
                 BottomSheetContent(
                     list = model.accounts.map { it.name to it.color.toComposeColor() },
-                    text = stringResource(R.string.select_account),
+                    text = stringResource(R.string.account_select_for_invoice),
                     onConfirm = { index ->
                         accountToPay.value = model.accounts[index]
                         showAccountPicker.value = false
@@ -98,7 +98,7 @@ fun InvoiceListContent(
         } else {
             EmptyState(
                 stringResource(R.string.empty_transactions_title),
-                stringResource(R.string.empty_invoice_desc)
+                stringResource(R.string.empty_invoice_description)
             )
         }
     }

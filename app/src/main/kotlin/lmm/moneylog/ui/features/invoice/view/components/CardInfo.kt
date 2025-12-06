@@ -61,7 +61,7 @@ fun CardInfo(
             ) {
                 Text(
                     if (!isInvoicePaid) {
-                        stringResource(R.string.pay)
+                        stringResource(R.string.action_pay)
                     } else {
                         stringResource(R.string.invoice_paid)
                     }

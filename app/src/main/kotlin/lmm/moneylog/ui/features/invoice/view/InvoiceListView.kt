@@ -30,8 +30,8 @@ fun InvoiceListView(
         onPay = { id ->
             viewModel.onPay(
                 id = id,
-                onError = { showToast(context, R.string.error_pay_invoice) },
-                onSuccess = { showToast(context, R.string.success_pay_invoice) }
+                onError = { showToast(context, R.string.error_invoice_pay) },
+                onSuccess = { showToast(context, R.string.success_invoice_pay) }
             )
         },
         onPreviousMonthClick = viewModel::onPreviousMonthClick,

@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -80,7 +81,7 @@ fun RecentExpensesCard(
                 ) {
                     CircularIconBox(
                         icon = Icons.Default.ArrowUpward,
-                        contentDescription = "Expenses",
+                        contentDescription = stringResource(lmm.moneylog.home.R.string.home_expenses_card_cd),
                         backgroundColor = outcome.copy(alpha = 0.12f),
                         iconTint = outcome,
                         boxSize = 32.dp,
@@ -88,7 +89,7 @@ fun RecentExpensesCard(
                     )
 
                     Text(
-                        text = "Despesas do Mês",
+                        text = stringResource(lmm.moneylog.home.R.string.home_expenses_card_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -136,7 +137,7 @@ fun RecentExpensesCard(
             } else {
                 Spacer(modifier = Modifier.height(Size.SmallSpaceSize))
                 Text(
-                    text = "Nenhuma despesa este mês",
+                    text = stringResource(lmm.moneylog.home.R.string.home_expenses_card_empty),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(vertical = Size.SmallSpaceSize)

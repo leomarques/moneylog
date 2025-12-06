@@ -81,7 +81,7 @@ private fun InvoiceListLayoutPreview() {
     InvoiceListLayout(
         model =
             InvoiceListUIState(
-                titleResourceId = R.string.invoice,
+                titleResourceId = R.string.common_invoice,
                 transactions = transactionModelListPreview,
                 totalValue = "R$100.00",
                 isInvoicePaid = false,

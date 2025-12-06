@@ -26,7 +26,7 @@ fun AccountsListTopBar(
     TopAppBar(
         modifier = modifier,
         windowInsets = WindowInsets(0.dp),
-        title = { Text(text = stringResource(id = R.string.accounts)) },
+        title = { Text(text = stringResource(id = R.string.common_accounts)) },
         navigationIcon = { ArrowBackIcon(onClick = onArrowBackClick) },
         actions = {
             IconButton(
@@ -34,7 +34,7 @@ fun AccountsListTopBar(
                 content = {
                     Icon(
                         painter = painterResource(id = R.drawable.outline_unarchive_24),
-                        contentDescription = stringResource(R.string.archive_desc)
+                        contentDescription = stringResource(R.string.accessibility_archive)
                     )
                 }
             )
@@ -43,7 +43,7 @@ fun AccountsListTopBar(
                 content = {
                     Icon(
                         painter = painterResource(id = R.drawable.outline_currency_exchange_24),
-                        contentDescription = stringResource(R.string.transfer_desc)
+                        contentDescription = stringResource(R.string.accessibility_transfer)
                     )
                 }
             )

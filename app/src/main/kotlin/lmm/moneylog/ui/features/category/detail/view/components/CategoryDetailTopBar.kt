@@ -28,9 +28,9 @@ fun CategoryDetailTopBar(
                 text =
                     stringResource(
                         if (isEdit) {
-                            R.string.detail_topbar_category_edit
+                            R.string.category_topbar_edit
                         } else {
-                            R.string.detail_topbar_category_add
+                            R.string.category_topbar_add
                         }
                     )
             )

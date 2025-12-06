@@ -25,7 +25,7 @@ fun LockButton(
     ) {
         Icon(
             imageVector = if (isHidden) Icons.Filled.Lock else Icons.Outlined.Lock,
-            contentDescription = stringResource(R.string.lock_desc)
+            contentDescription = stringResource(R.string.accessibility_lock)
         )
     }
 }

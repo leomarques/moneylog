@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -140,7 +141,7 @@ private fun BalanceCardHeader(
 private fun WalletIcon() {
     CircularIconBox(
         icon = Icons.Default.AccountBalanceWallet,
-        contentDescription = "Wallet",
+        contentDescription = stringResource(lmm.moneylog.home.R.string.home_balance_card_cd_wallet),
         backgroundColor =
             MaterialTheme.colorScheme.primary.copy(
                 alpha = TotalBalanceCardDefaults.ICON_ALPHA
@@ -186,7 +187,7 @@ private fun BalanceCardContent(
 ) {
     Column {
         Text(
-            text = "Total Balance",
+            text = stringResource(lmm.moneylog.home.R.string.home_balance_card_title),
             style = MaterialTheme.typography.bodySmall,
             color =
                 MaterialTheme.colorScheme.onPrimaryContainer.copy(
