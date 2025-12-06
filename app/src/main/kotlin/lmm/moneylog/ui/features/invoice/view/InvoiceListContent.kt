@@ -30,6 +30,7 @@ fun InvoiceListContent(
     model: InvoiceListUIState,
     filter: String,
     onPay: (Int) -> Unit,
+    onAdjustClick: () -> Unit,
     onItemClick: (Int) -> Unit,
     onPreviousMonthClick: () -> Unit,
     onNextMonthClick: () -> Unit,
@@ -85,6 +86,7 @@ fun InvoiceListContent(
             onPayClick = {
                 showAccountPicker.value = true
             },
+            onAdjustClick = onAdjustClick,
             onPreviousMonthClick = onPreviousMonthClick,
             onNextMonthClick = onNextMonthClick
         )
@@ -118,6 +120,7 @@ private fun InvoiceListContentPreview() {
             ),
         filter = "",
         onPay = {},
+        onAdjustClick = {},
         onItemClick = {},
         onPreviousMonthClick = {},
         onNextMonthClick = {}

@@ -94,6 +94,14 @@
     <string name="invoice_total">Total da fatura</string>
     <string name="invoice_pay_dialog_title">Confirmar pagamento</string>
     <string name="invoice_pay_dialog_description">Você irá pagar a fatura no valor de %1$s com a conta %2$s</string>
+    <string name="invoice_adjust_value">Ajustar Fatura</string>
+    <string name="invoice_adjust_value_title">Ajustar Valor da Fatura</string>
+    <string name="invoice_adjust_value_description">Digite o novo valor da fatura</string>
+    <string name="invoice_adjust_value_new">Novo Valor da Fatura</string>
+    <string name="invoice_adjust_value_success">Fatura ajustada com sucesso</string>
+    <string name="invoice_adjust_value_transaction_desc">Ajuste de fatura</string>
+    <string name="dialog_title_invoice_adjust_value">Ajustar fatura?</string>
+    <string name="dialog_desc_invoice_adjust_value">Uma transação de %1$s será criada para ajustar a fatura. Tem certeza?</string>
 
     <!-- Transfer Screen -->
     <string name="transfer_topbar_add">Fazer Transferência</string>

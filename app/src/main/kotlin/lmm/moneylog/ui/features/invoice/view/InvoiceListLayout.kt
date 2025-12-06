@@ -27,6 +27,7 @@ fun InvoiceListLayout(
     onFabClick: () -> Unit,
     onArrowBackClick: () -> Unit,
     onPay: (Int) -> Unit,
+    onAdjustClick: () -> Unit,
     onPreviousMonthClick: () -> Unit,
     onNextMonthClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -66,6 +67,7 @@ fun InvoiceListLayout(
                     model = model,
                     filter = filter.value,
                     onPay = onPay,
+                    onAdjustClick = onAdjustClick,
                     onItemClick = onItemClick,
                     onPreviousMonthClick = onPreviousMonthClick,
                     onNextMonthClick = onNextMonthClick
@@ -91,6 +93,7 @@ private fun InvoiceListLayoutPreview() {
         onFabClick = {},
         onArrowBackClick = {},
         onPay = {},
+        onAdjustClick = {},
         onPreviousMonthClick = {},
         onNextMonthClick = {}
     )

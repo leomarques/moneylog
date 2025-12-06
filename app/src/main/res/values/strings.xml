@@ -94,6 +94,14 @@
     <string name="invoice_total">Invoice total</string>
     <string name="invoice_pay_dialog_title">Confirm payment</string>
     <string name="invoice_pay_dialog_description">You will pay the invoice of %1$s with account %2$s</string>
+    <string name="invoice_adjust_value">Adjust Invoice</string>
+    <string name="invoice_adjust_value_title">Adjust Invoice Value</string>
+    <string name="invoice_adjust_value_description">Enter the new invoice value</string>
+    <string name="invoice_adjust_value_new">New Invoice Value</string>
+    <string name="invoice_adjust_value_success">Invoice adjusted successfully</string>
+    <string name="invoice_adjust_value_transaction_desc">Invoice adjustment</string>
+    <string name="dialog_title_invoice_adjust_value">Adjust invoice?</string>
+    <string name="dialog_desc_invoice_adjust_value">A transaction of %1$s will be created to adjust the invoice. Are you sure?</string>
 
     <!-- Transfer Screen -->
     <string name="transfer_topbar_add">Make Transfer</string>

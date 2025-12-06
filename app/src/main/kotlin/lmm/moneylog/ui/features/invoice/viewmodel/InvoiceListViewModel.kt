@@ -1,5 +1,6 @@
 package lmm.moneylog.ui.features.invoice.viewmodel
 
+import android.util.Log
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,7 @@ import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepositor
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.model.Transaction
+import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRepository
 import lmm.moneylog.ui.extensions.formatForRs
@@ -29,11 +31,16 @@ class InvoiceListViewModel(
     savedStateHandle: SavedStateHandle,
     private val updateTransactionRepository: UpdateTransactionRepository,
     private val getTransactionsRepository: GetTransactionsRepository,
+    private val addTransactionRepository: AddTransactionRepository,
     getCreditCardsRepository: GetCreditCardsRepository,
     getCategoriesRepository: GetCategoriesRepository,
     getAccountsRepository: GetAccountsRepository,
     private val domainTimeRepository: DomainTimeRepository
 ) : ViewModel() {
+    companion object {
+        private const val TAG = "InvoiceListViewModel"
+    }
+
     private val _uiState = MutableStateFlow(InvoiceListUIState(titleResourceId = R.string.common_invoice))
     val uiState: StateFlow<InvoiceListUIState> = _uiState.asStateFlow()
 
@@ -155,6 +162,58 @@ class InvoiceListViewModel(
         invoiceCode = invoiceCode.nextCode(domainTimeRepository)
         viewModelScope.launch {
             updateTransactions()
+        }
+    }
+
+    @Suppress("ReturnCount")
+    fun calculateInvoiceAdjustment(newValue: String): Pair<String, Double>? {
+        val newValueDouble = newValue.toDoubleOrNull() ?: return null
+
+        val currentTotal = savedTransactions.sumOf { it.value }
+
+        val adjustmentValue = newValueDouble - currentTotal
+        if (adjustmentValue == 0.0) return null
+
+        // Format the adjustment value for display
+        val formattedValue =
+            if (adjustmentValue > 0) {
+                "+${adjustmentValue.formatForRs()}"
+            } else {
+                adjustmentValue.formatForRs()
+            }
+
+        return Pair(formattedValue, adjustmentValue)
+    }
+
+    fun onAdjustInvoiceConfirm(
+        adjustmentValue: Double,
+        onSuccess: () -> Unit,
+        onError: (Int) -> Unit
+    ) {
+        viewModelScope.launch {
+            try {
+                // Extract invoice month and year from invoiceCode
+                val invoiceMonth = invoiceCode.substringBefore(".").toInt()
+                val invoiceYear = invoiceCode.substringAfter(".").toInt()
+
+                val adjustmentTransaction =
+                    Transaction(
+                        value = adjustmentValue,
+                        description = "Adjustment",
+                        date = domainTimeRepository.getCurrentDomainTime(),
+                        creditCardId = creditCardId,
+                        invoiceMonth = invoiceMonth,
+                        invoiceYear = invoiceYear
+                    )
+                addTransactionRepository.save(adjustmentTransaction)
+                onSuccess()
+            } catch (e: IllegalStateException) {
+                Log.e(TAG, "Error saving invoice adjustment transaction", e)
+                onError(R.string.validation_invalid_data)
+            } catch (e: IllegalArgumentException) {
+                Log.e(TAG, "Invalid argument for invoice adjustment transaction", e)
+                onError(R.string.validation_invalid_data)
+            }
         }
     }
 }
