@@ -4,10 +4,13 @@
   <CurrentIssues>
     <ID>ForbiddenComment:BalanceCardViewModel.kt$BalanceCardViewModel$* Calculates the absolute change amount for the balance * TODO: Implement proper calculation with previous period data</ID>
     <ID>ForbiddenComment:BalanceCardViewModel.kt$BalanceCardViewModel$* Calculates the percentage change for the balance * TODO: Implement proper calculation with previous period data</ID>
-    <ID>ForbiddenComment:CreditCardsViewModel.kt$CreditCardsViewModel$* Formats card ID to display as last 4 digits * TODO: Get actual card number from database if stored</ID>
     <ID>FunctionOnlyReturningConstant:BalanceCardViewModel.kt$BalanceCardViewModel$private fun calculateChangePercentage(currentBalance: Double): String</ID>
     <ID>MagicNumber:BalanceCardViewModel.kt$BalanceCardViewModel$0.082</ID>
-    <ID>MagicNumber:CreditCardsViewModel.kt$CreditCardsViewModel$4</ID>
     <ID>UnusedParameter:BalanceCardViewModel.kt$BalanceCardViewModel$currentBalance: Double</ID>
+    <ID>UnusedParameter:TotalBalanceCard.kt$changeAmount: String</ID>
+    <ID>UnusedParameter:TotalBalanceCard.kt$changePercentage: String</ID>
+    <ID>UnusedParameter:TotalBalanceCard.kt$onChangeIndicatorClick: () -&gt; Unit</ID>
+    <ID>UnusedParameter:TotalBalanceCard.kt$valuesMasked: Boolean</ID>
+    <ID>UnusedPrivateMember:TotalBalanceCard.kt$@Composable private fun ChangeIndicator( changePercentage: String, changeAmount: String, onClick: () -&gt; Unit, valuesMasked: Boolean )</ID>
   </CurrentIssues>
 </SmellBaseline>

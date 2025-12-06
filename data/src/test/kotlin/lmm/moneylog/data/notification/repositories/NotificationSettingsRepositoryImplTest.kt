@@ -71,4 +71,52 @@ class NotificationSettingsRepositoryImplTest {
         verify { editor.putInt("notification_default_credit_card_id", 2) }
         verify(exactly = 2) { editor.apply() }
     }
+
+    @Test
+    fun `should return category id when stored`() {
+        every {
+            sharedPreferences.getInt("notification_default_category_id", -1)
+        } returns 3
+
+        val result = repository.getDefaultCategoryId()
+
+        assertEquals(3, result)
+    }
+
+    @Test
+    fun `should return null when no category id stored`() {
+        every {
+            sharedPreferences.getInt("notification_default_category_id", -1)
+        } returns -1
+
+        val result = repository.getDefaultCategoryId()
+
+        assertNull(result)
+    }
+
+    @Test
+    fun `should save category id correctly`() {
+        repository.saveDefaultCategoryId(7)
+
+        verify { editor.putInt("notification_default_category_id", 7) }
+        verify { editor.apply() }
+    }
+
+    @Test
+    fun `should remove category id correctly`() {
+        repository.removeDefaultCategoryId()
+
+        verify { editor.remove("notification_default_category_id") }
+        verify { editor.apply() }
+    }
+
+    @Test
+    fun `should handle multiple category save operations`() {
+        repository.saveDefaultCategoryId(1)
+        repository.saveDefaultCategoryId(2)
+
+        verify { editor.putInt("notification_default_category_id", 1) }
+        verify { editor.putInt("notification_default_category_id", 2) }
+        verify(exactly = 2) { editor.apply() }
+    }
 }

@@ -14,8 +14,6 @@
     <ID>MutableStateParam:TransactionDetailDialogs.kt$showInvoicePicker</ID>
     <ID>ReturnCount:CreditCardDetailViewModel.kt$CreditCardDetailViewModel$fun onFabClick( onSuccess: () -&gt; Unit, onError: (Int) -&gt; Unit )</ID>
     <ID>ReturnCount:TransactionDetailViewModel.kt$TransactionDetailViewModel$private fun Transaction.checkForNulls( state: TransactionDetailUIState, onError: (Int) -&gt; Unit ): Boolean</ID>
-    <ID>SwallowedException:InvoiceListViewModel.kt$InvoiceListViewModel$e: Exception</ID>
-    <ID>TooGenericExceptionCaught:InvoiceListViewModel.kt$InvoiceListViewModel$e: Exception</ID>
     <ID>TooManyFunctions:TransactionDetailViewModel.kt$TransactionDetailViewModel : ViewModel</ID>
   </CurrentIssues>
 </SmellBaseline>

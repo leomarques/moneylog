@@ -27,10 +27,11 @@ class NubankTransactionParserImpl(
                         }
                     }
 
-                // Use keyword-based prediction
+                // Use keyword-based prediction, fallback to default category
                 val categoryId =
                     runBlocking {
                         categoryKeywordRepository.predictCategory(place)
+                            ?: notificationSettingsRepository.getDefaultCategoryId()
                     }
 
                 NubankTransactionInfo(

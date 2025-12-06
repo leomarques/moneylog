@@ -7,14 +7,17 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.notification.repositories.NotificationSettingsRepository
 import lmm.moneylog.ui.extensions.toComposeColor
+import lmm.moneylog.ui.features.notification.settings.model.CategoryItem
 import lmm.moneylog.ui.features.notification.settings.model.CreditCardItem
 import lmm.moneylog.ui.features.notification.settings.model.NotificationSettingsUIState
 
 class NotificationSettingsViewModel(
     private val getCreditCardsRepository: GetCreditCardsRepository,
+    private val getCategoriesRepository: GetCategoriesRepository,
     private val notificationSettingsRepository: NotificationSettingsRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(NotificationSettingsUIState())
@@ -38,6 +41,30 @@ class NotificationSettingsViewModel(
                     currentState.copy(
                         creditCards = creditCardItems,
                         selectedCreditCard = selectedCard
+                    )
+                }
+            }
+        }
+
+        viewModelScope.launch {
+            getCategoriesRepository.getCategories().collect { categories ->
+                val savedCategoryId = notificationSettingsRepository.getDefaultCategoryId()
+                val categoryItems =
+                    categories
+                        .filter { !it.isIncome }
+                        .map {
+                            CategoryItem(
+                                id = it.id,
+                                name = it.name,
+                                color = it.color.toComposeColor()
+                            )
+                        }
+                val selectedCategory = categoryItems.firstOrNull { it.id == savedCategoryId }
+
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        categories = categoryItems,
+                        selectedCategory = selectedCategory
                     )
                 }
             }
@@ -66,6 +93,20 @@ class NotificationSettingsViewModel(
             notificationSettingsRepository.removeDefaultCreditCardId()
             _uiState.update {
                 it.copy(selectedCreditCard = null)
+            }
+        }
+    }
+
+    fun selectCategory(categoryItem: CategoryItem?) {
+        if (categoryItem != null) {
+            notificationSettingsRepository.saveDefaultCategoryId(categoryItem.id)
+            _uiState.update {
+                it.copy(selectedCategory = categoryItem)
+            }
+        } else {
+            notificationSettingsRepository.removeDefaultCategoryId()
+            _uiState.update {
+                it.copy(selectedCategory = null)
             }
         }
     }

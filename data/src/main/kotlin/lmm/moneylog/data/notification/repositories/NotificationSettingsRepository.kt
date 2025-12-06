@@ -6,4 +6,10 @@ interface NotificationSettingsRepository {
     fun saveDefaultCreditCardId(creditCardId: Int)
 
     fun removeDefaultCreditCardId()
+
+    fun getDefaultCategoryId(): Int?
+
+    fun saveDefaultCategoryId(categoryId: Int)
+
+    fun removeDefaultCategoryId()
 }

@@ -7,13 +7,16 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -68,6 +71,7 @@ fun NotificationSettingsScreen(
     val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsState()
     var showCreditCardDialog by remember { mutableStateOf(false) }
+    var showCategoryDialog by remember { mutableStateOf(false) }
 
     var hasListenerPermission by remember {
         mutableStateOf(NotificationPermissionHelper.hasNotificationListenerPermission(context))
@@ -148,6 +152,12 @@ fun NotificationSettingsScreen(
                 onClearSelection = { viewModel.selectCreditCard(null) }
             )
 
+            DefaultCategoryCard(
+                selectedCategory = uiState.selectedCategory,
+                onCategoryClick = { showCategoryDialog = true },
+                onClearSelection = { viewModel.selectCategory(null) }
+            )
+
             CategoryKeywordsCard(
                 onManageClick = onCategoryKeywordsClick
             )
@@ -162,6 +172,18 @@ fun NotificationSettingsScreen(
             onCreditCardSelect = { creditCard ->
                 viewModel.selectCreditCard(creditCard)
                 showCreditCardDialog = false
+            }
+        )
+    }
+
+    if (showCategoryDialog) {
+        CategorySelectorDialog(
+            categories = uiState.categories,
+            selectedCategory = uiState.selectedCategory,
+            onDismiss = { showCategoryDialog = false },
+            onCategorySelect = { category ->
+                viewModel.selectCategory(category)
+                showCategoryDialog = false
             }
         )
     }
@@ -411,6 +433,63 @@ private fun DefaultCreditCardCard(
             )
 
             if (selectedCreditCard != null) {
+                TextButton(
+                    onClick = onClearSelection
+                ) {
+                    Text(stringResource(R.string.action_clear_selection))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun DefaultCategoryCard(
+    selectedCategory: lmm.moneylog.ui.features.notification.settings.model.CategoryItem?,
+    onCategoryClick: () -> Unit,
+    onClearSelection: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.category_default),
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            Text(
+                text = stringResource(R.string.category_default_description),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            ClickTextField(
+                value =
+                    selectedCategory?.name
+                        ?: stringResource(R.string.state_no_category_selected),
+                label = stringResource(R.string.common_category),
+                onClick = onCategoryClick,
+                leadingIcon = {
+                    Box(
+                        modifier =
+                            Modifier
+                                .size(24.dp)
+                                .background(
+                                    color =
+                                        selectedCategory?.color
+                                            ?: MaterialTheme.colorScheme.onSurfaceVariant,
+                                    shape = CircleShape
+                                )
+                    )
+                }
+            )
+
+            if (selectedCategory != null) {
                 TextButton(
                     onClick = onClearSelection
                 ) {

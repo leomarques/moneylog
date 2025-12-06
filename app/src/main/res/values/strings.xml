@@ -73,6 +73,10 @@
     <string name="category_topbar_add">Nova Categoria</string>
     <string name="category_topbar_edit">Editar Categoria</string>
     <string name="category_label">Categoria: %1$s</string>
+    <string name="category_select">Selecionar Categoria</string>
+    <string name="category_default">Categoria Padrão</string>
+    <string name="category_default_description">Selecione a categoria que será atribuída automaticamente às transações criadas a partir de notificações do Nubank quando nenhuma palavra-chave corresponder.</string>
+    <string name="state_no_category_selected">Nenhuma categoria selecionada</string>
 
     <!-- Credit Card Screen -->
     <string name="creditcard_topbar_add">Novo Cartão</string>
