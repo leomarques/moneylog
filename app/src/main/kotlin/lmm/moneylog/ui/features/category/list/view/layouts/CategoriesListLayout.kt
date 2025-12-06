@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,7 +31,6 @@ fun CategoriesListLayout(
                 icon = Icons.Default.Add
             )
         },
-        floatingActionButtonPosition = FabPosition.Center,
         content = { paddingValues ->
             Box(
                 Modifier

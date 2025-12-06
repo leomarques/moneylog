@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -55,7 +54,6 @@ fun TransactionsListLayout(
                 titleResourceId = model.titleResourceId
             )
         },
-        floatingActionButtonPosition = FabPosition.Center,
         floatingActionButton = {
             if (showFab) {
                 MyFab(
@@ -70,7 +68,7 @@ fun TransactionsListLayout(
         content = { paddingValues ->
             Column(
                 Modifier
-                    .padding(top = paddingValues.calculateTopPadding())
+                    .padding(paddingValues = paddingValues)
                     .testTag("TransactionsListScreen")
             ) {
                 MonthSelector(
@@ -120,16 +118,18 @@ private fun List(
     filter: String,
     onItemClick: (Int) -> Unit
 ) {
-    if (model.transactions.isNotEmpty()) {
-        TransactionsListContent(
-            list = model.transactions.filtered(filter),
-            onItemClick = onItemClick
-        )
-    } else {
-        EmptyState(
-            stringResource(R.string.empty_transactions_title),
-            stringResource(R.string.empty_transactions_description)
-        )
+    Box {
+        if (model.transactions.isNotEmpty()) {
+            TransactionsListContent(
+                list = model.transactions.filtered(filter),
+                onItemClick = onItemClick
+            )
+        } else {
+            EmptyState(
+                stringResource(R.string.empty_transactions_title),
+                stringResource(R.string.empty_transactions_description)
+            )
+        }
     }
 }
 

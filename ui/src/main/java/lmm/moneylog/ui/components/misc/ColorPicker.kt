@@ -138,8 +138,7 @@ fun ColorItem(
                 .background(
                     color = color,
                     shape = CircleShape
-                )
-                .then(
+                ).then(
                     if (isSelected) {
                         Modifier.border(
                             width = 3.dp,
@@ -153,8 +152,7 @@ fun ColorItem(
                             shape = CircleShape
                         )
                     }
-                )
-                .clickable { onItemClick() },
+                ).clickable { onItemClick() },
         contentAlignment = Alignment.Center
     ) {
         if (isSelected) {

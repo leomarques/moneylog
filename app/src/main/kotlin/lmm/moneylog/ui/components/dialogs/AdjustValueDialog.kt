@@ -109,8 +109,7 @@ fun AdjustValueDialog(
                                 .background(
                                     color = MaterialTheme.colorScheme.surfaceVariant,
                                     shape = RoundedCornerShape(8.dp)
-                                )
-                                .clickable { showCategorySelectorDialog = true }
+                                ).clickable { showCategorySelectorDialog = true }
                                 .padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -251,8 +250,7 @@ private fun CategorySelectorItem(
                             MaterialTheme.colorScheme.surface
                         },
                     shape = RoundedCornerShape(8.dp)
-                )
-                .clickable(onClick = onClick)
+                ).clickable(onClick = onClick)
                 .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
