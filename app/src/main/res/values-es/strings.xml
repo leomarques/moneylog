@@ -231,4 +231,13 @@
     <string name="graphs_title">Gráficos</string>
     <string name="graphs_label_creditcards">Tarjetas de Crédito</string>
     <string name="graphs_label_expenses">Gastos</string>
+
+    <!-- Demo Mode Feature -->
+    <string name="demo_mode_title">Modo Demo</string>
+    <string name="demo_mode_description">Usar datos de muestra en lugar de base de datos real</string>
+    <string name="demo_mode_enabled">El modo demo está activo</string>
+    <string name="demo_mode_disabled">Usando base de datos real</string>
+    <string name="demo_mode_reset">Restablecer Datos Demo</string>
+    <string name="demo_mode_reset_description">Restaurar datos demo al estado inicial</string>
+    <string name="demo_mode_reset_success">Los datos demo han sido restablecidos</string>
 </resources>

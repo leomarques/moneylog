@@ -14,30 +14,21 @@ import lmm.moneylog.data.category.database.CategoryDao
 import lmm.moneylog.data.category.database.CategoryEntity
 import lmm.moneylog.data.creditcard.database.CreditCardDao
 import lmm.moneylog.data.creditcard.database.CreditCardEntity
+import lmm.moneylog.data.misc.SampleDataGenerator.ACCOUNT_ID_NUCONTA
+import lmm.moneylog.data.misc.SampleDataGenerator.ACCOUNT_ID_SANTANDER
+import lmm.moneylog.data.misc.SampleDataGenerator.CATEGORY_ID_FOOD
+import lmm.moneylog.data.misc.SampleDataGenerator.CATEGORY_ID_GIFT
+import lmm.moneylog.data.misc.SampleDataGenerator.CATEGORY_ID_SALARY
+import lmm.moneylog.data.misc.SampleDataGenerator.CATEGORY_ID_TRANSPORT
+import lmm.moneylog.data.misc.SampleDataGenerator.CREDIT_CARD_CLOSING_DAY
+import lmm.moneylog.data.misc.SampleDataGenerator.CREDIT_CARD_DUE_DAY
+import lmm.moneylog.data.misc.SampleDataGenerator.CREDIT_CARD_ID_NUBANK
+import lmm.moneylog.data.misc.SampleDataGenerator.CREDIT_CARD_LIMIT
+import lmm.moneylog.data.misc.SampleDataGenerator.DEFAULT_TRANSACTION_COUNT
 import lmm.moneylog.data.transaction.database.TransactionDao
 import lmm.moneylog.data.transaction.database.TransactionEntity
 import java.time.LocalDate
 import java.util.concurrent.Executors
-import kotlin.random.Random
-
-private const val CREDIT_CARD_CLOSING_DAY = 3
-private const val CREDIT_CARD_DUE_DAY = 10
-private const val CREDIT_CARD_LIMIT = 10000
-private const val YEARS_OF_HISTORY = 3L
-private const val DEFAULT_TRANSACTION_COUNT = 500
-private const val INCOME_PROBABILITY = 0.3
-private const val CREDIT_CARD_PROBABILITY = 0.2
-private const val MIN_INCOME = 500.0
-private const val MAX_INCOME = 15000.0
-private const val MIN_EXPENSE = 10.0
-private const val MAX_EXPENSE = 500.0
-private const val ACCOUNT_ID_NUCONTA = 1
-private const val ACCOUNT_ID_SANTANDER = 2
-private const val CATEGORY_ID_SALARY = 1
-private const val CATEGORY_ID_GIFT = 2
-private const val CATEGORY_ID_FOOD = 3
-private const val CATEGORY_ID_TRANSPORT = 4
-private const val CREDIT_CARD_ID_NUBANK = 1
 
 data class TransactionGenerationParams(
     val transactionDao: TransactionDao,
@@ -51,16 +42,16 @@ data class TransactionGenerationParams(
 private suspend fun insertAccounts(accountDao: AccountDao) {
     accountDao.insert(
         AccountEntity(
-            name = "NuConta",
-            color = -51457814194814976,
+            name = SampleDataGenerator.Accounts.NUCONTA_NAME,
+            color = SampleDataGenerator.Accounts.NUCONTA_COLOR,
             archived = false
         )
     )
 
     accountDao.insert(
         AccountEntity(
-            name = "Santander",
-            color = -42442007825612800,
+            name = SampleDataGenerator.Accounts.SANTANDER_NAME,
+            color = SampleDataGenerator.Accounts.SANTANDER_COLOR,
             archived = false
         )
     )
@@ -70,16 +61,16 @@ private suspend fun insertCategories(categoryDao: CategoryDao) {
     // Insert income categories
     categoryDao.insert(
         CategoryEntity(
-            name = "Salário",
-            color = -59572381806493696,
+            name = SampleDataGenerator.Categories.SALARY_NAME,
+            color = SampleDataGenerator.Categories.SALARY_COLOR,
             isIncome = true
         )
     )
 
     categoryDao.insert(
         CategoryEntity(
-            name = "Presente",
-            color = -60722264810717184,
+            name = SampleDataGenerator.Categories.GIFT_NAME,
+            color = SampleDataGenerator.Categories.GIFT_COLOR,
             isIncome = true
         )
     )
@@ -87,16 +78,16 @@ private suspend fun insertCategories(categoryDao: CategoryDao) {
     // Insert expense categories
     categoryDao.insert(
         CategoryEntity(
-            name = "Alimentação",
-            color = -33386490188791808,
+            name = SampleDataGenerator.Categories.FOOD_NAME,
+            color = SampleDataGenerator.Categories.FOOD_COLOR,
             isIncome = false
         )
     )
 
     categoryDao.insert(
         CategoryEntity(
-            name = "Transporte",
-            color = -44970936109105152,
+            name = SampleDataGenerator.Categories.TRANSPORT_NAME,
+            color = SampleDataGenerator.Categories.TRANSPORT_COLOR,
             isIncome = false
         )
     )
@@ -105,11 +96,11 @@ private suspend fun insertCategories(categoryDao: CategoryDao) {
 private suspend fun insertCreditCard(creditCardDao: CreditCardDao) {
     creditCardDao.insert(
         CreditCardEntity(
-            name = "Nubank Violeta",
+            name = SampleDataGenerator.CreditCards.NUBANK_NAME,
             closingDay = CREDIT_CARD_CLOSING_DAY,
             dueDay = CREDIT_CARD_DUE_DAY,
             limit = CREDIT_CARD_LIMIT,
-            color = -51457814194814976
+            color = SampleDataGenerator.CreditCards.NUBANK_COLOR
         )
     )
 }
@@ -136,58 +127,6 @@ suspend fun populateDB(
                 count = DEFAULT_TRANSACTION_COUNT
             )
     )
-}
-
-private object TransactionDescriptions {
-    val income =
-        listOf(
-            "Salário mensal",
-            "Bônus",
-            "Freelance",
-            "Presente em dinheiro",
-            "Reembolso",
-            "Venda de item",
-            "Renda extra"
-        )
-
-    val expense =
-        listOf(
-            "Supermercado",
-            "Restaurante",
-            "Lanchonete",
-            "Padaria",
-            "Café",
-            "Uber",
-            "Ônibus",
-            "Metrô",
-            "Gasolina",
-            "Estacionamento",
-            "Farmácia",
-            "Cinema",
-            "Streaming",
-            "Internet",
-            "Água",
-            "Energia elétrica",
-            "Aluguel",
-            "Condomínio",
-            "Academia",
-            "Livros"
-        )
-}
-
-private object TransactionGenerator {
-    fun generateRandomDate(today: LocalDate, yearsAgo: LocalDate): LocalDate {
-        val daysBetween = yearsAgo.toEpochDay().let { today.toEpochDay() - it }
-        val randomDays = Random.nextLong(daysBetween + 1)
-        return yearsAgo.plusDays(randomDays)
-    }
-
-    fun generateValue(isIncome: Boolean): Double =
-        if (isIncome) {
-            Random.nextDouble(MIN_INCOME, MAX_INCOME)
-        } else {
-            -Random.nextDouble(MIN_EXPENSE, MAX_EXPENSE)
-        }
 }
 
 private object TransactionFactory {
@@ -237,46 +176,31 @@ private object TransactionFactory {
 }
 
 suspend fun generateRandomTransactions(params: TransactionGenerationParams) {
-    val today = LocalDate.now()
-    val yearsAgo = today.minusYears(YEARS_OF_HISTORY)
-
     repeat(params.count) {
-        val randomDate = TransactionGenerator.generateRandomDate(today, yearsAgo)
-        val isIncome = Random.nextDouble() < INCOME_PROBABILITY
-        val value = TransactionGenerator.generateValue(isIncome)
-
-        val categoryId =
-            if (isIncome) {
-                params.incomeCategoryIds.random()
-            } else {
-                params.expenseCategoryIds.random()
-            }
-
-        val description =
-            if (isIncome) {
-                TransactionDescriptions.income.random()
-            } else {
-                TransactionDescriptions.expense.random()
-            }
-
-        val useCreditCard = !isIncome && Random.nextDouble() < CREDIT_CARD_PROBABILITY
+        val generatedData =
+            SampleDataGenerator.generateTransactionData(
+                accountIds = params.accountIds,
+                incomeCategoryIds = params.incomeCategoryIds,
+                expenseCategoryIds = params.expenseCategoryIds,
+                creditCardId = params.creditCardId
+            )
 
         val transaction =
-            if (useCreditCard) {
+            if (generatedData.useCreditCard) {
                 TransactionFactory.createCreditCardTransaction(
-                    value = value,
-                    description = description,
-                    date = randomDate,
-                    categoryId = categoryId,
-                    creditCardId = params.creditCardId
+                    value = generatedData.value,
+                    description = generatedData.description,
+                    date = generatedData.date,
+                    categoryId = generatedData.categoryId,
+                    creditCardId = generatedData.creditCardId!!
                 )
             } else {
                 TransactionFactory.createAccountTransaction(
-                    value = value,
-                    description = description,
-                    date = randomDate,
-                    accountId = params.accountIds.random(),
-                    categoryId = categoryId
+                    value = generatedData.value,
+                    description = generatedData.description,
+                    date = generatedData.date,
+                    accountId = generatedData.accountId!!,
+                    categoryId = generatedData.categoryId
                 )
             }
 

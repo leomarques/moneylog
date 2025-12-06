@@ -36,6 +36,8 @@ import lmm.moneylog.data.creditcard.repositories.interfaces.DeleteCreditCardRepo
 import lmm.moneylog.data.creditcard.repositories.interfaces.GetCreditCardsRepository
 import lmm.moneylog.data.creditcard.repositories.interfaces.UpdateCreditCardRepository
 import lmm.moneylog.data.creditcard.utils.InvoiceCalculator
+import lmm.moneylog.data.demo.DemoModeManager
+import lmm.moneylog.data.demo.DemoRepositoriesManager
 import lmm.moneylog.data.graphs.interactors.GetMonthlyTotalsInteractor
 import lmm.moneylog.data.graphs.interactors.GetNetWorthHistoryInteractor
 import lmm.moneylog.data.graphs.interactors.GetTransactionsByCategoryInteractor
@@ -63,10 +65,12 @@ import lmm.moneylog.data.transaction.repositories.interfaces.SearchTransactionsR
 import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRepository
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val dataModule =
     module {
+        // Database DAOs (only for non-demo mode)
         single { MoneylogDatabase.getInstance(get()).transactionDao() }
         single { MoneylogDatabase.getInstance(get()).accountDao() }
         single { MoneylogDatabase.getInstance(get()).categoryDao() }
@@ -74,49 +78,254 @@ val dataModule =
         single { MoneylogDatabase.getInstance(get()).creditCardDao() }
         single { MoneylogDatabase.getInstance(get()).categoryKeywordDao() }
 
+        // Demo mode infrastructure
+        singleOf(::DemoModeManager)
+        single {
+            DemoRepositoriesManager(get()).apply {
+                if (get<DemoModeManager>().isDemoMode()) {
+                    initializeWithDemoData()
+                }
+            }
+        }
+
+        // Time repository (always real, not mocked)
         factoryOf(::DomainTimeRepositoryImpl) { bind<DomainTimeRepository>() }
 
+        // Utilities
         factoryOf(::InvoiceCalculator)
         factoryOf(::GetBalanceInteractor)
         factoryOf(::GetBalanceByAccountInteractor)
-        factoryOf(::GetBalanceRepositoryImpl) { bind<GetBalanceRepository>() }
-
         factoryOf(::GetCreditCardHomeInfoInteractor)
-
         factoryOf(::GetTransactionsByCategoryInteractor)
         factoryOf(::GetMonthlyTotalsInteractor)
         factoryOf(::GetNetWorthHistoryInteractor)
 
-        factoryOf(::AddAccountRepositoryImpl) { bind<AddAccountRepository>() }
-        factoryOf(::GetAccountsRepositoryImpl) { bind<GetAccountsRepository>() }
-        factoryOf(::UpdateAccountRepositoryImpl) { bind<UpdateAccountRepository>() }
-        factoryOf(::DeleteAccountRepositoryImpl) { bind<DeleteAccountRepository>() }
-        factoryOf(::ArchiveAccountRepositoryImpl) { bind<ArchiveAccountRepository>() }
-        factoryOf(::AccountTransferRepositoryImpl) { bind<AccountTransferRepository>() }
-
-        factoryOf(::AddCategoryRepositoryImpl) { bind<AddCategoryRepository>() }
-        factoryOf(::GetCategoriesRepositoryImpl) { bind<GetCategoriesRepository>() }
-        factoryOf(::UpdateCategoryRepositoryImpl) { bind<UpdateCategoryRepository>() }
-        factoryOf(::DeleteCategoryRepositoryImpl) { bind<DeleteCategoryRepository>() }
-
-        factoryOf(::CategoryKeywordRepositoryImpl) { bind<CategoryKeywordRepository>() }
-
-        factoryOf(::AddTransactionRepositoryImpl) { bind<AddTransactionRepository>() }
-        factoryOf(::GetTransactionsRepositoryImpl) { bind<GetTransactionsRepository>() }
-        factoryOf(::UpdateTransactionRepositoryImpl) { bind<UpdateTransactionRepository>() }
-        factoryOf(::DeleteTransactionRepositoryImpl) { bind<DeleteTransactionRepository>() }
-        factoryOf(::SearchTransactionsRepositoryImpl) { bind<SearchTransactionsRepository>() }
-
-        factoryOf(::AddCreditCardRepositoryImpl) { bind<AddCreditCardRepository>() }
-        factoryOf(::GetCreditCardsRepositoryImpl) { bind<GetCreditCardsRepository>() }
-        factoryOf(::UpdateCreditCardRepositoryImpl) { bind<UpdateCreditCardRepository>() }
-        factoryOf(::DeleteCreditCardRepositoryImpl) { bind<DeleteCreditCardRepository>() }
-
-        factoryOf(::NotificationSettingsRepositoryImpl) { bind<NotificationSettingsRepository>() }
-        factoryOf(::NotificationTransactionRepositoryImpl) { bind<NotificationTransactionRepository>() }
-
+        // Nubank utilities (only for non-demo mode)
         factoryOf(::NubankTransactionConverterImpl) { bind<NubankTransactionConverter>() }
         factoryOf(::NubankTransactionParserImpl) { bind<NubankTransactionParser>() }
 
-        factoryOf(::GetInvoicesRepositoryImpl) { bind<GetInvoicesRepository>() }
+        // Account repositories
+        factory<AddAccountRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.accountRepository
+            } else {
+                AddAccountRepositoryImpl(get())
+            }
+        }
+
+        factory<GetAccountsRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.accountRepository
+            } else {
+                GetAccountsRepositoryImpl(get())
+            }
+        }
+
+        factory<UpdateAccountRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.accountRepository
+            } else {
+                UpdateAccountRepositoryImpl(get())
+            }
+        }
+
+        factory<DeleteAccountRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.accountRepository
+            } else {
+                DeleteAccountRepositoryImpl(get())
+            }
+        }
+
+        factory<ArchiveAccountRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.accountRepository
+            } else {
+                ArchiveAccountRepositoryImpl(get())
+            }
+        }
+
+        // Category repositories
+        factory<AddCategoryRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.categoryRepository
+            } else {
+                AddCategoryRepositoryImpl(get())
+            }
+        }
+
+        factory<GetCategoriesRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.categoryRepository
+            } else {
+                GetCategoriesRepositoryImpl(get())
+            }
+        }
+
+        factory<UpdateCategoryRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.categoryRepository
+            } else {
+                UpdateCategoryRepositoryImpl(get())
+            }
+        }
+
+        factory<DeleteCategoryRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.categoryRepository
+            } else {
+                DeleteCategoryRepositoryImpl(get())
+            }
+        }
+
+        // Transaction repositories
+        factory<AddTransactionRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.transactionRepository
+            } else {
+                AddTransactionRepositoryImpl(get())
+            }
+        }
+
+        factory<GetTransactionsRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.transactionRepository
+            } else {
+                GetTransactionsRepositoryImpl(get())
+            }
+        }
+
+        factory<UpdateTransactionRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.transactionRepository
+            } else {
+                UpdateTransactionRepositoryImpl(get())
+            }
+        }
+
+        factory<DeleteTransactionRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.transactionRepository
+            } else {
+                DeleteTransactionRepositoryImpl(get())
+            }
+        }
+
+        factory<SearchTransactionsRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.transactionRepository
+            } else {
+                SearchTransactionsRepositoryImpl(get(), get())
+            }
+        }
+
+        // Credit card repositories
+        factory<AddCreditCardRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.creditCardRepository
+            } else {
+                AddCreditCardRepositoryImpl(get())
+            }
+        }
+
+        factory<GetCreditCardsRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.creditCardRepository
+            } else {
+                GetCreditCardsRepositoryImpl(get())
+            }
+        }
+
+        factory<UpdateCreditCardRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.creditCardRepository
+            } else {
+                UpdateCreditCardRepositoryImpl(get())
+            }
+        }
+
+        factory<DeleteCreditCardRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.creditCardRepository
+            } else {
+                DeleteCreditCardRepositoryImpl(get())
+            }
+        }
+
+        // Account transfer repository
+        factory<AccountTransferRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.accountTransferRepository
+            } else {
+                AccountTransferRepositoryImpl(get())
+            }
+        }
+
+        // Category keyword repository
+        factory<CategoryKeywordRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.categoryKeywordRepository
+            } else {
+                CategoryKeywordRepositoryImpl(get())
+            }
+        }
+
+        // Balance repository
+        factory<GetBalanceRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.balanceRepository
+            } else {
+                GetBalanceRepositoryImpl(get())
+            }
+        }
+
+        // Invoice repository
+        factory<GetInvoicesRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.invoiceRepository
+            } else {
+                GetInvoicesRepositoryImpl(get())
+            }
+        }
+
+        // Notification repositories
+        factory<NotificationSettingsRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.notificationSettingsRepository
+            } else {
+                NotificationSettingsRepositoryImpl(get())
+            }
+        }
+
+        factory<NotificationTransactionRepository> {
+            val demoManager = get<DemoRepositoriesManager>()
+            if (get<DemoModeManager>().isDemoMode()) {
+                demoManager.notificationTransactionRepository
+            } else {
+                NotificationTransactionRepositoryImpl(get())
+            }
+        }
     }

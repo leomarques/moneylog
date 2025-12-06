@@ -231,4 +231,13 @@
     <string name="graphs_title">Graphs</string>
     <string name="graphs_label_creditcards">Credit Cards</string>
     <string name="graphs_label_expenses">Expenses</string>
+
+    <!-- Demo Mode Feature -->
+    <string name="demo_mode_title">Demo Mode</string>
+    <string name="demo_mode_description">Use sample data instead of real database</string>
+    <string name="demo_mode_enabled">Demo mode is active</string>
+    <string name="demo_mode_disabled">Using real database</string>
+    <string name="demo_mode_reset">Reset Demo Data</string>
+    <string name="demo_mode_reset_description">Restore demo data to initial state</string>
+    <string name="demo_mode_reset_success">Demo data has been reset</string>
 </resources>
