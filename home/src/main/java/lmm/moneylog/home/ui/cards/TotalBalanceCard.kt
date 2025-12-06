@@ -128,12 +128,12 @@ private fun BalanceCardHeader(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        ChangeIndicator(
-            changePercentage = changePercentage,
-            changeAmount = changeAmount,
-            onClick = onChangeIndicatorClick,
-            valuesMasked = valuesMasked
-        )
+//        ChangeIndicator(
+//            changePercentage = changePercentage,
+//            changeAmount = changeAmount,
+//            onClick = onChangeIndicatorClick,
+//            valuesMasked = valuesMasked
+//        )
     }
 }
 
