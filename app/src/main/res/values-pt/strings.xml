@@ -229,8 +229,6 @@
 
     <!-- Graphs Feature -->
     <string name="graphs_title">Gráficos</string>
-    <string name="graphs_coming_soon">Este recurso estará disponível em breve!</string>
-    <string name="graphs_description">Aqui você poderá visualizar seus gastos e receitas através de gráficos interativos.</string>
     <string name="graphs_label_creditcards">Cartões de Crédito</string>
     <string name="graphs_label_expenses">Despesas</string>
 </resources>

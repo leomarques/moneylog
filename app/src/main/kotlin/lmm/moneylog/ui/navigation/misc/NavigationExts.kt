@@ -8,11 +8,12 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import lmm.moneylog.ui.features.balancecard.view.layout.BALANCE_CARD_INCOME
-import lmm.moneylog.ui.features.balancecard.view.layout.BALANCE_CARD_OUTCOME
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_ALL
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_INCOME
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_OUTCOME
+
+const val BALANCE_CARD_INCOME = "income"
+const val BALANCE_CARD_OUTCOME = "outcome"
 
 fun NavGraphBuilder.composableExt(
     route: String,

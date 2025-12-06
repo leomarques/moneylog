@@ -229,8 +229,6 @@
 
     <!-- Graphs Feature -->
     <string name="graphs_title">Graphs</string>
-    <string name="graphs_coming_soon">This feature will be available soon!</string>
-    <string name="graphs_description">Here you will be able to view your expenses and income through interactive graphs.</string>
     <string name="graphs_label_creditcards">Credit Cards</string>
     <string name="graphs_label_expenses">Expenses</string>
 </resources>

@@ -229,8 +229,6 @@
 
     <!-- Graphs Feature -->
     <string name="graphs_title">Gráficos</string>
-    <string name="graphs_coming_soon">¡Esta característica estará disponible pronto!</string>
-    <string name="graphs_description">Aquí podrá visualizar sus gastos e ingresos a través de gráficos interactivos.</string>
     <string name="graphs_label_creditcards">Tarjetas de Crédito</string>
     <string name="graphs_label_expenses">Gastos</string>
 </resources>

@@ -6,7 +6,6 @@ import lmm.moneylog.ui.features.account.archive.viewmodel.ArchivedAccountsViewMo
 import lmm.moneylog.ui.features.account.detail.viewmodel.AccountDetailViewModel
 import lmm.moneylog.ui.features.account.list.viewmodel.AccountsListViewModel
 import lmm.moneylog.ui.features.account.transfer.viewmodel.AccountTransferViewModel
-import lmm.moneylog.ui.features.balancecard.viewmodel.BalanceCardViewModel
 import lmm.moneylog.ui.features.category.detail.viewmodel.CategoryDetailViewModel
 import lmm.moneylog.ui.features.category.list.viewmodel.CategoriesListViewModel
 import lmm.moneylog.ui.features.categorykeywords.viewmodel.CategoryKeywordsViewModel
@@ -27,7 +26,6 @@ val appModule =
     module {
         loadKoinModules(homeModule)
 
-        viewModelOf(::BalanceCardViewModel)
         viewModelOf(::CreditHomeCardViewModel)
 
         viewModelOf(::AccountsListViewModel)
