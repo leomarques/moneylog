@@ -21,6 +21,8 @@ class NubankTransactionParserImplTest {
     fun setup() {
         // By default, return null from keyword repository (no match)
         coEvery { categoryKeywordRepository.predictCategory(any()) } returns null
+        // By default, return null from default category ID (no default set)
+        every { notificationSettingsRepository.getDefaultCategoryId() } returns null
         parser =
             NubankTransactionParserImpl(
                 notificationSettingsRepository,
