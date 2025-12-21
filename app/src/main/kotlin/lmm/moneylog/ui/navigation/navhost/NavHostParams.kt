@@ -19,6 +19,7 @@ import lmm.moneylog.ui.navigation.misc.NOTIFICATION_SETTINGS_SCREEN
 import lmm.moneylog.ui.navigation.misc.PARAM_CARD_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
+import lmm.moneylog.ui.navigation.misc.PARAM_IS_INCOME
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
@@ -59,8 +60,8 @@ fun NavHostParams(
         onAccountsItemClick = { id ->
             onNavigate("$ACCOUNT_DETAIL_SCREEN?$PARAM_ID=$id")
         },
-        onCategoriesFabClick = {
-            onNavigate(CATEGORY_DETAIL_SCREEN)
+        onCategoriesFabClick = { isIncome ->
+            onNavigate("$CATEGORY_DETAIL_SCREEN?$PARAM_IS_INCOME=$isIncome")
         },
         onCategoriesItemClick = { id ->
             onNavigate("$CATEGORY_DETAIL_SCREEN?$PARAM_ID=$id")

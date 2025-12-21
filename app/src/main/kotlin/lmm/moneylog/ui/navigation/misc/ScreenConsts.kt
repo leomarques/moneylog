@@ -22,6 +22,7 @@ const val PARAM_TYPE_ALL = "all"
 const val PARAM_ID = "id"
 const val PARAM_CARD_ID = "card_id"
 const val PARAM_INVOICE_CODE = "invoiceCode"
+const val PARAM_IS_INCOME = "isIncome"
 
 const val HOME_INDEX = 0
 const val TRANSACTIONS_INDEX = 1

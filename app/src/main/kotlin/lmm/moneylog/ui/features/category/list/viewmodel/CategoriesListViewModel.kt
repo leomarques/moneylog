@@ -22,15 +22,20 @@ class CategoriesListViewModel(
     init {
         viewModelScope.launch {
             getCategoriesRepository.getCategories().collect { categories ->
-                _uiState.update {
-                    CategoriesListUIState(
-                        categories
-                            .toCategoryModelList()
-                            .reversed()
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        list =
+                            categories
+                                .toCategoryModelList()
+                                .reversed()
                     )
                 }
             }
         }
+    }
+
+    fun setSelectedTab(index: Int) {
+        _uiState.update { it.copy(selectedTabIndex = index) }
     }
 }
 

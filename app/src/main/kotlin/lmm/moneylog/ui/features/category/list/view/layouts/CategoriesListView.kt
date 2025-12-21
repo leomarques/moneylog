@@ -11,12 +11,14 @@ fun CategoriesListView(
     onArrowBackClick: () -> Unit,
     onItemClick: (Int) -> Unit,
     viewModel: CategoriesListViewModel = koinViewModel(),
-    onFabClick: () -> Unit
+    onFabClick: (Boolean) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     CategoriesListLayout(
         list = uiState.list,
+        selectedTabIndex = uiState.selectedTabIndex,
+        onTabChange = { viewModel.setSelectedTab(it) },
         onArrowBackClick = onArrowBackClick,
         onItemClick = onItemClick,
         onFabClick = onFabClick

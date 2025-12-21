@@ -31,7 +31,11 @@ class CategoryDetailViewModel(
 
     init {
         viewModelScope.launch {
-            savedStateHandle.getIdParam()?.let { id ->
+            val id = savedStateHandle.getIdParam()
+            val isIncomeParam = savedStateHandle.get<Boolean>("isIncome") ?: true
+
+            if (id != null) {
+                // Edit mode - load existing category
                 getCategoriesRepository.getCategoryById(id)?.let { category ->
                     _uiState.update {
                         CategoryDetailUIState(
@@ -42,6 +46,11 @@ class CategoryDetailViewModel(
                             isEdit = true
                         )
                     }
+                }
+            } else {
+                // Create mode - use isIncome from navigation parameter
+                _uiState.update {
+                    it.copy(isIncome = isIncomeParam)
                 }
             }
         }

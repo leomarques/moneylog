@@ -45,6 +45,7 @@ import lmm.moneylog.ui.navigation.misc.NOTIFICATION_SETTINGS_SCREEN
 import lmm.moneylog.ui.navigation.misc.PARAM_CARD_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_ID
 import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
+import lmm.moneylog.ui.navigation.misc.PARAM_IS_INCOME
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_OF_VALUE
 import lmm.moneylog.ui.navigation.misc.SETTINGS_SCREEN
@@ -65,7 +66,7 @@ fun MyNavHost(
     onTransactionsItemClick: (Long) -> Unit,
     onAccountsFabClick: () -> Unit,
     onAccountsItemClick: (Int) -> Unit,
-    onCategoriesFabClick: () -> Unit,
+    onCategoriesFabClick: (Boolean) -> Unit,
     onCategoriesItemClick: (Int) -> Unit,
     onArchivedIconClick: () -> Unit,
     onTransferIconClick: () -> Unit,
@@ -179,9 +180,16 @@ fun MyNavHost(
         }
 
         composableExt(
-            route = "$CATEGORY_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
+            route = "$CATEGORY_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}&$PARAM_IS_INCOME={$PARAM_IS_INCOME}",
             onArrowBackClick = onArrowBackClick,
-            arguments = intIdArguments
+            arguments =
+                intIdArguments +
+                    listOf(
+                        navArgument(PARAM_IS_INCOME) {
+                            defaultValue = true
+                            type = NavType.BoolType
+                        }
+                    )
         ) {
             CategoryDetailView(onArrowBackClick = onArrowBackClick)
         }

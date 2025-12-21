@@ -46,7 +46,12 @@ fun CategoryDetailFields(
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
             colors =
                 CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor =
+                        if (isIncome) {
+                            MaterialTheme.colorScheme.primaryContainer
+                        } else {
+                            MaterialTheme.colorScheme.errorContainer
+                        }
                 )
         ) {
             Column(

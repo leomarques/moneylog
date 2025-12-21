@@ -17,17 +17,21 @@ import lmm.moneylog.ui.theme.darkRed
 @Composable
 fun CategoriesListLayout(
     onArrowBackClick: () -> Unit,
-    onFabClick: () -> Unit,
+    onFabClick: (Boolean) -> Unit,
     list: List<CategoryModel>,
+    selectedTabIndex: Int,
+    onTabChange: (Int) -> Unit,
     onItemClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var currentTabIsIncome = true
+
     Scaffold(
         modifier = modifier,
         topBar = { CategoriesListTopBar(onArrowBackClick = onArrowBackClick) },
         floatingActionButton = {
             HideFab(
-                onClick = onFabClick,
+                onClick = { onFabClick(currentTabIsIncome) },
                 icon = Icons.Default.Add
             )
         },
@@ -39,7 +43,10 @@ fun CategoriesListLayout(
             ) {
                 CategoriesListContent(
                     list = list,
-                    onItemClick = onItemClick
+                    selectedTabIndex = selectedTabIndex,
+                    onTabChange = onTabChange,
+                    onItemClick = onItemClick,
+                    currentTabIsIncome = { currentTabIsIncome = it }
                 )
             }
         }
@@ -73,6 +80,8 @@ private fun CategoriesListLayoutPreview() {
                     isIncome = false
                 )
             ),
+        selectedTabIndex = 0,
+        onTabChange = { },
         onItemClick = {}
     )
 }

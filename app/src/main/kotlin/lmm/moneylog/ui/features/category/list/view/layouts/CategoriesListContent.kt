@@ -3,8 +3,6 @@ package lmm.moneylog.ui.features.category.list.view.layouts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,26 +17,33 @@ import lmm.moneylog.ui.theme.neutralColor
 fun CategoriesListContent(
     onItemClick: (Int) -> Unit,
     list: List<CategoryModel>,
+    selectedTabIndex: Int,
+    onTabChange: (Int) -> Unit,
+    currentTabIsIncome: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val tabIndex = remember { mutableIntStateOf(0) }
     val tabs =
         listOf(
             stringResource(id = R.string.common_incomes),
             stringResource(id = R.string.common_outcomes)
         )
 
+    // Notify parent of current tab state
+    val isIncome = selectedTabIndex == 0
+    currentTabIsIncome(isIncome)
+
     Column(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CategoriesTabs(
-            tabIndex = tabIndex,
-            tabs = tabs
+            selectedTabIndex = selectedTabIndex,
+            tabs = tabs,
+            onTabChange = onTabChange
         )
 
         CategoriesTabContent(
-            list = list.filter { it.isIncome == (tabIndex.intValue == 0) },
+            list = list.filter { it.isIncome == isIncome },
             onItemClick = onItemClick
         )
     }
@@ -69,6 +74,9 @@ private fun CategoriesListContentPreview() {
                     color = neutralColor,
                     isIncome = true
                 )
-            )
+            ),
+        selectedTabIndex = 0,
+        onTabChange = { },
+        currentTabIsIncome = { }
     )
 }
