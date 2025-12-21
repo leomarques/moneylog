@@ -93,7 +93,7 @@ fun MyNavHost(
                     type = NavType.LongType
                 }
             )
-        
+
         val intIdArguments =
             listOf(
                 navArgument(PARAM_ID) {

@@ -5,8 +5,9 @@ Compose:
     active: true
   DefaultsVisibility:
     active: true
-  ModifierComposable:
-    active: true
+  # ModifierComposable rule has been removed or renamed in newer versions
+  # ModifierComposable:
+  #   active: true
   ModifierMissing:
     active: true
   ModifierNaming:
