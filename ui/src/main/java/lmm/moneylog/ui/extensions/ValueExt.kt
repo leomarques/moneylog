@@ -18,9 +18,7 @@ fun String.validateValue(isIncome: Boolean = true): Double {
     }
 }
 
-fun Double.roundTo2Decimals(): Double {
-    return round(this * 100) / 100
-}
+fun Double.roundTo2Decimals(): Double = round(this * 100) / 100
 
 fun Double.formatForRs(allowNegative: Boolean = true): String {
     val absValue = abs(this)

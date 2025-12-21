@@ -1,10 +1,10 @@
 package lmm.moneylog.data.graphs.interactors
 
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import lmm.moneylog.data.balance.repositories.GetBalanceRepository
 import lmm.moneylog.data.graphs.model.NetWorthPoint
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
-import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 
 private const val NET_WORTH_HISTORY_MONTHS = 24
 private const val FIRST_MONTH = 1
@@ -16,11 +16,11 @@ private const val YEAR_SUFFIX_LENGTH = 2
  * Interactor for getting net worth history over time
  * Calculates cumulative balance at the end of each month
  *
- * @property getTransactionsRepository Repository for fetching transactions
+ * @property getBalanceRepository Repository for fetching all transactions
  * @property domainTimeRepository Repository for time-related operations
  */
 class GetNetWorthHistoryInteractor(
-    private val getTransactionsRepository: GetTransactionsRepository,
+    private val getBalanceRepository: GetBalanceRepository,
     private val domainTimeRepository: DomainTimeRepository
 ) {
     /**
@@ -53,24 +53,20 @@ class GetNetWorthHistoryInteractor(
             }
         }
 
-        // Create flows for each month
-        val flows =
+        // Fetch ALL transactions at once and build cumulative balance month-by-month
+        // This ensures we include historical balance before the 24-month window
+        return getBalanceRepository.getTransactions().map { allTransactions ->
+            // Filter to only paid transactions (with accountId)
+            val paidTransactions = allTransactions.filter { it.accountId != null }
+
             monthlyData.map { (m, y) ->
-                getTransactionsRepository.getAllTransactions(month = m, year = y)
-            }
-
-        // Combine all flows
-        return combine(flows) { transactionArrays ->
-            var cumulativeBalance = 0.0
-
-            monthlyData.mapIndexed { index, (m, y) ->
-                // Add this month's paid transactions to cumulative balance
-                val monthTransactions = transactionArrays[index]
-                // Only add transactions from accounts (paid transactions)
-                cumulativeBalance +=
-                    monthTransactions
-                        .filter { it.accountId != null }
-                        .sumOf { it.value }
+                // Calculate cumulative balance up to and including this month/year
+                // This matches the logic in GetBalanceInteractor
+                val cumulativeBalance =
+                    paidTransactions
+                        .filter { transaction ->
+                            transaction.year < y || (transaction.year == y && transaction.month <= m)
+                        }.sumOf { it.value }
 
                 val shortMonthName =
                     domainTimeRepository
@@ -80,7 +76,9 @@ class GetNetWorthHistoryInteractor(
 
                 // For year boundaries, show "Mon/YY" format
                 val isYearBoundary = m == FIRST_MONTH || m == LAST_MONTH
-                val isFirstOrLast = index == 0 || index == monthlyData.size - 1
+                val isFirstOrLast =
+                    monthlyData.indexOf(Pair(m, y)) == 0 ||
+                        monthlyData.indexOf(Pair(m, y)) == monthlyData.size - 1
                 val displayName =
                     if (isYearBoundary || isFirstOrLast) {
                         "$shortMonthName/${y.toString().takeLast(YEAR_SUFFIX_LENGTH)}"
