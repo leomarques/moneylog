@@ -21,6 +21,7 @@ import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepos
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRepository
 import lmm.moneylog.ui.extensions.formatForRs
+import lmm.moneylog.ui.extensions.roundTo2Decimals
 import lmm.moneylog.ui.features.category.list.model.CategoriesListUIState
 import lmm.moneylog.ui.features.category.list.viewmodel.toCategoryModelList
 import lmm.moneylog.ui.features.invoice.model.InvoiceListUIState
@@ -199,7 +200,7 @@ class InvoiceListViewModel(
 
         val currentTotal = savedTransactions.sumOf { it.value }
 
-        val adjustmentValue = newValueDouble - currentTotal
+        val adjustmentValue = (newValueDouble - currentTotal).roundTo2Decimals()
         if (adjustmentValue == 0.0) return null
 
         // Format the adjustment value for display

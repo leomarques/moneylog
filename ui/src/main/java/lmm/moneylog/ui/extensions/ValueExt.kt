@@ -3,6 +3,7 @@ package lmm.moneylog.ui.extensions
 import java.lang.NumberFormatException
 import java.util.Locale.getDefault
 import kotlin.math.abs
+import kotlin.math.round
 
 fun String.validateValue(isIncome: Boolean = true): Double {
     val value = replace(",", ".").toDouble()
@@ -15,6 +16,10 @@ fun String.validateValue(isIncome: Boolean = true): Double {
     } else {
         -value
     }
+}
+
+fun Double.roundTo2Decimals(): Double {
+    return round(this * 100) / 100
 }
 
 fun Double.formatForRs(allowNegative: Boolean = true): String {

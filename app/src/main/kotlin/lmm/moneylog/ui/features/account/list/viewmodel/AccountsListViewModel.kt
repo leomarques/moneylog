@@ -20,6 +20,7 @@ import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.model.Transaction
 import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
 import lmm.moneylog.ui.extensions.formatForRs
+import lmm.moneylog.ui.extensions.roundTo2Decimals
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.account.list.model.AccountModel
 import lmm.moneylog.ui.features.account.list.model.AccountsListUIState
@@ -115,7 +116,7 @@ class AccountsListViewModel(
                 return null
             }
 
-        val adjustmentValue = newBalanceValue - currentBalance
+        val adjustmentValue = (newBalanceValue - currentBalance).roundTo2Decimals()
         if (adjustmentValue == 0.0) return null
 
         // Format the adjustment value for display
