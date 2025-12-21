@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -42,7 +43,7 @@ fun BalanceRoundIcon(
     RoundIcon(
         iconRes = lmm.moneylog.ui.R.drawable.balance_24px,
         backgroundColor = MaterialTheme.colorScheme.primaryContainer,
-        contentDescription = "Adjust balance",
+        contentDescription = stringResource(R.string.accessibility_adjust_balance),
         modifier = modifier
     )
 }
@@ -60,7 +61,7 @@ fun MoneyRoundIcon(
             } else {
                 MaterialTheme.colorScheme.surfaceVariant
             },
-        contentDescription = "Pay",
+        contentDescription = stringResource(R.string.accessibility_pay),
         modifier = modifier
     )
 }

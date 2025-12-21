@@ -56,6 +56,10 @@
     <string name="transaction_topbar_edit">Editar Transação</string>
     <string name="transaction_type_debt">Débito</string>
     <string name="transaction_type_credit">Crédito</string>
+    <string name="transaction_section_amount">Valor</string>
+    <string name="transaction_section_details">Detalhes</string>
+    <string name="transaction_section_category">Categoria</string>
+    <string name="transaction_section_payment">Método de Pagamento</string>
 
     <!-- Account Screen -->
     <string name="account_topbar_add">Nova Conta</string>
@@ -188,11 +192,14 @@
     <string name="accessibility_close">fechar</string>
     <string name="accessibility_lock">esconder</string>
     <string name="accessibility_preview_icon">Ícone de pré-visualização</string>
+    <string name="accessibility_adjust_balance">Ajustar saldo</string>
+    <string name="accessibility_pay">Pagar</string>
 
     <!-- Settings Screen -->
     <string name="settings_title">Configurações</string>
     <string name="settings_management">Gerenciamento</string>
     <string name="settings_features">Recursos</string>
+    <string name="settings_development">Desenvolvimento</string>
     <string name="settings_manage_accounts">Gerencie suas contas bancárias</string>
     <string name="settings_manage_categories">Gerencie suas categorias de gastos</string>
     <string name="settings_manage_creditcards">Gerencie seus cartões de crédito</string>
@@ -226,6 +233,10 @@
     <string name="notifications_permission_grant">Conceder Permissão de Notificação</string>
     <string name="notifications_permission_granted">✓ Permissão de notificação concedida!</string>
     <string name="notifications_settings_manage">Gerenciar Configurações de Notificações</string>
+    <string name="notification_action_remove">Remover</string>
+    <string name="notification_default_title">Transação MoneyLog</string>
+    <string name="notification_channel_name">Notificações MoneyLog</string>
+    <string name="notification_format_transaction">R$ %1$s em %2$s</string>
 
     <!-- Graphs Feature -->
     <string name="graphs_title">Gráficos</string>

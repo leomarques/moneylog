@@ -164,7 +164,7 @@ fun SettingsScreen(
             }
 
             Text(
-                text = "Development",
+                text = stringResource(R.string.settings_development),
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
