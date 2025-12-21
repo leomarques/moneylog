@@ -11,7 +11,7 @@ import lmm.moneylog.data.transaction.model.TransactionSuggestion
 import lmm.moneylog.ui.theme.neutralColor
 
 data class TransactionDetailUIState(
-    val id: Int = -1,
+    val id: Long = -1L,
     val titleResourceId: Int = R.string.transaction_topbar_add,
     val isEdit: Boolean = false,
     val showFab: Boolean = true,

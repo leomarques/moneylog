@@ -22,7 +22,7 @@ import lmm.moneylog.ui.features.transaction.list.view.transactionModelListPrevie
 @Composable
 fun InvoiceListLayout(
     model: InvoiceListUIState,
-    onItemClick: (Int) -> Unit,
+    onItemClick: (Long) -> Unit,
     onFabClick: () -> Unit,
     onArrowBackClick: () -> Unit,
     onPay: (Int) -> Unit,

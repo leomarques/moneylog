@@ -19,9 +19,9 @@ class InMemoryTransactionRepository :
     DeleteTransactionRepository,
     SearchTransactionsRepository {
     private val transactions = MutableStateFlow<List<Transaction>>(emptyList())
-    private var nextId = 1
+    private var nextId = 1L
 
-    override suspend fun getTransactionById(id: Int): Transaction? =
+    override suspend fun getTransactionById(id: Long): Transaction? =
         transactions.value.firstOrNull { it.id == id }
 
     override fun getAllTransactions(month: Int, year: Int): Flow<List<Transaction>> =
@@ -76,7 +76,7 @@ class InMemoryTransactionRepository :
     override suspend fun save(transaction: Transaction): Long {
         val newTransaction = transaction.copy(id = nextId++)
         transactions.value = transactions.value + newTransaction
-        return newTransaction.id.toLong()
+        return newTransaction.id
     }
 
     override suspend fun update(transaction: Transaction) {
@@ -119,7 +119,7 @@ class InMemoryTransactionRepository :
         this.transactions.value = this.transactions.value + paymentTransaction
     }
 
-    override suspend fun delete(id: Int) {
+    override suspend fun delete(id: Long) {
         transactions.value = transactions.value.filterNot { it.id == id }
     }
 
@@ -145,12 +145,12 @@ class InMemoryTransactionRepository :
 
     internal fun clear() {
         transactions.value = emptyList()
-        nextId = 1
+        nextId = 1L
     }
 
     internal fun setInitialData(data: List<Transaction>) {
         transactions.value = data
-        nextId = (data.maxOfOrNull { it.id } ?: 0) + 1
+        nextId = (data.maxOfOrNull { it.id } ?: 0L) + 1L
     }
 
     internal fun getAllTransactionsFlow(): Flow<List<Transaction>> = transactions

@@ -31,7 +31,7 @@ fun InvoiceListContent(
     filter: String,
     onPay: (Int) -> Unit,
     onAdjustClick: () -> Unit,
-    onItemClick: (Int) -> Unit,
+    onItemClick: (Long) -> Unit,
     onPreviousMonthClick: () -> Unit,
     onNextMonthClick: () -> Unit,
     modifier: Modifier = Modifier,

@@ -62,7 +62,7 @@ fun MyNavHost(
     onBalanceCardClick: (String) -> Unit,
     onArrowBackClick: () -> Unit,
     onTransactionsFabClick: () -> Unit,
-    onTransactionsItemClick: (Int) -> Unit,
+    onTransactionsItemClick: (Long) -> Unit,
     onAccountsFabClick: () -> Unit,
     onAccountsItemClick: (Int) -> Unit,
     onCategoriesFabClick: () -> Unit,
@@ -86,7 +86,15 @@ fun MyNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        val arguments =
+        val transactionArguments =
+            listOf(
+                navArgument(PARAM_ID) {
+                    defaultValue = -1L
+                    type = NavType.LongType
+                }
+            )
+        
+        val intIdArguments =
             listOf(
                 navArgument(PARAM_ID) {
                     defaultValue = -1
@@ -133,7 +141,7 @@ fun MyNavHost(
         composableExt(
             route = "$TRANSACTION_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}&$PARAM_CARD_ID={$PARAM_CARD_ID}",
             onArrowBackClick = onArrowBackClick,
-            arguments = arguments
+            arguments = transactionArguments
         ) {
             TransactionDetailView(onArrowBackClick = onArrowBackClick)
         }
@@ -154,7 +162,7 @@ fun MyNavHost(
         composableExt(
             route = "$ACCOUNT_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
             onArrowBackClick = onArrowBackClick,
-            arguments = arguments
+            arguments = intIdArguments
         ) {
             AccountDetailView(onArrowBackClick = onArrowBackClick)
         }
@@ -173,7 +181,7 @@ fun MyNavHost(
         composableExt(
             route = "$CATEGORY_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
             onArrowBackClick = onArrowBackClick,
-            arguments = arguments
+            arguments = intIdArguments
         ) {
             CategoryDetailView(onArrowBackClick = onArrowBackClick)
         }
@@ -206,7 +214,7 @@ fun MyNavHost(
         composableExt(
             route = "$CREDITCARD_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
             onArrowBackClick = onArrowBackClick,
-            arguments = arguments
+            arguments = intIdArguments
         ) {
             CreditCardDetailView(onArrowBackClick = onArrowBackClick)
         }
@@ -214,7 +222,7 @@ fun MyNavHost(
         composableExt(
             route = "$INVOICE_LIST_SCREEN?$PARAM_CARD_ID={$PARAM_CARD_ID}&$PARAM_INVOICE_CODE={$PARAM_INVOICE_CODE}",
             onArrowBackClick = onArrowBackClick,
-            arguments = arguments
+            arguments = intIdArguments
         ) {
             InvoiceListView(
                 onArrowBackClick = onArrowBackClick,
@@ -226,7 +234,7 @@ fun MyNavHost(
         composableExt(
             route = "$CREDITCARD_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
             onArrowBackClick = onArrowBackClick,
-            arguments = arguments
+            arguments = intIdArguments
         ) {
             CreditCardDetailView(onArrowBackClick = onArrowBackClick)
         }

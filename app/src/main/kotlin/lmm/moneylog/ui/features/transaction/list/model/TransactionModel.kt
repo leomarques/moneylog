@@ -9,7 +9,7 @@ data class TransactionModel(
     val account: String,
     val category: String,
     val date: String,
-    val id: Int,
+    val id: Long,
     val categoryColor: Color,
     val creditCard: String
 )

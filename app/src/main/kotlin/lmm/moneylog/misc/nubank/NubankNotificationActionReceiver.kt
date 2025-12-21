@@ -33,9 +33,9 @@ class NubankNotificationActionReceiver :
 
         when (intent.action) {
             ACTION_REMOVE_TRANSACTION -> {
-                val transactionId = intent.getIntExtra(EXTRA_TRANSACTION_ID, -1)
+                val transactionId = intent.getLongExtra(EXTRA_TRANSACTION_ID, -1L)
                 val notificationId = intent.getIntExtra(EXTRA_NOTIFICATION_ID, -1)
-                if (transactionId != -1) {
+                if (transactionId != -1L) {
                     handleRemoveTransaction(
                         context = context,
                         transactionId = transactionId,
@@ -48,7 +48,7 @@ class NubankNotificationActionReceiver :
 
     private fun handleRemoveTransaction(
         context: Context,
-        transactionId: Int,
+        transactionId: Long,
         notificationId: Int
     ) {
         // Use goAsync() to ensure the BroadcastReceiver stays alive during the async operation

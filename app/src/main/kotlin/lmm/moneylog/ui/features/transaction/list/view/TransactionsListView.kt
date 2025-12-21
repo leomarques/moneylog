@@ -12,7 +12,7 @@ fun TransactionsListView(
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
     typeOfValue: String?,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Long) -> Unit
 ) {
     val viewModel =
         koinViewModel<TransactionsListViewModel>(parameters = { parametersOf(typeOfValue) })

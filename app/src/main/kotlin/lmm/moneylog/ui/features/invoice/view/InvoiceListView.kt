@@ -19,7 +19,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun InvoiceListView(
-    onItemClick: (Int) -> Unit,
+    onItemClick: (Long) -> Unit,
     onFabClick: (Int) -> Unit,
     viewModel: InvoiceListViewModel = koinViewModel(),
     onArrowBackClick: () -> Unit

@@ -29,7 +29,7 @@ import lmm.moneylog.ui.theme.outcome
 @Composable
 fun TransactionsListItem(
     transaction: TransactionModel,
-    onItemClick: (Int) -> Unit,
+    onItemClick: (Long) -> Unit,
     color: Color,
     modifier: Modifier = Modifier
 ) {

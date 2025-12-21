@@ -36,7 +36,7 @@ fun TransactionsListLayout(
     model: TransactionsListUIState,
     onArrowBackClick: () -> Unit,
     onFabClick: () -> Unit,
-    onItemClick: (Int) -> Unit,
+    onItemClick: (Long) -> Unit,
     onPreviousMonthClick: () -> Unit,
     onNextMonthClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -116,7 +116,7 @@ private fun TotalValue(model: TransactionsListUIState) {
 private fun List(
     model: TransactionsListUIState,
     filter: String,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Long) -> Unit
 ) {
     Box {
         if (model.transactions.isNotEmpty()) {

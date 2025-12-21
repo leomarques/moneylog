@@ -90,7 +90,7 @@ object DemoDataProvider {
         val incomeCategoryIds = listOf(CATEGORY_ID_SALARY, CATEGORY_ID_GIFT)
         val expenseCategoryIds = listOf(CATEGORY_ID_FOOD, CATEGORY_ID_TRANSPORT)
 
-        var transactionId = 1
+        var transactionId = 1L
 
         repeat(DEFAULT_TRANSACTION_COUNT) {
             val generatedData =
@@ -132,7 +132,7 @@ object DemoDataProvider {
     fun getCategoryKeywords(): List<CategoryKeyword> = emptyList()
 
     private data class TransactionParams(
-        val id: Int,
+        val id: Long,
         val value: Double,
         val description: String,
         val date: java.time.LocalDate,

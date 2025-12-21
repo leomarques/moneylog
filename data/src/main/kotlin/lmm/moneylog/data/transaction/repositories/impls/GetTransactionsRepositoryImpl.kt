@@ -11,7 +11,7 @@ import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepo
 class GetTransactionsRepositoryImpl(
     private val transactionDao: TransactionDao
 ) : GetTransactionsRepository {
-    override suspend fun getTransactionById(id: Int): Transaction? {
+    override suspend fun getTransactionById(id: Long): Transaction? {
         val transaction = transactionDao.selectTransactionById(id)
         return if (transaction != null) {
             with(transaction) {

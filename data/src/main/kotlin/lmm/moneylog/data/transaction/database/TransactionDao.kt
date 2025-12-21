@@ -38,10 +38,10 @@ interface TransactionDao {
     ): Flow<List<TransactionEntity>>
 
     @Query("SELECT * FROM `transaction` WHERE id = :id")
-    suspend fun selectTransactionById(id: Int): TransactionEntity?
+    suspend fun selectTransactionById(id: Long): TransactionEntity?
 
     @Query("DELETE FROM `transaction` WHERE id = :id")
-    suspend fun delete(id: Int)
+    suspend fun delete(id: Long)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAndReturnId(transactionEntity: TransactionEntity): Long

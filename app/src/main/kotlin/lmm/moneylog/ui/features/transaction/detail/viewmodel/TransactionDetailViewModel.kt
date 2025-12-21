@@ -25,7 +25,7 @@ import lmm.moneylog.data.transaction.repositories.interfaces.DeleteTransactionRe
 import lmm.moneylog.data.transaction.repositories.interfaces.GetTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.SearchTransactionsRepository
 import lmm.moneylog.data.transaction.repositories.interfaces.UpdateTransactionRepository
-import lmm.moneylog.ui.extensions.getIdParam
+import lmm.moneylog.ui.extensions.getTransactionIdParam
 import lmm.moneylog.ui.extensions.orDefaultColor
 import lmm.moneylog.ui.extensions.toComposeColor
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
@@ -55,7 +55,7 @@ class TransactionDetailViewModel(
             val categories = getCategoriesRepository.getCategoriesSuspend()
             val creditCards = getCreditCardsRepository.getCreditCardsSuspend()
 
-            val idParam = savedStateHandle.getIdParam()
+            val idParam = savedStateHandle.getTransactionIdParam()
             if (idParam != null) {
                 setupEdit(idParam = idParam)
             } else {
@@ -91,7 +91,7 @@ class TransactionDetailViewModel(
         }
     }
 
-    private suspend fun setupEdit(idParam: Int) {
+    private suspend fun setupEdit(idParam: Long) {
         getTransactionsRepository.getTransactionById(idParam)?.let { transaction ->
             _uiState.update {
                 transaction.toDetailModel(domainTimeRepository)

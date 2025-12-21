@@ -54,5 +54,5 @@ data class TransactionEntity(
     val creditCardId: Int? = null
 ) {
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+    var id: Long = 0
 }
