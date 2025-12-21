@@ -81,7 +81,7 @@ fun TransactionDetailFields(
             ) {
                 // Section Header
                 Text(
-                    text = "Amount",
+                    text = stringResource(R.string.transaction_section_amount),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(bottom = 12.dp)
@@ -130,7 +130,7 @@ fun TransactionDetailFields(
                         .padding(20.dp)
             ) {
                 Text(
-                    text = "Details",
+                    text = stringResource(R.string.transaction_section_details),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(bottom = 12.dp)
@@ -189,7 +189,7 @@ fun TransactionDetailFields(
                         .padding(20.dp)
             ) {
                 Text(
-                    text = "Category",
+                    text = stringResource(R.string.transaction_section_category),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(bottom = 12.dp)
@@ -226,7 +226,7 @@ fun TransactionDetailFields(
                         .padding(20.dp)
             ) {
                 Text(
-                    text = "Payment Method",
+                    text = stringResource(R.string.transaction_section_payment),
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(bottom = 12.dp)

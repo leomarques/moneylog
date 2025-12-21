@@ -26,7 +26,7 @@ class NotificationHelper(
         val channel =
             NotificationChannel(
                 CHANNEL_ID,
-                CHANNEL_NAME,
+                context.getString(R.string.notification_channel_name),
                 NotificationManager.IMPORTANCE_DEFAULT
             )
         notificationManager.createNotificationChannel(channel)
@@ -72,7 +72,7 @@ class NotificationHelper(
 
             builder.addAction(
                 android.R.drawable.ic_menu_delete,
-                "Remover",
+                context.getString(R.string.notification_action_remove),
                 removePendingIntent
             )
 
@@ -97,17 +97,20 @@ class NotificationHelper(
     }
 
     private fun formatNotificationText(transactionInfo: NubankTransactionInfo): String =
-        "R$ ${transactionInfo.value} em ${transactionInfo.place}"
+        context.getString(
+            R.string.notification_format_transaction,
+            transactionInfo.value,
+            transactionInfo.place
+        )
 
     private fun sanitizeTitle(title: String?): String =
         title
             ?.trim()
             ?.take(MAX_TITLE_LENGTH)
-            ?.takeIf { it.isNotBlank() } ?: "MoneyLog Transaction"
+            ?.takeIf { it.isNotBlank() } ?: context.getString(R.string.notification_default_title)
 
     companion object {
         private const val CHANNEL_ID = "moneylog_channel"
-        private const val CHANNEL_NAME = "MoneyLog Notifications"
         private const val MAX_TITLE_LENGTH = 100
     }
 }

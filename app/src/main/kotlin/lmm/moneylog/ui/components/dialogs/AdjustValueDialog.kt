@@ -281,8 +281,8 @@ private fun AdjustValueDialogPreview() {
     AdjustValueDialog(
         onDismiss = {},
         onConfirm = { _, _ -> },
-        title = "Adjust Balance",
-        description = "Enter the new balance value",
-        inputLabel = "New balance"
+        title = stringResource(R.string.account_adjust_balance_title),
+        description = stringResource(R.string.account_adjust_balance_description),
+        inputLabel = stringResource(R.string.account_adjust_balance_new)
     )
 }

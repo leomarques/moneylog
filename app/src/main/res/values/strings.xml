@@ -56,6 +56,10 @@
     <string name="transaction_topbar_edit">Edit Transaction</string>
     <string name="transaction_type_debt">Debit</string>
     <string name="transaction_type_credit">Credit</string>
+    <string name="transaction_section_amount">Amount</string>
+    <string name="transaction_section_details">Details</string>
+    <string name="transaction_section_category">Category</string>
+    <string name="transaction_section_payment">Payment Method</string>
 
     <!-- Account Screen -->
     <string name="account_topbar_add">New Account</string>
@@ -188,11 +192,14 @@
     <string name="accessibility_close">close</string>
     <string name="accessibility_lock">hide</string>
     <string name="accessibility_preview_icon">Preview icon</string>
+    <string name="accessibility_adjust_balance">Adjust balance</string>
+    <string name="accessibility_pay">Pay</string>
 
     <!-- Settings Screen -->
     <string name="settings_title">Settings</string>
     <string name="settings_management">Management</string>
     <string name="settings_features">Features</string>
+    <string name="settings_development">Development</string>
     <string name="settings_manage_accounts">Manage your bank accounts</string>
     <string name="settings_manage_categories">Manage your expense categories</string>
     <string name="settings_manage_creditcards">Manage your credit cards</string>
@@ -226,6 +233,10 @@
     <string name="notifications_permission_grant">Grant Notification Permission</string>
     <string name="notifications_permission_granted">✓ Notification permission granted!</string>
     <string name="notifications_settings_manage">Manage Notification Settings</string>
+    <string name="notification_action_remove">Remove</string>
+    <string name="notification_default_title">MoneyLog Transaction</string>
+    <string name="notification_channel_name">MoneyLog Notifications</string>
+    <string name="notification_format_transaction">R$ %1$s at %2$s</string>
 
     <!-- Graphs Feature -->
     <string name="graphs_title">Graphs</string>
