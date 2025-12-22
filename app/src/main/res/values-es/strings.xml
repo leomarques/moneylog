@@ -223,19 +223,19 @@
     <!-- Notifications Feature -->
     <string name="notifications_title">Configuración de Notificaciones</string>
     <string name="notifications_nubank_access">Acceso a Notificaciones de Nubank</string>
-    <string name="notifications_listener_description">Permitir que MoneyLog intercepte notificaciones de Nubank para rastrear automáticamente sus transacciones.</string>
+    <string name="notifications_listener_description">Permitir que Lemony intercepte notificaciones de Nubank para rastrear automáticamente sus transacciones.</string>
     <string name="notifications_listener_grant">Conceder Permiso de Escucha</string>
-    <string name="notifications_listener_steps">Pasos:\n1. Encuentre \'MoneyLog\' en la lista\n2. Active el interruptor para habilitar\n3. Regrese a esta pantalla</string>
+    <string name="notifications_listener_steps">Pasos:\n1. Encuentre \'Lemony\' en la lista\n2. Active el interruptor para habilitar\n3. Regrese a esta pantalla</string>
     <string name="notifications_listener_granted">✓ ¡Permiso de escucha concedido!</string>
     <string name="notifications_listener_manage">Gestionar Permisos de Escucha</string>
     <string name="notifications_permission">Permiso de Notificación</string>
-    <string name="notifications_permission_description">Permitir que MoneyLog muestre notificaciones. Esto es necesario para que la aplicación muestre notificaciones sobre transacciones interceptadas.</string>
+    <string name="notifications_permission_description">Permitir que Lemony muestre notificaciones. Esto es necesario para que la aplicación muestre notificaciones sobre transacciones interceptadas.</string>
     <string name="notifications_permission_grant">Conceder Permiso de Notificación</string>
     <string name="notifications_permission_granted">✓ ¡Permiso de notificación concedido!</string>
     <string name="notifications_settings_manage">Gestionar Configuración de Notificaciones</string>
     <string name="notification_action_remove">Eliminar</string>
-    <string name="notification_default_title">Transacción MoneyLog</string>
-    <string name="notification_channel_name">Notificaciones MoneyLog</string>
+    <string name="notification_default_title">Transacción Lemony</string>
+    <string name="notification_channel_name">Notificaciones Lemony</string>
     <string name="notification_format_transaction">R$ %1$s en %2$s</string>
 
     <!-- Graphs Feature -->

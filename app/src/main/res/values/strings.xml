@@ -223,19 +223,19 @@
     <!-- Notifications Feature -->
     <string name="notifications_title">Notification Settings</string>
     <string name="notifications_nubank_access">Nubank Notification Access</string>
-    <string name="notifications_listener_description">Allow MoneyLog to intercept Nubank notifications to automatically track your transactions.</string>
+    <string name="notifications_listener_description">Allow Lemony to intercept Nubank notifications to automatically track your transactions.</string>
     <string name="notifications_listener_grant">Grant Listener Permission</string>
-    <string name="notifications_listener_steps">Steps:\n1. Find \'MoneyLog\' in the list\n2. Toggle the switch to enable\n3. Return to this screen</string>
+    <string name="notifications_listener_steps">Steps:\n1. Find \'Lemony\' in the list\n2. Toggle the switch to enable\n3. Return to this screen</string>
     <string name="notifications_listener_granted">✓ Listener permission granted!</string>
     <string name="notifications_listener_manage">Manage Listener Permissions</string>
     <string name="notifications_permission">Notification Permission</string>
-    <string name="notifications_permission_description">Allow MoneyLog to display notifications. This is required for the app to display notifications about intercepted transactions.</string>
+    <string name="notifications_permission_description">Allow Lemony to display notifications. This is required for the app to display notifications about intercepted transactions.</string>
     <string name="notifications_permission_grant">Grant Notification Permission</string>
     <string name="notifications_permission_granted">✓ Notification permission granted!</string>
     <string name="notifications_settings_manage">Manage Notification Settings</string>
     <string name="notification_action_remove">Remove</string>
-    <string name="notification_default_title">MoneyLog Transaction</string>
-    <string name="notification_channel_name">MoneyLog Notifications</string>
+    <string name="notification_default_title">Lemony Transaction</string>
+    <string name="notification_channel_name">Lemony Notifications</string>
     <string name="notification_format_transaction">R$ %1$s at %2$s</string>
 
     <!-- Graphs Feature -->
