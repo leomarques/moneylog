@@ -3,19 +3,23 @@ package lmm.moneylog.ui.features.transaction.detail.view.layout
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import lmm.moneylog.data.transaction.model.TransactionSuggestion
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.features.transaction.detail.model.TransactionDetailUIState
 import lmm.moneylog.ui.features.transaction.detail.view.components.TransactionDetailTopBar
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TransactionDetailLayout(
     uiState: TransactionDetailUIState,
@@ -37,14 +41,16 @@ fun TransactionDetailLayout(
     modifier: Modifier = Modifier
 ) {
     val showDeleteConfirmDialog = remember { mutableStateOf(false) }
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TransactionDetailTopBar(
                 onArrowBackClick = onArrowBackClick,
                 isEdit = uiState.isEdit,
-                onDeleteClick = { showDeleteConfirmDialog.value = true }
+                onDeleteClick = { showDeleteConfirmDialog.value = true },
+                scrollBehavior = scrollBehavior
             )
         },
         floatingActionButton = {

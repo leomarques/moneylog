@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,11 +20,13 @@ fun TransactionDetailTopBar(
     isEdit: Boolean,
     onDeleteClick: () -> Unit,
     onArrowBackClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    scrollBehavior: TopAppBarScrollBehavior? = null
 ) {
     TopAppBar(
         modifier = modifier,
         windowInsets = WindowInsets(0.dp),
+        scrollBehavior = scrollBehavior,
         title = {
             Text(
                 text =
@@ -43,6 +46,7 @@ fun TransactionDetailTopBar(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 private fun TransactionDetailTopBarPreview() {
