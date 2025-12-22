@@ -26,7 +26,7 @@ import lmm.moneylog.data.transaction.database.TransactionEntity
         CreditCardEntity::class,
         CategoryKeywordEntity::class
     ],
-    version = 2,
+    version = 1,
     exportSchema = true
 )
 abstract class MoneylogDatabase : RoomDatabase() {
@@ -58,8 +58,7 @@ abstract class MoneylogDatabase : RoomDatabase() {
                     context.applicationContext,
                     MoneylogDatabase::class.java,
                     "moneylog.db"
-                ).addMigrations(MIGRATION_1_2)
-                .fallbackToDestructiveMigration(true)
+                ).fallbackToDestructiveMigration(true)
                 .addCallback(onCreateCallback(context))
                 .build()
     }
