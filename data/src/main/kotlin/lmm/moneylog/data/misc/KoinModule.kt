@@ -12,8 +12,9 @@ import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.account.repositories.interfaces.UpdateAccountRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepositoryImpl
-import lmm.moneylog.data.balance.interactors.GetBalanceByAccountInteractor
+import lmm.moneylog.data.balance.interactors.GetBalanceByAccountWithTransfersInteractor
 import lmm.moneylog.data.balance.interactors.GetBalanceInteractor
+import lmm.moneylog.data.balance.interactors.GetBalancesForAllAccountsWithTransfersInteractor
 import lmm.moneylog.data.balance.repositories.GetBalanceRepository
 import lmm.moneylog.data.balance.repositories.GetBalanceRepositoryImpl
 import lmm.moneylog.data.category.repositories.impls.AddCategoryRepositoryImpl
@@ -94,7 +95,8 @@ val dataModule =
         // Utilities
         factoryOf(::InvoiceCalculator)
         factoryOf(::GetBalanceInteractor)
-        factoryOf(::GetBalanceByAccountInteractor)
+        factoryOf(::GetBalanceByAccountWithTransfersInteractor)
+        factoryOf(::GetBalancesForAllAccountsWithTransfersInteractor)
         factoryOf(::GetCreditCardHomeInfoInteractor)
         factoryOf(::GetTransactionsByCategoryInteractor)
         factoryOf(::GetMonthlyTotalsInteractor)

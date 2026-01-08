@@ -13,4 +13,6 @@ interface AccountTransferRepository {
     )
 
     fun getTransfers(): Flow<List<AccountTransfer>>
+
+    suspend fun getAllTransfers(): List<AccountTransfer>
 }

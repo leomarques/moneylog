@@ -21,16 +21,14 @@ class InMemoryAccountTransferRepository : AccountTransferRepository {
                 originAccountId = originAccountId,
                 destinationAccountId = destinationAccountId
             )
-        transfers.value = transfers.value + transfer
+        transfers.value += transfer
     }
 
     override fun getTransfers(): Flow<List<AccountTransfer>> = transfers
 
+    override suspend fun getAllTransfers(): List<AccountTransfer> = transfers.value
+
     internal fun clear() {
         transfers.value = emptyList()
-    }
-
-    internal fun setInitialData(data: List<AccountTransfer>) {
-        transfers.value = data
     }
 }

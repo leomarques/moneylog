@@ -1,6 +1,7 @@
 package lmm.moneylog.data.accounttransfer.repositories
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import lmm.moneylog.data.accounttransfer.database.AccountTransferDao
 import lmm.moneylog.data.accounttransfer.database.AccountTransferEntity
@@ -38,4 +39,17 @@ class AccountTransferRepositoryImpl(
                 )
             }
         }
+
+    override suspend fun getAllTransfers(): List<AccountTransfer> =
+        accountTransferDao
+            .selectAll()
+            .map { list ->
+                list.map { entity ->
+                    AccountTransfer(
+                        value = entity.value,
+                        originAccountId = entity.originAccountId,
+                        destinationAccountId = entity.destinationAccountId
+                    )
+                }
+            }.first()
 }

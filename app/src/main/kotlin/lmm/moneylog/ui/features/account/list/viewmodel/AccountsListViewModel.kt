@@ -12,9 +12,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
-import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
-import lmm.moneylog.data.balance.interactors.GetBalanceByAccountInteractor
-import lmm.moneylog.data.balance.repositories.GetBalanceRepository
+import lmm.moneylog.data.balance.interactors.GetBalanceByAccountWithTransfersInteractor
+import lmm.moneylog.data.balance.interactors.GetBalancesForAllAccountsWithTransfersInteractor
 import lmm.moneylog.data.category.repositories.interfaces.GetCategoriesRepository
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 import lmm.moneylog.data.transaction.model.Transaction
@@ -29,16 +28,14 @@ import lmm.moneylog.ui.features.category.list.viewmodel.toCategoryModelList
 
 class AccountsListViewModel(
     getAccountsRepository: GetAccountsRepository,
-    accountTransferRepository: AccountTransferRepository,
-    getBalanceRepository: GetBalanceRepository,
-    private val getBalanceByAccountInteractor: GetBalanceByAccountInteractor,
+    getBalancesForAllAccountsWithTransfersInteractor: GetBalancesForAllAccountsWithTransfersInteractor,
+    private val getBalanceByAccountInteractor: GetBalanceByAccountWithTransfersInteractor,
     private val addTransactionRepository: AddTransactionRepository,
     private val domainTimeRepository: DomainTimeRepository,
     private val getCategoriesRepository: GetCategoriesRepository
 ) : ViewModel() {
     private val accountsFlow = getAccountsRepository.getAccounts()
-    private val transfersFlow = accountTransferRepository.getTransfers()
-    private val transactionsFlow = getBalanceRepository.getTransactions()
+    private val balancesFlow = getBalancesForAllAccountsWithTransfersInteractor.execute()
 
     companion object {
         private const val TAG = "AccountsListViewModel"
@@ -64,26 +61,12 @@ class AccountsListViewModel(
     var uiState =
         combine(
             accountsFlow,
-            transfersFlow,
-            transactionsFlow
-        ) { accounts, transfers, transactions ->
+            balancesFlow
+        ) { accounts, accountBalances ->
             val list = mutableListOf<AccountModel>()
 
             accounts.forEach { account ->
-                // Calculate balance from transactions
-                var balance =
-                    transactions
-                        .filter { it.accountId == account.id }
-                        .sumOf { it.value }
-
-                // Adjust for transfers
-                transfers
-                    .filter { it.originAccountId == account.id }
-                    .forEach { balance -= it.value }
-
-                transfers
-                    .filter { it.destinationAccountId == account.id }
-                    .forEach { balance += it.value }
+                val balance = accountBalances.getOrDefault(account.id, 0.0)
 
                 list.add(
                     AccountModel(
