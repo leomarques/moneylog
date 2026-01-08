@@ -14,8 +14,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CreditCard
+import androidx.compose.material.icons.outlined.CreditCard
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -79,15 +82,19 @@ fun CreditCardsCard(
 
             Spacer(modifier = Modifier.height(Size.DefaultSpaceSize))
 
-            creditCards.forEachIndexed { index, card ->
-                if (index > 0) {
-                    Spacer(modifier = Modifier.height(Size.SmallSpaceSize))
+            if (creditCards.isEmpty()) {
+                CreditCardsEmptyState()
+            } else {
+                creditCards.forEachIndexed { index, card ->
+                    if (index > 0) {
+                        Spacer(modifier = Modifier.height(Size.SmallSpaceSize))
+                    }
+                    CreditCardItem(
+                        cardInfo = card,
+                        onClick = { callbacks.onCardClick(card) },
+                        valuesMasked = valuesMasked
+                    )
                 }
-                CreditCardItem(
-                    cardInfo = card,
-                    onClick = { callbacks.onCardClick(card) },
-                    valuesMasked = valuesMasked
-                )
             }
         }
     }
@@ -100,6 +107,8 @@ object CreditCardsCardDefaults {
     const val ICON_ALPHA = 0.9f
     val ColorIndicatorSize = 10.dp
     val AmountLetterSpacing = (-0.2).sp
+    val EmptyStateIconSize = 48.dp
+    const val EMPTY_STATE_ICON_ALPHA = 0.3f
 }
 
 @Composable
@@ -125,6 +134,39 @@ private fun CreditCardsHeader() {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(start = Size.SmallSpaceSize)
+        )
+    }
+}
+
+@Composable
+private fun CreditCardsEmptyState() {
+    Column(
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = Size.MediumSpaceSize),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(
+            imageVector = Icons.Outlined.CreditCard,
+            contentDescription = null,
+            modifier = Modifier.size(CreditCardsCardDefaults.EmptyStateIconSize),
+            tint =
+                MaterialTheme.colorScheme.onSurfaceVariant.copy(
+                    alpha = CreditCardsCardDefaults.EMPTY_STATE_ICON_ALPHA
+                )
+        )
+
+        Spacer(modifier = Modifier.height(Size.SmallSpaceSize))
+
+        Text(
+            text = stringResource(lmm.moneylog.home.R.string.home_credit_cards_empty),
+            style = MaterialTheme.typography.bodyMedium,
+            color =
+                MaterialTheme.colorScheme.onSurfaceVariant.copy(
+                    alpha = 0.6f
+                ),
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -203,6 +245,21 @@ private fun CreditCardsCardPreview() {
     AppTheme {
         CreditCardsCard(
             creditCards = HomePreviewData.sampleCreditCards(),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(Size.DefaultSpaceSize),
+            valuesMasked = false
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun CreditCardsCardEmptyPreview() {
+    AppTheme {
+        CreditCardsCard(
+            creditCards = emptyList(),
             modifier =
                 Modifier
                     .fillMaxWidth()

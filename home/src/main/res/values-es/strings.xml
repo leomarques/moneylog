@@ -17,6 +17,7 @@
     <!-- HOME SCREEN - Credit Cards Card -->
     <!-- ============================================ -->
     <string name="home_credit_cards_title">Tarjetas de Crédito</string>
+    <string name="home_credit_cards_empty">Aún no hay tarjetas de crédito</string>
     <string name="home_credit_cards_cd">Tarjetas de Crédito</string>
 
     <!-- ============================================ -->
