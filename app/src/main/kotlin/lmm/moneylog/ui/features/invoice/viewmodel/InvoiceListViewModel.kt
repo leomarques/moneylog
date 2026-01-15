@@ -197,10 +197,11 @@ class InvoiceListViewModel(
     @Suppress("ReturnCount")
     fun calculateInvoiceAdjustment(newValue: String): Pair<String, Double>? {
         val newValueDouble = newValue.toDoubleOrNull() ?: return null
+        val targetValue = -newValueDouble
 
         val currentTotal = savedTransactions.sumOf { it.value }
 
-        val adjustmentValue = (newValueDouble - currentTotal).roundTo2Decimals()
+        val adjustmentValue = (targetValue - currentTotal).roundTo2Decimals()
         if (adjustmentValue == 0.0) return null
 
         // Format the adjustment value for display
