@@ -161,27 +161,37 @@ private fun CategoryPieChart(
         val canvasSize = size.minDimension
         val radius = canvasSize / 2.5f
         val center = Offset(size.width / 2, size.height / 2)
+        val arcSize = CanvasSize(radius * 2, radius * 2)
+        val arcOffset = Offset(center.x - radius, center.y - radius)
 
-        var startAngle = -90f
+        val segmentList = mutableListOf<Triple<Color, Float, Float>>() // color, startAngle, sweepAngle
+        var currentAngle = -90f
+        val totalPercentage = categories.sumOf { it.percentage.toDouble() }.toFloat()
 
         categories.forEach { category ->
             val sweepAngle = (category.percentage / 100f) * 360f
-
-            // Draw filled arc (pie slice)
-            drawArc(
-                color = category.categoryColor ?: neutralColor,
-                startAngle = startAngle,
-                sweepAngle = sweepAngle,
-                useCenter = true,
-                topLeft =
-                    Offset(
-                        center.x - radius,
-                        center.y - radius
-                    ),
-                size = CanvasSize(radius * 2, radius * 2)
+            segmentList.add(
+                Triple(category.categoryColor ?: neutralColor, currentAngle, sweepAngle)
             )
+            currentAngle += sweepAngle
+        }
 
-            startAngle += sweepAngle
+        if (totalPercentage < 100f) {
+            val remainingSweepAngle = ((100f - totalPercentage) / 100f) * 360f
+            segmentList.add(
+                Triple(neutralColor.copy(alpha = 0.2f), currentAngle, remainingSweepAngle)
+            )
+        }
+
+        segmentList.forEach { (color, angle, sweep) ->
+            drawArc(
+                color = color,
+                startAngle = angle,
+                sweepAngle = sweep,
+                useCenter = true,
+                topLeft = arcOffset,
+                size = arcSize
+            )
         }
     }
 }
