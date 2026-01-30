@@ -71,7 +71,10 @@ class CategoryKeywordsViewModel(
 
     fun showAddKeywordDialog() {
         // Pre-select first category if available
-        val firstCategoryId = _uiState.value.categories.firstOrNull()?.id
+        val firstCategoryId =
+            _uiState.value.categories
+                .firstOrNull()
+                ?.id
         _uiState.update {
             it.copy(
                 showAddKeywordDialog = true,

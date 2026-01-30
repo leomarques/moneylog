@@ -156,11 +156,13 @@ private fun AllKeywordsList(
     modifier: Modifier = Modifier
 ) {
     // Flatten all keywords with their category info
-    val allKeywords = categories.flatMap { category ->
-        category.keywords.map { keyword ->
-            keyword to category
-        }
-    }.sortedBy { it.first.keyword }
+    val allKeywords =
+        categories
+            .flatMap { category ->
+                category.keywords.map { keyword ->
+                    keyword to category
+                }
+            }.sortedBy { it.first.keyword }
 
     LazyColumn(
         modifier =
@@ -268,8 +270,6 @@ private fun KeywordListItem(
         }
     }
 }
-
-
 
 @Preview
 @Composable

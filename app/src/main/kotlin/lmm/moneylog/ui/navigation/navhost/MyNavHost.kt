@@ -1,18 +1,22 @@
 package lmm.moneylog.ui.navigation.navhost
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import lmm.moneylog.BuildConfig
 import lmm.moneylog.home.ui.HomeLayout
 import lmm.moneylog.home.ui.HomeLayoutCallbacks
 import lmm.moneylog.home.ui.cards.CreditCardsCardCallbacks
 import lmm.moneylog.home.ui.cards.TotalBalanceCardCallbacks
+import lmm.moneylog.ui.features.about.AboutScreen
 import lmm.moneylog.ui.features.account.archive.view.layout.ArchivedAccountsListView
 import lmm.moneylog.ui.features.account.detail.view.layout.AccountDetailView
 import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView
@@ -26,14 +30,11 @@ import lmm.moneylog.ui.features.graphs.GraphsScreen
 import lmm.moneylog.ui.features.invoice.view.InvoiceListView
 import lmm.moneylog.ui.features.notification.settings.view.NotificationSettingsScreen
 import lmm.moneylog.ui.features.settings.SettingsScreen
-import lmm.moneylog.ui.features.about.AboutScreen
-import android.widget.Toast
-import androidx.compose.ui.platform.LocalContext
-import lmm.moneylog.BuildConfig
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListView
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_INCOME
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_OUTCOME
+import lmm.moneylog.ui.navigation.misc.ABOUT_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
@@ -52,7 +53,6 @@ import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
 import lmm.moneylog.ui.navigation.misc.PARAM_IS_INCOME
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_OF_VALUE
-import lmm.moneylog.ui.navigation.misc.ABOUT_SCREEN
 import lmm.moneylog.ui.navigation.misc.SETTINGS_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN

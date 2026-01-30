@@ -84,11 +84,12 @@ class AccountsListViewModel(
 
     private fun getAdjustCategoryId(): Int? {
         val adjustmentNames = listOf("ajuste", "adjustment", "adjust")
-        return _categoriesState.value.list.firstOrNull { category ->
-            adjustmentNames.any { name -> 
-                category.name.equals(name, ignoreCase = true) 
-            }
-        }?.id
+        return _categoriesState.value.list
+            .firstOrNull { category ->
+                adjustmentNames.any { name ->
+                    category.name.equals(name, ignoreCase = true)
+                }
+            }?.id
     }
 
     @Suppress("ReturnCount")
