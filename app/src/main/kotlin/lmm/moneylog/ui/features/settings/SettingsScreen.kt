@@ -14,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -21,17 +22,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -41,9 +35,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
-import lmm.moneylog.ui.features.settings.viewmodel.SettingsViewModel
 import lmm.moneylog.ui.theme.AppTheme
-import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,27 +46,13 @@ fun SettingsScreen(
     onCreditCardsClick: () -> Unit,
     onNotificationSettingsClick: () -> Unit,
     onGraphsClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    viewModel: SettingsViewModel = koinViewModel()
+    onAboutClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    val isDemoMode by viewModel.isDemoMode.collectAsState()
-    val showResetSuccess by viewModel.showResetSuccess.collectAsState()
-    val snackbarHostState = remember { SnackbarHostState() }
-
-    val resetSuccessMessage = stringResource(R.string.demo_mode_reset_success)
-
-    LaunchedEffect(showResetSuccess) {
-        if (showResetSuccess) {
-            snackbarHostState.showSnackbar(resetSuccessMessage)
-            viewModel.clearResetSuccessMessage()
-        }
-    }
-
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(R.string.nav_settings)) },
@@ -169,7 +147,7 @@ fun SettingsScreen(
             }
 
             Text(
-                text = stringResource(R.string.settings_development),
+                text = stringResource(R.string.settings_about),
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
@@ -178,93 +156,14 @@ fun SettingsScreen(
             Card(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Column {
-                    SettingsSwitchItem(
-                        title = stringResource(R.string.demo_mode_title),
-                        description =
-                            stringResource(
-                                if (isDemoMode) {
-                                    R.string.demo_mode_enabled
-                                } else {
-                                    R.string.demo_mode_disabled
-                                }
-                            ),
-                        icon = ImageVector.vectorResource(id = R.drawable.outline_category_24),
-                        checked = isDemoMode,
-                        onCheckedChange = { viewModel.toggleDemoMode() }
-                    )
-
-                    if (isDemoMode) {
-                        HorizontalDivider()
-
-                        SettingsItem(
-                            title = stringResource(R.string.demo_mode_reset),
-                            description = stringResource(R.string.demo_mode_reset_description),
-                            icon = ImageVector.vectorResource(id = R.drawable.outline_brush_24),
-                            onClick = { viewModel.resetDemoData() }
-                        )
-                    }
-                }
+                SettingsItem(
+                    title = stringResource(R.string.settings_about),
+                    description = stringResource(R.string.settings_about_summary_desc),
+                    icon = Icons.Default.Info,
+                    onClick = onAboutClick
+                )
             }
         }
-    }
-}
-
-@Composable
-private fun SettingsSwitchItem(
-    title: String,
-    description: String,
-    icon: ImageVector,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true
-) {
-    Row(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint =
-                if (enabled) {
-                    MaterialTheme.colorScheme.primary
-                } else {
-                    MaterialTheme.colorScheme.onSurfaceVariant
-                }
-        )
-
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleMedium,
-                color =
-                    if (enabled) {
-                        MaterialTheme.colorScheme.onSurface
-                    } else {
-                        MaterialTheme.colorScheme.onSurfaceVariant
-                    }
-            )
-            Text(
-                text = description,
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-
-        Switch(
-            checked = checked,
-            onCheckedChange = onCheckedChange,
-            enabled = enabled
-        )
     }
 }
 
@@ -341,7 +240,8 @@ private fun PreviewSettingsScreen() {
             onCategoriesClick = {},
             onCreditCardsClick = {},
             onNotificationSettingsClick = {},
-            onGraphsClick = {}
+            onGraphsClick = {},
+            onAboutClick = {}
         )
     }
 }

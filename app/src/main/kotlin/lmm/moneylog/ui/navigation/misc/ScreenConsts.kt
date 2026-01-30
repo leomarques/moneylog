@@ -16,6 +16,7 @@ const val NOTIFICATION_SETTINGS_SCREEN = "notification_settings"
 const val CATEGORY_KEYWORDS_SCREEN = "category_keywords"
 const val SETTINGS_SCREEN = "settings"
 const val GRAPHS_SCREEN = "graphs"
+const val ABOUT_SCREEN = "about"
 
 const val PARAM_TYPE_OF_VALUE = "typeOfValue"
 const val PARAM_TYPE_ALL = "all"

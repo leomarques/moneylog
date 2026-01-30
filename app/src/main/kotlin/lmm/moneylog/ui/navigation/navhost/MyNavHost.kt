@@ -26,6 +26,10 @@ import lmm.moneylog.ui.features.graphs.GraphsScreen
 import lmm.moneylog.ui.features.invoice.view.InvoiceListView
 import lmm.moneylog.ui.features.notification.settings.view.NotificationSettingsScreen
 import lmm.moneylog.ui.features.settings.SettingsScreen
+import lmm.moneylog.ui.features.about.AboutScreen
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
+import lmm.moneylog.BuildConfig
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListView
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_INCOME
@@ -48,6 +52,7 @@ import lmm.moneylog.ui.navigation.misc.PARAM_INVOICE_CODE
 import lmm.moneylog.ui.navigation.misc.PARAM_IS_INCOME
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
 import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_OF_VALUE
+import lmm.moneylog.ui.navigation.misc.ABOUT_SCREEN
 import lmm.moneylog.ui.navigation.misc.SETTINGS_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
@@ -80,6 +85,7 @@ fun MyNavHost(
     onCategoriesClick: () -> Unit,
     onCreditCardsClick: () -> Unit,
     onGraphsClick: () -> Unit,
+    onAboutClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -274,7 +280,25 @@ fun MyNavHost(
                 onCategoriesClick = onCategoriesClick,
                 onCreditCardsClick = onCreditCardsClick,
                 onNotificationSettingsClick = onNotificationSettingsClick,
-                onGraphsClick = onGraphsClick
+                onGraphsClick = onGraphsClick,
+                onAboutClick = onAboutClick
+            )
+        }
+
+        composableExt(
+            route = ABOUT_SCREEN,
+            onArrowBackClick = onArrowBackClick
+        ) {
+            val context = LocalContext.current
+            AboutScreen(
+                onArrowBackClick = onArrowBackClick,
+                appVersion = BuildConfig.VERSION_NAME,
+                onPrivacyClick = {
+                    Toast.makeText(context, "Privacy Policy clicked", Toast.LENGTH_SHORT).show()
+                },
+                onLicenseClick = {
+                    Toast.makeText(context, "License clicked", Toast.LENGTH_SHORT).show()
+                }
             )
         }
 

@@ -251,4 +251,13 @@
     <string name="demo_mode_reset">Resetar Dados Demo</string>
     <string name="demo_mode_reset_description">Restaurar dados demo ao estado inicial</string>
     <string name="demo_mode_reset_success">Dados demo foram resetados</string>
+
+    <!-- About Section -->
+    <string name="settings_about">Sobre</string>
+    <string name="settings_about_summary">Resumo</string>
+    <string name="settings_about_summary_desc">Lemony é um aplicativo de finanças pessoais para gerenciar transações, contas e cartões de crédito.</string>
+    <string name="settings_about_version">Versão</string>
+    <string name="settings_about_privacy">Política de Privacidade</string>
+    <string name="settings_about_license">Licenças de Código Aberto</string>
+    <string name="settings_about_summary_dialog_title">Sobre o Lemony</string>
 </resources>
