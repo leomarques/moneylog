@@ -72,7 +72,7 @@
     <string name="account_adjust_balance_description">Digite o novo saldo da conta</string>
     <string name="account_adjust_balance_new">Novo Saldo</string>
     <string name="account_adjust_balance_success">Saldo ajustado com sucesso</string>
-    <string name="account_adjust_balance_transaction_desc">Ajuste de saldo</string>
+    <string name="account_adjust_balance_transaction_desc">Ajuste</string>
     <string name="account_select_for_invoice">Selecione a conta para pagar a fatura</string>
     <string name="account_section_info">Informações da Conta</string>
 

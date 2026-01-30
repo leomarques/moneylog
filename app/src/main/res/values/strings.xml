@@ -72,7 +72,7 @@
     <string name="account_adjust_balance_description">Enter the new account balance</string>
     <string name="account_adjust_balance_new">New Balance</string>
     <string name="account_adjust_balance_success">Balance adjusted successfully</string>
-    <string name="account_adjust_balance_transaction_desc">Balance adjustment</string>
+    <string name="account_adjust_balance_transaction_desc">Adjustment</string>
     <string name="account_select_for_invoice">Select the account to pay the invoice</string>
     <string name="account_section_info">Account Information</string>
 
