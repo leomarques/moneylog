@@ -69,16 +69,28 @@ class CategoryKeywordsViewModel(
         }
     }
 
-    fun selectCategory(category: CategoryWithKeywords?) {
-        _uiState.update { it.copy(selectedCategory = category) }
-    }
-
     fun showAddKeywordDialog() {
-        _uiState.update { it.copy(showAddKeywordDialog = true) }
+        // Pre-select first category if available
+        val firstCategoryId = _uiState.value.categories.firstOrNull()?.id
+        _uiState.update {
+            it.copy(
+                showAddKeywordDialog = true,
+                selectedCategoryIdForAdd = firstCategoryId
+            )
+        }
     }
 
     fun hideAddKeywordDialog() {
-        _uiState.update { it.copy(showAddKeywordDialog = false) }
+        _uiState.update {
+            it.copy(
+                showAddKeywordDialog = false,
+                selectedCategoryIdForAdd = null
+            )
+        }
+    }
+
+    fun selectCategoryForAdd(categoryId: Int) {
+        _uiState.update { it.copy(selectedCategoryIdForAdd = categoryId) }
     }
 
     fun addKeyword(

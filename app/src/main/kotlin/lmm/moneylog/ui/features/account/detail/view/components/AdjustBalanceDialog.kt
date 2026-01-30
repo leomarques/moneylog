@@ -22,7 +22,7 @@ fun AdjustBalanceDialog(
         description = stringResource(R.string.account_adjust_balance_description),
         inputLabel = stringResource(R.string.account_adjust_balance_new),
         categories = categories,
-        showCategorySelector = true,
+        showCategorySelector = false,
         modifier = modifier
     )
 }

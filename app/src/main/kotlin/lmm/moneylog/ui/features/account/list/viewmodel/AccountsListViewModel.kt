@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import lmm.moneylog.R
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.balance.interactors.GetBalanceByAccountWithTransfersInteractor
 import lmm.moneylog.data.balance.interactors.GetBalancesForAllAccountsWithTransfersInteractor
@@ -81,11 +82,20 @@ class AccountsListViewModel(
             AccountsListUIState(list.reversed())
         }.stateIn(viewModelScope, SharingStarted.Lazily, AccountsListUIState())
 
+    private fun getAdjustCategoryId(): Int? {
+        val adjustmentNames = listOf("ajuste", "adjustment", "adjust")
+        return _categoriesState.value.list.firstOrNull { category ->
+            adjustmentNames.any { name -> 
+                category.name.equals(name, ignoreCase = true) 
+            }
+        }?.id
+    }
+
     @Suppress("ReturnCount")
     suspend fun calculateAdjustment(
         accountId: Int,
         newBalance: String
-    ): Pair<String, Double>? {
+    ): Triple<String, Double, Int?>? {
         val newBalanceValue = newBalance.toDoubleOrNull() ?: return null
 
         val currentBalance =
@@ -110,12 +120,14 @@ class AccountsListViewModel(
                 adjustmentValue.formatForRs()
             }
 
-        return Pair(formattedValue, adjustmentValue)
+        val adjustCategoryId = getAdjustCategoryId()
+        return Triple(formattedValue, adjustmentValue, adjustCategoryId)
     }
 
     fun onAdjustBalanceConfirm(
         accountId: Int,
         adjustmentValue: Double,
+        description: String,
         categoryId: Int?,
         onSuccess: () -> Unit,
         onError: (Int) -> Unit
@@ -125,7 +137,7 @@ class AccountsListViewModel(
                 val adjustmentTransaction =
                     Transaction(
                         value = adjustmentValue,
-                        description = "Adjustment",
+                        description = description,
                         date = domainTimeRepository.getCurrentDomainTime(),
                         accountId = accountId,
                         categoryId = if (categoryId != null && categoryId > 0) categoryId else null
@@ -134,10 +146,10 @@ class AccountsListViewModel(
                 onSuccess()
             } catch (e: IllegalStateException) {
                 Log.e(TAG, "Error saving balance adjustment transaction", e)
-                onError(lmm.moneylog.R.string.validation_invalid_data)
+                onError(R.string.validation_invalid_data)
             } catch (e: IllegalArgumentException) {
                 Log.e(TAG, "Invalid argument for balance adjustment transaction", e)
-                onError(lmm.moneylog.R.string.validation_invalid_data)
+                onError(R.string.validation_invalid_data)
             }
         }
     }

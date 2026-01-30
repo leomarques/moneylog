@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.misc.showToast
@@ -29,6 +30,7 @@ fun InvoiceListView(
 
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+    val adjustmentDescription = stringResource(R.string.invoice_adjust_value_transaction_desc)
 
     var showAdjustInvoiceDialog by remember { mutableStateOf(false) }
     var showAdjustInvoiceConfirmDialog by remember { mutableStateOf(false) }
@@ -39,13 +41,13 @@ fun InvoiceListView(
     if (showAdjustInvoiceDialog) {
         AdjustInvoiceDialog(
             onDismiss = { showAdjustInvoiceDialog = false },
-            onConfirm = { newValue, categoryId ->
+            onConfirm = { newValue, _ ->
                 coroutineScope.launch {
                     val result = viewModel.calculateInvoiceAdjustment(newValue)
                     if (result != null) {
                         adjustmentValue = result.first
                         adjustmentAmount = result.second
-                        selectedCategoryId = categoryId
+                        selectedCategoryId = result.third
                         showAdjustInvoiceDialog = false
                         showAdjustInvoiceConfirmDialog = true
                     } else {
@@ -63,6 +65,7 @@ fun InvoiceListView(
             onConfirm = {
                 viewModel.onAdjustInvoiceConfirm(
                     adjustmentValue = adjustmentAmount,
+                    description = adjustmentDescription,
                     categoryId = selectedCategoryId,
                     onSuccess = {
                         showToast(context, R.string.invoice_adjust_value_success)

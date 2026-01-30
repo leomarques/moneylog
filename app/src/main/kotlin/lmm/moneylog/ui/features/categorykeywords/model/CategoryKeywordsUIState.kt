@@ -5,10 +5,10 @@ import androidx.compose.ui.graphics.Color
 data class CategoryKeywordsUIState(
     val categories: List<CategoryWithKeywords> = emptyList(),
     val isLoading: Boolean = false,
-    val selectedCategory: CategoryWithKeywords? = null,
     val showAddKeywordDialog: Boolean = false,
     val showDeleteConfirmDialog: Boolean = false,
-    val keywordToDelete: KeywordItem? = null
+    val keywordToDelete: KeywordItem? = null,
+    val selectedCategoryIdForAdd: Int? = null
 )
 
 data class CategoryWithKeywords(

@@ -1,18 +1,13 @@
 package lmm.moneylog.ui.features.categorykeywords
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,7 +15,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Card
@@ -31,7 +25,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -41,7 +34,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
@@ -79,7 +71,7 @@ fun CategoryKeywordsScreen(
             )
         },
         floatingActionButton = {
-            if (uiState.selectedCategory != null) {
+            if (uiState.categories.isNotEmpty()) {
                 FloatingActionButton(
                     onClick = { viewModel.showAddKeywordDialog() }
                 ) {
@@ -105,13 +97,6 @@ fun CategoryKeywordsScreen(
                     )
                 }
 
-                uiState.selectedCategory != null -> {
-                    CategoryKeywordsDetail(
-                        category = uiState.selectedCategory!!,
-                        onDeleteKeyword = { viewModel.showDeleteConfirmDialog(it) }
-                    )
-                }
-
                 uiState.categories.isEmpty() -> {
                     Column(
                         modifier =
@@ -130,24 +115,26 @@ fun CategoryKeywordsScreen(
                 }
 
                 else -> {
-                    CategoriesList(
+                    AllKeywordsList(
                         categories = uiState.categories,
-                        onCategoryClick = { viewModel.selectCategory(it) }
+                        onDeleteKeyword = { viewModel.showDeleteConfirmDialog(it) }
                     )
                 }
             }
         }
 
         // Dialogs
-        if (uiState.showAddKeywordDialog && uiState.selectedCategory != null) {
+        if (uiState.showAddKeywordDialog) {
             AddKeywordDialog(
-                categoryName = uiState.selectedCategory!!.name,
+                categories = uiState.categories,
+                selectedCategoryId = uiState.selectedCategoryIdForAdd,
+                onCategorySelected = { viewModel.selectCategoryForAdd(it) },
                 onDismiss = { viewModel.hideAddKeywordDialog() },
-                onAddKeyword = { keyword ->
-                    viewModel.addKeyword(uiState.selectedCategory!!.id, keyword)
+                onAddKeyword = { categoryId, keyword ->
+                    viewModel.addKeyword(categoryId, keyword)
                 },
-                onAddMultipleKeywords = { keywords ->
-                    viewModel.addKeywords(uiState.selectedCategory!!.id, keywords)
+                onAddMultipleKeywords = { categoryId, keywords ->
+                    viewModel.addKeywords(categoryId, keywords)
                 }
             )
         }
@@ -163,11 +150,18 @@ fun CategoryKeywordsScreen(
 }
 
 @Composable
-private fun CategoriesList(
+private fun AllKeywordsList(
     categories: List<CategoryWithKeywords>,
-    onCategoryClick: (CategoryWithKeywords) -> Unit,
+    onDeleteKeyword: (KeywordItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    // Flatten all keywords with their category info
+    val allKeywords = categories.flatMap { category ->
+        category.keywords.map { keyword ->
+            keyword to category
+        }
+    }.sortedBy { it.first.keyword }
+
     LazyColumn(
         modifier =
             modifier
@@ -177,33 +171,60 @@ private fun CategoriesList(
     ) {
         item {
             Text(
-                text = stringResource(R.string.keywords_select_category),
+                text = stringResource(R.string.keywords_match_info),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
         }
 
-        items(categories) { category ->
-            CategoryListItem(
-                category = category,
-                onClick = { onCategoryClick(category) }
-            )
+        if (allKeywords.isEmpty()) {
+            item {
+                Card(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(32.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = stringResource(R.string.empty_keywords_title),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = stringResource(R.string.empty_keywords_description),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(top = 4.dp)
+                        )
+                    }
+                }
+            }
+        } else {
+            items(allKeywords) { (keyword, category) ->
+                KeywordListItem(
+                    keyword = keyword,
+                    category = category,
+                    onDeleteKeyword = { onDeleteKeyword(keyword) }
+                )
+            }
         }
     }
 }
 
 @Composable
-private fun CategoryListItem(
+private fun KeywordListItem(
+    keyword: KeywordItem,
     category: CategoryWithKeywords,
-    onClick: () -> Unit,
+    onDeleteKeyword: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .clickable(onClick = onClick)
+        modifier = modifier.fillMaxWidth()
     ) {
         Row(
             modifier =
@@ -227,189 +248,28 @@ private fun CategoryListItem(
                         .padding(horizontal = 16.dp)
             ) {
                 Text(
-                    text = category.name,
+                    text = keyword.keyword,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text =
-                        if (category.keywords.size != 1) {
-                            stringResource(R.string.keywords_count_plural, category.keywords.size)
-                        } else {
-                            stringResource(R.string.keywords_count_single, category.keywords.size)
-                        },
+                    text = category.name,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = stringResource(R.string.keywords_label),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-    }
-}
-
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-private fun CategoryKeywordsDetail(
-    category: CategoryWithKeywords,
-    onDeleteKeyword: (KeywordItem) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier =
-            modifier
-                .fillMaxSize()
-                .padding(16.dp)
-    ) {
-        // Category header
-        Card(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Row(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier =
-                        Modifier
-                            .size(40.dp)
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(category.color)
-                )
-
-                Column(
-                    modifier =
-                        Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp)
-                ) {
-                    Text(
-                        text = category.name,
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                    Text(
-                        text =
-                            if (category.keywords.size != 1) {
-                                stringResource(R.string.keywords_count_plural, category.keywords.size)
-                            } else {
-                                stringResource(R.string.keywords_count_single, category.keywords.size)
-                            },
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Keywords section
-        Text(
-            text = stringResource(R.string.keywords_label),
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-
-        if (category.keywords.isEmpty()) {
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(32.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = stringResource(R.string.empty_keywords_title),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Text(
-                        text = stringResource(R.string.empty_keywords_description),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(top = 4.dp)
-                    )
-                }
-            }
-        } else {
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                FlowRow(
-                    modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(12.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    category.keywords.forEach { keyword ->
-                        KeywordChip(
-                            keyword = keyword,
-                            onDelete = { onDeleteKeyword(keyword) }
-                        )
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Text(
-                text = stringResource(R.string.keywords_match_info),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-    }
-}
-
-@Composable
-private fun KeywordChip(
-    keyword: KeywordItem,
-    onDelete: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Surface(
-        modifier = modifier,
-        shape = RoundedCornerShape(16.dp),
-        color = MaterialTheme.colorScheme.secondaryContainer
-    ) {
-        Row(
-            modifier = Modifier.padding(start = 12.dp, end = 4.dp, top = 6.dp, bottom = 6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            Text(
-                text = keyword.keyword,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-
-            IconButton(
-                onClick = onDelete,
-                modifier = Modifier.size(24.dp)
-            ) {
+            IconButton(onClick = onDeleteKeyword) {
                 Icon(
                     imageVector = Icons.Default.Close,
                     contentDescription = stringResource(R.string.action_delete),
-                    tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                    modifier = Modifier.size(16.dp)
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
     }
 }
+
+
 
 @Preview
 @Composable

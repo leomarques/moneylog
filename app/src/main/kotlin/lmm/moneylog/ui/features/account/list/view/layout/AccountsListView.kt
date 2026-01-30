@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import lmm.moneylog.R
@@ -30,6 +31,7 @@ fun AccountsListView(
     val uiState by viewModel.uiState.collectAsState()
     val categoriesState by viewModel.categoriesState.collectAsState()
     val context = LocalContext.current
+    val adjustmentDescription = stringResource(R.string.account_adjust_balance_transaction_desc)
 
     var showAdjustBalanceDialog by remember { mutableStateOf(false) }
     var showAdjustBalanceConfirmDialog by remember { mutableStateOf(false) }
@@ -40,13 +42,13 @@ fun AccountsListView(
 
     if (showAdjustBalanceDialog) {
         AdjustBalanceDialog(
-            onConfirm = { newBalance, categoryId ->
+            onConfirm = { newBalance, _ ->
                 MainScope().launch {
                     val result = viewModel.calculateAdjustment(selectedAccountId, newBalance)
                     if (result != null) {
                         adjustmentValueDisplay = result.first
                         adjustmentValue = result.second
-                        selectedCategoryId = categoryId ?: -1
+                        selectedCategoryId = result.third ?: -1
                         showAdjustBalanceDialog = false
                         showAdjustBalanceConfirmDialog = true
                     } else {
@@ -69,6 +71,7 @@ fun AccountsListView(
                 viewModel.onAdjustBalanceConfirm(
                     accountId = selectedAccountId,
                     adjustmentValue = adjustmentValue,
+                    description = adjustmentDescription,
                     categoryId = if (selectedCategoryId > 0) selectedCategoryId else null,
                     onSuccess = {
                         showToast(context, R.string.account_adjust_balance_success)

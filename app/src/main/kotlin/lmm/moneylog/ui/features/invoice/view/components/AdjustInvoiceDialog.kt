@@ -22,7 +22,7 @@ fun AdjustInvoiceDialog(
         description = stringResource(R.string.invoice_adjust_value_description),
         inputLabel = stringResource(R.string.invoice_adjust_value_new),
         categories = categories,
-        showCategorySelector = true,
+        showCategorySelector = false,
         modifier = modifier
     )
 }
