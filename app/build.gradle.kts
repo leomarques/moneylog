@@ -4,7 +4,6 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.detekt)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jlleitschuh.gradle.ktlint)
     alias(libs.plugins.kotlin.compose)
 }

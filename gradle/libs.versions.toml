@@ -1,5 +1,5 @@
 [versions]
-composeBom            = "2026.01.01"
+composeBom            = "2026.02.00"
 composeRules          = "0.5.6"
 coreTesting           = "2.2.0"
 junit                 = "4.13.2"
@@ -9,13 +9,13 @@ material3             = "1.4.0"
 mockk                 = "1.14.9"
 navigationCompose     = "2.9.7"
 room                  = "2.8.4"
-uiTest                = "1.10.2"
+uiTest                = "1.10.3"
 
-androidApplication      = "8.13.2"
-androidLibrary          = "8.13.2"
+androidApplication      = "9.0.0"
+androidLibrary          = "9.0.0"
 detekt                  = "1.23.8"
 googleDevtoolsKsp       = "2.3.4"
-jetbrainsKotlinAndroid  = "2.3.0"
+jetbrainsKotlinAndroid  = "2.3.10"
 jlleitschuhGradleKtlint = "14.0.1"
 
 [libraries]
@@ -45,10 +45,9 @@ room         = ["room-ktx", "room-runtime"]
 test         = ["core-testing", "kotlinx-coroutines-test", "mockk", "junit"]
 
 [plugins]
-android-application 	  = { id = "com.android.application", 		      version.ref = "androidApplication" }
-android-library 		  = { id = "com.android.library", 			      version.ref = "androidLibrary" }
-google-devtools-ksp 	  = { id = "com.google.devtools.ksp", 		      version.ref = "googleDevtoolsKsp" }
-detekt                    = { id = "io.gitlab.arturbosch.detekt",         version.ref = "detekt" }
-jetbrains-kotlin-android  = { id = "org.jetbrains.kotlin.android", 	      version.ref = "jetbrainsKotlinAndroid" }
-kotlin-compose            = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "jetbrainsKotlinAndroid" }
-jlleitschuh-gradle-ktlint = { id = "org.jlleitschuh.gradle.ktlint",       version.ref = "jlleitschuhGradleKtlint" }
+android-application 	   = { id = "com.android.application", 		                    version.ref = "androidApplication" }
+android-library 		   = { id = "com.android.library", 			                    version.ref = "androidLibrary" }
+google-devtools-ksp 	   = { id = "com.google.devtools.ksp", 		                    version.ref = "googleDevtoolsKsp" }
+detekt                     = { id = "io.gitlab.arturbosch.detekt",                      version.ref = "detekt" }
+kotlin-compose             = { id = "org.jetbrains.kotlin.plugin.compose",              version.ref = "jetbrainsKotlinAndroid" }
+jlleitschuh-gradle-ktlint  = { id = "org.jlleitschuh.gradle.ktlint",                    version.ref = "jlleitschuhGradleKtlint" }
