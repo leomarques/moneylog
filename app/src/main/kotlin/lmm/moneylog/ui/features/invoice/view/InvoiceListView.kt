@@ -36,7 +36,6 @@ fun InvoiceListView(
     var showAdjustInvoiceConfirmDialog by remember { mutableStateOf(false) }
     var adjustmentValue by remember { mutableStateOf("") }
     var adjustmentAmount by remember { mutableDoubleStateOf(0.0) }
-    var selectedCategoryId by remember { mutableStateOf<Int?>(null) }
 
     if (showAdjustInvoiceDialog) {
         AdjustInvoiceDialog(
@@ -47,7 +46,6 @@ fun InvoiceListView(
                     if (result != null) {
                         adjustmentValue = result.first
                         adjustmentAmount = result.second
-                        selectedCategoryId = result.third
                         showAdjustInvoiceDialog = false
                         showAdjustInvoiceConfirmDialog = true
                     } else {
@@ -66,15 +64,13 @@ fun InvoiceListView(
                 viewModel.onAdjustInvoiceConfirm(
                     adjustmentValue = adjustmentAmount,
                     description = adjustmentDescription,
-                    categoryId = selectedCategoryId,
+                    categoryId = null,
                     onSuccess = {
                         showToast(context, R.string.invoice_adjust_value_success)
                         showAdjustInvoiceConfirmDialog = false
-                        selectedCategoryId = null
                     },
                     onError = { errorResId ->
                         showToast(context, errorResId)
-                        selectedCategoryId = null
                     }
                 )
             },

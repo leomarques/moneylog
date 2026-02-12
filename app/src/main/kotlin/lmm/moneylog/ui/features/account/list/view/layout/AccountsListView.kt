@@ -38,7 +38,6 @@ fun AccountsListView(
     var selectedAccountId by remember { mutableIntStateOf(-1) }
     var adjustmentValueDisplay by remember { mutableStateOf("") }
     var adjustmentValue by remember { mutableDoubleStateOf(0.0) }
-    var selectedCategoryId by remember { mutableIntStateOf(-1) }
 
     if (showAdjustBalanceDialog) {
         AdjustBalanceDialog(
@@ -48,7 +47,6 @@ fun AccountsListView(
                     if (result != null) {
                         adjustmentValueDisplay = result.first
                         adjustmentValue = result.second
-                        selectedCategoryId = result.third ?: -1
                         showAdjustBalanceDialog = false
                         showAdjustBalanceConfirmDialog = true
                     } else {
@@ -72,18 +70,16 @@ fun AccountsListView(
                     accountId = selectedAccountId,
                     adjustmentValue = adjustmentValue,
                     description = adjustmentDescription,
-                    categoryId = if (selectedCategoryId > 0) selectedCategoryId else null,
+                    categoryId = null,
                     onSuccess = {
                         showToast(context, R.string.account_adjust_balance_success)
                         showAdjustBalanceConfirmDialog = false
                         selectedAccountId = -1
-                        selectedCategoryId = -1
                     },
                     onError = {
                         showToast(context, it)
                         showAdjustBalanceConfirmDialog = false
                         selectedAccountId = -1
-                        selectedCategoryId = -1
                     }
                 )
             },

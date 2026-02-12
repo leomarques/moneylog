@@ -82,21 +82,11 @@ class AccountsListViewModel(
             AccountsListUIState(list.reversed())
         }.stateIn(viewModelScope, SharingStarted.Lazily, AccountsListUIState())
 
-    private fun getAdjustCategoryId(): Int? {
-        val adjustmentNames = listOf("ajuste", "adjustment", "adjust")
-        return _categoriesState.value.list
-            .firstOrNull { category ->
-                adjustmentNames.any { name ->
-                    category.name.equals(name, ignoreCase = true)
-                }
-            }?.id
-    }
-
     @Suppress("ReturnCount")
     suspend fun calculateAdjustment(
         accountId: Int,
         newBalance: String
-    ): Triple<String, Double, Int?>? {
+    ): Pair<String, Double>? {
         val newBalanceValue = newBalance.toDoubleOrNull() ?: return null
 
         val currentBalance =
@@ -121,8 +111,7 @@ class AccountsListViewModel(
                 adjustmentValue.formatForRs()
             }
 
-        val adjustCategoryId = getAdjustCategoryId()
-        return Triple(formattedValue, adjustmentValue, adjustCategoryId)
+        return Pair(formattedValue, adjustmentValue)
     }
 
     fun onAdjustBalanceConfirm(

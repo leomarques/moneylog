@@ -194,18 +194,8 @@ class InvoiceListViewModel(
         }
     }
 
-    private fun getAdjustCategoryId(): Int? {
-        val adjustmentNames = listOf("ajuste", "adjustment", "adjust")
-        return _categoriesState.value.list
-            .firstOrNull { category ->
-                adjustmentNames.any { name ->
-                    category.name.equals(name, ignoreCase = true)
-                }
-            }?.id
-    }
-
     @Suppress("ReturnCount")
-    fun calculateInvoiceAdjustment(newValue: String): Triple<String, Double, Int?>? {
+    fun calculateInvoiceAdjustment(newValue: String): Pair<String, Double>? {
         val newValueDouble = newValue.toDoubleOrNull() ?: return null
         val targetValue = -newValueDouble
 
@@ -222,8 +212,7 @@ class InvoiceListViewModel(
                 adjustmentValue.formatForRs()
             }
 
-        val adjustCategoryId = getAdjustCategoryId()
-        return Triple(formattedValue, adjustmentValue, adjustCategoryId)
+        return Pair(formattedValue, adjustmentValue)
     }
 
     fun onAdjustInvoiceConfirm(
