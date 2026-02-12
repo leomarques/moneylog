@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import lmm.moneylog.ui.navigation.misc.ABOUT_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
@@ -103,9 +102,6 @@ fun NavHostParams(
         },
         onGraphsClick = {
             onNavigate(GRAPHS_SCREEN)
-        },
-        onAboutClick = {
-            onNavigate(ABOUT_SCREEN)
         }
     )
 }

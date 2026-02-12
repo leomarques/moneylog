@@ -1,22 +1,18 @@
 package lmm.moneylog.ui.navigation.navhost
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import lmm.moneylog.BuildConfig
 import lmm.moneylog.home.ui.HomeLayout
 import lmm.moneylog.home.ui.HomeLayoutCallbacks
 import lmm.moneylog.home.ui.cards.CreditCardsCardCallbacks
 import lmm.moneylog.home.ui.cards.TotalBalanceCardCallbacks
-import lmm.moneylog.ui.features.about.AboutScreen
 import lmm.moneylog.ui.features.account.archive.view.layout.ArchivedAccountsListView
 import lmm.moneylog.ui.features.account.detail.view.layout.AccountDetailView
 import lmm.moneylog.ui.features.account.list.view.layout.AccountsListView
@@ -34,7 +30,6 @@ import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetail
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListView
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_INCOME
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_OUTCOME
-import lmm.moneylog.ui.navigation.misc.ABOUT_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
@@ -85,7 +80,6 @@ fun MyNavHost(
     onCategoriesClick: () -> Unit,
     onCreditCardsClick: () -> Unit,
     onGraphsClick: () -> Unit,
-    onAboutClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -280,25 +274,7 @@ fun MyNavHost(
                 onCategoriesClick = onCategoriesClick,
                 onCreditCardsClick = onCreditCardsClick,
                 onNotificationSettingsClick = onNotificationSettingsClick,
-                onGraphsClick = onGraphsClick,
-                onAboutClick = onAboutClick
-            )
-        }
-
-        composableExt(
-            route = ABOUT_SCREEN,
-            onArrowBackClick = onArrowBackClick
-        ) {
-            val context = LocalContext.current
-            AboutScreen(
-                onArrowBackClick = onArrowBackClick,
-                appVersion = BuildConfig.VERSION_NAME,
-                onPrivacyClick = {
-                    Toast.makeText(context, "Privacy Policy clicked", Toast.LENGTH_SHORT).show()
-                },
-                onLicenseClick = {
-                    Toast.makeText(context, "License clicked", Toast.LENGTH_SHORT).show()
-                }
+                onGraphsClick = onGraphsClick
             )
         }
 
