@@ -239,10 +239,15 @@ class TransactionDetailViewModel(
                 _uiState.value.invoices[0]
             }
 
+        // Only update value if it's currently blank
+        val newValue = _uiState.value.value.ifBlank {
+            if (value < 0) (-value).toString() else value.toString()
+        }
+
         _uiState.update {
             it.copy(
                 description = description,
-                value = if (value < 0) (-value).toString() else value.toString(),
+                value = newValue,
                 descriptionSuggestions = emptyList(),
                 categoryId = categoryId,
                 displayCategory = category?.name.orEmpty(),
