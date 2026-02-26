@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowUpward
+import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -80,7 +80,7 @@ fun RecentExpensesCard(
                     horizontalArrangement = Arrangement.spacedBy(Size.SmallSpaceSize)
                 ) {
                     CircularIconBox(
-                        icon = Icons.Default.ArrowUpward,
+                        icon = Icons.Default.ArrowDownward,
                         contentDescription = stringResource(lmm.moneylog.home.R.string.home_expenses_card_cd),
                         backgroundColor = outcome.copy(alpha = 0.12f),
                         iconTint = outcome,

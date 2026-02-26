@@ -63,7 +63,7 @@ fun FinancialSummaryView(
             IncomeExpenseCard(
                 title = stringResource(R.string.income),
                 amount = income!!.amount,
-                icon = Icons.Default.ArrowDownward,
+                icon = Icons.Default.ArrowUpward,
                 iconColor = incomeColor,
                 modifier = Modifier.weight(1f),
                 onClick = onIncomeClick,
@@ -72,7 +72,7 @@ fun FinancialSummaryView(
             IncomeExpenseCard(
                 title = stringResource(R.string.expenses),
                 amount = expenses!!.amount,
-                icon = Icons.Default.ArrowUpward,
+                icon = Icons.Default.ArrowDownward,
                 iconColor = outcomeColor,
                 modifier = Modifier.weight(1f),
                 onClick = onExpensesClick,

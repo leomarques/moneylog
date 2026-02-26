@@ -9,6 +9,4 @@ interface GetBalanceRepository {
     suspend fun getAllValuesByAccount(accountId: Int): List<Double>
 
     fun getAllValuesByAccountFlow(accountId: Int): Flow<List<Double>>
-
-    fun getTransactionsPaidMonth(): Flow<List<TransactionBalance>>
 }

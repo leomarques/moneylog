@@ -9,9 +9,6 @@ class GetBalanceRepositoryImpl(
 ) : GetBalanceRepository {
     override fun getTransactions(): Flow<List<TransactionBalance>> = transactionDao.selectTransactions()
 
-    override fun getTransactionsPaidMonth(): Flow<List<TransactionBalance>> =
-        transactionDao.selectTransactionsPaidMonth()
-
     override suspend fun getAllValuesByAccount(accountId: Int): List<Double> =
         transactionDao.selectValuesByAccountId(accountId)
 
