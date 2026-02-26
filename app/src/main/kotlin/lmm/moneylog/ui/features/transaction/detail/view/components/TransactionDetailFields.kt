@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,6 +55,8 @@ fun TransactionDetailFields(
     onClearSuggestions: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val focusManager = LocalFocusManager.current
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -164,7 +167,10 @@ fun TransactionDetailFields(
                             Spacer(modifier = Modifier.height(8.dp))
                             DescriptionAutocomplete(
                                 suggestions = uiState.descriptionSuggestions,
-                                onSuggestionClick = onSuggestionClick
+                                onSuggestionClick = { suggestion ->
+                                    focusManager.clearFocus()
+                                    onSuggestionClick(suggestion)
+                                }
                             )
                         }
                     }

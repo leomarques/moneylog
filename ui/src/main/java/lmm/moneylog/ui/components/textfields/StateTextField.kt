@@ -6,15 +6,21 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
 import lmm.moneylog.ui.components.misc.OnLifecycleEvent
@@ -33,16 +39,37 @@ fun StateTextField(
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
 
+    var textFieldValue by remember {
+        mutableStateOf(
+            TextFieldValue(
+                text = value,
+                selection = TextRange(value.length)
+            )
+        )
+    }
+
+    LaunchedEffect(value) {
+        if (textFieldValue.text != value) {
+            textFieldValue = TextFieldValue(
+                text = value,
+                selection = TextRange(value.length)
+            )
+        }
+    }
+
     OutlinedTextField(
         modifier =
             modifier
                 .fillMaxWidth()
                 .focusRequester(focusRequester)
                 .testTag(testTag),
-        value = value,
+        value = textFieldValue,
         label = { Text(text = title) },
         leadingIcon = leadingIcon,
-        onValueChange = onValueChange,
+        onValueChange = { newValue ->
+            textFieldValue = newValue
+            onValueChange(newValue.text)
+        },
         keyboardOptions =
             KeyboardOptions.Default.copy(
                 keyboardType = keyboardType,
