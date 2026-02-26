@@ -24,8 +24,8 @@ class GetBalancesForAllAccountsWithTransfersInteractor(
             val accountBalances = mutableMapOf<Int, Double>()
 
             // Group transactions by account
+            // accountId IS NOT NULL filter already applied at SQL level
             transactions
-                .filter { it.accountId != null }
                 .groupBy { it.accountId!! }
                 .forEach { (accountId, accountTransactions) ->
                     accountBalances[accountId] = accountTransactions.sumOf { it.value }

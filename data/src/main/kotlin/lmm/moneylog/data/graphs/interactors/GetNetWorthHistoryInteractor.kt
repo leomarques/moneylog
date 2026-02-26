@@ -53,17 +53,15 @@ class GetNetWorthHistoryInteractor(
             }
         }
 
-        // Fetch ALL transactions at once and build cumulative balance month-by-month
-        // This ensures we include historical balance before the 24-month window
+        // Fetch all paid transactions at once (accountId IS NOT NULL filter applied at SQL level)
+        // Credit cards use paidMonth/paidYear when available, otherwise transaction month/year
+        // This ensures net worth reflects when money actually left the account
         return getBalanceRepository.getTransactions().map { allTransactions ->
-            // Filter to only paid transactions (with accountId)
-            val paidTransactions = allTransactions.filter { it.accountId != null }
-
             monthlyData.map { (m, y) ->
                 // Calculate cumulative balance up to and including this month/year
                 // This matches the logic in GetBalanceInteractor
                 val cumulativeBalance =
-                    paidTransactions
+                    allTransactions
                         .filter { transaction ->
                             transaction.year < y || (transaction.year == y && transaction.month <= m)
                         }.sumOf { it.value }

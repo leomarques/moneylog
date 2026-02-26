@@ -10,14 +10,16 @@ class InMemoryBalanceRepository(
 ) : GetBalanceRepository {
     override fun getTransactions(): Flow<List<TransactionBalance>> =
         transactionRepository.getAllTransactionsFlow().map { transactions ->
-            transactions.map { transaction ->
-                TransactionBalance(
-                    value = transaction.value,
-                    month = transaction.date.month,
-                    year = transaction.date.year,
-                    accountId = transaction.accountId
-                )
-            }
+            transactions
+                .filter { it.accountId != null } // Only paid transactions (same as SQL filter)
+                .map { transaction ->
+                    TransactionBalance(
+                        value = transaction.value,
+                        month = transaction.date.month,
+                        year = transaction.date.year,
+                        accountId = transaction.accountId
+                    )
+                }
         }
 
     override suspend fun getAllValuesByAccount(accountId: Int): List<Double> =
