@@ -34,4 +34,8 @@ class InMemoryBalanceRepository(
                 .filter { it.accountId == accountId }
                 .map { it.value }
         }
+
+    override fun getTransactionsPaidMonth(): Flow<List<TransactionBalance>> {
+        return getTransactions()
+    }
 }

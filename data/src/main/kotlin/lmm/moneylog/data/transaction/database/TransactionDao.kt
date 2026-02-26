@@ -10,12 +10,15 @@ import lmm.moneylog.data.balance.model.TransactionBalance
 
 @Dao
 interface TransactionDao {
+    @Query("SELECT value, month, year, accountId FROM `transaction`")
+    fun selectTransactions(): Flow<List<TransactionBalance>>
+
     @Query(
         "SELECT value, COALESCE(paidMonth, month) as month, COALESCE(paidYear, year) as year, accountId " +
             "FROM `transaction` " +
             "WHERE accountId IS NOT NULL"
     )
-    fun selectTransactions(): Flow<List<TransactionBalance>>
+    fun selectTransactionsPaidMonth(): Flow<List<TransactionBalance>>
 
     @Query("SELECT value FROM `transaction` WHERE accountId = :accountId")
     suspend fun selectValuesByAccountId(accountId: Int): List<Double>
