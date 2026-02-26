@@ -125,6 +125,8 @@
     <string name="transfer_section_from">From Account</string>
     <string name="transfer_section_to">To Account</string>
     <string name="transfer_list_title">Transfers</string>
+    <string name="transfer_label_from">From</string>
+    <string name="transfer_label_to">To</string>
 
     <!-- Validation Errors -->
     <string name="validation_invalid_value">Invalid value</string>

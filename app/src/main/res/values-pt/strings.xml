@@ -125,6 +125,8 @@
     <string name="transfer_section_from">Da Conta</string>
     <string name="transfer_section_to">Para a Conta</string>
     <string name="transfer_list_title">Transferências</string>
+    <string name="transfer_label_from">De</string>
+    <string name="transfer_label_to">Para</string>
 
     <!-- Validation Errors -->
     <string name="validation_invalid_value">Valor inválido</string>
