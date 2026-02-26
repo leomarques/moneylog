@@ -236,13 +236,13 @@ fun LineChart(
                 }
         }
 
-        // Summary statistics
+        // Summary statistics - show month-to-month variation
         val currentNetWorth = data.lastOrNull()?.netWorth ?: 0.0
-        val startingNetWorth = data.firstOrNull()?.netWorth ?: 0.0
-        val change = currentNetWorth - startingNetWorth
+        val previousNetWorth = data.dropLast(1).lastOrNull()?.netWorth ?: currentNetWorth
+        val change = currentNetWorth - previousNetWorth
         val changePercent =
-            if (startingNetWorth != 0.0) {
-                (change / kotlin.math.abs(startingNetWorth)) * 100
+            if (previousNetWorth != 0.0) {
+                (change / kotlin.math.abs(previousNetWorth)) * 100
             } else {
                 0.0
             }
