@@ -14,5 +14,7 @@ interface AccountTransferRepository {
 
     fun getTransfers(): Flow<List<AccountTransfer>>
 
+    fun getTransfersByMonthYear(month: Int, year: Int): Flow<List<AccountTransfer>>
+
     suspend fun getAllTransfers(): List<AccountTransfer>
 }

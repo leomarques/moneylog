@@ -33,7 +33,26 @@ class AccountTransferRepositoryImpl(
         accountTransferDao.selectAll().map { list ->
             list.map { entity ->
                 AccountTransfer(
+                    id = entity.id,
                     value = entity.value,
+                    year = entity.year,
+                    month = entity.month,
+                    day = entity.day,
+                    originAccountId = entity.originAccountId,
+                    destinationAccountId = entity.destinationAccountId
+                )
+            }
+        }
+
+    override fun getTransfersByMonthYear(month: Int, year: Int): Flow<List<AccountTransfer>> =
+        accountTransferDao.selectByMonthYear(month, year).map { list ->
+            list.map { entity ->
+                AccountTransfer(
+                    id = entity.id,
+                    value = entity.value,
+                    year = entity.year,
+                    month = entity.month,
+                    day = entity.day,
                     originAccountId = entity.originAccountId,
                     destinationAccountId = entity.destinationAccountId
                 )
@@ -46,7 +65,11 @@ class AccountTransferRepositoryImpl(
             .map { list ->
                 list.map { entity ->
                     AccountTransfer(
+                        id = entity.id,
                         value = entity.value,
+                        year = entity.year,
+                        month = entity.month,
+                        day = entity.day,
                         originAccountId = entity.originAccountId,
                         destinationAccountId = entity.destinationAccountId
                     )

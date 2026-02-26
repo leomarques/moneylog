@@ -124,6 +124,7 @@
     <string name="transfer_section_amount">Monto de la Transferencia</string>
     <string name="transfer_section_from">Desde la Cuenta</string>
     <string name="transfer_section_to">A la Cuenta</string>
+    <string name="transfer_list_title">Transferencias</string>
 
     <!-- Validation Errors -->
     <string name="validation_invalid_value">Valor inválido</string>
@@ -159,6 +160,8 @@
     <!-- Empty States -->
     <string name="empty_transactions_title">No hay transacciones</string>
     <string name="empty_transactions_description">Agregue una transacción y aparecerá aquí.</string>
+    <string name="empty_transfers_title">No hay transferencias</string>
+    <string name="empty_transfers_description">Agregue una transferencia y aparecerá aquí.</string>
     <string name="empty_accounts_title">No hay cuentas</string>
     <string name="empty_accounts_description">Agregue una cuenta y aparecerá aquí.</string>
     <string name="empty_accounts_archived_title">No hay cuentas archivadas</string>
@@ -204,6 +207,7 @@
     <string name="settings_manage_categories">Gestione sus categorías de gastos</string>
     <string name="settings_manage_creditcards">Gestione sus tarjetas de crédito</string>
     <string name="settings_view_graphs">Visualice sus gastos</string>
+    <string name="settings_view_transfers">Visualice sus transferencias entre cuentas</string>
     <string name="settings_configure_nubank">Configure la captura de transacciones de Nubank</string>
     <string name="settings_notifications">Notificaciones</string>
 

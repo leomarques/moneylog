@@ -52,6 +52,7 @@ fun SettingsScreen(
     onAccountsClick: () -> Unit,
     onCategoriesClick: () -> Unit,
     onCreditCardsClick: () -> Unit,
+    onTransfersListClick: () -> Unit,
     onNotificationSettingsClick: () -> Unit,
     onGraphsClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -135,6 +136,15 @@ fun SettingsScreen(
                         description = stringResource(R.string.settings_manage_creditcards),
                         icon = ImageVector.vectorResource(id = R.drawable.outline_credit_card_24),
                         onClick = onCreditCardsClick
+                    )
+
+                    HorizontalDivider()
+
+                    SettingsItem(
+                        title = stringResource(R.string.transfer_list_title),
+                        description = stringResource(R.string.settings_view_transfers),
+                        icon = ImageVector.vectorResource(id = R.drawable.outline_currency_exchange_24),
+                        onClick = onTransfersListClick
                     )
                 }
             }
@@ -340,6 +350,7 @@ private fun PreviewSettingsScreen() {
             onAccountsClick = {},
             onCategoriesClick = {},
             onCreditCardsClick = {},
+            onTransfersListClick = {},
             onNotificationSettingsClick = {},
             onGraphsClick = {}
         )

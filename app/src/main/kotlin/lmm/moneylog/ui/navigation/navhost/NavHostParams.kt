@@ -24,6 +24,7 @@ import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
+import lmm.moneylog.ui.navigation.misc.TRANSFERS_LIST_SCREEN
 
 @Composable
 fun NavHostParams(
@@ -102,6 +103,9 @@ fun NavHostParams(
         },
         onGraphsClick = {
             onNavigate(GRAPHS_SCREEN)
+        },
+        onViewTransfersListClick = {
+            onNavigate(TRANSFERS_LIST_SCREEN)
         }
     )
 }

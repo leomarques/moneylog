@@ -2,9 +2,12 @@
 <SmellBaseline>
   <ManuallySuppressedIssues/>
   <CurrentIssues>
+    <ID>MagicNumber:DemoDataProvider.kt$DemoDataProvider$100</ID>
+    <ID>MagicNumber:DemoDataProvider.kt$DemoDataProvider$10000</ID>
+    <ID>MagicNumber:DemoDataProvider.kt$DemoDataProvider$15</ID>
+    <ID>MagicNumber:DemoDataProvider.kt$DemoDataProvider$20</ID>
     <ID>MagicNumber:InMemoryTransactionRepository.kt$InMemoryTransactionRepository$10</ID>
     <ID>MagicNumber:Invoice.kt$Invoice$12</ID>
-    <ID>MatchingDeclarationName:PopulateDB.kt$TransactionGenerationParams</ID>
     <ID>TooManyFunctions:InMemoryTransactionRepository.kt$InMemoryTransactionRepository : GetTransactionsRepositoryAddTransactionRepositoryUpdateTransactionRepositoryDeleteTransactionRepositorySearchTransactionsRepository</ID>
     <ID>TooManyFunctions:TransactionDao.kt$TransactionDao</ID>
   </CurrentIssues>

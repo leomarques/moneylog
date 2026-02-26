@@ -30,6 +30,7 @@ import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetail
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListView
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_INCOME
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_OUTCOME
+import lmm.moneylog.ui.features.transfer.list.view.TransfersListView
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
@@ -52,6 +53,7 @@ import lmm.moneylog.ui.navigation.misc.SETTINGS_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
+import lmm.moneylog.ui.navigation.misc.TRANSFERS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.composableExt
 import lmm.moneylog.ui.navigation.misc.toTransactionType
 
@@ -80,6 +82,7 @@ fun MyNavHost(
     onCategoriesClick: () -> Unit,
     onCreditCardsClick: () -> Unit,
     onGraphsClick: () -> Unit,
+    onViewTransfersListClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -209,6 +212,17 @@ fun MyNavHost(
         }
 
         composableExt(
+            route = TRANSFERS_LIST_SCREEN,
+            onArrowBackClick = onArrowBackClick
+        ) {
+            TransfersListView(
+                onArrowBackClick = onArrowBackClick,
+                onFabClick = onTransferIconClick,
+                onItemClick = { onViewTransfersListClick() }
+            )
+        }
+
+        composableExt(
             route = CREDITCARD_LIST_SCREEN,
             onArrowBackClick = onArrowBackClick
         ) {
@@ -273,6 +287,7 @@ fun MyNavHost(
                 onAccountsClick = onAccountsClick,
                 onCategoriesClick = onCategoriesClick,
                 onCreditCardsClick = onCreditCardsClick,
+                onTransfersListClick = onViewTransfersListClick,
                 onNotificationSettingsClick = onNotificationSettingsClick,
                 onGraphsClick = onGraphsClick
             )

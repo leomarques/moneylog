@@ -32,6 +32,7 @@ class DemoRepositoriesManager(
         creditCardRepository.setInitialData(DemoDataProvider.getCreditCards())
         transactionRepository.setInitialData(DemoDataProvider.getTransactions())
         categoryKeywordRepository.setInitialData(DemoDataProvider.getCategoryKeywords())
+        accountTransferRepository.setInitialData(DemoDataProvider.getTransfers())
     }
 
     fun clearAllData() {

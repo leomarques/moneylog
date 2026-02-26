@@ -17,6 +17,7 @@ import lmm.moneylog.ui.features.notification.settings.viewmodel.NotificationSett
 import lmm.moneylog.ui.features.settings.viewmodel.SettingsViewModel
 import lmm.moneylog.ui.features.transaction.detail.viewmodel.TransactionDetailViewModel
 import lmm.moneylog.ui.features.transaction.list.viewmodel.TransactionsListViewModel
+import lmm.moneylog.ui.features.transfer.list.viewmodel.TransfersListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.dsl.viewModel
@@ -53,6 +54,7 @@ val appModule =
         viewModelOf(::TransactionDetailViewModel)
         viewModelOf(::ArchivedAccountsViewModel)
         viewModelOf(::AccountTransferViewModel)
+        viewModelOf(::TransfersListViewModel)
         viewModelOf(::InvoiceListViewModel)
         viewModelOf(::NotificationSettingsViewModel)
         viewModelOf(::SettingsViewModel)

@@ -1,6 +1,7 @@
 package lmm.moneylog.data.demo
 
 import lmm.moneylog.data.account.model.Account
+import lmm.moneylog.data.accounttransfer.model.AccountTransfer
 import lmm.moneylog.data.category.model.Category
 import lmm.moneylog.data.categorypredictor.model.CategoryKeyword
 import lmm.moneylog.data.creditcard.model.CreditCard
@@ -18,6 +19,7 @@ import lmm.moneylog.data.misc.SampleDataGenerator.CREDIT_CARD_LIMIT
 import lmm.moneylog.data.misc.SampleDataGenerator.DEFAULT_TRANSACTION_COUNT
 import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.data.transaction.model.Transaction
+import java.time.LocalDate
 
 /**
  * Demo data provider using the same logic as PopulateDB.kt
@@ -131,11 +133,38 @@ object DemoDataProvider {
 
     fun getCategoryKeywords(): List<CategoryKeyword> = emptyList()
 
+    fun getTransfers(): List<AccountTransfer> {
+        val transfers = mutableListOf<AccountTransfer>()
+        val currentDate = LocalDate.now()
+
+        // Generate some sample transfers over the last few months
+        repeat(20) { index ->
+            val date = currentDate.minusDays((index * 15).toLong())
+            val originAccountId = if (index % 2 == 0) ACCOUNT_ID_NUCONTA else ACCOUNT_ID_SANTANDER
+            val destinationAccountId =
+                if (originAccountId == ACCOUNT_ID_NUCONTA) ACCOUNT_ID_SANTANDER else ACCOUNT_ID_NUCONTA
+
+            transfers.add(
+                AccountTransfer(
+                    id = index + 1,
+                    value = (100..1000).random().toDouble(),
+                    year = date.year,
+                    month = date.monthValue,
+                    day = date.dayOfMonth,
+                    originAccountId = originAccountId,
+                    destinationAccountId = destinationAccountId
+                )
+            )
+        }
+
+        return transfers.sortedByDescending { it.year * 10000 + it.month * 100 + it.day }
+    }
+
     private data class TransactionParams(
         val id: Long,
         val value: Double,
         val description: String,
-        val date: java.time.LocalDate,
+        val date: LocalDate,
         val categoryId: Int
     )
 

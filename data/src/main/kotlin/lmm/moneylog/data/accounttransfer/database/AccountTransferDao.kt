@@ -13,4 +13,7 @@ interface AccountTransferDao {
 
     @Query("SELECT * FROM `account_transfer`")
     fun selectAll(): Flow<List<AccountTransferEntity>>
+
+    @Query("SELECT * FROM `account_transfer` WHERE month = :month AND year = :year")
+    fun selectByMonthYear(month: Int, year: Int): Flow<List<AccountTransferEntity>>
 }
