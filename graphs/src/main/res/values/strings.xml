@@ -12,6 +12,8 @@
     <!-- ============================================ -->
     <string name="graphs_pie_income">Income</string>
     <string name="graphs_pie_expenses">Expenses</string>
+    <string name="graphs_pie_total_income">Total Income</string>
+    <string name="graphs_pie_total_expenses">Total Expenses</string>
 
     <!-- ============================================ -->
     <!-- GRAPHS SCREEN - Bar Chart -->

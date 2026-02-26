@@ -27,8 +27,11 @@ import lmm.moneylog.graphs.ui.components.LineChart
 import lmm.moneylog.graphs.ui.components.MonthSelector
 import lmm.moneylog.graphs.ui.components.PieChart
 import lmm.moneylog.graphs.viewmodel.GraphsViewModel
+import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.theme.AppTheme
 import lmm.moneylog.ui.theme.Size
+import lmm.moneylog.ui.theme.income
+import lmm.moneylog.ui.theme.outcome
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -160,13 +163,37 @@ private fun PieChartTab(
             )
         }
 
-        // Pie Chart
-        PieChart(
-            data = if (isIncome) incomeData else expensesData,
+        // Total value display
+        val currentData = if (isIncome) incomeData else expensesData
+        val totalValue = currentData.sumOf { it.totalAmount }
+
+        Column(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(top = Size.MediumSpaceSize)
+                    .padding(top = Size.MediumSpaceSize),
+            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = if (isIncome) {
+                    stringResource(R.string.graphs_pie_total_income)
+                } else {
+                    stringResource(R.string.graphs_pie_total_expenses)
+                },
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Text(
+                text = totalValue.formatForRs(),
+                style = MaterialTheme.typography.headlineMedium,
+                color = if (isIncome) income else outcome
+            )
+        }
+
+        // Pie Chart
+        PieChart(
+            data = currentData,
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
