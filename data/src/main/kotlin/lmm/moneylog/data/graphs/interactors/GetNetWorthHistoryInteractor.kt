@@ -56,7 +56,7 @@ class GetNetWorthHistoryInteractor(
         // Fetch all paid transactions at once (accountId IS NOT NULL filter applied at SQL level)
         // Credit cards use paidMonth/paidYear when available, otherwise transaction month/year
         // This ensures net worth reflects when money actually left the account
-        return getBalanceRepository.getTransactions().map { allTransactions ->
+        return getBalanceRepository.getTransactionsPaidMonth().map { allTransactions ->
             monthlyData.map { (m, y) ->
                 // Calculate cumulative balance up to and including this month/year
                 // This matches the logic in GetBalanceInteractor

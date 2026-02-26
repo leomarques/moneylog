@@ -25,17 +25,14 @@ class GetBalanceInteractor(
                 .filter { it.value < 0 }
                 .sumOf { it.value }
 
-        // Calculate cumulative balance up to and including the specified month/year
-        // Credit cards use paidMonth/paidYear, so they appear when money left the account
-        // Unpaid transactions are filtered at SQL level (accountId IS NOT NULL)
-        val cumulativeBalance =
-            allTransactions
-                .filter {
-                    it.year < yearNumber || (it.year == yearNumber && it.month <= monthNumber)
-                }.sumOf { it.value }
+        val paidTransactions =
+            allTransactions.filter {
+                it.accountId != null &&
+                        (it.year < yearNumber || (it.year == yearNumber && it.month <= monthNumber))
+            }.sumOf { it.value }
 
         BalanceModel(
-            total = cumulativeBalance,
+            total = paidTransactions,
             credit = credit,
             debt = -debt
         )
