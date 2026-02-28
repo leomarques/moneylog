@@ -1,5 +1,8 @@
 package lmm.moneylog.ui.navigation.misc
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.MutableState
@@ -19,16 +22,31 @@ fun NavGraphBuilder.composableExt(
     route: String,
     arguments: List<NamedNavArgument>? = null,
     onArrowBackClick: () -> Unit,
+    enterTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition)? = null,
+    exitTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition)? = null,
+    popEnterTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> EnterTransition)? = null,
+    popExitTransition: (AnimatedContentTransitionScope<NavBackStackEntry>.() -> ExitTransition)? = null,
     content: @Composable (NavBackStackEntry?) -> Unit
 ) {
     composable(
         route = route,
-        arguments = arguments ?: emptyList()
+        arguments = arguments ?: emptyList(),
+        enterTransition = enterTransition,
+        exitTransition = exitTransition,
+        popEnterTransition = popEnterTransition,
+        popExitTransition = popExitTransition
     ) {
         BackPressHandler(onBackPress = onArrowBackClick)
         content(it)
     }
 }
+
+// Standard transitions for detail screens
+fun <T> AnimatedContentTransitionScope<T>.slideInFromRight(): EnterTransition =
+    slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left)
+
+fun <T> AnimatedContentTransitionScope<T>.slideOutToRight(): ExitTransition =
+    slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right)
 
 fun NavHostController.navigatePopUpTo(
     destination: String,
