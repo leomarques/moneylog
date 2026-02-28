@@ -2,11 +2,10 @@ package lmm.moneylog.ui.components.bottombar
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-
-const val HOME_SCREEN = "home"
-const val TRANSACTIONS_LIST_SCREEN = "transactions_list"
-const val SETTINGS_SCREEN = "settings"
-const val PARAM_TYPE_ALL = "all"
+import lmm.moneylog.ui.navigation.HOME_SCREEN
+import lmm.moneylog.ui.navigation.PARAM_TYPE_ALL
+import lmm.moneylog.ui.navigation.SETTINGS_SCREEN
+import lmm.moneylog.ui.navigation.TRANSACTIONS_LIST_SCREEN
 
 @Composable
 fun BottomBar(
