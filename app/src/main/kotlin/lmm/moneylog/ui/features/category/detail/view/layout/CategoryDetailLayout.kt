@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.features.category.detail.view.layout
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.FabPosition
@@ -35,6 +36,7 @@ fun CategoryDetailLayout(
 
     Scaffold(
         modifier = modifier,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             CategoryDetailTopBar(
                 isEdit = isEdit,

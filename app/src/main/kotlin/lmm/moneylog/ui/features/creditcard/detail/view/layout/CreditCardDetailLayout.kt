@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.features.creditcard.detail.view.layout
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.FabPosition
@@ -39,6 +40,7 @@ fun CreditCardDetailLayout(
 
     Scaffold(
         modifier = modifier,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             CreditCardDetailTopBar(
                 isEdit = isEdit,

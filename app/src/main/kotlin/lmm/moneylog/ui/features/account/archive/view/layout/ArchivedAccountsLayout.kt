@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.features.account.archive.view.layout
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -22,6 +23,7 @@ fun ArchivedAccountsLayout(
 ) {
     Scaffold(
         modifier = modifier,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = { ArchivedAccountsTopBar(onArrowBackClick = onArrowBackClick) },
         content = { paddingValues ->
             Surface(Modifier.padding(top = paddingValues.calculateTopPadding())) {

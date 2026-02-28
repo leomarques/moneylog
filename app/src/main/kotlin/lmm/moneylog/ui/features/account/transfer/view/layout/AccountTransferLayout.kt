@@ -1,6 +1,7 @@
 package lmm.moneylog.ui.features.account.transfer.view.layout
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Scaffold
@@ -31,6 +32,7 @@ fun AccountTransferLayout(
 ) {
     Scaffold(
         modifier = modifier,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = { AccountTransferTopBar(onArrowBackClick = onArrowBackClick) },
         floatingActionButton = {
             HideFab(
