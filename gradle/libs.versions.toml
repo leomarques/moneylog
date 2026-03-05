@@ -1,5 +1,5 @@
 [versions]
-composeBom            = "2026.02.00"
+composeBom            = "2026.02.01"
 composeRules          = "0.5.6"
 coreTesting           = "2.2.0"
 junit                 = "4.13.2"
@@ -11,8 +11,8 @@ navigationCompose     = "2.9.7"
 room                  = "2.8.4"
 uiTest                = "1.10.4"
 
-androidApplication      = "9.0.1"
-androidLibrary          = "9.0.1"
+androidApplication      = "9.1.0"
+androidLibrary          = "9.1.0"
 detekt                  = "1.23.8"
 googleDevtoolsKsp       = "2.3.4"
 jetbrainsKotlinAndroid  = "2.3.10"
