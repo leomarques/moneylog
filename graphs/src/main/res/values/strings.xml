@@ -38,4 +38,9 @@
     <!-- ============================================ -->
     <string name="graphs_month_selector_previous">Previous month</string>
     <string name="graphs_month_selector_next">Next month</string>
+
+    <!-- ============================================ -->
+    <!-- GRAPHS SCREEN - Monthly Balance -->
+    <!-- ============================================ -->
+    <string name="graphs_monthly_balance_label">Monthly Balance</string>
 </resources>

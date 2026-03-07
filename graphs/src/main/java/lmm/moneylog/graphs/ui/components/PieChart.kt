@@ -40,7 +40,9 @@ fun PieChart(
 ) {
     if (data.isEmpty()) {
         Box(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(top = ThemeSize.DefaultSpaceSize),
             contentAlignment = Alignment.Center
         ) {
             Text(

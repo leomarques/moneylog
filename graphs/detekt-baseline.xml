@@ -1,5 +1,9 @@
 <?xml version="1.0" ?>
 <SmellBaseline>
-    <ManuallySuppressedIssues></ManuallySuppressedIssues>
-    <CurrentIssues></CurrentIssues>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>UnusedParameter:GraphsLayout.kt$incomeData: List&lt;lmm.moneylog.data.graphs.model.CategoryAmount&gt;</ID>
+    <ID>UnusedParameter:GraphsLayout.kt$isIncome: Boolean</ID>
+    <ID>UnusedParameter:GraphsLayout.kt$onToggleIncomeExpense: () -&gt; Unit</ID>
+  </CurrentIssues>
 </SmellBaseline>

@@ -2,14 +2,18 @@ package lmm.moneylog.graphs.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
-import androidx.compose.material3.SecondaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,9 +22,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import lmm.moneylog.graphs.R
 import lmm.moneylog.graphs.ui.components.BarChart
 import lmm.moneylog.graphs.ui.components.LineChart
@@ -61,6 +68,7 @@ fun GraphsLayout(
     val isIncome by viewModel.isIncome.collectAsState()
     val monthName by viewModel.monthName.collectAsState()
     val selectedYear by viewModel.selectedYear.collectAsState()
+    val monthlyTotal by viewModel.monthlyTotal.collectAsState()
 
     Column(
         modifier = modifier.fillMaxSize()
@@ -94,6 +102,7 @@ fun GraphsLayout(
                         expensesData = expensesByCategory,
                         monthName = monthName,
                         year = selectedYear,
+                        monthlyTotal = monthlyTotal,
                         onToggleIncomeExpense = { viewModel.toggleIncomeExpense() },
                         onPreviousMonth = { viewModel.goToPreviousMonth() },
                         onNextMonth = { viewModel.goToNextMonth() }
@@ -123,6 +132,7 @@ private fun PieChartTab(
     expensesData: List<lmm.moneylog.data.graphs.model.CategoryAmount>,
     monthName: String,
     year: Int,
+    monthlyTotal: Double,
     onToggleIncomeExpense: () -> Unit,
     onPreviousMonth: () -> Unit,
     onNextMonth: () -> Unit,
@@ -146,55 +156,80 @@ private fun PieChartTab(
                     .padding(vertical = Size.SmallSpaceSize)
         )
 
-        // Toggle between Income and Expenses
-        SecondaryTabRow(
-            selectedTabIndex = if (isIncome) 1 else 0,
+        // Monthly Summary Card
+        MonthlySummaryCard(
+            monthlyBalance = monthlyTotal,
+            expensesTotal = expensesData.sumOf { it.totalAmount },
+            modifier = Modifier.padding(horizontal = Size.DefaultSpaceSize)
+        )
+
+        // Pie Chart - hardcoded to show expenses only
+        PieChart(
+            data = expensesData,
             modifier = Modifier.fillMaxWidth()
-        ) {
-            Tab(
-                selected = !isIncome,
-                onClick = { if (isIncome) onToggleIncomeExpense() },
-                text = { Text(stringResource(R.string.graphs_pie_expenses)) }
-            )
-            Tab(
-                selected = isIncome,
-                onClick = { if (!isIncome) onToggleIncomeExpense() },
-                text = { Text(stringResource(R.string.graphs_pie_income)) }
-            )
-        }
+        )
+    }
+}
 
-        // Total value display
-        val currentData = if (isIncome) incomeData else expensesData
-        val totalValue = currentData.sumOf { it.totalAmount }
-
+@Composable
+private fun MonthlySummaryCard(
+    monthlyBalance: Double,
+    expensesTotal: Double,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 2.dp
+        )
+    ) {
         Column(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(top = Size.MediumSpaceSize),
-            horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(Size.DefaultSpaceSize),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Monthly Balance Section
             Text(
-                text = if (isIncome) {
-                    stringResource(R.string.graphs_pie_total_income)
-                } else {
-                    stringResource(R.string.graphs_pie_total_expenses)
-                },
+                text = stringResource(R.string.graphs_monthly_balance_label),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Text(
-                text = totalValue.formatForRs(),
+                text = monthlyBalance.formatForRs(),
                 style = MaterialTheme.typography.headlineMedium,
-                color = if (isIncome) income else outcome
+                color = when {
+                    monthlyBalance == 0.0 -> MaterialTheme.colorScheme.onSurface
+                    monthlyBalance < 0.0 -> outcome
+                    else -> income
+                },
+                fontWeight = FontWeight.SemiBold
             )
-        }
 
-        // Pie Chart
-        PieChart(
-            data = currentData,
-            modifier = Modifier.fillMaxWidth()
-        )
+            // Divider
+            Spacer(modifier = Modifier.padding(vertical = Size.DefaultSpaceSize))
+
+            // Expenses Section
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(R.string.graphs_pie_total_expenses),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = expensesTotal.formatForRs(),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = outcome,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+        }
     }
 }
 

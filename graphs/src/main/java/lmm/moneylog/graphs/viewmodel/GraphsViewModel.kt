@@ -56,6 +56,9 @@ class GraphsViewModel(
     private val _isIncome = MutableStateFlow(false)
     val isIncome: StateFlow<Boolean> = _isIncome.asStateFlow()
 
+    private val _monthlyTotal = MutableStateFlow(0.0)
+    val monthlyTotal: StateFlow<Double> = _monthlyTotal.asStateFlow()
+
     init {
         viewModelScope.launch {
             val currentDate = domainTimeRepository.getCurrentDomainTime()
@@ -82,6 +85,7 @@ class GraphsViewModel(
                     year = _selectedYear.value
                 ).collect { data ->
                     _incomeByCategory.value = data
+                    updateMonthlyTotal()
                 }
         }
 
@@ -93,6 +97,7 @@ class GraphsViewModel(
                     year = _selectedYear.value
                 ).collect { data ->
                     _expensesByCategory.value = data
+                    updateMonthlyTotal()
                 }
         }
 
@@ -117,6 +122,12 @@ class GraphsViewModel(
                     _netWorthHistory.value = data
                 }
         }
+    }
+
+    private fun updateMonthlyTotal() {
+        val totalIncome = _incomeByCategory.value.sumOf { it.totalAmount }
+        val totalExpenses = _expensesByCategory.value.sumOf { it.totalAmount }
+        _monthlyTotal.value = totalIncome - totalExpenses
     }
 
     /**
