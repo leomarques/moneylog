@@ -1,7 +1,5 @@
 package lmm.moneylog.ui.navigation.navhost
 
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -58,8 +56,6 @@ import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSFERS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.NavigationActions
 import lmm.moneylog.ui.navigation.misc.composableExt
-import lmm.moneylog.ui.navigation.misc.slideInFromRight
-import lmm.moneylog.ui.navigation.misc.slideOutToRight
 import lmm.moneylog.ui.navigation.misc.toTransactionType
 
 @Composable
@@ -90,11 +86,7 @@ fun MyNavHost(
                 }
             )
 
-        composable(
-            route = HOME_SCREEN,
-            enterTransition = { fadeIn() },
-            exitTransition = { fadeOut() }
-        ) {
+        composable(HOME_SCREEN) {
             HomeLayout(
                 callbacks =
                     HomeLayoutCallbacks(
@@ -119,10 +111,6 @@ fun MyNavHost(
         composableExt(
             route = "$TRANSACTIONS_LIST_SCREEN/{$PARAM_TYPE_OF_VALUE}",
             onArrowBackClick = actions::onArrowBackClick,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
         ) { backStackEntry ->
             val param = backStackEntry?.arguments?.getString(PARAM_TYPE_OF_VALUE)
 
@@ -137,22 +125,14 @@ fun MyNavHost(
         composableExt(
             route = "$TRANSACTION_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}&$PARAM_CARD_ID={$PARAM_CARD_ID}",
             onArrowBackClick = actions::onArrowBackClick,
-            arguments = transactionArguments,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            arguments = transactionArguments
         ) {
             TransactionDetailView(onArrowBackClick = actions::onArrowBackClick)
         }
 
         composableExt(
             route = ACCOUNTS_LIST_SCREEN,
-            onArrowBackClick = actions::onArrowBackClick,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            onArrowBackClick = actions::onArrowBackClick
         ) {
             AccountsListView(
                 onArrowBackClick = actions::onArrowBackClick,
@@ -166,22 +146,14 @@ fun MyNavHost(
         composableExt(
             route = "$ACCOUNT_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
             onArrowBackClick = actions::onArrowBackClick,
-            arguments = intIdArguments,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            arguments = intIdArguments
         ) {
             AccountDetailView(onArrowBackClick = actions::onArrowBackClick)
         }
 
         composableExt(
             route = CATEGORIES_LIST_SCREEN,
-            onArrowBackClick = actions::onArrowBackClick,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            onArrowBackClick = actions::onArrowBackClick
         ) {
             CategoriesListView(
                 onArrowBackClick = actions::onArrowBackClick,
@@ -200,44 +172,28 @@ fun MyNavHost(
                             defaultValue = true
                             type = NavType.BoolType
                         }
-                    ),
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+                    )
         ) {
             CategoryDetailView(onArrowBackClick = actions::onArrowBackClick)
         }
 
         composableExt(
             route = ARCHIVED_ACCOUNTS_LIST_SCREEN,
-            onArrowBackClick = actions::onArrowBackClick,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            onArrowBackClick = actions::onArrowBackClick
         ) {
             ArchivedAccountsListView(onArrowBackClick = actions::onArrowBackClick)
         }
 
         composableExt(
             route = TRANSFER_SCREEN,
-            onArrowBackClick = actions::onArrowBackClick,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            onArrowBackClick = actions::onArrowBackClick
         ) {
             AccountTransferView(onArrowBackClick = actions::onArrowBackClick)
         }
 
         composableExt(
             route = TRANSFERS_LIST_SCREEN,
-            onArrowBackClick = actions::onArrowBackClick,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            onArrowBackClick = actions::onArrowBackClick
         ) {
             TransfersListView(
                 onArrowBackClick = actions::onArrowBackClick,
@@ -248,11 +204,7 @@ fun MyNavHost(
 
         composableExt(
             route = CREDITCARD_LIST_SCREEN,
-            onArrowBackClick = actions::onArrowBackClick,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            onArrowBackClick = actions::onArrowBackClick
         ) {
             CreditCardsListView(
                 onArrowBackClick = actions::onArrowBackClick,
@@ -264,11 +216,7 @@ fun MyNavHost(
         composableExt(
             route = "$CREDITCARD_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
             onArrowBackClick = actions::onArrowBackClick,
-            arguments = intIdArguments,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            arguments = intIdArguments
         ) {
             CreditCardDetailView(onArrowBackClick = actions::onArrowBackClick)
         }
@@ -276,11 +224,7 @@ fun MyNavHost(
         composableExt(
             route = "$INVOICE_LIST_SCREEN?$PARAM_CARD_ID={$PARAM_CARD_ID}&$PARAM_INVOICE_CODE={$PARAM_INVOICE_CODE}",
             onArrowBackClick = actions::onArrowBackClick,
-            arguments = intIdArguments,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            arguments = intIdArguments
         ) {
             InvoiceListView(
                 onArrowBackClick = actions::onArrowBackClick,
@@ -292,22 +236,14 @@ fun MyNavHost(
         composableExt(
             route = "$CREDITCARD_DETAIL_SCREEN?$PARAM_ID={$PARAM_ID}",
             onArrowBackClick = actions::onArrowBackClick,
-            arguments = intIdArguments,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            arguments = intIdArguments
         ) {
             CreditCardDetailView(onArrowBackClick = actions::onArrowBackClick)
         }
 
         composableExt(
             route = NOTIFICATION_SETTINGS_SCREEN,
-            onArrowBackClick = actions::onArrowBackClick,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            onArrowBackClick = actions::onArrowBackClick
         ) {
             NotificationSettingsScreen(
                 onArrowBackClick = actions::onArrowBackClick,
@@ -317,20 +253,14 @@ fun MyNavHost(
 
         composableExt(
             route = CATEGORY_KEYWORDS_SCREEN,
-            onArrowBackClick = actions::onArrowBackClick,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            onArrowBackClick = actions::onArrowBackClick
         ) {
             CategoryKeywordsScreen(onArrowBackClick = actions::onArrowBackClick)
         }
 
         composableExt(
             route = SETTINGS_SCREEN,
-            onArrowBackClick = actions::onArrowBackClick,
-            enterTransition = { fadeIn() },
-            exitTransition = { fadeOut() }
+            onArrowBackClick = actions::onArrowBackClick
         ) {
             SettingsScreen(
                 onArrowBackClick = actions::onArrowBackClick,
@@ -345,11 +275,7 @@ fun MyNavHost(
 
         composableExt(
             route = GRAPHS_SCREEN,
-            onArrowBackClick = actions::onArrowBackClick,
-            enterTransition = { slideInFromRight() },
-            exitTransition = { fadeOut() },
-            popEnterTransition = { fadeIn() },
-            popExitTransition = { slideOutToRight() }
+            onArrowBackClick = actions::onArrowBackClick
         ) {
             GraphsScreen(onArrowBackClick = actions::onArrowBackClick)
         }
