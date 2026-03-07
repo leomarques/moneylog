@@ -19,6 +19,7 @@ import lmm.moneylog.ui.navigation.misc.PARAM_TYPE_ALL
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
+import lmm.moneylog.ui.navigation.misc.TRANSFERS_HUB_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSFERS_LIST_SCREEN
 
 @Suppress("TooManyFunctions")
@@ -34,6 +35,7 @@ interface NavigationActions {
     fun onCategoriesItemClick(id: Int)
     fun onArchivedIconClick()
     fun onTransferIconClick()
+    fun onMakeTransferClick()
     fun onCreditCardClick(cardId: Int, invoiceCode: String)
     fun onCreditCardsFabClick()
     fun onInvoiceListFabClick(cardId: Int)
@@ -94,6 +96,10 @@ fun createNavigationActions(
     }
 
     override fun onTransferIconClick() {
+        onNavigate(TRANSFERS_HUB_SCREEN)
+    }
+
+    override fun onMakeTransferClick() {
         onNavigate(TRANSFER_SCREEN)
     }
 

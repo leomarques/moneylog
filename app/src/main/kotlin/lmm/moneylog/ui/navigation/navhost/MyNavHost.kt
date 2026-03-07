@@ -30,6 +30,7 @@ import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetail
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListView
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_INCOME
 import lmm.moneylog.ui.features.transaction.list.viewmodel.GET_TRANSACTIONS_OUTCOME
+import lmm.moneylog.ui.features.transfer.hub.TransfersHubScreen
 import lmm.moneylog.ui.features.transfer.list.view.TransfersListView
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
@@ -53,6 +54,7 @@ import lmm.moneylog.ui.navigation.misc.SETTINGS_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTIONS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSACTION_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSFER_SCREEN
+import lmm.moneylog.ui.navigation.misc.TRANSFERS_HUB_SCREEN
 import lmm.moneylog.ui.navigation.misc.TRANSFERS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.NavigationActions
 import lmm.moneylog.ui.navigation.misc.composableExt
@@ -192,12 +194,23 @@ fun MyNavHost(
         }
 
         composableExt(
+            route = TRANSFERS_HUB_SCREEN,
+            onArrowBackClick = actions::onArrowBackClick
+        ) {
+            TransfersHubScreen(
+                onArrowBackClick = actions::onArrowBackClick,
+                onMakeTransferClick = actions::onMakeTransferClick,
+                onViewTransfersClick = actions::onViewTransfersListClick
+            )
+        }
+
+        composableExt(
             route = TRANSFERS_LIST_SCREEN,
             onArrowBackClick = actions::onArrowBackClick
         ) {
             TransfersListView(
                 onArrowBackClick = actions::onArrowBackClick,
-                onFabClick = actions::onTransferIconClick,
+                onFabClick = actions::onMakeTransferClick,
                 onItemClick = { actions.onViewTransfersListClick() }
             )
         }
@@ -267,7 +280,6 @@ fun MyNavHost(
                 onAccountsClick = actions::onAccountsClick,
                 onCategoriesClick = actions::onCategoriesClick,
                 onCreditCardsClick = actions::onCreditCardsClick,
-                onTransfersListClick = actions::onViewTransfersListClick,
                 onNotificationSettingsClick = actions::onNotificationSettingsClick,
                 onGraphsClick = actions::onGraphsClick
             )

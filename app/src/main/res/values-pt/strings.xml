@@ -125,6 +125,10 @@
     <string name="transfer_section_from">Da Conta</string>
     <string name="transfer_section_to">Para a Conta</string>
     <string name="transfer_list_title">Transferências</string>
+    <string name="transfer_hub_title">Transferências</string>
+    <string name="transfer_hub_make_transfer">Fazer Transferência</string>
+    <string name="transfer_hub_make_transfer_desc">Faça transferências entre contas</string>
+    <string name="transfer_hub_view_transfers">Ver Transferências</string>
     <string name="transfer_label_from">De</string>
     <string name="transfer_label_to">Para</string>
 

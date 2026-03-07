@@ -125,6 +125,10 @@
     <string name="transfer_section_from">From Account</string>
     <string name="transfer_section_to">To Account</string>
     <string name="transfer_list_title">Transfers</string>
+    <string name="transfer_hub_title">Transfers</string>
+    <string name="transfer_hub_make_transfer">Make Transfer</string>
+    <string name="transfer_hub_make_transfer_desc">Make transfers between accounts</string>
+    <string name="transfer_hub_view_transfers">View Transfers</string>
     <string name="transfer_label_from">From</string>
     <string name="transfer_label_to">To</string>
 
