@@ -18,6 +18,7 @@ class NotificationSettingsRepositoryImplTest {
     fun setup() {
         every { sharedPreferences.edit() } returns editor
         every { editor.putInt(any(), any()) } returns editor
+        every { editor.putBoolean(any(), any()) } returns editor
         every { editor.remove(any()) } returns editor
         every { editor.apply() } returns Unit
 
@@ -118,5 +119,43 @@ class NotificationSettingsRepositoryImplTest {
         verify { editor.putInt("notification_default_category_id", 1) }
         verify { editor.putInt("notification_default_category_id", 2) }
         verify(exactly = 2) { editor.apply() }
+    }
+
+    @Test
+    fun `should return true for interception enabled by default`() {
+        every {
+            sharedPreferences.getBoolean("notification_interception_enabled", true)
+        } returns true
+
+        val result = repository.isNotificationInterceptionEnabled()
+
+        assertEquals(true, result)
+    }
+
+    @Test
+    fun `should return false when interception is disabled`() {
+        every {
+            sharedPreferences.getBoolean("notification_interception_enabled", true)
+        } returns false
+
+        val result = repository.isNotificationInterceptionEnabled()
+
+        assertEquals(false, result)
+    }
+
+    @Test
+    fun `should save interception enabled correctly`() {
+        repository.setNotificationInterceptionEnabled(false)
+
+        verify { editor.putBoolean("notification_interception_enabled", false) }
+        verify { editor.apply() }
+    }
+
+    @Test
+    fun `should save interception enabled true correctly`() {
+        repository.setNotificationInterceptionEnabled(true)
+
+        verify { editor.putBoolean("notification_interception_enabled", true) }
+        verify { editor.apply() }
     }
 }

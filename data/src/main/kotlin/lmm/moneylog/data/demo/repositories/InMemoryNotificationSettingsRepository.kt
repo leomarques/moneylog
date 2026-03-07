@@ -3,8 +3,15 @@ package lmm.moneylog.data.demo.repositories
 import lmm.moneylog.data.notification.repositories.NotificationSettingsRepository
 
 class InMemoryNotificationSettingsRepository : NotificationSettingsRepository {
+    private var notificationInterceptionEnabled: Boolean = true
     private var defaultCreditCardId: Int? = null
     private var defaultCategoryId: Int? = null
+
+    override fun isNotificationInterceptionEnabled(): Boolean = notificationInterceptionEnabled
+
+    override fun setNotificationInterceptionEnabled(enabled: Boolean) {
+        notificationInterceptionEnabled = enabled
+    }
 
     override fun getDefaultCreditCardId(): Int? = defaultCreditCardId
 
@@ -27,6 +34,7 @@ class InMemoryNotificationSettingsRepository : NotificationSettingsRepository {
     }
 
     internal fun clear() {
+        notificationInterceptionEnabled = true
         defaultCreditCardId = null
         defaultCategoryId = null
     }

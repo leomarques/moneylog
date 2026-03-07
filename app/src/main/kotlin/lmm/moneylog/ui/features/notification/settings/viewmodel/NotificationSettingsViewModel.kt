@@ -25,6 +25,13 @@ class NotificationSettingsViewModel(
 
     init {
         viewModelScope.launch {
+            val isInterceptionEnabled = notificationSettingsRepository.isNotificationInterceptionEnabled()
+            _uiState.update { currentState ->
+                currentState.copy(isInterceptionEnabled = isInterceptionEnabled)
+            }
+        }
+
+        viewModelScope.launch {
             getCreditCardsRepository.getCreditCards().collect { creditCards ->
                 val savedCreditCardId = notificationSettingsRepository.getDefaultCreditCardId()
                 val creditCardItems =
@@ -108,6 +115,13 @@ class NotificationSettingsViewModel(
             _uiState.update {
                 it.copy(selectedCategory = null)
             }
+        }
+    }
+
+    fun setNotificationInterceptionEnabled(enabled: Boolean) {
+        notificationSettingsRepository.setNotificationInterceptionEnabled(enabled)
+        _uiState.update {
+            it.copy(isInterceptionEnabled = enabled)
         }
     }
 }

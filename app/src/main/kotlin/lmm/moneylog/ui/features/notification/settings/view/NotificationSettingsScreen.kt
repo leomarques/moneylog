@@ -31,6 +31,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -141,32 +142,39 @@ fun NotificationSettingsScreen(
                     .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            NotificationListenerPermissionCard(
-                hasListenerPermission = hasListenerPermission
+            InterceptionToggleCard(
+                isEnabled = uiState.isInterceptionEnabled,
+                onToggle = { viewModel.setNotificationInterceptionEnabled(it) }
             )
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                BasicNotificationPermissionCard(
-                    hasBasicPermission = hasBasicPermission,
-                    requestPermissionLauncher = requestPermissionLauncher
+            if (uiState.isInterceptionEnabled) {
+                NotificationListenerPermissionCard(
+                    hasListenerPermission = hasListenerPermission
+                )
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    BasicNotificationPermissionCard(
+                        hasBasicPermission = hasBasicPermission,
+                        requestPermissionLauncher = requestPermissionLauncher
+                    )
+                }
+
+                DefaultCreditCardCard(
+                    selectedCreditCard = uiState.selectedCreditCard,
+                    onCardClick = { showCreditCardDialog = true },
+                    onClearSelection = { viewModel.selectCreditCard(null) }
+                )
+
+                DefaultCategoryCard(
+                    selectedCategory = uiState.selectedCategory,
+                    onCategoryClick = { showCategoryDialog = true },
+                    onClearSelection = { viewModel.selectCategory(null) }
+                )
+
+                CategoryKeywordsCard(
+                    onManageClick = onCategoryKeywordsClick
                 )
             }
-
-            DefaultCreditCardCard(
-                selectedCreditCard = uiState.selectedCreditCard,
-                onCardClick = { showCreditCardDialog = true },
-                onClearSelection = { viewModel.selectCreditCard(null) }
-            )
-
-            DefaultCategoryCard(
-                selectedCategory = uiState.selectedCategory,
-                onCategoryClick = { showCategoryDialog = true },
-                onClearSelection = { viewModel.selectCategory(null) }
-            )
-
-            CategoryKeywordsCard(
-                onManageClick = onCategoryKeywordsClick
-            )
         }
     }
 
@@ -535,6 +543,45 @@ private fun CategoryKeywordsCard(
             ) {
                 Text(stringResource(R.string.keywords_manage))
             }
+        }
+    }
+}
+
+@Composable
+private fun InterceptionToggleCard(
+    isEnabled: Boolean,
+    onToggle: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.notifications_interception_title),
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text = stringResource(R.string.notifications_interception_description),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            Switch(
+                checked = isEnabled,
+                onCheckedChange = onToggle
+            )
         }
     }
 }

@@ -3,6 +3,7 @@ package lmm.moneylog.ui.features.notification.settings.model
 import androidx.compose.ui.graphics.Color
 
 data class NotificationSettingsUIState(
+    val isInterceptionEnabled: Boolean = true,
     val hasListenerPermission: Boolean = false,
     val hasBasicPermission: Boolean = false,
     val creditCards: List<CreditCardItem> = emptyList(),

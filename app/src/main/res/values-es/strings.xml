@@ -228,6 +228,8 @@
 
     <!-- Notifications Feature -->
     <string name="notifications_title">Configuración de Notificaciones</string>
+    <string name="notifications_interception_title">Captura Automática de Transacciones</string>
+    <string name="notifications_interception_description">Crear automáticamente transacciones a partir de notificaciones de Nubank cuando se reciban.</string>
     <string name="notifications_nubank_access">Acceso a Notificaciones de Nubank</string>
     <string name="notifications_listener_description">Permitir que Lemony intercepte notificaciones de Nubank para rastrear automáticamente sus transacciones.</string>
     <string name="notifications_listener_grant">Conceder Permiso de Escucha</string>

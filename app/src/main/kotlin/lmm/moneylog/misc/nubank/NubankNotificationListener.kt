@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import lmm.moneylog.data.notification.repositories.NotificationSettingsRepository
 import lmm.moneylog.data.transaction.nubank.converter.NubankTransactionConverter
 import lmm.moneylog.data.transaction.nubank.parser.NubankTransactionParser
 import lmm.moneylog.data.transaction.repositories.interfaces.AddTransactionRepository
@@ -24,12 +25,18 @@ class NubankNotificationListener : NotificationListenerService() {
     private val addTransactionRepository: AddTransactionRepository by inject()
     private val transactionConverter: NubankTransactionConverter by inject()
     private val transactionParser: NubankTransactionParser by inject()
+    private val notificationSettingsRepository: NotificationSettingsRepository by inject()
 
     @Volatile
     private var isServiceActive = true
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)
+
+        // Check if notification interception is enabled
+        if (!notificationSettingsRepository.isNotificationInterceptionEnabled()) {
+            return
+        }
 
         sbn?.let { notification ->
             if (isSupportedPackage(notification.packageName)) {

@@ -5,6 +5,16 @@ import android.content.SharedPreferences
 class NotificationSettingsRepositoryImpl(
     private val sharedPreferences: SharedPreferences
 ) : NotificationSettingsRepository {
+    override fun isNotificationInterceptionEnabled(): Boolean =
+        sharedPreferences.getBoolean(NOTIFICATION_INTERCEPTION_ENABLED_KEY, true)
+
+    override fun setNotificationInterceptionEnabled(enabled: Boolean) {
+        sharedPreferences
+            .edit()
+            .putBoolean(NOTIFICATION_INTERCEPTION_ENABLED_KEY, enabled)
+            .apply()
+    }
+
     override fun getDefaultCreditCardId(): Int? =
         sharedPreferences.getInt(DEFAULT_CREDIT_CARD_ID_KEY, -1).takeIf { it != -1 }
 
@@ -40,6 +50,7 @@ class NotificationSettingsRepositoryImpl(
     }
 
     companion object {
+        private const val NOTIFICATION_INTERCEPTION_ENABLED_KEY = "notification_interception_enabled"
         private const val DEFAULT_CREDIT_CARD_ID_KEY = "notification_default_credit_card_id"
         private const val DEFAULT_CATEGORY_ID_KEY = "notification_default_category_id"
     }
