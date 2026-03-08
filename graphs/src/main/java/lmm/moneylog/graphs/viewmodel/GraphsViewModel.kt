@@ -44,6 +44,7 @@ class GraphsViewModel(
     private val _netWorthHistory = MutableStateFlow<List<NetWorthPoint>>(emptyList())
     val netWorthHistory: StateFlow<List<NetWorthPoint>> = _netWorthHistory.asStateFlow()
 
+    // Pie Chart month (user selectable)
     private val _selectedMonth = MutableStateFlow(0)
     val selectedMonth: StateFlow<Int> = _selectedMonth.asStateFlow()
 
@@ -65,7 +66,7 @@ class GraphsViewModel(
             _selectedMonth.value = currentDate.month
             _selectedYear.value = currentDate.year
             updateMonthName()
-            loadData()
+            loadAllData()
         }
     }
 
@@ -76,7 +77,18 @@ class GraphsViewModel(
                 .replaceFirstChar { it.titlecase() }
     }
 
-    private fun loadData() {
+    /**
+     * Load all data - Pie Chart uses selected month, Bar/Net Worth use current date
+     */
+    private fun loadAllData() {
+        loadPieChartData()
+        loadBarChartAndNetWorthData()
+    }
+
+    /**
+     * Load data for Pie Chart tab (uses user-selected month)
+     */
+    private fun loadPieChartData() {
         viewModelScope.launch {
             // Load income data
             getTransactionsByCategoryInteractor
@@ -100,24 +112,31 @@ class GraphsViewModel(
                     updateMonthlyTotal()
                 }
         }
+    }
+
+    /**
+     * Load data for Bar Chart and Net Worth tabs (always uses current date)
+     */
+    private fun loadBarChartAndNetWorthData() {
+        val currentDate = domainTimeRepository.getCurrentDomainTime()
 
         viewModelScope.launch {
-            // Load monthly totals
+            // Load monthly totals (always up to current date)
             getMonthlyTotalsInteractor
                 .getMonthlyTotals(
-                    currentMonth = _selectedMonth.value,
-                    currentYear = _selectedYear.value
+                    currentMonth = currentDate.month,
+                    currentYear = currentDate.year
                 ).collect { data ->
                     _monthlyTotals.value = data
                 }
         }
 
         viewModelScope.launch {
-            // Load net worth history
+            // Load net worth history (always up to current date)
             getNetWorthHistoryInteractor
                 .getNetWorthHistory(
-                    currentMonth = _selectedMonth.value,
-                    currentYear = _selectedYear.value
+                    currentMonth = currentDate.month,
+                    currentYear = currentDate.year
                 ).collect { data ->
                     _netWorthHistory.value = data
                 }
@@ -131,7 +150,7 @@ class GraphsViewModel(
     }
 
     /**
-     * Navigate to the previous month
+     * Navigate to the previous month (Pie Chart only)
      */
     fun goToPreviousMonth() {
         if (_selectedMonth.value == FIRST_MONTH) {
@@ -141,11 +160,11 @@ class GraphsViewModel(
             _selectedMonth.value--
         }
         updateMonthName()
-        loadData()
+        loadPieChartData()
     }
 
     /**
-     * Navigate to the next month
+     * Navigate to the next month (Pie Chart only)
      */
     fun goToNextMonth() {
         if (_selectedMonth.value == LAST_MONTH) {
@@ -155,7 +174,7 @@ class GraphsViewModel(
             _selectedMonth.value++
         }
         updateMonthName()
-        loadData()
+        loadPieChartData()
     }
 
     /**

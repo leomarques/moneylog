@@ -6,7 +6,7 @@ import lmm.moneylog.data.balance.repositories.GetBalanceRepository
 import lmm.moneylog.data.graphs.model.NetWorthPoint
 import lmm.moneylog.data.time.repositories.DomainTimeRepository
 
-private const val NET_WORTH_HISTORY_MONTHS = 24
+private const val NET_WORTH_HISTORY_MONTHS = 12
 private const val FIRST_MONTH = 1
 private const val LAST_MONTH = 12
 private const val MONTH_ABBREVIATION_LENGTH = 3
@@ -24,23 +24,23 @@ class GetNetWorthHistoryInteractor(
     private val domainTimeRepository: DomainTimeRepository
 ) {
     /**
-     * Get net worth history for the past 24 months from the specified month
+     * Get net worth history for the past 12 months from the specified month
      *
      * @param currentMonth The current month (1-12)
      * @param currentYear The current year
-     * @return Flow of list of NetWorthPoint for the past 24 months
+     * @return Flow of list of NetWorthPoint for the past 12 months
      */
     fun getNetWorthHistory(
         currentMonth: Int,
         currentYear: Int
     ): Flow<List<NetWorthPoint>> {
-        // Calculate 24 months of data (2 years)
+        // Calculate 12 months of data (1 year)
         val monthlyData = mutableListOf<Pair<Int, Int>>() // Pair of (month, year)
 
         var month = currentMonth
         var year = currentYear
 
-        // Get past 24 months including current
+        // Get past 12 months including current
         repeat(NET_WORTH_HISTORY_MONTHS) {
             monthlyData.add(0, Pair(month, year)) // Add to beginning to maintain order
 

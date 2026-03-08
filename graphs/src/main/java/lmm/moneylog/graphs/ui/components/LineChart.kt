@@ -26,7 +26,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.data.graphs.model.NetWorthPoint
 import lmm.moneylog.ui.extensions.formatForRs
-import java.util.Locale
 import lmm.moneylog.ui.theme.Size as ThemeSize
 
 private const val CHART_PADDING_RATIO = 0.1
@@ -236,16 +235,8 @@ fun LineChart(
                 }
         }
 
-        // Summary statistics - show month-to-month variation
+        // Summary statistics - show current net worth only
         val currentNetWorth = data.lastOrNull()?.netWorth ?: 0.0
-        val previousNetWorth = data.dropLast(1).lastOrNull()?.netWorth ?: currentNetWorth
-        val change = currentNetWorth - previousNetWorth
-        val changePercent =
-            if (previousNetWorth != 0.0) {
-                (change / kotlin.math.abs(previousNetWorth)) * 100
-            } else {
-                0.0
-            }
 
         Column(
             modifier =
@@ -266,51 +257,67 @@ fun LineChart(
                 fontWeight = FontWeight.Bold,
                 color = if (currentNetWorth >= 0) positiveColor else negativeColor
             )
+        }
 
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(ThemeSize.MediumSpaceSize),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        text = stringResource(lmm.moneylog.graphs.R.string.graphs_line_chart_variation),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                    Text(
-                        text =
-                            String.format(
-                                Locale.getDefault(),
-                                "%s R$ %.2f",
-                                if (change >= 0) "+" else "",
-                                change
-                            ),
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = if (change >= 0) positiveColor else negativeColor
-                    )
-                }
+        // Monthly values list
+        Column(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = ThemeSize.DefaultSpaceSize),
+            verticalArrangement = Arrangement.spacedBy(ThemeSize.XSmallSpaceSize)
+        ) {
+            Text(
+                text = stringResource(lmm.moneylog.graphs.R.string.graphs_line_chart_monthly_history),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(bottom = ThemeSize.SmallSpaceSize)
+            )
 
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            // Create indexed data for variance calculation
+            val indexedData = data.withIndex().toList().reversed()
+            
+            indexedData.forEach { (index, point) ->
+                val pointColor = if (point.netWorth >= 0) positiveColor else negativeColor
+                
+                // Calculate variance from previous month (index - 1 in chronological order)
+                val prevNetWorth = if (index > 0) data[index - 1].netWorth else point.netWorth
+                val variance = calculateNetWorthVariance(point.netWorth, prevNetWorth)
+                
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Text(
-                        text = stringResource(lmm.moneylog.graphs.R.string.graphs_line_chart_percentage),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        text = point.monthName.take(3) + "/" + point.year,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.weight(1f)
                     )
                     Text(
-                        text =
-                            String.format(
-                                Locale.getDefault(),
-                                "%s%.1f%%",
-                                if (changePercent >= 0) "+" else "",
-                                changePercent
-                            ),
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = if (changePercent >= 0) positiveColor else negativeColor
+                        text = formatNetWorthWithVariance(point.netWorth, variance),
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Medium,
+                        color = pointColor,
+                        modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.End
                     )
                 }
             }
         }
     }
+}
+
+private fun calculateNetWorthVariance(current: Double, previous: Double): Double {
+    return if (previous != 0.0) {
+        ((current - previous) / kotlin.math.abs(previous)) * 100
+    } else {
+        0.0
+    }
+}
+
+private fun formatNetWorthWithVariance(value: Double, variance: Double): String {
+    val varianceStr = String.format(java.util.Locale.getDefault(), "(%+.1f%%)", variance)
+    return "$varianceStr ${value.formatForRs()}"
 }

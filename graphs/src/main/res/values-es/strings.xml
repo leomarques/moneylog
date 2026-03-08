@@ -28,10 +28,9 @@
     <!-- ============================================ -->
     <!-- GRAPHS SCREEN - Line Chart (Net Worth) -->
     <!-- ============================================ -->
-    <string name="graphs_line_chart_title">Patrimonio Neto - Últimos 2 Años</string>
+    <string name="graphs_line_chart_title">Patrimonio Neto - Últimos 12 Meses</string>
     <string name="graphs_line_chart_current_net_worth">Patrimonio Actual</string>
-    <string name="graphs_line_chart_variation">Variación</string>
-    <string name="graphs_line_chart_percentage">Porcentaje</string>
+    <string name="graphs_line_chart_monthly_history">Historial Mensual</string>
 
     <!-- ============================================ -->
     <!-- GRAPHS SCREEN - Month Selector -->

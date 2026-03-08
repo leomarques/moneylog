@@ -19,6 +19,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import lmm.moneylog.data.graphs.model.MonthlyTotal
@@ -182,7 +183,84 @@ fun BarChart(
                 )
             }
         }
+
+        // Monthly values list
+        Column(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = ThemeSize.DefaultSpaceSize),
+            verticalArrangement = Arrangement.spacedBy(ThemeSize.XSmallSpaceSize)
+        ) {
+            Text(
+                text = stringResource(R.string.graphs_line_chart_monthly_history),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(bottom = ThemeSize.SmallSpaceSize)
+            )
+
+            // Create indexed data for variance calculation
+            val indexedData = data.withIndex().toList().reversed()
+            
+            indexedData.forEach { (index, monthData) ->
+                // Calculate variances from previous month (index - 1 in chronological order)
+                val prevIncome = if (index > 0) data[index - 1].income else monthData.income
+                val prevExpenses = if (index > 0) data[index - 1].expenses else monthData.expenses
+                
+                val incomeVariance = calculateVariance(monthData.income, prevIncome)
+                val expensesVariance = calculateVariance(monthData.expenses, prevExpenses)
+                
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 2.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // Date on the left, vertically centered
+                    Text(
+                        text = monthData.monthName.take(3) + "/" + monthData.year,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.weight(1f)
+                    )
+                    
+                    // Values column on the right
+                    Column(
+                        horizontalAlignment = Alignment.End
+                    ) {
+                        Text(
+                            text = formatWithVariance(monthData.income, incomeVariance),
+                            style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Medium,
+                            color = incomeColor,
+                            textAlign = TextAlign.End
+                        )
+                        Text(
+                            text = formatWithVariance(monthData.expenses, expensesVariance),
+                            style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Medium,
+                            color = expenseColor,
+                            textAlign = TextAlign.End
+                        )
+                    }
+                }
+            }
+        }
     }
+}
+
+private fun calculateVariance(current: Double, previous: Double): Double {
+    return if (previous != 0.0) {
+        ((current - previous) / previous) * 100
+    } else {
+        0.0
+    }
+}
+
+private fun formatWithVariance(value: Double, variance: Double): String {
+    val varianceStr = String.format(java.util.Locale.getDefault(), "(%+.1f%%)", variance)
+    return "$varianceStr ${value.formatForRs()}"
 }
 
 /**

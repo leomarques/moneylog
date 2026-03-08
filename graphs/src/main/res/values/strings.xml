@@ -28,10 +28,9 @@
     <!-- ============================================ -->
     <!-- GRAPHS SCREEN - Line Chart (Net Worth) -->
     <!-- ============================================ -->
-    <string name="graphs_line_chart_title">Net Worth - Last 2 Years</string>
+    <string name="graphs_line_chart_title">Net Worth - Last 12 Months</string>
     <string name="graphs_line_chart_current_net_worth">Current Net Worth</string>
-    <string name="graphs_line_chart_variation">Variation</string>
-    <string name="graphs_line_chart_percentage">Percentage</string>
+    <string name="graphs_line_chart_monthly_history">Monthly History</string>
 
     <!-- ============================================ -->
     <!-- GRAPHS SCREEN - Month Selector -->
