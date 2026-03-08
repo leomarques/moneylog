@@ -180,51 +180,60 @@ private fun MonthlySummaryCard(
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
+            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
         ),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 2.dp
+            defaultElevation = 1.dp
         )
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(Size.DefaultSpaceSize),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(horizontal = Size.DefaultSpaceSize, vertical = Size.SmallSpaceSize),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // Monthly Balance Section
-            Text(
-                text = stringResource(R.string.graphs_monthly_balance_label),
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Text(
-                text = monthlyBalance.formatForRs(),
-                style = MaterialTheme.typography.headlineMedium,
-                color = when {
-                    monthlyBalance == 0.0 -> MaterialTheme.colorScheme.onSurface
-                    monthlyBalance < 0.0 -> outcome
-                    else -> income
-                },
-                fontWeight = FontWeight.SemiBold
+            // Monthly Balance Section (Left - takes more space)
+            Column(
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = stringResource(R.string.graphs_monthly_balance_label),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = monthlyBalance.formatForRs(),
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = when {
+                        monthlyBalance == 0.0 -> MaterialTheme.colorScheme.onSurface
+                        monthlyBalance < 0.0 -> outcome
+                        else -> income
+                    },
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            // Vertical divider line
+            Spacer(
+                modifier = Modifier
+                    .width(1.dp)
+                    .padding(vertical = 4.dp)
             )
 
-            // Divider
-            Spacer(modifier = Modifier.padding(vertical = Size.DefaultSpaceSize))
-
-            // Expenses Section
-            Row(
-                verticalAlignment = Alignment.CenterVertically
+            // Expenses Section (Right)
+            Column(
+                modifier = Modifier.padding(start = Size.DefaultSpaceSize),
+                horizontalAlignment = Alignment.End
             ) {
                 Text(
                     text = stringResource(R.string.graphs_pie_total_expenses),
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = expensesTotal.formatForRs(),
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.titleMedium,
                     color = outcome,
                     fontWeight = FontWeight.SemiBold
                 )

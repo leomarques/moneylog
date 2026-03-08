@@ -7,32 +7,23 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import lmm.moneylog.R
 import lmm.moneylog.ui.components.fabs.MyFab
 import lmm.moneylog.ui.components.misc.EmptyState
 import lmm.moneylog.ui.components.misc.MonthSelector
 import lmm.moneylog.ui.components.topappbar.TopAppBarWithSearch
-import lmm.moneylog.ui.extensions.formatForRs
 import lmm.moneylog.ui.features.transaction.list.model.TransactionsListUIState
 import lmm.moneylog.ui.features.transaction.list.model.filtered
-import lmm.moneylog.ui.theme.income
-import lmm.moneylog.ui.theme.outcome
 
 @Composable
 fun TransactionsListLayout(
@@ -82,8 +73,6 @@ fun TransactionsListLayout(
                     modifier = Modifier.fillMaxWidth()
                 )
 
-                TotalValue(model)
-
                 List(
                     model = model,
                     filter = filter,
@@ -92,29 +81,6 @@ fun TransactionsListLayout(
             }
         }
     )
-}
-
-@Composable
-private fun TotalValue(model: TransactionsListUIState) {
-    Box(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(vertical = 12.dp, horizontal = 8.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = stringResource(R.string.common_total, model.total.formatForRs()),
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.SemiBold,
-            color =
-                when {
-                    model.total == 0.0 -> White
-                    model.total < 0.0 -> outcome
-                    else -> income
-                }
-        )
-    }
 }
 
 @Composable
