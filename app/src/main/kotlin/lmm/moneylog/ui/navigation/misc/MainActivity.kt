@@ -20,7 +20,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme {
                 Navigation(
-                    pendingTransactionId = pendingTransactionId.longValue
+                    pendingTransactionId = pendingTransactionId.longValue,
+                    onCloseApp = { finish() }
                 )
             }
         }

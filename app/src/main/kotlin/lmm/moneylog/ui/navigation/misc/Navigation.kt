@@ -18,7 +18,8 @@ import lmm.moneylog.ui.navigation.navhost.NavHostParams
 fun Navigation(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    pendingTransactionId: Long = -1L
+    pendingTransactionId: Long = -1L,
+    onCloseApp: () -> Unit
 ) {
     val showNavigationBar = remember { mutableStateOf(true) }
     val navBarSelectedIndex = remember { mutableIntStateOf(0) }
@@ -74,7 +75,11 @@ fun Navigation(
                 )
             },
             onBackNavigation = {
-                navController.popBackStack()
+                val popped = navController.popBackStack()
+                if (!popped) {
+                    // No more screens in back stack, close the app
+                    onCloseApp()
+                }
             }
         )
     }
