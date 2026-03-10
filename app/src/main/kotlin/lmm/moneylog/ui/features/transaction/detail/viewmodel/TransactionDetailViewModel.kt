@@ -191,7 +191,10 @@ class TransactionDetailViewModel(
         viewModelScope.launch {
             if (description.length >= 2) {
                 val suggestions = searchTransactionsRepository.searchByDescription(description)
-                _uiState.update { it.copy(descriptionSuggestions = suggestions) }
+                val filteredSuggestions = suggestions.filterNot {
+                    it.description.equals(description, ignoreCase = true)
+                }
+                _uiState.update { it.copy(descriptionSuggestions = filteredSuggestions) }
             } else {
                 _uiState.update { it.copy(descriptionSuggestions = emptyList()) }
             }
