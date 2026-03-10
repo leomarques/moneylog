@@ -16,7 +16,7 @@ fun TransactionDetailUIState.toTransaction(): Transaction =
     Transaction(
         value = value.validateValue(isIncome),
         date = date,
-        description = description,
+        description = description.trimEnd(),
         id = id,
         accountId = accountId,
         categoryId = categoryId,
