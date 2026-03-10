@@ -30,6 +30,11 @@ class NubankNotificationListener : NotificationListenerService() {
     @Volatile
     private var isServiceActive = true
 
+    // Deduplication: track recently processed notification keys
+    private val recentNotifications = java.util.Collections.synchronizedSet(
+        java.util.LinkedHashSet<String>()
+    )
+
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)
 
@@ -40,6 +45,19 @@ class NubankNotificationListener : NotificationListenerService() {
 
         sbn?.let { notification ->
             if (isSupportedPackage(notification.packageName)) {
+                // Deduplication check: skip if recently processed
+                val dedupKey = "${notification.key}_${notification.postTime}"
+                if (recentNotifications.contains(dedupKey)) {
+                    return
+                }
+                recentNotifications.add(dedupKey)
+                // Cleanup: keep only last MAX_CACHE_SIZE entries
+                if (recentNotifications.size > MAX_CACHE_SIZE) {
+                    val iterator = recentNotifications.iterator()
+                    iterator.next()
+                    iterator.remove()
+                }
+
                 val (title, text) = extractNotificationData(notification)
                 processNotificationAsync(title, text)
             }
@@ -107,6 +125,7 @@ class NubankNotificationListener : NotificationListenerService() {
     companion object {
         private const val NUBANK_PACKAGE = "com.nu.production"
         private const val MAX_TEXT_LENGTH = 500
+        private const val MAX_CACHE_SIZE = 20
 
         private val SUPPORTED_PACKAGES = setOf(NUBANK_PACKAGE)
     }
