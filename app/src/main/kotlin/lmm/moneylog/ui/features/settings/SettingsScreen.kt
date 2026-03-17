@@ -107,10 +107,11 @@ fun SettingsScreen(
             ManagementSection(onAccountsClick, onCategoriesClick, onCreditCardsClick)
 
             SectionTitle(stringResource(R.string.settings_features))
-            FeaturesSection(onGraphsClick, onNotificationSettingsClick)
-
-            SectionTitle(stringResource(R.string.settings_backup_data))
-            BackupEntrySection(onBackupClick)
+            FeaturesSection(
+                onGraphsClick = onGraphsClick,
+                onBackupClick = onBackupClick,
+                onNotificationSettingsClick = onNotificationSettingsClick
+            )
 
             SectionTitle(stringResource(R.string.settings_development))
             DevelopmentSection(
@@ -167,6 +168,7 @@ private fun ManagementSection(
 @Composable
 private fun FeaturesSection(
     onGraphsClick: () -> Unit,
+    onBackupClick: () -> Unit,
     onNotificationSettingsClick: () -> Unit
 ) {
     Card(modifier = Modifier.fillMaxWidth()) {
@@ -184,19 +186,14 @@ private fun FeaturesSection(
                 icon = ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24),
                 onClick = onNotificationSettingsClick
             )
+            HorizontalDivider()
+            SettingsItem(
+                title = stringResource(R.string.settings_backup_data),
+                description = stringResource(R.string.settings_backup_open_desc),
+                icon = ImageVector.vectorResource(id = R.drawable.outline_backup_24),
+                onClick = onBackupClick
+            )
         }
-    }
-}
-
-@Composable
-private fun BackupEntrySection(onBackupClick: () -> Unit) {
-    Card(modifier = Modifier.fillMaxWidth()) {
-        SettingsItem(
-            title = stringResource(R.string.settings_backup_data),
-            description = stringResource(R.string.settings_backup_open_desc),
-            icon = ImageVector.vectorResource(id = R.drawable.outline_backup_24),
-            onClick = onBackupClick
-        )
     }
 }
 
@@ -247,7 +244,9 @@ private fun SettingsSwitchItem(
     enabled: Boolean = true
 ) {
     Row(
-        modifier = modifier.fillMaxWidth().padding(16.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -277,7 +276,10 @@ private fun SettingsItem(
     enabled: Boolean = true
 ) {
     Row(
-        modifier = modifier.fillMaxWidth().clickable(enabled = enabled) { onClick() }.padding(16.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable(enabled = enabled) { onClick() }
+            .padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

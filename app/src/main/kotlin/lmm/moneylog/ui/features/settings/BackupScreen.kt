@@ -177,7 +177,7 @@ fun BackupScreen(
                                 Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
                                     addCategory(Intent.CATEGORY_OPENABLE)
                                     type = "text/csv"
-                                    putExtra(Intent.EXTRA_TITLE, "moneylog_backup.csv")
+                                    putExtra(Intent.EXTRA_TITLE, "lemony_backup.csv")
                                 }
                             )
                         },
