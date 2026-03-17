@@ -54,6 +54,7 @@ fun SettingsScreen(
     onCreditCardsClick: () -> Unit,
     onNotificationSettingsClick: () -> Unit,
     onGraphsClick: () -> Unit,
+    onBackupClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = koinViewModel()
 ) {
@@ -102,110 +103,134 @@ fun SettingsScreen(
                     .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Text(
-                text = stringResource(R.string.settings_management),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+            SectionTitle(stringResource(R.string.settings_management))
+            ManagementSection(onAccountsClick, onCategoriesClick, onCreditCardsClick)
+
+            SectionTitle(stringResource(R.string.settings_features))
+            FeaturesSection(onGraphsClick, onNotificationSettingsClick)
+
+            SectionTitle(stringResource(R.string.settings_backup_data))
+            BackupEntrySection(onBackupClick)
+
+            SectionTitle(stringResource(R.string.settings_development))
+            DevelopmentSection(
+                isDemoMode = isDemoMode,
+                onToggleDemoMode = viewModel::toggleDemoMode,
+                onResetDemoData = viewModel::resetDemoData
+            )
+        }
+    }
+}
+
+@Composable
+private fun SectionTitle(title: String) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.titleSmall,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+    )
+}
+
+@Composable
+private fun ManagementSection(
+    onAccountsClick: () -> Unit,
+    onCategoriesClick: () -> Unit,
+    onCreditCardsClick: () -> Unit
+) {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column {
+            SettingsItem(
+                title = stringResource(R.string.common_accounts),
+                description = stringResource(R.string.settings_manage_accounts),
+                icon = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
+                onClick = onAccountsClick
+            )
+            HorizontalDivider()
+            SettingsItem(
+                title = stringResource(R.string.common_categories),
+                description = stringResource(R.string.settings_manage_categories),
+                icon = ImageVector.vectorResource(id = R.drawable.outline_category_24),
+                onClick = onCategoriesClick
+            )
+            HorizontalDivider()
+            SettingsItem(
+                title = stringResource(R.string.common_cards),
+                description = stringResource(R.string.settings_manage_creditcards),
+                icon = ImageVector.vectorResource(id = R.drawable.outline_credit_card_24),
+                onClick = onCreditCardsClick
+            )
+        }
+    }
+}
+
+@Composable
+private fun FeaturesSection(
+    onGraphsClick: () -> Unit,
+    onNotificationSettingsClick: () -> Unit
+) {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column {
+            SettingsItem(
+                title = stringResource(R.string.graphs_title),
+                description = stringResource(R.string.settings_view_graphs),
+                icon = ImageVector.vectorResource(id = R.drawable.outline_bar_chart_24),
+                onClick = onGraphsClick
+            )
+            HorizontalDivider()
+            SettingsItem(
+                title = stringResource(R.string.settings_notifications),
+                description = stringResource(R.string.settings_configure_nubank),
+                icon = ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24),
+                onClick = onNotificationSettingsClick
+            )
+        }
+    }
+}
+
+@Composable
+private fun BackupEntrySection(onBackupClick: () -> Unit) {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        SettingsItem(
+            title = stringResource(R.string.settings_backup_data),
+            description = stringResource(R.string.settings_backup_open_desc),
+            icon = ImageVector.vectorResource(id = R.drawable.outline_backup_24),
+            onClick = onBackupClick
+        )
+    }
+}
+
+@Composable
+private fun DevelopmentSection(
+    isDemoMode: Boolean,
+    onToggleDemoMode: () -> Unit,
+    onResetDemoData: () -> Unit
+) {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column {
+            SettingsSwitchItem(
+                title = stringResource(R.string.demo_mode_title),
+                description =
+                    stringResource(
+                        if (isDemoMode) {
+                            R.string.demo_mode_enabled
+                        } else {
+                            R.string.demo_mode_disabled
+                        }
+                    ),
+                icon = ImageVector.vectorResource(id = R.drawable.outline_category_24),
+                checked = isDemoMode,
+                onCheckedChange = { onToggleDemoMode() }
             )
 
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column {
-                    SettingsItem(
-                        title = stringResource(R.string.common_accounts),
-                        description = stringResource(R.string.settings_manage_accounts),
-                        icon = ImageVector.vectorResource(id = R.drawable.outline_account_balance_24),
-                        onClick = onAccountsClick
-                    )
-
-                    HorizontalDivider()
-
-                    SettingsItem(
-                        title = stringResource(R.string.common_categories),
-                        description = stringResource(R.string.settings_manage_categories),
-                        icon = ImageVector.vectorResource(id = R.drawable.outline_category_24),
-                        onClick = onCategoriesClick
-                    )
-
-                    HorizontalDivider()
-
-                    SettingsItem(
-                        title = stringResource(R.string.common_cards),
-                        description = stringResource(R.string.settings_manage_creditcards),
-                        icon = ImageVector.vectorResource(id = R.drawable.outline_credit_card_24),
-                        onClick = onCreditCardsClick
-                    )
-                }
-            }
-
-            Text(
-                text = stringResource(R.string.settings_features),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-            )
-
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column {
-                    SettingsItem(
-                        title = stringResource(R.string.graphs_title),
-                        description = stringResource(R.string.settings_view_graphs),
-                        icon = ImageVector.vectorResource(id = R.drawable.outline_bar_chart_24),
-                        onClick = onGraphsClick
-                    )
-
-                    HorizontalDivider()
-
-                    SettingsItem(
-                        title = stringResource(R.string.settings_notifications),
-                        description = stringResource(R.string.settings_configure_nubank),
-                        icon = ImageVector.vectorResource(id = R.drawable.outline_receipt_long_24),
-                        onClick = onNotificationSettingsClick
-                    )
-                }
-            }
-
-            Text(
-                text = stringResource(R.string.settings_development),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-            )
-
-            Card(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column {
-                    SettingsSwitchItem(
-                        title = stringResource(R.string.demo_mode_title),
-                        description =
-                            stringResource(
-                                if (isDemoMode) {
-                                    R.string.demo_mode_enabled
-                                } else {
-                                    R.string.demo_mode_disabled
-                                }
-                            ),
-                        icon = ImageVector.vectorResource(id = R.drawable.outline_category_24),
-                        checked = isDemoMode,
-                        onCheckedChange = { viewModel.toggleDemoMode() }
-                    )
-
-                    if (isDemoMode) {
-                        HorizontalDivider()
-
-                        SettingsItem(
-                            title = stringResource(R.string.demo_mode_reset),
-                            description = stringResource(R.string.demo_mode_reset_description),
-                            icon = ImageVector.vectorResource(id = R.drawable.outline_brush_24),
-                            onClick = { viewModel.resetDemoData() }
-                        )
-                    }
-                }
+            if (isDemoMode) {
+                HorizontalDivider()
+                SettingsItem(
+                    title = stringResource(R.string.demo_mode_reset),
+                    description = stringResource(R.string.demo_mode_reset_description),
+                    icon = ImageVector.vectorResource(id = R.drawable.outline_brush_24),
+                    onClick = onResetDemoData
+                )
             }
         }
     }
@@ -222,50 +247,23 @@ private fun SettingsSwitchItem(
     enabled: Boolean = true
 ) {
     Row(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+        modifier = modifier.fillMaxWidth().padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint =
-                if (enabled) {
-                    MaterialTheme.colorScheme.primary
-                } else {
-                    MaterialTheme.colorScheme.onSurfaceVariant
-                }
-        )
-
+        Icon(imageVector = icon, contentDescription = null)
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleMedium,
-                color =
-                    if (enabled) {
-                        MaterialTheme.colorScheme.onSurface
-                    } else {
-                        MaterialTheme.colorScheme.onSurfaceVariant
-                    }
-            )
+            Text(text = title, style = MaterialTheme.typography.titleMedium)
             Text(
                 text = description,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
-
-        Switch(
-            checked = checked,
-            onCheckedChange = onCheckedChange,
-            enabled = enabled
-        )
+        Switch(checked = checked, onCheckedChange = onCheckedChange, enabled = enabled)
     }
 }
 
@@ -279,55 +277,25 @@ private fun SettingsItem(
     enabled: Boolean = true
 ) {
     Row(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .clickable(enabled = enabled) { onClick() }
-                .padding(16.dp),
+        modifier = modifier.fillMaxWidth().clickable(enabled = enabled) { onClick() }.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint =
-                if (enabled) {
-                    MaterialTheme.colorScheme.primary
-                } else {
-                    MaterialTheme.colorScheme.onSurfaceVariant
-                }
-        )
-
+        Icon(imageVector = icon, contentDescription = null)
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleMedium,
-                color =
-                    if (enabled) {
-                        MaterialTheme.colorScheme.onSurface
-                    } else {
-                        MaterialTheme.colorScheme.onSurfaceVariant
-                    }
-            )
+            Text(text = title, style = MaterialTheme.typography.titleMedium)
             Text(
                 text = description,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
-
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-            contentDescription = null,
-            tint =
-                if (enabled) {
-                    MaterialTheme.colorScheme.onSurfaceVariant
-                } else {
-                    MaterialTheme.colorScheme.outlineVariant
-                }
+            contentDescription = null
         )
     }
 }
@@ -342,7 +310,8 @@ private fun PreviewSettingsScreen() {
             onCategoriesClick = {},
             onCreditCardsClick = {},
             onNotificationSettingsClick = {},
-            onGraphsClick = {}
+            onGraphsClick = {},
+            onBackupClick = {}
         )
     }
 }

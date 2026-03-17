@@ -272,4 +272,20 @@
     <string name="settings_about_privacy">Política de Privacidad</string>
     <string name="settings_about_license">Licencias de Código Abierto</string>
     <string name="settings_about_summary_dialog_title">Acerca de Lemony</string>
+
+    <!-- Backup -->
+    <string name="settings_backup_data">Copia de seguridad de datos</string>
+    <string name="settings_backup_export">Exportar a CSV</string>
+    <string name="settings_backup_export_desc">Guardar todos sus datos en un archivo CSV</string>
+    <string name="settings_backup_import">Importar desde CSV</string>
+    <string name="settings_backup_import_desc">Restaurar datos desde un archivo CSV</string>
+    <string name="settings_backup_open_desc">Abrir opciones de copia de seguridad y restauración</string>
+    <string name="backup_export_success">Exportación exitosa: %1$d cuentas, %2$d categorías, %3$d tarjetas, %4$d transacciones</string>
+    <string name="backup_import_success">Importación exitosa: %1$d cuentas, %2$d categorías, %3$d tarjetas, %4$d transacciones, %5$d transferencias, %6$d palabras clave</string>
+    <string name="backup_export_error">Error al exportar: %1$s</string>
+    <string name="backup_import_error">Error al importar: %1$s</string>
+    <string name="backup_import_dialog_title">Opciones de importación</string>
+    <string name="backup_import_dialog_message">¿Cómo le gustaría importar los datos?</string>
+    <string name="backup_import_replace">Reemplazar todos los datos</string>
+    <string name="backup_import_merge">Combinar con los existentes</string>
 </resources>

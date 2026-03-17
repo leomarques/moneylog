@@ -17,6 +17,7 @@ const val TRANSFERS_HUB_SCREEN = "transfers_hub"
 const val NOTIFICATION_SETTINGS_SCREEN = "notification_settings"
 const val CATEGORY_KEYWORDS_SCREEN = "category_keywords"
 const val SETTINGS_SCREEN = "settings"
+const val BACKUP_SCREEN = "backup"
 const val GRAPHS_SCREEN = "graphs"
 
 const val PARAM_TYPE_OF_VALUE = "typeOfValue"

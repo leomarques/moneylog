@@ -25,6 +25,7 @@ import lmm.moneylog.ui.features.creditcard.list.view.layouts.CreditCardsListView
 import lmm.moneylog.ui.features.graphs.GraphsScreen
 import lmm.moneylog.ui.features.invoice.view.InvoiceListView
 import lmm.moneylog.ui.features.notification.settings.view.NotificationSettingsScreen
+import lmm.moneylog.ui.features.settings.BackupScreen
 import lmm.moneylog.ui.features.settings.SettingsScreen
 import lmm.moneylog.ui.features.transaction.detail.view.layout.TransactionDetailView
 import lmm.moneylog.ui.features.transaction.list.view.TransactionsListView
@@ -34,6 +35,7 @@ import lmm.moneylog.ui.features.transfer.hub.TransfersHubScreen
 import lmm.moneylog.ui.features.transfer.list.view.TransfersListView
 import lmm.moneylog.ui.navigation.misc.ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.BACKUP_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
@@ -281,8 +283,16 @@ fun MyNavHost(
                 onCategoriesClick = actions::onCategoriesClick,
                 onCreditCardsClick = actions::onCreditCardsClick,
                 onNotificationSettingsClick = actions::onNotificationSettingsClick,
-                onGraphsClick = actions::onGraphsClick
+                onGraphsClick = actions::onGraphsClick,
+                onBackupClick = actions::onBackupClick
             )
+        }
+
+        composableExt(
+            route = BACKUP_SCREEN,
+            onArrowBackClick = actions::onArrowBackClick
+        ) {
+            BackupScreen(onArrowBackClick = actions::onArrowBackClick)
         }
 
         composableExt(

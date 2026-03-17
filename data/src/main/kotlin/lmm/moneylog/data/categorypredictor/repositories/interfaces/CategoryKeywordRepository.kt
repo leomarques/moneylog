@@ -6,6 +6,8 @@ import lmm.moneylog.data.categorypredictor.model.CategoryKeyword
 interface CategoryKeywordRepository {
     fun getAllKeywords(): Flow<List<CategoryKeyword>>
 
+    suspend fun getAllKeywordsSuspend(): List<CategoryKeyword>
+
     fun getKeywordsByCategory(categoryId: Int): Flow<List<CategoryKeyword>>
 
     suspend fun getKeywordById(id: Int): CategoryKeyword?

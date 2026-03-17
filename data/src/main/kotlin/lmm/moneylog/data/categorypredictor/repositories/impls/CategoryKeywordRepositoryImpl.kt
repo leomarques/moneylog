@@ -16,6 +16,9 @@ class CategoryKeywordRepositoryImpl(
             entities.map { it.toCategoryKeyword() }
         }
 
+    override suspend fun getAllKeywordsSuspend(): List<CategoryKeyword> =
+        categoryKeywordDao.getAllKeywordsSuspend().map { it.toCategoryKeyword() }
+
     override fun getKeywordsByCategory(categoryId: Int): Flow<List<CategoryKeyword>> =
         categoryKeywordDao.getKeywordsByCategory(categoryId).map { entities ->
             entities.map { it.toCategoryKeyword() }

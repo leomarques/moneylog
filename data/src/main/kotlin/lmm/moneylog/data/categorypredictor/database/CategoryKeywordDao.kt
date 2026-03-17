@@ -12,6 +12,9 @@ interface CategoryKeywordDao {
     @Query("SELECT * FROM category_keywords")
     fun getAllKeywords(): Flow<List<CategoryKeywordEntity>>
 
+    @Query("SELECT * FROM category_keywords")
+    suspend fun getAllKeywordsSuspend(): List<CategoryKeywordEntity>
+
     @Query("SELECT * FROM category_keywords WHERE categoryId = :categoryId")
     fun getKeywordsByCategory(categoryId: Int): Flow<List<CategoryKeywordEntity>>
 
@@ -32,4 +35,7 @@ interface CategoryKeywordDao {
 
     @Query("DELETE FROM category_keywords WHERE id = :id")
     suspend fun deleteById(id: Int)
+
+    @Query("DELETE FROM category_keywords")
+    suspend fun deleteAll()
 }

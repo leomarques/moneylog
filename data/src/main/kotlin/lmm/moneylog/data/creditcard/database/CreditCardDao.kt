@@ -16,7 +16,7 @@ interface CreditCardDao {
     suspend fun selectCreditCardsSuspend(): List<CreditCardEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(creditCardEntity: CreditCardEntity)
+    suspend fun insert(creditCardEntity: CreditCardEntity): Long
 
     @Query("SELECT * FROM `credit_card` WHERE id = :id")
     suspend fun selectCreditCardById(id: Int): CreditCardEntity?
@@ -26,4 +26,7 @@ interface CreditCardDao {
 
     @Query("DELETE FROM `credit_card` WHERE id = :id")
     suspend fun delete(id: Int)
+
+    @Query("DELETE FROM `credit_card`")
+    suspend fun deleteAll()
 }

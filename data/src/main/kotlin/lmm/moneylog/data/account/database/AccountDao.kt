@@ -16,7 +16,7 @@ interface AccountDao {
     suspend fun selectAccountsSuspend(): List<AccountEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(accountEntity: AccountEntity)
+    suspend fun insert(accountEntity: AccountEntity): Long
 
     @Query("SELECT * FROM `account` WHERE id = :id")
     suspend fun selectAccountById(id: Int): AccountEntity?
@@ -26,6 +26,9 @@ interface AccountDao {
 
     @Query("DELETE FROM `account` WHERE id = :id")
     suspend fun delete(id: Int)
+
+    @Query("DELETE FROM `account`")
+    suspend fun deleteAll()
 
     @Query("UPDATE account SET archived = :archived WHERE id = :id")
     suspend fun updateArchived(

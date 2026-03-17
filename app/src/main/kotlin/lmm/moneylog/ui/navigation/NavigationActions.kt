@@ -5,6 +5,7 @@ import lmm.moneylog.ui.navigation.misc.ACCOUNT_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.ARCHIVED_ACCOUNTS_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORIES_LIST_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_DETAIL_SCREEN
+import lmm.moneylog.ui.navigation.misc.BACKUP_SCREEN
 import lmm.moneylog.ui.navigation.misc.CATEGORY_KEYWORDS_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_DETAIL_SCREEN
 import lmm.moneylog.ui.navigation.misc.CREDITCARD_LIST_SCREEN
@@ -46,6 +47,7 @@ interface NavigationActions {
     fun onCategoriesClick()
     fun onCreditCardsClick()
     fun onGraphsClick()
+    fun onBackupClick()
     fun onViewTransfersListClick()
 }
 
@@ -145,6 +147,10 @@ fun createNavigationActions(
 
     override fun onGraphsClick() {
         onNavigate(GRAPHS_SCREEN)
+    }
+
+    override fun onBackupClick() {
+        onNavigate(BACKUP_SCREEN)
     }
 
     override fun onViewTransfersListClick() {

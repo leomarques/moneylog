@@ -6,11 +6,14 @@ import kotlinx.coroutines.flow.map
 import lmm.moneylog.data.categorypredictor.model.CategoryKeyword
 import lmm.moneylog.data.categorypredictor.repositories.interfaces.CategoryKeywordRepository
 
+@Suppress("TooManyFunctions")
 class InMemoryCategoryKeywordRepository : CategoryKeywordRepository {
     private val keywords = MutableStateFlow<List<CategoryKeyword>>(emptyList())
     private var nextId = 1
 
     override fun getAllKeywords(): Flow<List<CategoryKeyword>> = keywords
+
+    override suspend fun getAllKeywordsSuspend(): List<CategoryKeyword> = keywords.value
 
     override fun getKeywordsByCategory(categoryId: Int): Flow<List<CategoryKeyword>> =
         keywords.map { list -> list.filter { it.categoryId == categoryId } }

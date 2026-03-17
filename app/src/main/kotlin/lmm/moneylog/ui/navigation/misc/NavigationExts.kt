@@ -76,6 +76,7 @@ private fun settingsScreens() =
         CATEGORY_DETAIL_SCREEN,
         NOTIFICATION_SETTINGS_SCREEN,
         CATEGORY_KEYWORDS_SCREEN,
+        BACKUP_SCREEN,
         GRAPHS_SCREEN,
         TRANSFER_SCREEN
     )

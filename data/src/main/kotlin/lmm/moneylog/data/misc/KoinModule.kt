@@ -12,6 +12,8 @@ import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
 import lmm.moneylog.data.account.repositories.interfaces.UpdateAccountRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepository
 import lmm.moneylog.data.accounttransfer.repositories.AccountTransferRepositoryImpl
+import lmm.moneylog.data.backup.repositories.impls.BackupRepositoryImpl
+import lmm.moneylog.data.backup.repositories.interfaces.BackupRepository
 import lmm.moneylog.data.balance.interactors.GetBalanceByAccountWithTransfersInteractor
 import lmm.moneylog.data.balance.interactors.GetBalanceInteractor
 import lmm.moneylog.data.balance.interactors.GetBalancesForAllAccountsWithTransfersInteractor
@@ -105,6 +107,9 @@ val dataModule =
         // Nubank utilities (only for non-demo mode)
         factoryOf(::NubankTransactionConverterImpl) { bind<NubankTransactionConverter>() }
         factoryOf(::NubankTransactionParserImpl) { bind<NubankTransactionParser>() }
+
+        // Backup Repository
+        factoryOf(::BackupRepositoryImpl) { bind<BackupRepository>() }
 
         // Account repositories
         factory<AddAccountRepository> {

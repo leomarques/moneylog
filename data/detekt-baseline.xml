@@ -2,6 +2,7 @@
 <SmellBaseline>
   <ManuallySuppressedIssues/>
   <CurrentIssues>
+    <ID>LongParameterList:BackupRepositoryImpl.kt$BackupRepositoryImpl$( private val getAccountsRepository: GetAccountsRepository, private val getCategoriesRepository: GetCategoriesRepository, private val getCreditCardsRepository: GetCreditCardsRepository, private val accountTransferRepository: AccountTransferRepository, private val categoryKeywordRepository: CategoryKeywordRepository, private val transactionDao: TransactionDao, private val accountDao: AccountDao, private val categoryDao: CategoryDao, private val creditCardDao: CreditCardDao, private val accountTransferDao: AccountTransferDao, private val categoryKeywordDao: CategoryKeywordDao )</ID>
     <ID>MagicNumber:DemoDataProvider.kt$DemoDataProvider$100</ID>
     <ID>MagicNumber:DemoDataProvider.kt$DemoDataProvider$10000</ID>
     <ID>MagicNumber:DemoDataProvider.kt$DemoDataProvider$15</ID>

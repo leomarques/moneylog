@@ -43,6 +43,9 @@ interface TransactionDao {
     @Query("DELETE FROM `transaction` WHERE id = :id")
     suspend fun delete(id: Long)
 
+    @Query("DELETE FROM `transaction`")
+    suspend fun deleteAll()
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAndReturnId(transactionEntity: TransactionEntity): Long
 
@@ -63,6 +66,9 @@ interface TransactionDao {
         invoiceYear: Int,
         creditCardId: Int
     ): Flow<List<TransactionEntity>>
+
+    @Query("SELECT * FROM `transaction`")
+    suspend fun selectAllTransactionsForBackup(): List<TransactionEntity>
 
     @Query(
         "SELECT * FROM `transaction` " +

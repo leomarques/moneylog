@@ -16,7 +16,7 @@ interface CategoryDao {
     suspend fun selectCategoriesSuspend(): List<CategoryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(accountEntity: CategoryEntity)
+    suspend fun insert(accountEntity: CategoryEntity): Long
 
     @Query("SELECT * FROM `category` where id = :id")
     suspend fun selectCategory(id: Int): CategoryEntity?
@@ -26,4 +26,7 @@ interface CategoryDao {
 
     @Query("DELETE FROM `category` WHERE id = :id")
     suspend fun delete(id: Int)
+
+    @Query("DELETE FROM `category`")
+    suspend fun deleteAll()
 }
