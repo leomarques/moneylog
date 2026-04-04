@@ -59,7 +59,7 @@ class GetNetWorthHistoryInteractor(
                     allTransactions
                         .filter { transaction ->
                             transaction.accountId != null &&
-                                    (transaction.year < y || (transaction.year == y && transaction.month <= m))
+                                (transaction.year < y || (transaction.year == y && transaction.month <= m))
                         }.sumOf { it.value }
 
                 val shortMonthName =
@@ -72,7 +72,7 @@ class GetNetWorthHistoryInteractor(
                 val isYearBoundary = m == FIRST_MONTH || m == LAST_MONTH
                 val isFirstOrLast =
                     monthlyData.indexOf(Pair(m, y)) == 0 ||
-                            monthlyData.indexOf(Pair(m, y)) == monthlyData.size - 1
+                        monthlyData.indexOf(Pair(m, y)) == monthlyData.size - 1
                 val displayName =
                     if (isYearBoundary || isFirstOrLast) {
                         "$shortMonthName/${y.toString().takeLast(YEAR_SUFFIX_LENGTH)}"

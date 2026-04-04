@@ -4,8 +4,11 @@ import lmm.moneylog.data.backup.model.BackupData
 
 interface BackupRepository {
     suspend fun exportAllData(): BackupData
+
     suspend fun importAllData(data: BackupData): ImportResult
+
     suspend fun importAllData(data: BackupData, wipeBeforeImport: Boolean): ImportResult
+
     suspend fun clearAllData()
 }
 
@@ -19,5 +22,7 @@ sealed class ImportResult {
         val categoryKeywordsImported: Int
     ) : ImportResult()
 
-    data class Error(val message: String) : ImportResult()
+    data class Error(
+        val message: String
+    ) : ImportResult()
 }

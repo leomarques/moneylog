@@ -26,10 +26,11 @@ class GetBalanceInteractor(
                 .sumOf { it.value }
 
         val paidTransactions =
-            allTransactions.filter {
-                it.accountId != null &&
+            allTransactions
+                .filter {
+                    it.accountId != null &&
                         (it.year < yearNumber || (it.year == yearNumber && it.month <= monthNumber))
-            }.sumOf { it.value }
+                }.sumOf { it.value }
 
         BalanceModel(
             total = paidTransactions,

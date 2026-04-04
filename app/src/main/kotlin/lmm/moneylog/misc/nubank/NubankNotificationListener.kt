@@ -31,9 +31,10 @@ class NubankNotificationListener : NotificationListenerService() {
     private var isServiceActive = true
 
     // Deduplication: track recently processed notification keys
-    private val recentNotifications = java.util.Collections.synchronizedSet(
-        java.util.LinkedHashSet<String>()
-    )
+    private val recentNotifications =
+        java.util.Collections.synchronizedSet(
+            java.util.LinkedHashSet<String>()
+        )
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         super.onNotificationPosted(sbn)

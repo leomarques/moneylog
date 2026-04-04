@@ -62,9 +62,10 @@ fun TransfersListItem(
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                     contentDescription = null,
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .size(16.dp)
+                    modifier =
+                        Modifier
+                            .padding(4.dp)
+                            .size(16.dp)
                 )
 
                 // To account

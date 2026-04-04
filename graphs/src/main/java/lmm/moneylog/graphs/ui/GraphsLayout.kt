@@ -179,17 +179,20 @@ private fun MonthlySummaryCard(
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 1.dp
-        )
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+            ),
+        elevation =
+            CardDefaults.cardElevation(
+                defaultElevation = 1.dp
+            )
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = Size.DefaultSpaceSize, vertical = Size.SmallSpaceSize),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = Size.DefaultSpaceSize, vertical = Size.SmallSpaceSize),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Monthly Balance Section (Left - takes more space)
@@ -205,20 +208,22 @@ private fun MonthlySummaryCard(
                 Text(
                     text = monthlyBalance.formatForRs(),
                     style = MaterialTheme.typography.headlineSmall,
-                    color = when {
-                        monthlyBalance == 0.0 -> MaterialTheme.colorScheme.onSurface
-                        monthlyBalance < 0.0 -> outcome
-                        else -> income
-                    },
+                    color =
+                        when {
+                            monthlyBalance == 0.0 -> MaterialTheme.colorScheme.onSurface
+                            monthlyBalance < 0.0 -> outcome
+                            else -> income
+                        },
                     fontWeight = FontWeight.Bold
                 )
             }
 
             // Vertical divider line
             Spacer(
-                modifier = Modifier
-                    .width(1.dp)
-                    .padding(vertical = 4.dp)
+                modifier =
+                    Modifier
+                        .width(1.dp)
+                        .padding(vertical = 4.dp)
             )
 
             // Expenses Section (Right)

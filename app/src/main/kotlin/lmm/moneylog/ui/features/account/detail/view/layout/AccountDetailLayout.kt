@@ -1,7 +1,7 @@
 package lmm.moneylog.ui.features.account.detail.view.layout
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.FabPosition

@@ -191,9 +191,10 @@ class TransactionDetailViewModel(
         viewModelScope.launch {
             if (description.length >= 2) {
                 val suggestions = searchTransactionsRepository.searchByDescription(description)
-                val filteredSuggestions = suggestions.filterNot {
-                    it.description.equals(description, ignoreCase = true)
-                }
+                val filteredSuggestions =
+                    suggestions.filterNot {
+                        it.description.equals(description, ignoreCase = true)
+                    }
                 _uiState.update { it.copy(descriptionSuggestions = filteredSuggestions) }
             } else {
                 _uiState.update { it.copy(descriptionSuggestions = emptyList()) }
@@ -243,9 +244,10 @@ class TransactionDetailViewModel(
             }
 
         // Only update value if it's currently blank
-        val newValue = _uiState.value.value.ifBlank {
-            if (value < 0) (-value).toString() else value.toString()
-        }
+        val newValue =
+            _uiState.value.value.ifBlank {
+                if (value < 0) (-value).toString() else value.toString()
+            }
 
         _uiState.update {
             it.copy(

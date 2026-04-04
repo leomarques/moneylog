@@ -64,21 +64,23 @@ fun BackupScreen(
     val importState by backupViewModel.importState.collectAsState()
     val showWipeConfirmDialog by backupViewModel.showWipeConfirmDialog.collectAsState()
 
-    val exportLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.data?.let { uri ->
-                backupViewModel.exportData(uri, context.contentResolver)
+    val exportLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    backupViewModel.exportData(uri, context.contentResolver)
+                }
             }
         }
-    }
 
-    val importLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.data?.let { uri ->
-                backupViewModel.showWipeConfirmationDialog(uri)
+    val importLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    backupViewModel.showWipeConfirmationDialog(uri)
+                }
             }
         }
-    }
 
     val backupExportSuccessTemplate = stringResource(R.string.backup_export_success)
     val backupExportErrorTemplate = stringResource(R.string.backup_export_error)

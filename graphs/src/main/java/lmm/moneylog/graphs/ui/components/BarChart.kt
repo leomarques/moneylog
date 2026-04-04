@@ -201,19 +201,20 @@ fun BarChart(
 
             // Create indexed data for variance calculation
             val indexedData = data.withIndex().toList().reversed()
-            
+
             indexedData.forEach { (index, monthData) ->
                 // Calculate variances from previous month (index - 1 in chronological order)
                 val prevIncome = if (index > 0) data[index - 1].income else monthData.income
                 val prevExpenses = if (index > 0) data[index - 1].expenses else monthData.expenses
-                
+
                 val incomeVariance = calculateVariance(monthData.income, prevIncome)
                 val expensesVariance = calculateVariance(monthData.expenses, prevExpenses)
-                
+
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 2.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 2.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -224,7 +225,7 @@ fun BarChart(
                         color = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.weight(1f)
                     )
-                    
+
                     // Values column on the right
                     Column(
                         horizontalAlignment = Alignment.End
@@ -250,13 +251,12 @@ fun BarChart(
     }
 }
 
-private fun calculateVariance(current: Double, previous: Double): Double {
-    return if (previous != 0.0) {
+private fun calculateVariance(current: Double, previous: Double): Double =
+    if (previous != 0.0) {
         ((current - previous) / previous) * 100
     } else {
         0.0
     }
-}
 
 private fun formatWithVariance(value: Double, variance: Double): String {
     val varianceStr = String.format(java.util.Locale.getDefault(), "(%+.1f%%)", variance)

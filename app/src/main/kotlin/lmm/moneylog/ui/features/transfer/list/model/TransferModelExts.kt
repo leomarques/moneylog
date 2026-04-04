@@ -5,8 +5,9 @@ fun List<TransferModel>.filtered(filter: String): List<TransferModel> =
         transfer.originAccount.startsWith(
             prefix = filter,
             ignoreCase = true
-        ) || transfer.destinationAccount.startsWith(
-            prefix = filter,
-            ignoreCase = true
-        )
+        ) ||
+            transfer.destinationAccount.startsWith(
+                prefix = filter,
+                ignoreCase = true
+            )
     }

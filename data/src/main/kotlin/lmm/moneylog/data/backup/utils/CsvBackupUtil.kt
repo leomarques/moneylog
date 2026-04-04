@@ -18,7 +18,6 @@ import lmm.moneylog.data.transaction.model.Transaction
     "ReturnCount"
 )
 class CsvBackupUtil {
-
     companion object {
         const val ACCOUNTS_HEADER = "ACCOUNTS"
         const val CATEGORIES_HEADER = "CATEGORIES"
@@ -219,11 +218,12 @@ class CsvBackupUtil {
             id = parts[0].toLongOrNull() ?: return null,
             value = parts[1].toDoubleOrNull() ?: return null,
             description = parts[2],
-            date = DomainTime(
-                day = parts[3].toIntOrNull() ?: return null,
-                month = parts[4].toIntOrNull() ?: return null,
-                year = parts[5].toIntOrNull() ?: return null
-            ),
+            date =
+                DomainTime(
+                    day = parts[3].toIntOrNull() ?: return null,
+                    month = parts[4].toIntOrNull() ?: return null,
+                    year = parts[5].toIntOrNull() ?: return null
+                ),
             accountId = parts.getOrNull(6).toNullableInt(),
             categoryId = parts.getOrNull(7).toNullableInt(),
             creditCardId = parts.getOrNull(8).toNullableInt(),

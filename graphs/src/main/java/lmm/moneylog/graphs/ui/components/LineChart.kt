@@ -276,14 +276,14 @@ fun LineChart(
 
             // Create indexed data for variance calculation
             val indexedData = data.withIndex().toList().reversed()
-            
+
             indexedData.forEach { (index, point) ->
                 val pointColor = if (point.netWorth >= 0) positiveColor else negativeColor
-                
+
                 // Calculate variance from previous month (index - 1 in chronological order)
                 val prevNetWorth = if (index > 0) data[index - 1].netWorth else point.netWorth
                 val variance = calculateNetWorthVariance(point.netWorth, prevNetWorth)
-                
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -309,13 +309,12 @@ fun LineChart(
     }
 }
 
-private fun calculateNetWorthVariance(current: Double, previous: Double): Double {
-    return if (previous != 0.0) {
+private fun calculateNetWorthVariance(current: Double, previous: Double): Double =
+    if (previous != 0.0) {
         ((current - previous) / kotlin.math.abs(previous)) * 100
     } else {
         0.0
     }
-}
 
 private fun formatNetWorthWithVariance(value: Double, variance: Double): String {
     val varianceStr = String.format(java.util.Locale.getDefault(), "(%+.1f%%)", variance)

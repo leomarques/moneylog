@@ -1,6 +1,5 @@
 package lmm.moneylog.data.backup.repositories.impls
 
-import java.io.IOException
 import lmm.moneylog.data.account.database.AccountDao
 import lmm.moneylog.data.account.model.Account
 import lmm.moneylog.data.account.repositories.interfaces.GetAccountsRepository
@@ -21,6 +20,7 @@ import lmm.moneylog.data.time.model.DomainTime
 import lmm.moneylog.data.transaction.database.TransactionDao
 import lmm.moneylog.data.transaction.database.TransactionEntity
 import lmm.moneylog.data.transaction.model.Transaction
+import java.io.IOException
 
 @Suppress("TooManyFunctions")
 class BackupRepositoryImpl(
@@ -36,7 +36,6 @@ class BackupRepositoryImpl(
     private val accountTransferDao: AccountTransferDao,
     private val categoryKeywordDao: CategoryKeywordDao
 ) : BackupRepository {
-
     override suspend fun exportAllData(): BackupData {
         val archivedAccounts = getAccountsRepository.getAccountsSuspend(archived = true)
         val activeAccounts = getAccountsRepository.getAccountsSuspend(archived = false)
@@ -65,8 +64,8 @@ class BackupRepositoryImpl(
         accountDao.deleteAll()
     }
 
-    override suspend fun importAllData(data: BackupData, wipeBeforeImport: Boolean): ImportResult {
-        return try {
+    override suspend fun importAllData(data: BackupData, wipeBeforeImport: Boolean): ImportResult =
+        try {
             if (wipeBeforeImport) clearAllData()
 
             val accountIdMap = importAccounts(data.accounts)
@@ -96,7 +95,6 @@ class BackupRepositoryImpl(
         } catch (error: IllegalStateException) {
             ImportResult.Error(error.message ?: "Invalid import state")
         }
-    }
 
     override suspend fun importAllData(data: BackupData): ImportResult = importAllData(data, false)
 
@@ -105,13 +103,14 @@ class BackupRepositoryImpl(
 
         accounts.forEach { account ->
             val generatedId =
-                accountDao.insert(
-                    lmm.moneylog.data.account.database.AccountEntity(
-                        name = account.name,
-                        color = account.color,
-                        archived = account.archived
-                    )
-                ).toInt()
+                accountDao
+                    .insert(
+                        lmm.moneylog.data.account.database.AccountEntity(
+                            name = account.name,
+                            color = account.color,
+                            archived = account.archived
+                        )
+                    ).toInt()
 
             if (account.id > 0) idMap[account.id] = generatedId
         }
@@ -124,13 +123,14 @@ class BackupRepositoryImpl(
 
         categories.forEach { category ->
             val generatedId =
-                categoryDao.insert(
-                    lmm.moneylog.data.category.database.CategoryEntity(
-                        name = category.name,
-                        color = category.color,
-                        isIncome = category.isIncome
-                    )
-                ).toInt()
+                categoryDao
+                    .insert(
+                        lmm.moneylog.data.category.database.CategoryEntity(
+                            name = category.name,
+                            color = category.color,
+                            isIncome = category.isIncome
+                        )
+                    ).toInt()
 
             if (category.id > 0) idMap[category.id] = generatedId
         }
@@ -143,15 +143,16 @@ class BackupRepositoryImpl(
 
         creditCards.forEach { card ->
             val generatedId =
-                creditCardDao.insert(
-                    lmm.moneylog.data.creditcard.database.CreditCardEntity(
-                        name = card.name,
-                        closingDay = card.closingDay,
-                        dueDay = card.dueDay,
-                        limit = card.limit,
-                        color = card.color
-                    )
-                ).toInt()
+                creditCardDao
+                    .insert(
+                        lmm.moneylog.data.creditcard.database.CreditCardEntity(
+                            name = card.name,
+                            closingDay = card.closingDay,
+                            dueDay = card.dueDay,
+                            limit = card.limit,
+                            color = card.color
+                        )
+                    ).toInt()
 
             if (card.id > 0) idMap[card.id] = generatedId
         }
