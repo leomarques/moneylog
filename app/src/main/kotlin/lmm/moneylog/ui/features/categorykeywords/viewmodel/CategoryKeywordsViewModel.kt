@@ -41,6 +41,7 @@ class CategoryKeywordsViewModel(
                 categoryKeywordRepository.getAllKeywords()
             ) { categories, keywords ->
                 categories
+                    .filter { !it.isIncome }
                     .map { category ->
                         CategoryWithKeywords(
                             id = category.id,
